@@ -1,5 +1,8 @@
 package com.example.yoonlove.mapper;
 
+import com.example.yoonlove.Dto.CreatorDto;
+import org.apache.ibatis.annotations.Mapper;
+
 import java.util.List;
 
 @Mapper
