@@ -1,21 +1,25 @@
 package com.example.yoonlove.Controller;
 
+import com.example.yoonlove.Dto.CreatorDto;
+import com.example.yoonlove.service.CreatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-    @Controller
+import java.util.List;
+
+@Controller
     public class CreatorController {
 
         @Autowired
-        private CreatorSerivce creatorservice;
+        private CreatorService creatorservice;
         //서비스 객체 수정
 
         @GetMapping("/creator")
         public ModelAndView selectListCreaotr(){
             //실행할 메소드(서비스 부분에 있는 메소드)
-            CreatorDto dto = creatorservice.selectListCreator();
+            List<CreatorDto> dto = creatorservice.selectListCreator();
 
             //세션 객체생셩
             ModelAndView mv = new ModelAndView();
