@@ -3,8 +3,6 @@
 
 <mapper namespace="com.example.yoonlove.mapper.CsMapper">
 
-
-<<<<<<< HEAD
 <!--공지사항 쿼리-->
     <select id="selectNotice">
         SELECT * FROM notice where notice_id='1번글'
