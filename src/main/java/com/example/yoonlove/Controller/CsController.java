@@ -19,7 +19,7 @@ public class CsController {
     private CsService csService;
     //서비스 객체 수정
 
-    @GetMapping("/listNotice")
+    @GetMapping("/listnotice")
     public ModelAndView selectListNotice(){
         //실행할 메소드(서비스 부분에 있는 메소드)
         List<NoticeDto> dto = csService.selectListNotice();
@@ -27,14 +27,14 @@ public class CsController {
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
         //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
+        mv.setViewName("/testlist");
 
         //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
         mv.addObject("selectListNotice", dto);
         return mv;
     }
 
-    @GetMapping("/selectNotice")
+    @GetMapping("/selectnotice")
     public ModelAndView selectNotice(){
         //실행할 메소드(서비스 부분에 있는 메소드)
         NoticeDto dto = csService.selectNotice();
@@ -49,7 +49,7 @@ public class CsController {
         return mv;
     }
 
-    @GetMapping("/insertNotice")
+    @GetMapping("/insertnotice")
     public ModelAndView insertNotice(){
         //실행할 메소드(서비스 부분에 있는 메소드)
         csService.insertNotice();
@@ -60,7 +60,7 @@ public class CsController {
         mv.setViewName("/test");
         return mv;
     }
-    @GetMapping("/updateNotice")
+    @GetMapping("/updatenotice")
     public ModelAndView updateNotice(){
         //실행할 메소드(서비스 부분에 있는 메소드)
         csService.updateNotice();
@@ -72,7 +72,7 @@ public class CsController {
         return mv;
     }
 
-    @GetMapping("/deleteNotice")
+    @GetMapping("/deletenotice")
     public ModelAndView deleteNotice(){
         //실행할 메소드(서비스 부분에 있는 메소드)
         csService.deleteNotice();
@@ -86,7 +86,7 @@ public class CsController {
 
 
     //QnA 메서드
-    @GetMapping("/listQnA")
+    @GetMapping("/listqna")
     public ModelAndView selectListQnA(){
         //실행할 메소드(서비스 부분에 있는 메소드)
         List<QnADto> dto = csService.selectListQnA();
@@ -101,7 +101,7 @@ public class CsController {
         return mv;
     }
 
-    @GetMapping("/selectQnA")
+    @GetMapping("/selectqna")
     public ModelAndView selectQnA(){
         //실행할 메소드(서비스 부분에 있는 메소드)
         QnADto dto = csService.selectQnA();
@@ -116,7 +116,7 @@ public class CsController {
         return mv;
     }
 
-    @GetMapping("/insertQnA")
+    @GetMapping("/insertqna")
     public ModelAndView insertQnA(){
         //실행할 메소드(서비스 부분에 있는 메소드)
         csService.insertQnA();
@@ -127,7 +127,7 @@ public class CsController {
         mv.setViewName("/test");
         return mv;
     }
-    @GetMapping("/updateQnA")
+    @GetMapping("/updateqna")
     public ModelAndView updateQnA(){
         //실행할 메소드(서비스 부분에 있는 메소드)
         csService.updateQnA();
@@ -139,7 +139,7 @@ public class CsController {
         return mv;
     }
 
-    @GetMapping("/deleteQnA")
+    @GetMapping("/deleteqna")
     public ModelAndView deleteQnA(){
         //실행할 메소드(서비스 부분에 있는 메소드)
         csService.deleteQnA();
