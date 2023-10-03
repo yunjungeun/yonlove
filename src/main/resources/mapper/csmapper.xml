@@ -4,8 +4,8 @@
 <mapper namespace="com.example.yoonlove.mapper.CsMapper">
 
 
+<<<<<<< HEAD
 <!--공지사항 쿼리-->
-
     <select id="selectNotice">
         SELECT * FROM notice where notice_id='1번글'
     </select>
@@ -29,7 +29,6 @@
     </delete>
 
 
-
     <!--QnA 쿼리-->
     <select id="selectQnA">
         SELECT * FROM qna where notice_id='1번글'
@@ -49,8 +48,7 @@
         '5번글','쿼리로 입력한제목','내용입니다','관리자','2023-9-01','2023-9-02',0,'테스트관리자')
     </update>
 
-    <delete id="deleteNotice">
+    <delete id="deleteQnA">
         delete from qna where notice_id='5번글'
     </delete>
-
 </mapper>

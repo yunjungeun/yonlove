@@ -1,17 +1,13 @@
 package com.example.yoonlove.Controller;
 
+import com.example.yoonlove.Dto.CreatorDto;
 import com.example.yoonlove.Dto.NoticeDto;
-
 import com.example.yoonlove.Dto.QnADto;
-
+import com.example.yoonlove.service.CreatorService;
 import com.example.yoonlove.service.CsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.PostMapping;
-
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -23,7 +19,7 @@ public class CsController {
     private CsService csService;
     //서비스 객체 수정
 
-    @GetMapping("/listnotice")
+    @GetMapping("/listNotice")
     public ModelAndView selectListNotice(){
         //실행할 메소드(서비스 부분에 있는 메소드)
         List<NoticeDto> dto = csService.selectListNotice();
@@ -31,14 +27,14 @@ public class CsController {
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
         //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/testlist");
+        mv.setViewName("/test");
 
         //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
         mv.addObject("selectListNotice", dto);
         return mv;
     }
 
-    @GetMapping("/selectnotice")
+    @GetMapping("/selectNotice")
     public ModelAndView selectNotice(){
         //실행할 메소드(서비스 부분에 있는 메소드)
         NoticeDto dto = csService.selectNotice();
@@ -53,7 +49,7 @@ public class CsController {
         return mv;
     }
 
-    @GetMapping ("/insertnotice")
+    @GetMapping("/insertNotice")
     public ModelAndView insertNotice(){
         //실행할 메소드(서비스 부분에 있는 메소드)
         csService.insertNotice();
@@ -62,11 +58,9 @@ public class CsController {
         ModelAndView mv = new ModelAndView();
         //보여줄 view페이지 이름(ooo.mustache)
         mv.setViewName("/test");
-
         return mv;
     }
-
-    @GetMapping("/updatenotice")
+    @GetMapping("/updateNotice")
     public ModelAndView updateNotice(){
         //실행할 메소드(서비스 부분에 있는 메소드)
         csService.updateNotice();
@@ -75,11 +69,10 @@ public class CsController {
         ModelAndView mv = new ModelAndView();
         //보여줄 view페이지 이름(ooo.mustache)
         mv.setViewName("/test");
-
         return mv;
     }
 
-    @GetMapping("/deletenotice")
+    @GetMapping("/deleteNotice")
     public ModelAndView deleteNotice(){
         //실행할 메소드(서비스 부분에 있는 메소드)
         csService.deleteNotice();
@@ -88,12 +81,11 @@ public class CsController {
         ModelAndView mv = new ModelAndView();
         //보여줄 view페이지 이름(ooo.mustache)
         mv.setViewName("/test");
-
         return mv;
     }
 
 
-    //QnA 메소드
+    //QnA 메서드
     @GetMapping("/listQnA")
     public ModelAndView selectListQnA(){
         //실행할 메소드(서비스 부분에 있는 메소드)
@@ -102,7 +94,7 @@ public class CsController {
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
         //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/testlist");
+        mv.setViewName("/test");
 
         //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
         mv.addObject("selectListQnA", dto);
@@ -110,7 +102,7 @@ public class CsController {
     }
 
     @GetMapping("/selectQnA")
-    public ModelAndView selectNotice(){
+    public ModelAndView selectQnA(){
         //실행할 메소드(서비스 부분에 있는 메소드)
         QnADto dto = csService.selectQnA();
 
@@ -124,30 +116,26 @@ public class CsController {
         return mv;
     }
 
-    @GetMapping ("/insertQnA")
+    @GetMapping("/insertQnA")
     public ModelAndView insertQnA(){
         //실행할 메소드(서비스 부분에 있는 메소드)
-        csService.inserQnA();
+        csService.insertQnA();
 
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
         //보여줄 view페이지 이름(ooo.mustache)
         mv.setViewName("/test");
-
         return mv;
     }
-
     @GetMapping("/updateQnA")
     public ModelAndView updateQnA(){
         //실행할 메소드(서비스 부분에 있는 메소드)
         csService.updateQnA();
 
-
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
         //보여줄 view페이지 이름(ooo.mustache)
         mv.setViewName("/test");
-
         return mv;
     }
 
@@ -160,8 +148,6 @@ public class CsController {
         ModelAndView mv = new ModelAndView();
         //보여줄 view페이지 이름(ooo.mustache)
         mv.setViewName("/test");
-
         return mv;
     }
-
 }
