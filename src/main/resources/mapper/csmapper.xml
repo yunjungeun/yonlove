@@ -3,7 +3,9 @@
 
 <mapper namespace="com.example.yoonlove.mapper.CsMapper">
 
+
 <!--공지사항 쿼리-->
+
     <select id="selectNotice">
         SELECT * FROM notice where notice_id='1번글'
     </select>
@@ -25,6 +27,7 @@
     <delete id="deleteNotice">
         delete from notice where notice_id='5번글'
     </delete>
+
 
 
     <!--QnA 쿼리-->

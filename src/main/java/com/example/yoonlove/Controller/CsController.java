@@ -1,11 +1,17 @@
 package com.example.yoonlove.Controller;
 
 import com.example.yoonlove.Dto.NoticeDto;
+
 import com.example.yoonlove.Dto.QnADto;
+
 import com.example.yoonlove.service.CsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import org.springframework.web.bind.annotation.Mapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -65,7 +71,6 @@ public class CsController {
         //실행할 메소드(서비스 부분에 있는 메소드)
         csService.updateNotice();
 
-
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
         //보여줄 view페이지 이름(ooo.mustache)
@@ -86,6 +91,7 @@ public class CsController {
 
         return mv;
     }
+
 
     //QnA 메소드
     @GetMapping("/listQnA")
@@ -157,4 +163,5 @@ public class CsController {
 
         return mv;
     }
+
 }

@@ -1,7 +1,12 @@
 package com.example.yoonlove.service;
 
+
 import com.example.yoonlove.Dto.NoticeDto;
 import com.example.yoonlove.Dto.QnADto;
+
+import com.example.yoonlove.Dto.CreatorDto;
+import com.example.yoonlove.Dto.NoticeDto;
+
 import com.example.yoonlove.mapper.CsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,13 +18,24 @@ public class CsService {
     @Autowired
     private CsMapper csMapper;
 
+
     //공지사항 서비스 메소드
     public NoticeDto selectNotice(){
         return csMapper.selectNotice();
     }
     public List<NoticeDto> selectListNotice(){
         return csMapper.selectListNotice();
+
+    //서비스 메소드 작성 CRUD
+    public NoticeDto selectNotice(){
+        return csMapper.selectNotice();
     }
+
+    public List<NoticeDto> selectListNotice(){
+        return csMapper.selectListNotice();
+    }
+
+
     public void insertNotice(){
         csMapper.insertNotice();
     }
@@ -46,4 +62,5 @@ public class CsService {
     public void deleteQnA(){
         csMapper.deleteQnA();
     }
+
 }
