@@ -1,8 +1,8 @@
 package com.example.yoonlove.controller;
 
-import com.example.yoonlove.dto.ActorDto;
-import com.example.yoonlove.dto.SceneDto;
-import com.example.yoonlove.service.SceneService;
+import com.example.yoonlove.dto.ScriptPaperDto;
+import com.example.yoonlove.dto.TimeTableDto;
+import com.example.yoonlove.service.ScriptPaperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,14 +11,15 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-public class SceneController {
+public class ScriptPaperController {
     @Autowired
-    private SceneService sceneService;
+    private ScriptPaperService scriptPaperService;
 
-    @GetMapping("/listscenae")
-    public ModelAndView selectListScenario(){
+    //스크립트페이퍼
+    @GetMapping("/listscriptpaper")
+    public ModelAndView selectListScriptPaper(){
         //실행할 메소드(서비스 부분에 있는 메소드)
-        List<SceneDto> dto = sceneService.selectListScene();
+        List<ScriptPaperDto> dto = scriptPaperService.selectListScriptPaper();
 
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
@@ -26,14 +27,14 @@ public class SceneController {
         mv.setViewName("/testlist");
 
         //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
-        mv.addObject("selectListScene", dto);
+        mv.addObject("selectListScriptPaper", dto);
         return mv;
     }
 
-    @GetMapping("/selectscene")
-    public ModelAndView selectScene(){
+    @GetMapping("/selectscriptpaper")
+    public ModelAndView selectScriptPaper(){
         //실행할 메소드(서비스 부분에 있는 메소드)
-        SceneDto dto = sceneService.selectScene();
+        ScriptPaperDto dto = scriptPaperService.selectScriptPaper();
 
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
@@ -41,14 +42,14 @@ public class SceneController {
         mv.setViewName("/test");
 
         //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
-        mv.addObject("selectScene", dto);
+        mv.addObject("selectScriptPaper", dto);
         return mv;
     }
 
-    @GetMapping("/insertscene")
-    public ModelAndView insertScenario(){
+    @GetMapping("/insertscriptpaper")
+    public ModelAndView insertScriptPaper(){
         //실행할 메소드(서비스 부분에 있는 메소드)
-        sceneService.insertScene();
+        scriptPaperService.insertScriptPaper();
 
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
@@ -56,10 +57,10 @@ public class SceneController {
         mv.setViewName("/test");
         return mv;
     }
-    @GetMapping("/updatescene")
-    public ModelAndView updateScene(){
+    @GetMapping("/updatescriptpaper")
+    public ModelAndView updateScriptPaper(){
         //실행할 메소드(서비스 부분에 있는 메소드)
-        sceneService.updateScene();
+        scriptPaperService.updateScriptPaper();
 
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
@@ -67,10 +68,10 @@ public class SceneController {
         mv.setViewName("/test");
         return mv;
     }
-    @GetMapping("/deletescene")
-    public ModelAndView deleteScen(){
+    @GetMapping("/deletescriptpaper")
+    public ModelAndView deleteScriptPaper(){
         //실행할 메소드(서비스 부분에 있는 메소드)
-        sceneService.deleteScene();
+        scriptPaperService.deleteScriptPaper();
 
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
@@ -79,11 +80,11 @@ public class SceneController {
         return mv;
     }
 
-    //출연자 정보
-    @GetMapping("/listactor")
-    public ModelAndView selectListActor(){
+    //타입테이블
+    @GetMapping("/listtimetable")
+    public ModelAndView selectListTimeTable(){
         //실행할 메소드(서비스 부분에 있는 메소드)
-        List<ActorDto> dto = sceneService.selectListActor();
+        List<TimeTableDto> dto = scriptPaperService.selectListTimeTable();
 
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
@@ -91,14 +92,14 @@ public class SceneController {
         mv.setViewName("/testlist");
 
         //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
-        mv.addObject("selectListActor", dto);
+        mv.addObject("selectListTimeTable", dto);
         return mv;
     }
 
-    @GetMapping("/selectactor")
-    public ModelAndView selectActor(){
+    @GetMapping("/selecttimetable")
+    public ModelAndView selectTimeTable(){
         //실행할 메소드(서비스 부분에 있는 메소드)
-        ActorDto dto = sceneService.selectActor();
+        TimeTableDto dto = scriptPaperService.selectTimeTable();
 
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
@@ -106,14 +107,14 @@ public class SceneController {
         mv.setViewName("/test");
 
         //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
-        mv.addObject("selectActor", dto);
+        mv.addObject("selectTimeTable", dto);
         return mv;
     }
 
-    @GetMapping("/insertactor")
-    public ModelAndView insertActor(){
+    @GetMapping("/inserttimetable")
+    public ModelAndView insertTimeTable(){
         //실행할 메소드(서비스 부분에 있는 메소드)
-        sceneService.insertActor();
+        scriptPaperService.insertTimeTable();
 
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
@@ -121,10 +122,10 @@ public class SceneController {
         mv.setViewName("/test");
         return mv;
     }
-    @GetMapping("/updateactor")
-    public ModelAndView updateActor(){
+    @GetMapping("/updatetimetable")
+    public ModelAndView updateTimeTable(){
         //실행할 메소드(서비스 부분에 있는 메소드)
-        sceneService.updateActor();
+        scriptPaperService.updateTimeTable();
 
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
@@ -132,10 +133,10 @@ public class SceneController {
         mv.setViewName("/test");
         return mv;
     }
-    @GetMapping("/deleteactor")
-    public ModelAndView deleteActor(){
+    @GetMapping("/deletetimetable")
+    public ModelAndView deleteTimeTable(){
         //실행할 메소드(서비스 부분에 있는 메소드)
-        sceneService.deleteActor();
+        scriptPaperService.deleteTimeTable();
 
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
@@ -143,5 +144,4 @@ public class SceneController {
         mv.setViewName("/test");
         return mv;
     }
-
 }

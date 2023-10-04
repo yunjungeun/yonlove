@@ -1,7 +1,12 @@
 package com.example.yoonlove.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.sql.Date;
 
+@Getter
+@Setter
 public class QnADto {
     private String qna_id;
     private String qna_title;

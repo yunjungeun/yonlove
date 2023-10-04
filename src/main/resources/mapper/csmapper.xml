@@ -5,7 +5,7 @@
 
 <!--공지사항 쿼리-->
     <select id="selectNotice">
-        SELECT * FROM notice where notice_id='1번글'
+        SELECT * FROM notice where notice_id={{뭘선택햇늕니}}
     </select>
 
     <select id="selectListNotice">
@@ -14,11 +14,11 @@
 
     <insert id="insertNotice">
         insert into notice values(
-        '5번글','쿼리로 입력한제목','내용입니다','관리자','2023-9-01','2023-9-02',0,'테스트관리자')
+        {{파라미터}},'쿼리로 입력한제목','내용입니다','관리자','2023-9-01','2023-9-02',0,'테스트관리자')
     </insert>
 
     <update id="updateNotice">
-        insert into notice values(
+        update into notice values(
         '5번글','쿼리로 입력한제목','내용입니다','관리자','2023-9-01','2023-9-02',0,'테스트관리자')
     </update>
 
