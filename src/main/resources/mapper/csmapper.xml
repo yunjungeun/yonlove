@@ -4,21 +4,21 @@
 <mapper namespace="com.example.yoonlove.mapper.CsMapper">
 
 <!--공지사항 쿼리-->
-    <select id="selectNotice">
-        SELECT * FROM notice where notice_id='1번글'
+    <select id="selectNotice" resultType="com.example.yoonlove.dto.NoticeDto">
+        SELECT * FROM notice where notice_id=1
     </select>
 
-    <select id="selectListNotice">
+    <select id="selectListNotice" resultType="com.example.yoonlove.dto.NoticeDto">
         SELECT * FROM notice
     </select>
 
-    <insert id="insertNotice">
+    <insert id="insertNotice" parameterType="com.example.yoonlove.dto.NoticeDto">
         insert into notice values(
-        '5번글','쿼리로 입력한제목','내용입니다','관리자','2023-9-01','2023-9-02',0,'테스트관리자')
+        3,#{notice_title},#{notice_content},'관리자','2023-9-02',0,'test')
     </insert>
 
     <update id="updateNotice">
-        insert into notice values(
+        update into notice values(
         '5번글','쿼리로 입력한제목','내용입니다','관리자','2023-9-01','2023-9-02',0,'테스트관리자')
     </update>
 
@@ -28,11 +28,11 @@
 
 
     <!--QnA 쿼리-->
-    <select id="selectQnA">
+    <select id="selectQnA" resultType="com.example.yoonlove.dto.QnADto">
         SELECT * FROM qna where notice_id='1번글'
     </select>
 
-    <select id="selectListQnA">
+    <select id="selectListQnA" resultType="com.example.yoonlove.dto.QnADto">
         SELECT * FROM qna
     </select>
 
