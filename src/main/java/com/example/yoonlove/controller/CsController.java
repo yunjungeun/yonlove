@@ -17,7 +17,7 @@ public class CsController {
     private CsService csService;
     //서비스 객체 수정
 
-    @GetMapping("/listnotice")
+    @GetMapping("/cs/listnotice")
     public ModelAndView selectListNotice(){
         //실행할 메소드(서비스 부분에 있는 메소드)
         List<NoticeDto> dto = csService.selectListNotice();
@@ -25,14 +25,14 @@ public class CsController {
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
         //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/testlist");
+        mv.setViewName("/cs/listnotice");
 
         //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
         mv.addObject("selectListNotice", dto);
         return mv;
     }
 
-    @GetMapping("/selectnotice")
+    @GetMapping("/cs/selectnotice")
     public ModelAndView selectNotice(){
         //실행할 메소드(서비스 부분에 있는 메소드)
         NoticeDto dto = csService.selectNotice();
@@ -40,25 +40,27 @@ public class CsController {
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
         //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
+        mv.setViewName("/cs/selectnotic");
 
         //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
         mv.addObject("selectNotice", dto);
         return mv;
     }
 
-    @GetMapping("/insertnotice")
-    public ModelAndView insertNotice(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        csService.insertNotice();
-
-        //세션 객체생셩
+    @GetMapping("/cs/insertnotice-view")
+    public ModelAndView insertnoticeView(){
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
+        mv.setViewName("/cs/insertnoticeview");
         return mv;
     }
-    @GetMapping("/updatenotice")
+
+    @GetMapping("/cs/insertnotice")
+    public String insertNotice(){
+        //실행할 메소드(서비스 부분에 있는 메소드)
+        csService.insertNotice();
+        return "/cs/listnotice";
+    }
+    @GetMapping("/cs/updatenotice")
     public ModelAndView updateNotice(){
         //실행할 메소드(서비스 부분에 있는 메소드)
         csService.updateNotice();
@@ -70,7 +72,7 @@ public class CsController {
         return mv;
     }
 
-    @GetMapping("/deletenotice")
+    @GetMapping("/cs/deletenotice")
     public ModelAndView deleteNotice(){
         //실행할 메소드(서비스 부분에 있는 메소드)
         csService.deleteNotice();

@@ -6,13 +6,13 @@
     <title>게시판 리스트</title>
 </head>
 <body>
-<h1>게시판 리스트
+<h1>테스트 리스트</h1>
     <table border="1" cellpadding="1" cellspacing="1">
 <ul>
     {{#selectListNotice}}
         <tr>
             <td>{{notice_id}}</td>
-            <td><a href="/selectnotice">{{notice_title}}</a></td>
+            <td><a href="/insert">{{notice_title}}</a></td>
             <td>{{notice_writer}}</td>
             <td>{{notice_date}}</td>
             <td>{{notice_cnt}}</td>
@@ -20,5 +20,6 @@
     {{/selectListNotice}}
 </ul>
     </table>
+<a href="/insert">/selectnotice</a>
 </body>
 </html>
