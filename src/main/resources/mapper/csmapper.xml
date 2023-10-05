@@ -25,9 +25,9 @@
         delete from notice where notice_id='5번글'
     </delete>
 
-    <update id="cnt">
-        update notice set notice_cnt =(notice_cnt+1) where notice_id = 1
-    </update>
+<!--    <update id="cnt">-->
+<!--        update notice set notice_cnt =(notice_cnt+1) where notice_id = 1-->
+<!--    </update>-->
 
 
     <!--QnA-->

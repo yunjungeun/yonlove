@@ -21,7 +21,7 @@ public class CsController {
     public ModelAndView selectNotice(NoticeDto noticedto){
         NoticeDto dto = csService.selectNotice(noticedto);
         System.out.println("확인점1");
-        csService.cnt();
+/*        csService.cnt();*/
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/cs/selectnotice");
         mv.addObject("selectNotice", dto);
