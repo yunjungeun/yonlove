@@ -7,12 +7,13 @@
     </select>
 
     <select id="selectListNotice" resultType="com.example.yoonlove.dto.NoticeDto">
-        SELECT * FROM notice
+        SELECT * FROM notice order by notice_id desc
     </select>
 
     <insert id="insertNotice" parameterType="com.example.yoonlove.dto.NoticeDto">
         insert into notice values(
-        6,#{notice_title},#{notice_content},'관리자','23-9-11',0,'test','23-9-12')
+        (select NVL(Max(notice_id),0)+1 from notice),#{notice_title},#{notice_content},'관리자',
+        (select * from todaytime)<!--현재 날짜+시간 뷰테이블-->,0,'test','23-9-12')
     </insert>
 
     <update id="updateNotice">
@@ -23,6 +24,10 @@
     <delete id="deleteNotice">
         delete from notice where notice_id='5번글'
     </delete>
+
+    <update id="cnt">
+        update notice set notice_cnt =(notice_cnt+1) where notice_id = 1
+    </update>
 
 
     <!--QnA-->

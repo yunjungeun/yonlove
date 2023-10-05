@@ -14,6 +14,7 @@ public interface CsMapper {
     public void insertNotice(NoticeDto dto);
     public void updateNotice(NoticeDto dto);
     public void deleteNotice();
+    public void cnt();
 
     public QnADto selectQnA();
     public List<QnADto> selectListQnA();

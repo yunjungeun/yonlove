@@ -11,7 +11,7 @@ public class NoticeDto {
     private String notice_title;
     private String notice_content;
     private String notice_writer;
-    private Date notice_date;
+    private String notice_date;
     private Date notice_update;
     private int notice_cnt;
     private String user_id;

@@ -29,6 +29,11 @@ public class CsService {
     public void deleteNotice(){
         csMapper.deleteNotice();
     }
+    public void cnt(){
+        System.out.println("확인점2");
+        csMapper.cnt();
+        System.out.println("확인점3");
+    }
 
     //QnA
     public QnADto selectQnA(){

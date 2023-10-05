@@ -20,7 +20,8 @@ public class CsController {
     @GetMapping("/cs/selectnotice")
     public ModelAndView selectNotice(NoticeDto noticedto){
         NoticeDto dto = csService.selectNotice(noticedto);
-
+        System.out.println("확인점1");
+        csService.cnt();
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/cs/selectnotice");
         mv.addObject("selectNotice", dto);
