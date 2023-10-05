@@ -1,0 +1,106 @@
+package com.example.yoonlove.controller;
+
+import com.example.yoonlove.dto.NoticeDto;
+import com.example.yoonlove.dto.QnADto;
+import com.example.yoonlove.service.CsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
+
+@Controller
+public class CsController {
+
+    @Autowired
+    private CsService csService;
+
+    //공지사항
+    @GetMapping("/cs/selectnotice")
+    public ModelAndView selectNotice(){
+        NoticeDto dto = csService.selectNotice();
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/cs/selectnotice");
+        mv.addObject("selectNotice", dto);
+        return mv;
+    }
+    @GetMapping("/cs/notice")
+    public ModelAndView selectListNotice(){
+        List<NoticeDto> dto = csService.selectListNotice();
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/cs/selectlistnotice");
+        mv.addObject("selectListNotice", dto);
+        return mv;
+    }
+    @GetMapping("/cs/insertnotice")
+    public ModelAndView insertNotice(){
+        csService.insertNotice();
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/cs/selectlistnotice");
+        return mv;
+    }
+    @GetMapping("/cs/updatenotice")
+    public ModelAndView updateNotice(){
+        csService.updateNotice();
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/cs/selectnotice");
+        return mv;
+    }
+    @GetMapping("/cs/deletenotice")
+    public ModelAndView deleteNotice(){
+        csService.deleteNotice();
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/cs/selectlistnotice");
+        return mv;
+    }
+
+    //QnA
+    @GetMapping("/cs/selectqna")
+    public ModelAndView selectQnA(){
+        QnADto dto = csService.selectQnA();
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/cs/selectqna");
+        mv.addObject("selectQnA", dto);
+        return mv;
+    }
+    @GetMapping("/cs/qna")
+    public ModelAndView selectListQnA(){
+        List<QnADto> dto = csService.selectListQnA();
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/cs/selectlistqna");
+        mv.addObject("selectListQnA", dto);
+        return mv;
+    }
+    @GetMapping("/cs/insertqna")
+    public ModelAndView insertQnA(){
+        csService.insertQnA();
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/cs/selectlistqna");
+        return mv;
+    }
+    @GetMapping("/cs/updateqna")
+    public ModelAndView updateQnA(){
+        csService.updateQnA();
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/cs/selectqna");
+        return mv;
+    }
+    @GetMapping("/cs/deleteqna")
+    public ModelAndView deleteQnA(){
+        csService.deleteQnA();
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/cs/selectlistqna");
+        return mv;
+    }
+}
