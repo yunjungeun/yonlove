@@ -7,9 +7,20 @@
     <title>Document</title>
 </head>
 <body>
-테스트 뷰페이지<br>
-DB에서 나오는 데이터입니다<br>
-컬럼명 id의 내용은 : {{selectNotice.notice_id}}<br>
-컬럼명 content의 내용은  : {{selectNotice.notice_title}}
+<form method="get" action="/cs/updatenoticeview/">
+<input name="notice_id" type="hidden" value="{{selectNotice.notice_id}}"/>
+<table border="1" cellpadding="1" cellspacing="1">
+    <tr>
+        <td>제목</td>
+        <td><input name="notice_title" type="text" value="{{selectNotice.notice_title}}" disabled><td>
+    </tr>
+    <tr>
+        <td colspan="2"><textarea name="notice_content" cols="50" rows="20" disabled>{{selectNotice.notice_content}}</textarea></td>
+    </tr>
+</table>
+    <input type="submit" value="수정"/>
+</form>
+<a href="/cs/notice">목록</a>
+<a href="/cs/deletenotice">삭제</a>
 </body>
 </html>
