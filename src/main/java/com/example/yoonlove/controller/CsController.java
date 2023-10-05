@@ -44,12 +44,10 @@ public class CsController {
     }
 
     @GetMapping("/cs/insertnotice")
-    public ModelAndView insertNotice(){
-        csService.insertNotice();
+    public String insertNotice(NoticeDto dto){
+        csService.insertNotice(dto);
 
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("/cs/listnotice");
-        return mv;
+        return "/cs/notice";
     }
     @GetMapping("/cs/updatenotice")
     public ModelAndView updateNotice(){

@@ -20,8 +20,8 @@ public class CsService {
     public List<NoticeDto> selectListNotice(){
         return csMapper.selectListNotice();
     }
-    public void insertNotice(){
-        csMapper.insertNotice();
+    public void insertNotice(NoticeDto dto){
+        csMapper.insertNotice(dto);
     }
     public void updateNotice(){
         csMapper.updateNotice();

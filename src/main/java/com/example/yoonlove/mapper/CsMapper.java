@@ -11,7 +11,7 @@ public interface CsMapper {
     //공지사항
     public NoticeDto selectNotice();
     public List<NoticeDto> selectListNotice();
-    public void insertNotice();
+    public void insertNotice(NoticeDto dto);
     public void updateNotice();
     public void deleteNotice();
 

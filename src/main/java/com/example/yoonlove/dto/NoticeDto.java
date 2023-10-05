@@ -1,7 +1,11 @@
 package com.example.yoonlove.dto;
 
-import java.sql.Date;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.sql.Date;
+@Getter
+@Setter
 public class NoticeDto {
     private int notice_id;
     private String notice_title;

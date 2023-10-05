@@ -2,22 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.yoonlove.mapper.CsMapper">
-    <select id="selectNotice">
+    <select id="selectNotice" resultType="com.example.yoonlove.dto.NoticeDto">
         SELECT * FROM notice where notice_id='1번글'
     </select>
 
-    <select id="selectListNotice">
+    <select id="selectListNotice" resultType="com.example.yoonlove.dto.NoticeDto">
         SELECT * FROM notice
     </select>
 
-    <insert id="insertNotice">
+    <insert id="insertNotice" parameterType="com.example.yoonlove.dto.NoticeDto">
         insert into notice values(
-        5,'쿼리로 입력한제목5','내용입니다','관리자','23-9-11',0,'test','23-9-12')
+        6,#{notice_title},#{notice_content},'관리자','23-9-11',0,'test','23-9-12')
     </insert>
 
     <update id="updateNotice">
         insert into notice values(
-        '5번글','쿼리로 입력한제목','내용입니다','관리자','2023-9-01','2023-9-02',0,'테스트관리자')
+        '6번글','쿼리로 입력한제목','내용입니다','관리자','2023-9-01','2023-9-02',0,'테스트관리자')
     </update>
 
     <delete id="deleteNotice">
