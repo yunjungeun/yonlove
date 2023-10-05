@@ -22,7 +22,7 @@
     </update>
 
     <delete id="deleteNotice">
-        delete from notice where notice_id='5번글'
+        delete from notice where notice_id=(select max(notice_id) from notice)
     </delete>
 
 <!--    <update id="cnt">-->

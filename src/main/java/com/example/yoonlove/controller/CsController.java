@@ -67,12 +67,9 @@ public class CsController {
         return "/cs/notice";
     }
     @GetMapping("/cs/deletenotice")
-    public ModelAndView deleteNotice(){
+    public String deleteNotice(){
         csService.deleteNotice();
-
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("/cs/selectlistnotice");
-        return mv;
+        return "/cs/notice";
     }
 
     //QnA
