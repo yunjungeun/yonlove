@@ -14,8 +14,8 @@ public class CsService {
     private CsMapper csMapper;
 
     //공지사항
-    public NoticeDto selectNotice(){
-        return csMapper.selectNotice();
+    public NoticeDto selectNotice(NoticeDto dto){
+        return csMapper.selectNotice(dto);
     }
     public List<NoticeDto> selectListNotice(){
         return csMapper.selectListNotice();
@@ -23,8 +23,8 @@ public class CsService {
     public void insertNotice(NoticeDto dto){
         csMapper.insertNotice(dto);
     }
-    public void updateNotice(){
-        csMapper.updateNotice();
+    public void updateNotice(NoticeDto dto){
+        csMapper.updateNotice(dto);
     }
     public void deleteNotice(){
         csMapper.deleteNotice();

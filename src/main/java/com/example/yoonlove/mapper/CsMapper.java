@@ -9,10 +9,10 @@ import java.util.List;
 @Mapper
 public interface CsMapper {
     //공지사항
-    public NoticeDto selectNotice();
+    public NoticeDto selectNotice(NoticeDto dto);
     public List<NoticeDto> selectListNotice();
     public void insertNotice(NoticeDto dto);
-    public void updateNotice();
+    public void updateNotice(NoticeDto dto);
     public void deleteNotice();
 
     public QnADto selectQnA();

@@ -12,7 +12,7 @@
             {{#selectListNotice}}
                 <tr>
                     <td>{{notice_id}}</td>
-                    <td><a href="cs/selectnotice1">{{notice_title}}</a></td>
+                    <td><a href="/cs/selectnotice?notice_id={{notice_id}}">{{notice_title}}</a></td>
                     <td>{{notice_writer}}</td>
                     <td>{{notice_date}}</td>
                     <td>{{notice_cnt}}</td>
@@ -21,6 +21,6 @@
         </ul>
     </table>
 <a href="/cs/insertnotice-view" role="button">글 작성</a>
-<a href="/cs/listnotice">목록</a>
+<a href="/cs/notice">목록</a>
 </body>
 </html>

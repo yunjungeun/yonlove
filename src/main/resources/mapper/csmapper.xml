@@ -3,7 +3,7 @@
 
 <mapper namespace="com.example.yoonlove.mapper.CsMapper">
     <select id="selectNotice" resultType="com.example.yoonlove.dto.NoticeDto">
-        SELECT * FROM notice where notice_id='1번글'
+        SELECT * FROM notice where notice_id=#{notice_id}
     </select>
 
     <select id="selectListNotice" resultType="com.example.yoonlove.dto.NoticeDto">
@@ -16,8 +16,8 @@
     </insert>
 
     <update id="updateNotice">
-        insert into notice values(
-        '6번글','쿼리로 입력한제목','내용입니다','관리자','2023-9-01','2023-9-02',0,'테스트관리자')
+        update notice set(notice_title = #{notice_title}, notice_content=#{notice_content}
+        where notice_id = #{notice_id})
     </update>
 
     <delete id="deleteNotice">

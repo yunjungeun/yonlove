@@ -18,8 +18,8 @@ public class CsController {
 
     //공지사항
     @GetMapping("/cs/selectnotice")
-    public ModelAndView selectNotice(){
-        NoticeDto dto = csService.selectNotice();
+    public ModelAndView selectNotice(NoticeDto noticedto){
+        NoticeDto dto = csService.selectNotice(noticedto);
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/cs/selectnotice");
@@ -37,7 +37,7 @@ public class CsController {
     }
 
     @GetMapping("/cs/insertnotice-view")
-    public ModelAndView insertview(){
+    public ModelAndView insertNoticeView(){
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/cs/insertnoticeview");
         return mv;
@@ -49,13 +49,21 @@ public class CsController {
 
         return "/cs/notice";
     }
-    @GetMapping("/cs/updatenotice")
-    public ModelAndView updateNotice(){
-        csService.updateNotice();
 
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("/cs/selectnotice");
-        return mv;
+    @GetMapping("/cs/updatenoticeview")
+    public String updateNoticeView(){
+/*        ModelAndView mv = new ModelAndView();
+        mv.addObject("updateNoticeView", dto);
+        mv.setViewName("/cs/updatenotice");
+        return mv;*/
+        return "updatenotice";
+    }
+
+    @GetMapping("/cs/updatenotice")
+    public String updateNotice(NoticeDto dto){
+        csService.updateNotice(dto);
+
+        return "/cs/notice";
     }
     @GetMapping("/cs/deletenotice")
     public ModelAndView deleteNotice(){
