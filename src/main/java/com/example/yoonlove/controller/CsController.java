@@ -31,16 +31,24 @@ public class CsController {
         List<NoticeDto> dto = csService.selectListNotice();
 
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/cs/selectlistnotice");
+        mv.setViewName("/cs/listnotice");
         mv.addObject("selectListNotice", dto);
         return mv;
     }
+
+    @GetMapping("/cs/insertnotice-view")
+    public ModelAndView insertview(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/cs/insertnoticeview");
+        return mv;
+    }
+
     @GetMapping("/cs/insertnotice")
     public ModelAndView insertNotice(){
         csService.insertNotice();
 
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/cs/selectlistnotice");
+        mv.setViewName("/cs/listnotice");
         return mv;
     }
     @GetMapping("/cs/updatenotice")

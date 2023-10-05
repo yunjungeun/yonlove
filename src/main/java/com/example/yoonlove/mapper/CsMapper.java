@@ -15,9 +15,9 @@ public interface CsMapper {
     public void updateNotice();
     public void deleteNotice();
 
-    public QnADto selectQnADto();
-    public List<QnADto> selectListQnADto();
-    public void insertQnADto();
-    public void updateQnADto();
-    public void deleteQnADto();
+    public QnADto selectQnA();
+    public List<QnADto> selectListQnA();
+    public void insertQnA();
+    public void updateQnA();
+    public void deleteQnA();
 }
