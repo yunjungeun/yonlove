@@ -25,35 +25,44 @@
         delete from notice where notice_id=#{notice_id}
     </delete>
 
-    <update id="cnt">
+    <!--조회수증가-->
+    <update id="NoticeCnt">
         update notice set notice_cnt = notice_cnt+1 where notice_id=#{notice_id}
     </update>
 
-<!--    <update id="cnt">-->
-<!--        update notice set notice_cnt =(notice_cnt+1) where notice_id = 1-->
-<!--    </update>-->
 
 
     <!--QnA-->
-    <select id="selectQnA">
-        SELECT * FROM notice where notice_id='1번글'
+    <select id="selectQnA" resultType="com.example.yoonlove.dto.QnADto">
+        SELECT * FROM qna where qna_id=#{qna_id}
     </select>
+    <!--조회수증가-->
+    <update id="QnACnt">
+        update qna set qna_cnt = qna_cnt+1 where qna_id=#{qna_id}
+    </update>
 
-    <select id="selectListQnA">
-        SELECT * FROM notice
+    <select id="selectListQnA" resultType="com.example.yoonlove.dto.QnADto">
+        SELECT * FROM qna order by qna_id desc
     </select>
 
     <insert id="insertQnA">
-        insert into notice values(
-        '5번글','쿼리로 입력한제목','내용입니다','관리자','2023-9-01','2023-9-02',0,'테스트관리자')
+        insert into qna values(
+        (select NVL(Max(qna_id),0)+1 from qna),<!--글번호를 1씩 증가시키는 서브쿼리-->
+        #{qna_title},<!--입력받은 제목-->
+        #{qna_content},<!--입력받은 내용-->
+        '관리자',<!--작성자(닉네임)-->
+        (select * from todaytime)<!--현재 날짜+시간 뷰테이블-->,
+        null,<!--수정일자-->
+        0,<!--조회수 처음갑은0-->
+        'test'<!--작성한 유저id-->)
     </insert>
 
     <update id="updateQnA">
-        insert into notice values(
-        '5번글','쿼리로 입력한제목','내용입니다','관리자','2023-9-01','2023-9-02',0,'테스트관리자')
+        update qna set qna_title = #{qna_title}, qna_content=#{qna_content}
+        where qna_id = #{qna_id}
     </update>
 
     <delete id="deleteQnA">
-        delete from notice where notice_id='5번글'
+        delete from qna where qna_id = #{qna_id}
     </delete>
 </mapper>

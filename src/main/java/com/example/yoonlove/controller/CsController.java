@@ -22,7 +22,7 @@ public class CsController {
         NoticeDto dto = csService.selectNotice(noticedto);
 
         /*조회수 증가메소드*/
-        csService.cnt(noticedto);
+        csService.NoticeCnt(noticedto);
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/cs/selectnotice");
@@ -40,11 +40,8 @@ public class CsController {
     }
 
     @GetMapping("/cs/insertnotice-view")
-    public ModelAndView insertNoticeView(NoticeDto dto){
-        NoticeDto noticeDto = csService.selectNotice(dto);
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("/cs/insertnoticeview");
-        return mv;
+    public String insertNoticeView(){
+        return "/cs/insertnoticeview";
     }
 
     @GetMapping("/cs/insertnotice")
@@ -77,9 +74,11 @@ public class CsController {
     }
 
     //QnA
-    @GetMapping("/cs/selectqna")
-    public ModelAndView selectQnA(){
-        QnADto dto = csService.selectQnA();
+    @GetMapping("/cs/selectqna/{qna_id}")
+    public ModelAndView selectQnA(QnADto qnadto){
+        QnADto dto = csService.selectQnA(qnadto);
+        //조회수 증가 메소드
+        csService.QnACnt(qnadto);
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/cs/selectqna");
@@ -91,32 +90,38 @@ public class CsController {
         List<QnADto> dto = csService.selectListQnA();
 
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/cs/selectlistqna");
+        mv.setViewName("/cs/listqna");
         mv.addObject("selectListQnA", dto);
         return mv;
     }
+
+    @GetMapping("/cs/insertqnaview")
+    public String insertQnAView(){
+        return "/cs/insertqnaview";
+    }
     @GetMapping("/cs/insertqna")
-    public ModelAndView insertQnA(){
-        csService.insertQnA();
+    public String insertQnA(QnADto dto){
+        csService.insertQnA(dto);
+        return "/cs/qna";
+    }
 
+    @GetMapping("/cs/{qna_id}/updateqnaview")
+    public ModelAndView updateQnAView(QnADto qnadto){
+        QnADto dto = csService.selectQnA(qnadto);
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/cs/selectlistqna");
+        mv.setViewName("/cs/updateqna");
+        mv.addObject("updateQnA",dto);
         return mv;
     }
-    @GetMapping("/cs/updateqna")
-    public ModelAndView updateQnA(){
-        csService.updateQnA();
-
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("/cs/selectqna");
-        return mv;
+    @GetMapping("/cs/{qna_id}/updateqna")
+    public String updateQnA(QnADto dto){
+        csService.updateQnA(dto);
+        return "/cs/qna";
     }
-    @GetMapping("/cs/deleteqna")
-    public ModelAndView deleteQnA(){
-        csService.deleteQnA();
+    @GetMapping("/cs/{qna_id}/deleteqna")
+    public String deleteQnA(QnADto dto){
+        csService.deleteQnA(dto);
 
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("/cs/selectlistqna");
-        return mv;
+        return "/cs/qna";
     }
 }
