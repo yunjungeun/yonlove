@@ -17,7 +17,7 @@ public class CsController {
     private CsService csService;
 
     //공지사항
-    @GetMapping("/cs/selectnotice")
+    @GetMapping("/cs/selectnotice/{notice_id}")
     public ModelAndView selectNotice(NoticeDto noticedto){
         NoticeDto dto = csService.selectNotice(noticedto);
         System.out.println("확인점1");
