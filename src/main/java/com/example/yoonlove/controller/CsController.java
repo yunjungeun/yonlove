@@ -38,7 +38,8 @@ public class CsController {
     }
 
     @GetMapping("/cs/insertnotice-view")
-    public ModelAndView insertNoticeView(){
+    public ModelAndView insertNoticeView(NoticeDto dto){
+        NoticeDto noticeDto = csService.selectNotice(dto);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/cs/insertnoticeview");
         return mv;
@@ -51,16 +52,17 @@ public class CsController {
         return "/cs/notice";
     }
 
-    @GetMapping("/cs/updatenoticeview")
-    public String updateNoticeView(){
-/*        ModelAndView mv = new ModelAndView();
-        mv.addObject("updateNoticeView", dto);
+    @GetMapping("/cs/{notice_id}/updatenoticeview")
+    public ModelAndView updateNoticeView(NoticeDto dto){
+        NoticeDto noticedto = csService.selectNotice(dto);
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("updateNotice", noticedto);
         mv.setViewName("/cs/updatenotice");
-        return mv;*/
-        return "updatenotice";
+        return mv;
+
     }
 
-    @GetMapping("/cs/updatenotice")
+    @GetMapping("/cs/{notice_id}/updatenotice")
     public String updateNotice(NoticeDto dto){
         csService.updateNotice(dto);
 
