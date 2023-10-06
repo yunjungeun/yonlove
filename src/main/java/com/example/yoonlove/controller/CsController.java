@@ -20,8 +20,10 @@ public class CsController {
     @GetMapping("/cs/selectnotice/{notice_id}")
     public ModelAndView selectNotice(NoticeDto noticedto){
         NoticeDto dto = csService.selectNotice(noticedto);
-        System.out.println("확인점1");
-/*        csService.cnt();*/
+
+        /*조회수 증가메소드*/
+        csService.cnt(noticedto);
+
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/cs/selectnotice");
         mv.addObject("selectNotice", dto);
@@ -68,9 +70,9 @@ public class CsController {
 
         return "/cs/notice";
     }
-    @GetMapping("/cs/deletenotice")
-    public String deleteNotice(){
-        csService.deleteNotice();
+    @GetMapping("/cs/{notice_id}/deletenotice")
+    public String deleteNotice(NoticeDto dto){
+        csService.deleteNotice(dto);
         return "/cs/notice";
     }
 
