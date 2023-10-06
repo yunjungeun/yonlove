@@ -8,8 +8,11 @@ import java.util.List;
 @Mapper
 public interface ScenarioMapper {
     public List<ScenarioDto> selectListScenario();
-    public ScenarioDto selectScenario();
-    public void insertScenario();
-    public void updateScenario();
-    public void deleteScenario();
+    public ScenarioDto selectScenario(ScenarioDto dto);
+    public void insertScenario(ScenarioDto dto);
+    public void updateScenario(ScenarioDto dto);
+    public void deleteScenario(ScenarioDto dto);
+
+    /*조회수 증가*/
+    public void ScenarioCnt(ScenarioDto dto);
 }

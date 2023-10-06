@@ -14,62 +14,55 @@ public class ScenarioController {
     @Autowired
     private ScenarioService scenarioService;
 
-    @GetMapping("/listscenario")
+    @GetMapping("/scenario/scenario")
     public ModelAndView selectListScenario(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
         List<ScenarioDto> dto = scenarioService.selectListScenario();
-
-        //세션 객체생셩
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/testlist");
-
-        //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
+        mv.setViewName("/scenario/scenario");
         mv.addObject("selectListScenario", dto);
         return mv;
     }
 
-    @GetMapping("/selectscenario")
-    public ModelAndView selectScenario(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        ScenarioDto dto = scenarioService.selectScenario();
-
-        //세션 객체생셩
+    @GetMapping("/scenario/{scenario_id}/selectscenario/")
+    public ModelAndView selectScenario(ScenarioDto scenarioDto){
+        ScenarioDto dto = scenarioService.selectScenario(scenarioDto);
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
-
-        //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
+        mv.setViewName("/scenario/selectscenario");
         mv.addObject("selectScenario", dto);
         return mv;
     }
 
-    @GetMapping("/insertscenario")
-    public ModelAndView insertScenario(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        scenarioService.insertScenario();
+    @GetMapping("/scenario/insertscenarioview")
+    public String insertView(){
+        return "/scenario/insertscenario";
+    }
 
-        //세션 객체생셩
+    @GetMapping("/scenario/insertscenario")
+    public String insertScenario(ScenarioDto dto){
+        scenarioService.insertScenario(dto);
+        return "/scenario/scenario";
+    }
+
+    @GetMapping("/scenario/{scenario_id}/updatescenarioview")
+    public ModelAndView updateView(ScenarioDto scenarioDto){
+        ScenarioDto dto = scenarioService.selectScenario(scenarioDto);
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
+        mv.addObject("updateScenario", dto);
+        mv.setViewName("/scenario/updatescenario");
         return mv;
     }
-    @GetMapping("/updatescenario")
-    public ModelAndView updateScenario(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        scenarioService.updateScenario();
 
-        //세션 객체생셩
-        ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
-        return mv;
+    @GetMapping("/scenario/{scenario_id}/updatescenario")
+    public String updateScenario(ScenarioDto dto){
+        scenarioService.updateScenario(dto);
+        return "/scenario/scenario";
     }
+
+
     @GetMapping("/deletescenario")
-    public ModelAndView deleteScenario(){
+    public ModelAndView deleteScenario(ScenarioDto dto){
         //실행할 메소드(서비스 부분에 있는 메소드)
-        scenarioService.deleteScenario();
+        scenarioService.deleteScenario(dto);
 
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();

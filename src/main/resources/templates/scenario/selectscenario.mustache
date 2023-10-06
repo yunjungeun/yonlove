@@ -1,0 +1,30 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <input name="scenario_id" type="hidden" value="{{selectScenario.scenario_id}}"/>
+    <table border="1" cellpadding="1" cellspacing="1">
+        <tr>
+            <td>시나리오 제목
+                <input name="scenario_name" type="text" value="{{selectScenario.scenario_name}}" readonly></td>
+            <td>기획ID / 나중에 기획명으로 바꿔야함
+                <input name="project_id" type="text" value="{{selectScenario.project_id}}" readonly></td>
+            <td>시나리오 번호
+                <input name="scenario_num" type="text" value="{{selectScenario.scenario_num}}" readonly></td>
+        </tr>
+        <tr>
+            <td colspan="3"><textarea name="scenario_content" cols="50" rows="20" readonly>{{selectScenario.scenario_content}}</textarea></td>
+        </tr>
+    </table>
+
+<a href="/scenario/scenario">목록</a>
+<a href="/scenario/{{selectScenario.scenario_id}}/updatescenarioview">수정</a>
+<a href="/scenario/{{selectScenario.scenario_id}}/deletescenario">삭제</a>
+</body>
+</html>

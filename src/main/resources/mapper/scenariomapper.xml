@@ -2,22 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.yoonlove.mapper.ScenarioMapper">
-    <select id="selectScenario">
-        SELECT * FROM notice where notice_id='1번글'
+    <select id="selectScenario" resultType="com.example.yoonlove.dto.ScenarioDto">
+        SELECT * FROM scenario where scenario_id=#{scenario_id}
     </select>
 
-    <select id="selectListScenario">
-        SELECT * FROM notice
+    <select id="selectListScenario" resultType="com.example.yoonlove.dto.ScenarioDto">
+        SELECT * FROM scenario
     </select>
 
     <insert id="insertScenario">
-        insert into notice values(
-        '5번글','쿼리로 입력한제목','내용입니다','관리자','2023-9-01','2023-9-02',0,'테스트관리자')
+        insert into scenario values(
+        '4',<!--시나리오 pk-->
+        (select scenario_num+1 from scenario), <!--시나리오번호 자동증가-->
+        #{scenario_name}, <!--시나리오 제목-->
+        #{scenario_content},<!--시나리오내용-->
+        '관리자',<!--작성자-->
+        (select * from todaytime),<!--작성시간-->
+        <!--수정일. 기본은 공백-->
+        'pj1'<!--드롭박스로 선택할수 있어야함-->)
     </insert>
 
     <update id="updateScenario">
-        insert into notice values(
-        '5번글','쿼리로 입력한제목','내용입니다','관리자','2023-9-01','2023-9-02',0,'테스트관리자')
+        update scenario set scenario_name = #{scenario_name}, scenario_content=#{scenario_content}
+        where scenario_id = #{scenario_id}
     </update>
 
     <delete id="deleteScenario">
