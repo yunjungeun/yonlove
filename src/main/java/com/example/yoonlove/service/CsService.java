@@ -26,14 +26,12 @@ public class CsService {
     public void updateNotice(NoticeDto dto){
         csMapper.updateNotice(dto);
     }
-    public void deleteNotice(){
-        csMapper.deleteNotice();
+    public void deleteNotice(NoticeDto dto){
+        csMapper.deleteNotice(dto);
     }
- /*   public void cnt(){
-        System.out.println("확인점2");
-        csMapper.cnt();
-        System.out.println("확인점3");
-    }*/
+    public void cnt(NoticeDto dto){
+        csMapper.cnt(dto);
+    }
 
     //QnA
     public QnADto selectQnA(){

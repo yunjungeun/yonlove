@@ -7,14 +7,17 @@
     <title>Document</title>
 </head>
 <body>
-<form method="get" action="/cs/updatenotice">
+<form method="get" action="/cs/{{updateNotice.notice_id}}/updatenotice">
+    <input name="notice_id" type="hidden" value="{{updateNotice.notice_id}}"/>
 <table border="1" cellpadding="1" cellspacing="1">
     <tr>
         <td>제목</td>
-        <td><input name="notice_title" type="text">수정내용<td>
+        <td><input name="notice_title" type="text" value="{{updateNotice.notice_title}}"><td>
     </tr>
     <tr>
-        <td colspan="2"><textarea name="notice_content" cols="50" rows="20">수정내용</textarea></td>
+        <td colspan="2">
+            <textarea name="notice_content" cols="50" rows="20">{{updateNotice.notice_content}}</textarea>
+        </td>
     </tr>
 </table>
     <input type="submit" value="수정"/>

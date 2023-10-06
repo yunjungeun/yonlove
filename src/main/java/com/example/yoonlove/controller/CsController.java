@@ -17,11 +17,13 @@ public class CsController {
     private CsService csService;
 
     //공지사항
-    @GetMapping("/cs/selectnotice")
+    @GetMapping("/cs/selectnotice/{notice_id}")
     public ModelAndView selectNotice(NoticeDto noticedto){
         NoticeDto dto = csService.selectNotice(noticedto);
-        System.out.println("확인점1");
-/*        csService.cnt();*/
+
+        /*조회수 증가메소드*/
+        csService.cnt(noticedto);
+
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/cs/selectnotice");
         mv.addObject("selectNotice", dto);
@@ -38,7 +40,8 @@ public class CsController {
     }
 
     @GetMapping("/cs/insertnotice-view")
-    public ModelAndView insertNoticeView(){
+    public ModelAndView insertNoticeView(NoticeDto dto){
+        NoticeDto noticeDto = csService.selectNotice(dto);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/cs/insertnoticeview");
         return mv;
@@ -51,24 +54,25 @@ public class CsController {
         return "/cs/notice";
     }
 
-    @GetMapping("/cs/updatenoticeview")
-    public String updateNoticeView(){
-/*        ModelAndView mv = new ModelAndView();
-        mv.addObject("updateNoticeView", dto);
+    @GetMapping("/cs/{notice_id}/updatenoticeview")
+    public ModelAndView updateNoticeView(NoticeDto dto){
+        NoticeDto noticedto = csService.selectNotice(dto);
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("updateNotice", noticedto);
         mv.setViewName("/cs/updatenotice");
-        return mv;*/
-        return "updatenotice";
+        return mv;
+
     }
 
-    @GetMapping("/cs/updatenotice")
+    @GetMapping("/cs/{notice_id}/updatenotice")
     public String updateNotice(NoticeDto dto){
         csService.updateNotice(dto);
 
         return "/cs/notice";
     }
-    @GetMapping("/cs/deletenotice")
-    public String deleteNotice(){
-        csService.deleteNotice();
+    @GetMapping("/cs/{notice_id}/deletenotice")
+    public String deleteNotice(NoticeDto dto){
+        csService.deleteNotice(dto);
         return "/cs/notice";
     }
 

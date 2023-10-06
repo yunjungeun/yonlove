@@ -12,15 +12,16 @@
 <table border="1" cellpadding="1" cellspacing="1">
     <tr>
         <td>제목</td>
-        <td><input name="notice_title" type="text" value="{{selectNotice.notice_title}}" disabled><td>
+        <td><input name="notice_title" type="text" value="{{selectNotice.notice_title}}" readonly><td>
     </tr>
     <tr>
-        <td colspan="2"><textarea name="notice_content" cols="50" rows="20" disabled>{{selectNotice.notice_content}}</textarea></td>
+        <td colspan="2"><textarea name="notice_content" cols="50" rows="20" readonly>{{selectNotice.notice_content}}</textarea></td>
     </tr>
 </table>
     <input type="submit" value="수정"/>
 </form>
 <a href="/cs/notice">목록</a>
-<a href="/cs/deletenotice">삭제</a>
+<a href="/cs/{{selectNotice.notice_id}}/updatenoticeview">수정</a>
+<a href="/cs/{{selectNotice.notice_id}}/deletenotice">삭제</a>
 </body>
 </html>

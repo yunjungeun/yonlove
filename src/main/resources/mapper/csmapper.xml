@@ -17,13 +17,17 @@
     </insert>
 
     <update id="updateNotice">
-        update notice set(notice_title = #{notice_title}, notice_content=#{notice_content}
-        where notice_id = #{notice_id})
+        update notice set notice_title = #{notice_title}, notice_content=#{notice_content}
+        where notice_id = #{notice_id}
     </update>
 
     <delete id="deleteNotice">
-        delete from notice where notice_id=(select max(notice_id) from notice)
+        delete from notice where notice_id=#{notice_id}
     </delete>
+
+    <update id="cnt">
+        update notice set notice_cnt = notice_cnt+1 where notice_id=#{notice_id}
+    </update>
 
 <!--    <update id="cnt">-->
 <!--        update notice set notice_cnt =(notice_cnt+1) where notice_id = 1-->
