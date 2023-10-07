@@ -15,15 +15,15 @@ public class SceneController {
     @Autowired
     private SceneService sceneService;
 
-    @GetMapping("/listscenae")
-    public ModelAndView selectListScenario(){
+    @GetMapping("/scene/scene")
+    public ModelAndView selectListScene(){
         //실행할 메소드(서비스 부분에 있는 메소드)
         List<SceneDto> dto = sceneService.selectListScene();
 
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
         //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/testlist");
+        mv.setViewName("/scene/scene");
 
         //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
         mv.addObject("selectListScene", dto);
@@ -31,9 +31,9 @@ public class SceneController {
     }
 
     @GetMapping("/selectscene")
-    public ModelAndView selectScene(){
+    public ModelAndView selectScene(SceneDto sceneDto){
         //실행할 메소드(서비스 부분에 있는 메소드)
-        SceneDto dto = sceneService.selectScene();
+        SceneDto dto = sceneService.selectScene(sceneDto);
 
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
@@ -45,21 +45,22 @@ public class SceneController {
         return mv;
     }
 
-    @GetMapping("/insertscene")
-    public ModelAndView insertScenario(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        sceneService.insertScene();
+    @GetMapping("/scene/insertsceneview")
+    public String insertSceneView(){
+        return "/scene/sceneinsert";
+    }
 
-        //세션 객체생셩
-        ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
-        return mv;
+    @GetMapping("/scene/insertscene")
+    public String insertScene(SceneDto dto){
+        System.out.println("test1");
+        sceneService.insertScene(dto);
+        System.out.println("test2");
+        return "redirect:/scene/scene";
     }
     @GetMapping("/updatescene")
-    public ModelAndView updateScene(){
+    public ModelAndView updateScene(SceneDto dto){
         //실행할 메소드(서비스 부분에 있는 메소드)
-        sceneService.updateScene();
+        sceneService.updateScene(dto);
 
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
@@ -68,9 +69,9 @@ public class SceneController {
         return mv;
     }
     @GetMapping("/deletescene")
-    public ModelAndView deleteScen(){
+    public ModelAndView deleteScen(SceneDto dto){
         //실행할 메소드(서비스 부분에 있는 메소드)
-        sceneService.deleteScene();
+        sceneService.deleteScene(dto);
 
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
@@ -78,6 +79,7 @@ public class SceneController {
         mv.setViewName("/test");
         return mv;
     }
+
 
     //출연자 정보
     @GetMapping("/listactor")
@@ -96,9 +98,9 @@ public class SceneController {
     }
 
     @GetMapping("/selectactor")
-    public ModelAndView selectActor(){
+    public ModelAndView selectActor(ActorDto actorDto){
         //실행할 메소드(서비스 부분에 있는 메소드)
-        ActorDto dto = sceneService.selectActor();
+        ActorDto dto = sceneService.selectActor(actorDto);
 
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
@@ -111,9 +113,9 @@ public class SceneController {
     }
 
     @GetMapping("/insertactor")
-    public ModelAndView insertActor(){
+    public ModelAndView insertActor(ActorDto dto){
         //실행할 메소드(서비스 부분에 있는 메소드)
-        sceneService.insertActor();
+        sceneService.insertActor(dto);
 
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
@@ -122,9 +124,9 @@ public class SceneController {
         return mv;
     }
     @GetMapping("/updateactor")
-    public ModelAndView updateActor(){
+    public ModelAndView updateActor(ActorDto dto){
         //실행할 메소드(서비스 부분에 있는 메소드)
-        sceneService.updateActor();
+        sceneService.updateActor(dto);
 
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();
@@ -133,9 +135,9 @@ public class SceneController {
         return mv;
     }
     @GetMapping("/deleteactor")
-    public ModelAndView deleteActor(){
+    public ModelAndView deleteActor(ActorDto dto){
         //실행할 메소드(서비스 부분에 있는 메소드)
-        sceneService.deleteActor();
+        sceneService.deleteActor(dto);
 
         //세션 객체생셩
         ModelAndView mv = new ModelAndView();

@@ -13,6 +13,4 @@ public interface ScenarioMapper {
     public void updateScenario(ScenarioDto dto);
     public void deleteScenario(ScenarioDto dto);
 
-    /*조회수 증가*/
-    public void ScenarioCnt(ScenarioDto dto);
 }

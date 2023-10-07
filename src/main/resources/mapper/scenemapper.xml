@@ -2,25 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.yoonlove.mapper.SceneMapper">
-    <select id="selectScenario">
-        SELECT * FROM notice where notice_id='1번글'
+    <select id="selectScene">
+        SELECT * FROM scene where notice_id='1번글'
     </select>
 
-    <select id="selectListScenario">
-        SELECT * FROM notice
+    <select id="selectListScene">
+        SELECT * FROM scene
     </select>
 
-    <insert id="insertScenario">
-        insert into notice values(
-        '5번글','쿼리로 입력한제목','내용입니다','관리자','2023-9-01','2023-9-02',0,'테스트관리자')
+    <insert id="insertScene">
+        insert into scene values(
+        (select concat('scene',(substring(NVL(max(scene_id),'scene0'),6)+1)) from scene),<!--pk코드 자동증가-->
+        (select nvl(max(scene_num),0)+1 from scene),<!--씬 번호 자동증가-->
+        null,<!--이미지 첨부파일 주소-->
+        #{scene_place}, <!--촬영장소-->
+        #{story_board},<!--스토리보드 내용-->
+        #{scene_content}, <!--스토리보드 요약-->
+        'pj1' <!--시나리오 id 조인해서 드롭다운 형태로 선택할수 있어야함-->
+        )
     </insert>
 
-    <update id="updateScenario">
-        insert into notice values(
+    <update id="updateScene">
+        insert into scene values(
         '5번글','쿼리로 입력한제목','내용입니다','관리자','2023-9-01','2023-9-02',0,'테스트관리자')
     </update>
 
-    <delete id="deleteScenario">
+    <delete id="deleteScene">
         delete from notice where notice_id='5번글'
     </delete>
 </mapper>

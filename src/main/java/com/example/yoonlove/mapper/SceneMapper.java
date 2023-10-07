@@ -10,15 +10,15 @@ import java.util.List;
 public interface SceneMapper {
     //스토리보드
     public List<SceneDto> selectListScene();
-    public SceneDto selectScene();
-    public void insertScene();
-    public void updateScene();
-    public void deleteScene();
+    public SceneDto selectScene(SceneDto dto);
+    public void insertScene(SceneDto dto);
+    public void updateScene(SceneDto dto);
+    public void deleteScene(SceneDto dto);
 
     //출연자편성
     public List<ActorDto> selectListActor();
-    public ActorDto selectActor();
-    public void insertActor();
-    public void updateActor();
-    public void deleteActor();
+    public ActorDto selectActor(ActorDto dto);
+    public void insertActor(ActorDto dto);
+    public void updateActor(ActorDto dto);
+    public void deleteActor(ActorDto dto);
 }
