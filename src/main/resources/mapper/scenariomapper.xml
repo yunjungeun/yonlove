@@ -28,6 +28,6 @@
     </update>
 
     <delete id="deleteScenario">
-        delete from notice where notice_id='5번글'
+        delete from scenario where scenario_id=#{scenario_id}
     </delete>
 </mapper>

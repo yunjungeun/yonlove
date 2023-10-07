@@ -40,7 +40,7 @@ public class ScenarioController {
     @GetMapping("/scenario/insertscenario")
     public String insertScenario(ScenarioDto dto){
         scenarioService.insertScenario(dto);
-        return "/scenario/scenario";
+        return "redirect:/scenario/scenario";
     }
 
     @GetMapping("/scenario/{scenario_id}/updatescenarioview")
@@ -55,19 +55,13 @@ public class ScenarioController {
     @GetMapping("/scenario/{scenario_id}/updatescenario")
     public String updateScenario(ScenarioDto dto){
         scenarioService.updateScenario(dto);
-        return "/scenario/scenario";
+        return "redirect:/scenario/scenario";
     }
 
 
-    @GetMapping("/deletescenario")
-    public ModelAndView deleteScenario(ScenarioDto dto){
-        //실행할 메소드(서비스 부분에 있는 메소드)
+    @GetMapping("/scenario/{scenario_id}/deletescenario")
+    public String deleteScenario(ScenarioDto dto){
         scenarioService.deleteScenario(dto);
-
-        //세션 객체생셩
-        ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
-        return mv;
+        return "redirect:/scenario/scenario";
     }
 }
