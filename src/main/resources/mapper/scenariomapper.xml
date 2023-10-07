@@ -12,8 +12,8 @@
 
     <insert id="insertScenario">
         insert into scenario values(
-        '5',<!--시나리오 pk-->
-        (select scenario_num+1 from scenario), <!--시나리오번호 자동증가-->
+        (select concat('scenario',(substring(NVL(max(scenario_id),'scenario0'),9)+1)) from scenario),<!--pk코드 자동증가-->
+        (select nvl(max(scenario_num),0)+1 from scenario), <!--시나리오번호 자동증가-->
         #{scenario_name}, <!--시나리오 제목-->
         #{scenario_content},<!--시나리오내용-->
         '관리자',<!--작성자-->
