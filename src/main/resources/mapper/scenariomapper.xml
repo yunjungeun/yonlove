@@ -12,14 +12,14 @@
 
     <insert id="insertScenario">
         insert into scenario values(
-        '4',<!--시나리오 pk-->
+        '5',<!--시나리오 pk-->
         (select scenario_num+1 from scenario), <!--시나리오번호 자동증가-->
         #{scenario_name}, <!--시나리오 제목-->
         #{scenario_content},<!--시나리오내용-->
         '관리자',<!--작성자-->
         (select * from todaytime),<!--작성시간-->
-        <!--수정일. 기본은 공백-->
-        'pj1'<!--드롭박스로 선택할수 있어야함-->)
+        'pj1',<!--드롭박스로 선택할수 있어야함-->
+        null<!--수정일. 기본은 공백-->)
     </insert>
 
     <update id="updateScenario">
