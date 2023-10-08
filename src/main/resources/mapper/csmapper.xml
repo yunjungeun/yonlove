@@ -6,6 +6,11 @@
         SELECT * FROM notice where notice_id=#{notice_id}
     </select>
 
+    <!--조회수증가-->
+    <update id="NoticeCnt">
+        update notice set notice_cnt = notice_cnt+1 where notice_id=#{notice_id}
+    </update>
+
     <select id="selectListNotice" resultType="com.example.yoonlove.dto.NoticeDto">
         SELECT * FROM notice order by notice_id desc
     </select>
@@ -25,10 +30,6 @@
         delete from notice where notice_id=#{notice_id}
     </delete>
 
-    <!--조회수증가-->
-    <update id="NoticeCnt">
-        update notice set notice_cnt = notice_cnt+1 where notice_id=#{notice_id}
-    </update>
 
 
 

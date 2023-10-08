@@ -47,7 +47,6 @@ public class CsController {
     @GetMapping("/cs/insertnotice")
     public String insertNotice(NoticeDto dto){
         csService.insertNotice(dto);
-
         return "/cs/notice";
     }
 
@@ -58,15 +57,13 @@ public class CsController {
         mv.addObject("updateNotice", noticedto);
         mv.setViewName("/cs/updatenotice");
         return mv;
-
     }
-
     @GetMapping("/cs/{notice_id}/updatenotice")
     public String updateNotice(NoticeDto dto){
         csService.updateNotice(dto);
-
         return "/cs/notice";
     }
+
     @GetMapping("/cs/{notice_id}/deletenotice")
     public String deleteNotice(NoticeDto dto){
         csService.deleteNotice(dto);
