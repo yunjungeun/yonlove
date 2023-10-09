@@ -67,17 +67,11 @@ public class SceneController {
 
 
     //출연자 정보
-    @GetMapping("/listactor")
+    @GetMapping("scene/actor")
     public ModelAndView selectListActor(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
         List<ActorDto> dto = sceneService.selectListActor();
-
-        //세션 객체생셩
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/testlist");
-
-        //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
+        mv.setViewName("scene/actor");
         mv.addObject("selectListActor", dto);
         return mv;
     }
