@@ -1,0 +1,25 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1" cellpadding="1" cellspacing="1">
+        <tr>
+            <td>씬 번호<input name="scene_id" type="text" readonly value="{{selectActor.scene_id}}"></td>
+            <td>시나리오 번호(조인 테이블로 생성된 값이 들어가야함)<input name="pd_id" type="text" value="{{selectActor.pd_id}}" readonly> </td>
+        </tr>
+        <tr>
+            <td>출연자 정보<input name="actor_info" type="text" value="{{selectActor.actor_info}}" readonly/></td>
+        </tr>
+    </table>
+
+    <a href="/scene/actor">목록</a>
+    <a href="/scene/{{selectActor.actor_id}}/updateactorview">수정</a>
+    <a href="/scene/{{selectActor.actor_id}}/deleteactor">삭제</a>
+
+</body>
+</html>

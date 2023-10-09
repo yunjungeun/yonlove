@@ -76,53 +76,44 @@ public class SceneController {
         return mv;
     }
 
-    @GetMapping("/selectactor")
+    @GetMapping("scene/{actor_id}/selectactor")
     public ModelAndView selectActor(ActorDto actorDto){
-        //실행할 메소드(서비스 부분에 있는 메소드)
         ActorDto dto = sceneService.selectActor(actorDto);
-
-        //세션 객체생셩
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
-
-        //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
+        mv.setViewName("scene/actorselect");
         mv.addObject("selectActor", dto);
         return mv;
     }
 
-    @GetMapping("/insertactor")
-    public ModelAndView insertActor(ActorDto dto){
-        //실행할 메소드(서비스 부분에 있는 메소드)
+    @GetMapping("scene/insertactorview")
+    public String insertActorView(){
+        return "scene/actorinsert";
+    }
+    @GetMapping("scene/insertactor")
+    public String insertActor(ActorDto dto){
         sceneService.insertActor(dto);
+        return "redirect:/scene/actor";
+    }
 
-        //세션 객체생셩
+
+    @GetMapping("scene/{actor_id}/updateactorview")
+    public ModelAndView updateActorView(ActorDto actorDto){
+        ActorDto dto = sceneService.selectActor(actorDto);
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
+        mv.setViewName("scene/actorupdate");
+        mv.addObject("updateActor", dto);
         return mv;
     }
-    @GetMapping("/updateactor")
-    public ModelAndView updateActor(ActorDto dto){
-        //실행할 메소드(서비스 부분에 있는 메소드)
+
+    @GetMapping("scene/{actor_id}/updateactor")
+    public String updateActor(ActorDto dto){
         sceneService.updateActor(dto);
-
-        //세션 객체생셩
-        ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
-        return mv;
+        return "redirect:/scene/actor";
     }
-    @GetMapping("/deleteactor")
-    public ModelAndView deleteActor(ActorDto dto){
-        //실행할 메소드(서비스 부분에 있는 메소드)
+    @GetMapping("scene/{actor_id}/deleteactor")
+    public String deleteActor(ActorDto dto){
         sceneService.deleteActor(dto);
-
-        //세션 객체생셩
-        ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
-        return mv;
+        return "redirect:/scene/actor";
     }
 
 }
