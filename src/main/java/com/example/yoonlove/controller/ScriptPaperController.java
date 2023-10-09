@@ -16,68 +16,53 @@ public class ScriptPaperController {
     private ScriptPaperService scriptPaperService;
 
     //스크립트페이퍼
-    @GetMapping("/listscriptpaper")
+    @GetMapping("script/scriptpaper")
     public ModelAndView selectListScriptPaper(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
         List<ScriptPaperDto> dto = scriptPaperService.selectListScriptPaper();
-
-        //세션 객체생셩
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/testlist");
-
-        //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
+        mv.setViewName("script/scriptpaper");
         mv.addObject("selectListScriptPaper", dto);
         return mv;
     }
 
-    @GetMapping("/selectscriptpaper")
-    public ModelAndView selectScriptPaper(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        ScriptPaperDto dto = scriptPaperService.selectScriptPaper();
-
-        //세션 객체생셩
+    @GetMapping("script/selectscriptpaper")
+    public ModelAndView selectScriptPaper(ScriptPaperDto scriptPaperDto){
+        ScriptPaperDto dto = scriptPaperService.selectScriptPaper(scriptPaperDto);
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
-
-        //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
+        mv.setViewName("/script/scriptselect");
         mv.addObject("selectScriptPaper", dto);
         return mv;
     }
 
-    @GetMapping("/insertscriptpaper")
-    public ModelAndView insertScriptPaper(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        scriptPaperService.insertScriptPaper();
+    @GetMapping("script/insertscriptpaperview")
+    public String insertscript(){
+        return "script/scriptinsert";
+    }
 
-        //세션 객체생셩
+    @GetMapping("script/insertscriptpaper")
+    public String insertScriptPaper(ScriptPaperDto dto){
+        scriptPaperService.insertScriptPaper(dto);
+        return "redirect:/script/scriptpaper";
+    }
+
+    @GetMapping("script/updatescriptview")
+    public ModelAndView updatescript(ScriptPaperDto scriptPaperDto){
+        ScriptPaperDto dto = scriptPaperService.selectScriptPaper(scriptPaperDto);
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
+        mv.setViewName("script/scriptupdate");
+        mv.addObject("selectListScriptPaper", dto);
         return mv;
     }
-    @GetMapping("/updatescriptpaper")
-    public ModelAndView updateScriptPaper(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        scriptPaperService.updateScriptPaper();
 
-        //세션 객체생셩
-        ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
-        return mv;
+    @GetMapping("script/updatescriptpaper")
+    public String updateScriptPaper(ScriptPaperDto dto){
+        scriptPaperService.updateScriptPaper(dto);
+        return "redirect:/script/scriptpaper";
     }
-    @GetMapping("/deletescriptpaper")
-    public ModelAndView deleteScriptPaper(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        scriptPaperService.deleteScriptPaper();
-
-        //세션 객체생셩
-        ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
-        return mv;
+    @GetMapping("script/deletescriptpaper")
+    public String deleteScriptPaper(ScriptPaperDto dto){
+        scriptPaperService.deleteScriptPaper(dto);
+        return "redirect:/script/scriptpaper";
     }
 
     //타입테이블

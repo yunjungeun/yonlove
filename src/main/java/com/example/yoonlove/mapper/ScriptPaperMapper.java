@@ -10,15 +10,15 @@ import java.util.List;
 public interface ScriptPaperMapper {
     //스크립트페이퍼
     public List<ScriptPaperDto> selectListScriptPaper();
-    public ScriptPaperDto selectScriptPaper();
-    public void insertScriptPaper();
-    public void updateScriptPaper();
-    public void deleteScriptPaper();
+    public ScriptPaperDto selectScriptPaper(ScriptPaperDto dto);
+    public void insertScriptPaper(ScriptPaperDto dto);
+    public void updateScriptPaper(ScriptPaperDto dto);
+    public void deleteScriptPaper(ScriptPaperDto dto);
 
     //타임테이블
     public List<TimeTableDto> selectListTimeTable();
-    public TimeTableDto selectTimeTable();
-    public void insertTimeTable();
-    public void updateTimeTable();
-    public void deleteTimeTable();
+    public TimeTableDto selectTimeTable(TimeTableDto dto);
+    public void insertTimeTable(TimeTableDto dto);
+    public void updateTimeTable(TimeTableDto dto);
+    public void deleteTimeTable(TimeTableDto dto);
 }
