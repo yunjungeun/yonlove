@@ -17,7 +17,7 @@ public class CsController {
     private CsService csService;
 
     //공지사항
-    @GetMapping("/cs/selectnotice/{notice_id}")
+    @GetMapping("cs/selectnotice/{notice_id}")
     public ModelAndView selectNotice(NoticeDto noticedto){
         NoticeDto dto = csService.selectNotice(noticedto);
 
@@ -25,7 +25,7 @@ public class CsController {
         csService.NoticeCnt(noticedto);
 
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/cs/selectnotice");
+        mv.setViewName("cs/selectnotice");
         mv.addObject("selectNotice", dto);
         return mv;
     }

@@ -1,6 +1,7 @@
 package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.ActorDto;
+import com.example.yoonlove.dto.ScenarioDto;
 import com.example.yoonlove.dto.SceneDto;
 import com.example.yoonlove.service.SceneService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,32 +16,20 @@ public class SceneController {
     @Autowired
     private SceneService sceneService;
 
-    @GetMapping("/scene/scene")
+    @GetMapping("scene/scene")
     public ModelAndView selectListScene(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
         List<SceneDto> dto = sceneService.selectListScene();
-
-        //세션 객체생셩
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
         mv.setViewName("/scene/scene");
-
-        //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
         mv.addObject("selectListScene", dto);
         return mv;
     }
 
-    @GetMapping("/selectscene")
+    @GetMapping("scene/{scene_id}/selectscene")
     public ModelAndView selectScene(SceneDto sceneDto){
-        //실행할 메소드(서비스 부분에 있는 메소드)
         SceneDto dto = sceneService.selectScene(sceneDto);
-
-        //세션 객체생셩
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
-
-        //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
+        mv.setViewName("scene/sceneselect");
         mv.addObject("selectScene", dto);
         return mv;
     }
@@ -52,32 +41,28 @@ public class SceneController {
 
     @GetMapping("/scene/insertscene")
     public String insertScene(SceneDto dto){
-        System.out.println("test1");
         sceneService.insertScene(dto);
-        System.out.println("test2");
         return "redirect:/scene/scene";
     }
-    @GetMapping("/updatescene")
-    public ModelAndView updateScene(SceneDto dto){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        sceneService.updateScene(dto);
 
-        //세션 객체생셩
+    @GetMapping("/scene/{scene_id}/updatesceneview")
+    public ModelAndView updateSceneView(SceneDto sceneDto){
+        SceneDto dto = sceneService.selectScene(sceneDto);
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
+        mv.setViewName("/scene/sceneupdate");
+        mv.addObject("updateScene",dto);
         return mv;
     }
-    @GetMapping("/deletescene")
-    public ModelAndView deleteScen(SceneDto dto){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        sceneService.deleteScene(dto);
 
-        //세션 객체생셩
-        ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
-        return mv;
+    @GetMapping("/scene/{scene_id}/updatescene")
+    public String updateScene(SceneDto dto){
+        sceneService.updateScene(dto);
+        return "redirect:/scene/scene";
+    }
+    @GetMapping("/scene/{scene_id}/deletescene")
+    public String deleteScen(SceneDto dto){
+        sceneService.deleteScene(dto);
+        return "redirect:/scene/scene";
     }
 
 

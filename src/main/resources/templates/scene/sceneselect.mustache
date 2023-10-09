@@ -7,23 +7,24 @@
     <title>Document</title>
 </head>
 <body>
+    <table border="1" cellpadding="1" cellspacing="1">
+        <tr>
+            <td>시나리오<input name="scenario_id" type="text" readonly value="{{selectScene.scenario_id}}"></td>
+            <td>씬 번호<input name="scene_num" type="number" value="{{selectScene.scene_num}}" readonly></td>
+        </tr>
+        <tr>
+            <td>장면 요약<input name="scene_content" type="text" value="{{selectScene.scene_content}}" readonly/></td>
+        </tr>
+        <tr>
+            <td>카메라 장면 : 첨부파일 등록하게끔 만들어야함</td>
+            <td colspan="2"><textarea name="story_board" cols="50" rows="20" readonly>{{selectScene.story_board}}</textarea></td>
+            <td>촬영장소 <input name="scene_place" type="text" value="{{selectScene.scene_place}}" readonly/></td>
+        </tr>
+    </table>
 
-<input name="scene_id" type="hidden" value="{{selectScene.scene_id}}"/>
-<table border="1" cellpadding="1" cellspacing="1">
-    <tr>
-        <td>시나리오 제목
-            <input name="scene_name" type="text" value="{{selectScene.scene_name}}" readonly></td>
-        <td>기획ID / 나중에 기획명으로 바꿔야함
-            <input name="project_id" type="text" value="{{selectScene.project_id}}" readonly></td>
-        <td>시나리오 번호
-            <input name="scenario_num" type="text" value="{{selectScenario.scenario_num}}" readonly></td>
-    </tr>
-    <tr>
-        <td colspan="3"><textarea name="scenario_content" cols="50" rows="20" readonly>{{selectScenario.scenario_content}}</textarea></td>
-    </tr>
-</table>
-<a href="/scenario/scenario">목록</a>
-<a href="/scenario/{{selectScenario.scenario_id}}/updatescenarioview">수정</a>
-<a href="/scenario/{{selectScenario.scenario_id}}/deletescenario">삭제</a>
+<a href="/scene/scene">목록</a>
+    <a href="/scene/{{selectScene.scene_id}}/updatesceneview">수정</a>
+    <a href="/scene/{{selectScene.scene_id}}/deletescene">삭제</a>
+
 </body>
 </html>
