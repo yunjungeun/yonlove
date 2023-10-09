@@ -1,0 +1,27 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<form method="get" action="/cs/{{updateQnA.qna_id}}/updateqna">
+    <input name="qna_id" type="hidden" value="{{updateQnA.qna_id}}"/>
+    <table border="1" cellpadding="1" cellspacing="1">
+        <tr>
+            <td>제목</td>
+            <td><input name="qna_title" type="text" value="{{updateQnA.qna_title}}"><td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <textarea name="qna_content" cols="50" rows="20">{{updateQnA.qna_content}}</textarea>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="수정"/>
+</form>
+<a href="/cs/qna">목록</a>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<form action="/scene/insertactor" method="get">
+    <table border="1" cellpadding="1" cellspacing="1">
+        <tr>
+            <td>씬 번호<input name="scene_id" type="text" readonly value="조인에서 들어는 고정값임"></td>
+        </tr>
+        <tr>
+            <td>출연자 정보<input name="actor_info" type="text" placeholder="출연자 정보를 작성하세요"/></td>
+        </tr>
+    </table>
+    <input type="submit" value="등록">
+</form>
+<a href="/scene/actor">취소</a>
+
+</body>
+</html>

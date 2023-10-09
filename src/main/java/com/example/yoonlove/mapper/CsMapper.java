@@ -14,11 +14,12 @@ public interface CsMapper {
     public void insertNotice(NoticeDto dto);
     public void updateNotice(NoticeDto dto);
     public void deleteNotice(NoticeDto dto);
-    public void cnt(NoticeDto dto);
+    public void NoticeCnt(NoticeDto dto);
 
-    public QnADto selectQnA();
+    public QnADto selectQnA(QnADto dto);
     public List<QnADto> selectListQnA();
-    public void insertQnA();
-    public void updateQnA();
-    public void deleteQnA();
+    public void insertQnA(QnADto dto);
+    public void updateQnA(QnADto dto);
+    public void deleteQnA(QnADto dto);
+    public void QnACnt(QnADto dto);
 }

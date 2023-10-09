@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>출연자 관리 리스트</title>
+</head>
+<body>
+<h1>출연자 게시판</h1>
+<table border="1" cellpadding="1" cellspacing="1">
+    <ul>
+        <tr>
+            <td>씬 번호</td>
+            <td>출연자 id(조인으로 성명들어가야함)</td>
+            <td>출연장 배역/역할</td>
+        </tr>
+        {{#selectListActor}}
+            <tr>
+                <td>{{actor_id}}<!--여기누르면 시나리오로 이동해야함--></td>
+                <td><a href="/scene/{{actor_id}}/selectactor">{{scene_id}}</a></td>
+                <td>{{actor_info}}</td>
+            </tr>
+        {{/selectListActor}}
+    </ul>
+</table>
+근데 작성자는 잇어야되지 않을까요?<br/>
+<a href="/scene/insertactorview" role="button">작성</a>
+<a href="/scene/actor">목록</a>
+</body>
+</html>

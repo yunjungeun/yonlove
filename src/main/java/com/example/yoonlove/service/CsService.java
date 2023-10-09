@@ -29,24 +29,25 @@ public class CsService {
     public void deleteNotice(NoticeDto dto){
         csMapper.deleteNotice(dto);
     }
-    public void cnt(NoticeDto dto){
-        csMapper.cnt(dto);
+    public void NoticeCnt(NoticeDto dto){
+        csMapper.NoticeCnt(dto);
     }
 
     //QnA
-    public QnADto selectQnA(){
-        return csMapper.selectQnA();
+    public QnADto selectQnA(QnADto dto){
+        return csMapper.selectQnA(dto);
     }
     public List<QnADto> selectListQnA(){
         return csMapper.selectListQnA();
     }
-    public void insertQnA(){
-        csMapper.insertQnA();
+    public void insertQnA(QnADto dto){
+        csMapper.insertQnA(dto);
     }
-    public void updateQnA(){
-        csMapper.updateQnA();
+    public void updateQnA(QnADto dto){
+        csMapper.updateQnA(dto);
     }
-    public void deleteQnA(){
-        csMapper.deleteQnA();
+    public void deleteQnA(QnADto dto){
+        csMapper.deleteQnA(dto);
     }
+    public void QnACnt(QnADto dto){ csMapper.QnACnt(dto);}
 }

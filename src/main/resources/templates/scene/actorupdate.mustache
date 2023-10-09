@@ -1,0 +1,27 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<form method="get" action="/scene/{{updateActor.actor_id}}/updateactor">
+<table border="1" cellpadding="1" cellspacing="1">
+    <tr>
+        <td>씬 번호<input name="scene_id" type="text" readonly value="{{updateActor.scene_id}}"></td>
+        <td>시나리오 번호(조인 테이블로 생성된 값이 들어가야함)<input name="pd_id" type="text" value="{{updateActor.pd_id}}" readonly> </td>
+    </tr>
+    <tr>
+        <td>출연자 정보<input name="actor_info" type="text" value="{{updateActor.actor_info}}"/></td>
+    </tr>
+</table>
+<input type="submit" value="수정"/>
+</form>
+
+<a href="/scene/actor">취소</a>
+
+</body>
+</html>

@@ -2,25 +2,66 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.yoonlove.mapper.SceneMapper">
-    <select id="selectScenario">
-        SELECT * FROM notice where notice_id='1번글'
+    <select id="selectScene">
+        SELECT * FROM scene where scene_id = #{scene_id}
     </select>
 
-    <select id="selectListScenario">
-        SELECT * FROM notice
+    <select id="selectListScene">
+        SELECT * FROM scene
     </select>
 
-    <insert id="insertScenario">
-        insert into notice values(
-        '5번글','쿼리로 입력한제목','내용입니다','관리자','2023-9-01','2023-9-02',0,'테스트관리자')
+    <insert id="insertScene">
+        insert into scene values(
+        (select concat('scene',(substr(NVL(max(scene_id),'scene0'),6)+1)) from scene),<!--pk코드 자동증가-->
+        (select nvl(max(scene_num),0)+1 from scene),<!--씬 번호 자동증가-->
+        null,<!--이미지 첨부파일 주소-->
+        #{scene_place}, <!--촬영장소-->
+        #{story_board},<!--스토리보드 내용-->
+        #{scene_content}, <!--스토리보드 요약-->
+        'scenario1' <!--시나리오 id 조인해서 드롭다운 형태로 선택할수 있어야함-->
+        )
     </insert>
 
-    <update id="updateScenario">
-        insert into notice values(
-        '5번글','쿼리로 입력한제목','내용입니다','관리자','2023-9-01','2023-9-02',0,'테스트관리자')
+    <update id="updateScene">
+        update scene
+        set scene_num = #{scene_num},
+            scene_content = #{scene_content},
+            story_board = #{story_board},
+            scene_place = #{scene_place}
+        where scene_id = #{scene_id}
     </update>
 
-    <delete id="deleteScenario">
-        delete from notice where notice_id='5번글'
+    <delete id="deleteScene">
+        delete from scene where scene_id = #{scene_id}
+    </delete>
+
+
+    <!--Actor SQL-->
+    <select id="selectActor">
+        SELECT * FROM actor where actor_id = #{actor_id}
+    </select>
+
+    <select id="selectListActor">
+        SELECT * FROM actor order by actor_id desc
+    </select>
+
+    <insert id="insertActor">
+        insert into actor values(
+        (select concat('actor',(substr(NVL(max(actor_id),'actor0'),6)+1)) from actor),<!--pk코드 자동증가-->
+        'scene1', <!--외래키로, 조인해온 외래키를 드롭다운으로 선택하게끔 해야함-->
+        'pd1', <!--외래키로, 조인해온 외래키를 드롭다운으로 선택하게끔 해야함-->
+        #{actor_info}<!--출연자정보-->
+        )
+    </insert>
+
+    <update id="updateActor">
+        update actor
+        set scene_id = #{scene_id},
+        actor_info = #{actor_info}
+        where actor_id = #{actor_id}
+    </update>
+
+    <delete id="deleteActor">
+        delete from actor where actor_id = #{actor_id}
     </delete>
 </mapper>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시나리오 리스트</title>
+</head>
+<body>
+<h1>시나리오 게시판</h1>
+<table border="1" cellpadding="1" cellspacing="1">
+    <ul>
+        <tr>
+            <td>시나리오 번호</td>
+            <td>제목</td>
+            <td>작성자</td>
+            <td>작성일</td>
+            <td>기획번호</td>
+            <td>기획명</td>
+        </tr>
+        {{#selectListScenario}}
+            <tr>
+                <td>{{scenario_num}}</td>
+                <td><a href="/scenario/{{scenario_id}}/selectscenario/">{{scenario_name}}</a></td>
+                <td>{{scenario_writer}}</td>
+                <td>{{scenario_date}}</td>
+                <td>{{project_id}}</td>
+                <td>코딩예정<!--기획명을 조인 테이블로 해서 입력해야됨--></td>
+
+            </tr>
+        {{/selectListScenario}}
+    </ul>
+</table>
+<a href="/scenario/insertscenarioview" role="button">시나리오 작성</a>
+<a href="/scenario/scenario">목록</a>
+</body>
+</html>

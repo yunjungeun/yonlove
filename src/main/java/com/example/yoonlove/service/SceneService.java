@@ -13,36 +13,36 @@ public class SceneService {
     @Autowired
     private SceneMapper sceneMapper;
 
-    public SceneDto selectScene(){
-        return sceneMapper.selectScene();
+    public SceneDto selectScene(SceneDto dto){
+        return sceneMapper.selectScene(dto);
     }
     public List<SceneDto> selectListScene() {
         return sceneMapper.selectListScene();
     }
-    public void insertScene(){
-        sceneMapper.insertScene();
+    public void insertScene(SceneDto dto){
+        sceneMapper.insertScene(dto);
     }
-    public void updateScene(){
-        sceneMapper.updateScene();
+    public void updateScene(SceneDto dto){
+        sceneMapper.updateScene(dto);
     }
-    public void deleteScene(){
-        sceneMapper.deleteScene();
+    public void deleteScene(SceneDto dto){
+        sceneMapper.deleteScene(dto);
     }
 
     //출연자정보
-    public ActorDto selectActor(){
-        return sceneMapper.selectActor();
+    public ActorDto selectActor(ActorDto dto){
+        return sceneMapper.selectActor(dto);
     }
     public List<ActorDto> selectListActor() {
         return sceneMapper.selectListActor();
     }
-    public void insertActor(){
-        sceneMapper.insertActor();
+    public void insertActor(ActorDto dto){
+        sceneMapper.insertActor(dto);
     }
-    public void updateActor(){
-        sceneMapper.updateActor();
+    public void updateActor(ActorDto dto){
+        sceneMapper.updateActor(dto);
     }
-    public void deleteActor(){
-        sceneMapper.deleteActor();
+    public void deleteActor(ActorDto dto){
+        sceneMapper.deleteActor(dto);
     }
 }

@@ -12,20 +12,21 @@ public class ScenarioService {
     @Autowired
     private ScenarioMapper scenarioMapper;
 
-    public ScenarioDto selectScenario(){
-        return scenarioMapper.selectScenario();
+    public ScenarioDto selectScenario(ScenarioDto dto){
+        return scenarioMapper.selectScenario(dto);
     }
     public List<ScenarioDto> selectListScenario() {
         return scenarioMapper.selectListScenario();
     }
     //서비스 메소드 작성 CRUD
-    public void insertScenario(){
-        scenarioMapper.insertScenario();
+    public void insertScenario(ScenarioDto dto){
+        scenarioMapper.insertScenario(dto);
     }
-    public void updateScenario(){
-        scenarioMapper.updateScenario();
+    public void updateScenario(ScenarioDto dto){
+        scenarioMapper.updateScenario(dto);
     }
-    public void deleteScenario(){
-        scenarioMapper.deleteScenario();
+    public void deleteScenario(ScenarioDto dto){
+        scenarioMapper.deleteScenario(dto);
     }
+
 }
