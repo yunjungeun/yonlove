@@ -91,52 +91,42 @@ public class AdminController {
         return mv;
     }
 
-    @GetMapping("/admin/selectdepartment")
-    public ModelAndView selectDepartment(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        DepartmentDto dto = adminService.selectDepartment();
-
-        //세션 객체생셩
+    @GetMapping("/admin/{dpt_id}/selectdpt")
+    public ModelAndView selectDepartment(DepartmentDto departmentDto){
+        DepartmentDto dto = adminService.selectDepartment(departmentDto);
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/admin/selectdepartment");
-
-        //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
-        mv.addObject("selectDepartment", dto);
+        mv.setViewName("/admin/dptselect");
+        mv.addObject("selectDpt", dto);
         return mv;
     }
 
-    @GetMapping("/admin/insertdepartment")
-    public ModelAndView insertDepartment(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        adminService.insertDepartment();
+    @GetMapping("admin/insertdptview")
+    public String insertDptView(){
+        return "admin/dptinsert";
+    }
+    @GetMapping("/admin/insertdpt")
+    public String insertDepartment(DepartmentDto dto){
+        adminService.insertDepartment(dto);
+        return "redirect:/admin/dpt";
+    }
 
-        //세션 객체생셩
+    @GetMapping("/admin/{dpt_id}/updatedptview")
+    public ModelAndView updatedptview(DepartmentDto departmentDto){
+        DepartmentDto dto = adminService.selectDepartment(departmentDto);
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/admin/insertdepartment");
+        mv.setViewName("admin/dptupdate");
+        mv.addObject("selectDpt", dto);
         return mv;
     }
-    @GetMapping("/admin/updatedepartment")
-    public ModelAndView updateDepartment(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        adminService.updateDepartment();
 
-        //세션 객체생셩
-        ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/admin/updatedepartment");
-        return mv;
+    @GetMapping("/admin/{dpt_id}/updatedpt")
+    public String updateDepartment(DepartmentDto dto){
+        adminService.updateDepartment(dto);
+        return "redirect:/admin/dpt";
     }
-    @GetMapping("/admin/deletedepartment")
-    public ModelAndView deleteDepartment(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        adminService.deleteDepartment();
-
-        //세션 객체생셩
-        ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/admin/deletedepartment");
-        return mv;
+    @GetMapping("/admin/{dpt_id}/deletedpt")
+    public String deleteDepartment(DepartmentDto dto){
+        adminService.deleteDepartment(dto);
+        return "redirect:/admin/dpt";
     }
 }

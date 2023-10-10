@@ -17,8 +17,8 @@ public interface AdminMapper {
 
     //부서정보
     public List<DepartmentDto> selectListDepartment();
-    public DepartmentDto selectDepartment();
-    public void insertDepartment();
-    public void updateDepartment();
-    public void deleteDepartment();
+    public DepartmentDto selectDepartment(DepartmentDto dto);
+    public void insertDepartment(DepartmentDto dto);
+    public void updateDepartment(DepartmentDto dto);
+    public void deleteDepartment(DepartmentDto dto);
 }
