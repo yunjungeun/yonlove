@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>타임테이블 리스트</title>
+</head>
+<body>
+<h1>타임테이블 게시판</h1>
+<table border="1" cellpadding="1" cellspacing="1">
+    <ul>
+        <tr>
+            <td>스크립트 번호</td>
+            <td>촬영시간</td>
+            <td>타임테이블 번호</td>
+            <td>OK/NG</td>
+            <td>슬레이트</td>
+        </tr>
+        {{#selectListTimeTable}}
+            <tr>
+                <td><a href="/script/{{table_id}}/selecttimetable">{{script_id}}</td>
+                <td>{{film_time}}</a></td>
+                <td>{{time_num}}</td>
+                <td>{{ok_ng}}</td>
+                <td>{{slate_time}}</td>
+            </tr>
+        {{/selectListTimeTable}}
+    </ul>
+</table>
+근데 작성자는 잇어야되지 않을까요?<br/>
+<a href="/script/inserttimeview" role="button">작성</a>
+<a href="/script/timetable">목록</a>
+</body>
+</html>

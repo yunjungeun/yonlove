@@ -42,4 +42,40 @@
     <delete id="deleteScriptPaper">
         delete from script_paper where script_id = #{script_id}
     </delete>
+
+
+    <!--타임테이블-->
+    <select id="selectListTimeTable" resultType="com.example.yoonlove.dto.TimeTableDto">
+        select * from time_table order by table_id <!--1번 내용부터 오름차순해야됨-->
+    </select>
+
+    <insert id="insertTimeTable">
+        insert into time_table values(
+        (select concat('time',(substr(NVL(max(table_id),'time0'),4)+1)) from time_table),<!--pk코드 자동증가-->
+        #{film_time},<!--촬영시간(몇시간 몇분)-->
+        #{time_num},<!--타임테이블 번호 자동증가 해야됨-->
+        #{ok_ng}, <!--ok판정-->
+        #{slate_time}, <!--슬레이트시간-->
+        #{script_id} <!--script id값 /나중에 조인해서 스크립트 번호가 가야됨-->
+        )
+    </insert>
+
+    <select id="selectTimeTable" resultType="com.example.yoonlove.dto.TimeTableDto">
+        select * from time_table where table_id = #{table_id} <!--1번 내용부터 오름차순해야됨-->
+    </select>
+
+    <update id="updateTimeTable">
+        update time_table
+        set film_time = #{film_time},
+        time_num = #{time_num},
+        ok_ng = #{ok_ng},
+        slate_time = #{slate_time},
+        script_id = #{script_id} <!--스크립트 드롭다운 선택형-->
+        where table_id = #{table_id}
+    </update>
+
+    <delete id="deleteTimeTable">
+        delete from time_table where table_id = #{table_id}
+    </delete>
+
 </mapper>

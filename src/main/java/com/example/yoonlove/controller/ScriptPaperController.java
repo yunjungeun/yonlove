@@ -70,12 +70,12 @@ public class ScriptPaperController {
     public ModelAndView selectListTimeTable(){
         List<TimeTableDto> dto = scriptPaperService.selectListTimeTable();
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("script/timtable");
+        mv.setViewName("script/timetable");
         mv.addObject("selectListTimeTable", dto);
         return mv;
     }
 
-    @GetMapping("script/selecttimetable")
+    @GetMapping("script/{table_id}/selecttimetable")
     public ModelAndView selectTimeTable(TimeTableDto timetableDto){
         TimeTableDto dto = scriptPaperService.selectTimeTable(timetableDto);
         ModelAndView mv = new ModelAndView();
@@ -95,7 +95,7 @@ public class ScriptPaperController {
         return "redirect:/script/timetable";
     }
 
-    @GetMapping("script/updatetimeview")
+    @GetMapping("script/{table_id}/updatetimeview")
     public ModelAndView updateTimeView(TimeTableDto timeTableDto){
         TimeTableDto dto = scriptPaperService.selectTimeTable(timeTableDto);
         ModelAndView mv = new ModelAndView();
@@ -103,13 +103,14 @@ public class ScriptPaperController {
         mv.addObject("selectTimeTable", dto);
         return mv;
     }
-    @GetMapping("script/updatetimetable")
+    @GetMapping("script/{table_id}/updatetimetable")
     public String updateTimeTable(TimeTableDto dto){
+        System.out.println(dto.toString());
         scriptPaperService.updateTimeTable(dto);
         return "redirect:/script/timetable";
     }
 
-    @GetMapping("script/deletetimetable")
+    @GetMapping("script/{table_id}/deletetimetable")
     public String deleteTimeTable(TimeTableDto dto){
         scriptPaperService.deleteTimeTable(dto);
         return "redirect:/script/timetable";

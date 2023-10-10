@@ -1,0 +1,26 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<form action="/script/inserttimetable" method="get">
+    <table border="1" cellpadding="1" cellspacing="1">
+        <tr>
+            <td>스크립트 번호 <input name="script_id" type="text" placeholder="스크립트번호/"></td>
+            <td>촬영시간 <input name="film_time" type="date" placeholder="시간값date"/></td>
+            <td>타임테이블 번호<input name="time_num" type="number" placeholder="숫자값"></td>
+            <td>OK/NG<input name="ok_ng" type="text" placeholder="ok또는ng 선택"></td>
+            <td>슬레이트<input name="slate_time" type="date" placeholder="시간값"></td>
+        </tr>
+    </table>
+    <input type="submit" value="등록"/>
+</form>
+<a href="/script/timetable">취소</a>
+
+<br/>현재까지 버그<br/>
+</body>
+</html>
