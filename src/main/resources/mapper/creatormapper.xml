@@ -3,16 +3,15 @@
 
 <!--부서-->
 <mapper namespace="com.example.yoonlove.mapper.CreatorMapper">
+    <select id="selectCreator" resultType="com.example.yoonlove.dto.CreatorDto">
+        SELECT * FROM department where dpt_id=#{dpt_id}
+    </select>
 
     <select id="selectListCreator" resultType="com.example.yoonlove.dto.CreatorDto">
         SELECT * FROM creater
     </select>
 
-    <select id="selectCreator" resultType="com.example.yoonlove.dto.CreatorDto">
-        SELECT * FROM creater where ch_id = #{ch_id}
-    </select>
-
-    <insert id="insertCreator">
+    <insert id="insertCreator" parameterType="com.example.yoonlove.dto.CreatorDto">
         insert into creater values(
         (select concat('ch',(substr(NVL(max(ch_id),'ch0'),3)+1)) from creater),<!--pk코드 자동증가-->
         #{ch_name},
@@ -20,18 +19,6 @@
         #{user_id}
         )
     </insert>
-
-    <update id="updateCreator" >
-        UPDATE CREATER
-        SET ch_name=#{ch_name},
-        ch_sub=#{ch_sub},
-        user_id=#{user_id}
-        where ch_id = #{ch_id}
-    </update>
-
-    <delete id="deleteCreator">
-        DELETE FROM creater WHERE ch_id = #{ch_id}
-    </delete>
 
 
 </mapper>
