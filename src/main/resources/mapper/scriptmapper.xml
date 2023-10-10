@@ -3,17 +3,43 @@
 
 <mapper namespace="com.example.yoonlove.mapper.ScriptPaperMapper">
     <select id="selectScriptPaper" resultType="com.example.yoonlove.dto.ScriptPaperDto">
+        select * from script_paper where script_id = #{script_id}
     </select>
 
     <select id="selectListScriptPaper" resultType="com.example.yoonlove.dto.ScriptPaperDto">
+        select * from script_paper order by script_id <!--1번 내용부터 오름차순해야됨-->
     </select>
 
     <insert id="insertScriptPaper">
+        insert into script_paper values(
+        (select concat('script',(substr(NVL(max(script_id),'script0'),7)+1)) from script_paper),<!--pk코드 자동증가-->
+        #{scene_id}, <!--script id값 /나중에 조인해서 스크립트 번호가 가야됨-->
+        #{video_name}, <!--영상제목-->
+        #{video_date}, <!--영상촬영 날짜-->
+        #{video_time}, <!--영상 촬영시작시간-->
+        #{video_end_time}, <!--영상 촬영 종료시간-->
+        #{action_image}, <!--액션이미지 첨부파일 주소-->
+        #{action_content}, <!--액션 내용-->
+        #{position_image}, <!--카메라포지션 첨부파일 주소-->
+        #{conti} <!--콘티-->
+        )
     </insert>
 
     <update id="updateScriptPaper">
+        update script_paper
+        set scene_id = #{scene_id},
+        video_name = #{video_name},
+        video_date = #{video_date},
+        video_time = #{video_time},
+        video_end_time = #{video_end_time},
+        action_image = #{action_image},
+        action_content = #{action_content},
+        position_image = #{position_image},
+        conti = #{conti}
+        where script_id = #{script_id}
     </update>
 
     <delete id="deleteScriptPaper">
+        delete from script_paper where script_id = #{script_id}
     </delete>
 </mapper>

@@ -20,12 +20,12 @@ public class ScriptPaperController {
     public ModelAndView selectListScriptPaper(){
         List<ScriptPaperDto> dto = scriptPaperService.selectListScriptPaper();
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("script/scriptpaper");
+        mv.setViewName("script/script");
         mv.addObject("selectListScriptPaper", dto);
         return mv;
     }
 
-    @GetMapping("script/selectscriptpaper")
+    @GetMapping("script/{script_id}/selectscriptpaper")
     public ModelAndView selectScriptPaper(ScriptPaperDto scriptPaperDto){
         ScriptPaperDto dto = scriptPaperService.selectScriptPaper(scriptPaperDto);
         ModelAndView mv = new ModelAndView();
@@ -45,21 +45,21 @@ public class ScriptPaperController {
         return "redirect:/script/scriptpaper";
     }
 
-    @GetMapping("script/updatescriptview")
+    @GetMapping("script/{script_id}/updatescriptview")
     public ModelAndView updatescript(ScriptPaperDto scriptPaperDto){
         ScriptPaperDto dto = scriptPaperService.selectScriptPaper(scriptPaperDto);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("script/scriptupdate");
-        mv.addObject("selectListScriptPaper", dto);
+        mv.addObject("selectScriptPaper", dto);
         return mv;
     }
 
-    @GetMapping("script/updatescriptpaper")
+    @GetMapping("script/{script_id}/updatescriptpaper")
     public String updateScriptPaper(ScriptPaperDto dto){
         scriptPaperService.updateScriptPaper(dto);
         return "redirect:/script/scriptpaper";
     }
-    @GetMapping("script/deletescriptpaper")
+    @GetMapping("script/{script_id}/deletescriptpaper")
     public String deleteScriptPaper(ScriptPaperDto dto){
         scriptPaperService.deleteScriptPaper(dto);
         return "redirect:/script/scriptpaper";
