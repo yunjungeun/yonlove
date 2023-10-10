@@ -6,8 +6,8 @@
         SELECT * FROM notice where notice_id=#{notice_id}
     </select>
 
-    <select id="selectListNotice" resultType="com.example.yoonlove.dto.NoticeDto">
-        SELECT * FROM notice
+    <select id="selectListDepartment" resultType="com.example.yoonlove.dto.DepartmentDto">
+        SELECT * FROM department order by dpt_name
     </select>
 
     <insert id="insertNotice" parameterType="com.example.yoonlove.dto.NoticeDto">

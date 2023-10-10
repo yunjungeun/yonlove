@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스크립트 리스트</title>
+</head>
+<body>
+<h1>(회사명 들어갈곳 인데 태그넣으면 여러개 회사 다뜸/현재는 회사id) 부서현황</h1>
+<table border="1" cellpadding="1" cellspacing="1">
+    <ul>
+        <tr>
+            <td>부서명</td>
+            <td>부서기능</td>
+            <td>직원현황이 들어가야될 곳</td>
+        </tr>
+        {{#selectListDpt}}
+            <tr>
+                <td><a href="/admin/{{dpt_id}}/selectdpt">{{dpt_name}}</a></td>
+                <td>{{dpt_function}}</td>
+            </tr>
+        {{/selectListDpt}}
+    </ul>
+</table>
+근데 작성자는 잇어야되지 않을까요?<br/>
+<a href="/admin/insertdptview" role="button">작성</a>
+<a href="/admin/dpt">목록</a>
+</body>
+</html>

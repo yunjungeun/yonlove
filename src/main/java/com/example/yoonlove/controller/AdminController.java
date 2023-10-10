@@ -82,18 +82,12 @@ public class AdminController {
     }
 
     //부서관리
-    @GetMapping("/admin/listdepartment")
+    @GetMapping("/admin/dpt")
     public ModelAndView selectListDepartment(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
         List<DepartmentDto> dto = adminService.selectListDepartment();
-
-        //세션 객체생셩
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/admin/listdepartment");
-
-        //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
-        mv.addObject("selectListDepartment", dto);
+        mv.setViewName("/admin/dpt");
+        mv.addObject("selectListDpt", dto);
         return mv;
     }
 
