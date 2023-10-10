@@ -16,18 +16,23 @@ import java.util.List;
         private CreatorService creatorservice;
         //서비스 객체 수정
 
-        @GetMapping("/creator")
+        @GetMapping("creator/creator")
         public ModelAndView selectListCreaotr(){
-            //실행할 메소드(서비스 부분에 있는 메소드)
             List<CreatorDto> dto = creatorservice.selectListCreator();
-
-            //세션 객체생셩
             ModelAndView mv = new ModelAndView();
-            //보여줄 view페이지 이름(ooo.mustache)
-            mv.setViewName("/listcreator");
-
-            //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
+            mv.setViewName("/creator/creator");
             mv.addObject("selectListCreator", dto);
             return mv;
+        }
+
+        @GetMapping("creator/insertcreatorview")
+        public String insert(){
+            return "creator/creatorinsert";
+        }
+
+        @GetMapping("creator/insertcreator")
+        public String insertCreator(CreatorDto creatorDto){
+            creatorservice.insertCreator(creatorDto);
+            return "redirect:/creator/creator";
         }
 }

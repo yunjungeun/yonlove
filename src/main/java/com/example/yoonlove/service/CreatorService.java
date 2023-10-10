@@ -22,4 +22,7 @@ public class CreatorService {
     public List<CreatorDto> selectListCreator(){
         return creatorMapper.selectListCreator();
     }
+    public void insertCreator(CreatorDto dto){
+        creatorMapper.insertCreator(dto);
+    }
 }
