@@ -15,8 +15,8 @@ public class CreatorService {
     private CreatorMapper creatorMapper;
 
     //서비스 메소드 작성 CRUD
-    public CreatorDto selectCreator(){
-        return creatorMapper.selectCreator();
+    public CreatorDto selectCreator(CreatorDto creatorDto){
+        return creatorMapper.selectCreator(creatorDto);
     }
 
     public List<CreatorDto> selectListCreator(){
@@ -25,4 +25,10 @@ public class CreatorService {
     public void insertCreator(CreatorDto dto){
         creatorMapper.insertCreator(dto);
     }
+
+    public void updateCreator(CreatorDto creatorDto){
+        creatorMapper.updateCreator(creatorDto);}
+
+    public void deleteCreator(CreatorDto dto){ //게시글증가번호 = ch_id라서 creatorDto로 받음
+        creatorMapper.deleteCreator(dto);}
 }
