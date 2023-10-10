@@ -7,9 +7,9 @@ import java.util.List;
 
 @Mapper
 public interface CreatorMapper {
-    List<CreatorDto> selectListCreator();
+    public List<CreatorDto> selectListCreator();
     CreatorDto selectCreator();
-    CreatorDto insertCreator(CreatorDto dto);
+    public void insertCreator(CreatorDto dto);
     CreatorDto updateCreator();
     CreatorDto deleteCreator();
 

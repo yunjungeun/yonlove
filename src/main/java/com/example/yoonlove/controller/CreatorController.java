@@ -20,7 +20,7 @@ import java.util.List;
         public ModelAndView selectListCreaotr(){
             List<CreatorDto> dto = creatorservice.selectListCreator();
             ModelAndView mv = new ModelAndView();
-            mv.setViewName("/creator/creator");
+            mv.setViewName("creator/creator");
             mv.addObject("selectListCreator", dto);
             return mv;
         }
@@ -32,6 +32,8 @@ import java.util.List;
 
         @GetMapping("creator/insertcreator")
         public String insertCreator(CreatorDto creatorDto){
+            System.out.println("test11");
+            System.out.println(creatorDto.toString());
             creatorservice.insertCreator(creatorDto);
             return "redirect:/creator/creator";
         }
