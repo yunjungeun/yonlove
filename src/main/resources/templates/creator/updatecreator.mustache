@@ -1,0 +1,44 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>업뎃수정</title>
+</head>
+<body>
+<form method="get" action="/creator/updatecreator/{{selectCreator.ch_id}}">
+<div id="div_box">
+    <h1>게시글 상세보기</h1>
+    <hr>
+    <table board="1" cellpascing="0" cellpading="0">
+        <tr>
+            <td bgcolor="pink" width="70">채널아이디</td>
+            <td align="left">{{selectCreator.ch_id}}</td>
+        </tr>
+
+        <tr>
+            <td bgcolor="pink">채널명</td>
+            <td align="left"><input type="text" name="ch_name" value="{{selectCreator.ch_name}}"/></td>
+        </tr>
+
+        <tr>
+            <td bgcolor="pink">구독자수</td>
+            <td align="left"> <input type="number" name="ch_sub" value="{{selectCreator.ch_sub}}"/></td>
+        </tr>
+
+        <tr>
+            <td bgcolor="pink">유저ID</td>
+            <td align="left"><input type="text" name="user_id" value="{{selectCreator.user_id}}"/></td>
+        </tr>
+
+    </table>
+        <input type="submit" value="수정"/>
+    <hr>
+    <a href="/creator/updatecreatorview/{{selectCreator.ch_id}}">게시글 수정</a>&nbsp;&nbsp;&nbsp;
+    <a href="#" class="delete-link" data-id="{{selectCreator.ch_id}}">게시글 삭제</a>&nbsp;
+    <a href="/creator/creator">전체 목록 보기</a>
+</div>
+</form>
+</body>
+</html>

@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>스크립트 리스트</title>
+    <title>크리에이터 리스트</title>
 </head>
 <body>
-<h1>(회사명 들어갈곳 인데 태그넣으면 여러개 회사 다뜸/현재는 회사id) 부서현황</h1>
+<h1>크리에이터 현황</h1>
 <table border="1" cellpadding="1" cellspacing="1">
     <ul>
         <tr>
-            <td>부서명</td>
-            <td>부서기능</td>
-            <td>직원현황이 들어가야될 곳</td>
+            <td>이름</td>
+            <td>sub</td>
+            <td>유저아이디</td>
         </tr>
         {{#selectListCreator}}
             <tr>
-                <td><a href="/admin/{{ch_id}}/selectdpt">{{ch_name}}</a></td>
+                <td><a href="/creator/{{ch_id}}/selectcreator">{{ch_name}}</a></td>
                 <td>{{ch_sub}}</td>
                 <td>{{user_id}}</td>
             </tr>
