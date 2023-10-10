@@ -1,5 +1,10 @@
 package com.example.yoonlove.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class CreatorDto {
     private String ch_id;
     private String ch_name;

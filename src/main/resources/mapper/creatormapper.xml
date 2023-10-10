@@ -3,15 +3,12 @@
 
 <!--부서-->
 <mapper namespace="com.example.yoonlove.mapper.CreatorMapper">
-    <select id="selectCreator" resultType="com.example.yoonlove.dto.CreatorDto">
-        SELECT * FROM department where dpt_id=#{dpt_id}
-    </select>
 
     <select id="selectListCreator" resultType="com.example.yoonlove.dto.CreatorDto">
         SELECT * FROM creater
     </select>
 
-    <insert id="insertCreator" parameterType="com.example.yoonlove.dto.CreatorDto">
+    <insert id="insertCreator">
         insert into creater values(
         (select concat('ch',(substr(NVL(max(ch_id),'ch0'),3)+1)) from creater),<!--pk코드 자동증가-->
         #{ch_name},
