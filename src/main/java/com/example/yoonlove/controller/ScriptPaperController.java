@@ -19,8 +19,10 @@ public class ScriptPaperController {
     @GetMapping("script/scriptpaper")
     public ModelAndView selectListScriptPaper(){
         List<ScriptPaperDto> dto = scriptPaperService.selectListScriptPaper();
+
         ModelAndView mv = new ModelAndView();
         mv.setViewName("script/script");
+
         mv.addObject("selectListScriptPaper", dto);
         return mv;
     }
@@ -92,7 +94,7 @@ public class ScriptPaperController {
     @GetMapping("script/inserttimetable")
     public String insertTimeTable(TimeTableDto dto){
         scriptPaperService.insertTimeTable(dto);
-        return "redirect:/script/timetable";
+        return "redirect:timetable";
     }
 
     @GetMapping("script/{table_id}/updatetimeview")
