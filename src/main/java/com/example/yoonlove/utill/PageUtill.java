@@ -28,7 +28,7 @@ public class PageUtill {
         return pageCnt;
     }
 
-    //페이징에서 시작 페이지 구하는 법 // (현재페이지 번호 -1 / 페이징사이즈)* 페이징 사이즈 + 1 =시작번호
+    //현재 페이징에서 시작 페이지 구하는 법 // (현재페이지 번호 -1 / 페이징사이즈)* 페이징 사이즈 + 1 =시작번호
     //현재페이지값은 setter나 객체로 넣고, 기본값은 0임. 페이징사이즈 기본값은 10임.
     public int pageStart(){
         PageDto pageDto = new PageDto();
@@ -37,6 +37,26 @@ public class PageUtill {
     }
 
     //페이징에서 끝 페이지 구하는법 // 시작페이지 + 페이징 사이즈 - 1 과 총페이지보다 작은것
-    public int
+    public int pageEnd(){
+        PageDto dto = new PageDto();
+        int result = pageStart() + dto.getPaging() - 1;
+        return result;
+    }
+    //게시판의 마지막 글 번호를 구하는 메소드
+    // 현재페이지 * 페이지당 글 수 = 페이지의 마지막글 번호
+    public int postEnd(){
+        PageDto dto = new PageDto();
+        int result = dto.getCurrentPage()*dto.getPaging();
+        //여기도 총 글자숫자보다 작으면 비교하는 값이 잇어야함.
+        return result;
+    }
+    //게시판의 시작 글 번호 구하는 메소드
+    // 마지막 글번호 - (페이지당 글 수-1) = 시작 글번호
+    // 마지막 글번호가 15라면 문제가 될수도있음. -->페이지 당 글 개수가 최신화 되야함.
+    public int postStart(){
+        PageDto dto = new PageDto();
+        int result = postEnd() - (dto.getPaging() - 1);
+        return result;
+    }
 
 }
