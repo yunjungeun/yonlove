@@ -40,7 +40,7 @@ public class PageUtill {
     public int pageEnd(){
         PageDto dto = new PageDto();
         int result = pageStart() + dto.getPaging() - 1;
-        return result;
+        return Math.min(result, totalPost());
     }
     //게시판의 마지막 글 번호를 구하는 메소드
     // 현재페이지 * 페이지당 글 수 = 페이지의 마지막글 번호
@@ -58,5 +58,12 @@ public class PageUtill {
         int result = postEnd() - (dto.getPaging() - 1);
         return result;
     }
-
+    //'이전' 단추를 구하는 방법
+    // 페이징의 시작 페이지가 1이면 참 아니면 거짓 산출
+    public boolean pre(){
+        return pageStart() != 1;
+    }
+    public boolean next(){
+        return pageEnd() < totalPageCnt();
+    }
 }

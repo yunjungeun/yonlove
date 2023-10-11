@@ -44,6 +44,7 @@ public class CsController {
         System.out.println("총개시글"+pu.totalPost()+"개 / " +"총 페이지"+ pu.totalPageCnt());
         System.out.println("현재페이징 에서 페이지 시작 "+pu.pageStart()+" / " +"페이지 끝"+ pu.pageEnd());
         System.out.println("게시판의 시작 글번호"+pu.postStart()+" / " +"마지막 글번호 "+ pu.postEnd());
+        System.out.println("pre 값"+pu.pre()+" / " +"next값 "+ pu.next());
 
 
         return mv;
