@@ -7,8 +7,11 @@ import lombok.Setter;
 @Setter
 public class PageDto {
 
-    //페이징 처리하는 메소드의 Dto
+    //외부에서 제공해줘야하는 값은...table, id는 외부에서 바꿔줘야함.
+    //현재페이지는 항상 최신화 되어야함.
+    //페이징의 최대 표시될 수의 값은 항상 최신화 되어야함.
 
+    //페이징 처리하는 메소드의 Dto
     private int totalPost; //글의 총 갯수 값
     private int postStart; //게시판의 시작 게시글 번호
     private int postEnd; //게시판의 마지막 게시글 번호
