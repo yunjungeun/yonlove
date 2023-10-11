@@ -1,5 +1,6 @@
 package com.example.yoonlove.controller;
 
+import com.example.yoonlove.dto.BudgetDto;
 import com.example.yoonlove.dto.CreatorDto;
 import com.example.yoonlove.dto.ProjectDto;
 import com.example.yoonlove.service.ProjectService;
@@ -34,7 +35,7 @@ public class ProjectController {
     }
 
     @GetMapping("project/insertprojectview")  // 작성클릭 후 페이지 리턴하는
-    public String insert(){
+    public String insertprojectview(){
         return "project/projectinsert";
     }
 
@@ -72,4 +73,60 @@ public class ProjectController {
         return "redirect:/project/listproject";   // 목록페이지로 이동
     }
 
+    // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ프로젝트 끝
+
+    //제작예산
+    @GetMapping("/project/listbudget")
+    public ModelAndView selectListBudget(){
+        List<BudgetDto> dto = projectService.selectListBudget();
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/project/listbudget");
+        mv.addObject("selectListBudget", dto);
+        return mv;
+    }
+
+    @GetMapping("project/insertbudgetview")  // 작성클릭 후 페이지 리턴하는
+    public String insertbudgetview(){
+        return "project/budgetinsert";
+    }
+
+    @GetMapping("project/insertbudget")   // 작성 후 입력값 넘기는~
+    public String insertBudget(BudgetDto budgetDto){
+        /*System.out.println("test11");*/
+        /*System.out.println(projectDto.toString());*/
+        projectService.insertBudget(budgetDto);
+        return "redirect:/project/listbudget";
+    }
+
+    @GetMapping("project/{budget_id}/selectbudget")
+    public ModelAndView selectProject(BudgetDto budgetDto){
+        BudgetDto dto = projectService.selectBudget(budgetDto);
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/project/selectbudget");
+        mv.addObject("selectBudget", dto);
+        return mv;
+    }
+
+    @GetMapping("/project/deletebudget/{budget_id}")
+    public String deleteBudget(BudgetDto dto){
+        projectService.deleteBudget(dto);
+        return "redirect:/project/listbudget";
+    }
+
+    // 수정!!!!!!!!!!!!!!!!!!!!!
+    @GetMapping("/project/updatebudgetview/{budget_id}") // 수정하는곳
+    public ModelAndView updateBudgetView(BudgetDto budgetDto){
+        ModelAndView mv = new ModelAndView();
+        BudgetDto dto = projectService.selectBudget(budgetDto);
+        mv.setViewName("/project/updatebudget");
+        mv.addObject("selectBudget", dto);
+        return mv;
+    }
+
+    @GetMapping("/project/updatebudget/{budget_id}") // 수정 //해당주소 머스터치에 액션값
+    public String updateBudget(BudgetDto dto){
+        /*System.out.println(dto.toString());*/
+        projectService.updateBudget(dto);
+        return "redirect:/project/listbudget";   // 목록페이지로 이동
+    }
 }

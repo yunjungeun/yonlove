@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제작예산 리스트</title>
+</head>
+<body>
+<h1>예산서 리스트</h1>
+<table border="1" cellpadding="1" cellspacing="1">
+    <ul>
+        <tr>
+            <td>항목이름</td>
+            <td>프로젝트아이디</td>
+        </tr>
+        {{#selectListBudget}}
+            <tr>
+                <td><a href="/project/{{budget_id}}/selectbudget">{{budget_name}}</a></td>
+                <td>{{project_id}}</td>
+            </tr>
+        {{/selectListBudget}}
+    </ul>
+</table>
+근데 작성자는 잇어야되지 않을까요?<br/>
+<a href="/project/insertbudgetview" role="button">작성</a>
+</body>
+</html>

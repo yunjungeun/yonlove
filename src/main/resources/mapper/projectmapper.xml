@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!--부서-->
 <mapper namespace="com.example.yoonlove.mapper.ProjectMapper">
 
     <select id="selectListProject" resultType="com.example.yoonlove.dto.ProjectDto">
@@ -11,7 +10,6 @@
     <select id="selectProject" resultType="com.example.yoonlove.dto.ProjectDto">
         SELECT * FROM project where project_id= #{project_id}
     </select>
-
 
     <insert id="insertProject">
         insert into project values(
@@ -31,7 +29,6 @@
         )
     </insert>
 
-
     <update id="updateProject" >
         UPDATE project
         SET
@@ -41,9 +38,43 @@
         where project_id = #{project_id}
         </update>
 
-
     <delete id="deleteProject">
         DELETE FROM project WHERE project_id = #{project_id}
     </delete>
+
+
+    <!-- !!!!!!!!!!!!!!!!!!!!프로젝트 기획 끝!!!!!!!!!!!!!!!!!!!! -->
+
+    <select id="selectListBudget" resultType="com.example.yoonlove.dto.BudgetDto">
+        select * from budget
+    </select>
+
+    <select id="selectBudget" resultType="com.example.yoonlove.dto.BudgetDto">
+        SELECT * FROM budget
+        where budget_id = #{budget_id}
+    </select>
+
+    <insert id="insertBudget">
+        insert into budget values(
+        (select concat('budget',(substr(NVL(max(budget_id),'budget0'),7)+1)) from budget),
+        #{budget_name},
+       '테스트내용',
+        #{budget_amount},
+        'code101',
+        '예산서테스티01',
+        'pj2'
+        )
+    </insert>
+
+    <update id="updateBudget">
+        UPDATE budget
+        SET
+        budget_name = #{budget_name},
+        budget_amount = #{budget_amount}
+
+        where budget_id = #{budget_id}
+    </update>
+
+    <delete id="deleteBudget"> DELETE FROM budget WHERE budget_id = #{budget_id}</delete>
 
 </mapper>
