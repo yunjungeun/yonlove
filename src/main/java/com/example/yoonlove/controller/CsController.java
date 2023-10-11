@@ -4,7 +4,7 @@ import com.example.yoonlove.dto.NoticeDto;
 import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.QnADto;
 import com.example.yoonlove.service.CsService;
-import com.example.yoonlove.utill.PageUtill;
+import com.example.yoonlove.service.PagingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,7 @@ public class CsController {
     private CsService csService;
 
     @Autowired
-    private PageUtill pu;
+    private PagingService pagingService;
 
     //공지사항
     @GetMapping("cs/selectnotice/{notice_id}")
@@ -41,12 +41,11 @@ public class CsController {
         mv.setViewName("/cs/listnotice");
         mv.addObject("selectListNotice", dto);
 
-        PageDto pageDto = new PageDto();
-        pageDto = pu.paging("notice","notice_id",1);
-       System.out.println("총 게시글"+ pageDto.getTotalPost());
-        System.out.println("총 페이지" + pageDto.getPaging());
-        System.out.println("시작페이지 " + pageDto.getPageStart());
-        System.out.println("끝 페이지" + pageDto.getPageEnd());
+        PageDto cnt = new PageDto();
+        PageDto result = pagingService.totalPost(cnt);
+        System.out.println(result.getTotalPost());
+
+
         return mv;
     }
 

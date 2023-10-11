@@ -16,7 +16,6 @@ public class PagingService {
         return pageMapper.totalPost(dto);
     }
 
-
     //총페이지를 구하는 법=
     // (전체글 -1) / 페이징 갯수   + 1
 
