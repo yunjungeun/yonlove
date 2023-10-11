@@ -8,4 +8,26 @@
         SELECT * FROM project
     </select>
 
+    <select id="selectProject" resultType="com.example.yoonlove.dto.ProjectDto">
+        SELECT * FROM project where project_id= #{project_id}
+    </select>
+
+    <insert id="insertProject">
+        insert into project values(
+        (select concat('project',(substr(NVL(max(project_id),'project0'),13)+1)) from project),<!--pk코드 자동증가-->
+        #{project_name},
+        #{project_num},
+        #{project_writer},
+        #{project_concept},
+        #{project_content},
+        #[project_date},
+        #{project_start_date},
+        #{project_end_date},
+        #{project_reg_date},
+        #{project_flag},
+        #{project_reason},
+        #{com_id}
+        )
+    </insert>
+
 </mapper>
