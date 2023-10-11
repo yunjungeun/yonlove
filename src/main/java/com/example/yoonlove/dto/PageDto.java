@@ -12,6 +12,7 @@ public class PageDto {
     private int totalPost; //글의 총 갯수 값
     private int postStart; //게시판의 시작 게시글 번호
     private int postEnd; //게시판의 마지막 게시글 번호
+    private int postCnt;
 
     private int pageCnt; //페이지의 총 갯수 값
     private int currentPage = 1; //현재 페이지
