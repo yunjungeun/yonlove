@@ -25,5 +25,12 @@ public class ProjectService {
     }
 
 
+    public void deleteProject(ProjectDto dto){ //게시글증가번호 = ch_id라서 creatorDto로 받음
+        projectMapper.deleteProject(dto);
+    }
+
+
+    public void updateProject(ProjectDto projectDto){
+        projectMapper.updateProject(projectDto);}
 
 }

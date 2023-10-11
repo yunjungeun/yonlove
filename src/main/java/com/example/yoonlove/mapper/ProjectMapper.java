@@ -14,4 +14,8 @@ public interface ProjectMapper {
 
     public void insertProject(ProjectDto dto);
 
+    public void deleteProject(ProjectDto dto);
+
+    public void updateProject(ProjectDto projectDto);
+
 }

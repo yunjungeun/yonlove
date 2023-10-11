@@ -33,18 +33,43 @@ public class ProjectController {
 
     }
 
-    @GetMapping("project/insertprojectview")
+    @GetMapping("project/insertprojectview")  // 작성클릭 후 페이지 리턴하는
     public String insert(){
         return "project/projectinsert";
     }
 
-    @GetMapping("project/insertproject")
+    @GetMapping("project/insertproject")   // 작성 후 입력값 넘기는~
     public String insertProject(ProjectDto projectDto){
-          /*  System.out.println("test11");
-            System.out.println(creatorDto.toString());*/
+            /*System.out.println("test11");*/
+            /*System.out.println(projectDto.toString());*/
         projectService.insertProject(projectDto);
         return "redirect:/project/listproject";
     }
 
+
+        // 삭제 !!!!!!!!!!!!!!!!!!
+    @GetMapping("/project/deleteproject/{project_id}")
+    public String deleteProject(ProjectDto dto){
+         projectService.deleteProject(dto);
+        return "redirect:/project/listproject";
+    }
+
+
+    // 수정!!!!!!!!!!!!!!!!!!!!!
+    @GetMapping("/project/updateprojectview/{project_id}") // 수정하는곳
+    public ModelAndView updateProjectView(ProjectDto projectDto){
+        ModelAndView mv = new ModelAndView();
+        ProjectDto dto = projectService.selectProject(projectDto);
+        mv.setViewName("/project/updateproject");
+        mv.addObject("selectProject", dto);
+        return mv;
+    }
+
+    @GetMapping("/project/updateproject/{project_id}") // 수정 //해당주소 머스터치에 액션값
+    public String updateCreator(ProjectDto dto){
+        /*System.out.println(dto.toString());*/
+        projectService.updateProject(dto);
+        return "redirect:/project/listproject";   // 목록페이지로 이동
+    }
 
 }

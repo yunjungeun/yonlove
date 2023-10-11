@@ -12,22 +12,38 @@
         SELECT * FROM project where project_id= #{project_id}
     </select>
 
+
     <insert id="insertProject">
         insert into project values(
-        (select concat('project',(substr(NVL(max(project_id),'project0'),13)+1)) from project),<!--pk코드 자동증가-->
-        #{project_name},
-        #{project_num},
-        #{project_writer},
-        #{project_concept},
-        #{project_content},
-        #[project_date},
-        #{project_start_date},
-        #{project_end_date},
-        #{project_reg_date},
-        #{project_flag},
-        #{project_reason},
-        #{com_id}
+            (select concat('pj',(substr(NVL(max(project_id),'pj0'),3)+1)) from project),<!--pk코드 자동증가-->
+            #{project_name},
+            #{project_num},
+            null,
+            null,
+            '내용테스트',
+            '2023/10/11',
+            null,
+            null,
+            null,
+            'true',
+            null,
+            'com1'
         )
     </insert>
+
+
+    <update id="updateProject" >
+        UPDATE project
+        SET
+        project_name = #{project_name},
+        project_num = #{project_num}
+
+        where project_id = #{project_id}
+        </update>
+
+
+    <delete id="deleteProject">
+        DELETE FROM project WHERE project_id = #{project_id}
+    </delete>
 
 </mapper>

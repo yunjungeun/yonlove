@@ -7,19 +7,18 @@
     <title>Document</title>
 </head>
 <body>
-<form action="/project/insertproject" method="get">
+<form action="/project/updateproject/{{selectProject.project_id}}" method="get">
 
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
-            <td>기획명 <input name="project_name" type="text" placeholder="기획명"/></td>
-            <td>기획번호 <input name="project_num" type="number" placeholders="기획번호"/></td>
+            <td>수정할 기획명 <input name="project_name" type="text" placeholder="기획명"/></td>
+            <td>수정할 기획번호 <input name="project_num" type="number" placeholders="기획번호"/></td>
 
         </tr>
     </table>
-    <input type="submit" value="등록"/>
+    <input type="submit" value="수정"/>
 </form>
-<a href="/project/listproject">취소</a>
-
+<a href="/project/listproject">전체 목록 보기</a>
 <br/>현재까지 버그<br/>
 </body>
 </html>
