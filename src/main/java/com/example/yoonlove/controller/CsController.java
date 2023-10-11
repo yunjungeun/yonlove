@@ -1,8 +1,10 @@
 package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.NoticeDto;
+import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.QnADto;
 import com.example.yoonlove.service.CsService;
+import com.example.yoonlove.service.PagingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,9 @@ public class CsController {
     @Autowired
     private CsService csService;
 
+    @Autowired
+    private PagingService pagingService;
+
     //공지사항
     @GetMapping("cs/selectnotice/{notice_id}")
     public ModelAndView selectNotice(NoticeDto noticedto){
@@ -23,19 +28,24 @@ public class CsController {
 
         /*조회수 증가메소드*/
         csService.NoticeCnt(noticedto);
-
         ModelAndView mv = new ModelAndView();
         mv.setViewName("cs/selectnotice");
         mv.addObject("selectNotice", dto);
+
         return mv;
     }
     @GetMapping("/cs/notice")
     public ModelAndView selectListNotice(){
         List<NoticeDto> dto = csService.selectListNotice();
-
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/cs/listnotice");
         mv.addObject("selectListNotice", dto);
+
+        PageDto cnt = new PageDto();
+        PageDto result = pagingService.totalPost(cnt);
+        System.out.println(result.getTotalPost());
+
+
         return mv;
     }
 
