@@ -39,7 +39,7 @@ public class PageUtill {
     public int pageEnd(){
         PageDto dto = new PageDto();
         int result = pageStart() + dto.getPaging() - 1;
-        return Math.min(result, totalPost());
+        return Math.min(result, totalPost(dto));
     }
     //게시판의 마지막 글 번호를 구하는 메소드
     // 현재페이지 * 페이지당 글 수 = 페이지의 마지막글 번호
@@ -62,16 +62,22 @@ public class PageUtill {
     public boolean pre(){
         return pageStart() != 1;
     }
-    public boolean next(){
-        return pageEnd() < totalPageCnt();
+    public boolean next(PageDto dto){
+        return pageEnd() < totalPageCnt(dto);
     }
 
-    public PageDto paging(String table, String id){
+    public PageDto paging(String table, String id, int currentPage){
         PageDto dto = new PageDto();
-        dto.setTable(table);
-        dto.setId(id);
-
-        totalPost(dto);
+        dto.setTable(table);  //테이블
+        dto.setId(id);   //컬럼명
+        dto.setCurrentPage(currentPage); //현재페이지
+        dto.setTotalPost(totalPost(dto));  //총 글의 수
+        dto.setPageCnt(totalPageCnt(dto)); // 총 페이지 수
+        dto.setPageEnd(pageEnd());  //끝페이지
+        dto.setPageStart(pageStart());  //시작페이지
+        dto.setPostStart(postStart()); //페이지의 시작글
+        dto.setPostEnd(postEnd()); //페이지의 끝 글
+        return dto;
     }
 
 }
