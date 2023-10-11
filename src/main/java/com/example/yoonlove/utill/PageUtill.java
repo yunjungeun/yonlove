@@ -12,18 +12,17 @@ public class PageUtill {
     private PagingService pagingService;
 
     //글의 총 갯수를 구하는 메서드
-    public int totalPost(){
-        PageDto cnt = new PageDto();
-        PageDto result = pagingService.totalPost(cnt);
+    public int totalPost(PageDto dto){
+        PageDto result = pagingService.totalPost(dto);
         return result.getTotalPost();
     }
 
     //총 페이지를 구하는 방법  = // (전체글 -1) / 페이징 갯수   + 1
-    public int totalPageCnt(){
+    public int totalPageCnt(PageDto dto){
         PageDto totalPage = new PageDto();
 
         //(전체글 -1) / 페이징 갯수   + 1
-        int pageCnt =(totalPost()-1)/totalPage.getPaging() + 1;
+        int pageCnt =(totalPost(dto)-1)/totalPage.getPaging() + 1;
 
         return pageCnt;
     }
@@ -66,4 +65,13 @@ public class PageUtill {
     public boolean next(){
         return pageEnd() < totalPageCnt();
     }
+
+    public PageDto paging(String table, String id){
+        PageDto dto = new PageDto();
+        dto.setTable(table);
+        dto.setId(id);
+
+        totalPost(dto);
+    }
+
 }
