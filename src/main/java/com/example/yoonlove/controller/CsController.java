@@ -43,8 +43,10 @@ public class CsController {
 
         PageDto pageDto = new PageDto();
         pageDto = pu.paging("notice","notice_id",1);
-       System.out.println(pageDto.getTotalPost());
-
+       System.out.println("총 게시글"+ pageDto.getTotalPost());
+        System.out.println("총 페이지" + pageDto.getPaging());
+        System.out.println("시작페이지 " + pageDto.getPageStart());
+        System.out.println("끝 페이지" + pageDto.getPageEnd());
         return mv;
     }
 
