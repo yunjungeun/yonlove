@@ -40,8 +40,9 @@ public class CsController {
         mv.setViewName("/cs/listnotice");
         mv.addObject("selectListNotice", dto);
 
-        //개시글의 갯수 출력
-        System.out.println("총개시글"+pu.totalPost()+" " + pu.totalPageCnt());
+        //개시글의 갯수 출력 로그출력
+        System.out.println("총개시글"+pu.totalPost()+" / " +"총 페이지"+ pu.totalPageCnt());
+        System.out.println("페이지 시작"+pu.pageStart()+" / " +"페이지 끝"+ pu.totalPageCnt());
 
 
         return mv;
