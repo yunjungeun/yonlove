@@ -1,6 +1,7 @@
 package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.NoticeDto;
+import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.QnADto;
 import com.example.yoonlove.service.CsService;
 import com.example.yoonlove.utill.PageUtill;
@@ -40,12 +41,9 @@ public class CsController {
         mv.setViewName("/cs/listnotice");
         mv.addObject("selectListNotice", dto);
 
-        //개시글의 갯수 출력 로그출력
-/*        System.out.println("총개시글"+pu.totalPost()+"개 / " +"총 페이지"+ pu.totalPageCnt());
-        System.out.println("현재페이징 에서 페이지 시작 "+pu.pageStart()+" / " +"페이지 끝"+ pu.pageEnd());
-        System.out.println("게시판의 시작 글번호"+pu.postStart()+" / " +"마지막 글번호 "+ pu.postEnd());
-        System.out.println("pre 값"+pu.pre()+" / " +"next값 "+ pu.next());*/
-
+        PageDto pageDto = new PageDto();
+        pageDto = pu.paging("notice","notice_id",1);
+       System.out.println(pageDto.getTotalPost());
 
         return mv;
     }
