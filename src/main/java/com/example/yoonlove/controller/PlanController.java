@@ -1,6 +1,7 @@
 package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.ActorManagementDto;
+import com.example.yoonlove.dto.FilmPlanDto;
 import com.example.yoonlove.dto.ScheduleDayDto;
 import com.example.yoonlove.dto.ScheduleTimeDto;
 import com.example.yoonlove.service.PlanService;
@@ -209,6 +210,75 @@ public class PlanController {
         return "redirect:/plan/actorManagementList";
 
     }
+
+//===========================================================================================출연진관라
+
+
+    @GetMapping("plan/filmList")
+    public ModelAndView selectListFilmPlan(){
+
+        List<FilmPlanDto> dto = planService.selectListFilmPlan();
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/plan/filmList");
+        mv.addObject("filmList", dto);
+        return mv;
+    }
+
+
+    @GetMapping("plan/filmPlan/{film_id}")
+    public ModelAndView selectFilmPlan(FilmPlanDto dto) {
+        FilmPlanDto filmPlanDetail = planService.selectFilmPlan(dto);
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/plan/filmPlanDetail");
+        mv.setStatus(HttpStatus.valueOf(200));
+        mv.addObject("filmPlanDetail", filmPlanDetail);
+        return mv;
+    }
+
+    @GetMapping("plan/insertFilmPlanView")
+    public ModelAndView insertFilmPlanView() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("plan/insertFilmPlanView");
+        mv.setStatus(HttpStatus.valueOf(200));
+        return mv;
+    }
+
+
+    @GetMapping("plan/insertFilm")  //컨텐츠 추가 처리
+    public String insertFilm(FilmPlanDto dto) {
+
+        planService.insertFilm(dto);
+
+        return "redirect:/plan/filmList";
+    }
+
+
+    @GetMapping("plan/{film_id}/filmPlanUpdateView") //컨텐츠 업데이트하는 뷰
+    public ModelAndView filmPlanUpdateView( FilmPlanDto dto) {
+        FilmPlanDto filmPlanUpdate = planService.selectFilmPlan(dto);//업데이트를 하려면 해당 컨텐츠 불러와야하니까 위에 selectContent메소드를 다시씀!
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/plan/filmPlanUpdateView");
+        mv.setStatus(HttpStatus.valueOf(200));
+        mv.addObject("filmPlanUpdate", filmPlanUpdate);
+        return mv;
+    }
+
+    @GetMapping("plan/{film_id}/updatefilm") //업데이트 처리
+    public String updateFilm( FilmPlanDto dto) {
+        planService.updateFilm(dto);
+        return "redirect:/plan/filmList";
+    }
+
+    @GetMapping("plan/{film_id}/deleteFilm") //삭제 처리
+    public String deleteFilm( FilmPlanDto dto) {
+        planService.deleteFilm(dto);
+        return "redirect:/plan/filmList";
+
+    }
+
+
+//=================================================================================
 
 
 
