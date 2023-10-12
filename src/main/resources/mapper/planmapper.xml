@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.yoonlove.mapper.PlanMapper">
+
+
+    <select id="selectListSchedule"  resultType="com.example.yoonlove.dto.ScheduleDayDto">
+        SELECT * FROM schedule_day
+        <if test="keyword != null and keyword != ''">
+            WHERE day_title LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        ORDER BY day_id DESC
+    </select>
+
+
+    <select id="selectSchedule" parameterType="com.example.yoonlove.dto.ScheduleDayDto" resultType="com.example.yoonlove.dto.ScheduleDayDto">
+        SELECT * FROM schedule_day WHERE day_id = #{day_id}
+    </select>
+
+
+
+    <insert id="insertSchedule" parameterType="com.example.yoonlove.dto.ScheduleDayDto" >
+        INSERT INTO schedule_day  VALUES (
+        (select concat('day',(substr(NVL(max(day_id),'day0'),4)+1)) from schedule_day),
+        #{film_date},
+        #{weather},
+        #{day_title},
+        #{light},
+        #{costume},
+        #{prop},
+        #{film_order},
+        #{direct},
+        #{project_id}
+        )
+    </insert>
+
+    <update id="updateSchedule" parameterType="com.example.yoonlove.dto.ScheduleDayDto" >
+        UPDATE
+        schedule_day
+        SET
+        film_date = #{film_date},
+        day_title = #{day_title},
+        weather = #{film_date},
+        light = #{light},
+        costume = #{costume},
+        prop = #{prop},
+        film_order = #{film_order},
+        direct = #{direct},
+        project_id = #{project_id}
+
+        WHERE
+        day_id = #{day_id}
+    </update>
+
+    <delete id="deleteSchedule" parameterType="com.example.yoonlove.dto.ScheduleDayDto">
+        DELETE FROM schedule_day WHERE day_id = #{day_id}
+    </delete>
+
+    <!-- schedule_day CRUD쿼리문 작성완료-->
+
+    <select id="selectListScheduleTime"  resultType="com.example.yoonlove.dto.ScheduleTimeDto">
+        SELECT * FROM schedule_time ORDER BY time_id DESC
+    </select>
+
+    <select id="selectScheduleTime" parameterType="com.example.yoonlove.dto.ScheduleTimeDto" resultType="com.example.yoonlove.dto.ScheduleTimeDto">
+        SELECT * FROM schedule_time WHERE time_id = #{time_id}
+    </select>
+
+    <insert id="insertTime" parameterType="com.example.yoonlove.dto.ScheduleTimeDto" >
+        INSERT INTO schedule_time  VALUES (
+        (select concat('time',(substr(NVL(max(time_id),'time0'),5)+1)) from schedule_time),
+        #{day_id},
+        #{film_time},
+        #{film_content}
+        )
+    </insert>
+
+    <update id="updateTime" parameterType="com.example.yoonlove.dto.ScheduleTimeDto" >
+        UPDATE
+        schedule_time
+        SET
+        day_id = #{day_id},
+        film_time = #{film_time},
+        film_content = #{film_content}
+
+        WHERE
+        time_id = #{time_id}
+    </update>
+
+    <delete id="deleteTime" parameterType="com.example.yoonlove.dto.ScheduleTimeDto">
+        DELETE FROM schedule_time WHERE time_id = #{time_id}
+    </delete>
+
+    <!-- schedule_Time CRUD쿼리문 작성완료-->
+
+
+
+
+
+
+
+
+    <select id="selectListActorManagement"  resultType="com.example.yoonlove.dto.ActorManagementDto">
+        SELECT * FROM actor_management ORDER BY actor_id DESC
+    </select>
+
+    <select id="selectActorManagement" parameterType="com.example.yoonlove.dto.ActorManagementDto" resultType="com.example.yoonlove.dto.ActorManagementDto">
+        SELECT * FROM actor_management WHERE actor_id = #{actor_id}
+    </select>
+
+    <insert id="insertActorManagement" parameterType="com.example.yoonlove.dto.ActorManagementDto" >
+        INSERT INTO actor_management value (
+        (select concat('actor',(substr(NVL(max(actor_id),'actor0'),6)+1)) from actor_management),
+
+        #{actor_name},
+        #{actor_time},
+        #{place},
+        #{set_call},
+        #{day_id}
+        )
+    </insert>
+
+    <update id="updateActorManagement" parameterType="com.example.yoonlove.dto.ActorManagementDto" >
+        UPDATE
+        actor_management
+        SET
+        actor_name = #{actor_name},
+        actor_time = #{actor_time},
+        place = #{place},
+        set_call = #{set_call},
+        day_id = #{day_id}
+
+
+        WHERE
+        actor_id = #{actor_id}
+    </update>
+
+    <delete id="deleteActorManagement" parameterType="com.example.yoonlove.dto.ActorManagementDto">
+        DELETE FROM actor_management WHERE actor_id = #{actor_id}
+    </delete>
+
+
+    <!--actor_management CRUD 작성완료-->
+
+
+
+    <select id="selectListFilmPlan"  resultType="com.example.yoonlove.dto.FilmPlanDto">
+        SELECT * FROM film_plan ORDER BY film_id DESC
+    </select>
+
+    <select id="selectFilmPlan" parameterType="com.example.yoonlove.dto.FilmPlanDto" resultType="com.example.yoonlove.dto.FilmPlanDto">
+        SELECT * FROM film_plan WHERE film_id = #{film_id}
+    </select>
+
+    <insert id="insertFilm" parameterType="com.example.yoonlove.dto.FilmPlanDto" >
+        INSERT INTO film_plan value(
+        (select concat('film',(substr(NVL(max(film_id),'film0'),5)+1)) from film_plan),
+        #{day_id},
+        #{scene_id},
+        #{inside_id},
+        #{day_flag},
+        #{cut}
+        )
+    </insert>
+
+
+    <update id="updateFilm" parameterType="com.example.yoonlove.dto.FilmPlanDto" >
+        UPDATE
+
+        film_plan
+
+        set
+
+        day_id = #{day_id},
+        scene_id = #{scene_id},
+        inside_id = #{inside_id},
+        day_flag = #{day_flag},
+        cut = #{cut}
+
+        WHERE
+        film_id = #{film_id}
+    </update>
+
+    <delete id="deleteFilm" parameterType="com.example.yoonlove.dto.FilmPlanDto">
+        DELETE FROM film_plan WHERE film_id = #{film_id}
+    </delete>
+
+    <!--film_plan CRUD쿼리문 작성완료-->
+
+
+
+    <select id="selectListPlan"  resultType="com.example.yoonlove.dto.ScheduleMonthDto">
+        SELECT * FROM schedule_month
+        <if test="keyword != null and keyword != ''">
+            WHERE schedule_name LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        ORDER BY month_id DESC
+    </select>
+
+    <select id="selectPlan" parameterType="com.example.yoonlove.dto.ScheduleMonthDto" resultType="com.example.yoonlove.dto.ScheduleMonthDto">
+        SELECT * FROM film_plan WHERE month_id = #{month_id}
+    </select>
+
+
+
+
+    <insert id="insertPlan" parameterType="com.example.yoonlove.dto.ScheduleMonthDto" >
+        INSERT INTO schedule_month value(
+        (select concat('month',(substr(NVL(max(month_id),'month0'),6)+1)) from schedule_month),
+        #{schedule_name},
+        #{schedule_content},
+        #{schedule_date},
+        #{project_id}
+
+        )
+    </insert>
+
+    <update id="updatePlan" parameterType="com.example.yoonlove.dto.ScheduleMonthDto" >
+        UPDATE
+        schedule_month
+        SET
+        schedule_name = #{schedule_name},
+        schedule_content = #{schedule_content},
+        schedule_date = #{schedule_date},
+        project_id = #{project_id}
+
+        WHERE
+        month_id = #{month_id}
+    </update>
+
+    <delete id="deletePlan" parameterType="com.example.yoonlove.dto.ScheduleMonthDto">
+        DELETE FROM schedule_month WHERE month_id = #{month_id}
+    </delete>
+
+    <!--schedule_month CRUD쿼리문 작성완료-->
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
