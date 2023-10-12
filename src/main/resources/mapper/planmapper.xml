@@ -109,7 +109,7 @@
     </select>
 
     <insert id="insertActorManagement" parameterType="com.example.yoonlove.dto.ActorManagementDto" >
-        INSERT INTO actor_management value (
+        INSERT INTO actor_management values (
         (select concat('actor',(substr(NVL(max(actor_id),'actor0'),6)+1)) from actor_management),
 
         #{actor_name},

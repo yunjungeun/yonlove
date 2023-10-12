@@ -7,14 +7,16 @@
     <title>Document</title>
 </head>
 <body>
-<form action="/plan/insertScheduleTime" method="get">
+<form action="/plan/insertactorManagement" method="get">
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
 
 
-            <td>촬영시간<input name="film_time" type="date"  ></td>
-            <td>촬영내용<input name="film_content" type="text" ></td>
-            <td>계획표id<input name="day_id" type="text" ></td>
+            <td>배우이름<input name="actor_name" type="text"   ></td>
+            <td>도착시간<input name="arrival_time" type="date"  ></td>
+            <td>장소<input name="place" type="text" ></td>
+            <td>셋콜<input name="set_call" type="text" ></td>
+            <td>일정id<input name="day_id" type="text"  ></td>
 
 
 
@@ -24,8 +26,9 @@
     </table>
     <input type="submit" value="등록">
 </form>
-<a href="/plan/actorManagementList">목록</a>
 
+
+<a href="/plan/actorManagementList">목록</a>
 
 </body>
 </html>

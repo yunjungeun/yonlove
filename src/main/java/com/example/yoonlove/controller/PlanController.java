@@ -160,19 +160,19 @@ public class PlanController {
 
     @GetMapping("plan/actorManagement/{actor_id}")
     public ModelAndView selectActorManagement(ActorManagementDto dto) {
-        ActorManagementDto actorManagement = planService.selectActorManagement(dto);
+        ActorManagementDto actorManagementDetail = planService.selectActorManagement(dto);
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/actorManagementDetail");
         mv.setStatus(HttpStatus.valueOf(200));
-        mv.addObject("actorManagement", actorManagement);
+        mv.addObject("actorManagementDetail", actorManagementDetail);
         return mv;
     }
 
-   @GetMapping("plan/insertScheduleTimeView")
+   @GetMapping("plan/insertactorManagementView")
     public ModelAndView insertactorManagementView() {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("plan/insertScheduleTimeView");
+        mv.setViewName("plan/insertactorManagementView");
         mv.setStatus(HttpStatus.valueOf(200));
         return mv;
     }
@@ -187,31 +187,31 @@ public class PlanController {
     }
 
 
-    @GetMapping("plan/{time_id}/scheduleTimeUpdateView") //컨텐츠 업데이트하는 뷰
-    public ModelAndView scheduleTimeUpdateView( ActorManagementDto dto) {
+    @GetMapping("plan/{actor_id}/actorManagementUpdateView") //컨텐츠 업데이트하는 뷰
+    public ModelAndView actorManagementUpdateView( ActorManagementDto dto) {
         ActorManagementDto actorManagementDto = planService.selectActorManagement(dto);//업데이트를 하려면 해당 컨텐츠 불러와야하니까 위에 selectContent메소드를 다시씀!
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/plan/");
+        mv.setViewName("/plan/actorManagementUpdateView");
         mv.setStatus(HttpStatus.valueOf(200));
-        mv.addObject("updateScheduleTime", actorManagementDto);
+        mv.addObject("actorManagementUpdate", actorManagementDto);
         return mv;
     }
 
-    @GetMapping("plan/{time_id}/updateScheduleTime") //업데이트 처리
+    @GetMapping("plan/{actor_id}/updateActorManagement") //업데이트 처리
     public String updateActorManagement( ActorManagementDto dto) {
         planService.updateActorManagement(dto);
-        return "redirect:/plan/";
+        return "redirect:/plan/actorManagementList";
     }
 
-    @GetMapping("plan/{time_id}/deleteTime") //삭제 처리
+    @GetMapping("plan/{actor_id}/deleteActorManagement") //삭제 처리
     public String deleteActorManagement( ActorManagementDto dto) {
         planService.deleteActorManagement(dto);
-        return "redirect:/plan/";
+        return "redirect:/plan/actorManagementList";
 
     }
 
 
-*/
+
 
 }
 
