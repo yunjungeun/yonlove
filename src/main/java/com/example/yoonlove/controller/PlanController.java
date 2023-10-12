@@ -29,7 +29,6 @@ public class PlanController {
         return mv;
     }
 
-
     @GetMapping("plan/schedule/{day_id}")
     public ModelAndView selectSchedule(ScheduleDayDto dto) {
         ScheduleDayDto scheduleDetail = planService.selectSchedule(dto);
