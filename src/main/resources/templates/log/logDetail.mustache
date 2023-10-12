@@ -1,0 +1,35 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<table border="1" cellpadding="1" cellspacing="1">
+    <tr>
+        <td>일지번호<input name="log_num" type="text" value="{{selectLog.log_num}}" ></td>
+        <td>작성일<input name="log_date" type="date" value="{{selectLog.log_date}}"></td>
+    </tr>
+    <tr>
+        <td>일지내용<input name="log_content" type="text" value="{{selectLog.log_content}}"/></td>
+    </tr>
+    <tr>
+
+
+        <td>프로젝트아이디<input name="project_id" type="text"  value="{{selectLog.project_id}}"/></td>
+    </tr>
+</table>
+<a href="/log/log">목록</a>
+<a href="/log/{{selectLog.log_id}}/logUpdateView">수정</a>
+<a href="/log/{{selectLog.log_id}}/deleteLog">삭제</a>
+</body>
+</html>
+
+
+
+
+
+

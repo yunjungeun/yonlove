@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 리스트</title>
+</head>
+<body>
+<h1>공지사항</h1>
+<table border="1" cellpadding="1" cellspacing="1">
+    <ul>
+        <tr>
+            <td>일지번호</td>
+            <td>로그id</td>
+            <td>작성자</td>
+            <td>날짜</td>
+            <td>조회수</td>
+        </tr>
+        {{#selectListLog}}
+            <tr>
+                <td>{{log_num}}</td>
+                <td><a href="/log/selectlog/{{log_id}}">{{log_id}}</a></td>
+                <td>{{log_date}}</td>
+            </tr>
+        {{/selectListLog}}
+    </ul>
+</table>
+<a href="insertLogView" role="button">글 작성</a>
+<a href="/log/log">목록</a>
+</body>
+</html>

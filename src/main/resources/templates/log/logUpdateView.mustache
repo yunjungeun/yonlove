@@ -1,0 +1,32 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<form action="/log/{{updateLog.log_id}}/updateLog" method="get">   <!--왜 selectLog.log_id 가 이니고 updateLog.log_id일까....-->
+    <input name="notice_id" type="hidden" value="{{updateLog.log_id}}"/>
+    <table border="1" cellpadding="1" cellspacing="1">
+        <tr>
+            <td>일지번호<input name="log_num" type="text"  value="{{updateLog.log_num}}"></td>
+            <td>작성일<input name="log_date" type="date" value="{{updateLog.log_date}}"></td>
+        </tr>
+        <tr>
+            <td>일지내용<input name="log_content" type="text" value="{{updateLog.log_content}}"/></td>
+        </tr>
+        <tr>
+
+
+            <td>프로젝트아이디 <input name="project_id" type="text" value="{{updateLog.project_id}}"/></td>
+        </tr>
+    </table>
+    <input type="submit" value="등록">
+</form>
+<a href="/log/log">목록</a>
+
+
+</body>
+</html>

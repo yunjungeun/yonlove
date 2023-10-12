@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.yoonlove.mapper.LogMapper">
+
+
+    <select id="selectListLog"  resultType="com.example.yoonlove.dto.LogDto">
+        SELECT * FROM log
+        <if test="keyword != null and keyword != ''">
+            WHERE log_num LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        ORDER BY Log_id DESC
+    </select>
+
+    <select id="selectLog"  parameterType="com.example.yoonlove.dto.LogDto"  resultType="com.example.yoonlove.dto.LogDto">
+        SELECT * FROM log WHERE log_id = #{log_id}
+    </select>
+
+    <!--<update id="updateBbsView" parameterType="">
+        UPDATE log SET views = views+1 WHERE log_id = #{log_id}
+    </update>-->
+
+    <insert id="insertLog" parameterType="com.example.yoonlove.dto.LogDto">
+        INSERT INTO log VALUES (
+        (select concat('log',(substr(NVL(max(log_id),'log0'),4)+1)) from log),<!--pk코드 자동증가-->
+        #{log_num},
+        #{log_date},
+        #{log_content},
+        #{project_id}
+        )
+    </insert>
+
+    <update id="updateLog" parameterType="com.example.yoonlove.dto.LogDto">
+        UPDATE
+        log
+        SET
+        log_num = #{log_num}
+        , log_date = #{log_date}
+        , log_content = #{log_content}
+        , project_id  =  #{project_id}
+
+
+        WHERE
+        log_id = #{log_id}
+    </update>
+
+    <delete id="deleteLog" parameterType="com.example.yoonlove.dto.LogDto">
+        DELETE FROM log WHERE log_id = #{log_id}
+    </delete>
+
+
+</mapper>
