@@ -1,5 +1,6 @@
 package com.example.yoonlove.controller;
 
+import com.example.yoonlove.dto.ActorManagementDto;
 import com.example.yoonlove.dto.ScheduleDayDto;
 import com.example.yoonlove.dto.ScheduleTimeDto;
 import com.example.yoonlove.service.PlanService;
@@ -143,10 +144,74 @@ public class PlanController {
 
     }
 
+//============================================================================================촬영시간표
 
 
+    @GetMapping("plan/actorManagementList")
+    public ModelAndView selectListActorManagement(){
+
+        List<ActorManagementDto> dto = planService.selectListActorManagement();
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/plan/actorManagementList");
+        mv.addObject("actorManagementList", dto);
+        return mv;
+    }
 
 
+    @GetMapping("plan/actorManagement/{actor_id}")
+    public ModelAndView selectActorManagement(ActorManagementDto dto) {
+        ActorManagementDto actorManagement = planService.selectActorManagement(dto);
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/plan/actorManagementDetail");
+        mv.setStatus(HttpStatus.valueOf(200));
+        mv.addObject("actorManagement", actorManagement);
+        return mv;
+    }
+
+   @GetMapping("plan/insertScheduleTimeView")
+    public ModelAndView insertactorManagementView() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("plan/insertScheduleTimeView");
+        mv.setStatus(HttpStatus.valueOf(200));
+        return mv;
+    }
+
+
+    @GetMapping("plan/insertactorManagement")  //컨텐츠 추가 처리
+    public String insertActorManagement(ActorManagementDto dto) {
+
+        planService.insertActorManagement(dto);
+
+        return "redirect:/plan/actorManagementList";
+    }
+
+
+    @GetMapping("plan/{time_id}/scheduleTimeUpdateView") //컨텐츠 업데이트하는 뷰
+    public ModelAndView scheduleTimeUpdateView( ActorManagementDto dto) {
+        ActorManagementDto actorManagementDto = planService.selectActorManagement(dto);//업데이트를 하려면 해당 컨텐츠 불러와야하니까 위에 selectContent메소드를 다시씀!
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/plan/");
+        mv.setStatus(HttpStatus.valueOf(200));
+        mv.addObject("updateScheduleTime", actorManagementDto);
+        return mv;
+    }
+
+    @GetMapping("plan/{time_id}/updateScheduleTime") //업데이트 처리
+    public String updateActorManagement( ActorManagementDto dto) {
+        planService.updateActorManagement(dto);
+        return "redirect:/plan/";
+    }
+
+    @GetMapping("plan/{time_id}/deleteTime") //삭제 처리
+    public String deleteActorManagement( ActorManagementDto dto) {
+        planService.deleteActorManagement(dto);
+        return "redirect:/plan/";
+
+    }
+
+
+*/
 
 }
 

@@ -24,7 +24,7 @@ public interface PlanMapper {
     public void insertTime(ScheduleTimeDto dto);
     public void updateTime(ScheduleTimeDto dto);
     public void deleteTime(ScheduleTimeDto dto);
-
+//========================================================================
     public List<ActorManagementDto> selectListActorManagement();
     public ActorManagementDto selectActorManagement(ActorManagementDto dto);
     public void insertActorManagement(ActorManagementDto dto);

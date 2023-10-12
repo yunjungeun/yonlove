@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 리스트</title>
+</head>
+<body>
+<h1>공지사항</h1>
+<table border="1" cellpadding="1" cellspacing="1">
+    <ul>
+        <tr>
+            <td>배우이름</td>
+            <td>도착시간</td>
+            <td>장소</td>
+            <td>셋콜</td>
+            <td>일정id</td>
+
+
+        </tr>
+        {{#actorManagementList}}
+            <tr>
+                <td>{{arrival_time}}</td>
+                <td><a href="/plan/actorManagement/{{actor_id}}">{{actor_name}}</a></td>
+                <td>{{place}}</td>
+                <td>{{set_call}}</td>
+                <td>{{day_id}}</td>
+
+            </tr>
+        {{/actorManagementList}}
+    </ul>
+</table>
+<a href="/plan/insertScheduleTimeView" role="button">새 시간표 작성</a>
+<a href="/plan/scheduleTimeList">목록</a>
+</body>
+</html>
