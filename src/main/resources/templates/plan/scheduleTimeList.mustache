@@ -16,14 +16,14 @@
 
 
         </tr>
-        {{#scheduleTime}}
+        {{#scheduleTimeList}}
             <tr>
                 <td>{{film_time}}</td>
-                <td><a href="/plan/schedule/{{day_id}}">{{film_content}}</a></td>
+                <td><a href="/plan/scheduleTime/{{time_id}}">{{film_content}}</a></td>
                 <td>{{day_id}}</td>
 
             </tr>
-        {{/scheduleTime}}
+        {{/scheduleTimeList}}
     </ul>
 </table>
 <a href="/plan/insertScheduleTimeView" role="button">새 시간표 작성</a>

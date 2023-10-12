@@ -136,7 +136,7 @@ public class PlanController {
         return "redirect:/plan/scheduleTimeList";
     }
 
-    @GetMapping("plan/{time_id}/delete") //삭제 처리
+    @GetMapping("plan/{time_id}/deleteTime") //삭제 처리
     public String deleteTime( ScheduleTimeDto dto) {
         planService.deleteTime(dto);
         return "redirect:/plan/scheduleTimeList";
