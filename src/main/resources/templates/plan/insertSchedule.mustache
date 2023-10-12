@@ -1,0 +1,36 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<form action="/plan/insertSchedule" method="get">
+    <table border="1" cellpadding="1" cellspacing="1">
+        <tr>
+
+
+            <td>촬영계획표제목<input name="day_title" type="text"  ></td>
+            <td>촬영날짜<input name="film_date" type="date" ></td>
+            <td>촬영순서<input name="film_order" type="text" ></td>
+            <td>날씨<input name="weather" type="text" ></td>
+            <td>조명<input name="light" type="text" ></td>
+            <td>의상<input name="costume" type="text" ></td>
+            <td>소품<input name="prop" type="text" ></td>
+            <td>연출/제작<input name="direct" type="text" ></td>
+            <td>기획ID<input name="project_id" type="text" ></td>
+
+
+        </tr>
+
+
+    </table>
+    <input type="submit" value="등록">
+</form>
+<a href="/plan/scheduleList"></a>
+
+
+</body>
+</html>
