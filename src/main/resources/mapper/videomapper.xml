@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.yoonlove.mapper.VideoMapper">
+
+
+    <select id="selectListContent" resultType="com.example.yoonlove.dto.VideoDto">
+        SELECT * FROM video
+        <if test="keyword != null and keyword != ''">
+            WHERE video_name LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        ORDER BY video_id DESC
+    </select>
+
+    <select id="selectContent" parameterType="com.example.yoonlove.dto.VideoDto" resultType="com.example.yoonlove.dto.VideoDto">
+        SELECT * FROM video WHERE video_id = #{video_id}
+    </select>
+
+    <!-- <update id="updateBbsView" parameterType="">
+         UPDATE video SET views = views+1 WHERE video_id = #{video_id}
+     </update>-->
+
+    <insert id="insertContent" parameterType="com.example.yoonlove.dto.VideoDto" >
+        INSERT INTO video VALUES (
+        (select concat('video',(substr(NVL(max(video_id),'video0'),6)+1)) from video),<!--pk코드 자동증가-->
+        #{video_name},
+        #{video_sub},
+        #{video_view},
+        #{like_cnt},
+        #{video_url},
+        #{upload_date},
+        #{video_profit},
+        #{project_id}
+        )
+    </insert>
+
+    <update id="updateContent" parameterType="com.example.yoonlove.dto.VideoDto" >
+        UPDATE
+        video
+        SET
+        video_name = #{video_name}
+        , video_sub = #{video_sub}
+        , video_view = #{video_view}
+        , like_cnt = #{like_cnt}
+        , video_url = #{video_url}
+        , upload_date = #{upload_date}
+        , video_profit = #{video_profit}
+        , project_id = #{project_id}
+
+        WHERE
+        video_id = #{video_id}
+    </update>
+
+    <delete id="deleteContent" parameterType="com.example.yoonlove.dto.VideoDto">
+        DELETE FROM video WHERE video_id = #{video_id}
+    </delete>
+
+
+</mapper>

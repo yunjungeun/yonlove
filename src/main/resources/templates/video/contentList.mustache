@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 리스트</title>
+</head>
+<body>
+<h1>공지사항</h1>
+<table border="1" cellpadding="1" cellspacing="1">
+    <ul>
+        <tr>
+            <td>영상제목</td>
+            <td>영상설명</td>
+            <td>영상주소</td>
+            <td>업로드날짜</td>
+            <td>영상수익</td>
+            <td>조회수</td>
+            <td>좋아요수</td>
+            <td>프로젝트아이디</td>
+        </tr>
+        {{#selectContentList}}
+            <tr>
+                <td><a href="/vd/content/{{video_id}}">{{video_name}}</a></td>
+                <td>{{video_sub}}</td>
+                <td>{{video_url}}</td>
+                <td>{{upload_date}}</td>
+                <td>{{video_profit}}</td>
+                <td>{{video_view}}</td>
+                <td>{{like_cnt}}</td>
+                <td>{{project_id}}</td>
+            </tr>
+        {{/selectContentList}}
+    </ul>
+</table>
+<a href="/vd/contentInsertView" role="button">새 영상 작성</a>
+<a href="/vd/contentList">목록</a>
+</body>
+</html>
