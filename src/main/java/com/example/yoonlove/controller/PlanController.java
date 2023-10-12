@@ -55,4 +55,30 @@ public class PlanController {
 
         return "redirect:/plan/scheduleList";
     }
+
+    @GetMapping("plan/{day_id}/scheduleUpdateView") //컨텐츠 업데이트하는 뷰
+    public ModelAndView scheduleUpdateView( ScheduleDayDto dto) {
+        ScheduleDayDto scheduleDayDto = planService.selectSchedule(dto);//업데이트를 하려면 해당 컨텐츠 불러와야하니까 위에 selectContent메소드를 다시씀!
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/plan/updateSchedule");
+        mv.setStatus(HttpStatus.valueOf(200));
+        mv.addObject("updateSchedule", scheduleDayDto);
+        return mv;
+    }
+
+    @GetMapping("plan/{day_id}/updateSchedule") //업데이트 처리
+    public String updateSchedule( ScheduleDayDto dto) {
+        planService.updateSchedule(dto);
+        return "redirect:/plan/scheduleList";
+    }
+
+    @GetMapping("plan/{day_id}/deleteSchedule") //삭제 처리
+    public String deleteSchedule( ScheduleDayDto dto) {
+        planService.deleteSchedule(dto);
+        return "redirect:/plan/scheduleList";
+
+    }
+//
+
+
 }

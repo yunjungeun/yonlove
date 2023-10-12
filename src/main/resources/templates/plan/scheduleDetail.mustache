@@ -1,0 +1,38 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<table border="1" cellpadding="1" cellspacing="1">
+    <tr>
+
+
+        <td>촬영계획표제목<input name="day_title" type="text" value="{{scheduleDetail.day_title}}" ></td>
+        <td>촬영날짜<input name="film_date" type="date" value="{{scheduleDetail.film_date}}"></td>
+        <td>촬영순서<input name="film_order" type="text" value="{{scheduleDetail.film_order}}"></td>
+        <td>날씨<input name="weather" type="text"value="{{scheduleDetail.weather}}" ></td>
+        <td>조명<input name="light" type="text" value="{{scheduleDetail.light}}"></td>
+        <td>의상<input name="costume" type="text" value="{{scheduleDetail.costume}}" ></td>
+        <td>소품<input name="prop" type="text"  value="{{scheduleDetail.prop}}"></td>
+        <td>연출/제작<input name="direct" type="text" value="{{scheduleDetail.direct}}" ></td>
+        <td>기획ID<input name="project_id" type="text" value="{{scheduleDetail.project_id}}" ></td>
+
+
+    </tr>
+
+
+</table>
+<a href="/plan/scheduleList">목록</a>
+<a href="/plan/{{scheduleDetail.day_id}}/insertScheduleView">수정</a>
+<a href="/plan/{{scheduleDetail.day_id}}/deleteSchedule">삭제</a>
+
+
+
+
+</body>
+</html>
