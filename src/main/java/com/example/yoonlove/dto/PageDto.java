@@ -23,8 +23,8 @@ public class PageDto {
     private int pageStart; //페에징에서 시작 페이지 값
     private int pageEnd; //페이징에서 마지막 값
 
-    private String table = "notice";
-    private String id = "notice_id";
+    private String table;
+    private String id;
 
     @Override
     public String toString() {

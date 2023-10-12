@@ -6,4 +6,11 @@
         select count(${id}) as totalPost from ${table}
     </select>
 
+    <select id="postlist" parameterType="com.example.yoonlove.dto.PageDto">
+        select * from(
+            select rownum as r, t.* from
+                (select * from ${table} order by ${id} desc) t)
+        where r between #{poststart} and #{postend}
+    </select>
+
 </mapper>
