@@ -30,14 +30,15 @@ import java.util.List;
         }
 
         @GetMapping("creator/insertcreatorview")
-        public String insert(){
+        public String insertcreatorview(){
             return "creator/creatorinsert";
         }
 
         @GetMapping("creator/insertcreator")
         public String insertCreator(CreatorDto creatorDto){
-          /*  System.out.println("test11");
-            System.out.println(creatorDto.toString());*/
+            System.out.println("test11");
+
+            System.out.println(creatorDto.toString());
             creatorservice.insertCreator(creatorDto);
             return "redirect:/creator/creator";
         }

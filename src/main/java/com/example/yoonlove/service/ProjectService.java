@@ -1,7 +1,7 @@
 package com.example.yoonlove.service;
 
 import com.example.yoonlove.dto.BudgetDto;
-import com.example.yoonlove.dto.CreatorDto;
+import com.example.yoonlove.dto.ProduceDto;
 import com.example.yoonlove.dto.ProjectDto;
 import com.example.yoonlove.mapper.ProjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +27,7 @@ public class ProjectService {
 
     public void updateProject(ProjectDto projectDto){
         projectMapper.updateProject(projectDto);}
-
-    // 프로젝트,기획 부분 끝 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // ==============================프로젝트,기획 부분 끝 !!!!!!!!!!!!!!!!!!!!!!!!!!!
     public List<BudgetDto> selectListBudget(){
         return projectMapper.selectListBudget();}
 
@@ -42,5 +41,20 @@ public class ProjectService {
 
     public void updateBudget(BudgetDto budgetDto){
         projectMapper.updateBudget(budgetDto);}
+
+    // ============================== Budget  끝 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    public List<ProduceDto> selectListProduce(){
+        return projectMapper.selectListProduce();}
+    public void insertProduce(ProduceDto dto){
+       projectMapper.insertProduce(dto);}
+    public ProduceDto selectProduce(ProduceDto produceDto){
+        return projectMapper.selectProduce(produceDto);}
+    public void deleteProduce(ProduceDto dto){
+         projectMapper.deleteProduce(dto);}
+
+    public void updateProduce(ProduceDto dto){
+        projectMapper.updateProduce(dto);}
+    // ============================== 프로듀스 끝 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 }

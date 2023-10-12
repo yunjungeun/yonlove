@@ -22,7 +22,8 @@
         </tr>
 
         <tr>
-            <td bgcolor="pink">작성자</td>
+            <td bgcolor="pink">기획번호</td>
+            <td align="left">{{selectProject.project_num}}</td>
        <!--     <td align="left"> {1{selectProject.project_writer}}</td>-->
         </tr>
 
@@ -31,6 +32,8 @@
     <hr>
     <a href="/project/updateprojectview/{{selectProject.project_id}}">게시글 수정</a>&nbsp;&nbsp;&nbsp;
     <a href="/project/deleteproject/{{selectProject.project_id}}">게시글 삭제</a>&nbsp;
+
+    project/deleteproject/{project_id}
     <a href="/project/listproject">전체 목록 보기</a>
 </div>
 </body>

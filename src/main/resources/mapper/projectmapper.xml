@@ -13,7 +13,7 @@
 
     <insert id="insertProject">
         insert into project values(
-            (select concat('pj',(substr(NVL(max(project_id),'pj0'),3)+1)) from project),<!--pk코드 자동증가-->
+            (select concat('project',(substr(NVL(max(project_id),'project0'),8)+1)) from project),<!--pk코드 자동증가-->
             #{project_name},
             #{project_num},
             null,
@@ -34,7 +34,6 @@
         SET
         project_name = #{project_name},
         project_num = #{project_num}
-
         where project_id = #{project_id}
         </update>
 
@@ -43,7 +42,7 @@
     </delete>
 
 
-    <!-- !!!!!!!!!!!!!!!!!!!!프로젝트 기획 끝!!!!!!!!!!!!!!!!!!!! -->
+    <!-- !!!!!!!!!!!!!!!!!!!!=======================프로젝트 기획 끝!!!!!!!!!!!!!!!!!!!! -->
 
     <select id="selectListBudget" resultType="com.example.yoonlove.dto.BudgetDto">
         select * from budget
@@ -61,8 +60,8 @@
        '테스트내용',
         #{budget_amount},
         'code101',
-        '예산서테스티01',
-        'pj2'
+        '예산서테스터01',
+        'project2'
         )
     </insert>
 
@@ -71,10 +70,41 @@
         SET
         budget_name = #{budget_name},
         budget_amount = #{budget_amount}
-
         where budget_id = #{budget_id}
     </update>
 
     <delete id="deleteBudget"> DELETE FROM budget WHERE budget_id = #{budget_id}</delete>
+
+    <!--=========================================Budget 완료 !!!!!!!!!!======================== -->
+    <select id="selectListProduce" resultType="com.example.yoonlove.dto.ProduceDto">
+        select * from produce
+    </select>
+    
+    <select id="selectProduce" resultType="com.example.yoonlove.dto.ProduceDto">
+        select * from produce
+        where pd_id = #{pd_id}
+    </select>
+
+    <insert id="insertProduce">
+        insert into produce values(
+        (select concat('pd',(substr(NVL(max(pd_id),'pd0'),3)+1)) from produce),
+        #{pd_name},
+        #{role},
+        #{casting},
+        'project2',
+        'test'
+        )
+    </insert>
+
+    <delete id="deleteProduce"> delete from produce where pd_id = #{pd_id} </delete>
+
+    <update id="updateProduce">
+        update produce
+        set
+        pd_id = #{pd_name},
+        role = #{role},
+        casting = #{casting}
+    </update>
+    <!--==================================프로듀스 완료 !!!!!!!!!!============== -->
 
 </mapper>

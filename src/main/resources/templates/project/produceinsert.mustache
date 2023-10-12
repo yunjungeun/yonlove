@@ -4,19 +4,21 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>제작(프로듀스) 추가 </title>
 </head>
 <body>
-<form action="/creator/insertcreator" method="get">
+<form action="/project/insertproduce" method="get">
+
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
-            <td>이름 <input name="ch_name" type="text" placeholder="이름"/></td>
-            <td>SUB <input name="ch_sub" type="number" placeholder="SUB"/></td>
-            <td>유저아이디<input type="text" name="user_id" placeholder="유저아이디" ></td>
+            <td>이름 <input name="pd_name" type="text" placeholder="이름"/></td>
+            <td>역할 <input name="role" type="text" placeholders="역할"/></td>
+            <td>배역 <input name="casting" type="text" placeholders="배역"/></td>
         </tr>
     </table>
     <input type="submit" value="등록"/>
 </form>
-<a href="/creator/creator">취소</a>
+<a href="/project/listproduce">목록으로 가기</a>
+
 </body>
 </html>
