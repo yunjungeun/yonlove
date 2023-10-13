@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 리스트</title>
+</head>
+<body>
+<h1>공지사항</h1>
+<table border="1" cellpadding="1" cellspacing="1">
+    <ul>
+        <tr>
+            <td>스케쥴명</td>
+            <td>스케쥴내용</td>
+            <td>스케쥴일정</td>
+            <td>프로젝트id</td>
+
+
+        </tr>
+        {{#scheduleMonthList}}
+            <tr>
+                <td>{{schedule_name}}</td>
+                <td><a href="/plan/scheduleMonth/{{month_id}}">{{schedule_content}}</a></td>
+                <td>{{schedule_date}}</td>
+                <td>{{project_id}}</td>
+
+            </tr>
+        {{/scheduleMonthList}}
+    </ul>
+</table>
+<a href="/plan/insertScheduleMonthView" role="button">새 스케쥴 작성</a>
+<a href="/plan/scheduleMonthList">목록</a>
+</body>
+</html>

@@ -198,7 +198,7 @@
     </select>
 
     <select id="selectPlan" parameterType="com.example.yoonlove.dto.ScheduleMonthDto" resultType="com.example.yoonlove.dto.ScheduleMonthDto">
-        SELECT * FROM film_plan WHERE month_id = #{month_id}
+        SELECT * FROM schedule_month WHERE month_id = #{month_id}
     </select>
 
 

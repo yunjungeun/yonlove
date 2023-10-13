@@ -1,0 +1,32 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<form action="/plan/insertPlan" method="get">
+    <table border="1" cellpadding="1" cellspacing="1">
+        <tr>
+
+
+            <td>스케쥴명<input name="schedule_name" type="text"  ></td>
+            <td>스케쥴내용<input name="schedule_content" type="text" ></td>
+            <td>스케쥴일정<input name="schedule_date" type="date" ></td>
+            <td>프로젝트id<input name="project_id" type="text" ></td>
+
+
+
+        </tr>
+
+
+    </table>
+    <input type="submit" value="등록">
+</form>
+<a href="/plan/scheduleMonthList">목록</a>
+
+
+</body>
+</html>

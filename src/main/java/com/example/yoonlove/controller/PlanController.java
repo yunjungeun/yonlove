@@ -1,9 +1,6 @@
 package com.example.yoonlove.controller;
 
-import com.example.yoonlove.dto.ActorManagementDto;
-import com.example.yoonlove.dto.FilmPlanDto;
-import com.example.yoonlove.dto.ScheduleDayDto;
-import com.example.yoonlove.dto.ScheduleTimeDto;
+import com.example.yoonlove.dto.*;
 import com.example.yoonlove.service.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -279,6 +276,72 @@ public class PlanController {
 
 
 //=================================================================================
+
+    @GetMapping("plan/scheduleMonthList")
+    public ModelAndView selectListPlan(){
+
+        List<ScheduleMonthDto> dto = planService.selectListPlan();
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/plan/scheduleMonthList");
+        mv.addObject("scheduleMonthList", dto);
+        return mv;
+    }
+
+
+    @GetMapping("plan/scheduleMonth/{month_id}")
+    public ModelAndView selectPlan(ScheduleMonthDto dto) {
+        ScheduleMonthDto scheduleMonth = planService.selectPlan(dto);
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/plan/scheduleMonthDetail");
+        mv.setStatus(HttpStatus.valueOf(200));
+        mv.addObject("scheduleMonth", scheduleMonth);
+        return mv;
+    }
+
+    @GetMapping("plan/insertScheduleMonthView")
+    public ModelAndView insertScheduleMonthView() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("plan/insertScheduleMonthView");
+        mv.setStatus(HttpStatus.valueOf(200));
+        return mv;
+    }
+
+
+    @GetMapping("plan/insertPlan")  //컨텐츠 추가 처리
+    public String insertPlan(ScheduleMonthDto dto) {
+
+        planService.insertPlan(dto);
+
+        return "redirect:/plan/scheduleMonthList";
+    }
+
+
+    @GetMapping("plan/{month_id}/ScheduleMonthUpdateView") //컨텐츠 업데이트하는 뷰
+    public ModelAndView ScheduleMonthUpdateView( ScheduleMonthDto dto) {
+        ScheduleMonthDto ScheduleMonthUpdate = planService.selectPlan(dto);//업데이트를 하려면 해당 컨텐츠 불러와야하니까 위에 selectContent메소드를 다시씀!
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/plan/ScheduleMonthUpdateView");
+        mv.setStatus(HttpStatus.valueOf(200));
+        mv.addObject("ScheduleMonthUpdate", ScheduleMonthUpdate);
+        return mv;
+    }
+
+    @GetMapping("plan/{month_id}/updateScheduleMonth") //업데이트 처리
+    public String  updatePlan( ScheduleMonthDto dto) {
+        planService. updatePlan(dto);
+        return "redirect:/plan/scheduleMonthList";
+    }
+
+    @GetMapping("plan/{month_id}/deleteScheduleMonth") //삭제 처리
+    public String deletePlan( ScheduleMonthDto dto) {
+        planService.deletePlan(dto);
+        return "redirect:/plan/scheduleMonthList";
+
+    }
+
+
+
 
 
 
