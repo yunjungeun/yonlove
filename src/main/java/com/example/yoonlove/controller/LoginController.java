@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.Date;
@@ -47,7 +46,7 @@ public class LoginController {
 
 
     @GetMapping("/login/login")
-    public boolean loginUser(@RequestBody UserDto userDto, HttpServletRequest request, HttpServletResponse response) {
+    public boolean loginUser(UserDto userDto, HttpServletRequest request, HttpServletResponse response) {
         UserDto user = userService.loginUser(userDto);
         if (user == null) return false;
 
@@ -76,6 +75,27 @@ public class LoginController {
 
 
     }
+
+
+    @GetMapping("/login/joinview")
+    public ModelAndView joinView() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/login/joinview");
+        mv.setStatus(HttpStatus.valueOf(200));
+        return mv;
+    }
+
+
+    @GetMapping("/login/join")
+    public boolean joinUser(UserDto userDto) {
+        boolean result = userService.joinUser(userDto);
+        return result;
+    }
+
+
+
+
+
 
 
 }

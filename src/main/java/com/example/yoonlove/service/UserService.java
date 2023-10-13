@@ -5,6 +5,9 @@ import com.example.yoonlove.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class UserService {
 
@@ -28,6 +31,19 @@ public class UserService {
         }
     }
 
+
+    public boolean joinUser(UserDto userDto) {
+        UserDto existingUser = userMapper.selectUser(userDto.getEmail());
+        if (existingUser != null) {
+            return false;
+        }
+
+        int cnt = userMapper.insertUser(userDto);
+        if (cnt > 0) {
+            return true;
+        }
+        return false;
+    }
 
 
 

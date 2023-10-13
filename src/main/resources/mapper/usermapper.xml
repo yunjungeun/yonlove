@@ -15,7 +15,7 @@
         SELECT
         *
         FROM
-        users
+        user
         WHERE
         sessionId = #{sessionId}
     </select>
