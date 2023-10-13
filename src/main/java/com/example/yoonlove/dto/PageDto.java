@@ -36,9 +36,17 @@ public class PageDto {
     @Override
     public String toString() {
         return "PageDto{" +
-                "table='" + table + '\'' +
-                ", id='" + id + '\'' +
-                ", totalPost='" + totalPost + '\'' +
+                "총 개시글의 수=" + totalPost +
+                ", 현재페이지의 시작 글번호=" + postStart +
+                ", 현재페이지의 끝 글번호=" + postEnd +
+                ", 페이지당 표시되는 글의 수=" + postCnt +
+                ", 페이지의 총 갯수=" + pageCnt +
+                ", 현재페이지 값=" + currentPage +
+                ", 페이지당 표시되는 글 의 수=" + paging +
+                ", 페이징 시작 페이지=" + pageStart +
+                ", 페이징 마지막 페이지=" + pageEnd +
+                ", 테이블='" + table + '\'' +
+                ", PK컬럼명='" + id + '\'' +
                 '}';
     }
 }
