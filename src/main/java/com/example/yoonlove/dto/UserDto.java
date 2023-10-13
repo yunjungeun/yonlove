@@ -1,41 +1,41 @@
 package com.example.yoonlove.dto;
 
-import lombok.*;
+import lombok.Data;
 
+import java.sql.Date;
+
+
+@Data
 public class UserDto {
 
-    @Builder
-    @Getter
-    @NoArgsConstructor
-    @AllArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class UserLoginRequest{
-        @Setter
-        private String loginId;
-        @Setter
-        private String password;
+    private boolean autoLogin;
+    private String sessionId;
+    private Date expiredAt;
 
-        public static UserLoginRequestBuilder builder(){
-            return new UserLoginRequestBuilder();
-        }
+    private String user_id;
+    private String pw;
+    private String pw2;
+    private String user_name;
+    private String nickname;
+    private int phone;
+    private int tell;
+    private String email;
+    private String address1;
+    private String address2;
+    private int zipcode;
+    private String company_user;
+    private String grade;
+    private String authority;
+    private String company_id;
+    private String dpt_id;
+    private Date sign_date;
+    private int basic_pay;
+    private int total_pay;
 
-        public static class UserLoginRequestBuilder{
-            private String loginId;
-            private String password;
 
-            public UserLoginRequestBuilder loginId(String id){
-                this.loginId=id;
-                return this;
-            }
 
-            public UserLoginRequestBuilder password(String pwd){
-                this.password=pwd;
-                return this;
-            }
 
-            public UserLoginRequest build(){
-                return new UserLoginRequest(this.loginId,this.password);
-            }
-        }
-    }
+
+
 }
 
