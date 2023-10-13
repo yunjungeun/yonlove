@@ -15,13 +15,16 @@ public class PageDto {
     private int totalPost; //글의 총 갯수 값
     private int postStart; //게시판의 시작 게시글 번호
     private int postEnd; //게시판의 마지막 게시글 번호
-    private int postCnt = 10; // 게시판에 보여주는 게시글의 수
+    private int postCnt = 2; // 게시판에 보여주는 게시글의 수
 
     private int pageCnt; //페이지의 총 갯수 값
     private int currentPage = 1; //현재 페이지
+    private boolean currentPageFlag; //페이지리스트 중에서 반복문 페이지가 현재페이지와 일치하는지 확인
+
     private int paging = 10; //게시글 밑 페이징에서 표시될 페이지의 수 값
     private int pageStart; //페에징에서 시작 페이지 값
     private int pageEnd; //페이징에서 마지막 값
+
 
     private String table;
     private String id;
@@ -31,6 +34,10 @@ public class PageDto {
         this.table = table;
         this.id = id;
         this.currentPage = currentPage;
+    }
+    public PageDto(int currentPage, boolean currentPageFlag){
+        this.currentPage = currentPage;
+        this.currentPageFlag = currentPageFlag;
     }
 
     @Override

@@ -27,6 +27,19 @@
             {{/selectListNotice}}
         </ul>
     </table>
+
+
+<!-- 페이지 번호들 -->
+{{#pagelist}}
+    {{#currentPageFlag}}
+        <strong>{{currentPage}}</strong>
+    {{/currentPageFlag}}
+    {{^currentPageFlag}}
+        <a href="/cs/notice?page={{currentPage}}">{{currentPage}}</a>
+    {{/currentPageFlag}}
+
+{{/pagelist}}
+
 <a href="/cs/insertnotice-view" role="button">글 작성</a>
 <a href="/cs/notice">목록</a>
 </body>

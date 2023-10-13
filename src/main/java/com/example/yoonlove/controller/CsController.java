@@ -8,8 +8,10 @@ import com.example.yoonlove.service.PagingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 @Controller
 
@@ -35,17 +37,26 @@ public class CsController {
         return mv;
     }
     @GetMapping("/cs/notice")
-    public ModelAndView selectListNotice(){
+    public ModelAndView selectListNotice(@RequestParam(name="page", defaultValue = "1") int page){
 
+        PageDto pageDto = new PageDto("notice","notice_id",page);
 
-        PageDto pageDto = new PageDto("notice","notice_id",1);
         PageDto test = pagingService.paging(pageDto);
+
+        List<PageDto> pagelist = new ArrayList<>();
+        for(int i = test.getPageStart(); i<= test.getPageEnd(); i++){
+            PageDto pageFlag = new PageDto(i, i==page);
+            pagelist.add(pageFlag);
+        }
 
         List<NoticeDto> dto = pagingService.postList(test);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/cs/listnotice");
         mv.addObject("selectListNotice", dto);
 
+        mv.addObject("paging", test);  //페이징정보
+
+        mv.addObject("pagelist", pagelist); //페이지 리스트
         return mv;
     }
 
