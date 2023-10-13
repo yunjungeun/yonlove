@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 @Controller
 
@@ -40,22 +39,18 @@ public class CsController {
     public ModelAndView selectListNotice(@RequestParam(name="page", defaultValue = "1") int page){
 
         PageDto pageDto = new PageDto("notice","notice_id",page);
-
+        //페이징정보처리 메소드
         PageDto test = pagingService.paging(pageDto);
-
-        List<PageDto> pagelist = new ArrayList<>();
-        for(int i = test.getPageStart(); i<= test.getPageEnd(); i++){
-            PageDto pageFlag = new PageDto(i, i==page);
-            pagelist.add(pageFlag);
-        }
+        //뷰페이지에 페이징처리를 해주는 리스트
+        List<PageDto> pagelist = pagingService.pageList(test.getPageStart(), test.getPageEnd(), page);
 
         List<NoticeDto> dto = pagingService.postList(test);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/cs/listnotice");
         mv.addObject("selectListNotice", dto);
 
+        //페이징에 필요한센션
         mv.addObject("paging", test);  //페이징정보
-
         mv.addObject("pagelist", pagelist); //페이지 리스트
         return mv;
     }

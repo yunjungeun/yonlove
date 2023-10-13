@@ -6,6 +6,7 @@ import com.example.yoonlove.mapper.PageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -46,6 +47,16 @@ public class PagingService {
 
         System.out.println(pageDto.toString());
         return pageDto;
+    }
+
+    //뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
+    public List<PageDto> pageList(int pageStart, int pageEnd, int currentPage){
+        List<PageDto> pagelist = new ArrayList<>();
+        for(int i = pageStart; i<= pageEnd; i++){
+            PageDto pageFlag = new PageDto(i, i==currentPage);
+            pagelist.add(pageFlag);
+        }
+        return pagelist;
     }
 
     public List<NoticeDto> postList(PageDto dto){return pageMapper.postList(dto);}
