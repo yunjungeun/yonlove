@@ -153,11 +153,11 @@
     </select>
 
     <insert id="insertFilm" parameterType="com.example.yoonlove.dto.FilmPlanDto" >
-        INSERT INTO film_plan value(
+        INSERT INTO film_plan values(
         (select concat('film',(substr(NVL(max(film_id),'film0'),5)+1)) from film_plan),
         #{day_id},
         #{scene_id},
-        #{inside_id},
+        #{inside_flag},
         #{day_flag},
         #{cut}
         )
@@ -173,7 +173,7 @@
 
         day_id = #{day_id},
         scene_id = #{scene_id},
-        inside_id = #{inside_id},
+        inside_flag = #{inside_flag},
         day_flag = #{day_flag},
         cut = #{cut}
 
@@ -205,7 +205,7 @@
 
 
     <insert id="insertPlan" parameterType="com.example.yoonlove.dto.ScheduleMonthDto" >
-        INSERT INTO schedule_month value(
+        INSERT INTO schedule_month values(
         (select concat('month',(substr(NVL(max(month_id),'month0'),6)+1)) from schedule_month),
         #{schedule_name},
         #{schedule_content},
