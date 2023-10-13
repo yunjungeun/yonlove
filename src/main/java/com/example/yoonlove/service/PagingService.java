@@ -19,7 +19,6 @@ public class PagingService {
     public PageDto paging(PageDto dto){
         PageDto pageDto = new PageDto();
 
-
        //dto 리턴값 = 전체게시글 구하는 sql 실행 메소드
         pageDto = pageMapper.totalPost(dto);
 
@@ -44,6 +43,12 @@ public class PagingService {
         //  시작글 번호   =  마지막 글버놓 - (  페이지당 글수   - 1)
         int postStartNum = postEndNum - (dto.getPostCnt() - 1);
         pageDto.setPostStart(postStartNum);
+
+        //이전 다음버튼 관련 값
+        pageDto.setHasPre(dto.getCurrentPage() > 1);
+        pageDto.setHasNext(dto.getCurrentPage() < pageEnd);
+        pageDto.setPrePage(dto.getCurrentPage()-1);
+        pageDto.setNextPage(dto.getCurrentPage()+1);
 
         System.out.println(pageDto.toString());
         return pageDto;

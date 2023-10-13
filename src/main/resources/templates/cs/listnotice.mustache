@@ -30,11 +30,11 @@
 
 
 <!--이전 버튼-->
-{{#flag}}
+{{#paging}}
     {{#hasPre}}
         <a href="/cs/notice?page={{prePage}}">이전</a>
     {{/hasPre}}
-{{/flag}}
+{{/paging}}
 
 <!-- 페이지 번호를 반복문으로 생성 -->
 {{#pagelist}}
@@ -49,11 +49,11 @@
 {{/pagelist}}
 
 <!--다음페이지 버튼-->
-{{#flag}}
+{{#paging}}
     {{#hasNext}}
         <a href="/cs/notice?page={{nextPage}}">다음</a>
     {{/hasNext}}
-{{/flag}}
+{{/paging}}
 
 <br/>
 <a href="/cs/insertnotice-view" role="button">글 작성</a>
