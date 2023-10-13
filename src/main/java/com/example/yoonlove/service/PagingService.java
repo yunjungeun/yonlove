@@ -1,9 +1,12 @@
 package com.example.yoonlove.service;
 
+import com.example.yoonlove.dto.NoticeDto;
 import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.mapper.PageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PagingService {
@@ -42,5 +45,7 @@ public class PagingService {
 
         return pageDto;
     }
+
+    public List<NoticeDto> testList(PageDto dto){return pageMapper.postList(dto);}
 
 }

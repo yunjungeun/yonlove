@@ -36,15 +36,19 @@ public class CsController {
     }
     @GetMapping("/cs/notice")
     public ModelAndView selectListNotice(){
-        List<NoticeDto> dto = csService.selectListNotice();
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("/cs/listnotice");
-        mv.addObject("selectListNotice", dto);
+
 
         PageDto pageDto = new PageDto("qna","qna_id",1);
 
         PageDto test = pagingService.paging(pageDto);
         System.out.println(test.toString());
+
+        pagingService.testList(test);
+
+        List<NoticeDto> dto = csService.selectListNotice();
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/cs/listnotice");
+        mv.addObject("selectListNotice", dto);
 
         return mv;
     }
