@@ -5,9 +5,10 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>업뎃수정</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<form method="get" action="/creator/updatecreator/{{selectCreator.ch_id}}">
+<form id="updateFrom" method="get" action="/creator/updatecreator/{{selectCreator.ch_id}}">
 <div id="div_box">
     <h1>게시글 수정</h1>
     <hr>
@@ -33,12 +34,44 @@
         </tr>
 
     </table>
-        <input type="submit" value="수정"/>
+        <input type="submit" value="수정" id="updateBtn"/>
     <hr>
     <a href="/creator/updatecreatorview/{{selectCreator.ch_id}}">게시글 수정</a>&nbsp;&nbsp;&nbsp;
     <a href="#" class="delete-link" data-id="{{selectCreator.ch_id}}">게시글 삭제</a>&nbsp;
     <a href="/creator/creator">전체 목록 보기</a>
 </div>
 </form>
+
+<script>
+    document.getElementById("updateFrom").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        // 입력된 데이터 가져오기
+        var ch_name = $("input[name='ch_name']").val();
+        var ch_sub = $("input[name='ch_sub']").val();
+        var user_id = $("input[name='user_id']").val();
+
+        // Mustache 템플릿에서 추출한 ch_id 값
+        var ch_id = "{{selectCreator.ch_id}}";  // 이 부분을 실제 Mustache 데이터로 대체해야 합니다.
+
+        // API로 데이터 전송
+        $.ajax({
+            url: "/creator/updatecreator/" + ch_id,
+            type: "GET",
+            data: {
+                ch_name: ch_name,
+                ch_sub: ch_sub,
+                user_id: user_id
+            },
+            success: function (response) {
+                alert("글 수정 처리 완료" );
+                window.location.href = "/creator/creator" ;
+            },
+            error: function (error) {
+                alert("오류가 발생.");
+            }
+        });
+    });
+</script>
 </body>
 </html>
