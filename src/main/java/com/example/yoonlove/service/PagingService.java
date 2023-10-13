@@ -59,6 +59,16 @@ public class PagingService {
         return pagelist;
     }
 
+    //이전 다음버튼 에대한 생성 메서드
+    public PageDto pagingFlag(int page, int pageEnd){
+        PageDto pageDto = new PageDto();
+        pageDto.setHasPre(page > 1);
+        pageDto.setHasNext(page < pageEnd);
+        pageDto.setPrePage(page-1);
+        pageDto.setNextPage(page+1);
+        return pageDto;
+    }
+
     public List<NoticeDto> postList(PageDto dto){return pageMapper.postList(dto);}
 
 }

@@ -29,17 +29,33 @@
     </table>
 
 
-<!-- 페이지 번호들 -->
+<!--이전 버튼-->
+{{#flag}}
+    {{#hasPre}}
+        <a href="/cs/notice?page={{prePage}}">이전</a>
+    {{/hasPre}}
+{{/flag}}
+
+<!-- 페이지 번호를 반복문으로 생성 -->
 {{#pagelist}}
+    <!--현재페이지는 링크가 없고 강조표시-->
     {{#currentPageFlag}}
         <strong>{{currentPage}}</strong>
     {{/currentPageFlag}}
+    <!--현재 페이지가 아닌 숫자들은 해당페이지로 이동하는 링크생성-->
     {{^currentPageFlag}}
         <a href="/cs/notice?page={{currentPage}}">{{currentPage}}</a>
     {{/currentPageFlag}}
-
 {{/pagelist}}
 
+<!--다음페이지 버튼-->
+{{#flag}}
+    {{#hasNext}}
+        <a href="/cs/notice?page={{nextPage}}">다음</a>
+    {{/hasNext}}
+{{/flag}}
+
+<br/>
 <a href="/cs/insertnotice-view" role="button">글 작성</a>
 <a href="/cs/notice">목록</a>
 </body>

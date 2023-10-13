@@ -44,6 +44,8 @@ public class CsController {
         //뷰페이지에 페이징처리를 해주는 리스트
         List<PageDto> pagelist = pagingService.pageList(test.getPageStart(), test.getPageEnd(), page);
 
+        PageDto flag = pagingService.pagingFlag(page,test.getPageEnd());
+
         List<NoticeDto> dto = pagingService.postList(test);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/cs/listnotice");
@@ -52,6 +54,7 @@ public class CsController {
         //페이징에 필요한센션
         mv.addObject("paging", test);  //페이징정보
         mv.addObject("pagelist", pagelist); //페이지 리스트
+        mv.addObject("flag", flag);
         return mv;
     }
 
