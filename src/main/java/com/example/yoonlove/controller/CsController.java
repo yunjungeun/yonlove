@@ -38,6 +38,7 @@ public class CsController {
     @GetMapping("/cs/notice")
     public ModelAndView selectListNotice(@RequestParam(name="page", defaultValue = "1") int page){
 
+        //페이징에 필요한 매개변수, 객체생성
         PageDto pageDto = new PageDto("notice","notice_id",page);
         //페이징정보처리 메소드
         PageDto test = pagingService.paging(pageDto);
