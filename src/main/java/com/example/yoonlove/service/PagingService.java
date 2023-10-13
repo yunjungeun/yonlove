@@ -46,6 +46,6 @@ public class PagingService {
         return pageDto;
     }
 
-    public List<NoticeDto> testList(PageDto dto){return pageMapper.postList(dto);}
+    public List<NoticeDto> postList(PageDto dto){return pageMapper.postList(dto);}
 
 }

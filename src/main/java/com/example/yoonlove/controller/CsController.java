@@ -38,14 +38,10 @@ public class CsController {
     public ModelAndView selectListNotice(){
 
 
-        PageDto pageDto = new PageDto("qna","qna_id",1);
-
+        PageDto pageDto = new PageDto("notice","notice_id",1);
         PageDto test = pagingService.paging(pageDto);
-        System.out.println(test.toString());
 
-        pagingService.testList(test);
-
-        List<NoticeDto> dto = csService.selectListNotice();
+        List<NoticeDto> dto = pagingService.postList(test);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/cs/listnotice");
         mv.addObject("selectListNotice", dto);
