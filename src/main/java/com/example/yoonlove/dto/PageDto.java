@@ -26,6 +26,13 @@ public class PageDto {
     private String table;
     private String id;
 
+    public PageDto(){}
+    public PageDto(String table, String id, int currentPage){
+        this.table = table;
+        this.id = id;
+        this.currentPage = currentPage;
+    }
+
     @Override
     public String toString() {
         return "PageDto{" +
