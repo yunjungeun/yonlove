@@ -3,6 +3,7 @@ package com.example.yoonlove.service;
 import com.example.yoonlove.dto.BudgetDto;
 import com.example.yoonlove.dto.ProduceDto;
 import com.example.yoonlove.dto.ProjectDto;
+import com.example.yoonlove.dto.commandobj.BudgetSearchDto;
 import com.example.yoonlove.mapper.ProjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,8 +29,8 @@ public class ProjectService {
     public void updateProject(ProjectDto projectDto){
         projectMapper.updateProject(projectDto);}
     // ==============================프로젝트,기획 부분 끝 !!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public List<BudgetDto> selectListBudget(){
-        return projectMapper.selectListBudget();}
+    public List<BudgetDto> selectListBudget(BudgetSearchDto budgetSearchDto){
+        return projectMapper.selectListBudget(budgetSearchDto);}
 
     public BudgetDto selectBudget(BudgetDto budgetDto){
         return projectMapper.selectBudget(budgetDto);}

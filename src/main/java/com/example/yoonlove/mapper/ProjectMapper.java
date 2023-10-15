@@ -4,6 +4,7 @@ import com.example.yoonlove.dto.BudgetDto;
 import com.example.yoonlove.dto.CreatorDto;
 import com.example.yoonlove.dto.ProduceDto;
 import com.example.yoonlove.dto.ProjectDto;
+import com.example.yoonlove.dto.commandobj.BudgetSearchDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public interface ProjectMapper {
     public void updateProject(ProjectDto projectDto);
 // -------------------------====================================프로젝트 끝
 
-    public List<BudgetDto> selectListBudget();
+    public List<BudgetDto> selectListBudget(BudgetSearchDto budgetSearchDto);
     public BudgetDto selectBudget(BudgetDto budgetDto);
     public void insertBudget(BudgetDto dto);
     public void updateBudget(BudgetDto budgetDto);

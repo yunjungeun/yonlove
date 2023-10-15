@@ -16,10 +16,10 @@
             (select concat('project',(substr(NVL(max(project_id),'project0'),8)+1)) from project),<!--pk코드 자동증가-->
             #{project_name},
             #{project_num},
-            null,
-            null,
-            '내용테스트',
-            '2023/10/11',
+            '테스트',
+            '테스트진행중',
+            '기획내용 내용테스트',
+            '2023-10-11',  //h2는 - , 오라클 / 변경
             null,
             null,
             null,
@@ -44,8 +44,21 @@
 
     <!-- !!!!!!!!!!!!!!!!!!!!=======================프로젝트 기획 끝!!!!!!!!!!!!!!!!!!!! -->
 
-    <select id="selectListBudget" resultType="com.example.yoonlove.dto.BudgetDto">
+    <select id="selectListBudget" parameterType="com.example.yoonlove.dto.commandobj.BudgetSearchDto" resultType="com.example.yoonlove.dto.BudgetDto">
         select * from budget
+        where 1=1
+        <if test="projectId != null and projectId != ''"> <!-- 값이 존재 하면 -->
+            AND project_id = #{projectId}
+        </if>
+        <if test="name != null and name != ''">
+            AND budget_name = #{name}
+        </if>
+<!--        <if test="searchType == 'projectId'"> &lt;!&ndash; 값이 존재 하면 &ndash;&gt;-->
+<!--            AND project_id = #{content}-->
+<!--        </if>-->
+<!--        <if test="name != null and name != ''">-->
+<!--            AND budget_name = #{name}-->
+<!--        </if>-->
     </select>
 
     <select id="selectBudget" resultType="com.example.yoonlove.dto.BudgetDto">
@@ -91,7 +104,7 @@
         #{pd_name},
         #{role},
         #{casting},
-        'project2',
+        'project1',
         'test'
         )
     </insert>
