@@ -23,12 +23,24 @@ public class LoginController {
         return "/login/login";
     }
 
-    @PostMapping("login/porc")
+   /* @PostMapping("login/porc")
     public String loginporoc(UserDto dto){
         String rawPw = dto.getPw();
         String encPw = bCryptPasswordEncoder.encode(rawPw);
         userService.loadUserByUsername(dto.getUser_id());
        return null;
+    }*/
+
+    @GetMapping("/signupview")
+    public String signview(){
+        return "/login/signup";
+    }
+    @GetMapping("signup")
+    public String sign(UserDto dto){
+        System.out.println("sql실행전"+dto.toString());
+        userService.signUp(dto);
+        System.out.println("sql실행후");
+        return "/cs/qna";
     }
 
 }

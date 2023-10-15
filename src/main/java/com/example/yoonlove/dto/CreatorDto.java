@@ -9,5 +9,4 @@ public class CreatorDto {
     private int ch_sub;
     private String user_id;
 
-    }
 }

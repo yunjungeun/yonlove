@@ -6,6 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -33,9 +34,14 @@ public class UserDto implements UserDetails {
         private int total_pay;
 
 
-    @Override//권한 반환
+    @Override//권한 반환                    스프링시큐리티 유저디테일 인터페이스에 정의된 메서드
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("user"));//"user"권한만 반환함
+        //권한 컬렉션 선언
+        ArrayList<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
+        //권한 컬렉션에 Dto의 권한값인 authority를 추가
+        //SimpleGrantedAuthority는 GrantedAuthority인터페이스의 구현체
+        auth.add(new SimpleGrantedAuthority(this.authority));
+        return auth;
     }
 
     @Override//비번반환

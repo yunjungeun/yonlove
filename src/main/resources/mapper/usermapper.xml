@@ -9,5 +9,12 @@
     </select>
 
 
+    <insert id="signUp" parameterType="com.example.yoonlove.dto.UserDto">
+        insert into users (user_id, pw, authority) values(
+        #{user_id},
+        #{pw},
+        #{authority}
+        )
+    </insert>
 
 </mapper>
