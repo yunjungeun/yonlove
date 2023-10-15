@@ -47,12 +47,11 @@ public class UserService implements UserDetailsService {
         return new User(dto.getUser_id(),dto.getPw(), authorities);
     }
 
+    //회원가입 정보에서 비밀번호를 암호화하고 db에 등록
     public void signUp(UserDto dto){
-        UserDto userDto = new UserDto();
-        userDto.setUser_id(dto.getUser_id());
-        userDto.setAuthority(dto.getAuthority());
-        userDto.setPw(bCryptPasswordEncoder.encode(dto.getPw()));
-        userMapper.signUp(userDto);
-        System.out.println("암호화 완료"+userDto.getPw());
+        //회원가입폼에서 가저온 정보중 비밀번호를 암호화해서 변경
+        dto.setPw(bCryptPasswordEncoder.encode(dto.getPw()));
+        userMapper.signUp(dto);
+        System.out.println("암호화 완료"+dto.getPw());
     }
 }
