@@ -4,8 +4,13 @@ package com.example.yoonlove.controller;
 import com.example.yoonlove.dto.UserDto;
 import com.example.yoonlove.mapper.UserMapper;
 import com.example.yoonlove.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +36,7 @@ public class LoginController {
        return null;
     }*/
 
-    @GetMapping("/signupview")
+    @GetMapping("signupview")
     public String signview(){
         return "/login/signup";
     }
@@ -41,6 +46,12 @@ public class LoginController {
         userService.signUp(dto);
         System.out.println("sql실행후");
         return "/cs/qna";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response){
+        new SecurityContextLogoutHandler().logout(request,response, SecurityContextHolder.getContext().getAuthentication());
+        return "redirect:/login";
     }
 
 }

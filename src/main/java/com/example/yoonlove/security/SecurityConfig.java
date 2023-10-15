@@ -14,13 +14,20 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    //private final UserService userService;
+    //비번 인코더로 사용할 빈
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
              http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
                 .requestMatchers("/login","/cs/qna","/signupview","/signup").permitAll()
+                .requestMatchers("cs/selectqna/**").hasAuthority("admin")
                 .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -46,10 +53,5 @@ public class SecurityConfig {
                 .passwordEncoder(bCryptPasswordEncoder);
     }*/
 
-    //비번 인코더로 사용할 빈
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
 
 }
