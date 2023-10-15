@@ -13,36 +13,36 @@ public class ScriptPaperService {
     @Autowired
     private ScriptPaperMapper scriptPaperMapper;
 
-    public ScriptPaperDto selectScriptPaper(){
-        return scriptPaperMapper.selectScriptPaper();
+    public ScriptPaperDto selectScriptPaper(ScriptPaperDto dto){
+        return scriptPaperMapper.selectScriptPaper(dto);
     }
     public List<ScriptPaperDto> selectListScriptPaper() {
         return scriptPaperMapper.selectListScriptPaper();
     }
-    public void insertScriptPaper(){
-        scriptPaperMapper.insertScriptPaper();
+    public void insertScriptPaper(ScriptPaperDto dto){
+        scriptPaperMapper.insertScriptPaper(dto);
     }
-    public void updateScriptPaper(){
-        scriptPaperMapper.updateScriptPaper();
+    public void updateScriptPaper(ScriptPaperDto dto){
+        scriptPaperMapper.updateScriptPaper(dto);
     }
-    public void deleteScriptPaper(){
-        scriptPaperMapper.deleteScriptPaper();
+    public void deleteScriptPaper(ScriptPaperDto dto){
+        scriptPaperMapper.deleteScriptPaper(dto);
     }
 
     //타임테이블
-    public TimeTableDto selectTimeTable(){
-        return scriptPaperMapper.selectTimeTable();
+    public TimeTableDto selectTimeTable(TimeTableDto dto){
+        return scriptPaperMapper.selectTimeTable(dto);
     }
     public List<TimeTableDto> selectListTimeTable() {
         return scriptPaperMapper.selectListTimeTable();
     }
-    public void insertTimeTable(){
-        scriptPaperMapper.insertTimeTable();
+    public void insertTimeTable(TimeTableDto dto){
+        scriptPaperMapper.insertTimeTable(dto);
     }
-    public void updateTimeTable(){
-        scriptPaperMapper.updateTimeTable();
+    public void updateTimeTable(TimeTableDto dto){
+        scriptPaperMapper.updateTimeTable(dto);
     }
-    public void deleteTimeTable(){
-        scriptPaperMapper.deleteTimeTable();
+    public void deleteTimeTable(TimeTableDto dto){
+        scriptPaperMapper.deleteTimeTable(dto);
     }
 }

@@ -1,27 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!--부서-->
 <mapper namespace="com.example.yoonlove.mapper.AdminMapper">
-    <select id="selectNotice" resultType="com.example.yoonlove.dto.NoticeDto">
-        SELECT * FROM notice where notice_id=#{notice_id}
+    <select id="selectDepartment" resultType="com.example.yoonlove.dto.DepartmentDto">
+        SELECT * FROM department where dpt_id=#{dpt_id}
     </select>
 
-    <select id="selectListNotice" resultType="com.example.yoonlove.dto.NoticeDto">
-        SELECT * FROM notice
+    <select id="selectListDepartment" resultType="com.example.yoonlove.dto.DepartmentDto">
+        SELECT * FROM department order by dpt_name
     </select>
 
-    <insert id="insertNotice" parameterType="com.example.yoonlove.dto.NoticeDto">
-        insert into notice values(
-        6,#{notice_title},#{notice_content},'관리자','23-9-11',0,'test','23-9-12')
+    <insert id="insertDepartment" parameterType="com.example.yoonlove.dto.DepartmentDto">
+        insert into department values(
+        (select concat('dpt',(substr(NVL(max(dpt_id),'dpt0'),4)+1)) from department),<!--pk코드 자동증가-->
+        #{dpt_name},
+        #{dpt_function},
+        'com1'
+        )
     </insert>
 
-    <update id="updateNotice">
-        update notice set(notice_title = #{notice_title}, notice_content=#{notice_content}
-        where notice_id = #{notice_id})
+    <update id="updateDepartment">
+        update department
+        set dpt_name = #{dpt_name},
+        dpt_function = #{dpt_function}
+        where dpt_id = #{dpt_id}
     </update>
 
-    <delete id="deleteNotice">
-        delete from notice where notice_id='5번글'
+    <delete id="deleteDepartment">
+        delete from department where dpt_id=#{dpt_id}
     </delete>
 
 </mapper>

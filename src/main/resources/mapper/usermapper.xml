@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--부서-->
+<mapper namespace="com.example.yoonlove.mapper.UserMapper">
+
+    <select id="getUser" resultType="com.example.yoonlove.dto.UserDto">
+        SELECT * FROM users where user_id = #{user_id}
+    </select>
+
+
+    <insert id="signUp" parameterType="com.example.yoonlove.dto.UserDto">
+        insert into users (user_id, pw, authority) values(
+        #{user_id},
+        #{pw},
+        #{authority}
+        )
+    </insert>
+
+</mapper>

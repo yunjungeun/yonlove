@@ -1,0 +1,32 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<form action="/script/insertscriptpaper" method="get">
+    <table border="1" cellpadding="1" cellspacing="1">
+        <tr>
+            <td>씬 번호(자동입력 필요)<input name="scene_id" type="text" placeholder="드롭다운"></td>
+            <td>영상 제목<input name="video_name" type="text" placeholder="영상제목 입력"></td>
+            <td>촬영날짜<input name="video_date" type="date" placeholder="날짜형식 yy/mm/dd 입력"></td>
+            <td>촬영시작시간<input name="video_time" type="date" placeholder="날짜형식입력(시간아직안됨)"></td>
+            <td>촬영종료시간<input name="video_end_time" type="date" placeholder="날짜형식입력"></td>
+        </tr>
+        <tr>
+            <td>액션 이미지 첨부파일 <input name="action_image" type="text" placeholder="varchar2"/></td>
+            <td>액션 내용 <input name="action_content" type="text" placeholder="varchar2"/></td>
+            <td>카메라포지션 첨부파일 <input name="position_image" type="text" placeholder="varchar2"/></td>
+            <td>콘티 <input name="conti" type="text" placeholder="varchar2"/></td>
+        </tr>
+    </table>
+    <input type="submit" value="등록"/>
+</form>
+<a href="/script/scriptpaper">취소</a>
+
+<br/>현재까지 버그<br/>
+</body>
+</html>

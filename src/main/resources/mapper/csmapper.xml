@@ -17,8 +17,14 @@
 
     <insert id="insertNotice" parameterType="com.example.yoonlove.dto.NoticeDto">
         insert into notice values(
-        (select NVL(Max(notice_id),0)+1 from notice),#{notice_title},#{notice_content},'관리자',
-        (select * from todaytime)<!--현재 날짜+시간 뷰테이블-->,0,'test','23-9-12')
+        (select NVL(Max(notice_id),0)+1 from notice),
+        #{notice_title},
+        #{notice_content},
+        '관리자',
+        (select * from todaytime)<!--현재 날짜+시간 뷰테이블-->,
+        '23-9-12',
+        0,
+        'test')
     </insert>
 
     <update id="updateNotice">

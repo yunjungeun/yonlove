@@ -1,0 +1,24 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1" cellpadding="1" cellspacing="1">
+        <tr>
+            <td>부서명 <input name="dpt_name" type="text" value="{{selectDpt.dpt_name}}" readonly/></td>
+            <td>부서기능 <input name="dpt_function" type="text" value="{{selectDpt.dpt_function}}" readonly/></td>
+            <td>여기에 직원현황이 나와야하나?</td>
+        </tr>
+    </table>
+
+<a href="/admin/dpt">목록</a>
+    <a href="/admin/{{selectDpt.dpt_id}}/updatedptview">수정</a>
+    <a href="/admin/{{selectDpt.dpt_id}}/deletedpt">삭제</a>
+
+<br/>현재까지 버그<br/>
+</body>
+</html>

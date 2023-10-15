@@ -31,19 +31,19 @@ public class AdminService {
     }
 
     //부서정보
-    public DepartmentDto selectDepartment(){
-        return adminMapper.selectDepartment();
+    public DepartmentDto selectDepartment(DepartmentDto dto){
+        return adminMapper.selectDepartment(dto);
     }
     public List<DepartmentDto> selectListDepartment() {
         return adminMapper.selectListDepartment();
     }
-    public void insertDepartment(){
-        adminMapper.insertDepartment();
+    public void insertDepartment(DepartmentDto dto){
+        adminMapper.insertDepartment(dto);
     }
-    public void updateDepartment(){
-        adminMapper.updateDepartment();
+    public void updateDepartment(DepartmentDto dto){
+        adminMapper.updateDepartment(dto);
     }
-    public void deleteDepartment(){
-        adminMapper.deleteDepartment();
+    public void deleteDepartment(DepartmentDto dto){
+        adminMapper.deleteDepartment(dto);
     }
 }

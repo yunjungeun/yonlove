@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.yoonlove.mapper.PageMapper">
+
+    <select id="totalPost" parameterType="com.example.yoonlove.dto.PageDto">
+        select count(${id}) as totalPost from ${table}
+    </select>
+
+    <select id="postList" parameterType="com.example.yoonlove.dto.PageDto" resultType="com.example.yoonlove.dto.NoticeDto">
+        select * from(
+            select rownum as r, t.* from
+                (select * from notice order by notice_id desc) t)
+        where r between #{postStart} and #{postEnd}
+    </select>
+
+</mapper>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.yoonlove.mapper.ScriptPaperMapper">
+    <select id="selectScriptPaper" resultType="com.example.yoonlove.dto.ScriptPaperDto">
+        select * from script_paper where script_id = #{script_id}
+    </select>
+
+    <select id="selectListScriptPaper" resultType="com.example.yoonlove.dto.ScriptPaperDto">
+        select * from script_paper order by script_id <!--1번 내용부터 오름차순해야됨-->
+    </select>
+
+    <insert id="insertScriptPaper">
+        insert into script_paper values(
+        (select concat('script',(substr(NVL(max(script_id),'script0'),7)+1)) from script_paper),<!--pk코드 자동증가-->
+        #{scene_id}, <!--script id값 /나중에 조인해서 스크립트 번호가 가야됨-->
+        #{video_name}, <!--영상제목-->
+        #{video_date}, <!--영상촬영 날짜-->
+        #{video_time}, <!--영상 촬영시작시간-->
+        #{video_end_time}, <!--영상 촬영 종료시간-->
+        #{action_image}, <!--액션이미지 첨부파일 주소-->
+        #{action_content}, <!--액션 내용-->
+        #{position_image}, <!--카메라포지션 첨부파일 주소-->
+        #{conti} <!--콘티-->
+        )
+    </insert>
+
+    <update id="updateScriptPaper">
+        update script_paper
+        set scene_id = #{scene_id},
+        video_name = #{video_name},
+        video_date = #{video_date},
+        video_time = #{video_time},
+        video_end_time = #{video_end_time},
+        action_image = #{action_image},
+        action_content = #{action_content},
+        position_image = #{position_image},
+        conti = #{conti}
+        where script_id = #{script_id}
+    </update>
+
+    <delete id="deleteScriptPaper">
+        delete from script_paper where script_id = #{script_id}
+    </delete>
+
+
+    <!--타임테이블-->
+    <select id="selectListTimeTable" resultType="com.example.yoonlove.dto.TimeTableDto">
+        select * from time_table order by table_id <!--1번 내용부터 오름차순해야됨-->
+    </select>
+
+    <insert id="insertTimeTable">
+        insert into time_table values(
+        (select concat('time',(substr(NVL(max(table_id),'time0'),4)+1)) from time_table),<!--pk코드 자동증가-->
+        #{film_time},<!--촬영시간(몇시간 몇분)-->
+        #{time_num},<!--타임테이블 번호 자동증가 해야됨-->
+        #{ok_ng}, <!--ok판정-->
+        #{slate_time}, <!--슬레이트시간-->
+        #{script_id} <!--script id값 /나중에 조인해서 스크립트 번호가 가야됨-->
+        )
+    </insert>
+
+    <select id="selectTimeTable" resultType="com.example.yoonlove.dto.TimeTableDto">
+        select * from time_table where table_id = #{table_id} <!--1번 내용부터 오름차순해야됨-->
+    </select>
+
+    <update id="updateTimeTable">
+        update time_table
+        set film_time = #{film_time},
+        time_num = #{time_num},
+        ok_ng = #{ok_ng},
+        slate_time = #{slate_time},
+        script_id = #{script_id} <!--스크립트 드롭다운 선택형-->
+        where table_id = #{table_id}
+    </update>
+
+    <delete id="deleteTimeTable">
+        delete from time_table where table_id = #{table_id}
+    </delete>
+
+</mapper>

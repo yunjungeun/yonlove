@@ -16,132 +16,105 @@ public class ScriptPaperController {
     private ScriptPaperService scriptPaperService;
 
     //스크립트페이퍼
-    @GetMapping("/listscriptpaper")
+    @GetMapping("script/scriptpaper")
     public ModelAndView selectListScriptPaper(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
         List<ScriptPaperDto> dto = scriptPaperService.selectListScriptPaper();
 
-        //세션 객체생셩
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/testlist");
+        mv.setViewName("script/script");
 
-        //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
         mv.addObject("selectListScriptPaper", dto);
         return mv;
     }
 
-    @GetMapping("/selectscriptpaper")
-    public ModelAndView selectScriptPaper(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        ScriptPaperDto dto = scriptPaperService.selectScriptPaper();
-
-        //세션 객체생셩
+    @GetMapping("script/{script_id}/selectscriptpaper")
+    public ModelAndView selectScriptPaper(ScriptPaperDto scriptPaperDto){
+        ScriptPaperDto dto = scriptPaperService.selectScriptPaper(scriptPaperDto);
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
-
-        //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
+        mv.setViewName("/script/scriptselect");
         mv.addObject("selectScriptPaper", dto);
         return mv;
     }
 
-    @GetMapping("/insertscriptpaper")
-    public ModelAndView insertScriptPaper(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        scriptPaperService.insertScriptPaper();
+    @GetMapping("script/insertscriptpaperview")
+    public String insertscript(){
+        return "script/scriptinsert";
+    }
 
-        //세션 객체생셩
+    @GetMapping("script/insertscriptpaper")
+    public String insertScriptPaper(ScriptPaperDto dto){
+        scriptPaperService.insertScriptPaper(dto);
+        return "redirect:/script/scriptpaper";
+    }
+
+    @GetMapping("script/{script_id}/updatescriptview")
+    public ModelAndView updatescript(ScriptPaperDto scriptPaperDto){
+        ScriptPaperDto dto = scriptPaperService.selectScriptPaper(scriptPaperDto);
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
+        mv.setViewName("script/scriptupdate");
+        mv.addObject("selectScriptPaper", dto);
         return mv;
     }
-    @GetMapping("/updatescriptpaper")
-    public ModelAndView updateScriptPaper(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        scriptPaperService.updateScriptPaper();
 
-        //세션 객체생셩
-        ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
-        return mv;
+    @GetMapping("script/{script_id}/updatescriptpaper")
+    public String updateScriptPaper(ScriptPaperDto dto){
+        scriptPaperService.updateScriptPaper(dto);
+        return "redirect:/script/scriptpaper";
     }
-    @GetMapping("/deletescriptpaper")
-    public ModelAndView deleteScriptPaper(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        scriptPaperService.deleteScriptPaper();
-
-        //세션 객체생셩
-        ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
-        return mv;
+    @GetMapping("script/{script_id}/deletescriptpaper")
+    public String deleteScriptPaper(ScriptPaperDto dto){
+        scriptPaperService.deleteScriptPaper(dto);
+        return "redirect:/script/scriptpaper";
     }
 
     //타입테이블
-    @GetMapping("/listtimetable")
+    @GetMapping("script/timetable")
     public ModelAndView selectListTimeTable(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
         List<TimeTableDto> dto = scriptPaperService.selectListTimeTable();
-
-        //세션 객체생셩
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/testlist");
-
-        //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
+        mv.setViewName("script/timetable");
         mv.addObject("selectListTimeTable", dto);
         return mv;
     }
 
-    @GetMapping("/selecttimetable")
-    public ModelAndView selectTimeTable(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        TimeTableDto dto = scriptPaperService.selectTimeTable();
-
-        //세션 객체생셩
+    @GetMapping("script/{table_id}/selecttimetable")
+    public ModelAndView selectTimeTable(TimeTableDto timetableDto){
+        TimeTableDto dto = scriptPaperService.selectTimeTable(timetableDto);
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
-
-        //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
+        mv.setViewName("script/timetableselect");
         mv.addObject("selectTimeTable", dto);
         return mv;
     }
 
-    @GetMapping("/inserttimetable")
-    public ModelAndView insertTimeTable(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        scriptPaperService.insertTimeTable();
+    @GetMapping("script/inserttimeview")
+    public String insertTimeView(){
+        return "script/timetableinsert";
+    }
 
-        //세션 객체생셩
+    @GetMapping("script/inserttimetable")
+    public String insertTimeTable(TimeTableDto dto){
+        scriptPaperService.insertTimeTable(dto);
+        return "redirect:timetable";
+    }
+
+    @GetMapping("script/{table_id}/updatetimeview")
+    public ModelAndView updateTimeView(TimeTableDto timeTableDto){
+        TimeTableDto dto = scriptPaperService.selectTimeTable(timeTableDto);
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
+        mv.setViewName("script/timetableupdate");
+        mv.addObject("selectTimeTable", dto);
         return mv;
     }
-    @GetMapping("/updatetimetable")
-    public ModelAndView updateTimeTable(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        scriptPaperService.updateTimeTable();
-
-        //세션 객체생셩
-        ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
-        return mv;
+    @GetMapping("script/{table_id}/updatetimetable")
+    public String updateTimeTable(TimeTableDto dto){
+        System.out.println(dto.toString());
+        scriptPaperService.updateTimeTable(dto);
+        return "redirect:/script/timetable";
     }
-    @GetMapping("/deletetimetable")
-    public ModelAndView deleteTimeTable(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        scriptPaperService.deleteTimeTable();
 
-        //세션 객체생셩
-        ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/test");
-        return mv;
+    @GetMapping("script/{table_id}/deletetimetable")
+    public String deleteTimeTable(TimeTableDto dto){
+        scriptPaperService.deleteTimeTable(dto);
+        return "redirect:/script/timetable";
     }
 }
