@@ -2,13 +2,9 @@ package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.CreatorDto;
 import com.example.yoonlove.service.CreatorService;
-import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -35,7 +31,7 @@ import java.util.List;
         }
 
         @GetMapping("creator/insertcreator")
-        public String insertCreator(CreatorDto creatorDto){
+        public String insertCreator(CreatoDto creatorDto){
           /*  System.out.println("test11");
             System.out.println(creatorDto.toString());*/
             creatorservice.insertCreator(creatorDto);
