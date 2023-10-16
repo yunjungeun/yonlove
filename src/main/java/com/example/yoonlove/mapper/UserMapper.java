@@ -8,4 +8,6 @@ public interface UserMapper {
 
     public UserDto getUser(String user_id);
     public void signUp(UserDto dto);
+
+    public UserDto getNick(String user_id);
 }

@@ -5,6 +5,7 @@ import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.QnADto;
 import com.example.yoonlove.service.CsService;
 import com.example.yoonlove.service.PagingService;
+import com.example.yoonlove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,8 @@ public class CsController {
 
     @Autowired
     private CsService csService;
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private PagingService pagingService;
@@ -38,8 +41,6 @@ public class CsController {
     }
     @GetMapping("/cs/notice")
     public ModelAndView selectListNotice(@RequestParam(name="page", defaultValue = "1") int page){
-
-
         //페이징에 필요한 매개변수, 객체생성
         PageDto pageDto = new PageDto("notice","notice_id",page);
         //페이징정보처리 메소드
@@ -63,7 +64,7 @@ public class CsController {
     public ModelAndView insertNoticeView(Principal user){
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/cs/insertnoticeview");
-        mv.addObject("writer", user.getName());
+        mv.addObject("writer", userService.getnick(user));
         return mv;
     }
 

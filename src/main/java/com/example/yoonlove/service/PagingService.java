@@ -50,7 +50,6 @@ public class PagingService {
         pageDto.setPrePage(dto.getCurrentPage()-1);
         pageDto.setNextPage(dto.getCurrentPage()+1);
 
-        System.out.println(pageDto.toString());
         return pageDto;
     }
 

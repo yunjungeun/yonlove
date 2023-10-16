@@ -20,7 +20,7 @@
         (select NVL(Max(notice_id),0)+1 from notice),
         #{notice_title},
         #{notice_content},
-        '관리자',
+        #{notice_writer},  <!--닉네임-->
         (select * from todaytime)<!--현재 날짜+시간 뷰테이블-->,
         '23-9-12',
         0,

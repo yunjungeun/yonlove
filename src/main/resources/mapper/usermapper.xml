@@ -18,4 +18,8 @@
         )
     </insert>
 
+    <select id="getNick" resultType="com.example.yoonlove.dto.UserDto">
+        SELECT nickname FROM users where user_id = #{user_id}
+    </select>
+
 </mapper>

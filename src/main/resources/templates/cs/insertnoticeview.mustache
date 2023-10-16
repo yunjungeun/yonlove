@@ -9,11 +9,12 @@
 <body>
 <form action="/cs/insertnotice" method="get">
 <table border="1" cellpadding="1" cellspacing="1">
+    <input type="hidden" name="notice_writer" value="{{writer}}">
     <tr>
-        <td>제목 <input name="notice_title" type="text">작성자 : {{writer}}<td>
+        <td>제목 <input name="notice_title" type="text"> 작성자 : {{writer}}<td>
     </tr>
     <tr>
-        <td><textarea name="notice_content" cols="50" rows="20"></textarea></td>
+        <td colspan="2"><textarea name="notice_content" cols="50" rows="20"></textarea></td>
     </tr>
 </table>
     <input type="submit" value="등록">
