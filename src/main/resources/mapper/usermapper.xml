@@ -10,10 +10,11 @@
 
 
     <insert id="signUp" parameterType="com.example.yoonlove.dto.UserDto">
-        insert into users (user_id, pw, authority) values(
+        insert into users (user_id, pw, authority, sign_date) values(
         #{user_id},
         #{pw},
-        #{authority}
+        #{authority},
+        '23/10/16'
         )
     </insert>
 

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 @Controller
 
@@ -38,6 +39,7 @@ public class CsController {
     @GetMapping("/cs/notice")
     public ModelAndView selectListNotice(@RequestParam(name="page", defaultValue = "1") int page){
 
+
         //페이징에 필요한 매개변수, 객체생성
         PageDto pageDto = new PageDto("notice","notice_id",page);
         //페이징정보처리 메소드
@@ -53,12 +55,16 @@ public class CsController {
         //페이징에 필요한센션
         mv.addObject("paging", test);  //페이징정보
         mv.addObject("pagelist", pagelist); //페이지 리스트
+
         return mv;
     }
 
     @GetMapping("/cs/insertnotice-view")
-    public String insertNoticeView(){
-        return "/cs/insertnoticeview";
+    public ModelAndView insertNoticeView(Principal user){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/cs/insertnoticeview");
+        mv.addObject("writer", user.getName());
+        return mv;
     }
 
     @GetMapping("/cs/insertnotice")
