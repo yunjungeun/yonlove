@@ -3,7 +3,7 @@ package com.example.yoonlove.controller;
 import com.example.yoonlove.dto.BudgetDto;
 import com.example.yoonlove.dto.ProduceDto;
 import com.example.yoonlove.dto.ProjectDto;
-import com.example.yoonlove.dto.commandobj.BudgetSearchDto;
+import com.example.yoonlove.dto.SearchDto;
 import com.example.yoonlove.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -73,8 +73,8 @@ public class ProjectController {
     //제작예산
     // httpserveltrequest -> @RequestParam -> Command Object (dto)
     @GetMapping("/project/listbudget")
-    public ModelAndView selectListBudget(BudgetSearchDto budgetSearchDto){
-        List<BudgetDto> dto = projectService.selectListBudget(budgetSearchDto);
+    public ModelAndView selectListBudget(SearchDto searchDto){
+        List<BudgetDto> dto = projectService.selectListBudget(searchDto);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/project/listbudget");
         mv.addObject("selectListBudget", dto);

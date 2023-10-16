@@ -44,14 +44,14 @@
 
     <!-- !!!!!!!!!!!!!!!!!!!!=======================프로젝트 기획 끝!!!!!!!!!!!!!!!!!!!! -->
 
-    <select id="selectListBudget" parameterType="com.example.yoonlove.dto.commandobj.BudgetSearchDto" resultType="com.example.yoonlove.dto.BudgetDto">
+    <select id="selectListBudget" parameterType="com.example.yoonlove.dto.SearchDto" resultType="com.example.yoonlove.dto.BudgetDto">
         select * from budget
         where 1=1
-        <if test="projectId != null and projectId != ''"> <!-- 값이 존재 하면 -->
-            AND project_id = #{projectId}
+        <if test="id != null and search != ''"> <!-- 값이 존재 하면 -->
+            AND project_id like '%${id}%'
         </if>
-        <if test="name != null and name != ''">
-            AND budget_name = #{name}
+        <if test="title != null and search != ''">
+            AND budget_name like '%${title}%'
         </if>
 <!--        <if test="searchType == 'projectId'"> &lt;!&ndash; 값이 존재 하면 &ndash;&gt;-->
 <!--            AND project_id = #{content}-->
