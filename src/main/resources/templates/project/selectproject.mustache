@@ -1,0 +1,40 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div id="div_box">
+    <h1>게시글 상세보기</h1>
+    <hr>
+    <table board="1" cellpascing="0" cellpading="0">
+        <tr>
+            <td bgcolor="pink" width="70">프로젝트아이디 </td>
+            <td align="left">{{selectProject.project_id}}</td>
+        </tr>
+
+        <tr>
+            <td bgcolor="pink">기획명</td>
+            <td align="left">{{selectProject.project_name}}</td>
+        </tr>
+
+        <tr>
+            <td bgcolor="pink">기획번호</td>
+            <td align="left">{{selectProject.project_num}}</td>
+       <!--     <td align="left"> {1{selectProject.project_writer}}</td>-->
+        </tr>
+
+    </table>
+
+    <hr>
+    <a href="/project/updateprojectview/{{selectProject.project_id}}">게시글 수정</a>&nbsp;&nbsp;&nbsp;
+    <a href="/project/deleteproject/{{selectProject.project_id}}">게시글 삭제</a>&nbsp;
+
+    project/deleteproject/{project_id}
+    <a href="/project/listproject">전체 목록 보기</a>
+</div>
+</body>
+</html>

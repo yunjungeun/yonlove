@@ -10,15 +10,14 @@
 <table border="1" cellpadding="1" cellspacing="1">
     <ul>
         <tr>
-            <td>이름</td>
-            <td>sub</td>
-            <td>유저아이디</td>
+            <td>크레이터 이름 </td>
+            <td>구독자 수 </td>
+
         </tr>
         {{#selectListCreator}}
             <tr>
                 <td><a href="/creator/{{ch_id}}/selectcreator">{{ch_name}}</a></td>
                 <td>{{ch_sub}}</td>
-                <td>{{user_id}}</td>
             </tr>
         {{/selectListCreator}}
     </ul>

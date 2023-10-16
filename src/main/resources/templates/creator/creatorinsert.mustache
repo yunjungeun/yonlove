@@ -1,13 +1,15 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<form action="/creator/insertcreator" method="get">
+<form id="insertForm" action="/creator/insertcreator" method="get">
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
             <td>이름 <input name="ch_name" type="text" placeholder="이름"/></td>
@@ -15,10 +17,63 @@
             <td>유저아이디<input type="text" name="user_id" placeholder="유저아이디" ></td>
         </tr>
     </table>
-    <input type="submit" value="등록"/>
+    <input type="submit" value="등록" id="submitBtn" />
 </form>
-<a href="/creator/creator">취소</a>
+<a href="/creator/creator">목록으로 가기</a>
 
-<br/>현재까지 버그<br/>
+
+<script>
+    document.getElementById("insertForm").addEventListener("submit", function (event) {
+        event.preventDefault();  // 기본 제출동작을 멈추게함
+
+        // 입력된 데이터 가져오기
+        var ch_name = $("input[name='ch_name']").val();
+        var ch_sub = $("input[name='ch_sub']").val();
+        var user_id = $("input[name='user_id']").val();
+
+        // API로 데이터 전송
+        $.ajax({
+            url: "/creator/insertcreator", // API 엔드포인트 URL을 여기에 입력
+            type: "GET", // GET 또는 POST, API가 지원하는 메서드로 설정
+            data: {
+                ch_name: ch_name,
+                ch_sub: ch_sub,
+                user_id: user_id
+            },
+            success: function (response) {  // 성공일때 아래 메시지 띄우고 크레이터페이지로 이동
+                alert("글추가 완료! " );
+                window.location.href = "/creator/creator";
+            },
+            error: function (error) {  //실패시 아래 메시지 띄우기!
+                alert("API 요청 중 오류가 발생했습니다.");
+            }
+        });
+    });
+</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
