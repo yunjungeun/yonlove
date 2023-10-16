@@ -50,10 +50,19 @@ public class PagingService {
         pageDto.setPrePage(dto.getCurrentPage()-1);
         pageDto.setNextPage(dto.getCurrentPage()+1);
 
+
+        pageDto.setPkid(dto.getPkid());
+        pageDto.setPkintid(dto.getPkintid());
+        pageDto.setWriter(dto.getWriter());
+        pageDto.setContent(dto.getContent());
+        pageDto.setTitle(dto.getTitle());
+        pageDto.setDate(dto.getDate());
+        pageDto.setSearch(dto.getSearch());
+
         return pageDto;
     }
 
-    //뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
+    //뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드  //매개변수는 paging 매소드값의 결과이다.
     public List<PageDto> pageList(int pageStart, int pageEnd, int currentPage){
         List<PageDto> pagelist = new ArrayList<>();
         for(int i = pageStart; i<= pageEnd; i++){

@@ -3,6 +3,8 @@ package com.example.yoonlove.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Date;
+
 @Getter
 @Setter
 public class PageDto {
@@ -15,7 +17,7 @@ public class PageDto {
     private int totalPost; //글의 총 갯수 값
     private int postStart; //게시판의 시작 게시글 번호
     private int postEnd; //게시판의 마지막 게시글 번호
-    private int postCnt = 2; // 게시판에 보여주는 게시글의 수
+    private int postCnt = 4; // 게시판에 보여주는 게시글의 수
 
     private int pageCnt; //페이지의 총 갯수 값
     private int currentPage = 1; //현재 페이지
@@ -36,11 +38,30 @@ public class PageDto {
     private String table;
     private String id;
 
+    //검색관련 프로퍼티
+    private String pkid;
+    private String pkintid;
+    private String writer;
+    private String content;
+    private String title;
+    private Date date;
+
+    private String search;
+
+
+
     public PageDto(){}
-    public PageDto(String table, String id, int currentPage){
+    public PageDto(String table, String id, int currentPage, PageDto dto){
         this.table = table;
         this.id = id;
         this.currentPage = currentPage;
+        this.pkid = dto.getPkid();
+        this.pkintid = dto.getPkintid();
+        this.writer = dto.getWriter();
+        this.content = dto.getContent();
+        this.title = dto.getTitle();
+        this.date = dto.getDate();
+        this.search = dto.getSearch();
     }
     public PageDto(int currentPage, boolean currentPageFlag){
         this.currentPage = currentPage;

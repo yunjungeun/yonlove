@@ -40,13 +40,18 @@ public class CsController {
         return mv;
     }
     @GetMapping("/cs/notice")
-    public ModelAndView selectListNotice(@RequestParam(name="page", defaultValue = "1") int page){
+    public ModelAndView selectListNotice(PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page){
         //페이징에 필요한 매개변수, 객체생성
-        PageDto pageDto = new PageDto("notice","notice_id",page);
+        PageDto pageDto = new PageDto("notice","notice_id",page, pdto);
         //페이징정보처리 메소드
         PageDto test = pagingService.paging(pageDto);
-        //뷰페이지에 페이징처리를 해주는 리스트
+
+        //뷰페이지에 하단 페이징처리를 해주는 리스트
         List<PageDto> pagelist = pagingService.pageList(test.getPageStart(), test.getPageEnd(), page);
+
+        /*이부분을 넓갓으로 선택하게 하는 if문을 작성하고*/
+        String a = "/cs/notice?title="+pdto.getTitle()+"&page=";
+        String b = "/cs/notice?writer=" + pdto.getWriter()+ "&page=";
 
         List<NoticeDto> dto = pagingService.postList(test);
         ModelAndView mv = new ModelAndView();
@@ -56,6 +61,9 @@ public class CsController {
         //페이징에 필요한센션
         mv.addObject("paging", test);  //페이징정보
         mv.addObject("pagelist", pagelist); //페이지 리스트
+
+        //검색값 페이징선택하는 동적 페이징처리 예제
+        mv.addObject("test",a);
 
         return mv;
     }

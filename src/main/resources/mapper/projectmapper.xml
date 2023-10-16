@@ -53,12 +53,6 @@
         <if test="title != null and search != ''">
             AND budget_name like '%${title}%'
         </if>
-<!--        <if test="searchType == 'projectId'"> &lt;!&ndash; 값이 존재 하면 &ndash;&gt;-->
-<!--            AND project_id = #{content}-->
-<!--        </if>-->
-<!--        <if test="name != null and name != ''">-->
-<!--            AND budget_name = #{name}-->
-<!--        </if>-->
     </select>
 
     <select id="selectBudget" resultType="com.example.yoonlove.dto.BudgetDto">
