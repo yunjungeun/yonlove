@@ -115,6 +115,7 @@ public class CsController {
     }
     @GetMapping("/cs/qna")
     public ModelAndView selectListQnA(PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page){
+        System.out.println("질의응답 게시판리스트");
         PageDto pageDto = new PageDto("qna","qna_id",page,pdto);
         PageDto pageInfo = pagingService.paging(pageDto);
 

@@ -89,7 +89,7 @@
         // 프로젝트Id 로 검색 또는 입력값이 없을때
         if (selectedSearchType === "title" && search !== "") {  // 검색시, projectId와 빈칸일때
             // URL 주소를 아래로 변경해라 (베이스URL / 서치 URL)
-            var baseUrl = "/cs/notice";
+            var baseUrl = "/cs/qna";
             var searchUrl = baseUrl + "?title=" + search;
 
             //  searchUrl로 이동
@@ -98,7 +98,7 @@
 
         if (selectedSearchType === "writer" && search !== "") {
             // Construct the URL
-            var baseUrl = "/cs/notice";
+            var baseUrl = "/cs/qna";
             var searchUrl = baseUrl + "?writer=" + search;
 
 
