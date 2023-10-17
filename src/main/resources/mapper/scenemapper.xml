@@ -12,7 +12,7 @@
 
     <insert id="insertScene">
         insert into scene values(
-        (select concat('scene',(substr(NVL(max(scene_id),'scene0'),6)+1)) from scene),<!--pk코드 자동증가-->
+        (select concat('scene', (nvl(max(substr(scene_id, 6)), 0)+1)) from scene),<!--pk코드 자동증가-->
         (select nvl(max(scene_num),0)+1 from scene),<!--씬 번호 자동증가-->
         null,<!--이미지 첨부파일 주소-->
         #{scene_place}, <!--촬영장소-->
