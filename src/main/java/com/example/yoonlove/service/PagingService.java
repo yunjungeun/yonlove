@@ -2,6 +2,7 @@ package com.example.yoonlove.service;
 
 import com.example.yoonlove.dto.NoticeDto;
 import com.example.yoonlove.dto.PageDto;
+import com.example.yoonlove.mapper.CreatorMapper;
 import com.example.yoonlove.mapper.CsMapper;
 import com.example.yoonlove.mapper.PageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class PagingService {
     private PageMapper pageMapper;
     @Autowired
     private CsMapper csMapper;
+    @Autowired
+    private CreatorMapper creatorMapper;
 
 
     public PageDto paging(PageDto dto){
@@ -31,7 +34,7 @@ public class PagingService {
             case "actor_managment" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
             case "budget" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
             case "company" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
-            case "creater" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
+            case "creater" : pageDto = creatorMapper.totalCreatorPost(dto); break;
             case "creater_profit" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
             case "department" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
             case "film_plan" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;

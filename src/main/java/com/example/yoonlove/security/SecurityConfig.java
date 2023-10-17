@@ -26,7 +26,7 @@ public class SecurityConfig {
              http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
-                .requestMatchers("/login","/cs/qna","/signupview","/signup").permitAll()
+                .requestMatchers("/login","/cs/qna","/signupview","/signup","/index").permitAll()
                 .requestMatchers("cs/selectqna/**").hasAuthority("admin")
                 .anyRequest().authenticated()
                 )
@@ -35,7 +35,7 @@ public class SecurityConfig {
                         .loginProcessingUrl("/loginProc")
                         .usernameParameter("user_id")
                         .passwordParameter("pw")
-                        .defaultSuccessUrl("/cs/notice")
+                        .defaultSuccessUrl("/index")
                 )
                 .logout(logout -> logout
                         .logoutUrl("/login/logout")
