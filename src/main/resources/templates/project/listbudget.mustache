@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>예산서 리스트</h1>
-<form action="/project/listbudget" method="GET">
+<form action="/project/listbudget" method="GET" onsubmit="return submitForm()">
     <table border="1" cellpadding="1" cellspacing="1">
         <ul>
 
@@ -42,12 +42,12 @@
         <td>
             <input type="text" id="search" name="search" placeholder="검색">
         </td>
-
-    </tr> <input type="button" value="검색" onclick="submitForm()">
+        <input type="submit" value="검색">
+   <!-- </tr> <input type="button" value="검색" onclick="submitForm()">-->
 </form>
 
 <a href="/project/insertbudgetview" role="button">작성</a>
-
+<a href="/project/listbudget" role="button">목록으로 </a>
 
 <script>
     // search 할때, 기본 URL 주소값을 변경하기 위해..
@@ -55,6 +55,7 @@
         //  위의 select의 name인 서치타입을 가져오고 해당 입력값을 가져옴
         var searchTypeSelect = document.getElementById("searchType");
         var selectedSearchType = searchTypeSelect.value;
+
 
         //인풋 값을 컨텐츠에 담음
         var search = document.getElementById("search").value;
@@ -75,10 +76,27 @@
             var baseUrl = "/project/listbudget";
             var searchUrl = baseUrl + "?title=" + search;
 
-
             window.location.href = searchUrl;
         }
+           // 폼 제출을 막고, Enter 키 이벤트도 처리
+        return false;
     }
+     // "검색" 버튼 클릭 시 이벤트 핸들러
+    document.querySelector('input[type="submit"]').addEventListener("click", function(event) {
+        event.preventDefault(); // 폼 제출 방지
+        submitForm();
+    });
+
+    // Enter 키를 눌렀을 때 검색 버튼 클릭 시키는 이벤트 핸들러 추가
+    document.getElementById("content").addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            submitForm();
+        }
+    });
+
+ // event.preventDefault()는 "검색" 버튼 클릭 시 폼이 서버로 데이터를 전송하는 기본 동작을 중단시키는 역할을 합니다.
+//그 후, JavaScript 코드에서 사용자 정의 동작을 수행할 수 있게 됩니다.
 </script>
 </body>
 </html>
+
