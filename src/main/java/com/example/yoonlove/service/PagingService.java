@@ -2,6 +2,7 @@ package com.example.yoonlove.service;
 
 import com.example.yoonlove.dto.NoticeDto;
 import com.example.yoonlove.dto.PageDto;
+import com.example.yoonlove.mapper.CsMapper;
 import com.example.yoonlove.mapper.PageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,8 @@ public class PagingService {
 
     @Autowired
     private PageMapper pageMapper;
+    @Autowired
+    private CsMapper csMapper;
 
 
     public PageDto paging(PageDto dto){
@@ -21,7 +24,16 @@ public class PagingService {
 
 
        //dto 리턴값 = 전체게시글 구하는 sql 실행 메소드
-        pageDto = pageMapper.totalPost(dto);
+        switch (dto.getTable()){
+            case "notice" : pageDto = csMapper.totalNoticePost(dto); System.out.println("공지 스위치 실행");break;
+            case "qna" : pageDto = csMapper.totalQnAPost(dto);
+                System.out.println("qna 스위치 실행"); break;
+            default:
+                System.out.println("Paging서비스의 paging 메소드 오류 : 특정 게시판의 총 페이지를 구하는 메소드를 선택되지 못했습니다" +
+                        " dto.getTable() 값이 잘못되었습니다/ dto.getTable ="+dto.getTable());
+        }
+
+
 
         //전체 게시글의 갯수 값
         int totalPost = pageDto.getTotalPost();
@@ -77,7 +89,7 @@ public class PagingService {
         return pagelist;
     }
 
-    //이전 다음버튼 에대한 생성 메서드
+    //이전 다음버튼에 대한 생성 메서드
     public PageDto pagingFlag(int page, int pageEnd){
         PageDto pageDto = new PageDto();
         pageDto.setHasPre(page > 1);

@@ -54,7 +54,7 @@ public class CsController {
         //검색유무에 따라 동적 페이지링크를 만들어줌
         String rink = pagingService.pageRink(pageDto);
 
-        List<NoticeDto> dto = pagingService.postList(test);
+        List<NoticeDto> dto = csService.selectListNotice(test);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/cs/listnotice");
         mv.addObject("selectListNotice", dto);
@@ -114,12 +114,22 @@ public class CsController {
         return mv;
     }
     @GetMapping("/cs/qna")
-    public ModelAndView selectListQnA(){
-        List<QnADto> dto = csService.selectListQnA();
+    public ModelAndView selectListQnA(PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page){
+        PageDto pageDto = new PageDto("qna","qna_id",page,pdto);
+        PageDto pageInfo = pagingService.paging(pageDto);
 
+        List<PageDto> pagelist = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
+        String rink = pagingService.pageRink(pageDto);
+
+        List<QnADto> pagedto = csService.selectListQnA(pageInfo);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/cs/listqna");
-        mv.addObject("selectListQnA", dto);
+        mv.addObject("selectListQnA", pagedto);
+
+        //페이징에 필요한센션
+        mv.addObject("paging", pageInfo);  //페이징정보
+        mv.addObject("pagelist", pagelist); //페이지 하단부 페이지 리스트
+        mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
         return mv;
     }
 
