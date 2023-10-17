@@ -20,7 +20,7 @@
         from(select rownum as r, t.*
 
               <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
-             from (select * from notice
+             from (select * from ${table}
                   where 1=1
                     <if test="title != null and search != ''">
                         AND notice_title like '%${title}%'
@@ -28,7 +28,7 @@
                     <if test="writer != null and search != ''">
                         AND notice_writer like '%${writer}%'
                     </if>
-                     order by notice_id desc) t)
+                     order by ${id} desc) t)
 
               <!-- rownum을 기준(r)으로 시작번호부터 끝번호까지 검색   -->
         where r between #{postStart} and #{postEnd}

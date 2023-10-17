@@ -19,6 +19,7 @@ public class PagingService {
     public PageDto paging(PageDto dto){
         PageDto pageDto = new PageDto();
 
+
        //dto 리턴값 = 전체게시글 구하는 sql 실행 메소드
         pageDto = pageMapper.totalPost(dto);
 
@@ -50,7 +51,7 @@ public class PagingService {
         pageDto.setPrePage(dto.getCurrentPage()-1);
         pageDto.setNextPage(dto.getCurrentPage()+1);
 
-
+        //검색관련된 내용을 저장
         pageDto.setPkid(dto.getPkid());
         pageDto.setPkintid(dto.getPkintid());
         pageDto.setWriter(dto.getWriter());
@@ -58,6 +59,10 @@ public class PagingService {
         pageDto.setTitle(dto.getTitle());
         pageDto.setDate(dto.getDate());
         pageDto.setSearch(dto.getSearch());
+
+        //페이징 테이블 관련된 내용을 저장
+        pageDto.setTable(dto.getTable());
+        pageDto.setId(dto.getId());
 
         return pageDto;
     }
@@ -82,19 +87,30 @@ public class PagingService {
         return pageDto;
     }
 
-    /*public String pageRink(PageDto dto){
-        String rink = null;
-        List<>
-        *//*이부분을 넓갓으로 선택하게 하는 if문을 작성하고*//*
-            if(dto.getTitle() == null && dto.getWriter() == null) {
-                rink = "/cs/"+dto.getTable()+"?page=";
-                } else if (dto.getTitle() != null) {
-                    rink = "/cs/notice?title="+dto.getTitle()+"&page=";
-                }else if(dto.getWriter() != null){
-                    rink = "/cs/notice?writer=" + dto.getWriter()+ "&page=";
-                }
+    //검색유무에 따라 페이지 링크를 동적으로 생성
+    public String pageRink(PageDto dto){
+        String rink;
+        String type=null;
+        String keyword=null;
+        String[] keywords = {dto.getTitle(), dto.getWriter(), dto.getContent(), dto.getPkid(),dto.getPkintid()};
+        String[] types = {"title", "writer", "content", "pkid", "pkintid"};
+
+        //검색을 했는지 안했는지 검출하는 for문// 검색어가 있다면 검색어(keyword)와 검색타입(type)을 검출함
+        for (int i = 0 ; i < keywords.length; i++){
+            if(keywords[i] != null ){
+                keyword= keywords[i];
+                type = types[i];
+                break;
+            }
+        }
+        //검색 값이 없으면 일반적인 페이지링크를 만들고 값이 있다면 검색어에 대한 페이지링크 생성
+        if(keyword == null){
+            rink = dto.getTable()+"?page=";
+        }else {
+            rink = dto.getTable() + "?" + type+ "=" +keyword + "&page=";
+        }
         return rink;
-    }*/
+    }
 
     public List<NoticeDto> postList(PageDto dto){return pageMapper.postList(dto);}
 

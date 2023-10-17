@@ -43,22 +43,16 @@ public class CsController {
     public ModelAndView selectListNotice(PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page){
         //페이징에 필요한 매개변수, 객체생성
         PageDto pageDto = new PageDto("notice","notice_id",page, pdto);
+
         //페이징정보처리 메소드
         PageDto test = pagingService.paging(pageDto);
+
 
         //뷰페이지에 하단 페이징처리를 해주는 리스트
         List<PageDto> pagelist = pagingService.pageList(test.getPageStart(), test.getPageEnd(), page);
 
-        String rink = null;
-        /*이부분을 넓갓으로 선택하게 하는 if문을 작성하고*/
-        if(pdto.getTitle() == null && pdto.getWriter() == null) {
-            rink = "/cs/notice?page=";
-        } else if (pdto.getTitle() != null) {
-            rink = "/cs/notice?title="+pdto.getTitle()+"&page=";
-        }else if(pdto.getWriter() != null){
-            rink = "/cs/notice?writer=" + pdto.getWriter()+ "&page=";
-        }
-
+        //검색유무에 따라 동적 페이지링크를 만들어줌
+        String rink = pagingService.pageRink(pageDto);
 
         List<NoticeDto> dto = pagingService.postList(test);
         ModelAndView mv = new ModelAndView();
@@ -67,10 +61,8 @@ public class CsController {
 
         //페이징에 필요한센션
         mv.addObject("paging", test);  //페이징정보
-        mv.addObject("pagelist", pagelist); //페이지 리스트
-
-        //검색값 페이징선택하는 동적 페이징처리 예제
-        mv.addObject("pageRink",rink);
+        mv.addObject("pagelist", pagelist); //페이지 하단부 페이지 리스트
+        mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
 
         return mv;
     }
