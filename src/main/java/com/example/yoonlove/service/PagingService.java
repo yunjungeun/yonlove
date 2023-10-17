@@ -82,6 +82,20 @@ public class PagingService {
         return pageDto;
     }
 
+    /*public String pageRink(PageDto dto){
+        String rink = null;
+        List<>
+        *//*이부분을 넓갓으로 선택하게 하는 if문을 작성하고*//*
+            if(dto.getTitle() == null && dto.getWriter() == null) {
+                rink = "/cs/"+dto.getTable()+"?page=";
+                } else if (dto.getTitle() != null) {
+                    rink = "/cs/notice?title="+dto.getTitle()+"&page=";
+                }else if(dto.getWriter() != null){
+                    rink = "/cs/notice?writer=" + dto.getWriter()+ "&page=";
+                }
+        return rink;
+    }*/
+
     public List<NoticeDto> postList(PageDto dto){return pageMapper.postList(dto);}
 
 }

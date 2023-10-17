@@ -32,7 +32,8 @@
 <!--이전 버튼-->
 {{#paging}}
     {{#hasPre}}
-        <a href="/cs/notice?page={{prePage}}">이전</a>
+      <!--{!{검색어유무에따른url}}/{!{실제페이지번호}}-->
+        <a href="{{pageRink}}{{prePage}}">이전</a>
     {{/hasPre}}
 {{/paging}}
 
@@ -44,14 +45,14 @@
     {{/currentPageFlag}}
     <!--현재 페이지가 아닌 숫자들은 해당페이지로 이동하는 링크생성-->
     {{^currentPageFlag}}
-        <a href="{{test}}{{currentPage}}">{{currentPage}}</a>
+        <a href="{{pageRink}}{{currentPage}}">{{currentPage}}</a>
     {{/currentPageFlag}}
 {{/pagelist}}
 
 <!--다음페이지 버튼-->
 {{#paging}}
     {{#hasNext}}
-        <a href="/cs/notice?page={{nextPage}}">다음</a>
+        <a href="{{pageRink}}{{nextPage}}">다음</a>
     {{/hasNext}}
 {{/paging}}
 

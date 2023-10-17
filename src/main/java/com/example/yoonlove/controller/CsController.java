@@ -49,9 +49,16 @@ public class CsController {
         //뷰페이지에 하단 페이징처리를 해주는 리스트
         List<PageDto> pagelist = pagingService.pageList(test.getPageStart(), test.getPageEnd(), page);
 
+        String rink = null;
         /*이부분을 넓갓으로 선택하게 하는 if문을 작성하고*/
-        String a = "/cs/notice?title="+pdto.getTitle()+"&page=";
-        String b = "/cs/notice?writer=" + pdto.getWriter()+ "&page=";
+        if(pdto.getTitle() == null && pdto.getWriter() == null) {
+            rink = "/cs/notice?page=";
+        } else if (pdto.getTitle() != null) {
+            rink = "/cs/notice?title="+pdto.getTitle()+"&page=";
+        }else if(pdto.getWriter() != null){
+            rink = "/cs/notice?writer=" + pdto.getWriter()+ "&page=";
+        }
+
 
         List<NoticeDto> dto = pagingService.postList(test);
         ModelAndView mv = new ModelAndView();
@@ -63,7 +70,7 @@ public class CsController {
         mv.addObject("pagelist", pagelist); //페이지 리스트
 
         //검색값 페이징선택하는 동적 페이징처리 예제
-        mv.addObject("test",a);
+        mv.addObject("pageRink",rink);
 
         return mv;
     }
