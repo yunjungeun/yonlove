@@ -13,7 +13,7 @@
 
     <insert id="insertProject">
         insert into project values(
-            (select concat('project',(substr(NVL(max(project_id),'project0'),8)+1)) from project),<!--pk코드 자동증가-->
+            (select concat('project', (nvl(max(substr(project_id, 8)), 0)+1)) from project),<!--pk코드 자동증가(수정)-->
             #{project_name},
             #{project_num},
             '테스트',
@@ -62,7 +62,7 @@
 
     <insert id="insertBudget">
         insert into budget values(
-        (select concat('budget',(substr(NVL(max(budget_id),'budget0'),7)+1)) from budget),
+        (select concat('budget', (nvl(max(substr(budget_id, 7)), 0)+1)) from budget),<!--pk코드 자동증가(수정)-->
         #{budget_name},
        '테스트내용',
         #{budget_amount},
