@@ -1,14 +1,13 @@
 package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.CreatorDto;
+import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.service.CreatorService;
-import org.slf4j.MDC;
+import com.example.yoonlove.service.PagingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -18,14 +17,29 @@ import java.util.List;
 
         @Autowired
         private CreatorService creatorservice;
+
+        @Autowired
+        private PagingService pagingService;
+
         //서비스 객체 수정
 
-        @GetMapping("creator/creator")
-        public ModelAndView selectListCreaotr(){
-            List<CreatorDto> dto = creatorservice.selectListCreator();
+        @GetMapping("creator/creater")
+        public ModelAndView selectListCreaotr(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
+            PageDto pageDto = new PageDto("creater", "ch_id", page, pdto);
+            PageDto pageInfo=pagingService.paging(pageDto);
+
+            List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(), pageInfo.getPageEnd(), page);
+            String rink = pagingService.pageRink(pageDto);
+
+            List<CreatorDto> dto = creatorservice.selectListCreator(pageInfo);
             ModelAndView mv = new ModelAndView();
             mv.setViewName("creator/creator");
             mv.addObject("selectListCreator", dto);
+
+            //페이징에 필요한센션
+            mv.addObject("paging", pageInfo);  //페이징정보
+            mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
+            mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
             return mv;
         }
 
@@ -36,11 +50,8 @@ import java.util.List;
 
         @GetMapping("creator/insertcreator")
         public String insertCreator(CreatorDto creatorDto){
-            System.out.println("test11");
-
-            System.out.println(creatorDto.toString());
             creatorservice.insertCreator(creatorDto);
-            return "redirect:/creator/creator";
+            return "redirect:/creator/creater";
         }
 
       @GetMapping("/creator/{ch_id}/selectcreator")
@@ -65,12 +76,12 @@ import java.util.List;
     public String updateCreator(CreatorDto dto){
             System.out.println(dto.toString());
         creatorservice.updateCreator(dto);
-        return "redirect:/creator/creator";   // 목록페이지로 이동
+        return "redirect:/creator/creater";   // 목록페이지로 이동
     }
 
     @GetMapping("/creator/deletecreator/{ch_id}")
     public String deleteCreator(CreatorDto dto){
         creatorservice.deleteCreator(dto);
-        return "redirect:/creator/creator";
+        return "redirect:/creator/creater";
     }
 }

@@ -65,7 +65,7 @@
     </select>
     <input type="text" id="search" name="search" placeholder="검색">
 
-    <input type="button" value="검색" onclick="submitForm()">
+    <input type="submit" value="검색">
 
 </form>
 
@@ -104,7 +104,21 @@
 
             window.location.href = searchUrl;
         }
+        return false;
     }
+
+             // "검색" 버튼 클릭 시 이벤트 핸들러
+    document.querySelector('input[type="submit"]').addEventListener("click", function(event) {
+        event.preventDefault(); // 폼 제출 방지
+        submitForm();
+    });
+
+    // Enter 키를 눌렀을 때 검색 버튼 클릭 시키는 이벤트 핸들러 추가
+    document.getElementById("content").addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            submitForm();
+        }
+    });
 </script>
 
 </body>
