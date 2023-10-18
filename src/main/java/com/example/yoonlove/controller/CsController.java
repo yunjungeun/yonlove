@@ -6,12 +6,14 @@ import com.example.yoonlove.dto.QnADto;
 import com.example.yoonlove.service.CsService;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.UserService;
+import com.example.yoonlove.service.YouTubeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 @Controller
@@ -24,6 +26,12 @@ public class CsController {
     private UserService userService;
     @Autowired
     private PagingService pagingService;
+    private final YouTubeService youTubeService;
+
+    @Autowired
+    public CsController(YouTubeService youTubeService) {
+        this.youTubeService = youTubeService;
+    }
 
     //공지사항
     @GetMapping("cs/selectnotice/{notice_id}")
@@ -62,6 +70,13 @@ public class CsController {
         mv.addObject("paging", test);  //페이징정보
         mv.addObject("pagelist", pagelist); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
+
+        try {
+            System.out.println(youTubeService.searchVideos("ytn"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return mv;
+        }
 
         return mv;
     }
