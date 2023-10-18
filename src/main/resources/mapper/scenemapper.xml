@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.yoonlove.mapper.SceneMapper">
-    <select id="selectScene">
+    <select id="selectScene" parameterType="com.example.yoonlove.dto.SceneDto">
         SELECT * FROM scene where scene_id = #{scene_id}
     </select>
 
@@ -10,7 +10,7 @@
         SELECT * FROM scene
     </select>
 
-    <insert id="insertScene">
+    <insert id="insertScene"  parameterType="com.example.yoonlove.dto.SceneDto">
         insert into scene values(
         (select concat('scene', (nvl(max(substr(scene_id, 6)), 0)+1)) from scene),<!--pk코드 자동증가(수정)-->
         (select nvl(max(scene_num),0)+1 from scene),<!--씬 번호 자동증가-->
@@ -21,6 +21,11 @@
         'scenario1' <!--시나리오 id 조인해서 드롭다운 형태로 선택할수 있어야함-->
         )
     </insert>
+
+
+
+
+
 
     <update id="updateScene">
         update scene

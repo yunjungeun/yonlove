@@ -1,20 +1,32 @@
 package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.ActorDto;
-import com.example.yoonlove.dto.ScenarioDto;
 import com.example.yoonlove.dto.SceneDto;
+import com.example.yoonlove.dto.FileDto;
+import com.example.yoonlove.service.FileService;
 import com.example.yoonlove.service.SceneService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.List;
 
+@Slf4j
 @Controller
 public class SceneController {
     @Autowired
     private SceneService sceneService;
+    @Autowired
+    private FileService fileService;
+
+
 
     @GetMapping("scene/scene")
     public ModelAndView selectListScene(){
@@ -27,10 +39,12 @@ public class SceneController {
 
     @GetMapping("scene/{scene_id}/selectscene")
     public ModelAndView selectScene(SceneDto sceneDto){
+        System.out.println(sceneDto.toString());
         SceneDto dto = sceneService.selectScene(sceneDto);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("scene/sceneselect");
         mv.addObject("selectScene", dto);
+        System.out.println(dto.toString());
         return mv;
     }
 
@@ -39,9 +53,19 @@ public class SceneController {
         return "/scene/sceneinsert";
     }
 
-    @GetMapping("/scene/insertscene")
-    public String insertScene(SceneDto dto){
-        sceneService.insertScene(dto);
+    @PostMapping("/scene/insertscene")
+    public String insertScene(SceneDto dto, MultipartFile file) throws IOException {
+
+        try {
+
+            fileService.uploadFile(file); // FileService를 사용하여 파일 업로드
+
+            sceneService.insertScene(dto);
+            log.info("실행됐을까요?");
+        } catch (IOException e) {
+           log.info(e.getMessage());
+            // 예외 처리
+        }
         return "redirect:/scene/scene";
     }
 
@@ -55,8 +79,14 @@ public class SceneController {
     }
 
     @GetMapping("/scene/{scene_id}/updatescene")
-    public String updateScene(SceneDto dto){
+    public String updateScene(SceneDto dto,MultipartFile newfile,FileDto fileDto){
+
+        fileService.updateFile(newfile,);
+
         sceneService.updateScene(dto);
+
+
+
         return "redirect:/scene/scene";
     }
     @GetMapping("/scene/{scene_id}/deletescene")

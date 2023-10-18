@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+
+
+
+
+
+<mapper namespace="com.example.yoonlove.mapper.FileMapper">
+
+    <!-- 파일 ID로 파일 정보를 조회하는 쿼리 -->
+    <select id="getFileById" resultType="com.example.dto.FileDto">
+        SELECT file_id, file_name, file_path, file_data
+        FROM files
+        WHERE file_id = #{file_id}
+    </select>
+
+
+
+    <insert id="insertFile" parameterType="com.example.yoonlove.dto.FileDto">
+        INSERT INTO files (file_id,file_name, file_path, file_data)
+
+        VALUES
+            ((select concat('file_id', (nvl(max(substr(file_id, 8)), 0)+1)) from files),
+             #{file_name}, #{file_path}, #{file_data})
+    </insert>
+
+
+    <!-- 파일 정보를 업데이트하는 쿼리 -->
+    <update id="updateFile" parameterType="com.example.dto.FileDto">
+        UPDATE files
+        SET file_name = #{file_name}, file_path = #{file_path}, file_data = #{file_data}
+        WHERE file_id = #{file_id}
+    </update>
+
+
+    <delete id="deleteFile" parameterType="com.example.dto.FileDto">
+        DELETE FROM files
+        WHERE file_id = #{file_id}
+    </delete>
+
+
+
+
+
+
+</mapper>
