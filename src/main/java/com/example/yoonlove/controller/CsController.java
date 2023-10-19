@@ -78,6 +78,12 @@ public class CsController {
             return mv;
         }
 
+        try {
+            youTubeService.searchCh();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         return mv;
     }
 
