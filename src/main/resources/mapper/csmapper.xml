@@ -11,14 +11,53 @@
         update notice set notice_cnt = notice_cnt+1 where notice_id=#{notice_id}
     </update>
 
-    <select id="selectListNotice" resultType="com.example.yoonlove.dto.NoticeDto">
-        SELECT * FROM notice order by notice_id desc
+
+<!--검색유무에 따라 게시판의 총 게시글 수는 구하는 쿼리-->
+    <select id="totalNoticePost" parameterType="com.example.yoonlove.dto.PageDto">
+        select count(${id}) as totalPost from ${table}
+        where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
+        <!--검색어가 있다면 아래 조건문을 실행-->
+        <if test="title != null and search != ''">
+            AND notice_title like '%${title}%'
+        </if>
+        <if test="writer != null and search != ''">
+            AND notice_writer like '%${writer}%'
+        </if>
     </select>
+
+
+    <select id="selectListNotice" parameterType="com.example.yoonlove.dto.PageDto" resultType="com.example.yoonlove.dto.NoticeDto">
+        select *
+        <!--notice검색결과에 rownum을 하고 r로 지정-->
+        from(select rownum as r, t.*
+
+        <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
+        from (select * from ${table}
+        where 1=1
+        <if test="title != null and search != ''">
+            AND notice_title like '%${title}%'
+        </if>
+        <if test="writer != null and search != ''">
+            AND notice_writer like '%${writer}%'
+        </if>
+        order by ${id} desc) t)
+
+        <!-- rownum을 기준(r)으로 시작번호부터 끝번호까지 검색   -->
+        where r between #{postStart} and #{postEnd}
+    </select>
+
+
 
     <insert id="insertNotice" parameterType="com.example.yoonlove.dto.NoticeDto">
         insert into notice values(
-        (select NVL(Max(notice_id),0)+1 from notice),#{notice_title},#{notice_content},'관리자',
-        (select * from todaytime)<!--현재 날짜+시간 뷰테이블-->,0,'test','23-9-12')
+        (select NVL(Max(notice_id),0)+1 from notice),
+        #{notice_title},
+        #{notice_content},
+        #{notice_writer},  <!--닉네임-->
+        (select * from todaytime)<!--현재 날짜+시간 뷰테이블-->,
+        '23-9-12',
+        0,
+        'test')
     </insert>
 
     <update id="updateNotice">
@@ -43,7 +82,36 @@
     </update>
 
     <select id="selectListQnA" resultType="com.example.yoonlove.dto.QnADto">
-        SELECT * FROM qna order by qna_id desc
+        select *
+        <!--notice검색결과에 rownum을 하고 r로 지정-->
+        from(select rownum as r, t.*
+
+        <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
+        from (select * from ${table}
+        where 1=1
+        <if test="title != null and search != ''">
+            AND qna_title like '%${title}%'
+        </if>
+        <if test="writer != null and search != ''">
+            AND qna_writer like '%${writer}%'
+        </if>
+        order by ${id} desc) t)
+
+        <!-- rownum을 기준(r)으로 시작번호부터 끝번호까지 검색   -->
+        where r between #{postStart} and #{postEnd}
+    </select>
+
+    <!--검색유무에 따라 게시판의 총 게시글 수는 구하는 쿼리-->
+    <select id="totalQnAPost" parameterType="com.example.yoonlove.dto.PageDto">
+        select count(${id}) as totalPost from ${table}
+        where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
+        <!--검색어가 있다면 아래 조건문을 실행-->
+        <if test="title != null and search != ''">
+            AND qna_title like '%${title}%'
+        </if>
+        <if test="writer != null and search != ''">
+            AND qna_writer like '%${writer}%'
+        </if>
     </select>
 
     <insert id="insertQnA">

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로듀스 리스트</title>
+</head>
+<body>
+<h1>프로듀스 리스트</h1>
+<table border="1" cellpadding="1" cellspacing="1">
+    <ul>
+        <tr>
+            <td>제작 이름</td>
+            <td>제작 역할</td>
+        </tr>
+        {{#selectListProduce}}
+            <tr>
+                <td><a href="/project/{{pd_id}}/selectproduce">{{pd_name}}</a></td>
+                <td>{{role}}</td>
+            </tr>
+        {{/selectListProduce}}
+    </ul>
+</table>
+<a href="/project/insertproduceview" role="button">작성</a>
+<a href="/index">홈 페이지</a>
+</body>
+</html>

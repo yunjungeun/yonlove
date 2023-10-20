@@ -1,6 +1,7 @@
 package com.example.yoonlove.mapper;
 
 import com.example.yoonlove.dto.ActorDto;
+import com.example.yoonlove.dto.FileDto;
 import com.example.yoonlove.dto.SceneDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,6 +13,9 @@ public interface SceneMapper {
     public List<SceneDto> selectListScene();
     public SceneDto selectScene(SceneDto dto);
     public void insertScene(SceneDto dto);
+
+
+    public void insertFile(FileDto fileDto);
     public void updateScene(SceneDto dto);
     public void deleteScene(SceneDto dto);
 
@@ -21,4 +25,8 @@ public interface SceneMapper {
     public void insertActor(ActorDto dto);
     public void updateActor(ActorDto dto);
     public void deleteActor(ActorDto dto);
+
+
+    //마지막 작성글 불러오는 메서드
+    public int lastPost(SceneDto dto);
 }

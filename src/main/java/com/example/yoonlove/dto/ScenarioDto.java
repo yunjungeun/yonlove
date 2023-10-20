@@ -3,8 +3,6 @@ package com.example.yoonlove.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Date;
-
 @Getter
 @Setter
 public class ScenarioDto {
@@ -16,4 +14,5 @@ public class ScenarioDto {
     private String scenario_date;
     private String project_id;
     private String scenario_update;
+
 }

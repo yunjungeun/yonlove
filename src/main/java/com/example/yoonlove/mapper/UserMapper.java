@@ -6,20 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper {
 
+    public UserDto getUser(String user_id);
+    public void signUp(UserDto dto);
 
-
-    public UserDto selectUser(UserDto dto);
-
-   /* public UserDto selectUserBySessionId(UserDto dto);*/
-
-    public int insertUser(UserDto dto);
-
-    public int updatetUser(UserDto dto);
-
-    public int updateUserSessionInit(UserDto dto);
-
-
-
-
-
+    public UserDto getNick(String user_id);
 }

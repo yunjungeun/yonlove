@@ -12,7 +12,7 @@ public class NoticeDto {
     private String notice_content;
     private String notice_writer;
     private String notice_date;
-    private Date notice_update;
+    private String notice_update;
     private int notice_cnt;
     private String user_id;
 }

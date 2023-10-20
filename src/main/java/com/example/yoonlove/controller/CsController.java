@@ -4,12 +4,15 @@ import com.example.yoonlove.dto.NoticeDto;
 import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.QnADto;
 import com.example.yoonlove.service.CsService;
-import com.example.yoonlove.utill.PageUtill;
+import com.example.yoonlove.service.PagingService;
+import com.example.yoonlove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 @Controller
 
@@ -17,9 +20,11 @@ public class CsController {
 
     @Autowired
     private CsService csService;
+    @Autowired
+    private UserService userService;
 
     @Autowired
-    private PageUtill pu;
+    private PagingService pagingService;
 
     //공지사항
     @GetMapping("cs/selectnotice/{notice_id}")
@@ -35,24 +40,39 @@ public class CsController {
         return mv;
     }
     @GetMapping("/cs/notice")
-    public ModelAndView selectListNotice(){
-        List<NoticeDto> dto = csService.selectListNotice();
+    public ModelAndView selectListNotice(PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page){
+        //페이징에 필요한 매개변수, 객체생성
+        PageDto pageDto = new PageDto("notice","notice_id",page, pdto);
+
+        //페이징정보처리 메소드
+        PageDto test = pagingService.paging(pageDto);
+
+
+        //뷰페이지에 하단 페이징처리를 해주는 리스트
+        List<PageDto> pagelist = pagingService.pageList(test.getPageStart(), test.getPageEnd(), page);
+
+        //검색유무에 따라 동적 페이지링크를 만들어줌
+        String rink = pagingService.pageRink(pageDto);
+
+        List<NoticeDto> dto = csService.selectListNotice(test);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/cs/listnotice");
         mv.addObject("selectListNotice", dto);
 
-        PageDto pageDto = new PageDto();
-        pageDto = pu.paging("notice","notice_id",1);
-       System.out.println("총 게시글"+ pageDto.getTotalPost());
-        System.out.println("총 페이지" + pageDto.getPaging());
-        System.out.println("시작페이지 " + pageDto.getPageStart());
-        System.out.println("끝 페이지" + pageDto.getPageEnd());
+        //페이징에 필요한센션
+        mv.addObject("paging", test);  //페이징정보
+        mv.addObject("pagelist", pagelist); //페이지 하단부 페이지 리스트
+        mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
+
         return mv;
     }
 
     @GetMapping("/cs/insertnotice-view")
-    public String insertNoticeView(){
-        return "/cs/insertnoticeview";
+    public ModelAndView insertNoticeView(Principal user){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/cs/insertnoticeview");
+        mv.addObject("writer", userService.getnick(user));
+        return mv;
     }
 
     @GetMapping("/cs/insertnotice")
@@ -94,12 +114,23 @@ public class CsController {
         return mv;
     }
     @GetMapping("/cs/qna")
-    public ModelAndView selectListQnA(){
-        List<QnADto> dto = csService.selectListQnA();
+    public ModelAndView selectListQnA(PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page){
+        System.out.println("질의응답 게시판리스트");
+        PageDto pageDto = new PageDto("qna","qna_id",page,pdto);
+        PageDto pageInfo = pagingService.paging(pageDto);
 
+        List<PageDto> pagelist = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
+        String rink = pagingService.pageRink(pageDto);
+
+        List<QnADto> pagedto = csService.selectListQnA(pageInfo);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/cs/listqna");
-        mv.addObject("selectListQnA", dto);
+        mv.addObject("selectListQnA", pagedto);
+
+        //페이징에 필요한센션
+        mv.addObject("paging", pageInfo);  //페이징정보
+        mv.addObject("pagelist", pagelist); //페이지 하단부 페이지 리스트
+        mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
         return mv;
     }
 

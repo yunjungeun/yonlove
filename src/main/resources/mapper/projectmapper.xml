@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.yoonlove.mapper.ProjectMapper">
+
+    <select id="selectListProject" resultType="com.example.yoonlove.dto.ProjectDto">
+        SELECT * FROM project
+    </select>
+
+    <select id="selectProject" resultType="com.example.yoonlove.dto.ProjectDto">
+        SELECT * FROM project where project_id= #{project_id}
+    </select>
+
+    <insert id="insertProject">
+        insert into project values(
+            (select concat('project', (nvl(max(substr(project_id, 8)), 0)+1)) from project),<!--pk코드 자동증가(수정)-->
+            #{project_name},
+            #{project_num},
+            '테스트',
+            '테스트진행중',
+            '기획내용 내용테스트',
+            '2023-10-11',  //h2는 - , 오라클 / 변경
+            null,
+            null,
+            null,
+            'true',
+            null,
+            'com1'
+        )
+    </insert>
+
+    <update id="updateProject" >
+        UPDATE project
+        SET
+        project_name = #{project_name},
+        project_num = #{project_num}
+        where project_id = #{project_id}
+        </update>
+
+    <delete id="deleteProject">
+        DELETE FROM project WHERE project_id = #{project_id}
+    </delete>
+
+
+    <!-- !!!!!!!!!!!!!!!!!!!!=======================프로젝트 기획 끝!!!!!!!!!!!!!!!!!!!! -->
+
+    <select id="selectListBudget" parameterType="com.example.yoonlove.dto.SearchDto" resultType="com.example.yoonlove.dto.BudgetDto">
+        select * from budget
+        where 1=1
+        <if test="id != null and search != ''"> <!-- 값이 존재 하면 -->
+            AND project_id like '%${id}%'
+        </if>
+        <if test="title != null and search != ''">
+            AND budget_name like '%${title}%'
+        </if>
+    </select>
+
+    <select id="selectBudget" resultType="com.example.yoonlove.dto.BudgetDto">
+        SELECT * FROM budget
+        where budget_id = #{budget_id}
+    </select>
+
+    <insert id="insertBudget">
+        insert into budget values(
+        (select concat('budget', (nvl(max(substr(budget_id, 7)), 0)+1)) from budget),<!--pk코드 자동증가(수정)-->
+        #{budget_name},
+       '테스트내용',
+        #{budget_amount},
+        'code101',
+        '예산서테스터01',
+        'project2'
+        )
+    </insert>
+
+    <update id="updateBudget">
+        UPDATE budget
+        SET
+        budget_name = #{budget_name},
+        budget_amount = #{budget_amount}
+        where budget_id = #{budget_id}
+    </update>
+
+    <delete id="deleteBudget"> DELETE FROM budget WHERE budget_id = #{budget_id}</delete>
+
+    <!--=========================================Budget 완료 !!!!!!!!!!======================== -->
+    <select id="selectListProduce" resultType="com.example.yoonlove.dto.ProduceDto">
+        select * from produce
+    </select>
+    
+    <select id="selectProduce" resultType="com.example.yoonlove.dto.ProduceDto">
+        select * from produce
+        where pd_id = #{pd_id}
+    </select>
+
+    <insert id="insertProduce">
+        insert into produce values(
+        (select concat('pd',(substr(NVL(max(pd_id),'pd0'),3)+1)) from produce),
+        #{pd_name},
+        #{role},
+        #{casting},
+        'project1',
+        'test'
+        )
+    </insert>
+
+    <delete id="deleteProduce"> delete from produce where pd_id = #{pd_id} </delete>
+
+    <update id="updateProduce">
+        update produce
+        set
+        pd_id = #{pd_name},
+        role = #{role},
+        casting = #{casting}
+    </update>
+    <!--==================================프로듀스 완료 !!!!!!!!!!============== -->
+
+</mapper>

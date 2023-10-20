@@ -1,52 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!--부서-->
 <mapper namespace="com.example.yoonlove.mapper.UserMapper">
-    <select id="selectUser" parameterType="com.example.yoonlove.dto.UserDto" resultType="com.example.yoonlove.dto.UserDto">
-        SELECT * FROM users
-        WHERE
-        email = #{email}
-        <if test="password != null and password != ''">
-            AND password = #{password}
-        </if>
+
+    <select id="getUser" resultType="com.example.yoonlove.dto.UserDto">
+        SELECT * FROM users where user_id = #{user_id}
     </select>
 
-    <select id="selectUserBySessionId" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-        SELECT
-        *
-        FROM
-        user
-        WHERE
-        sessionId = #{sessionId}
-    </select>
 
-    <insert id="insertUser" parameterType="java.util.HashMap">
-        INSERT INTO user (email, password, userName) VALUES (#{email}, #{password}, #{userName})
+    <insert id="signUp" parameterType="com.example.yoonlove.dto.UserDto">
+        insert into users (user_id, pw, authority, sign_date) values(
+        #{user_id},
+        #{pw},
+        #{authority},
+        '23/10/16'
+        )
     </insert>
 
-    <update id="updatetUser" parameterType="java.util.HashMap">
-        UPDATE
-        user
-        SET
-        updatedAt = NOW()
-        <if test="sessionId != null and sessionId != ''">
-            , sessionId = #{sessionId}
-        </if>
-        <if test="expiredAt != null and expiredAt != ''">
-            , expiredAt = #{expiredAt}
-        </if>
-        WHERE
-        email = #{email}
-    </update>
+    <select id="getNick" resultType="com.example.yoonlove.dto.UserDto">
+        SELECT nickname FROM users where user_id = #{user_id}
+    </select>
 
-    <update id="updateUserSessionInit" parameterType="java.util.HashMap">
-        UPDATE
-        user
-        SET
-        updatedAt = NOW()
-        , sessionId = NULL
-        , expiredAt = NULL
-        WHERE
-        email = #{email}
-    </update>
 </mapper>

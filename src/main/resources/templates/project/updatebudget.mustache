@@ -1,0 +1,24 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>수정-예산</title>
+</head>
+<body>
+<form action="/project/updatebudget/{{selectBudget.budget_id}}" method="get">
+
+    <table border="1" cellpadding="1" cellspacing="1">
+        <tr>
+            <td>수정할 예산이름 <input name="budget_name" type="text" placeholder="예산이름"/></td>
+            <td>수정할 예산금액 <input name="budget_amount" type="number" placeholders="예산금액"/></td>
+
+        </tr>
+    </table>
+    <input type="submit" value="수정"/>
+</form>
+<a href="/project/listbudget">전체 목록 보기</a>
+
+</body>
+</html>
