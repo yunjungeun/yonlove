@@ -3,10 +3,10 @@ package com.example.yoonlove.service;
 import com.example.yoonlove.dto.ActorDto;
 
 import com.example.yoonlove.dto.FileDto;
+import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.SceneDto;
 import com.example.yoonlove.mapper.FileMapper;
 import com.example.yoonlove.mapper.SceneMapper;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,9 +26,8 @@ public class SceneService {
     public SceneDto selectScene(SceneDto dto) {
         return sceneMapper.selectScene(dto);
     }
-
-    public List<SceneDto> selectListScene() {
-        return sceneMapper.selectListScene();
+    public List<SceneDto> selectListScene(PageDto pageInfo) {
+        return sceneMapper.selectListScene(pageInfo);
     }
 
     public int lastPost(SceneDto dto){return sceneMapper.lastPost(dto);}
@@ -37,10 +36,7 @@ public class SceneService {
 
 
         sceneMapper.insertScene(dto);
-
     }
-
-
     public void updateScene(SceneDto dto){
         sceneMapper.updateScene(dto);
     }
@@ -56,8 +52,8 @@ public class SceneService {
     public ActorDto selectActor(ActorDto dto){
         return sceneMapper.selectActor(dto);
     }
-    public List<ActorDto> selectListActor() {
-        return sceneMapper.selectListActor();
+    public List<ActorDto> selectListActor(PageDto pageInfo) {
+        return sceneMapper.selectListActor(pageInfo);
     }
     public void insertActor(ActorDto dto){
         sceneMapper.insertActor(dto);

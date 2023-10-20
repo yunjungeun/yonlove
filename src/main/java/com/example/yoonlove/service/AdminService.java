@@ -1,6 +1,7 @@
 package com.example.yoonlove.service;
 
 import com.example.yoonlove.dto.DepartmentDto;
+import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.UserDto;
 import com.example.yoonlove.mapper.AdminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,8 @@ public class AdminService {
     public DepartmentDto selectDepartment(DepartmentDto dto){
         return adminMapper.selectDepartment(dto);
     }
-    public List<DepartmentDto> selectListDepartment() {
-        return adminMapper.selectListDepartment();
+    public List<DepartmentDto> selectListDepartment(PageDto dto) {
+        return adminMapper.selectListDepartment(dto);
     }
     public void insertDepartment(DepartmentDto dto){
         adminMapper.insertDepartment(dto);
@@ -46,4 +47,5 @@ public class AdminService {
     public void deleteDepartment(DepartmentDto dto){
         adminMapper.deleteDepartment(dto);
     }
+
 }

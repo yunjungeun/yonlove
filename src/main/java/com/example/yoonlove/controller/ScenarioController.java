@@ -1,10 +1,13 @@
 package com.example.yoonlove.controller;
 
+import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.ScenarioDto;
+import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.ScenarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -13,13 +16,24 @@ import java.util.List;
 public class ScenarioController {
     @Autowired
     private ScenarioService scenarioService;
+    @Autowired
+    private PagingService pagingService;
 
     @GetMapping("/scenario/scenario")
-    public ModelAndView selectListScenario(){
-        List<ScenarioDto> dto = scenarioService.selectListScenario();
+    public ModelAndView selectListScenario(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
+        PageDto pageDto = new PageDto("scenario","scenario_id",page,pdto);
+        PageDto pageInfo = pagingService.paging(pageDto);
+        List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
+        String rink = pagingService.pageRink(pageDto);
+
+        List<ScenarioDto> dto = scenarioService.selectListScenario(pageInfo);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/scenario/scenario");
         mv.addObject("selectListScenario", dto);
+
+        mv.addObject("paging", pageInfo);  //페이징정보
+        mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
+        mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
         return mv;
     }
 

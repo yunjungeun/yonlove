@@ -58,7 +58,7 @@
 
 <form action="/cs/qna" method="GET">
     <select id="searchType" name="searchType">
-        <option value="">전체</option>
+        <option value="all">선택</option>
         <option value="title">제목</option>
         <option value="writer">작성자</option>
         <!-- 필요한 항목 추가 -->
@@ -105,6 +105,14 @@
 
             window.location.href = searchUrl;
         }
+             if (selectedSearchType === "all" && search == "") {
+            // Construct the URL
+            var baseUrl = "/cs/qna";
+            var searchUrl = baseUrl;
+
+            window.location.href = searchUrl;
+        }
+
         return false;
     }
 

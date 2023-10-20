@@ -1,5 +1,6 @@
 package com.example.yoonlove.service;
 
+import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.ScriptPaperDto;
 import com.example.yoonlove.dto.TimeTableDto;
 import com.example.yoonlove.mapper.ScriptPaperMapper;
@@ -16,8 +17,8 @@ public class ScriptPaperService {
     public ScriptPaperDto selectScriptPaper(ScriptPaperDto dto){
         return scriptPaperMapper.selectScriptPaper(dto);
     }
-    public List<ScriptPaperDto> selectListScriptPaper() {
-        return scriptPaperMapper.selectListScriptPaper();
+    public List<ScriptPaperDto> selectListScriptPaper(PageDto pageInfo) {
+        return scriptPaperMapper.selectListScriptPaper(pageInfo);
     }
     public void insertScriptPaper(ScriptPaperDto dto){
         scriptPaperMapper.insertScriptPaper(dto);
@@ -33,8 +34,8 @@ public class ScriptPaperService {
     public TimeTableDto selectTimeTable(TimeTableDto dto){
         return scriptPaperMapper.selectTimeTable(dto);
     }
-    public List<TimeTableDto> selectListTimeTable() {
-        return scriptPaperMapper.selectListTimeTable();
+    public List<TimeTableDto> selectListTimeTable(PageDto pageInfo) {
+        return scriptPaperMapper.selectListTimeTable(pageInfo);
     }
     public void insertTimeTable(TimeTableDto dto){
         scriptPaperMapper.insertTimeTable(dto);

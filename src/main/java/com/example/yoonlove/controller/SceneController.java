@@ -1,19 +1,13 @@
 package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.ActorDto;
+import com.example.yoonlove.dto.ScenarioDto;
 import com.example.yoonlove.dto.SceneDto;
-import com.example.yoonlove.dto.FileDto;
-import com.example.yoonlove.mapper.FileMapper;
-import com.example.yoonlove.service.FileService;
 import com.example.yoonlove.service.SceneService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
@@ -31,11 +25,21 @@ public class SceneController {
 
 
     @GetMapping("scene/scene")
-    public ModelAndView selectListScene(){
-        List<SceneDto> dto = sceneService.selectListScene();
+    public ModelAndView selectListScene(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
+        PageDto pageDto = new PageDto("scene","scene_id",page,pdto);
+        PageDto pageInfo = pagingService.paging(pageDto);
+        List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
+        String rink = pagingService.pageRink(pageDto);
+
+
+        List<SceneDto> dto = sceneService.selectListScene(pageInfo);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/scene/scene");
         mv.addObject("selectListScene", dto);
+
+        mv.addObject("paging", pageInfo);  //페이징정보
+        mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
+        mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
         return mv;
     }
 
@@ -130,11 +134,21 @@ public class SceneController {
 
     //출연자 정보
     @GetMapping("scene/actor")
-    public ModelAndView selectListActor(){
-        List<ActorDto> dto = sceneService.selectListActor();
+    public ModelAndView selectListActor(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
+        PageDto pageDto = new PageDto("actor","actor_id",page,pdto);
+        PageDto pageInfo = pagingService.paging(pageDto);
+        List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
+        String rink = pagingService.pageRink(pageDto);
+
+        List<ActorDto> dto = sceneService.selectListActor(pageInfo);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("scene/actor");
         mv.addObject("selectListActor", dto);
+
+        mv.addObject("paging", pageInfo);  //페이징정보
+        mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
+        mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
+
         return mv;
     }
 

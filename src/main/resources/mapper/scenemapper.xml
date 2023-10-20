@@ -6,8 +6,37 @@
         SELECT * FROM scene where scene_id = #{scene_id}
     </select>
 
-    <select id="selectListScene">
-        SELECT * FROM scene
+    <select id="totalScenePost" parameterType="com.example.yoonlove.dto.PageDto">
+        select count(${id}) as totalPost from ${table}
+        where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
+        <!--검색어가 있다면 아래 조건문을 실행-->
+        <if test="title != null and search != ''">
+            AND scene_num like '%${title}%'
+        </if>
+        <if test="content != null and search != ''">
+            AND scene_content like '%${content}%'
+        </if>
+    </select>
+
+
+    <select id="selectListScene" parameterType="com.example.yoonlove.dto.PageDto" resultType="com.example.yoonlove.dto.SceneDto">
+        select *
+        <!--notice검색결과에 rownum을 하고 r로 지정-->
+        from(select rownum as r, t.*
+
+        <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
+        from (select * from ${table}
+        where 1=1
+        <if test="title != null and search != ''">
+            AND scene_num like '%${title}%'
+        </if>
+        <if test="content != null and search != ''">
+            AND scene_content like '%${content}%'
+        </if>
+        order by ${id} desc) t)
+
+        <!-- rownum을 기준(r)으로 시작번호부터 끝번호까지 검색   -->
+        where r between #{postStart} and #{postEnd}
     </select>
 
     <insert id="insertScene"  parameterType="com.example.yoonlove.dto.SceneDto">
@@ -53,9 +82,39 @@
         SELECT * FROM actor where actor_id = #{actor_id}
     </select>
 
-    <select id="selectListActor">
-        SELECT * FROM actor order by actor_id desc
+    <select id="totalActorPost" parameterType="com.example.yoonlove.dto.PageDto">
+        select count(${id}) as totalPost from ${table}
+        where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
+        <!--검색어가 있다면 아래 조건문을 실행-->
+        <if test="title != null and search != ''">
+            AND actor_id like '%${title}%'
+        </if>
+        <if test="content != null and search != ''">
+            AND actor_info like '%${content}%'
+        </if>
     </select>
+
+
+    <select id="selectListActor" parameterType="com.example.yoonlove.dto.PageDto" resultType="com.example.yoonlove.dto.ActorDto">
+        select *
+        <!--notice검색결과에 rownum을 하고 r로 지정-->
+        from(select rownum as r, t.*
+
+        <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
+        from (select * from ${table}
+        where 1=1
+        <if test="title != null and search != ''">
+            AND actor_id like '%${title}%'
+        </if>
+        <if test="content != null and search != ''">
+            AND actor_info like '%${content}%'
+        </if>
+        order by ${id} desc) t)
+
+        <!-- rownum을 기준(r)으로 시작번호부터 끝번호까지 검색   -->
+        where r between #{postStart} and #{postEnd}
+    </select>
+
 
     <insert id="insertActor">
         insert into actor values(

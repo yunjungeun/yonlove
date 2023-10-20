@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 @Controller
@@ -52,31 +51,40 @@ public class CsController {
         PageDto pageDto = new PageDto("notice","notice_id",page, pdto);
 
         //페이징정보처리 메소드
-        PageDto test = pagingService.paging(pageDto);
+        PageDto pageInfo = pagingService.paging(pageDto);
 
 
         //뷰페이지에 하단 페이징처리를 해주는 리스트
-        List<PageDto> pagelist = pagingService.pageList(test.getPageStart(), test.getPageEnd(), page);
+        List<PageDto> pagelist = pagingService.pageList(pageInfo.getPageStart(), pageInfo.getPageEnd(), page);
 
         //검색유무에 따라 동적 페이지링크를 만들어줌
         String rink = pagingService.pageRink(pageDto);
 
-        List<NoticeDto> dto = csService.selectListNotice(test);
+        List<NoticeDto> dto = csService.selectListNotice(pageInfo);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/cs/listnotice");
         mv.addObject("selectListNotice", dto);
 
         //페이징에 필요한센션
-        mv.addObject("paging", test);  //페이징정보
+        mv.addObject("paging", pageInfo);  //페이징정보
         mv.addObject("pagelist", pagelist); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
 
-        try {
+
+       //유튜브 api 부분
+     /*   try {
             System.out.println(youTubeService.searchVideos("ytn"));
         } catch (IOException e) {
             e.printStackTrace();
             return mv;
         }
+
+        try {
+            youTubeService.searchCh();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }*/
+        //유튜브 api 끝
 
         return mv;
     }

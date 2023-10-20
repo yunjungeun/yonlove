@@ -1,11 +1,14 @@
 package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.DepartmentDto;
+import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.UserDto;
 import com.example.yoonlove.service.AdminService;
+import com.example.yoonlove.service.PagingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -15,6 +18,10 @@ public class AdminController {
 
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private PagingService pagingService;
+
 
     //유저관리
     @GetMapping("/admin/listuser")
@@ -82,12 +89,23 @@ public class AdminController {
     }
 
     //부서관리
-    @GetMapping("/admin/dpt")
-    public ModelAndView selectListDepartment(){
-        List<DepartmentDto> dto = adminService.selectListDepartment();
+    @GetMapping("/admin/department")
+    public ModelAndView selectListDepartment(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
+        PageDto pageDto = new PageDto("department","dpt_id",page,pdto);
+
+        PageDto pageInfo = pagingService.paging(pageDto);
+        List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
+        String rink = pagingService.pageRink(pageDto);
+
+        List<DepartmentDto> dto = adminService.selectListDepartment(pageInfo);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/admin/dpt");
         mv.addObject("selectListDpt", dto);
+
+        mv.addObject("paging", pageInfo);  //페이징정보
+        mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
+        mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
+
         return mv;
     }
 
@@ -107,7 +125,7 @@ public class AdminController {
     @GetMapping("/admin/insertdpt")
     public String insertDepartment(DepartmentDto dto){
         adminService.insertDepartment(dto);
-        return "redirect:/admin/dpt";
+        return "redirect:/admin/department";
     }
 
     @GetMapping("/admin/{dpt_id}/updatedptview")
@@ -122,11 +140,11 @@ public class AdminController {
     @GetMapping("/admin/{dpt_id}/updatedpt")
     public String updateDepartment(DepartmentDto dto){
         adminService.updateDepartment(dto);
-        return "redirect:/admin/dpt";
+        return "redirect:/admin/department";
     }
     @GetMapping("/admin/{dpt_id}/deletedpt")
     public String deleteDepartment(DepartmentDto dto){
         adminService.deleteDepartment(dto);
-        return "redirect:/admin/dpt";
+        return "redirect:/admin/department";
     }
 }
