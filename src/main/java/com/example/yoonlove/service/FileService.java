@@ -18,7 +18,12 @@ public class FileService {
     @Autowired
     private FileMapper fileMapper;
 
-
+    public void insertNull(int lastnum){
+        SceneDto dto = new SceneDto();
+        String result = "scene"+lastnum;
+        dto.setScene_id(result);
+        fileMapper.insertNull(dto);
+    }
 
 
     @Transactional
@@ -86,7 +91,24 @@ public class FileService {
 
 
 
+    public void deleFile(SceneDto dto){
 
+        FileDto existingFile = fileMapper.selectFile(dto);
+
+        File file = new File(existingFile.getFile_path());
+        if (file.exists()) {
+            file.delete();
+        }
+    }
+
+    public void deletdb(SceneDto dto){
+        fileMapper.deleteFile(dto);
+    }
 
 
 }
+
+
+
+
+

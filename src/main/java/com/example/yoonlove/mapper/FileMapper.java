@@ -9,6 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 public interface FileMapper {
     void insertFile(FileDto fileDto);
 
+    //첨부파일이 null일때
+    void insertNull(SceneDto dto);
     // 파일 정보를 업데이트하는 쿼리
     void updateFile(FileDto fileDto);
 
@@ -19,6 +21,8 @@ public interface FileMapper {
     FileDto getFileById(String file_id);
 
     FileDto selectFile(SceneDto dto);
+
+    void deleteFile(SceneDto dto);
 
 
 

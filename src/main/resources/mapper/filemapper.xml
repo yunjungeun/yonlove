@@ -18,6 +18,15 @@
              #{file_name}, #{file_path}, #{file_data}, #{scene_id})
     </insert>
 
+        <!--첨부파일이 없을때 임시테이블 생성-->
+    <insert id="insertNull" parameterType="com.example.yoonlove.dto.SceneDto">
+        INSERT INTO files
+
+        VALUES
+            ((select concat('file_id', (nvl(max(substr(file_id, 8)), 0)+1)) from files),
+             null, '파일이 없습니다', null, #{scene_id})
+    </insert>
+
 
     <!-- 파일 정보를 업데이트하는 쿼리 -->
     <update id="updateFile" parameterType="com.example.yoonlove.dto.FileDto">
@@ -27,13 +36,14 @@
     </update>
 
 
- <!--   <delete id="deleteFile" parameterType="com.example.dto.FileDto">
-        DELETE FROM files
-        WHERE file_id = #{file_id}
-    </delete>-->
+    <update id="deleteFile" parameterType="com.example.yoonlove.dto.SceneDto">
+        UPDATE files
+        SET file_name = null, file_path = '파일이 없습니다', file_data = null
+        WHERE scene_id = #{scene_id}
+    </update>
 
 
-    <select id="selectFile" parameterType="com.example.yoonlove.dto.SceneDto" resultType="com.example.yoonlove.dto.FileDto">
+    <select id="selectFile" parameterType="com.example.yoonlove.dto.SceneDto" >
         SELECT * FROM files
         WHERE scene_id = #{scene_id}
     </select>

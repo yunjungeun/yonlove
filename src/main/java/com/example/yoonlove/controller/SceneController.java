@@ -41,20 +41,13 @@ public class SceneController {
 
     @GetMapping("scene/{scene_id}/selectscene")
     public ModelAndView selectScene(SceneDto sceneDto){
-
-
         FileDto fileDto = fileService.selectFile(sceneDto);
         SceneDto dto = sceneService.selectScene(sceneDto);
-        System.out.println("fk=" + fileDto.getScene_id());
-
-        System.out.println("오류444");
-        System.out.println("오류555");
 
         ModelAndView mv = new ModelAndView();
         mv.addObject("file",fileDto);
         mv.setViewName("scene/sceneselect");
         mv.addObject("selectScene", dto); //여기까지 했어요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        System.out.println(dto.toString());
         return mv;
     }
 
@@ -64,25 +57,23 @@ public class SceneController {
     }
 
     @PostMapping("/scene/insertscene")
-    public String insertScene(SceneDto dto, FileDto fileDto,MultipartFile file) throws IOException {
+    public String insertScene(SceneDto dto,MultipartFile file) throws IOException {
             sceneService.insertScene(dto);
-        System.out.println("insert 업로드");
-        System.out.println(file !=null);
 
             int lastnum = sceneService.lastPost(dto);
-        try {
-            System.out.println("오류1111");
-            fileService.insertFile(file, lastnum); // FileService를 사용하여 파일 업로드
-            System.out.println("오류2222");
 
-            log.info("실행됐을까요?");
-        } catch (IOException e) {
-           log.info(e.getMessage());
-            // 예외 처리
-        }
+            if(file.isEmpty()){
+                fileService.insertNull(lastnum);
+            }else {
+                try {
 
+                    fileService.insertFile(file, lastnum); // FileService를 사용하여 파일 업로드
+                } catch (IOException e) {
+                    log.info(e.getMessage());
+                    // 예외 처리
+                }
+            }
 
-        log.info("실행됐을까요?");
         return "redirect:/scene/scene";
     }
 
@@ -104,11 +95,6 @@ public class SceneController {
 
     @PostMapping("/scene/{scene_id}/updatescene")
     public String updateScene(SceneDto dto, MultipartFile newfile) {
-        System.out.println("insert 업로드");
-        System.out.println(newfile !=null);
-
-
-        System.out.println("오류111111111111111111111111111111111");
 
         try {
             fileService.updateFile(dto, newfile); // 파일수정해서 업로드하는 메소드!!!!!!!
@@ -116,23 +102,30 @@ public class SceneController {
             e.printStackTrace();
 
         }
-        System.out.println("이게 찍혔다면 파일 업로드 수정 처리 완료!!!!!!!");
-
         sceneService.updateScene(dto);
-
         return "redirect:/scene/scene";
     }
     @GetMapping("/scene/{scene_id}/deletescene")
     public String deleteScene(SceneDto dto){
-
-        System.out.println("1111111111");
-
         sceneService.deleteScene(dto);
-
-        System.out.println("22322222222");
-
         return "redirect:/scene/scene";
     }
+
+
+    @GetMapping("/scene/{scene_id}/deletefile")
+    public String deletefile(SceneDto dto){
+        String id= dto.getScene_id();
+        fileService.deleFile(dto);
+        fileService.deletdb(dto);
+        return "redirect:/scene/"+id+"/updatesceneview";
+    }
+
+
+
+
+
+
+
 
 
     //출연자 정보
