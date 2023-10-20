@@ -1,9 +1,8 @@
 package com.example.yoonlove.controller;
 
-import com.example.yoonlove.dto.CreatorDto;
+
 import com.example.yoonlove.dto.UserDto;
 import com.example.yoonlove.mapper.UserMapper;
-
 import com.example.yoonlove.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,25 +18,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class LoginController {
 
-
     @Autowired
     public UserService userService;
     @Autowired
     public BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
-
     @GetMapping("login")
     public String login(){
-
-
-    // 로그인 요청
-    @PostMapping(path="/login",produces = MediaType.TEXT_HTML_VALUE,consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public ModelAndView loginPro(@ModelAttribute UserDto.UserLoginRequest dto){
-
         return "/login/login";
     }
-
 
    /* @PostMapping("login/porc")
     public String loginporoc(UserDto dto){
@@ -47,18 +36,8 @@ public class LoginController {
        return null;
     }*/
 
-
-
-
     @GetMapping("signupview")
-    public String signview() {
-
-
-
-
-
-
-
+    public String signview(){
         return "/login/signup";
     }
     @GetMapping("signup")
