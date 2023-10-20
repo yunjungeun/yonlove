@@ -17,7 +17,7 @@ public class PageDto {
     private int totalPost; //글의 총 갯수 값
     private int postStart; //게시판의 시작 게시글 번호
     private int postEnd; //게시판의 마지막 게시글 번호
-    private int postCnt = 4; // 게시판에 보여주는 게시글의 수
+    private int postCnt = 2; // 게시판에 보여주는 게시글의 수
 
     private int pageCnt; //페이지의 총 갯수 값
     private int currentPage = 1; //현재 페이지
@@ -26,7 +26,7 @@ public class PageDto {
     private int paging = 10; //게시글 밑 페이징에서 표시될 페이지의 수 값
     private int pageStart; //페에징에서 시작 페이지 값
     private int pageEnd; //페이징에서 마지막 값
-    
+
     //이전 / 다음 존재유무에 대한 변수값
     private boolean hasPre;
     private boolean hasNext;
@@ -51,9 +51,9 @@ public class PageDto {
 
 
     public PageDto(){}
-    public PageDto(String table, String id, int currentPage, PageDto dto){
+    public PageDto(String table, String pkid, int currentPage, PageDto dto){
         this.table = table;
-        this.id = id;
+        this.id = pkid;
         this.currentPage = currentPage;
         this.pkid = dto.getPkid();
         this.pkintid = dto.getPkintid();

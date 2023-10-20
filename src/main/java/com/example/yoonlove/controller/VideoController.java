@@ -1,5 +1,6 @@
 package com.example.yoonlove.controller;
 
+import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.VideoDto;
 import com.example.yoonlove.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,11 @@ public class VideoController {
     private VideoService videoService;
 
     @GetMapping("vd/contentList") //컨텐츠 전체목록보기 뷰
-    public ModelAndView selectListContent() {
+    public ModelAndView selectListContent(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page) {
+
+        PageDto pageDto = new PageDto("video","video_id", pdto, page);
+
+
         List<VideoDto> contentList = videoService.selectListContent();
         ModelAndView mv = new ModelAndView();
         mv.setViewName("video/contentList");
