@@ -40,10 +40,10 @@ public class FileService {
             FileDto fileDto = new FileDto();
             fileDto.setScene_id("scene"+lastnum);
             fileDto.setFile_name(file.getOriginalFilename());
-            fileDto.setFile_path("C:/1019/files/abc.png" + file.getOriginalFilename());
+            fileDto.setFile_path("C:/1019/src/main/resources/static/img/" + file.getOriginalFilename());
             fileDto.setFile_data(file.getBytes());
             // 파일을 서버의 파일 시스템에 저장
-            File destFile = new File("C:/1019/files/abc.png" + file.getOriginalFilename());
+            File destFile = new File("C:/1019/src/main/resources/static/img/" + file.getOriginalFilename());
             file.transferTo(destFile);
 
             fileMapper.insertFile(fileDto);
@@ -64,7 +64,7 @@ public class FileService {
             existingFile.setFile_name(newFile.getOriginalFilename());
 
             // 파일 업로드 경로 설정
-            String uploadDirectory = "C:/1019/files/";
+            String uploadDirectory = "C:/1019/src/main/resources/static/img/";
             String newFilePath = uploadDirectory + existingFile.getFile_id() + "_" + newFile.getOriginalFilename();
             existingFile.setFile_path(newFilePath);
             existingFile.setFile_data(newFile.getBytes());
