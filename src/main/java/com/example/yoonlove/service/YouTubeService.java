@@ -1,10 +1,11 @@
 package com.example.yoonlove.service;
 
-import org.springframework.stereotype.Service;
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.SearchListResponse;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Collections;
 
 @Service
 public class YouTubeService {
@@ -20,10 +21,10 @@ public class YouTubeService {
     }
 
     public SearchListResponse searchVideos(String query) throws IOException {
-        YouTube.Search.List search = youTube.search().list("id,snippet");
-        search.setKey("YOUR_YOUTUBE_API_KEY"); // YouTube API 키 설정
+        YouTube.Search.List search = youTube.search().list(Collections.singletonList("id,snippet"));
+        search.setKey("AIzaSyDYbGsMdpj9MqMiC2F6hFps-T-7jdXfJME"); // YouTube API 키 설정
         search.setQ(query);
-        search.setType("video");
+        search.setType(Collections.singletonList("video"));
 
         return search.execute();
     }
