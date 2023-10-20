@@ -57,7 +57,7 @@
 <br/>
 <form action="/creator/creater" method="GET">
     <select id="searchType" name="searchType">
-        <option value="">전체</option>
+        <option value="all">선택</option>
         <option value="title">채널명</option>
         <!-- 필요한 항목 추가 -->
     </select>
@@ -88,6 +88,14 @@
             //  searchUrl로 이동
             window.location.href = searchUrl;
         }
+             if (selectedSearchType === "all" && search == "") {
+            // Construct the URL
+            var baseUrl = "/creator/creator";
+            var searchUrl = baseUrl;
+
+            window.location.href = searchUrl;
+        }
+
         return false;
     }
          // "검색" 버튼 클릭 시 이벤트 핸들러

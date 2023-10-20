@@ -6,9 +6,45 @@
         SELECT * FROM scenario where scenario_id=#{scenario_id}
     </select>
 
-    <select id="selectListScenario" resultType="com.example.yoonlove.dto.ScenarioDto">
-        SELECT * FROM scenario
+    <select id="totalScenarioPost" parameterType="com.example.yoonlove.dto.PageDto">
+        select count(${id}) as totalPost from ${table}
+        where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
+        <!--검색어가 있다면 아래 조건문을 실행-->
+        <if test="title != null and search != ''">
+            AND scenario_name like '%${title}%'
+        </if>
+        <if test="content != null and search != ''">
+            AND scenario_content like '%${title}%'
+        </if>
+        <if test="writer != null and search != ''">
+            AND scenario_writer like '%${title}%'
+        </if>
     </select>
+
+
+    <select id="selectListScenario" parameterType="com.example.yoonlove.dto.PageDto" resultType="com.example.yoonlove.dto.ScenarioDto">
+        select *
+        <!--notice검색결과에 rownum을 하고 r로 지정-->
+        from(select rownum as r, t.*
+
+        <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
+        from (select * from ${table}
+        where 1=1
+        <if test="title != null and search != ''">
+            AND scenario_name like '%${title}%'
+        </if>
+        <if test="content != null and search != ''">
+            AND scenario_content like '%${title}%'
+        </if>
+        <if test="writer != null and search != ''">
+            AND scenario_writer like '%${title}%'
+        </if>
+        order by ${id} desc) t)
+
+        <!-- rownum을 기준(r)으로 시작번호부터 끝번호까지 검색   -->
+        where r between #{postStart} and #{postEnd}
+    </select>
+
 
     <insert id="insertScenario">
         insert into scenario values(
@@ -18,8 +54,9 @@
         #{scenario_content},<!--시나리오내용-->
         '관리자',<!--작성자-->
         (select * from todaytime),<!--작성시간-->
-        'pj1',<!--드롭박스로 선택할수 있어야함-->
-        null<!--수정일. 기본은 공백-->)
+        'project1',<!--드롭박스로 선택할수 있어야함-->
+        '23/11/01'
+        )
     </insert>
 
     <update id="updateScenario">
