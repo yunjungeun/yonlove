@@ -14,7 +14,7 @@
             AND scene_num like '%${title}%'
         </if>
         <if test="content != null and search != ''">
-            AND scene_content like '%${title}%'
+            AND scene_content like '%${content}%'
         </if>
     </select>
 
@@ -31,7 +31,7 @@
             AND scene_num like '%${title}%'
         </if>
         <if test="content != null and search != ''">
-            AND scene_content like '%${title}%'
+            AND scene_content like '%${content}%'
         </if>
         order by ${id} desc) t)
 
@@ -78,7 +78,7 @@
             AND actor_id like '%${title}%'
         </if>
         <if test="content != null and search != ''">
-            AND actor_info like '%${title}%'
+            AND actor_info like '%${content}%'
         </if>
     </select>
 
@@ -95,7 +95,7 @@
             AND actor_id like '%${title}%'
         </if>
         <if test="content != null and search != ''">
-            AND actor_info like '%${title}%'
+            AND actor_info like '%${content}%'
         </if>
         order by ${id} desc) t)
 

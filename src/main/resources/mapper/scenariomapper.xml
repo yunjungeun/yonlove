@@ -14,10 +14,10 @@
             AND scenario_name like '%${title}%'
         </if>
         <if test="content != null and search != ''">
-            AND scenario_content like '%${title}%'
+            AND scenario_content like '%${content}%'
         </if>
         <if test="writer != null and search != ''">
-            AND scenario_writer like '%${title}%'
+            AND scenario_writer like '%${writer}%'
         </if>
     </select>
 
@@ -34,10 +34,10 @@
             AND scenario_name like '%${title}%'
         </if>
         <if test="content != null and search != ''">
-            AND scenario_content like '%${title}%'
+            AND scenario_content like '%${content}%'
         </if>
         <if test="writer != null and search != ''">
-            AND scenario_writer like '%${title}%'
+            AND scenario_writer like '%${writer}%'
         </if>
         order by ${id} desc) t)
 

@@ -1,11 +1,14 @@
 package com.example.yoonlove.controller;
 
+import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.ScriptPaperDto;
 import com.example.yoonlove.dto.TimeTableDto;
+import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.ScriptPaperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -14,16 +17,28 @@ import java.util.List;
 public class ScriptPaperController {
     @Autowired
     private ScriptPaperService scriptPaperService;
+    @Autowired
+    private PagingService pagingService;
 
     //스크립트페이퍼
     @GetMapping("script/scriptpaper")
-    public ModelAndView selectListScriptPaper(){
-        List<ScriptPaperDto> dto = scriptPaperService.selectListScriptPaper();
+    public ModelAndView selectListScriptPaper(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
+        PageDto pageDto = new PageDto("scriptpaper","script_id", page,pdto);
+        PageDto pageInfo = pagingService.paging(pageDto);
+        List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
+        String rink = pagingService.pageRink(pageDto);
+
+        List<ScriptPaperDto> dto = scriptPaperService.selectListScriptPaper(pageInfo);
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("script/script");
-
         mv.addObject("selectListScriptPaper", dto);
+
+        //페이징에 필요한센션
+        mv.addObject("paging", pageInfo);  //페이징정보
+        mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
+        mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
+
         return mv;
     }
 
@@ -69,11 +84,22 @@ public class ScriptPaperController {
 
     //타입테이블
     @GetMapping("script/timetable")
-    public ModelAndView selectListTimeTable(){
-        List<TimeTableDto> dto = scriptPaperService.selectListTimeTable();
+    public ModelAndView selectListTimeTable(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
+        PageDto pageDto = new PageDto("timetable","table_id",page,pdto);
+        PageDto pageInfo = pagingService.paging(pageDto);
+        List<PageDto> pageList =pagingService.pageList(pageInfo.getPageStart(), pageInfo.getPageEnd(),page);
+        String rink = pagingService.pageRink(pageDto);
+
+        List<TimeTableDto> dto = scriptPaperService.selectListTimeTable(pageInfo);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("script/timetable");
         mv.addObject("selectListTimeTable", dto);
+
+        //페이징에 필요한센션
+        mv.addObject("paging", pageInfo);  //페이징정보
+        mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
+        mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
+
         return mv;
     }
 
