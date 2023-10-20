@@ -10,21 +10,108 @@
 <table border="1" cellpadding="1" cellspacing="1">
     <ul>
         <tr>
-            <td>이름</td>
-            <td>sub</td>
-            <td>유저아이디</td>
+            <td>크레이터 이름 </td>
+            <td>구독자 수 </td>
+
         </tr>
         {{#selectListCreator}}
             <tr>
                 <td><a href="/creator/{{ch_id}}/selectcreator">{{ch_name}}</a></td>
                 <td>{{ch_sub}}</td>
-                <td>{{user_id}}</td>
             </tr>
         {{/selectListCreator}}
     </ul>
 </table>
 근데 작성자는 잇어야되지 않을까요?<br/>
 <a href="/creator/insertcreatorview" role="button">작성</a>
-<a href="/creator/creator">목록</a>
+<a href="/creator/creater">목록</a>
+<a href="/index">홈 페이지</a>
+<!--이전 버튼-->
+{{#paging}}
+    {{#hasPre}}
+        <!--{!{검색어유무에따른url}}/{!{실제페이지번호}}-->
+        <a href="/creator/{{pageRink}}{{prePage}}">이전</a>
+    {{/hasPre}}
+{{/paging}}
+
+<!-- 페이지 번호를 반복문으로 생성 -->
+{{#pagelist}}
+    <!--현재페이지는 링크가 없고 강조표시-->
+    {{#currentPageFlag}}
+        <strong>{{currentPage}}</strong>
+    {{/currentPageFlag}}
+    <!--현재 페이지가 아닌 숫자들은 해당페이지로 이동하는 링크생성-->
+    {{^currentPageFlag}}
+        <a href="/creator/{{pageRink}}{{currentPage}}">{{currentPage}}</a>
+    {{/currentPageFlag}}
+{{/pagelist}}
+
+<!--다음페이지 버튼-->
+{{#paging}}
+    {{#hasNext}}
+        <a href="/creator/{{pageRink}}{{nextPage}}">다음</a>
+    {{/hasNext}}
+{{/paging}}
+
+
+<br/>
+<form action="/creator/creater" method="GET">
+    <select id="searchType" name="searchType">
+        <option value="all">선택</option>
+        <option value="title">채널명</option>
+        <!-- 필요한 항목 추가 -->
+    </select>
+    <input type="text" id="search" name="search" placeholder="검색">
+
+    <input type="submit" value="검색">
+
+</form>
+
+
+<script>
+    // search 할때, 기본 URL 주소값을 변경하기 위해..
+    function submitForm() {
+        //  위의 select의 name인 서치타입을 가져오고 해당 입력값을 가져옴
+        var searchTypeSelect = document.getElementById("searchType");
+        var selectedSearchType = searchTypeSelect.value;
+
+        //인풋 값을 컨텐츠에 담음
+        var search = document.getElementById("search").value;
+
+
+        // 프로젝트Id 로 검색 또는 입력값이 없을때
+        if (selectedSearchType === "title" && search !== "") {  // 검색시, projectId와 빈칸일때
+            // URL 주소를 아래로 변경해라 (베이스URL / 서치 URL)
+            var baseUrl = "/creator/creator";
+            var searchUrl = baseUrl + "?title=" + search;
+
+            //  searchUrl로 이동
+            window.location.href = searchUrl;
+        }
+             if (selectedSearchType === "all" && search == "") {
+            // Construct the URL
+            var baseUrl = "/creator/creator";
+            var searchUrl = baseUrl;
+
+            window.location.href = searchUrl;
+        }
+
+        return false;
+    }
+         // "검색" 버튼 클릭 시 이벤트 핸들러
+    document.querySelector('input[type="submit"]').addEventListener("click", function(event) {
+        event.preventDefault(); // 폼 제출 방지
+        submitForm();
+    });
+
+    // Enter 키를 눌렀을 때 검색 버튼 클릭 시키는 이벤트 핸들러 추가
+    document.getElementById("content").addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            submitForm();
+        }
+    });
+
+</script>
+
 </body>
 </html>

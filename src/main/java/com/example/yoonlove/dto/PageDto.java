@@ -3,6 +3,8 @@ package com.example.yoonlove.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Date;
+
 @Getter
 @Setter
 public class PageDto {
@@ -36,11 +38,30 @@ public class PageDto {
     private String table;
     private String id;
 
+    //검색관련 프로퍼티
+    private String pkid;
+    private String pkintid;
+    private String writer;
+    private String content;
+    private String title;
+    private Date date;
+
+    private String search;
+
+
+
     public PageDto(){}
-    public PageDto(String table, String id, int currentPage){
+    public PageDto(String table, String pkid, int currentPage, PageDto dto){
         this.table = table;
-        this.id = id;
+        this.id = pkid;
         this.currentPage = currentPage;
+        this.pkid = dto.getPkid();
+        this.pkintid = dto.getPkintid();
+        this.writer = dto.getWriter();
+        this.content = dto.getContent();
+        this.title = dto.getTitle();
+        this.date = dto.getDate();
+        this.search = dto.getSearch();
     }
     public PageDto(int currentPage, boolean currentPageFlag){
         this.currentPage = currentPage;

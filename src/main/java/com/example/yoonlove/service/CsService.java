@@ -1,6 +1,7 @@
 package com.example.yoonlove.service;
 
 import com.example.yoonlove.dto.NoticeDto;
+import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.QnADto;
 import com.example.yoonlove.mapper.CsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class CsService {
     public NoticeDto selectNotice(NoticeDto dto){
         return csMapper.selectNotice(dto);
     }
-    public List<NoticeDto> selectListNotice(){
-        return csMapper.selectListNotice();
+    public List<NoticeDto> selectListNotice(PageDto dto){
+        return csMapper.selectListNotice(dto);
     }
     public void insertNotice(NoticeDto dto){
         csMapper.insertNotice(dto);
@@ -37,8 +38,8 @@ public class CsService {
     public QnADto selectQnA(QnADto dto){
         return csMapper.selectQnA(dto);
     }
-    public List<QnADto> selectListQnA(){
-        return csMapper.selectListQnA();
+    public List<QnADto> selectListQnA(PageDto dto){
+        return csMapper.selectListQnA(dto);
     }
     public void insertQnA(QnADto dto){
         csMapper.insertQnA(dto);

@@ -1,6 +1,7 @@
 package com.example.yoonlove.service;
 
 import com.example.yoonlove.dto.CreatorDto;
+import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.mapper.CreatorMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,11 +20,11 @@ public class CreatorService {
         return creatorMapper.selectCreator(creatorDto);
     }
 
-    public List<CreatorDto> selectListCreator(){
-        return creatorMapper.selectListCreator();
+    public List<CreatorDto> selectListCreator(PageDto dto){
+        return creatorMapper.selectListCreator(dto);
     }
-    public void insertCreator(CreatorDto dto){
-        creatorMapper.insertCreator(dto);
+    public void insertCreator(CreatorDto creatorDto){
+        creatorMapper.insertCreator(creatorDto);
     }
 
     public void updateCreator(CreatorDto creatorDto){

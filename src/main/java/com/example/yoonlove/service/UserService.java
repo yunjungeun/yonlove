@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,13 @@ public class UserService implements UserDetailsService {
     @Autowired
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    public String getnick(Principal user){
+        UserDto dto = userMapper.getNick(user.getName());
+        String user_nick = dto.getNickname();
+        return user_nick;
+    }
+
+    //유저 id를 확인하느 메소드
     public UserDto getUser(String user_id){return userMapper.getUser(user_id);}
 
     @Override//아이디로 사용자 비밀번호를 리턴하느 메소드

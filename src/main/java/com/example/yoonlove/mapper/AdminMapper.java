@@ -1,6 +1,7 @@
 package com.example.yoonlove.mapper;
 
 import com.example.yoonlove.dto.DepartmentDto;
+import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.UserDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -16,9 +17,10 @@ public interface AdminMapper {
     public void deleteUser();
 
     //부서정보
-    public List<DepartmentDto> selectListDepartment();
+    public List<DepartmentDto> selectListDepartment(PageDto dto);
     public DepartmentDto selectDepartment(DepartmentDto dto);
     public void insertDepartment(DepartmentDto dto);
     public void updateDepartment(DepartmentDto dto);
     public void deleteDepartment(DepartmentDto dto);
+    public PageDto totalDptPost(PageDto dto);
 }

@@ -1,5 +1,6 @@
 package com.example.yoonlove.service;
 
+import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.ScenarioDto;
 import com.example.yoonlove.mapper.ScenarioMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,8 @@ public class ScenarioService {
     public ScenarioDto selectScenario(ScenarioDto dto){
         return scenarioMapper.selectScenario(dto);
     }
-    public List<ScenarioDto> selectListScenario() {
-        return scenarioMapper.selectListScenario();
+    public List<ScenarioDto> selectListScenario(PageDto pageInfo) {
+        return scenarioMapper.selectListScenario(pageInfo);
     }
     //서비스 메소드 작성 CRUD
     public void insertScenario(ScenarioDto dto){
