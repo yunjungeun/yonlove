@@ -14,13 +14,20 @@
         insert into scene values(
         (select concat('scene', (nvl(max(substr(scene_id, 6)), 0)+1)) from scene),<!--pk코드 자동증가(수정)-->
         (select nvl(max(scene_num),0)+1 from scene),<!--씬 번호 자동증가-->
-        null,<!--이미지 첨부파일 주소-->
+
         #{scene_place}, <!--촬영장소-->
         #{story_board},<!--스토리보드 내용-->
         #{scene_content}, <!--스토리보드 요약-->
-        'scenario1' <!--시나리오 id 조인해서 드롭다운 형태로 선택할수 있어야함-->
+        'scenario1'         <!--시나리오 id 조인해서 드롭다운 형태로 선택할수 있어야함-->
+
+
         )
     </insert>
+
+    <!--마지막 작성글 불러오는 메소드-->
+    <select id="lastPost" parameterType="com.example.yoonlove.dto.SceneDto" resultType="int">
+        SELECT max(substr(scene_id,6)) from scene
+    </select>
 
 
 

@@ -1,6 +1,7 @@
 package com.example.yoonlove.mapper;
 
 import com.example.yoonlove.dto.FileDto;
+import com.example.yoonlove.dto.SceneDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,10 +13,13 @@ public interface FileMapper {
     void updateFile(FileDto fileDto);
 
     // 파일 정보를 삭제하는 쿼리
-    void deleteFile(String file_id);
+    /*void deleteFile(String file_id);*/
 
     // 파일 ID로 파일 정보를 조회하는 쿼리
-    FileDto getFileById(String file_d);
+    FileDto getFileById(String file_id);
+
+    FileDto selectFile(SceneDto dto);
+
 
 
 }

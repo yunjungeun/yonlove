@@ -15,6 +15,10 @@ public class FileDto {
     private String file_name;
     private String file_path;
     private byte[] file_data;
-    /*private String scene_id;
-    private String scenario_id;*/
+
+    private String scene_id;
+
+
+
+
 }

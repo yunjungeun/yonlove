@@ -25,4 +25,8 @@ public interface SceneMapper {
     public void insertActor(ActorDto dto);
     public void updateActor(ActorDto dto);
     public void deleteActor(ActorDto dto);
+
+
+    //마지막 작성글 불러오는 메서드
+    public int lastPost(SceneDto dto);
 }
