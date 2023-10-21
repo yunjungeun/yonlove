@@ -1,12 +1,12 @@
 
-function mappingurl(submiturl,sucessurl, int){
+function mappingurl(submiturl,sucessurl, int, text){
     document.getElementById("alert").addEventListener("submit", function (event){
     event.preventDefault();
 
     var data = {};
 
         for(var i = 1; i <= int; i++){
-            var name = ".insert"+i;
+            var name = ".field"+i;
             $(name).each(function() {
              var field = $(this).attr("name");
              data[field] = $(this).val();
@@ -18,11 +18,11 @@ function mappingurl(submiturl,sucessurl, int){
             type : "GET",
             data : data,
             success:function(response){
-                alert("정상적으로 등록 되었습니다");
+                alert("정상적으로 " +text+" 되었습니다");
                 window.location.href = sucessurl ;
             },
             error: function(error){
-                alert("작성 중 오류가 발생 했습니다");
+                alert(text+" 중 오류가 발생 했습니다");
                 window.location.href = sucessurl ;
 
             }

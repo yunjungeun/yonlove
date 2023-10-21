@@ -5,19 +5,23 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
+
 </head>
 <body>
-<form action="/scenario/insertscenario" method="get">
+<form id="alert" action="/scenario/insertscenario" method="get">
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
             <td>제목</td>
-            <td><input name="scenario_name" type="text"><td>
+            <td><input class="field1" name="scenario_name" type="text"><td>
         </tr>
         <tr>
-            <td colspan="2"><textarea name="scenario_content" cols="50" rows="20"></textarea></td>
+            <td colspan="2"><textarea class="field2" name="scenario_content" cols="50" rows="20"></textarea></td>
         </tr>
     </table>
-    <input type="submit" value="등록">
+    <input type="submit" value="등록" onclick="mappingurl('/scenario/insertscenario','/scenario/scenario',2,'작성')">
 </form>
 <a href="/scenario/scenario">취소</a>
 

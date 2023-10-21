@@ -6,20 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/static/js/postreg.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
 </head>
 <body>
 <form id="alert" action="/cs/insertnotice" method="get">
 <table border="1" cellpadding="1" cellspacing="1">
         <tr>
-            <td>제목 <input class="insert1" name="notice_title" type="text">
-        작성자 : <input class="insert2"  name="notice_writer" type="text" value="{{writer}}" readonly></td>
+            <td>제목 <input class="field1" name="notice_title" type="text">
+        작성자 : <input class="field2"  name="notice_writer" type="text" value="{{writer}}" readonly></td>
     </tr>
     <tr>
-        <td colspan="2"><textarea class="insert3" name="notice_content" cols="50" rows="20"></textarea></td>
+        <td colspan="2"><textarea class="field3" name="notice_content" cols="50" rows="20"></textarea></td>
     </tr>
 </table>
-    <input type="submit"  id="insert" value="등록" onclick="mappingurl('/cs/insertnotice','/cs/notice',3)">
+    <input type="submit"  id="insert" value="등록" onclick="mappingurl('/cs/insertnotice','/cs/notice',3,'작성')">
 </form>
  <a href="/cs/notice">취소</a>
 
