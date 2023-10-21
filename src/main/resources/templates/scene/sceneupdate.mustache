@@ -5,25 +5,29 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
+
 </head>
 <body>
-<form method="get" action="/scene/{{updateScene.scene_id}}/updatescene">
+<form id="alert" method="get" action="/scene/{{updateScene.scene_id}}/updatescene">
     <input type="hidden" name="scene=id" value="{{updateScene.scene_id}}">
 <table border="1" cellpadding="1" cellspacing="1">
     <tr>
         <td>시나리오<input name="scenario_id" type="text" readonly value="{{updateScene.scenario_id}}"></td>
-        <td>씬 번호<input name="scene_num" type="number" value="{{updateScene.scene_num}}"></td>
+        <td>씬 번호<input class="field1" name="scene_num" type="number" value="{{updateScene.scene_num}}"></td>
     </tr>
     <tr>
-        <td>장면 요약<input name="scene_content" type="text" value="{{updateScene.scene_content}}"/></td>
+        <td>장면 요약<input class="field2" name="scene_content" type="text" value="{{updateScene.scene_content}}"/></td>
     </tr>
     <tr>
         <td>카메라 장면 : 첨부파일 등록하게끔 만들어야함</td>
-        <td colspan="2"><textarea name="story_board" cols="50" rows="20">{{updateScene.story_board}}</textarea></td>
-        <td>촬영장소 <input name="scene_place" type="text" value="{{updateScene.scene_place}}"/></td>
+        <td colspan="2"><textarea class="field3" name="story_board" cols="50" rows="20">{{updateScene.story_board}}</textarea></td>
+        <td>촬영장소 <input class="field4" name="scene_place" type="text" value="{{updateScene.scene_place}}"/></td>
     </tr>
 </table>
-    <input type="submit" value="수정"/>
+    <input type="submit" value="수정" onclick="mappingurl('/scene/{{updateScene.scene_id}}/updatescene','/scene/scene',4,'수정')"/>
 </form>
 <a href="/scene/scene">목록</a>
 
