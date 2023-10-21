@@ -99,6 +99,7 @@ public class CsController {
 
     @GetMapping("/cs/insertnotice")
     public String insertNotice(NoticeDto dto){
+
         csService.insertNotice(dto);
         return "/cs/notice";
     }
@@ -113,6 +114,7 @@ public class CsController {
     }
     @GetMapping("/cs/{notice_id}/updatenotice")
     public String updateNotice(NoticeDto dto){
+        System.out.println(dto.toString());
         csService.updateNotice(dto);
         return "/cs/notice";
     }

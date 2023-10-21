@@ -5,19 +5,21 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/postreg.js"></script>
 </head>
 <body>
-<form action="/cs/insertnotice" method="get">
+<form id="alert" action="/cs/insertnotice" method="get">
 <table border="1" cellpadding="1" cellspacing="1">
-    <input type="hidden" name="notice_writer" value="{{writer}}">
-    <tr>
-        <td>제목 <input name="notice_title" type="text"> 작성자 : {{writer}}<td>
+        <tr>
+            <td>제목 <input class="insert1" name="notice_title" type="text">
+        작성자 : <input class="insert2"  name="notice_writer" type="text" value="{{writer}}" readonly></td>
     </tr>
     <tr>
-        <td colspan="2"><textarea name="notice_content" cols="50" rows="20"></textarea></td>
+        <td colspan="2"><textarea class="insert3" name="notice_content" cols="50" rows="20"></textarea></td>
     </tr>
 </table>
-    <input type="submit" value="등록">
+    <input type="submit"  id="insert" value="등록" onclick="mappingurl('/cs/insertnotice','/cs/notice',3)">
 </form>
  <a href="/cs/notice">취소</a>
 
