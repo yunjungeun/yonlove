@@ -23,7 +23,7 @@ public class SceneController {
     @GetMapping("scene/scene")
     public ModelAndView selectListScene(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
         PageDto pageDto = new PageDto("scene","scene_id",page,pdto);
-        PageDto pageInfo = pagingService.paging(pageDto);
+        PageDto pageInfo = pagingService.paging(pageDto,"scene");
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.pageRink(pageDto);
 
@@ -84,7 +84,7 @@ public class SceneController {
     @GetMapping("scene/actor")
     public ModelAndView selectListActor(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
         PageDto pageDto = new PageDto("actor","actor_id",page,pdto);
-        PageDto pageInfo = pagingService.paging(pageDto);
+        PageDto pageInfo = pagingService.paging(pageDto,"scene");
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.pageRink(pageDto);
 

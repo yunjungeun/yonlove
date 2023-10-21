@@ -28,7 +28,7 @@ public class PagingService {
     private ScriptPaperMapper scriptPaperMapper;
 
 
-    public PageDto paging(PageDto dto){
+    public PageDto paging(PageDto dto, String controllerName){
         PageDto pageDto = new PageDto();
 
 
@@ -107,6 +107,7 @@ public class PagingService {
         pageDto.setTable(dto.getTable());
         pageDto.setId(dto.getId());
 
+        pageDto.setPrefixUrl("/"+controllerName+"/");
         return pageDto;
     }
 

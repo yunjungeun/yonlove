@@ -24,7 +24,7 @@ public class ScriptPaperController {
     @GetMapping("script/scriptpaper")
     public ModelAndView selectListScriptPaper(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
         PageDto pageDto = new PageDto("scriptpaper","script_id", page,pdto);
-        PageDto pageInfo = pagingService.paging(pageDto);
+        PageDto pageInfo = pagingService.paging(pageDto,"script");
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.pageRink(pageDto);
 
@@ -86,7 +86,7 @@ public class ScriptPaperController {
     @GetMapping("script/timetable")
     public ModelAndView selectListTimeTable(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
         PageDto pageDto = new PageDto("timetable","table_id",page,pdto);
-        PageDto pageInfo = pagingService.paging(pageDto);
+        PageDto pageInfo = pagingService.paging(pageDto,"script");
         List<PageDto> pageList =pagingService.pageList(pageInfo.getPageStart(), pageInfo.getPageEnd(),page);
         String rink = pagingService.pageRink(pageDto);
 

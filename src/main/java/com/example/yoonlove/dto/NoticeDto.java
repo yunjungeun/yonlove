@@ -14,6 +14,7 @@ public class NoticeDto {
     private int notice_cnt;
     private String user_id;
 
+    private String prefixUrl = "/cs/";
 
     @Override
     public String toString() {

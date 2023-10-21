@@ -26,7 +26,7 @@ import java.util.List;
         @GetMapping("creator/creater")
         public ModelAndView selectListCreaotr(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
             PageDto pageDto = new PageDto("creater", "ch_id", page, pdto);
-            PageDto pageInfo=pagingService.paging(pageDto);
+            PageDto pageInfo=pagingService.paging(pageDto,"creator");
 
             List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(), pageInfo.getPageEnd(), page);
             String rink = pagingService.pageRink(pageDto);

@@ -93,7 +93,7 @@ public class AdminController {
     public ModelAndView selectListDepartment(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
         PageDto pageDto = new PageDto("department","dpt_id",page,pdto);
 
-        PageDto pageInfo = pagingService.paging(pageDto);
+        PageDto pageInfo = pagingService.paging(pageDto,"admin");
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.pageRink(pageDto);
 

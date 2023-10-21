@@ -22,7 +22,7 @@ public class ScenarioController {
     @GetMapping("/scenario/scenario")
     public ModelAndView selectListScenario(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
         PageDto pageDto = new PageDto("scenario","scenario_id",page,pdto);
-        PageDto pageInfo = pagingService.paging(pageDto);
+        PageDto pageInfo = pagingService.paging(pageDto,"scenario");
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.pageRink(pageDto);
 
