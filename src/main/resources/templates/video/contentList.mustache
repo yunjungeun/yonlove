@@ -34,10 +34,15 @@
     </ul>
 </table>
 
+{{>layout/paging}}
 
 
 
-<form action="/cs/qna" method="GET">
+
+
+
+
+<form action="/vd/video" method="GET">
     <select id="searchType" name="searchType">
         <option value="all">선택</option>
         <option value="title">제목</option>
@@ -51,10 +56,13 @@
 
 
 <a href="/vd/contentInsertView" role="button">새 영상 작성</a>
-<a href="/vd/contentList">목록</a>
+<a href="/vd/video">목록</a>
 
 
-
+<script>
+    var url = "/vd/video";
+</script>
+<script src="/static/js/search.js"></script>
 
 </body>
 </html>

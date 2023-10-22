@@ -20,7 +20,7 @@ public class VideoController {
     @Autowired
     private PagingService pagingService;
 
-    @GetMapping("vd/contentList") //컨텐츠 전체목록보기 뷰
+    @GetMapping("vd/video") //컨텐츠 전체목록보기 뷰
     public ModelAndView selectListContent(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page) {
 
         PageDto pageDto = new PageDto("video","video_id", page,pdto);  // page???
@@ -36,6 +36,7 @@ public class VideoController {
         mv.setStatus(HttpStatus.valueOf(200));
         mv.addObject("selectContentList", contentList);
 
+        mv.addObject("prefixUrl","vd");
         mv.addObject("paging", pageInfo);  //페이징정보
         mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
@@ -75,7 +76,7 @@ public class VideoController {
         System.out.println(dto.toString());
         videoService.insertContent(dto);
         System.out.println(dto.toString());
-        return "redirect:/vd/contentList";
+        return "redirect:/vd/video";
     }
 
     @GetMapping("vd/{video_id}/UpdateView") //컨텐츠 업데이트하는 뷰
@@ -92,14 +93,14 @@ public class VideoController {
     @GetMapping("vd/{video_id}/updateContent") //업데이트 처리
     public String updateContent( VideoDto dto) {
         videoService.updateContent(dto);
-        return "redirect:/vd/contentList";
+        return "redirect:/vd/video";
     }
 
 
     @GetMapping("vd/{video_id}/delete") //삭제 처리
     public String deleteContent( VideoDto dto) {
         videoService.deleteContent(dto);
-        return "redirect:/vd/contentList";
+        return "redirect:/vd/video";
 
     }
 }
