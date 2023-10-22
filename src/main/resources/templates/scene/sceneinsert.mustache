@@ -5,6 +5,10 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
+
 </head>
 <body>
 <form action="/scene/insertscene" method="post" enctype="multipart/form-data">
@@ -15,7 +19,7 @@
             <td>첨부파일<input name="file" type="file" placeholder="파일을 첨부하세요"></td>
         </tr>
         <tr>
-            <td>장면 요약<input name="scene_content" type="text" placeholder="스토리보드 내용을 요약작성해 주세요"/></td>
+            <td>장면 요약<input class="field1" name="scene_content" type="text" placeholder="스토리보드 내용을 요약작성해 주세요"/></td>
         </tr>
         <tr>
 
@@ -23,7 +27,7 @@
             <td>촬영장소 <input name="scene_place" type="text"/></td>
         </tr>
     </table>
-    <input type="submit" value="등록">
+    <input type="submit" value="등록" onclick="mappingurl('/scene/insertscene','/scene/scene',3,'작성')">
 </form>
 <a href="/scene/scene">취소</a>
 

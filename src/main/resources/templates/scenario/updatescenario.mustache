@@ -5,24 +5,28 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
+
 </head>
 <body>
-<form method="get" action="/scenario/{{updateScenario.scenario_id}}/updatescenario">
+<form id="alert" method="get" action="/scenario/{{updateScenario.scenario_id}}/updatescenario">
     <input name="scenario_id" type="text" value="{{updateScenario.scenario_id}}"/>
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
             <td>시나리오 제목
-                <input name="scenario_name" type="text" value="{{updateScenario.scenario_name}}"></td>
+                <input class="field1" name="scenario_name" type="text" value="{{updateScenario.scenario_name}}"></td>
             <td>기획ID / 나중에 기획명으로 바꿔야함
-                <input name="project_id" type="text" value="{{updateScenario.project_id}}" readonly></td>
+                <input class="field2" name="project_id" type="text" value="{{updateScenario.project_id}}" readonly></td>
             <td>시나리오 번호
-                <input name="scenario_num" type="text" value="{{updateScenario.scenario_num}}"></td>
+                <input class="field3" name="scenario_num" type="text" value="{{updateScenario.scenario_num}}"></td>
         </tr>
         <tr>
-            <td colspan="3"><textarea name="scenario_content" cols="50" rows="20">{{updateScenario.scenario_content}}</textarea></td>
+            <td colspan="3"><textarea class="field4" name="scenario_content" cols="50" rows="20">{{updateScenario.scenario_content}}</textarea></td>
         </tr>
     </table>
-    <input type="submit" value="수정"/>
+    <input type="submit" value="수정" onclick="mappingurl('/scenario/{{updateScenario.scenario_id}}/updatescenario','/scenario/scenario',4,'수정')" />
 </form>
 <a href="/scenario/scenario">목록</a>
 </body>

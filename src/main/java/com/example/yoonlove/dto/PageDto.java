@@ -48,8 +48,6 @@ public class PageDto {
 
     private String search;
 
-
-
     public PageDto(){}
     public PageDto(String table, String pkid, int currentPage, PageDto dto){ //PageDto dto ==> 얘는 검색떄문에 넣은거임
         this.table = table;

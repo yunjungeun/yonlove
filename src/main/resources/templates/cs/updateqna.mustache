@@ -5,22 +5,26 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
+
 </head>
 <body>
-<form method="get" action="/cs/{{updateQnA.qna_id}}/updateqna">
+<form id="alert" method="get" action="/cs/{{updateQnA.qna_id}}/updateqna">
     <input name="qna_id" type="hidden" value="{{updateQnA.qna_id}}"/>
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
             <td>제목</td>
-            <td><input name="qna_title" type="text" value="{{updateQnA.qna_title}}"><td>
+            <td><input class="field1" name="qna_title" type="text" value="{{updateQnA.qna_title}}"><td>
         </tr>
         <tr>
             <td colspan="2">
-                <textarea name="qna_content" cols="50" rows="20">{{updateQnA.qna_content}}</textarea>
+                <textarea class="field2" name="qna_content" cols="50" rows="20">{{updateQnA.qna_content}}</textarea>
             </td>
         </tr>
     </table>
-    <input type="submit" value="수정"/>
+    <input type="submit" value="수정"  onclick="mappingurl('/cs/{{updateQnA.qna_id}}/updateqna','/cs/qna',2,'수정')"/>
 </form>
 <a href="/cs/qna">목록</a>
 </body>

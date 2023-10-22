@@ -31,6 +31,7 @@ public class ScenarioController {
         mv.setViewName("/scenario/scenario");
         mv.addObject("selectListScenario", dto);
 
+        mv.addObject("prefixUrl", "scenario");
         mv.addObject("paging", pageInfo);  //페이징정보
         mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달

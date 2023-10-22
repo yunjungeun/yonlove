@@ -2,8 +2,6 @@ package com.example.yoonlove.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import java.sql.Date;
 @Getter
 @Setter
 public class NoticeDto {
@@ -15,4 +13,20 @@ public class NoticeDto {
     private String notice_update;
     private int notice_cnt;
     private String user_id;
+
+    private String prefixUrl = "/cs/";
+
+    @Override
+    public String toString() {
+        return "NoticeDto{" +
+                "notice_id=" + notice_id +
+                ", notice_title='" + notice_title + '\'' +
+                ", notice_content='" + notice_content + '\'' +
+                ", notice_writer='" + notice_writer + '\'' +
+                ", notice_date='" + notice_date + '\'' +
+                ", notice_update='" + notice_update + '\'' +
+                ", notice_cnt=" + notice_cnt +
+                ", user_id='" + user_id + '\'' +
+                '}';
+    }
 }
