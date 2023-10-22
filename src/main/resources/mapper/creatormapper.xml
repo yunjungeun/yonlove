@@ -39,7 +39,7 @@
 
     <insert id="insertCreator">
         insert into creater values(
-        (select concat('ch', (nvl(max(substr(ch_id, 3)), 0)+1)) from creater),<!--pk코드 자동증가(수정)-->
+        (select concat('ch', (nvl(max(to_number(substr(ch_id, 3))), 0)+1)) from creater),<!--pk코드 자동증가(수정2)-->
         #{ch_name},
         #{ch_sub},
         #{user_id}
