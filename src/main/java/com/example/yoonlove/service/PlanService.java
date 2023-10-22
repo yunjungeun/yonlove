@@ -16,8 +16,8 @@ public class PlanService {
     private PlanMapper planMapper;
 
 
-    public List<ScheduleDayDto> selectListSchedule() {
-        List<ScheduleDayDto> scheduleList = planMapper.selectListSchedule();
+    public List<ScheduleDayDto> selectListSchedule(PageDto pageInfo) {
+        List<ScheduleDayDto> scheduleList = planMapper.selectListSchedule(pageInfo);
         return scheduleList;
     }
 
@@ -48,8 +48,8 @@ public class PlanService {
 
 //================================================================================
 
-    public List<ScheduleTimeDto> selectListScheduleTime() {
-        List<ScheduleTimeDto> scheduleTimeList = planMapper.selectListScheduleTime();
+    public List<ScheduleTimeDto> selectListScheduleTime(PageDto pageInfo) {
+        List<ScheduleTimeDto> scheduleTimeList = planMapper.selectListScheduleTime(pageInfo);
         return scheduleTimeList;
     }
 
@@ -80,8 +80,8 @@ public class PlanService {
 //===================================================================================
 
 
-    public List<ActorManagementDto> selectListActorManagement() {
-        List<ActorManagementDto> ActorManagementList = planMapper.selectListActorManagement();
+    public List<ActorManagementDto> selectListActorManagement(PageDto pageInfo) {
+        List<ActorManagementDto> ActorManagementList = planMapper.selectListActorManagement(pageInfo);
         return ActorManagementList;
     }
 
@@ -108,8 +108,8 @@ public class PlanService {
 
     //================================================
 
-    public List<FilmPlanDto> selectListFilmPlan() {
-        List<FilmPlanDto> FilmPlanList = planMapper.selectListFilmPlan();
+    public List<FilmPlanDto> selectListFilmPlan(PageDto pageInfo) {
+        List<FilmPlanDto> FilmPlanList = planMapper.selectListFilmPlan(pageInfo);
         return FilmPlanList;
     }
 
@@ -137,8 +137,8 @@ public class PlanService {
     //============================================
 
 
-    public List<ScheduleMonthDto> selectListPlan() {
-        List<ScheduleMonthDto> planList = planMapper.selectListPlan();
+    public List<ScheduleMonthDto> selectListPlan(PageDto pageInfo) {
+        List<ScheduleMonthDto> planList = planMapper.selectListPlan(pageInfo);
         return planList;
     }
 

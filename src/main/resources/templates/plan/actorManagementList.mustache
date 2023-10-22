@@ -30,7 +30,31 @@
         {{/actorManagementList}}
     </ul>
 </table>
+
+{{>layout/paging}}
+
+<form action="/plan/actor_management" method="GET">
+    <select id="searchType" name="searchType">
+        <option value="all">선택</option>
+        <option value="title">제목</option>
+        <!-- 필요한 항목 추가 -->
+    </select>
+    <input type="text" id="search" name="search" placeholder="검색">
+
+    <input type="submit" value="검색">
+
+</form>
+
+
 <a href="/plan/insertactorManagementView" role="button">출연자정보 작성</a>
-<a href="/plan/actorManagementList">목록</a>
+<a href="/plan/actor_management">목록</a>
+
+
+<script>
+    var url = "/plan/actor_management";
+</script>
+<script src="/static/js/search.js"></script>
+
+
 </body>
 </html>

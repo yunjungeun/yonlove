@@ -40,7 +40,7 @@ public class PageDto {
 
     //검색관련 프로퍼티
     private String pkid;
-    private String pkintid;
+    private String pkintid;   // string 아니고 int !!!!!!!!!
     private String writer;
     private String content;
     private String title;

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -22,12 +23,28 @@ public class PlanController {
     PagingService pagingService;
 
 
-    @GetMapping("plan/scheduleList")
-    public ModelAndView selectListSchedule() {
-        List<ScheduleDayDto> dto = planService.selectListSchedule();
+    @GetMapping("/plan/schedule_day")
+    public ModelAndView selectListSchedule(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page) {
+
+        PageDto pageDto = new PageDto("schedule_day","day_id", page,pdto);
+        PageDto pageInfo = pagingService.paging(pageDto); // paging ==> 전체게시글 갯수 구해오는 메소드
+        List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
+        String rink = pagingService.pageRink(pageDto);
+
+
+
+
+        List<ScheduleDayDto> dto = planService.selectListSchedule(pageInfo);
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/plan/scheduleList");
+        mv.setViewName("/plan/schedule_day");
         mv.addObject("scheduleList", dto);
+
+        mv.addObject("prefixUrl","plan");
+        mv.addObject("paging", pageInfo);  //페이징정보
+        mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
+        mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
+
+
         return mv;
     }
 
@@ -55,7 +72,7 @@ public class PlanController {
     public String insertSchedule(ScheduleDayDto dto) {
         planService.insertSchedule(dto);
 
-        return "redirect:/plan/scheduleList";
+        return "redirect:/plan/schedule_day";
     }
 
     @GetMapping("plan/{day_id}/scheduleUpdateView") //컨텐츠 업데이트하는 뷰
@@ -71,25 +88,44 @@ public class PlanController {
     @GetMapping("plan/{day_id}/updateSchedule") //업데이트 처리
     public String updateSchedule( ScheduleDayDto dto) {
         planService.updateSchedule(dto);
-        return "redirect:/plan/scheduleList";
+        return "redirect:/plan/schedule_day";
     }
 
     @GetMapping("plan/{day_id}/deleteSchedule") //삭제 처리
     public String deleteSchedule( ScheduleDayDto dto) {
         planService.deleteSchedule(dto);
-        return "redirect:/plan/scheduleList";
+        return "redirect:/plan/schedule_day";
 
     }
 //===================================================================================================================================== 촬영계획표
 
 
-    @GetMapping("plan/scheduleTimeList")
-    public ModelAndView selectListScheduleTime(){
-        List<ScheduleTimeDto> dto = planService.selectListScheduleTime();
+    @GetMapping("plan/schedule_time")
+    public ModelAndView selectListScheduleTime(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
+
+        PageDto pageDto = new PageDto("schedule_time","time_id", page,pdto);  // page???
+
+        PageDto pageInfo = pagingService.paging(pageDto);
+        System.out.println(pageDto.getTotalPost());
+
+        // paging ==> 전체게시글 갯수 구해오는 메소드
+        List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
+        String rink = pagingService.pageRink(pageDto);
+
+
+        List<ScheduleTimeDto> dto = planService.selectListScheduleTime(pageInfo);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/scheduleTimeList");
         mv.addObject("scheduleTimeList", dto);
+
+        mv.addObject("prefixUrl","plan");
+        mv.addObject("paging", pageInfo);  //페이징정보
+        mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
+        mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
+
         return mv;
+
+
     }
 
 
@@ -118,7 +154,7 @@ public class PlanController {
 
         planService.insertTime(dto);
 
-        return "redirect:/plan/scheduleTimeList";
+        return "redirect:/plan/schedule_time";
     }
 
 
@@ -135,26 +171,43 @@ public class PlanController {
     @GetMapping("plan/{time_id}/updateScheduleTime") //업데이트 처리
     public String updateTime( ScheduleTimeDto dto) {
         planService.updateTime(dto);
-        return "redirect:/plan/scheduleTimeList";
+        return "redirect:/plan/schedule_time";
     }
 
     @GetMapping("plan/{time_id}/deleteTime") //삭제 처리
     public String deleteTime( ScheduleTimeDto dto) {
         planService.deleteTime(dto);
-        return "redirect:/plan/scheduleTimeList";
+        return "redirect:/plan/schedule_time";
 
     }
 
 //============================================================================================촬영시간표
 
 
-    @GetMapping("plan/actorManagementList")
-    public ModelAndView selectListActorManagement(){
+    @GetMapping("/plan/actor_management")
+    public ModelAndView selectListActorManagement(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
 
-        List<ActorManagementDto> dto = planService.selectListActorManagement();
+        PageDto pageDto = new PageDto("actor_management","actor_id", page,pdto);
+
+        PageDto pageInfo = pagingService.paging(pageDto);
+        System.out.println(pageDto.getTotalPost());
+
+        // paging ==> 전체게시글 갯수 구해오는 메소드
+        List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
+        String rink = pagingService.pageRink(pageDto);
+
+
+        List<ActorManagementDto> dto = planService.selectListActorManagement(pageInfo);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/actorManagementList");
         mv.addObject("actorManagementList", dto);
+
+        mv.addObject("prefixUrl","plan");
+        mv.addObject("paging", pageInfo);  //페이징정보
+        mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
+        mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
+
+
         return mv;
     }
 
@@ -184,7 +237,7 @@ public class PlanController {
 
         planService.insertActorManagement(dto);
 
-        return "redirect:/plan/actorManagementList";
+        return "redirect:/plan/actor_management";
     }
 
 
@@ -201,26 +254,44 @@ public class PlanController {
     @GetMapping("plan/{actor_id}/updateActorManagement") //업데이트 처리
     public String updateActorManagement( ActorManagementDto dto) {
         planService.updateActorManagement(dto);
-        return "redirect:/plan/actorManagementList";
+        return "redirect:/plan/actor_management";
     }
 
     @GetMapping("plan/{actor_id}/deleteActorManagement") //삭제 처리
     public String deleteActorManagement( ActorManagementDto dto) {
         planService.deleteActorManagement(dto);
-        return "redirect:/plan/actorManagementList";
+        return "redirect:/plan/actor_management";
 
     }
 
 //===========================================================================================출연진관라
 
 
-    @GetMapping("plan/filmList")
-    public ModelAndView selectListFilmPlan(){
+    @GetMapping("plan/film_plan")
+    public ModelAndView selectListFilmPlan(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
 
-        List<FilmPlanDto> dto = planService.selectListFilmPlan();
+        PageDto pageDto = new PageDto("film_plan","film_id", page,pdto);
+
+        PageDto pageInfo = pagingService.paging(pageDto);
+        System.out.println(pageDto.getTotalPost());
+
+        // paging ==> 전체게시글 갯수 구해오는 메소드
+        List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
+        String rink = pagingService.pageRink(pageDto);
+
+
+
+        List<FilmPlanDto> dto = planService.selectListFilmPlan(pageInfo);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/filmList");
         mv.addObject("filmList", dto);
+
+        mv.addObject("prefixUrl","plan");
+        mv.addObject("paging", pageInfo);  //페이징정보
+        mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
+        mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
+
+
         return mv;
     }
 
@@ -250,7 +321,7 @@ public class PlanController {
 
         planService.insertFilm(dto);
 
-        return "redirect:/plan/filmList";
+        return "redirect:/plan/film_plan";
     }
 
 
@@ -267,27 +338,47 @@ public class PlanController {
     @GetMapping("plan/{film_id}/updatefilm") //업데이트 처리
     public String updateFilm( FilmPlanDto dto) {
         planService.updateFilm(dto);
-        return "redirect:/plan/filmList";
+        return "redirect:/plan/film_plan";
     }
 
     @GetMapping("plan/{film_id}/deleteFilm") //삭제 처리
     public String deleteFilm( FilmPlanDto dto) {
         planService.deleteFilm(dto);
-        return "redirect:/plan/filmList";
+        return "redirect:/plan/film_plan";
 
     }
 
 
 //=================================================================================
 
-    @GetMapping("plan/scheduleMonthList")
-    public ModelAndView selectListPlan(){
+    @GetMapping("plan/schedule_month")
+    public ModelAndView selectListPlan(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
 
-        List<ScheduleMonthDto> dto = planService.selectListPlan();
+        PageDto pageDto = new PageDto("schedule_month","month_id", page,pdto);
+
+        PageDto pageInfo = pagingService.paging(pageDto);
+        System.out.println(pageDto.getTotalPost());
+
+        // paging ==> 전체게시글 갯수 구해오는 메소드
+        List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
+        String rink = pagingService.pageRink(pageDto);
+
+
+        List<ScheduleMonthDto> dto = planService.selectListPlan(pageInfo);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/scheduleMonthList");
         mv.addObject("scheduleMonthList", dto);
+
+        mv.addObject("prefixUrl","plan");
+        mv.addObject("paging", pageInfo);  //페이징정보
+        mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
+        mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
+
+
         return mv;
+
+
+
     }
 
 
@@ -316,7 +407,7 @@ public class PlanController {
 
         planService.insertPlan(dto);
 
-        return "redirect:/plan/scheduleMonthList";
+        return "redirect:/plan/schedule_month";
     }
 
 
@@ -333,13 +424,13 @@ public class PlanController {
     @GetMapping("plan/{month_id}/updateScheduleMonth") //업데이트 처리
     public String  updatePlan( ScheduleMonthDto dto) {
         planService. updatePlan(dto);
-        return "redirect:/plan/scheduleMonthList";
+        return "redirect:/plan/schedule_month";
     }
 
     @GetMapping("plan/{month_id}/deleteScheduleMonth") //삭제 처리
     public String deletePlan( ScheduleMonthDto dto) {
         planService.deletePlan(dto);
-        return "redirect:/plan/scheduleMonthList";
+        return "redirect:/plan/schedule_month";
 
     }
 
