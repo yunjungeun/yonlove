@@ -48,11 +48,6 @@ public class PageDto {
 
     private String search;
 
-    //뷰페이지 레이아웃 url 프로퍼티/ url에서 컨트롤러 부분을 저장함 이게 없으면 페이징링크 안됨
-    private String prefixUrl;
-
-
-
     public PageDto(){}
     public PageDto(String table, String pkid, int currentPage, PageDto dto){
         this.table = table;

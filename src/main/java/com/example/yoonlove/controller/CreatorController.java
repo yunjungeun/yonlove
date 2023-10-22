@@ -26,7 +26,7 @@ import java.util.List;
         @GetMapping("creator/creater")
         public ModelAndView selectListCreaotr(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
             PageDto pageDto = new PageDto("creater", "ch_id", page, pdto);
-            PageDto pageInfo=pagingService.paging(pageDto,"creator");
+            PageDto pageInfo=pagingService.paging(pageDto);
 
             List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(), pageInfo.getPageEnd(), page);
             String rink = pagingService.pageRink(pageDto);
@@ -37,6 +37,7 @@ import java.util.List;
             mv.addObject("selectListCreator", dto);
 
             //페이징에 필요한센션
+            mv.addObject("prefixUrl", "creator");
             mv.addObject("paging", pageInfo);  //페이징정보
             mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
             mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달

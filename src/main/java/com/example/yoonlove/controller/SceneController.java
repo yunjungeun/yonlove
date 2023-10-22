@@ -23,7 +23,7 @@ public class SceneController {
     @GetMapping("scene/scene")
     public ModelAndView selectListScene(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
         PageDto pageDto = new PageDto("scene","scene_id",page,pdto);
-        PageDto pageInfo = pagingService.paging(pageDto,"scene");
+        PageDto pageInfo = pagingService.paging(pageDto);
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.pageRink(pageDto);
 
@@ -32,7 +32,7 @@ public class SceneController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/scene/scene");
         mv.addObject("selectListScene", dto);
-
+        mv.addObject("prefixUrl", "scene");
         mv.addObject("paging", pageInfo);  //페이징정보
         mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
@@ -84,7 +84,7 @@ public class SceneController {
     @GetMapping("scene/actor")
     public ModelAndView selectListActor(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
         PageDto pageDto = new PageDto("actor","actor_id",page,pdto);
-        PageDto pageInfo = pagingService.paging(pageDto,"scene");
+        PageDto pageInfo = pagingService.paging(pageDto);
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.pageRink(pageDto);
 
@@ -93,6 +93,7 @@ public class SceneController {
         mv.setViewName("scene/actor");
         mv.addObject("selectListActor", dto);
 
+        mv.addObject("prefixUrl", "scene");
         mv.addObject("paging", pageInfo);  //페이징정보
         mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달

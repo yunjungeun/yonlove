@@ -51,7 +51,7 @@ public class CsController {
         PageDto pageDto = new PageDto("notice","notice_id",page, pdto);
 
         //페이징정보처리 메소드
-        PageDto pageInfo = pagingService.paging(pageDto,"cs");
+        PageDto pageInfo = pagingService.paging(pageDto);
 
 
         //뷰페이지에 하단 페이징처리를 해주는 리스트
@@ -65,9 +65,9 @@ public class CsController {
         mv.setViewName("/cs/listnotice");
         mv.addObject("selectListNotice", dto);
 
-        System.out.println("test"+pageInfo.getPrefixUrl());
 
         //페이징에 필요한센션
+        mv.addObject("prefixUrl", "cs");
         mv.addObject("paging", pageInfo);  //페이징정보
         mv.addObject("pagelist", pagelist); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
@@ -143,7 +143,7 @@ public class CsController {
     public ModelAndView selectListQnA(PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page){
         System.out.println("질의응답 게시판리스트");
         PageDto pageDto = new PageDto("qna","qna_id",page,pdto);
-        PageDto pageInfo = pagingService.paging(pageDto,"cs");
+        PageDto pageInfo = pagingService.paging(pageDto);
 
         List<PageDto> pagelist = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.pageRink(pageDto);
@@ -155,6 +155,7 @@ public class CsController {
 
 
         //페이징에 필요한센션
+        mv.addObject("prefixUrl", "cs");
         mv.addObject("paging", pageInfo);  //페이징정보
         mv.addObject("pagelist", pagelist); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
