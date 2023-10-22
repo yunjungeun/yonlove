@@ -1,6 +1,7 @@
 package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.*;
+import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,8 @@ public class PlanController {
 
     @Autowired
     private PlanService planService;
+    @Autowired
+    PagingService pagingService;
 
 
     @GetMapping("plan/scheduleList")

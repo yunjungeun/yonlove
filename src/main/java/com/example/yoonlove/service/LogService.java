@@ -1,6 +1,7 @@
 package com.example.yoonlove.service;
 
 import com.example.yoonlove.dto.LogDto;
+import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.mapper.LogMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,8 +14,8 @@ public class LogService {
     private LogMapper logMapper;
 
 
-    public List<LogDto> selectListLog() {
-        List<LogDto> logList = logMapper.selectListLog();
+    public List<LogDto> selectListLog(PageDto pageInfo) {
+        List<LogDto> logList = logMapper.selectListLog(pageInfo);
         return logList;
     }
 

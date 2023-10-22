@@ -4,13 +4,46 @@
 <mapper namespace="com.example.yoonlove.mapper.LogMapper">
 
 
-    <select id="selectListLog"  resultType="com.example.yoonlove.dto.LogDto">
-        SELECT * FROM log
-        <if test="keyword != null and keyword != ''">
-            WHERE log_num LIKE CONCAT('%', #{keyword}, '%')
+
+    <select id="totalLogPost" parameterType="com.example.yoonlove.dto.PageDto">
+        select count(${id}) as totalPost from ${table}
+        where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
+        <!--검색어가 있다면 아래 조건문을 실행-->
+        <if test="title != null and search != ''">
+            AND log_content like '%${title}%'
         </if>
-        ORDER BY Log_id DESC
     </select>
+
+
+
+
+
+
+
+    <select id="selectListLog" parameterType="com.example.yoonlove.dto.PageDto" resultType="com.example.yoonlove.dto.LogDto">
+        select *
+        <!--notice검색결과에 rownum을 하고 r로 지정-->
+        from(select rownum as r, t.*
+
+        <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
+        from (select * from ${table}
+        where 1=1  /*에러처리방지를 위한 코드*/
+        <if test="title != null and search != ''">
+            AND log_content like '%${title}%'
+        </if>
+        order by ${id} desc) t)
+
+        <!-- rownum을 기준(r)으로 시작번호부터 끝번호까지 검색   -->
+        where r between #{postStart} and #{postEnd}    /*where r between 1 and 10    where r between 11 and 20*/
+    </select>
+
+
+
+
+
+
+
+
 
     <select id="selectLog"  parameterType="com.example.yoonlove.dto.LogDto"  resultType="com.example.yoonlove.dto.LogDto">
         SELECT * FROM log WHERE log_id = #{log_id}

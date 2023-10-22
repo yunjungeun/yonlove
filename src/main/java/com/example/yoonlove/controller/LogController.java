@@ -22,19 +22,35 @@ public class LogController {
     private PagingService pagingService;
 
     @GetMapping("log/log")
-    public ModelAndView selectListLog(){
+    public ModelAndView selectListLog(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
+
+        PageDto pageDto = new PageDto("log","log_id", page,pdto);  // page???
+
+        PageDto pageInfo = pagingService.paging(pageDto);
+        System.out.println(pageDto.getTotalPost());
+
+        // paging ==> 전체게시글 갯수 구해오는 메소드
+        List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
+        String rink = pagingService.pageRink(pageDto);
 
 
 
 
 
 
-
-
-        List<LogDto> dto =  logService.selectListLog();
+        List<LogDto> dto =  logService.selectListLog(pageInfo);
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("log/listlog");
+        mv.setViewName("log/log");
+
+        System.out.println("오류111111");
         mv.addObject("selectListLog" ,dto);
+
+        System.out.println("오류22222");
+
+        mv.addObject("prefixUrl","log");
+        mv.addObject("paging", pageInfo);  //페이징정보
+        mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
+        mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
         return mv;
     }
 
