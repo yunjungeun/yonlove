@@ -13,6 +13,8 @@
         <strong>{{currentPage}}</strong>
     {{/currentPageFlag}}
     <!--현재 페이지가 아닌 숫자들은 해당페이지로 이동하는 링크생성-->
+
+
     {{^currentPageFlag}}
         <a href="/{{prefixUrl}}/{{pageRink}}{{currentPage}}">{{currentPage}}</a>
     {{/currentPageFlag}}

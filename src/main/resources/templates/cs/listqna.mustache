@@ -30,32 +30,6 @@
 </table>
 
 
-<!--이전 버튼-->
-{{#paging}}
-    {{#hasPre}}
-        <!--{!{검색어유무에따른url}}/{!{실제페이지번호}}-->
-        <a href="/cs/{{pageRink}}{{prePage}}">이전</a>
-    {{/hasPre}}
-{{/paging}}
-<!-- 페이지 번호를 반복문으로 생성 -->
-{{#pagelist}}
-    <!--현재페이지는 링크가 없고 강조표시-->
-    {{#currentPageFlag}}
-        <strong>{{currentPage}}</strong>
-    {{/currentPageFlag}}
-    <!--현재 페이지가 아닌 숫자들은 해당페이지로 이동하는 링크생성-->
-    {{^currentPageFlag}}
-        <a href="/cs/{{pageRink}}{{currentPage}}">{{currentPage}}</a>
-    {{/currentPageFlag}}
-{{/pagelist}}
-
-<!--다음페이지 버튼-->
-{{#paging}}
-    {{#hasNext}}
-        <a href="/cs/{{pageRink}}{{nextPage}}">다음</a>
-    {{/hasNext}}
-{{/paging}}
-
 <form action="/cs/qna" method="GET">
     <select id="searchType" name="searchType">
         <option value="all">선택</option>
@@ -69,6 +43,8 @@
 
 </form>
 
+<!--페이징 처리 레이아웃-->
+{{>layout/paging}}
 
 <a href="/cs/insertqnaview">글 작성</a>
 <a href="/cs/qna">목록</a>
