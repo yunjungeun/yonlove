@@ -1,13 +1,17 @@
 package com.example.yoonlove.controller;
 
-import com.example.yoonlove.dto.ActorDto;
-import com.example.yoonlove.dto.ScenarioDto;
-import com.example.yoonlove.dto.SceneDto;
+import com.example.yoonlove.dto.*;
+import com.example.yoonlove.mapper.FileMapper;
+import com.example.yoonlove.service.FileService;
+import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.SceneService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
@@ -21,7 +25,9 @@ public class SceneController {
     @Autowired
     private FileService fileService;
     @Autowired
-    private FileMapper  fileMapper;
+    private FileMapper fileMapper;
+    @Autowired
+    private PagingService pagingService;
 
 
     @GetMapping("scene/scene")
@@ -61,7 +67,7 @@ public class SceneController {
     }
 
     @PostMapping("/scene/insertscene")
-    public String insertScene(SceneDto dto,MultipartFile file) throws IOException {
+    public String insertScene(SceneDto dto, MultipartFile file) throws IOException {
             sceneService.insertScene(dto);
 
             int lastnum = sceneService.lastPost(dto);

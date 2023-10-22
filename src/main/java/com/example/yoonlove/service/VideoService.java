@@ -1,6 +1,7 @@
 package com.example.yoonlove.service;
 
 
+import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.VideoDto;
 import com.example.yoonlove.mapper.VideoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,11 @@ public class VideoService {
     private VideoMapper videoMapper;
 
 
-    public List<VideoDto> selectListContent() {
-        List<VideoDto> videoList = videoMapper.selectListContent();// 오류원인:videoMapper 얘를 VideoMapper로 했었음..
+    public List<VideoDto> selectListContent(PageDto pageInfo) {
+        List<VideoDto> videoList = videoMapper.selectListContent(pageInfo);// 오류원인:videoMapper 얘를 VideoMapper로 했었음..
         return videoList;
     }
+
 
     public VideoDto selectContent(VideoDto videodto) {
         VideoDto dto = videoMapper.selectContent(videodto);

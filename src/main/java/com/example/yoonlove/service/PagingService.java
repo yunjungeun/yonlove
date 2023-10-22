@@ -26,6 +26,8 @@ public class PagingService {
     private SceneMapper sceneMapper;
     @Autowired
     private ScriptPaperMapper scriptPaperMapper;
+    @Autowired
+    private VideoMapper videoMapper;
 
 
     public PageDto paging(PageDto dto){
@@ -56,7 +58,7 @@ public class PagingService {
             case "scriptpaper" : pageDto = scriptPaperMapper.totalScriptPost(dto); break;
             case "timetable" : pageDto = scriptPaperMapper.totalTimeTablePost(dto); break;
             case "users" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
-            case "video" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
+            case "video" : pageDto = videoMapper.totalContentPost(dto); break;
 
             //오류메세지 출력
             default:
@@ -110,7 +112,8 @@ public class PagingService {
         return pageDto;
     }
 
-    //뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드  //매개변수는 paging 매소드값의 결과이다.
+    //뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드  //매개변수는 paging 매소드값의 결과이다. pageList 메소드는 paging 메소드에 의존함 ..
+    // paging 메소드를 실행되면 PageDto에는 페이지 시작번호 끝번호 등등의 정보가 이미 다 담겨있음 ..!!
     public List<PageDto> pageList(int pageStart, int pageEnd, int currentPage){
         List<PageDto> pagelist = new ArrayList<>();
         for(int i = pageStart; i<= pageEnd; i++){
@@ -146,7 +149,7 @@ public class PagingService {
                 break;
             }
         }
-        //검색 값이 없으면 일반적인 페이지링크를 만들고 값이 있다면 검색어에 대한 페이지링크 생성
+        //검색 값이 없으면 일반적인 페이지링크를 만들고 값이 있다면 검색어에 대한 페이지링크 생성 ( 이 코드는 검색과 페이징을 동시에 했을떄 url에 검색은 안나오고 페이징만 나와서 반장님이 추가한 코드)
         if(keyword == null){
             rink = dto.getTable()+"?page=";
         }else {

@@ -1,11 +1,14 @@
 package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.LogDto;
+import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.service.LogService;
+import com.example.yoonlove.service.PagingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -15,9 +18,19 @@ public class LogController {
 
     @Autowired
     private LogService logService;
+    @Autowired
+    private PagingService pagingService;
 
     @GetMapping("log/log")
     public ModelAndView selectListLog(){
+
+
+
+
+
+
+
+
         List<LogDto> dto =  logService.selectListLog();
         ModelAndView mv = new ModelAndView();
         mv.setViewName("log/listlog");
