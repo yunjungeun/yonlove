@@ -43,7 +43,7 @@
 
     <insert id="insertScriptPaper">
         insert into scriptpaper values(
-        (select concat('script', (nvl(max(substr(script_id, 7)), 0)+1)) from scriptpaper),<!--pk코드 자동증가(수정)-->
+        (select concat('script', (nvl(max(to_number(substr(script_id, 7))), 0)+1)) from scriptpaper),<!--pk코드 자동증가(수정2)-->
         #{scene_id}, <!--script id값 /나중에 조인해서 스크립트 번호가 가야됨-->
         #{video_name}, <!--영상제목-->
         #{video_date}, <!--영상촬영 날짜-->
@@ -105,7 +105,7 @@
 
     <insert id="insertTimeTable">
         insert into timetable values(
-        (select concat('time', (nvl(max(substr(table_id, 4)), 0)+1)) from timetable),<!--pk코드 자동증가(수정)-->
+        (select concat('time', (nvl(max(to_number(substr(table_id, 4))), 0)+1)) from timetable),<!--pk코드 자동증가(수정2)-->
         #{film_time},<!--촬영시간(몇시간 몇분)-->
         #{time_num},<!--타임테이블 번호 자동증가 해야됨-->
         #{ok_ng}, <!--ok판정-->

@@ -38,7 +38,7 @@
 
     <insert id="insertDepartment" parameterType="com.example.yoonlove.dto.DepartmentDto">
         insert into department values(
-        (select concat('dpt', (nvl(max(substr(dpt_id, 4)), 0)+1)) from department),<!--pk코드 자동증가(수정)-->
+        (select concat('dpt', (nvl(max(to_number(substr(dpt_id, 4))), 0)+1)) from department),<!--pk코드 자동증가(수정2)-->
         #{dpt_name},
         #{dpt_function},
         'com1'
