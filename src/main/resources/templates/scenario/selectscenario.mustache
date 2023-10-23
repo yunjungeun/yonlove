@@ -23,52 +23,58 @@
         </tr>
     </table>
 
-
-    <!--스크립트페이퍼 목록-->
+<!--서브 게시판 / 스토리보드-->
     <table border="1" cellpadding="1" cellspacing="1">
         <ul>
             <tr>
+                <td>시나리오 번호</td>
                 <td>씬 번호</td>
-                <td>영상제목</td>
-                <td>촬영일자</td>
-                <td>콘티</td>
+                <td>촬영내용</td>
+                <td>찰영장소</td>
             </tr>
-            {{#selectListScriptPaper}}
+            {{#selectListScene}}
                 <tr>
-                    <td>{{scene_id}}<!--씬 번호가 들어가야함(조인)--></td>
-                    <td><a href="/script/{{script_id}}/selectscriptpaper">{{video_name}}</a></td>
-                    <td>{{video_date}}</td>
-                    <td>{{conti}}</td>
+                    <td>{{scenario_id}}<!--여기누르면 시나리오로 이동해야함--></td>
+                    <td>{{scene_num}}</td>
+                    <td><a href="/scene/{{scene_id}}/selectscene">{{scene_content}}</a></td>
+                    <td>{{scene_place}}</td>
                 </tr>
-            {{/selectListScriptPaper}}
+            {{/selectListScene}}
         </ul>
     </table>
+    <!--서브게시판 / end-->
 
+    <!--서브게시판 페이징-->
     {{>layout/subpaging}}
+
     <!--subPost 검색-->
-    <form action="/script/scriptpaper" method="GET">
+    <form action="/scene/scene" method="GET">
         <select id="searchType" name="searchType">
             <option value="all">선택</option>
-            <option value="title">스크립트 번호</option>
-            <option value="content">액션내용</option>
+            <option value="title">씬</option>
+            <option value="content">내용</option>
             <!-- 필요한 항목 추가 -->
         </select>
         <input type="text" id="search" name="search" placeholder="검색">
-
         <input type="submit" value="검색">
     </form>
+    <!--subPost 검색 / end-->
+
 
     <br/>
+    <!--시나리오 게시판 이동-->
 <a href="/scenario/scenario">목록</a>
 <a href="/scenario/{{selectScenario.scenario_id}}/updatescenarioview">수정</a>
 <a href="javascript:void(0);" onclick="deleteAlert('/scenario/{{selectScenario.scenario_id}}/deletescenario')">삭제</a>
 
 
+    <!--서브게시판 검색 js-->
     <script>
         var url = "/scenario/{{selectScenario.scenario_id}}/selectscenario";
     </script>
     <script src="/static/js/search.js"></script>
 
+<!--게시글 삭제시 경고문 js-->
 <script src="/static/js/deletepost.js"></script>
 
 </body>

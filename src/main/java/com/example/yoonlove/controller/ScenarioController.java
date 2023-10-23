@@ -2,10 +2,10 @@ package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.ScenarioDto;
-import com.example.yoonlove.dto.ScriptPaperDto;
+import com.example.yoonlove.dto.SceneDto;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.ScenarioService;
-import com.example.yoonlove.service.ScriptPaperService;
+import com.example.yoonlove.service.SceneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +20,9 @@ public class ScenarioController {
     private ScenarioService scenarioService;
     @Autowired
     private PagingService pagingService;
-
     @Autowired
-    private ScriptPaperService scriptPaperService;
+    private SceneService sceneService;
+
 
     @GetMapping("/scenario/scenario")
     public ModelAndView selectListScenario(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
@@ -52,15 +52,16 @@ public class ScenarioController {
         mv.addObject("selectScenario", dto);
         //기존 select end
 
-        PageDto pageDto = new PageDto("scriptpaper","script_id", page,pdto);
+
+        PageDto pageDto = new PageDto("scene","scene_id",page,pdto);
         PageDto pageInfo = pagingService.paging(pageDto);
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
-        String rink = pagingService.subPageRink(pageDto, "scenario");
-
-        List<ScriptPaperDto> scriptList = scriptPaperService.selectListScriptPaper(pageInfo);
-        mv.addObject("selectListScriptPaper", scriptList);
+        String rink = pagingService.subPageRink(pageDto,"scenario");
+        List<SceneDto> subList = sceneService.selectListScene(pageInfo);
+        mv.addObject("selectListScene", subList);
 
         String subPk = dto.getScenario_id();
+
         //페이징에 필요한센션
         mv.addObject("subPk",subPk);
         mv.addObject("prefixUrl", "scenario");
