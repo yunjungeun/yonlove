@@ -57,14 +57,13 @@ public class SceneController {
         PageDto pageInfo = pagingService.paging(pageDto);
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.subPageRink(pageDto,"scene");
-        String subPk = dto.getScene_id();
 
         List<ScriptPaperDto> subList = scriptPaperService.selectListScriptPaper(pageInfo);
         mv.addObject("selectListScriptPaper", subList);
 
         //서브 페이징에 필요한섹션
-        mv.addObject("subPk",subPk);
-        mv.addObject("prefixUrl", "scene");
+        mv.addObject("pageDto", pageDto);
+        mv.addObject("prefixUrl", "scene"); //컨트롤러 이름
         mv.addObject("paging", pageInfo);  //페이징정보
         mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달

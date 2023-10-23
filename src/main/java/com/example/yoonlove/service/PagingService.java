@@ -135,8 +135,8 @@ public class PagingService {
         String rink;
         String type=null;
         String keyword=null;
-        String[] keywords = {dto.getTitle(), dto.getWriter(), dto.getContent(), dto.getPkid(),dto.getPkintid()};
-        String[] types = {"title", "writer", "content", "pkid", "pkintid"};
+        String[] keywords = {dto.getTitle(), dto.getWriter(), dto.getContent(), dto.getPkid()};
+        String[] types = {"title", "writer", "content", "pkid"};
 
         //검색을 했는지 안했는지 검출하는 for문// 검색어가 있다면 검색어(keyword)와 검색타입(type)을 검출함
         for (int i = 0 ; i < keywords.length; i++){
@@ -159,8 +159,8 @@ public class PagingService {
         String rink;
         String type=null;
         String keyword=null;
-        String[] keywords = {dto.getTitle(), dto.getWriter(), dto.getContent(), dto.getPkid(),dto.getPkintid()};
-        String[] types = {"title", "writer", "content", "pkid", "pkintid"};
+        String[] keywords = {dto.getTitle(), dto.getWriter(), dto.getContent(), dto.getPkid()};
+        String[] types = {"title", "writer", "content", "pkid"};
 
         //검색을 했는지 안했는지 검출하는 for문// 검색어가 있다면 검색어(keyword)와 검색타입(type)을 검출함
         for (int i = 0 ; i < keywords.length; i++){

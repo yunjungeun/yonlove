@@ -52,6 +52,7 @@ public class ScenarioController {
         mv.addObject("selectScenario", dto);
         //기존 select end
 
+        //fk 검색 값 설정
         pdto.setPkid(dto.getScenario_id());
         PageDto pageDto = new PageDto("scene","scene_id",page,pdto);
 
@@ -61,11 +62,8 @@ public class ScenarioController {
         List<SceneDto> subList = sceneService.selectListScene(pageInfo);
         mv.addObject("selectListScene", subList);
 
-        String subPk = dto.getScenario_id();
-
-        //페이징에 필요한센션
-        mv.addObject("subPk",subPk);
-        mv.addObject("prefixUrl", "scenario");
+        mv.addObject("pageDto", pageDto);
+        mv.addObject("prefixUrl", "scenario"); //컨트롤러 이름
         mv.addObject("paging", pageInfo);  //페이징정보
         mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달

@@ -2,7 +2,7 @@
 {{#paging}}
     {{#hasPre}}
         <!--{!{검색어유무에따른url}}/{!{실제페이지번호}}-->
-        <a href="/{{prefixUrl}}/{{subPk}}/{{pageRink}}{{prePage}}">이전</a>
+        <a href="/{{prefixUrl}}/{{pageDto.pkid}}/{{pageRink}}{{prePage}}">이전</a>
     {{/hasPre}}
 {{/paging}}
 
@@ -16,13 +16,13 @@
 
 
     {{^currentPageFlag}}
-        <a href="/{{prefixUrl}}/{{subPk}}/{{pageRink}}{{currentPage}}">{{currentPage}}</a>
+        <a href="/{{prefixUrl}}/{{pageDto.pkid}}/{{pageRink}}{{currentPage}}">{{currentPage}}</a>
     {{/currentPageFlag}}
 {{/pagelist}}
 
 <!--다음페이지 버튼-->
 {{#paging}}
     {{#hasNext}}
-        <a href="/{{prefixUrl}}/{{subPk}}/{{pageRink}}{{nextPage}}">다음</a>
+        <a href="/{{prefixUrl}}/{{pageDto.pkid}}/{{pageRink}}{{nextPage}}">다음</a>
     {{/hasNext}}
 {{/paging}}

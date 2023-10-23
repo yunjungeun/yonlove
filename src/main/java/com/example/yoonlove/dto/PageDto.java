@@ -26,7 +26,7 @@ public class PageDto {
     private int paging = 10; //게시글 밑 페이징에서 표시될 페이지의 수 값
     private int pageStart; //페에징에서 시작 페이지 값
     private int pageEnd; //페이징에서 마지막 값
-    
+
     //이전 / 다음 존재유무에 대한 변수값
     private boolean hasPre;
     private boolean hasNext;
@@ -40,7 +40,7 @@ public class PageDto {
 
     //검색관련 프로퍼티
     private String pkid;
-    private String pkintid;
+    private int pkintid;
     private String writer;
     private String content;
     private String title;
