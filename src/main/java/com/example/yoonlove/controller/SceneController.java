@@ -51,6 +51,8 @@ public class SceneController {
         mv.addObject("selectScene", dto);
 
         //서브게시판 리스트
+        pdto.setPkid(dto.getScene_id());
+
         PageDto pageDto = new PageDto("scriptpaper","script_id", page,pdto);
         PageDto pageInfo = pagingService.paging(pageDto);
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
