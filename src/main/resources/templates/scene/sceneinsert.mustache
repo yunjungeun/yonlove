@@ -14,7 +14,8 @@
 <form id="alert" action="/scene/insertscene" method="get">
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
-            <td>시나리오<input name="scenario_id" type="text" placeholder="드롭다운" readonly></td>
+            <td>시나리오
+            <select id="fk" name="scenario_id"></select></td>
             <td>씬 번호<input name="scene_num" type="number" placeholder="미입력시 자동생성"></td>
         </tr>
         <tr>
@@ -35,5 +36,7 @@
 number데이터형에 공란이 들어가면서 db오류 발생<br/>
 마이바티스 문법으로 if문으로 해결 가능<br/>
 시나리오 번호 자동증가는 공란이 들어갔을때 어떻게 처리될 것인지?<br/>
+
+<script src="/static/js/dropdown.js"></script>
 </body>
 </html>

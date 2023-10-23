@@ -1,9 +1,6 @@
 package com.example.yoonlove.controller;
 
-import com.example.yoonlove.dto.ActorDto;
-import com.example.yoonlove.dto.PageDto;
-import com.example.yoonlove.dto.SceneDto;
-import com.example.yoonlove.dto.ScriptPaperDto;
+import com.example.yoonlove.dto.*;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.SceneService;
 import com.example.yoonlove.service.ScriptPaperService;
@@ -23,6 +20,7 @@ public class SceneController {
     private PagingService pagingService;
     @Autowired
     private ScriptPaperService scriptPaperService;
+
 
     @GetMapping("scene/scene")
     public ModelAndView selectListScene(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
@@ -72,8 +70,13 @@ public class SceneController {
     }
 
     @GetMapping("/scene/insertsceneview")
-    public String insertSceneView(){
-        return "/scene/sceneinsert";
+    public ModelAndView insertSceneView(){
+        List<ScenarioDto> scenarioDto = sceneService.selectFk();
+
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("fkList",scenarioDto);
+        mv.setViewName("/scene/sceneinsert");
+        return mv;
     }
 
     @GetMapping("/scene/insertscene")

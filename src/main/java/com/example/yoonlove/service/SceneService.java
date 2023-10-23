@@ -2,6 +2,7 @@ package com.example.yoonlove.service;
 
 import com.example.yoonlove.dto.ActorDto;
 import com.example.yoonlove.dto.PageDto;
+import com.example.yoonlove.dto.ScenarioDto;
 import com.example.yoonlove.dto.SceneDto;
 import com.example.yoonlove.mapper.SceneMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class SceneService {
     }
     public List<SceneDto> selectListScene(PageDto pageInfo) {
         return sceneMapper.selectListScene(pageInfo);
+    }
+    public List<ScenarioDto> selectFk(){
+        return sceneMapper.selectFk();
     }
     public void insertScene(SceneDto dto){
         sceneMapper.insertScene(dto);
