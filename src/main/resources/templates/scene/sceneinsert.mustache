@@ -7,7 +7,6 @@
     <title>Document</title>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/static/js/cu_alert.js"></script>
 
 </head>
 <body>
@@ -27,11 +26,10 @@
             <td>촬영장소 <input class="field3" name="scene_place" type="text"/></td>
         </tr>
     </table>
-    <input type="submit" value="등록" onclick="mappingurl('/scene/insertscene','/scene/scene',3,'작성')">
+    <input id="submit-button" type="submit" value="등록" onclick="mappingurl('/scene/insertscene','/scene/scene',3,'작성')">
 </form>
 
 
-<script>var test = '{{{fkList}}}';</script>
 
 
 <a href="/scene/scene">취소</a>
@@ -42,6 +40,12 @@ number데이터형에 공란이 들어가면서 db오류 발생<br/>
 마이바티스 문법으로 if문으로 해결 가능<br/>
 시나리오 번호 자동증가는 공란이 들어갔을때 어떻게 처리될 것인지?<br/>
 
+
+<script>
+    var test = '{{{fkList}}}';
+    var selectName = "scenario_id";
+</script>
 <script src="/static/js/dropdown.js"></script>
+<script src="/static/js/cu_alert.js"></script>
 </body>
 </html>

@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class SceneController {
@@ -78,10 +79,10 @@ public class SceneController {
 
 
 
-        List<String> testlist = new ArrayList<>();
+        Map<String, String> testlist = new HashMap<>();
 
         for(int i=0; i< scenarioDto.size(); i++){
-            testlist.add(scenarioDto.get(i).getScenario_name());
+            testlist.put(scenarioDto.get(i).getScenario_id(),scenarioDto.get(i).getScenario_name());
         }
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonList = objectMapper.writeValueAsString(testlist);
@@ -95,6 +96,7 @@ public class SceneController {
 
     @GetMapping("/scene/insertscene")
     public String insertScene(SceneDto dto){
+        System.out.println(dto.getScenario_id());
         sceneService.insertScene(dto);
         return "redirect:/scene/scene";
     }

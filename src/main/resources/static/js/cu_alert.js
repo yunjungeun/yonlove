@@ -1,4 +1,4 @@
-
+var fkid = selectName;
 function mappingurl(submiturl,sucessurl, int, text){
     document.getElementById("alert").addEventListener("submit", function (event){
     event.preventDefault();
@@ -12,6 +12,12 @@ function mappingurl(submiturl,sucessurl, int, text){
              data[field] = $(this).val();
             });
         }
+
+                // 추가: select 요소의 값을 가져와서 데이터 객체에 추가
+    if(fkid != null){
+        var selectedValue = $("#fk").val(); // #fk는 select 요소의 ID입니다.
+        data[fkid] = selectedValue;
+    }
 
        $.ajax({
             url: submiturl,

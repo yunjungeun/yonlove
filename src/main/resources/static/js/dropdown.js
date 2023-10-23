@@ -3,9 +3,9 @@ var scenario = JSON.parse(test);
 
 var dropdown = document.getElementById("fk");
 
-for(var i = 0; i< scenario.length; i++){
+for(var key in scenario){
     var option = document.createElement("option");
-    option.value = 'scenario_name';
-    option.text = scenario[i];
+    option.value = key;
+    option.text = scenario[key];
     dropdown.appendChild(option);
 }
