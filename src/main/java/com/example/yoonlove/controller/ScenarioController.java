@@ -2,8 +2,10 @@ package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.ScenarioDto;
+import com.example.yoonlove.dto.ScriptPaperDto;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.ScenarioService;
+import com.example.yoonlove.service.ScriptPaperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,9 @@ public class ScenarioController {
     private ScenarioService scenarioService;
     @Autowired
     private PagingService pagingService;
+
+    @Autowired
+    private ScriptPaperService scriptPaperService;
 
     @GetMapping("/scenario/scenario")
     public ModelAndView selectListScenario(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
@@ -39,11 +44,29 @@ public class ScenarioController {
     }
 
     @GetMapping("/scenario/{scenario_id}/selectscenario/")
-    public ModelAndView selectScenario(ScenarioDto scenarioDto){
+    public ModelAndView selectScenario(ScenarioDto scenarioDto, @RequestParam(name="page", defaultValue = "1") int page, PageDto pdto ){
+        //기존 select
         ScenarioDto dto = scenarioService.selectScenario(scenarioDto);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/scenario/selectscenario");
         mv.addObject("selectScenario", dto);
+        //기존 select end
+
+        PageDto pageDto = new PageDto("scriptpaper","script_id", page,pdto);
+        PageDto pageInfo = pagingService.paging(pageDto);
+        List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
+        String rink = pagingService.pageRink(pageDto);
+
+        List<ScriptPaperDto> scriptList = scriptPaperService.selectListScriptPaper(pageInfo);
+        mv.addObject("selectListScriptPaper", scriptList);
+
+        //페이징에 필요한센션
+        mv.addObject("prefixUrl", "scenario");
+        mv.addObject("paging", pageInfo);  //페이징정보
+        mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
+        mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
+
+
         return mv;
     }
 
