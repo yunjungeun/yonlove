@@ -65,7 +65,9 @@ public class CsController {
         mv.setViewName("/cs/listnotice");
         mv.addObject("selectListNotice", dto);
 
+
         //페이징에 필요한센션
+        mv.addObject("prefixUrl", "cs");
         mv.addObject("paging", pageInfo);  //페이징정보
         mv.addObject("pagelist", pagelist); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
@@ -99,6 +101,7 @@ public class CsController {
 
     @GetMapping("/cs/insertnotice")
     public String insertNotice(NoticeDto dto){
+
         csService.insertNotice(dto);
         return "/cs/notice";
     }
@@ -113,6 +116,7 @@ public class CsController {
     }
     @GetMapping("/cs/{notice_id}/updatenotice")
     public String updateNotice(NoticeDto dto){
+        System.out.println(dto.toString());
         csService.updateNotice(dto);
         return "/cs/notice";
     }
@@ -149,7 +153,9 @@ public class CsController {
         mv.setViewName("/cs/listqna");
         mv.addObject("selectListQnA", pagedto);
 
+
         //페이징에 필요한센션
+        mv.addObject("prefixUrl", "cs");
         mv.addObject("paging", pageInfo);  //페이징정보
         mv.addObject("pagelist", pagelist); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달

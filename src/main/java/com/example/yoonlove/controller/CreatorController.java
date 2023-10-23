@@ -37,6 +37,7 @@ import java.util.List;
             mv.addObject("selectListCreator", dto);
 
             //페이징에 필요한센션
+            mv.addObject("prefixUrl", "creator");
             mv.addObject("paging", pageInfo);  //페이징정보
             mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
             mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달

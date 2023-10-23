@@ -42,6 +42,8 @@ public class ProjectController {
 
     @GetMapping("project/insertproject")   // 작성 후 입력값 넘기는~
     public String insertProject(ProjectDto projectDto){
+        System.out.println("test");
+        System.out.println(projectDto.toString());
         projectService.insertProject(projectDto);
         return "redirect:/project/listproject";
     }

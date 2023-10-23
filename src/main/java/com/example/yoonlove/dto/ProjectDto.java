@@ -2,7 +2,6 @@ package com.example.yoonlove.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.util.Date;
 
@@ -22,7 +21,7 @@ public class ProjectDto {
     private Date project_reg_date;  // 작성일10
     private String project_flag; // 종료여부11
     private String project_reason; //종료사유12
-    private String com_id;  // 기업아이디13
+    private String company_id;  // 기업아이디13
 
     @Override
     public String toString() {
@@ -39,7 +38,7 @@ public class ProjectDto {
                 ", project_reg_date=" + project_reg_date +
                 ", project_flag='" + project_flag + '\'' +
                 ", project_reason='" + project_reason + '\'' +
-                ", com_id='" + com_id + '\'' +
+                ", com_id='" + company_id + '\'' +
                 '}';
     }
 }

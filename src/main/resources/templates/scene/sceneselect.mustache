@@ -24,7 +24,8 @@
 
 <a href="/scene/scene">목록</a>
     <a href="/scene/{{selectScene.scene_id}}/updatesceneview">수정</a>
-    <a href="/scene/{{selectScene.scene_id}}/deletescene">삭제</a>
+    <a href="javascript:void(0);" onclick="deleteAlert('/scene/{{selectScene.scene_id}}/deletescene')">삭제</a>
 
+    <script src="/static/js/deletepost.js"></script>
 </body>
 </html>

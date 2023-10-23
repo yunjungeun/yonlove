@@ -5,27 +5,31 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
+
 </head>
 <body>
-<form method="get" action="/script/{{selectScriptPaper.script_id}}/updatescriptpaper">
+<form id="alert" method="get" action="/script/{{selectScriptPaper.script_id}}/updatescriptpaper">
     <input name="script_id" type="hidden" value="{{selectScriptPaper.script_id}}"/>
 
 <table border="1" cellpadding="1" cellspacing="1">
     <tr>
         <td>씬 번호(자동입력 필요)<input name="scene_id" type="text" value="{{selectScriptPaper.scene_id}}" ></td>
-        <td>영상 제목<input name="video_name" type="text" value="{{selectScriptPaper.video_name}}" ></td>
-        <td>촬영날짜<input name="video_date" type="date" value="{{selectScriptPaper.video_date}}" ></td>
-        <td>촬영시작시간<input name="video_time" type="date" value="{{selectScriptPaper.video_time}}" ></td>
-        <td>촬영종료시간<input name="video_end_time" type="date" value="{{selectScriptPaper.video_end_time}}" ></td>
+        <td>영상 제목<input class="field1" name="video_name" type="text" value="{{selectScriptPaper.video_name}}" ></td>
+        <td>촬영날짜<input class="field2" name="video_date" type="date" value="{{selectScriptPaper.video_date}}" ></td>
+        <td>촬영시작시간<input class="field3" name="video_time" type="date" value="{{selectScriptPaper.video_time}}" ></td>
+        <td>촬영종료시간<input class="field4" name="video_end_time" type="date" value="{{selectScriptPaper.video_end_time}}" ></td>
     </tr>
     <tr>
         <td>액션 이미지 첨부파일 <input name="action_image" type="text" value="{{selectScriptPaper.action_image}}" /></td>
-        <td>액션 내용 <input name="action_content" type="text" value="{{selectScriptPaper.action_content}}" /></td>
-        <td>카메라포지션 첨부파일 <input name="position_image" type="text" value="{{selectScriptPaper.position_image}}" /></td>
-        <td>콘티 <input name="conti" type="text" value="{{selectScriptPaper.conti}}" /></td>
+        <td>액션 내용 <input class="field5" name="action_content" type="text" value="{{selectScriptPaper.action_content}}" /></td>
+        <td>카메라포지션 첨부파일 <input class="field6" name="position_image" type="text" value="{{selectScriptPaper.position_image}}" /></td>
+        <td>콘티 <input class="field7" name="conti" type="text" value="{{selectScriptPaper.conti}}" /></td>
     </tr>
 </table>
-    <input type="submit" value="수정"/>
+    <input type="submit" value="수정" onclick="mappingurl('/script/{{selectScriptPaper.script_id}}/updatescriptpaper','/script/scriptpaper',7,'수정')"/>
 </form>
 <a href="/script/scriptpaper">취소</a>
 <br/>현재까지 버그<br/>

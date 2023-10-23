@@ -48,8 +48,6 @@ public class PageDto {
 
     private String search;
 
-
-
     public PageDto(){}
     public PageDto(String table, String pkid, int currentPage, PageDto dto){
         this.table = table;
