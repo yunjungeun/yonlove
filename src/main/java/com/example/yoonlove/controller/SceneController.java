@@ -4,12 +4,15 @@ import com.example.yoonlove.dto.*;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.SceneService;
 import com.example.yoonlove.service.ScriptPaperService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -70,11 +73,22 @@ public class SceneController {
     }
 
     @GetMapping("/scene/insertsceneview")
-    public ModelAndView insertSceneView(){
+    public ModelAndView insertSceneView() throws JsonProcessingException{
         List<ScenarioDto> scenarioDto = sceneService.selectFk();
 
+
+
+        List<String> testlist = new ArrayList<>();
+
+        for(int i=0; i< scenarioDto.size(); i++){
+            testlist.add(scenarioDto.get(i).getScenario_name());
+        }
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonList = objectMapper.writeValueAsString(testlist);
+
+
         ModelAndView mv = new ModelAndView();
-        mv.addObject("fkList",scenarioDto);
+        mv.addObject("fkList", jsonList);
         mv.setViewName("/scene/sceneinsert");
         return mv;
     }

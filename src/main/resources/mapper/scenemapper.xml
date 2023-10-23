@@ -7,7 +7,7 @@
     </select>
 
     <select id="selectFk">
-        SELECT scenario_id, scenario_num, scenario_name FROM scenario
+        SELECT scenario_id, scenario_num, scenario_name FROM scenario order by scenario_id desc
     </select>
 
 
@@ -57,6 +57,7 @@
         #{story_board},<!--스토리보드 내용-->
         #{scene_content}, <!--스토리보드 요약-->
         'scenario1' <!--시나리오 id 조인해서 드롭다운 형태로 선택할수 있어야함-->
+        <!--(select scenario_id from scenario where scenario_name=#{scenario_name})-->
         )
     </insert>
 
