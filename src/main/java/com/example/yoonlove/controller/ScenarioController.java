@@ -43,7 +43,7 @@ public class ScenarioController {
         return mv;
     }
 
-    @GetMapping("/scenario/{scenario_id}/selectscenario/")
+    @GetMapping("/scenario/{scenario_id}/selectscenario")
     public ModelAndView selectScenario(ScenarioDto scenarioDto, @RequestParam(name="page", defaultValue = "1") int page, PageDto pdto ){
         //기존 select
         ScenarioDto dto = scenarioService.selectScenario(scenarioDto);
@@ -55,12 +55,14 @@ public class ScenarioController {
         PageDto pageDto = new PageDto("scriptpaper","script_id", page,pdto);
         PageDto pageInfo = pagingService.paging(pageDto);
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
-        String rink = pagingService.pageRink(pageDto);
+        String rink = pagingService.subPageRink(pageDto, "scenario");
 
         List<ScriptPaperDto> scriptList = scriptPaperService.selectListScriptPaper(pageInfo);
         mv.addObject("selectListScriptPaper", scriptList);
 
+        String subPk = dto.getScenario_id();
         //페이징에 필요한센션
+        mv.addObject("subPk",subPk);
         mv.addObject("prefixUrl", "scenario");
         mv.addObject("paging", pageInfo);  //페이징정보
         mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트

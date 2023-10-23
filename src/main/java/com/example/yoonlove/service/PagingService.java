@@ -155,6 +155,30 @@ public class PagingService {
         return rink;
     }
 
+    public String subPageRink(PageDto dto, String upwardPostTable){
+        String rink;
+        String type=null;
+        String keyword=null;
+        String[] keywords = {dto.getTitle(), dto.getWriter(), dto.getContent(), dto.getPkid(),dto.getPkintid()};
+        String[] types = {"title", "writer", "content", "pkid", "pkintid"};
+
+        //검색을 했는지 안했는지 검출하는 for문// 검색어가 있다면 검색어(keyword)와 검색타입(type)을 검출함
+        for (int i = 0 ; i < keywords.length; i++){
+            if(keywords[i] != null ){
+                keyword= keywords[i];
+                type = types[i];
+                break;
+            }
+        }
+        //검색 값이 없으면 일반적인 페이지링크를 만들고 값이 있다면 검색어에 대한 페이지링크 생성
+        if(keyword == null){
+            rink = "select"+upwardPostTable+"?page=";
+        }else {
+            rink = "select"+upwardPostTable + "?" + type+ "=" +keyword + "&page=";
+        }
+        return rink;
+    }
+
     public List<NoticeDto> postList(PageDto dto){return pageMapper.postList(dto);}
 
 }
