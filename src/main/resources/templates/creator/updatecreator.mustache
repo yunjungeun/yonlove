@@ -6,9 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>업뎃수정</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
 </head>
 <body>
-<form id="updateFrom" method="get" action="/creator/updatecreator/{{selectCreator.ch_id}}">
+<form id="alert" method="get" action="/creator/updatecreator/{{selectCreator.ch_id}}">
 <div id="div_box">
     <h1>게시글 수정</h1>
     <hr>
@@ -20,21 +21,21 @@
 
         <tr>
             <td bgcolor="pink">채널명</td>
-            <td align="left"><input type="text" name="ch_name" value="{{selectCreator.ch_name}}"/></td>
+            <td align="left"><input type="text"class="field1"  name="ch_name" value="{{selectCreator.ch_name}}"/></td>
         </tr>
 
         <tr>
             <td bgcolor="pink">구독자수</td>
-            <td align="left"> <input type="number" name="ch_sub" value="{{selectCreator.ch_sub}}"/></td>
+            <td align="left"> <input type="number"class="field2"  name="ch_sub" value="{{selectCreator.ch_sub}}"/></td>
         </tr>
 
         <tr>
             <td bgcolor="pink">유저ID</td>
-            <td align="left"><input type="text" name="user_id" value="{{selectCreator.user_id}}"/></td>
+            <td align="left"><input type="text" class="field3" name="user_id" value="{{selectCreator.user_id}}"/></td>
         </tr>
 
     </table>
-        <input type="submit" value="수정" id="updateBtn"/>
+        <input type="submit" value="수정" id="updateBtn" onclick="mappingurl('/creator/updatecreator/{{selectCreator.ch_id}}','/creator/creater', 3,'수정')"/>
     <hr>
     <a href="/creator/updatecreatorview/{{selectCreator.ch_id}}">게시글 수정</a>&nbsp;&nbsp;&nbsp;
     <a href="#" class="delete-link" data-id="{{selectCreator.ch_id}}">게시글 삭제</a>&nbsp;
@@ -42,7 +43,7 @@
 </div>
 </form>
 
-<script>
+<!--<script>
     document.getElementById("updateFrom").addEventListener("submit", function (event) {
         event.preventDefault();
 
@@ -72,6 +73,6 @@
             }
         });
     });
-</script>
+</script>-->
 </body>
 </html>

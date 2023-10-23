@@ -5,18 +5,21 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>예산 추가 </title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
+
 </head>
 <body>
 <form action="/project/insertbudget" method="get">
 
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
-            <td>예산이름 <input name="budget_name" type="text" placeholder="예산이름"/></td>
-            <td>예산금액 <input name="budget_amount" type="number" placeholders="예산금액"/></td>
+            <td>예산이름 <input class="field1" name="budget_name" type="text" placeholder="예산이름"/></td>
+            <td>예산금액 <input class="field2" name="budget_amount" type="number" placeholders="예산금액"/></td>
 
         </tr>
     </table>
-    <input type="submit" value="등록"/>
+    <input type="submit" value="등록" onclick="mappingurl('/project/insertbudget','/project/budget', 2,'작성')"/>
 </form>
 <a href="/project/listbudget">목록으로 가기</a>
 

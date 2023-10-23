@@ -22,7 +22,29 @@
     </ul>
 </table>
 <a href="/project/insertprojectview" role="button">작성</a>
-<a href="/project/listproject">목록</a>
+<a href="/project/project">목록</a>  <!-- 목록의 url 주소값은 컨트롤러 주소와 동일 -->
 <a href="/index">홈 페이지</a>
+
+<!--페이징 처리 레이아웃-->
+{{>layout/paging}}
+
+<!--검색-->
+<br/>
+<form action="/project/project" method="GET">
+    <select id="searchType" name="searchType">
+        <option value="all">선택</option>
+        <option value="title">프로젝트이름</option>
+        <!-- 필요한 항목 추가 -->
+    </select>
+    <input type="text" id="search" name="search" placeholder="검색">
+
+   <input type="submit" value="검색">
+</form>
+
+<script>
+    var url = "/project/project";
+</script>
+<script src="/static/js/search.js"></script>
+
 </body>
 </html>

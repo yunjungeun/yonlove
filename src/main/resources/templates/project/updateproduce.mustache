@@ -5,20 +5,24 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>제작(프로듀스) 수정페이지 </title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
+
 </head>
 <body>
-<form action="/project/insertproduce" method="get">
+<form id="alert" action="/project/updateproduce/{{selectProduce.pd_id}}" method="get">
 
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
-            <td>이름 <input name="pd_name" type="text" placeholder="이름"/></td>
-            <td>역할 <input name="role" type="text" placeholders="역할"/></td>
-            <td>배역 <input name="casting" type="text" placeholders="배역"/></td>
+            <td>이름 <input class="field1" name="pd_name" type="text" placeholder="이름"/></td>
+            <td>역할 <input class="field2" name="role" type="text" placeholders="역할"/></td>
+            <td>배역 <input class="field3" name="casting" type="text" placeholders="배역"/></td>
         </tr>
     </table>
-    <input type="submit" value="수정"/>
+    <input type="submit" value="수정" onclick="mappingurl('/project/updateproduce/{{selectProduce.pd_id}}','/project/produce', 3,'수정')"/>
 </form>
-<a href="/project/listproduce">목록으로 가기</a>
+<a href="/project/produce">목록으로 가기</a>
 
 </body>
 </html>

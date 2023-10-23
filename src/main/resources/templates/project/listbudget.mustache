@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>예산서 리스트</h1>
-<form action="/project/listbudget" method="GET" onsubmit="return submitForm()">
+<form action="/project/budget" method="GET" >
     <table border="1" cellpadding="1" cellspacing="1">
         <ul>
 
@@ -24,34 +24,41 @@
             {{/selectListBudget}}
         </ul>
     </table>
-
-    <tr>
-        <td>
-            <!--  원래 URL주소는: searchType=projectId&content=311 로 get주소로 나옴
-            따로 DB 검색 Dto(BudgetSearchDto)에 name,projectId를 설정해놔서
-            주소 값을 변경해야함 -> 이부분은 자바스크립트로 변경처리
-             -->
-            <select id="searchType" name="searchType">
-                <option value="">전체</option>
-                <option value="title">제목</option>
-                <option value="id">프로젝트 아이디</option>
-                <!-- 필요한 항목 추가 -->
-            </select>
-        </td>
-
-        <td>
-            <input type="text" id="search" name="search" placeholder="검색">
-        </td>
-        <input type="submit" value="검색">
-   <!-- </tr> <input type="button" value="검색" onclick="submitForm()">-->
 </form>
 
 <a href="/project/insertbudgetview" role="button">작성</a>
-<a href="/project/listbudget" role="button">목록으로 </a>
+<a href="/project/budget" role="button">목록으로 </a>
 
 <a href="/index">홈 페이지</a>
 
+{{>layout/paging}}
+
+
+<!--  검색!!!!!!!
+원래 URL주소는: searchType=projectId&content=311 로 get주소로 나옴
+따로 DB 검색 Dto(BudgetSearchDto)에 name,projectId를 설정해놔서
+주소 값을 변경해야함 -> 이부분은 자바스크립트로 변경처리
+-->
+
+<br/>
+<form action="/project/budget" method="GET">
+    <select id="searchType" name="searchType">
+        <option value="all">선택</option>
+        <option value="title">제작예산서 이름</option>
+        <!-- 필요한 항목 추가 -->
+    </select>
+
+    <input type="text" id="search" name="search" placeholder="검색">
+    <input type="submit" value="검색">
+</form>
+
 <script>
+    var url = "/project/budget";
+</script>
+<script src="/static/js/search.js"></script>
+
+
+<!--<script>
     // search 할때, 기본 URL 주소값을 변경하기 위해..
     function submitForm() {
         //  위의 select의 name인 서치타입을 가져오고 해당 입력값을 가져옴
@@ -98,7 +105,7 @@
 
  // event.preventDefault()는 "검색" 버튼 클릭 시 폼이 서버로 데이터를 전송하는 기본 동작을 중단시키는 역할을 합니다.
 //그 후, JavaScript 코드에서 사용자 정의 동작을 수행할 수 있게 됩니다.
-</script>
+</script>-->
 </body>
 </html>
 

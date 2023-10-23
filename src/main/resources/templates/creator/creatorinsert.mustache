@@ -7,22 +7,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
 </head>
 <body>
-<form id="insertForm" action="/creator/insertcreator" method="get">
+<form id="alert" action="/creator/insertcreator" method="get">
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
-            <td>이름 <input name="ch_name" type="text" placeholder="이름"/></td>
-            <td>SUB <input name="ch_sub" type="number" placeholder="SUB"/></td>
-            <td>유저아이디<input type="text" name="user_id" placeholder="유저아이디" ></td>
+            <td>이름 <input class="field1" name="ch_name" type="text" placeholder="이름"/></td>
+            <td>SUB <input class="field2" name="ch_sub" type="number" placeholder="SUB"/></td>
+            <td>유저아이디<input type="text" class="field3" name="user_id" placeholder="유저아이디" ></td>
         </tr>
     </table>
-    <input type="submit" value="등록" id="submitBtn" />
+    <input type="submit" value="등록" id="submitBtn" onclick="mappingurl('/creator/insertcreator','/creator/creater', 3,'작성')" />
+                                                                        <!--컨트롤러 insert 주소 ,    클릭 후 메인주소, 작성값의 갯수 , text 나오는값 -->
 </form>
 <a href="/creator/creater">목록으로 가기</a>
 
 
-<script>
+<!--<script>
     document.getElementById("insertForm").addEventListener("submit", function (event) {
         event.preventDefault();  // 기본 제출동작을 멈추게함
 
@@ -49,7 +51,7 @@
             }
         });
     });
-</script>
+</script>-->
 </body>
 </html>
 
