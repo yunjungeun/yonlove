@@ -16,6 +16,10 @@
         <if test="content != null and search != ''">
             AND scene_content like '%${content}%'
         </if>
+        <!--서브게시판pk 설정-->
+        <if test="pkid != null">
+            AND scenario_id = #{pkid}
+        </if>
     </select>
 
 

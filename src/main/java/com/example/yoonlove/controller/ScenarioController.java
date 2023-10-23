@@ -52,8 +52,9 @@ public class ScenarioController {
         mv.addObject("selectScenario", dto);
         //기존 select end
 
-
+        pdto.setPkid(dto.getScenario_id());
         PageDto pageDto = new PageDto("scene","scene_id",page,pdto);
+
         PageDto pageInfo = pagingService.paging(pageDto);
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.subPageRink(pageDto,"scenario");
