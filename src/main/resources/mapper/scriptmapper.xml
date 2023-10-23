@@ -17,6 +17,9 @@
         <if test="content != null and search != ''">
             AND action_content like '%${content}%'
         </if>
+        <if test="pkid != null">
+            AND scene_id = #{pkid}
+        </if>
     </select>
 
 
