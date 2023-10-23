@@ -7,19 +7,22 @@
     <title>Document</title>
 </head>
 <body>
-<form method="get" action="/admin/{{selectDpt.dpt_id}}/updatedpt">
+<form id="alert" method="get" action="/admin/{{selectDpt.dpt_id}}/updatedpt">
 <table border="1" cellpadding="1" cellspacing="1">
     <tr>
-        <td>부서명 <input name="dpt_name" type="text" value="{{selectDpt.dpt_name}}" /></td>
-        <td>부서기능 <input name="dpt_function" type="text" value="{{selectDpt.dpt_function}}"/></td>
+        <td>부서명 <input class="field1" name="dpt_name" type="text" value="{{selectDpt.dpt_name}}" /></td>
+        <td>부서기능 <input class="field2" name="dpt_function" type="text" value="{{selectDpt.dpt_function}}"/></td>
         <td>여기에 직원현황이 나와야하나?</td>
     </tr>
 </table>
-<input type="submit" value="수정"/>
+<input type="submit" value="수정"  onclick="mappingurl('/admin/{{selectDpt.dpt_id}}/updatedpt','/admin/department',2,'수정')"/>
 </form>
 
 <a href="/admin/department">취소</a>
 
 <br/>현재까지 버그<br/>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/static/js/cu_alert.js"></script>
 </body>
 </html>

@@ -25,6 +25,8 @@
 
 <a href="/scenario/scenario">목록</a>
 <a href="/scenario/{{selectScenario.scenario_id}}/updatescenarioview">수정</a>
-<a href="/scenario/{{selectScenario.scenario_id}}/deletescenario">삭제</a>
+<a href="javascript:void(0);" onclick="deleteAlert('/scenario/{{selectScenario.scenario_id}}/deletescenario')">삭제</a>
+
+<script src="/static/js/deletepost.js"></script>
 </body>
 </html>

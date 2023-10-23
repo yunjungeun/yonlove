@@ -41,7 +41,7 @@
 
     <insert id="insertScene">
         insert into scene values(
-        (select concat('scene', (nvl(max(substr(scene_id, 6)), 0)+1)) from scene),<!--pk코드 자동증가(수정)-->
+        (select concat('scene', (nvl(max(to_number(substr(scene_id, 6)), 0)+1))) from scene),<!--pk코드 자동증가(수정2)-->
         (select nvl(max(scene_num),0)+1 from scene),<!--씬 번호 자동증가-->
         null,<!--이미지 첨부파일 주소-->
         #{scene_place}, <!--촬영장소-->
@@ -106,7 +106,7 @@
 
     <insert id="insertActor">
         insert into actor values(
-        (select concat('actor', (nvl(max(substr(actor_id, 6)), 0)+1)) from actor),<!--pk코드 자동증가(수정)-->
+        (select concat('actor', (nvl(max(to_number(substr(actor_id, 6)), 0)+1))) from actor),<!--pk코드 자동증가(수정2)-->
         'scene1', <!--외래키로, 조인해온 외래키를 드롭다운으로 선택하게끔 해야함-->
         'pd1', <!--외래키로, 조인해온 외래키를 드롭다운으로 선택하게끔 해야함-->
         #{actor_info}<!--출연자정보-->

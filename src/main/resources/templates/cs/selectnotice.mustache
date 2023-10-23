@@ -19,6 +19,9 @@
 </table>
 <a href="/cs/notice">목록</a>
 <a href="/cs/{{selectNotice.notice_id}}/updatenoticeview">수정</a>
-<a href="/cs/{{selectNotice.notice_id}}/deletenotice">삭제</a>
+<a href="javascript:void(0);" onclick="deleteAlert('/cs/{{selectNotice.notice_id}}/deletenotice')">삭제</a>
+
+<script src="/static/js/deletepost.js"></script>
+
 </body>
 </html>
