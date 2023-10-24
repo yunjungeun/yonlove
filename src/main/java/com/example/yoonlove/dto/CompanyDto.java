@@ -13,6 +13,6 @@ public class CompanyDto {
     private Date company_date;
     private String company_homepage;
     private String company_adress1;
-    private String company__adress2;
+    private String company_adress2;
     private String company_email;
 }
