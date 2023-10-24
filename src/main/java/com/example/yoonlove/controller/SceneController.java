@@ -72,8 +72,10 @@ public class SceneController {
 
     @GetMapping("/scene/insertsceneview")
     public ModelAndView insertSceneView() throws JsonProcessingException{
+        //fk값으로 db검색결과
         List<ScenarioDto> scenarioDto = sceneService.selectFk();
 
+        //검색리스트를 json 리스트 문자열로 생성
         String jsonList = sceneService.fkJson(scenarioDto);
 
         ModelAndView mv = new ModelAndView();

@@ -1,11 +1,13 @@
 package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.PageDto;
+import com.example.yoonlove.dto.ProjectDto;
 import com.example.yoonlove.dto.ScenarioDto;
 import com.example.yoonlove.dto.SceneDto;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.ScenarioService;
 import com.example.yoonlove.service.SceneService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -75,12 +77,23 @@ public class ScenarioController {
     }
 
     @GetMapping("/scenario/insertscenarioview")
-    public String insertView(){
-        return "/scenario/insertscenario";
+    public ModelAndView insertView() throws JsonProcessingException {
+        //fk값으로 db검색결과
+        List<ProjectDto> projectDto = scenarioService.selectFk();
+
+        //검색리스트를 json 리스트 문자열로 생성
+        String jsonList = scenarioService.fkJson(projectDto);
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/scenario/insertscenario");
+        mv.addObject("fkList", jsonList);
+        return mv;
     }
 
     @GetMapping("/scenario/insertscenario")
     public String insertScenario(ScenarioDto dto){
+        System.out.println(dto.toString());
+
         scenarioService.insertScenario(dto);
         return "redirect:/scenario/scenario";
     }

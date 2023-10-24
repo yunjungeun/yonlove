@@ -30,6 +30,7 @@ function mappingurl(submiturl,sucessurl, int, text, cnt){
         data[fkid] = selectedValue;
     }
 
+
        $.ajax({
             url: submiturl,
             type : "GET",

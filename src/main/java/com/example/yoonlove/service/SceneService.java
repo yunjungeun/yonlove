@@ -25,6 +25,7 @@ public class SceneService {
     public List<SceneDto> selectListScene(PageDto pageInfo) {
         return sceneMapper.selectListScene(pageInfo);
     }
+    //fk로 db를list를 출력하는 메소드
     public List<ScenarioDto> selectFk(){
         return sceneMapper.selectFk();
     }

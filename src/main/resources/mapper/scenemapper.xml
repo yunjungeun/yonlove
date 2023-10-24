@@ -22,10 +22,6 @@
         <if test="content != null and search != ''">
             AND scene_content like '%${content}%'
         </if>
-        <!--서브게시판pk 설정-->
-        <if test="pkid != null">
-            AND scenario_id = #{pkid}
-        </if>
     </select>
 
 
@@ -44,7 +40,7 @@
             AND scene_content like '%${content}%'
         </if>
 
-        <!--서브게시판 이라면 실행-->
+        <!--다른곳의 서브게시판으로 사용된다면 실행-->
         <if test="pkid != null">
             AND scenario_id = #{pkid}
         </if>
