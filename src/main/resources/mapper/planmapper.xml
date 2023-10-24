@@ -4,12 +4,16 @@
 <mapper namespace="com.example.yoonlove.mapper.PlanMapper">
 
 
-    <select id="totalSceduledayPost" parameterType="com.example.yoonlove.dto.PageDto">  /**/
+    <select id="totalSceduledayPost" parameterType="com.example.yoonlove.dto.PageDto">
         select count(${id}) as totalPost from ${table}
         where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
         <!--검색어가 있다면 아래 조건문을 실행-->
         <if test="title != null and search != ''">
             AND day_title like '%${title}%'
+        </if>
+
+        <if test="content != null and search != ''">
+            AND weather like '%${content}%'
         </if>
     </select>
 
@@ -24,6 +28,11 @@
         where 1=1  /*에러처리방지를 위한 코드*/
         <if test="title != null and search != ''">
             AND day_title like '%${title}%'
+        </if>
+
+
+        <if test="content != null and search != ''">
+            AND weather like '%${content}%'
         </if>
         order by ${id} desc) t)
 
@@ -230,6 +239,11 @@
         <if test="title != null and search != ''">
             AND inside_flag like '%${title}%'
         </if>
+
+        <if test="title != null and search != ''">
+            AND day_flag like '%${content}%'
+        </if>
+
     </select>
 
 
@@ -303,6 +317,15 @@
         <if test="title != null and search != ''">
             AND schedule_name like '%${title}%'
         </if>
+
+        <if test="content != null and search != ''">
+            AND schedule_content like '%${content}%'
+        </if>
+
+        <if test="date != null and search != ''">
+            AND schedule_date like 'YYYY-MM-DD'
+        </if>
+
     </select>
 
 
@@ -317,6 +340,16 @@
         <if test="title != null and search != ''">
             AND schedule_name like '%${title}%'
         </if>
+
+        <if test="content != null and search != ''">
+            AND schedule_content like '%${content}%'
+        </if>
+
+        <if test="date != null and search != ''">
+            AND schedule_date like 'YYYY-MM-DD'
+        </if>
+
+
         order by ${id} desc) t)
 
         <!-- rownum을 기준(r)으로 시작번호부터 끝번호까지 검색   -->
