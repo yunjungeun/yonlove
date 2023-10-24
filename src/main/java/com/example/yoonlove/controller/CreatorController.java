@@ -21,9 +21,8 @@ import java.util.List;
         @Autowired
         private PagingService pagingService;
 
-        //서비스 객체 수정
 
-        @GetMapping("creator/creater")
+        @GetMapping("creator/creater")  // 뒤에 테이블명
         public ModelAndView selectListCreaotr(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
             PageDto pageDto = new PageDto("creater", "ch_id", page, pdto);
             PageDto pageInfo=pagingService.paging(pageDto);
@@ -37,7 +36,7 @@ import java.util.List;
             mv.addObject("selectListCreator", dto);
 
             //페이징에 필요한센션
-            mv.addObject("prefixUrl", "creator");
+            mv.addObject("prefixUrl", "creator"); // 컨트롤러 앞부분 /명
             mv.addObject("paging", pageInfo);  //페이징정보
             mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
             mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
@@ -75,7 +74,7 @@ import java.util.List;
 
      @GetMapping("/creator/updatecreator/{ch_id}") // 수정
     public String updateCreator(CreatorDto dto){
-            System.out.println(dto.toString());
+            /*System.out.println(dto.toString());*/
         creatorservice.updateCreator(dto);
         return "redirect:/creator/creater";   // 목록페이지로 이동
     }

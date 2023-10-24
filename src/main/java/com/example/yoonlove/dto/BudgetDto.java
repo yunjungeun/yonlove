@@ -14,4 +14,17 @@ public class BudgetDto {
     private String budget_code;
     private String budget_flag;
     private String project_id;
+
+    @Override
+    public String toString() {
+        return "BudgetDto{" +
+                "budget_id='" + budget_id + '\'' +
+                ", budget_name='" + budget_name + '\'' +
+                ", budget_content='" + budget_content + '\'' +
+                ", budget_amount=" + budget_amount +
+                ", budget_code='" + budget_code + '\'' +
+                ", budget_flag='" + budget_flag + '\'' +
+                ", project_id='" + project_id + '\'' +
+                '}';
+    }
 }
