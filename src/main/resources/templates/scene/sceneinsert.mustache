@@ -15,18 +15,18 @@
         <tr>
             <td>시나리오
             <select id="fk" name="scenario_id"></select></td>
-            <td>씬 번호<input class="field1" name="scene_num" type="number" placeholder="미입력시 자동생성"></td>
+            <td>씬 번호<input  class="int1" name="scene_num" type="number" placeholder="미입력시 자동생성"></td>
         </tr>
         <tr>
-            <td>장면 요약<input class="field2" name="scene_content" type="text" placeholder="스토리보드 내용을 요약작성해 주세요"/></td>
+            <td>장면 요약<input class="field1" name="scene_content" type="text" placeholder="스토리보드 내용을 요약작성해 주세요"/></td>
         </tr>
         <tr>
             <td>카메라 장면 : 첨부파일 등록하게끔 만들어야함</td>
-            <td colspan="2"><textarea class="field3" name="story_board" cols="50" rows="20" placeholder="스토리보드 내용"></textarea></td>
-            <td>촬영장소 <input class="field4" name="scene_place" type="text"/></td>
+            <td colspan="2"><textarea class="field2" name="story_board" cols="50" rows="20" placeholder="스토리보드 내용"></textarea></td>
+            <td>촬영장소 <input class="field3" name="scene_place" type="text"/></td>
         </tr>
     </table>
-    <input id="submit-button" type="submit" value="등록" onclick="mappingurl('/scene/insertscene','/scene/scene',4,'작성')">
+    <input id="submit-button" type="submit" value="등록" onclick="mappingurl('/scene/insertscene','/scene/scene',4,'작성',1)">
 </form>
 
 
