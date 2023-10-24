@@ -43,6 +43,11 @@
         <if test="content != null and search != ''">
             AND scene_content like '%${content}%'
         </if>
+
+        <!--서브게시판 이라면 실행-->
+        <if test="pkid != null">
+            AND scenario_id = #{pkid}
+        </if>
         order by ${id} desc) t)
 
         <!-- rownum을 기준(r)으로 시작번호부터 끝번호까지 검색   -->
@@ -52,7 +57,14 @@
     <insert id="insertScene">
         insert into scene values(
         (select concat('scene', (nvl(max(to_number(substr(scene_id, 6))), 0)+1)) from scene),<!--pk코드 자동증가(수정2)-->
-        (select nvl(max(scene_num),0)+1 from scene),<!--씬 번호 자동증가-->
+
+        <if test="scene_num == 0 or  scene_num == null">
+        (select nvl(max(scene_num),0)+1 from scene where scenario_id=#{scenario_id}),<!--씬 번호 자동증가-->
+        </if>
+        <if test="scene_num != null and  scene_num != 0">
+        #{scene_num},
+        </if>
+
         #{scene_place}, <!--촬영장소-->
         #{story_board},<!--스토리보드 내용-->
         #{scene_content}, <!--스토리보드 요약-->

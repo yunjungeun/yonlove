@@ -57,8 +57,10 @@ public class ScenarioController {
         PageDto pageDto = new PageDto("scene","scene_id",page,pdto);
 
         PageDto pageInfo = pagingService.paging(pageDto);
+
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.subPageRink(pageDto,"scenario");
+
         List<SceneDto> subList = sceneService.selectListScene(pageInfo);
         mv.addObject("selectListScene", subList);
 

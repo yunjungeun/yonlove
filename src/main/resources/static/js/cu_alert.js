@@ -10,9 +10,15 @@ function mappingurl(submiturl,sucessurl, int, text){
             var name = ".field"+i;
             $(name).each(function() {
              var field = $(this).attr("name");
-             data[field] = $(this).val();
+                //val()는 항상 문자열로 값을 가져옴
+                if (!isNaN($(this).val())) {
+                    data[field] = parseInt($(this).val()); // 숫자형으로 변환하여 저장
+                } else {
+                    data[field] = $(this).val(); // 문자열로 저장
+                }
             });
         }
+
 
                 // 옵션값이 존재하는 확인하는 if문
     if(fkid != null){

@@ -84,7 +84,7 @@ public class SceneController {
 
     @GetMapping("/scene/insertscene")
     public String insertScene(SceneDto dto){
-        System.out.println(dto.getScenario_id());
+        System.out.println(dto.toString());
         sceneService.insertScene(dto);
         return "redirect:/scene/scene";
     }

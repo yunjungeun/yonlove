@@ -44,10 +44,8 @@ public class SceneService {
         html과 서버에서는 프로퍼티를 가지고 데이터를 처리함. 주로 pk-id값
         그러나 사용자는 pk값을 구분 할수 없어 'pk'가 가진 데이터를 보여줘야함.
         따라서 'pk(fk)':'보여줄 값' 형식이기 때문에 해쉬맵을 사용함*/
-
-    //해쉬맵은 삽입순서를 유지하지 않기 때문에, LinkedHashMap<>으로 사용자 편의를 위한 정렬삽입을 했음
     public String fkJson(List<ScenarioDto> dto) throws JsonProcessingException {
-        Map<String, String> fkList = new LinkedHashMap<>();
+        Map<String, String> fkList = new LinkedHashMap<>();//해쉬맵은 삽입순서를 유지하지 않기 때문에, LinkedHashMap<>으로 사용자 편의를 위한 정렬삽입을 했음
             for(int i=0; i< dto.size(); i++){
                 fkList.put(dto.get(i).getScenario_id(),dto.get(i).getScenario_name());
               }
