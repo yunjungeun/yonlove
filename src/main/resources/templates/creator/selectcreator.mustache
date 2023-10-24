@@ -5,6 +5,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/delete.js"></script>
 </head>
 <body>
 <div id="div_box">
@@ -34,7 +36,7 @@
 
     <hr>
     <a href="/creator/updatecreatorview/{{selectCreator.ch_id}}">게시글 수정</a>&nbsp;&nbsp;&nbsp;
-    <a href="/creator/deletecreator/{{selectCreator.ch_id}}">게시글 삭제</a>&nbsp;
+    <a href="/creator/deletecreator/{{selectCreator.ch_id}}" onclick="confirmDelete(event)">게시글 삭제</a>&nbsp;
     <a href="/creator/creater">전체 목록 보기</a>
 </div>
 </body>
