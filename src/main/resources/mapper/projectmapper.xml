@@ -46,18 +46,19 @@
     <insert id="insertProject">
         insert into project values(
             (select concat('project', (nvl(max(to_number(substr(project_id, 8))), 0)+1)) from project),<!--pk코드 자동증가(수정2)-->
-            #{project_name},
-            #{project_num},
-            '테스트',
-            '테스트진행중',
-            '기획내용 내용테스트',
-            '23/10/11',
-            null,
-            null,
-            null,
-            'true',
-            null,
-            'com1'
+            #{project_name},  <!--기획명-->
+            #{project_num},   <!--기획번호-->
+            '테스트',    <!--작성자-->
+            #{project_concept},  <!--콘셉트-->
+            #{project_content}, <!--기획내용-->
+            (select * from todaytime),  <!--기획일-->
+            #{project_start_date},  <!--기획 시작일-->
+            #{project_start_date},   <!--기획 종료일-->
+            (select * from todaytime),   <!--작성일-->
+            'false', <!--종료여부-->
+            '-',   <!--종료사유-->
+            'com1', <!--회사table pk 자동입력-->
+            #{project_state} <!--작성상태-->
         )
     </insert>
 

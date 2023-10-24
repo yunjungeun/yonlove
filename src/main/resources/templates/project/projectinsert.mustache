@@ -13,8 +13,20 @@
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
             <td>기획명 <input class="field1" name="project_name" type="text" placeholder="기획명"/></td>
-            <td>기획번호 <input class="field2" name="project_num" type="number" placeholders="기획번호"/></td>
+            <td>기획번호 <input class="int1" name="project_num" type="number" placeholders="기획번호" placeholder="미입력시 자동작성"/></td>
         </tr>
+        <tr><td colspan="2">콘셉트<textarea cols="50" rows="5" class="field2" name="project_concept"></textarea></td>
+        <tr><td colspan="2">기획 안<textarea cols="50" rows="20" class="field3" name="project_content"></textarea></td>
+        <tr><td colspan="2">시작일<input type="date" class="field4" name="project_start_date"> (예상)종료일<input type="date" class="field5" name="project_end_date">
+            진행상태
+            <select class="field6" name="project_state">
+                <option value="작성 중">작성 중</option>
+                <option value="작성 완료">작성 완료</option>
+                <option value="진행 중">진행 중</option>
+                <option value="기타">기타</option>
+            </select>
+        </td>
+
     </table>
     <input type="submit" value="등록" onclick="mappingurl('/project/insertproject','/project/project', 2,'작성')"/>
 </form>

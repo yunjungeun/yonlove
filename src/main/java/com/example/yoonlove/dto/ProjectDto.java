@@ -2,7 +2,6 @@ package com.example.yoonlove.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.util.Date;
 
@@ -23,6 +22,7 @@ public class ProjectDto {
     private String project_flag; // 종료여부11
     private String project_reason; //종료사유12
     private String company_id;  // 기업아이디13
+    private String project_state;
 
     @Override
     public String toString() {
