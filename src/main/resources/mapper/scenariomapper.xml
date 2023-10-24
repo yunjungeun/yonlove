@@ -33,7 +33,7 @@
         from(select rownum as r, t.*
 
         <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
-        from (select * from ${table}
+        from (select * from scenariolist
         where 1=1
         <if test="title != null and search != ''">
             AND scenario_name like '%${title}%'
