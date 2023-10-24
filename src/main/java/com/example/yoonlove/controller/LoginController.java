@@ -43,6 +43,7 @@ public class LoginController {
     @GetMapping("signup")
     public String sign(UserDto dto){
         System.out.println("sql실행전"+dto.toString());
+
         userService.signUp(dto);
         System.out.println("sql실행후");
         return "/cs/qna";

@@ -93,22 +93,22 @@
         <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
 
         <label for="address">주소:</label>
-        <input type="text" id="adress1"  name="address" placeholder="주소" required ><br>
-        <input type="text" id="adress2" name="address" placeholder="상세주소">
+        <input type="text" id="address1"  name="address" placeholder="주소" required ><br>
+        <input type="text" id="address2" name="address" placeholder="상세주소">
         <input type="text" id="extraAddress"name="address" placeholder="참고항목">
 
-        <label>성별:</label>
+      <!--  <label>성별:</label>
         <input type="radio" id="male" name="gender" value="male">남성
-        <input type="radio" id="female" name="gender" value="female">여성
+        <input type="radio" id="female" name="gender" value="female">여성-->
         <br/>
         <label for="terms">약관에 동의합니다:</label>
         <input type="checkbox" id="terms" name="terms" required>
         <br/>
-        <button type="submit" id="submitBtn" disabled>회원가입</button>
+        <button type="submit" id="submitBtn">회원가입</button>
     </form>
 </div>
 
-<script>
+<<script>
     // 카카오 주소검색
 function execDaumPostcode() {   // 우편번호 찾기 버튼을 누르면,
     new daum.Postcode({    //우편번호 실행
@@ -151,18 +151,20 @@ function execDaumPostcode() {   // 우편번호 찾기 버튼을 누르면,
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('zip_code').value = data.zonecode;
-            document.getElementById("adress1").value = addr;
+            document.getElementById("address1").value = addr;
             // 커서를 상세주소 필드로 이동한다.
-            document.getElementById("adress2").focus();
+            document.getElementById("address2").focus();
         }
     }).open();
 }
+</script>
 
- function execDaumPostcode() {
+<script>
+function execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
-                const addressInput = document.getElementById("adress1");
-                const zipcodeInput = document.getElementById("zip_code");
+                const addressInput = document.getElementById("address1");
+                const zipCodeInput = document.getElementById("zip_code");
 
                addressInput.value = data.address;
                 zipCodeInput.value = data.zonecode;
@@ -171,59 +173,57 @@ function execDaumPostcode() {   // 우편번호 찾기 버튼을 누르면,
             }
         }).open();
     }
-         const userIdInput = document.getElementById("user_id");
-         const pwInput = document.getElementById("pw");
-         const confirmPasswordInput = document.getElementById("confirm_password");
-         const nameInput = document.getElementById("user_name");
-         const nicknameInput = document.getElementById("nickname");
-         const phoneInput = document.getElementById("phone");
-         const emailInput = document.getElementById("email");
-         const addressInput  = document.getElementById("adress1");
-         const address2Input  = document.getElementById("adress2");
-         const extraAddressInput = document.getElementById("extraAddress");
-         const termsCheckbox = document.getElementById("terms");
-         const submitButton = document.getElementById("submitBtn");
+
+    const userIdInput = document.getElementById("user_id");
+    const pwInput = document.getElementById("pw");
+    const confirmPasswordInput = document.getElementById("confirm_password");
+    const nameInput = document.getElementById("user_name");
+    const nicknameInput = document.getElementById("nickname");
+    const phoneInput = document.getElementById("phone");
+    const emailInput = document.getElementById("email");
+    const addressInput = document.getElementById("address1");
+    const address2Input = document.getElementById("address2");
+    const extraAddressInput = document.getElementById("extraAddress");
+    const termsCheckbox = document.getElementById("terms");
+    const submitButton = document.getElementById("submitBtn");&ndash;&gt;
+
 
 
   function validateForm() {  // 각 필드값에 유효성 검사하는 함수
 
-
-       const userId = userIdInput.value.trim();
+        const userId = userIdInput.value.trim();
         const pw = pwInput.value;
         const confirmPassword = confirmPasswordInput.value;
-        const name = nameInput.value.trim();      ;
+        const name = nameInput.value.trim();
         const nickname = nicknameInput.value.trim();
         const phone = phoneInput.value.trim();
         const email = emailInput.value.trim();
-        const address1  = addressInput.value.trim();
-        const address2  = address2Input.value.trim();
+        const address1 = addressInput.value.trim();
+        const address2 = address2Input.value.trim();
         const extraAddress = extraAddressInput.value.trim();
-        const termsAgreed = termsCheckbox.checked;
+       const termsAgreed = termsCheckbox.checked;
 
-           if (
-            userId === "" ||
-            pw === "" ||
-            confirmPassword === "" ||
-            name === "" ||
-            nickname === "" ||
-            phone === "" ||
-            email === "" ||
-            address1 === "" ||
-            address2 === "" ||
-            extraAddress === "" ||
-            !termsAgreed
-        ) {
-            submitButton.disabled = true;
-        }
+        const isInvalid = (
+        userId === "" ||
+        pw === "" ||
+        confirmPassword === "" ||
+        name === "" ||
+        nickname === "" ||
+        phone === "" ||
+        email === "" ||
+        address1 === "" ||
+        address2 === "" ||
+        extraAddress === "" ||
+        !termsAgreed
+    );
 
-        else if (pw !== confirmPassword) {
-            submitButton.disabled = true;
-            alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-        } else {
-        alert("입력 불일치.");
-            submitButton.disabled = false;
-        }
+   if (isInvalid) {
+        submitButton.disabled = true;
+
+    } else {
+        submitButton.disabled = false;
     }
+}
 
     userIdInput.addEventListener("input", validateForm);
     pwInput.addEventListener("input", validateForm);
