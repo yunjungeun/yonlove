@@ -5,6 +5,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/delete.js"></script>
 </head>
 <body>
 
@@ -28,7 +30,7 @@
 
 <a href="/plan/schedule_month">목록</a>
 <a href="/plan/{{scheduleMonth.month_id}}/ScheduleMonthUpdateView">수정</a>
-<a href="/plan/{{scheduleMonth.month_id}}/deleteScheduleMonth">삭제</a>
+<a href="/plan/{{scheduleMonth.month_id}}/deleteScheduleMonth" onclick="confirmDelete(event)">삭제</a>
 
 
 </body>

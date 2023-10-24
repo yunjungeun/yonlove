@@ -5,25 +5,27 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
 </head>
 <body>
-<form action="/log/{{updateLog.log_id}}/updateLog" method="get">   <!--왜 selectLog.log_id 가 이니고 updateLog.log_id일까....-->
-    <input name="notice_id" type="hidden" value="{{updateLog.log_id}}"/>
+<form id="alert" action="/log/{{updateLog.log_id}}/updateLog" method="get">   <!--왜 selectLog.log_id 가 이니고 updateLog.log_id일까....-->
+    <input name="log_id" type="hidden" value="{{updateLog.log_id}}" />
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
-            <td>일지번호<input name="log_num" type="text"  value="{{updateLog.log_num}}"></td>
-            <td>작성일<input name="log_date" type="date" value="{{updateLog.log_date}}"></td>
+            <td>일지번호<input name="log_num" type="text"  value="{{updateLog.log_num}}" class="field1"></td>
+            <td>작성일<input name="log_date" type="date" value="{{updateLog.log_date}}" class="field2"></td>
         </tr>
         <tr>
-            <td>일지내용<input name="log_content" type="text" value="{{updateLog.log_content}}"/></td>
+            <td>일지내용<input name="log_content" type="text" value="{{updateLog.log_content}}" class="field3"/></td>
         </tr>
         <tr>
 
 
-            <td>프로젝트아이디 <input name="project_id" type="text" value="{{updateLog.project_id}}"/></td>
+            <td>프로젝트아이디 <input name="project_id" type="text" value="{{updateLog.project_id}}"class="field4"/></td>
         </tr>
     </table>
-    <input type="submit" value="등록">
+    <input type="submit" value="등록" onclick="mappingurl('/log/{{updateLog.log_id}}/updateLog','/log/log', 4,'수정')">
 </form>
 <a href="/log/log">목록</a>
 

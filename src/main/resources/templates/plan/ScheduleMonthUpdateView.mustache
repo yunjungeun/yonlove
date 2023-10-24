@@ -5,17 +5,19 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
 </head>
 <body>
-<form action="/plan/{{ScheduleMonthUpdate.month_id}}/updateScheduleMonth" method="get">
+<form id="alert"action="/plan/{{ScheduleMonthUpdate.month_id}}/updateScheduleMonth" method="get">
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
 
 
-            <td>스케쥴명<input name="schedule_name" type="text" value="{{ScheduleMonthUpdate.schedule_name}}" ></td>
-            <td>스케쥴내용<input name="schedule_content" type="text" value="{{ScheduleMonthUpdate.schedule_content}}"></td>
-            <td>스케쥴일정<input name="schedule_date" type="date" value="{{ScheduleMonthUpdate.schedule_date}}"></td>
-            <td>프로젝트id<input name="project_id" type="text"value="{{ScheduleMonthUpdate.project_id}}" ></td>
+            <td>스케쥴명<input name="schedule_name" type="text" value="{{ScheduleMonthUpdate.schedule_name}}" class="field1" ></td>
+            <td>스케쥴내용<input name="schedule_content" type="text" value="{{ScheduleMonthUpdate.schedule_content}}" class="field2"></td>
+            <td>스케쥴일정<input name="schedule_date" type="date" value="{{ScheduleMonthUpdate.schedule_date}}" class="field3"></td>
+            <td>프로젝트id<input name="project_id" type="text"value="{{ScheduleMonthUpdate.project_id}}" class="field4"></td>
 
 
 
@@ -24,7 +26,7 @@
 
 
     </table>
-    <input type="submit" value="등록">
+    <input type="submit" value="등록" onclick="mappingurl('/plan/{{ScheduleMonthUpdate.month_id}}/updateScheduleMonth','/plan/schedule_month', 4,'수정')">
 </form>
 
 <a href="/plan/schedule_month">목록</a>

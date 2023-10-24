@@ -5,6 +5,7 @@ function mappingurl(submiturl,sucessurl, int, text){
 
     var data = {};
 
+
         for(var i = 1; i <= int; i++){
             var name = ".field"+i;
             $(name).each(function() {

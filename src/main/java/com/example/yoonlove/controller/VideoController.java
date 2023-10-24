@@ -97,7 +97,7 @@ public class VideoController {
     }
 
 
-    @GetMapping("vd/{video_id}/delete") //삭제 처리
+    @GetMapping("/vd/{video_id}/delete") //삭제 처리
     public String deleteContent( VideoDto dto) {
         videoService.deleteContent(dto);
         return "redirect:/vd/video";

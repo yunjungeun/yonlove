@@ -5,18 +5,21 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
+
 </head>
 <body>
-<form action="/plan/insertactorManagement" method="get">
+<form id="alert"action="/plan/insertactorManagement" method="get">
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
 
 
-            <td>배우이름<input name="actor_name" type="text"   ></td>
-            <td>도착시간<input name="arrival_time" type="date"  ></td>
-            <td>장소<input name="place" type="text" ></td>
-            <td>셋콜<input name="set_call" type="text" ></td>
-            <td>일정id<input name="day_id" type="text"  ></td>
+            <td>배우이름<input name="actor_name" type="text"  class="field1" ></td>
+            <td>도착시간<input name="arrival_time" type="date" class="field2" ></td>
+            <td>장소<input name="place" type="text" class="field3" ></td>
+            <td>셋콜<input name="set_call" type="text" class="field4"></td>
+            <td>일정id<input name="day_id" type="text" class="field5" ></td>
 
 
 
@@ -24,7 +27,7 @@
 
 
     </table>
-    <input type="submit" value="등록">
+    <input type="submit" value="등록"  onclick="mappingurl('/plan/insertactorManagement','/plan/actor_management',5,'작성')">
 </form>
 
 
