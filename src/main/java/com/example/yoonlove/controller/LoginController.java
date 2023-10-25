@@ -46,10 +46,9 @@ public class LoginController {
 
    @GetMapping("companysignup")
     public String companysign(CompanyDto dto){
-        System.out.println("입력값 확인!!!!!!");
-
+       System.out.println("?11?" + dto.toString());
         userService.companysignup(dto);
-        return "redirect:/login";
+        return "redirect:/index";
     }
 
 

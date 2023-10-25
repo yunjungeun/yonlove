@@ -8,36 +8,35 @@
     <!--<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>-->
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
 <div class="container">
     <h2>기업 회원가입</h2>
-    <form id="registrationForm" method="get" action="/companysignup">
+    <form id="alert" method="get" action="/companysignup">
 
         <label for="company_name">기업명:</label>
-        <input type="text" id="company_name" name="company_name" required>
+        <input type="text" class="field1" id="company_name" name="company_name" required>
 
         <label for="company_homepage">기업 홈페이지 :</label>
-        <input type="text" id="company_homepage" name="company_homepage" required>
+        <input type="text" class="field2" id="company_homepage" name="company_homepage" required>
 
         <label for="zip_code">우편번호:</label>
-        <input type="text" id="zip_code" name="zip_code" placeholder="우편번호" required>
+        <input type="text" class="field3" id="zip_code" name="zip_code" placeholder="우편번호" required>
         <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
 
-        <label for="address">주소:</label>
-        <input type="text" id="company_address1"  name="address" placeholder="주소" required ><br>
-        <input type="text" id="company_address2" name="address" placeholder="상세주소">
-        <input type="text" id="extraAddress" name="address" placeholder="참고항목">
+        <label for="company_address1">주소:</label>
+        <input type="text" class="field4" id="company_address1"  name="company_address1" placeholder="주소" required ><br>
+        <input type="text" class="field5" id="company_address2" name="company_address2" placeholder="상세주소">
+        <input type="text" class="field6" id="company_address3" name="company_address3" placeholder="참고항목">
 
         <label for="company_email">사업자 이메일:</label>
-        <input type="text" id="company_email" name="company_email" required>
+        <input type="text" class="field7" id="company_email" name="company_email" required>
 
         <br/>
-        <label for="terms">약관에 동의합니다:</label>
-        <input type="checkbox" id="terms" name="terms" required>
-        <br/>
-        <button type="submit" id="submitBtn">기업 회원가입</button>
+        <button type="submit" id="submitBtn" onclick="mappingurl('/companysignup','/index', 7,'가입')">기업 회원가입</button>
+                                                  <!--컨트롤러 insert 주소 ,    클릭 후 메인주소, 작성값의 갯수 , text 나오는값 -->
     </form>
 </div>
 
@@ -76,10 +75,10 @@ function execDaumPostcode() {   // 우편번호 찾기 버튼을 누르면,
                     extraAddr = ' (' + extraAddr + ')';
                 }
                 // 조합된 참고항목을 해당 필드에 넣는다.
-                document.getElementById("extraAddress").value = extraAddr;
+                document.getElementById("company_address3").value = extraAddr;
 
             } else {
-                document.getElementById("extraAddress").value = '';
+                document.getElementById("company_address3").value = '';
             }
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
@@ -99,7 +98,7 @@ function execDaumPostcode() {   // 우편번호 찾기 버튼을 누르면,
               oncomplete: function(data) {
                   const addressInput = document.getElementById("company_address1");
                   const zipCodeInput = document.getElementById("zip_code");
-                  const extraAddressInput = document.getElementById("extraAddress"); // extraAddress 필드 가져오기
+                  const address3Input = document.getElementById("company_address3"); // extraAddress -> company_address3 필드 가져오기
 
                   addressInput.value = data.address;
                   zipCodeInput.value = data.zonecode;
@@ -124,10 +123,10 @@ function execDaumPostcode() {   // 우편번호 찾기 버튼을 누르면,
                       }
 
                       // extraAddress 필드에 설정
-                      extraAddressInput.value = extraAddr;
+                      address3Input.value = extraAddr;
                   } else {
                       // 도로명 주소가 아닌 경우, extraAddress 필드를 비웁니다.
-                      extraAddressInput.value = '';
+                      address3Input.value = '';
                   }
 
                   validateForm(); // 유효성 검사 실행
@@ -139,9 +138,8 @@ function execDaumPostcode() {   // 우편번호 찾기 버튼을 누르면,
           const homepageInput = document.getElementById("company_homepage");
           const addressInput = document.getElementById("company_address1");
           const address2Input = document.getElementById("company_address2");
-          const extraAddressInput = document.getElementById("extraAddress");
+          const address3Input = document.getElementById("company_address3");
           const emailInput = document.getElementById("company_email");
-          const termsCheckbox = document.getElementById("terms");
           const submitButton = document.getElementById("submitBtn");
 
 
@@ -151,18 +149,18 @@ function execDaumPostcode() {   // 우편번호 찾기 버튼을 누르면,
               const homepage = homepageInput.value.trim();
               const address1 = addressInput.value.trim();
               const address2 = address2Input.value.trim();
-              const extraAddress = extraAddressInput.value;
+              const address3 = address3Input.value;
               const email = emailInput.value.trim();
-              const termsAgreed = termsCheckbox.checked;
+
 
               const isInvalid = (
               name === "" ||
               homepage === "" ||
               address1 === "" ||
               address2 === "" ||
-              extraAddress === "" ||
+              address3 === "" ||
               email === "" ||
-              !termsAgreed
+
           );
 
          if (isInvalid) {
@@ -177,10 +175,9 @@ function execDaumPostcode() {   // 우편번호 찾기 버튼을 누르면,
           homepageInput .addEventListener("input", validateForm);
           addressInput.addEventListener("input", validateForm);
           address2Input.addEventListener("input", validateForm);
-          extraAddressInput.addEventListener("input", validateForm);
+          address3Input.addEventListener("input", validateForm);
           emailInput.addEventListener("input", validateForm);
-          termsCheckbox.addEventListener("change", validateForm);
-</script>
 
+</script>
 </body>
 </html>

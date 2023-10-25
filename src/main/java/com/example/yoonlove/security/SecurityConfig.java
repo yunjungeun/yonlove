@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request -> request
                 .requestMatchers("/login","/cs/qna","/signupview","/signup","/index","/static/**").permitAll()
                 .requestMatchers("cs/selectqna/**").hasAuthority("admin")
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()     //.authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")

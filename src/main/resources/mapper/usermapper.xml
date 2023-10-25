@@ -25,14 +25,15 @@
 
     <insert id="insertCompany" parameterType="com.example.yoonlove.dto.CompanyDto">
         INSERT INTO company VALUES (
-        (select concat('com', (nvl(max(substr(company_id, 4)), 0)+1)) from company),<!--pk코드 자동증가(수정)-->
+        (select concat('company', (nvl(max(substr(company_id, 8)), 0)+1)) from company),<!--pk코드 자동증가(수정)-->
          #{company_name},
         '2023/10/25',
         #{company_homepage},
         #{company_address1},
         #{company_address2},
         #{company_email},
-        #{zip_code}
+        #{zip_code},
+        #{company_address3}
         )
     </insert>
 </mapper>

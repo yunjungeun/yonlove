@@ -30,7 +30,7 @@ public class UserDto implements UserDetails {
         private String company_id;
         private String dpt_id;
         private Date sign_date;
-        private int basic_pay;
+        private String address3;
         private int total_pay;
 
 
