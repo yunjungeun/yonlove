@@ -1,5 +1,6 @@
 package com.example.yoonlove.service;
 
+import com.example.yoonlove.dto.CompanyDto;
 import com.example.yoonlove.dto.DepartmentDto;
 import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.UserDto;
@@ -50,5 +51,8 @@ public class AdminService {
     public void deleteDepartment(DepartmentDto dto){
         adminMapper.deleteDepartment(dto);
     }
+
+    //회사정보
+    public CompanyDto selectCompany(CompanyDto dto){return adminMapper.selectCompany(dto); }
 
 }

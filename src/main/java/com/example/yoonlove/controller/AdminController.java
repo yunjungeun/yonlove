@@ -1,5 +1,6 @@
 package com.example.yoonlove.controller;
 
+import com.example.yoonlove.dto.CompanyDto;
 import com.example.yoonlove.dto.DepartmentDto;
 import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.UserDto;
@@ -56,7 +57,9 @@ public class AdminController {
         ModelAndView mv = new ModelAndView();
 
 
-
+        CompanyDto companyDto = new CompanyDto();
+        companyDto.setCompany_id(dto.getCompany_id());
+        CompanyDto companyname = adminService.selectCompany(companyDto);
 
         //부서 조인안하고 그냥 객체만듬
         DepartmentDto dptDto = new DepartmentDto();
@@ -64,6 +67,7 @@ public class AdminController {
         DepartmentDto dptname = adminService.selectDepartment(dptDto);
 
         mv.addObject("selectDpt",dptname);
+        mv.addObject("selectCompany",companyname);
         mv.setViewName("/admin/userselect");
         mv.addObject("selectUser", dto);
         return mv;

@@ -93,4 +93,9 @@
         SELECT * FROM users where user_id=#{user_id}
     </select>
 
+
+    <!--회사-->
+    <select id="selectCompany" resultType="com.example.yoonlove.dto.CompanyDto">
+        SELECT * FROM company where company_id=#{company_id}
+    </select>
 </mapper>

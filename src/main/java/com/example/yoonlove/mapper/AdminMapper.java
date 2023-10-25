@@ -1,5 +1,6 @@
 package com.example.yoonlove.mapper;
 
+import com.example.yoonlove.dto.CompanyDto;
 import com.example.yoonlove.dto.DepartmentDto;
 import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.UserDto;
@@ -24,4 +25,8 @@ public interface AdminMapper {
     public void updateDepartment(DepartmentDto dto);
     public void deleteDepartment(DepartmentDto dto);
     public PageDto totalDptPost(PageDto dto);
+
+
+    //회사정보조회
+    public CompanyDto selectCompany(CompanyDto dto);
 }
