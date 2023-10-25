@@ -24,18 +24,26 @@ public class AdminController {
 
 
     //유저관리
-    @GetMapping("/admin/listuser")
-    public ModelAndView selectListUser(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        List<UserDto> dto = adminService.selectListUser();
+    @GetMapping("/admin/user")
+    public ModelAndView selectListUser(PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page){
+        PageDto pageDto = new PageDto("users","user_id",page,pdto);
+        PageDto pageInfo = pagingService.paging(pageDto);
 
-        //세션 객체생셩
+        List<PageDto> pagelist = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
+        String rink = pagingService.pageRink(pageDto);
+
+        System.out.println(pageInfo.toString());
+        List<UserDto> pagedto = adminService.selectListUser(pageInfo);
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/admin/listuser");
+        mv.setViewName("/admin/user");
+        mv.addObject("selectListUser", pagedto);
 
-        //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
-        mv.addObject("selectListUser", dto);
+
+        //페이징에 필요한센션
+        mv.addObject("prefixUrl", "admin");
+        mv.addObject("paging", pageInfo);  //페이징정보
+        mv.addObject("pageList", pagelist); //페이지 하단부 페이지 리스트
+        mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
         return mv;
     }
 

@@ -18,9 +18,12 @@ public class AdminService {
     public UserDto selectUser(){
         return adminMapper.selectUser();
     }
-    public List<UserDto> selectListUser() {
-        return adminMapper.selectListUser();
+
+    public List<UserDto> selectListUser(PageDto pageInfo) {
+        return adminMapper.selectListUser(pageInfo);
     }
+
+
     public void insertUser(){
         adminMapper.insertUser();
     }

@@ -10,7 +10,8 @@ import java.util.List;
 @Mapper
 public interface AdminMapper {
     //고객정보
-    public List<UserDto> selectListUser();
+    public List<UserDto> selectListUser(PageDto pageInfo);
+    public PageDto totalUserPost(PageDto dto);
     public UserDto selectUser();
     public void insertUser();
     public void updateUser();

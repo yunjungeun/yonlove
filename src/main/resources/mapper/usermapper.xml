@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!--부서-->
+
 <mapper namespace="com.example.yoonlove.mapper.UserMapper">
+
+
+
 
     <select id="getUser" resultType="com.example.yoonlove.dto.UserDto">
         SELECT * FROM users where user_id = #{user_id}
@@ -10,9 +13,10 @@
 
 
     <insert id="signUp" parameterType="com.example.yoonlove.dto.UserDto">
-        insert into users (user_id, pw, nickname, phone, email, address1, address2, address3, zip_code, authority, sign_date) values(
+        insert into users (user_id, pw, user_name, nickname, phone, email, address1, address2, address3, zip_code, authority, sign_date, company_id) values(
         #{user_id},  <!--id-->
         #{pw},         <!--비번-->
+        #{user_name},
         #{nickname},<!--닉네임-->
         #{phone},<!--핸드폰-->
         #{email},<!--이메일-->
@@ -22,6 +26,7 @@
         #{zip_code},   <!--우편번호-->
         '일반',   <!--권한-->
         (select * from todaytime)    <!--가입일-->
+        'company2'
         )
     </insert>
 

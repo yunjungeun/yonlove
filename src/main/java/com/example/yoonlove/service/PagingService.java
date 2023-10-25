@@ -58,7 +58,7 @@ public class PagingService {
             case "schedule_time" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
             case "scriptpaper" : pageDto = scriptPaperMapper.totalScriptPost(dto); break;
             case "timetable" : pageDto = scriptPaperMapper.totalTimeTablePost(dto); break;
-            case "users" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
+            case "users" : pageDto= adminMapper.totalUserPost(dto); break;
             case "video" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
 
             //오류메세지 출력
