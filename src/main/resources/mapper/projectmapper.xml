@@ -49,8 +49,15 @@
         insert into project values(
             (select concat('project', (nvl(max(to_number(substr(project_id, 8))), 0)+1)) from project),<!--pk코드 자동증가(수정2)-->
             #{project_name},  <!--기획명-->
-            #{project_num},   <!--기획번호-->
-            '테스트',    <!--작성자-->
+
+        <if test="project_num == 0 or project_num == null">      <!--com1 부분 로그인 세션가져와서 적용필요-->
+            (select nvl(max(project_num),0)+1 from project where company_id = 'com1'),
+        </if>
+        <if test="project_num != null and project_num != 0">
+            #{project_num},
+        </if>
+
+            '작성자', <!--작성자-->
             #{project_concept},  <!--콘셉트-->
             #{project_content}, <!--기획내용-->
             (select * from todaytime),  <!--기획일-->
