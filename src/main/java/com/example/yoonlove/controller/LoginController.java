@@ -1,6 +1,7 @@
 package com.example.yoonlove.controller;
 
 
+import com.example.yoonlove.dto.CompanyDto;
 import com.example.yoonlove.dto.UserDto;
 import com.example.yoonlove.mapper.UserMapper;
 import com.example.yoonlove.service.UserService;
@@ -35,6 +36,24 @@ public class LoginController {
         userService.loadUserByUsername(dto.getUser_id());
        return null;
     }*/
+
+
+
+    @GetMapping("companysignupview")
+    public String companysignupview(){
+        return "/login/companysignup";
+    }
+
+   @GetMapping("companysignup")
+    public String companysign(CompanyDto dto){
+        System.out.println("입력값 확인!!!!!!");
+
+        userService.companysignup(dto);
+        return "redirect:/login";
+    }
+
+
+
 
     @GetMapping("signupview")
     public String signview(){

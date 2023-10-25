@@ -1,5 +1,6 @@
 package com.example.yoonlove.mapper;
 
+import com.example.yoonlove.dto.CompanyDto;
 import com.example.yoonlove.dto.UserDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,4 +11,5 @@ public interface UserMapper {
     public void signUp(UserDto dto);
 
     public UserDto getNick(String user_id);
+    public void insertCompany(CompanyDto companyDto);
 }
