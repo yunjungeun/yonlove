@@ -3,8 +3,6 @@ package com.example.yoonlove.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Date;
-
 @Getter
 @Setter
 public class ScenarioDto {
@@ -23,7 +21,7 @@ public class ScenarioDto {
     private String project_writer;
     private String project_concept;
     private String project_flag;
-    private Date project_date;
+    private String project_date;
 
     @Override
     public String toString() {

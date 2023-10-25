@@ -52,8 +52,8 @@
             #{project_concept},  <!--콘셉트-->
             #{project_content}, <!--기획내용-->
             (select * from todaytime),  <!--기획일-->
-            #{project_start_date},  <!--기획 시작일-->
-            #{project_start_date},   <!--기획 종료일-->
+            '23/11/02',  <!--기획 시작일-->
+            '23/11/02',   <!--기획 종료일-->
             (select * from todaytime),   <!--작성일-->
             'false', <!--종료여부-->
             '-',   <!--종료사유-->
