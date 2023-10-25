@@ -1,14 +1,12 @@
 package com.example.yoonlove.dto;
 
-import lombok.*;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @Data
 public class UserDto implements UserDetails {
@@ -18,19 +16,19 @@ public class UserDto implements UserDetails {
         private String pw2;
         private String user_name;
         private String nickname;
-        private int phone;
-        private int tell;
+        private String phone;
+        private String tell;
         private String email;
         private String address1;
         private String address2;
-        private int zipcode;
+        private String zip_code;
         private String company_user;
         private String grade;
         private String authority;
         private String company_id;
         private String dpt_id;
-        private Date sign_date;
-        private int basic_pay;
+        private String sign_date;
+        private String address3;
         private int total_pay;
 
 

@@ -28,10 +28,10 @@
         <input type="password" id="pw" name="pw" required>
 
         <label for="confirm_password">비밀번호 확인:</label>
-        <input type="password" id="confirm_password" name="confirm_password" required>
+        <input type="password" id="confirm_password" required>
 
         <label for="name">이름:</label>
-        <input type="text" id="user_name" name="name" required>
+        <input type="text" id="user_name" name="user_name" required>
 
         <label for="nickname">닉네임 :</label>
         <input type="text" id="nickname" name="nickname" required>
@@ -47,16 +47,16 @@
         <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
 
         <label for="address">주소:</label>
-        <input type="text" id="address1"  name="address" placeholder="주소" required ><br>
-        <input type="text" id="address2" name="address" placeholder="상세주소">
-        <input type="text" id="extraAddress"name="address" placeholder="참고항목">
+        <input type="text" id="address1"  name="address1" placeholder="주소" required ><br>
+        <input type="text" id="address2" name="address2" placeholder="상세주소">
+        <input type="text" id="extraAddress" name="address3" placeholder="참고항목">
 
       <!--  <label>성별:</label>
         <input type="radio" id="male" name="gender" value="male">남성
         <input type="radio" id="female" name="gender" value="female">여성-->
         <br/>
         <label for="terms">약관에 동의합니다:</label>
-        <input type="checkbox" id="terms" name="terms" required>
+        <input type="checkbox" id="terms" required>
         <br/>
         <button type="submit" id="submitBtn">회원가입</button>
     </form>
@@ -218,6 +218,7 @@
     extraAddressInput.addEventListener("input", validateForm);
     termsCheckbox.addEventListener("change", validateForm);
 </script>
+
 
 </body>
 </html>
