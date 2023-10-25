@@ -28,11 +28,11 @@ public class AdminService {
     public void insertUser(){
         adminMapper.insertUser();
     }
-    public void updateUser(){
-        adminMapper.updateUser();
+    public void updateUser(UserDto dto){
+        adminMapper.updateUser(dto);
     }
-    public void deleteUser(){
-        adminMapper.deleteUser();
+    public void deleteUser(UserDto dto){
+        adminMapper.deleteUser(dto);
     }
 
     //부서정보

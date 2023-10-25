@@ -93,6 +93,28 @@
         SELECT * FROM users where user_id=#{user_id}
     </select>
 
+    <update id="updateUser">
+        update users
+        set
+        user_name = #{user_name},
+        nickname = #{nickname},
+        phone = #{phone},
+        email = #{email},
+        zip_code = #{zip_code},
+        address1 = #{address1},
+        address2 = #{address2},
+        address3 = #{address3},
+        company_user = #{company_user},
+        grade = #{grade},
+        authority = #{authority}
+        where user_id = #{user_id}
+    </update>
+
+    <delete id="deleteUser">
+        delete from users where user_id=#{user_id}
+    </delete>
+
+
 
     <!--회사-->
     <select id="selectCompany" resultType="com.example.yoonlove.dto.CompanyDto">

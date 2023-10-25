@@ -15,8 +15,8 @@ public interface AdminMapper {
     public PageDto totalUserPost(PageDto dto);
     public UserDto selectUser(UserDto dto);
     public void insertUser();
-    public void updateUser();
-    public void deleteUser();
+    public void updateUser(UserDto dto);
+    public void deleteUser(UserDto dto);
 
     //부서정보
     public List<DepartmentDto> selectListDepartment(PageDto dto);

@@ -56,7 +56,7 @@ public class AdminController {
         UserDto dto = adminService.selectUser(userDto);
         ModelAndView mv = new ModelAndView();
 
-
+        //회사 조인안하고 그냥 객체로 만듬
         CompanyDto companyDto = new CompanyDto();
         companyDto.setCompany_id(dto.getCompany_id());
         CompanyDto companyname = adminService.selectCompany(companyDto);
@@ -73,39 +73,35 @@ public class AdminController {
         return mv;
     }
 
-    @GetMapping("/admin/insertuser")
-    public ModelAndView insertUser(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        adminService.insertUser();
-
-        //세션 객체생셩
+    @GetMapping("/admin/{user_id}/updateuserview")
+    public ModelAndView updateUserView(UserDto userDto) {
+        UserDto dto = adminService.selectUser(userDto);
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/admin/insertuser");
+
+        //회사 조인안하고 그냥 객체로 만듬
+        CompanyDto companyDto = new CompanyDto();
+        companyDto.setCompany_id(dto.getCompany_id());
+        CompanyDto companyname = adminService.selectCompany(companyDto);
+
+        //부서 조인안하고 그냥 객체만듬
+        DepartmentDto dptDto = new DepartmentDto();
+        dptDto.setDpt_id(dto.getDpt_id());
+        DepartmentDto dptname = adminService.selectDepartment(dptDto);
+
+        mv.addObject("selectDpt",dptname);
+        mv.addObject("selectCompany",companyname);
+
+        mv.setViewName("/admin/userupdate");
+        mv.addObject("selectUser", dto);
         return mv;
     }
-    @GetMapping("/admin/updateuser")
-    public ModelAndView updateUser(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        adminService.updateUser();
 
-        //세션 객체생셩
-        ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/admin/updateuser");
-        return mv;
+    @GetMapping("/admin/{dpt_id}/deleteuser")
+    public String deleteDepartment(UserDto dto){
+        adminService.deleteUser(dto);
+        return "redirect:/admin/user";
     }
-    @GetMapping("/admin/deleteuser")
-    public ModelAndView deleteUser(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        adminService.deleteUser();
 
-        //세션 객체생셩
-        ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/admin/deleteuser");
-        return mv;
-    }
 
     //부서관리
     @GetMapping("/admin/department")
@@ -128,6 +124,19 @@ public class AdminController {
 
         return mv;
     }
+    @GetMapping("/admin/{user_id}/updateuser")
+    public String updateUser(UserDto dto){
+        System.out.println(dto.toString());
+        adminService.updateUser(dto);
+        return "redirect:/admin/user";
+    }
+
+    @GetMapping("/admin/{user}/deleteuser")
+    public String deleteUser(UserDto dto){
+        adminService.deleteUser(dto);
+        return "redirect:/admin/user";
+    }
+
 
     @GetMapping("/admin/{dpt_id}/selectdpt")
     public ModelAndView selectDepartment(DepartmentDto departmentDto){
