@@ -66,7 +66,14 @@
         UPDATE project
         SET
         project_name = #{project_name},
-        project_num = #{project_num}
+        project_num = #{project_num},
+        project_concept = #{project_concept},
+        project_content = #{project_content},
+        project_start_date = #{project_start_date},
+        project_end_date = #{project_end_date}
+        <if test="project_state != '----------'">
+        , project_state = #{project_state}
+        </if>
         where project_id = #{project_id}
         </update>
 
