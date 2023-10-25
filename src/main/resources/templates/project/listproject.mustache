@@ -10,13 +10,28 @@
 <table border="1" cellpadding="1" cellspacing="1">
     <ul>
         <tr>
-            <td>이름</td>
-            <td>회사아이디</td>
+            <td>기획명</td>
+            <td>기획번호</td>
+            <td>기획번호</td>
+            <td>작성자</td>
+            <td>작성일</td>
+            <td>기획시작</td>
+            <td>기획(예상)종료</td>
+            <td>기획상태</td>
+            <td>종료사유</td>
+
         </tr>
         {{#selectListProject}}
             <tr>
                 <td><a href="/project/{{project_id}}/selectproject">{{project_name}}</a></td>
-                <td>{{company_id}}</td>
+                <td>{{project_num}}</td>
+                <td>{{project_name}}</td>
+                <td>{{project_writer}}</td>
+                <td>{{project_date}}</td>
+                <td>{{string_start_date}}</td>
+                <td>{{string_end_date}}</td>
+                <td>{{project_state}}</td>
+                <td>{{project_reason}}</td>
             </tr>
         {{/selectListProject}}
     </ul>
@@ -42,9 +57,14 @@
 </form>
 
 <script>
+    <!--페이징처리를 위한 prefix url-->
     var url = "/project/project";
+
 </script>
 <script src="/static/js/search.js"></script>
+
+<!--date 변수를 dateformat.js에 넘겨주는 링크-->
+<script src="/static/js/dateformat.js"></script>
 
 </body>
 </html>

@@ -25,6 +25,7 @@ public class ProjectController {
         PageDto pageDto = new PageDto("project", "project_id", page, pdto);
         PageDto pageInfo = pagingService.paging(pageDto);
 
+
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(), pageInfo.getPageEnd(), page);
         String rink = pagingService.pageRink(pageDto);
 

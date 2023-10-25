@@ -9,8 +9,10 @@
         from(select rownum as r, t.*
 
         <!--  ( 결과 또는 검색 후 리스트에 대한 결과 )를 t로 지정-->
-        from (select * from ${table}
-        where 1=1
+        from (select to_char(project_start_date, 'YY-MM-DD') as string_start_date,to_char(project_end_date, 'YY-MM-DD') as string_end_date, project.*
+                            <!--날짜+시간을 강제로 날짜값으려 변경-->
+                from ${table}
+                where 1=1
         <if test="title != null and search != ''">
             AND project_name like '%${title}%'
         </if>

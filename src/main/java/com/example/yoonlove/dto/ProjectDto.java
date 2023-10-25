@@ -22,6 +22,10 @@ public class ProjectDto {
     private String company_id;  // 기업아이디13
     private String project_state;
 
+    //project 리스트에 시간값을 강제로 빼기위한 프로퍼티 // sql에서 to_char로 만듬
+    private String string_start_date;
+    private String string_end_date;
+
     @Override
     public String toString() {
         return "ProjectDto{" +
