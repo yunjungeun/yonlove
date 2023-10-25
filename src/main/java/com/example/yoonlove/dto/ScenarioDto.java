@@ -3,6 +3,8 @@ package com.example.yoonlove.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Date;
+
 @Getter
 @Setter
 public class ScenarioDto {
@@ -22,18 +24,8 @@ public class ScenarioDto {
     private String project_concept;
     private String project_flag;
     private String project_date;
+    private String project_state;
+    private Date project_start_date;  //값을 출력할때는 date타입, js로 넣어줄대는 string타입
 
-    @Override
-    public String toString() {
-        return "ScenarioDto{" +
-                "scenario_id='" + scenario_id + '\'' +
-                ", scenario_num=" + scenario_num +
-                ", scenario_name='" + scenario_name + '\'' +
-                ", scenario_content='" + scenario_content + '\'' +
-                ", scenario_writer='" + scenario_writer + '\'' +
-                ", scenario_date='" + scenario_date + '\'' +
-                ", project_id='" + project_id + '\'' +
-                ", scenario_update='" + scenario_update + '\'' +
-                '}';
-    }
+
 }
