@@ -96,8 +96,8 @@ public class AdminController {
         return mv;
     }
 
-    @GetMapping("/admin/{dpt_id}/deleteuser")
-    public String deleteDepartment(UserDto dto){
+    @GetMapping("/admin/{user_id}/deleteuser")
+    public String deleteUser(UserDto dto){
         adminService.deleteUser(dto);
         return "redirect:/admin/user";
     }
@@ -128,12 +128,6 @@ public class AdminController {
     public String updateUser(UserDto dto){
         System.out.println(dto.toString());
         adminService.updateUser(dto);
-        return "redirect:/admin/user";
-    }
-
-    @GetMapping("/admin/{user}/deleteuser")
-    public String deleteUser(UserDto dto){
-        adminService.deleteUser(dto);
         return "redirect:/admin/user";
     }
 
