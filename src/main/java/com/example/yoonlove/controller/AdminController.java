@@ -5,6 +5,7 @@ import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.UserDto;
 import com.example.yoonlove.service.AdminService;
 import com.example.yoonlove.service.PagingService;
+import com.example.yoonlove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,8 @@ public class AdminController {
 
     @Autowired
     private PagingService pagingService;
+    @Autowired
+    private UserService userService;
 
 
     //유저관리
@@ -47,17 +50,21 @@ public class AdminController {
         return mv;
     }
 
-    @GetMapping("/admin/selectuser")
-    public ModelAndView selectUser(){
-        //실행할 메소드(서비스 부분에 있는 메소드)
-        UserDto dto = adminService.selectUser();
-
-        //세션 객체생셩
+    @GetMapping("/admin/{user_id}/selectuser")
+    public ModelAndView selectUser(UserDto userDto){
+        UserDto dto = adminService.selectUser(userDto);
         ModelAndView mv = new ModelAndView();
-        //보여줄 view페이지 이름(ooo.mustache)
-        mv.setViewName("/admin/selectuser");
 
-        //dto객체 형태로 "selectListCreator"이라는 이름으로 세션형성
+
+
+
+        //부서 조인안하고 그냥 객체만듬
+        DepartmentDto dptDto = new DepartmentDto();
+        dptDto.setDpt_id(dto.getDpt_id());
+        DepartmentDto dptname = adminService.selectDepartment(dptDto);
+
+        mv.addObject("selectDpt",dptname);
+        mv.setViewName("/admin/userselect");
         mv.addObject("selectUser", dto);
         return mv;
     }

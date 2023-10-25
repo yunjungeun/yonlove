@@ -15,8 +15,8 @@ public class AdminService {
     private AdminMapper adminMapper;
 
     //유저정보
-    public UserDto selectUser(){
-        return adminMapper.selectUser();
+    public UserDto selectUser(UserDto dto){
+        return adminMapper.selectUser(dto);
     }
 
     public List<UserDto> selectListUser(PageDto pageInfo) {

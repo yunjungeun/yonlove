@@ -12,7 +12,7 @@ public interface AdminMapper {
     //고객정보
     public List<UserDto> selectListUser(PageDto pageInfo);
     public PageDto totalUserPost(PageDto dto);
-    public UserDto selectUser();
+    public UserDto selectUser(UserDto dto);
     public void insertUser();
     public void updateUser();
     public void deleteUser();

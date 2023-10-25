@@ -88,4 +88,9 @@
             AND user_content like '%${content}%'
         </if>
     </select>
+
+    <select id="selectUser" resultType="com.example.yoonlove.dto.UserDto">
+        SELECT * FROM users where user_id=#{user_id}
+    </select>
+
 </mapper>
