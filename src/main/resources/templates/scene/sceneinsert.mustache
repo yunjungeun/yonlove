@@ -7,34 +7,35 @@
     <title>Document</title>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/static/js/cu_alert.js"></script>
+    <script src="/static/js/checkFile.js"></script>
+    <script src="/static/js/cu_alert.js.js"></script>
+
 
 </head>
 <body>
-<form action="/scene/insertscene" method="post" enctype="multipart/form-data">
+<form id="alert" action="/scene/insertscene" method="post" enctype="multipart/form-data">
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
-            <td>시나리오<input name="scenario_id" type="text" placeholder="드롭다운" readonly></td>
-            <td>씬 번호<input name="scene_num" type="number" placeholder="미입력시 자동생성"></td>
-            <td>첨부파일<input name="file" type="file" placeholder="파일을 첨부하세요"></td>
+            <td>시나리오<input name="scenario_id" type="text" placeholder="드롭다운" readonly class="field1" ></td>
+            <td>씬 번호<input name="scene_num" type="number" placeholder="미입력시 자동생성" class="field12" ></td>
+            <td>첨부파일<input id="fileInput"  name="file" type="file" placeholder="파일을 첨부하세요" class="field3"></td>
+            <p id="errorText" style="color: red;"></p>
         </tr>
         <tr>
-            <td>장면 요약<input class="field1" name="scene_content" type="text" placeholder="스토리보드 내용을 요약작성해 주세요"/></td>
+            <td>장면 요약<input  name="scene_content" type="text" placeholder="스토리보드 내용을 요약작성해 주세요" class="field4"/></td>
         </tr>
         <tr>
 
-            <td colspan="2"><textarea name="story_board" cols="50" rows="20" placeholder="스토리보드 내용"></textarea></td>
-            <td>촬영장소 <input name="scene_place" type="text"/></td>
+            <td colspan="2"><textarea name="story_board" cols="50" rows="20" placeholder="스토리보드 내용" class="field5"></textarea></td>
+            <td>촬영장소 <input name="scene_place" type="text" class="field6"/></td>
         </tr>
     </table>
-    <input type="submit" value="등록" onclick="mappingurl('/scene/insertscene','/scene/scene',3,'작성')">
+    <input type="submit" value="씬등록" onclick="checkFile('업로드');" >
+    <input type="submit" value="파일등록" onclick="mappingurl('/scene/insertscene','/scene/scene', 6,'작성')"  >
+
 </form>
 <a href="/scene/scene">취소</a>
 
-<br/>현재까지 버그<br/>
-작성칸이 공란이면 db에 null값이 들어가는게아닌 공란이 들어감<br/>
-number데이터형에 공란이 들어가면서 db오류 발생<br/>
-마이바티스 문법으로 if문으로 해결 가능<br/>
-시나리오 번호 자동증가는 공란이 들어갔을때 어떻게 처리될 것인지?<br/>
+
 </body>
 </html>
