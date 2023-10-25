@@ -17,6 +17,9 @@
         <if test="content != null and search != ''">
             AND action_content like '%${content}%'
         </if>
+        <if test="pkid != null">
+            AND scene_id = #{pkid}
+        </if>
     </select>
 
 
@@ -105,7 +108,7 @@
 
     <insert id="insertTimeTable">
         insert into timetable values(
-        (select concat('time', (nvl(max(to_number(substr(table_id, 4))), 0)+1)) from timetable),<!--pk코드 자동증가(수정2)-->
+        (select concat('time',(nvl(max(to_number(substr(table_id, 4)), 0)+1))) from timetable),<!--pk코드 자동증가(수정2)-->
         #{film_time},<!--촬영시간(몇시간 몇분)-->
         #{time_num},<!--타임테이블 번호 자동증가 해야됨-->
         #{ok_ng}, <!--ok판정-->

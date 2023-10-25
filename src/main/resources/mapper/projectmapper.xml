@@ -9,8 +9,10 @@
         from(select rownum as r, t.*
 
         <!--  ( 결과 또는 검색 후 리스트에 대한 결과 )를 t로 지정-->
-        from (select * from ${table}
-        where 1=1
+        from (select to_char(project_start_date, 'YY-MM-DD') as string_start_date,to_char(project_end_date, 'YY-MM-DD') as string_end_date, project.*
+                            <!--날짜+시간을 강제로 날짜값으려 변경-->
+                from ${table}
+                where 1=1
         <if test="title != null and search != ''">
             AND project_name like '%${title}%'
         </if>
@@ -39,29 +41,33 @@
         </if>
     </select>
 
-
-
     <select id="selectProject" resultType="com.example.yoonlove.dto.ProjectDto">
         SELECT * FROM project where project_id= #{project_id}
     </select>
 
-
-
     <insert id="insertProject">
         insert into project values(
-            (select concat('project', (nvl(max(substr(project_id, 8)), 0)+1)) from project),<!--pk코드 자동증가(수정)-->
-            #{project_name},
+            (select concat('project', (nvl(max(to_number(substr(project_id, 8))), 0)+1)) from project),<!--pk코드 자동증가(수정2)-->
+            #{project_name},  <!--기획명-->
+
+        <if test="project_num == 0 or project_num == null">      <!--com1 부분 로그인 세션가져와서 적용필요-->
+            (select nvl(max(project_num),0)+1 from project where company_id = 'com1'),
+        </if>
+        <if test="project_num != null and project_num != 0">
             #{project_num},
-            '테스트',
-            '테스트진행중',
-            '기획내용 내용테스트',
-            '2023/10/11',
-            null,
-            null,
-            null,
-            'true',
-            null,
-            'com1'
+        </if>
+
+            '작성자', <!--작성자-->
+            #{project_concept},  <!--콘셉트-->
+            #{project_content}, <!--기획내용-->
+            (select * from todaytime),  <!--기획일-->
+            #{project_start_date},  <!--기획 시작일-->
+            #{project_end_date},   <!--기획 종료일-->
+            (select * from todaytime),   <!--작성일-->
+            'false', <!--종료여부-->
+            '-',   <!--종료사유-->
+            'com1', <!--회사table pk 자동입력-->
+            #{project_state} <!--작성상태-->
         )
     </insert>
 
@@ -69,7 +75,14 @@
         UPDATE project
         SET
         project_name = #{project_name},
-        project_num = #{project_num}
+        project_num = #{project_num},
+        project_concept = #{project_concept},
+        project_content = #{project_content},
+        project_start_date = #{project_start_date},
+        project_end_date = #{project_end_date}
+        <if test="project_state != '----------'">
+        , project_state = #{project_state}
+        </if>
         where project_id = #{project_id}
         </update>
 
@@ -104,7 +117,6 @@
         </if>
     </select>
 
-
     <select id="selectBudget" resultType="com.example.yoonlove.dto.BudgetDto">
         SELECT * FROM budget
         where budget_id = #{budget_id}
@@ -127,7 +139,6 @@
         SET
         budget_name = #{budget_name},
         budget_amount = #{budget_amount}
-
         where budget_id = #{budget_id}
     </update>
 
@@ -185,5 +196,5 @@
 
         where pd_id = #{pd_id}
     </update>
-    <!--==================================프로듀스 완료 !!!!!!!!!!============== -->
+
 </mapper>

@@ -5,6 +5,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
 </head>
 <body>
     <table border="1" cellpadding="1" cellspacing="1">
@@ -17,8 +18,12 @@
 
 <a href="/admin/department">목록</a>
     <a href="/admin/{{selectDpt.dpt_id}}/updatedptview">수정</a>
-    <a href="/admin/{{selectDpt.dpt_id}}/deletedpt">삭제</a>
+    <a href="javascript:void(0);" onclick="deleteAlert('/admin/{{selectDpt.dpt_id}}/deletedpt')">삭제</a>
+
+
 
 <br/>현재까지 버그<br/>
+
+    <script src="/static/js/deletepost.js"></script>
 </body>
 </html>

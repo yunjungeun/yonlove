@@ -7,23 +7,36 @@
     <title>Document</title>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/static/js/cu_alert.js"></script>
 
 </head>
 <body>
 <form id="alert" action="/scenario/insertscenario" method="get">
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
-            <td>제목</td>
-            <td><input class="field1" name="scenario_name" type="text"><td>
+            <td>프로젝트
+                <select id="fk" name="project_id"></select></td>
+            <td>제목
+                <input class="field1" name="scenario_name" type="text"></td>
+            <td>시나리오 번호
+                <input  class="int1" name="scenario_num" type="number" placeholder="미입력시 자동입력"></td>
         </tr>
         <tr>
-            <td colspan="2"><textarea class="field2" name="scenario_content" cols="50" rows="20"></textarea></td>
+            <td colspan="3"><textarea class="field2" name="scenario_content" cols="50" rows="20"></textarea></td>
         </tr>
     </table>
-    <input type="submit" value="등록" onclick="mappingurl('/scenario/insertscenario','/scenario/scenario',2,'작성')">
+    <input type="submit" value="등록" onclick="mappingurl('/scenario/insertscenario','/scenario/scenario',2,'작성',1)">
 </form>
 <a href="/scenario/scenario">취소</a>
 
+
+<!--옵션 태그에 필요한 js-->
+<script>
+    var jsonValue = '{{{fkList}}}';
+    <!--select 옵션 name값을 cu_alert.js에 보내주기 위한 변수 값/이게없으면 제출이 안됨-->
+    var selectName = "project_id";
+    <!--selectName이 실행되기 위해선 cu_alert 스크립트소스가 이 아래 있어야함-->
+</script>
+<script src="/static/js/dropdown.js"></script>
+<script src="/static/js/cu_alert.js"></script>
 </body>
 </html>

@@ -25,6 +25,7 @@ public class ProjectController {
         PageDto pageDto = new PageDto("project", "project_id", page, pdto);
         PageDto pageInfo = pagingService.paging(pageDto);
 
+
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(), pageInfo.getPageEnd(), page);
         String rink = pagingService.pageRink(pageDto);
 
@@ -57,6 +58,7 @@ public class ProjectController {
 
     @GetMapping("project/insertproject")   // 작성 후 입력값 넘기는~
     public String insertProject(ProjectDto projectDto){
+        System.out.println("작성 내용"+projectDto.toString());
         projectService.insertProject(projectDto);
         return "redirect:/project/project";
     }

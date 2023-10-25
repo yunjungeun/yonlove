@@ -6,6 +6,12 @@
         SELECT * FROM scene where scene_id = #{scene_id}
     </select>
 
+    <!--옵션값에 넣기 위한 fk테이블의 검색값을 가져오는 쿼리-->
+    <select id="selectFk">
+        SELECT scenario_id, scenario_num, scenario_name FROM scenario order by scenario_id desc
+    </select>
+
+
     <select id="totalScenePost" parameterType="com.example.yoonlove.dto.PageDto">
         select count(${id}) as totalPost from ${table}
         where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
@@ -33,6 +39,11 @@
         <if test="content != null and search != ''">
             AND scene_content like '%${content}%'
         </if>
+
+        <!--다른곳의 서브게시판으로 사용된다면 실행-->
+        <if test="pkid != null">
+            AND scenario_id = #{pkid}
+        </if>
         order by ${id} desc) t)
 
         <!-- rownum을 기준(r)으로 시작번호부터 끝번호까지 검색   -->
@@ -42,12 +53,16 @@
     <insert id="insertScene">
         insert into scene values(
         (select concat('scene', (nvl(max(to_number(substr(scene_id, 6))), 0)+1)) from scene),<!--pk코드 자동증가(수정2)-->
-        (select nvl(max(scene_num),0)+1 from scene),<!--씬 번호 자동증가-->
-        null,<!--이미지 첨부파일 주소-->
+        <if test="scene_num == 0 or  scene_num == null">
+            (select nvl(max(scene_num),0)+1 from scene where scenario_id=#{scenario_id}),<!--씬 번호 자동증가-->
+        </if>
+        <if test="scene_num != null and  scene_num != 0">
+            #{scene_num},
+        </if>
         #{scene_place}, <!--촬영장소-->
         #{story_board},<!--스토리보드 내용-->
         #{scene_content}, <!--스토리보드 요약-->
-        'scenario1' <!--시나리오 id 조인해서 드롭다운 형태로 선택할수 있어야함-->
+        (select scenario_id from scenario where scenario_id=#{scenario_id})
         )
     </insert>
 
@@ -106,7 +121,7 @@
 
     <insert id="insertActor">
         insert into actor values(
-        (select concat('actor', (nvl(max(to_number(substr(actor_id, 6))), 0)+1)) from actor),<!--pk코드 자동증가(수정2)-->
+        (select concat('actor', (nvl(max(to_number(substr(actor_id, 6)), 0)+1))) from actor),<!--pk코드 자동증가(수정2)-->
         'scene1', <!--외래키로, 조인해온 외래키를 드롭다운으로 선택하게끔 해야함-->
         'pd1', <!--외래키로, 조인해온 외래키를 드롭다운으로 선택하게끔 해야함-->
         #{actor_info}<!--출연자정보-->

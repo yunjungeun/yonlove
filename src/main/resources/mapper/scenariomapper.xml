@@ -6,6 +6,11 @@
         SELECT * FROM scenario where scenario_id=#{scenario_id}
     </select>
 
+    <!--옵션값에 넣기 위한 fk테이블의 검색값을 가져오는 쿼리-->
+    <select id="selectFk">
+        SELECT project_id, project_name, project_num FROM project order by project_id desc
+    </select>
+
     <select id="totalScenarioPost" parameterType="com.example.yoonlove.dto.PageDto">
         select count(${id}) as totalPost from ${table}
         where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
@@ -28,7 +33,7 @@
         from(select rownum as r, t.*
 
         <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
-        from (select * from ${table}
+        from (select * from scenariolist
         where 1=1
         <if test="title != null and search != ''">
             AND scenario_name like '%${title}%'
@@ -49,12 +54,18 @@
     <insert id="insertScenario">
         insert into scenario values(
         (select concat('scenario', (nvl(max(to_number(substr(scenario_id, 9))), 0)+1)) from scenario),<!--pk코드 자동증가(수정2)-->
-        (select nvl(max(scenario_num),0)+1 from scenario), <!--시나리오번호 자동증가-->
+        <!--fk값 별 자동증가 설정/ if문은 사용자 입력시 입력값으로 적용-->
+        <if test="scenario_num == 0 or  scenario_num == null">
+            (select nvl(max(scenario_num),0)+1 from scenario where project_id=#{project_id}),
+        </if>
+        <if test="scenario_num != null and  scenario_num != 0">
+            #{scenario_num},
+        </if>
         #{scenario_name}, <!--시나리오 제목-->
         #{scenario_content},<!--시나리오내용-->
         '관리자',<!--작성자-->
         (select * from todaytime),<!--작성시간-->
-        'project1',<!--드롭박스로 선택할수 있어야함-->
+        #{project_id},<!--드롭박스로 선택할수 있어야함-->
         '23/11/01'
         )
     </insert>

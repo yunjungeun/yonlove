@@ -52,6 +52,7 @@ public class CsController {
 
         //페이징정보처리 메소드
         PageDto pageInfo = pagingService.paging(pageDto);
+        System.out.println("페이징정보 : "+pageInfo.toString());
 
 
         //뷰페이지에 하단 페이징처리를 해주는 리스트

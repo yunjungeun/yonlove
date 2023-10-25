@@ -25,7 +25,9 @@
     </table>
 <a href="/script/scriptpaper">목록</a>
     <a href="/script/{{selectScriptPaper.script_id}}/updatescriptview">수정</a>
-    <a href="/script/{{selectScriptPaper.script_id}}/deletescriptpaper">삭제</a>
+    <a href="javascript:void(0);" onclick="deleteAlert('/script/{{selectScriptPaper.script_id}}/deletescriptpaper')">삭제</a>
 <br/>현재까지 버그<br/>
+
+    <script src="/static/js/deletepost.js"></script>
 </body>
 </html>
