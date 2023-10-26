@@ -3,6 +3,7 @@ package com.example.yoonlove.controller;
 import com.example.yoonlove.dto.*;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.PlanService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -137,10 +138,18 @@ public class PlanController {
     }
 
     @GetMapping("plan/insertScheduleTimeView")
-    public ModelAndView insertScheduleTimeView() {
+    public ModelAndView insertScheduleTimeView() throws JsonProcessingException {
+
+        //fk값으로 db검색결과
+        List<ScheduleDayDto> scheduleDayDto = planService.selectFk();
+
+        //검색리스트를 json 리스트 문자열로 생성
+        String jsonList = planService.fkJson(scheduleDayDto);
+
         ModelAndView mv = new ModelAndView();
+        mv.addObject("fkList", jsonList);
+        mv.setViewName("/scene/sceneinsert");
         mv.setViewName("plan/insertScheduleTime");
-        mv.setStatus(HttpStatus.valueOf(200));
         return mv;
     }
 

@@ -3,10 +3,14 @@ package com.example.yoonlove.service;
 
 import com.example.yoonlove.dto.*;
 import com.example.yoonlove.mapper.PlanMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -14,7 +18,6 @@ public class PlanService {
 
     @Autowired
     private PlanMapper planMapper;
-
 
     public List<ScheduleDayDto> selectListSchedule(PageDto pageInfo) {
         List<ScheduleDayDto> scheduleList = planMapper.selectListSchedule(pageInfo);
@@ -46,7 +49,7 @@ public class PlanService {
 
 
 
-//================================================================================
+//==============================스케쥴타임==================================================
 
     public List<ScheduleTimeDto> selectListScheduleTime(PageDto pageInfo) {
         List<ScheduleTimeDto> scheduleTimeList = planMapper.selectListScheduleTime(pageInfo);
@@ -58,25 +61,32 @@ public class PlanService {
         return scheduleTimeDetail;
     }
 
-
-
     public void insertTime(ScheduleTimeDto dto) {
-
-
         planMapper.insertTime(dto);
     }
 
     public void updateTime(ScheduleTimeDto dto) {
         planMapper.updateTime(dto);
-
     }
 
     public void deleteTime(ScheduleTimeDto dto) {
         planMapper.deleteTime(dto);
-
     }
 
-
+    //옵션 fk검색
+    public List<ScheduleDayDto> selectFk(){
+        return planMapper.selectFk();
+    }
+    //옵션헤쉬맵
+    public String fkJson(List<ScheduleDayDto> dto) throws JsonProcessingException {
+        Map<String, String> fkList = new LinkedHashMap<>();//해쉬맵은 삽입순서를 유지하지 않기 때문에, LinkedHashMap<>으로 사용자 편의를 위한 정렬삽입을 했음
+        for(int i=0; i< dto.size(); i++){
+            fkList.put(dto.get(i).getDay_id(),dto.get(i).getDay_title());
+        }
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonList = objectMapper.writeValueAsString(fkList);
+        return jsonList;
+    }
 //===================================================================================
 
 
