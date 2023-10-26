@@ -3,10 +3,14 @@ package com.example.yoonlove.service;
 
 import com.example.yoonlove.dto.*;
 import com.example.yoonlove.mapper.PlanMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -14,6 +18,25 @@ public class PlanService {
 
     @Autowired
     private PlanMapper planMapper;
+
+
+    public String fkJson(List<ProjectDto> dto) throws JsonProcessingException {
+        Map<String, String> fkList = new LinkedHashMap<>();//해쉬맵은 삽입순서를 유지하지 않기 때문에, LinkedHashMap<>으로 사용자 편의를 위한 정렬삽입을 했음
+        for(int i=0; i< dto.size(); i++){
+            //           fk 값       /   실제 표시딜 이름값
+            fkList.put(dto.get(i).getProject_id(),dto.get(i).getProject_name());
+        }
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonList = objectMapper.writeValueAsString(fkList);
+        return jsonList;
+    }
+
+
+    public List<ProjectDto> selectFk(){
+        return planMapper.selectFk();
+    }
+
+
 
 
     public List<ScheduleDayDto> selectListSchedule(PageDto pageInfo) {

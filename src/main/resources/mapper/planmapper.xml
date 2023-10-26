@@ -5,7 +5,7 @@
 
 
     <select id="totalSceduledayPost" parameterType="com.example.yoonlove.dto.PageDto">
-        select count(${id}) as totalPost from ${table}
+        select count(${id}) as totalPost from scheduledaylist
         where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
         <!--검색어가 있다면 아래 조건문을 실행-->
         <if test="title != null and search != ''">
@@ -14,6 +14,17 @@
         <if test="content != null and search != ''">
             AND weather like '%${content}%'
         </if>
+
+        <if test="writer != null and search != ''">
+            AND project_name like '%${writer}%'
+        </if>
+
+
+    </select>
+
+    <!--옵션값에 넣기 위한 fk테이블의 검색값을 가져오는 쿼리-->
+    <select id="selectFk">
+        SELECT project_id, project_name, project_num FROM project order by project_id desc
     </select>
 
 
@@ -23,7 +34,7 @@
         from(select rownum as r, t.*
 
         <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
-        from (select * from ${table}
+        from (select * from scheduledaylist
         where 1=1  /*에러처리방지를 위한 코드*/
         <if test="title != null and search != ''">
             AND day_title like '%${title}%'
@@ -32,6 +43,11 @@
         <if test="content != null and search != ''">
             AND weather like '%${content}%'
         </if>
+
+        <if test="writer != null and search != ''">
+            AND project_name like '%${writer}%'
+        </if>
+
         order by ${id} desc) t)
 
         <!-- rownum을 기준(r)으로 시작번호부터 끝번호까지 검색   -->

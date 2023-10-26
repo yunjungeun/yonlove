@@ -3,6 +3,7 @@ package com.example.yoonlove.controller;
 import com.example.yoonlove.dto.*;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.PlanService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,8 @@ public class PlanController {
     @GetMapping("/plan/schedule_day")
     public ModelAndView selectListSchedule(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page) {
 
+
+
         PageDto pageDto = new PageDto("schedule_day","day_id", page,pdto);
         PageDto pageInfo = pagingService.paging(pageDto); // paging ==> 전체게시글 갯수 구해오는 메소드
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
@@ -36,6 +39,9 @@ public class PlanController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/schedule_day");
         mv.addObject("scheduleList", dto);
+
+        System.out.println(dto.get(0).getProject_name());
+
 
         mv.addObject("prefixUrl","plan");
         mv.addObject("paging", pageInfo);  //페이징정보
@@ -56,10 +62,15 @@ public class PlanController {
     }
 
     @GetMapping("plan/insertScheduleView")
-    public ModelAndView insertScheduleView() {
+    public ModelAndView insertScheduleView() throws JsonProcessingException {
+
+        List<ProjectDto> projectDto = planService.selectFk();
+
+        String jsonList = planService.fkJson(projectDto);
+
         ModelAndView mv = new ModelAndView();
         mv.setViewName("plan/insertSchedule");
-        mv.setStatus(HttpStatus.valueOf(200));
+        mv.addObject("fkList",jsonList );
         return mv;
     }
 

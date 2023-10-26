@@ -18,7 +18,7 @@
         </tr>
         {{#scheduleList}}
             <tr>
-                <td>{{project_id}}</td>
+                <td><a href="/project/{{project_id}}/selectproject">{{project_name}}</a></td>
                 <td><a href="/plan/schedule/{{day_id}}">{{day_title}}</a></td>
                 <td>{{film_date}}</td>
 
@@ -32,6 +32,7 @@
 <form action="/plan/schedule_day" method="GET">
     <select id="searchType" name="searchType">
         <option value="all">선택</option>
+        <option value="writer">기획명</option>
         <option value="title">제목</option>
         <option value="content">날씨</option>
         <!-- 필요한 항목 추가 -->
