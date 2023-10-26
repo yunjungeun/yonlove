@@ -135,14 +135,16 @@ public class AdminController {
         mv.setViewName("/admin/dptselect");
 
         //서브게시판
-        PageDto pageDto = new PageDto("users","user_id",page,pdto);
         pdto.setPkid(dto.getDpt_id());
-       PageDto pageInfo = pagingService.paging(pageDto);
+        PageDto pageDto = new PageDto("users","user_id",page,pdto);
+
+        PageDto pageInfo = pagingService.paging(pageDto);
 
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
-        String rink = pagingService.subPageRink(pageDto,"scenario");
+        String rink = pagingService.subPageRink(pageDto,"department");
 
         List<UserDto> subList = adminService.selectListUser(pageInfo);
+        System.out.println(pageInfo.getPkid());
         mv.addObject("selectListUser", subList);
 
         //페이징에 필요한센션

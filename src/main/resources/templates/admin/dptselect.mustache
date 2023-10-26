@@ -12,28 +12,25 @@
         <tr>
             <td>부서명 <input name="dpt_name" type="text" value="{{selectDpt.dpt_name}}" readonly/></td>
             <td>부서기능 <input name="dpt_function" type="text" value="{{selectDpt.dpt_function}}" readonly/></td>
-            <td>여기에 직원현황이 나와야하나?</td>
         </tr>
     </table>
 
     <table border="1" cellpadding="1" cellspacing="1">
         <ul>
             <tr>
-                <td>회원ID</td>
-                <td>회원이름</td>
+                <td>직원ID</td>
+                <td>성명</td>
                 <td>닉네임</td>
-                <td>회원가입 일시</td>
-                <td>권한</td>
-                <td>회사</td>
+                <td>연락처</td>
+                <td>E-mail</td>
             </tr>
             {{#selectListUser}}
                 <tr>
                     <td><a href="/admin/{{user_id}}/selectuser">{{user_id}}</a></td>   <!--관리자용 링크임/ 수정필요-->
                     <td>{{user_name}}</td>
                     <td>{{nickname}}</td>
-                    <td>{{sign_date}}</td>
-                    <td>{{authority}}</td>
-                    <td>{{company_name}}</td>
+                    <td>{{phone}}</td>
+                    <td>{{email}}</td>
                 </tr>
             {{/selectListUser}}
         </ul>
@@ -46,8 +43,9 @@
     <form action="/admin/user" method="GET">
         <select id="searchType" name="searchType">
             <option value="all">선택</option>
-            <option value="title">씬</option>
-            <option value="content">내용</option>
+            <option value="writer">ID</option>
+            <option value="title">이름</option>
+            <option value="content">E-mail</option>
             <!-- 필요한 항목 추가 -->
         </select>
         <input type="text" id="search" name="search" placeholder="검색">
