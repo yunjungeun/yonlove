@@ -11,6 +11,9 @@ import java.util.Collection;
 @Data
 public class UserDto implements UserDetails {
 
+
+
+
         private String user_id;
         private String pw;
         private String pw2;

@@ -49,7 +49,6 @@ public class PagingService {
             case "actor_management" : pageDto = planMapper.totalActorManagementPost(dto); break;
             case "budget" : pageDto = projectMapper.totalBudgetPost(dto); break;
             case "actor_managment" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
-            case "budget" : pageDto = projectMapper.totalBudgetPost(dto); break;
             case "company" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
             case "creater" : pageDto = creatorMapper.totalCreatorPost(dto); break;
             case "creater_profit" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;

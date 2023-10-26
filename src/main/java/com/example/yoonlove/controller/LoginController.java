@@ -55,7 +55,7 @@ public class LoginController {
 
 
 
-    @GetMapping("signupview")
+    @GetMapping("  ")
     public String signview(){
         return "/login/signup";
     }

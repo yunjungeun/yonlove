@@ -1,11 +1,8 @@
 package com.example.yoonlove.controller;
 
-import com.example.yoonlove.dto.ActorDto;
-import com.example.yoonlove.dto.FileDto;
+import com.example.yoonlove.dto.*;
 import com.example.yoonlove.mapper.FileMapper;
 import com.example.yoonlove.service.FileService;
-import com.example.yoonlove.dto.PageDto;
-import com.example.yoonlove.dto.SceneDto;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.SceneService;
 import lombok.extern.slf4j.Slf4j;
