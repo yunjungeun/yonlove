@@ -11,7 +11,6 @@
         <if test="title != null and search != ''">
             AND day_title like '%${title}%'
         </if>
-
         <if test="content != null and search != ''">
             AND weather like '%${content}%'
         </if>
@@ -29,7 +28,6 @@
         <if test="title != null and search != ''">
             AND day_title like '%${title}%'
         </if>
-
 
         <if test="content != null and search != ''">
             AND weather like '%${content}%'
@@ -61,7 +59,7 @@
 
     <insert id="insertSchedule" parameterType="com.example.yoonlove.dto.ScheduleDayDto" >
         INSERT INTO schedule_day  VALUES (
-        (select concat('day',(substr(NVL(max(day_id),'day0'),4)+1)) from schedule_day),
+        (select concat('day', (nvl(max(to_number(substr(day_id, 4))), 0)+1)) from schedule_day),<!--pk코드 자동증가(수정2)-->
         #{film_date},
         #{weather},
         #{day_title},
