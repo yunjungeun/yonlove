@@ -13,6 +13,5 @@ public interface UserMapper {
     public UserDto getNick(String user_id);
     public void insertCompany(CompanyDto companyDto);
 
-    public boolean selectId(UserDto dto);
-
+    public boolean selectId(UserDto dto); //
 }

@@ -62,27 +62,13 @@ public class LoginController {
 
         ModelAndView mv = new ModelAndView();
         UserDto dto = new UserDto();
-
         dto.setUser_id(user_id);
         mv.setViewName("/login/signup");
         mv.addObject("ConfirmId", userService.selectId(dto));
 
         boolean isIdAvailable = userService.selectId(dto);
         System.out.println("중복확인 값"+isIdAvailable);
-
         return ResponseEntity.ok(isIdAvailable);
-
-//    public ResponseEntity<?> confirmId(@RequestParam("id") String id) {//
-//        System.out.println("---------------------------ConfirmId---------------------");
-//        ModelAndView mv = new ModelAndView();
-//        UserDto dto = new UserDto();
-//        dto.setUser_id(id);
-//        mv.setViewName("/login/signup");
-//        mv.addObject("ConfirmId", userService.selectId(dto));//
-//        boolean a = userService.selectId(dto);//
-//        /*String response = "test";*/
-//        System.out.println("!!!!!!" + a);
-//        return ResponseEntity.ok(a);
     }
 
 

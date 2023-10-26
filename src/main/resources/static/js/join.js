@@ -1,12 +1,6 @@
     $(document).ready(function() {
     	function checkIdDuplicate() {
 
-
-    	/*usercomfim*/
-    	//ID 중복 확인
-    	//id를 입력할 수 있는 input text 영역을 벗어나면 동작한다.
-    	/*$("#user_id").on("click", checkIdDuplicate() {*/
-
     		var id = $("#user_id").val();
     		if(id == '' || id.length == 0) {
     			alert("공백은 ID로 사용할 수 없습니다.");
