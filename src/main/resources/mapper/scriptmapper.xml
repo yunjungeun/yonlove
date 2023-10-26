@@ -8,7 +8,7 @@
 
 
     <select id="totalScriptPost" parameterType="com.example.yoonlove.dto.PageDto">
-        select count(${id}) as totalPost from ${table}
+        select count(${id}) as totalPost from scriptview
         where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
         <!--검색어가 있다면 아래 조건문을 실행-->
         <if test="title != null and search != ''">
@@ -17,6 +17,11 @@
         <if test="content != null and search != ''">
             AND action_content like '%${content}%'
         </if>
+
+        <if test="writer != null and search != ''">
+            AND scenario_name like '%${writer}%'
+        </if>
+
         <if test="pkid != null">
             AND scene_id = #{pkid}
         </if>
@@ -29,14 +34,22 @@
         from(select rownum as r, t.*
 
         <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
-        from (select * from ${table}
+        from (select * from scriptview
         where 1=1
         <if test="title != null and search != ''">
-            AND script_id like '%${title}%'
+            AND scene_num like '%${title}%'
         </if>
         <if test="content != null and search != ''">
             AND action_content like '%${title}%'
         </if>
+
+
+        <if test="writer != null and search != ''">
+            AND scenario_name like '%${writer}%'
+        </if>
+
+
+
         order by ${id} desc) t)
 
         <!-- rownum을 기준(r)으로 시작번호부터 끝번호까지 검색   -->

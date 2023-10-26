@@ -7,6 +7,9 @@ function mappingurl(submiturl,sucessurl, int, text, cnt){
     var data = {};
 
 
+     /*   var fileData = new FormData(document.getElementById("alert"));
+        data.append("file", fileData);*/
+
         for(var i = 1; i <= int; i++){
             var name = ".field"+i;  // name <-  ". field" +i  클래스이름 대체 +1 갯수숫자의미  .점은 선택자 클래스라서 점으로 표시
             $(name).each(function() {    // $(클랙스이름) 넣고 반복해서 함수를
@@ -32,10 +35,18 @@ function mappingurl(submiturl,sucessurl, int, text, cnt){
     }
 
 
-       $.ajax({
+    $.ajax({
             url: submiturl,
-            type : "GET",
+            type : "POST",
             data : data,
+
+             enctype: 'multipart/form-data',
+        processData: false,
+             contentType: false,
+             cache: false,
+
+
+
             success:function(response){
                 alert("정상적으로 " +text+" 되었습니다");
                 window.location.href = sucessurl ;
