@@ -26,7 +26,6 @@ import java.util.List;
         public ModelAndView selectListCreaotr(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
             PageDto pageDto = new PageDto("creater", "ch_id", page, pdto);
             PageDto pageInfo=pagingService.paging(pageDto);
-
             List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(), pageInfo.getPageEnd(), page);
             String rink = pagingService.pageRink(pageDto);
 
@@ -60,6 +59,12 @@ import java.util.List;
           ModelAndView mv = new ModelAndView();
           mv.setViewName("/creator/selectcreator");
           mv.addObject("selectCreator", dto);
+          // 기존 크레이터 값 끝
+
+          // 이어붙일 테이블: 영상정보 start
+
+
+
           return mv;
       }
 
