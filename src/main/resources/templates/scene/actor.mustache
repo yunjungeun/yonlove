@@ -10,14 +10,19 @@
 <table border="1" cellpadding="1" cellspacing="1">
     <ul>
         <tr>
-            <td>씬 번호</td>
-            <td>출연자 id(조인으로 성명들어가야함)</td>
-            <td>출연장 배역/역할</td>
+
+            <td>촬영계획명</td>
+            <td>기획명</td>
+            <td>출연자(조인으로 성명들어가야함)</td>
+            <td>출연자 배역/역할</td>
         </tr>
         {{#selectListActor}}
             <tr>
-                <td>{{actor_id}}<!--여기누르면 시나리오로 이동해야함--></td>
-                <td><a href="/scene/{{actor_id}}/selectactor">{{scene_id}}</a></td>
+
+
+                <td>{{day_title}}</td>
+                <td>{{project_name}}</td>
+                <td><a href="plan/actorManagement/{{actor_id}}">{{actor_name}}</a></td>
                 <td>{{actor_info}}</td>
             </tr>
         {{/selectListActor}}
@@ -30,8 +35,9 @@
 <form action="/scene/actor" method="GET">
     <select id="searchType" name="searchType">
         <option value="all">선택</option>
-        <option value="title">actor_id</option>
-        <option value="content">역할</option>
+        <option value="title">출연자</option>
+        <option value="writer">기획명</option>
+        <option value="content">촬영계획명</option>
         <!-- 필요한 항목 추가 -->
     </select>
     <input type="text" id="search" name="search" placeholder="검색">
@@ -41,12 +47,12 @@
 </form>
 
 근데 작성자는 잇어야되지 않을까요?<br/>
-<a href="/scene/insertactorview" role="button">작성</a>
-<a href="/scene/actor">목록</a>
+<a href="plan/insertactorManagementView" role="button">작성</a>
+<a href="/plan/actor_management">목록</a>
 <a href="/index">홈 페이지</a>
 
 <script>
-    var url = "/scene/actor";
+    var url = "/plan/actor_management";
 </script>
 <script src="/static/js/search.js"></script>
 

@@ -10,7 +10,7 @@
 <table border="1" cellpadding="1" cellspacing="1">
     <ul>
         <tr>
-            <td>시나리오 제목</td>
+            <td>시나리오</td>
             <td>씬 번호</td>
             <td>촬영내용</td>
             <td>찰영장소</td>
@@ -18,7 +18,7 @@
         </tr>
         {{#selectListScene}}
             <tr>
-                <td>{{scenario_name}}</td>
+                <td><a href="/scenario/{{scenario_id}}/selectscenario">{{scenario_name}}</a></td>
                 <td>{{scene_num}}<!--여기누르면 시나리오로 이동해야함--></td>
 
                 <td><a href="/scene/{{scene_id}}/selectscene">{{scene_content}}</a></td>

@@ -3,40 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시판 리스트</title>
+    <title>출연자 관리 리스트</title>
 </head>
 <body>
-<h1>공지사항</h1>
+<h1>출연자 게시판</h1>
 <table border="1" cellpadding="1" cellspacing="1">
     <ul>
         <tr>
-            <td>배우이름</td>
-            <td>도착시간</td>
-            <td>장소</td>
-            <td>셋콜</td>
-            <td>일정id</td>
 
-
+            <td>촬영계획명</td>
+            <td>기획명</td>
+            <td>출연자</td>
+            <td>출연자 배역/역할</td>
         </tr>
-        {{#actorManagementList}}
+        {{#selectListActor}}
             <tr>
-                <td>{{arrival_time}}</td>
-                <td><a href="/plan/actorManagement/{{actor_id}}">{{actor_name}}</a></td>
-                <td>{{place}}</td>
-                <td>{{set_call}}</td>
-                <td>{{day_id}}</td>
 
+
+                <td>{{day_title}}</td>
+                <td>{{project_name}}</td>
+                <td><a href="plan/actorManagement/{{actor_id}}">{{actor_name}}</a></td>
+                <td>{{actor_info}}</td>
             </tr>
-        {{/actorManagementList}}
+        {{/selectListActor}}
     </ul>
 </table>
 
+<!--페이징 처리 레이아웃-->
 {{>layout/paging}}
 
-<form action="/plan/actor_management" method="GET">
+<form action="/scene/actor" method="GET">
     <select id="searchType" name="searchType">
         <option value="all">선택</option>
-        <option value="title">제목</option>
+        <option value="title">출연자</option>
+        <option value="writer">기획명</option>
+        <option value="content">촬영계획명</option>
         <!-- 필요한 항목 추가 -->
     </select>
     <input type="text" id="search" name="search" placeholder="검색">
@@ -44,17 +45,14 @@
     <input type="submit" value="검색">
 
 </form>
-
-
-<a href="/plan/insertactorManagementView" role="button">출연자정보 작성</a>
+<a href="/plan/insertactorManagementView" role="button">작성</a>
 <a href="/plan/actor_management">목록</a>
-
+<a href="/index">홈 페이지</a>
 
 <script>
     var url = "/plan/actor_management";
 </script>
 <script src="/static/js/search.js"></script>
-
 
 </body>
 </html>

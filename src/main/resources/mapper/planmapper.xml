@@ -54,9 +54,7 @@
         where r between #{postStart} and #{postEnd}    /*where r between 1 and 10    where r between 11 and 20*/
     </select>
 
-
-
-
+<!--////////////////////////////////////////////scheduledaylist (일일촬영계획표와 프로젝트기획 조인쿼리/////////////////////////////////////////////////////////////-->
 
 
 
@@ -175,15 +173,27 @@
 
 
 
-    <select id="totalActorManagementPost" parameterType="com.example.yoonlove.dto.PageDto">  /**/
-        select count(${id}) as totalPost from ${table}
+    <select id="totalActorManagementPost" parameterType="com.example.yoonlove.dto.PageDto">
+        select count(${id}) as totalPost from actormanagementlist
         where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
         <!--검색어가 있다면 아래 조건문을 실행-->
         <if test="title != null and search != ''">
             AND actor_name like '%${title}%'
         </if>
+
+        <if test="writer != null and search != ''">
+            AND project_name like '%${writer}%'
+        </if>
+
+        <if test="content != null and search != ''">
+            AND day_title like '%${content}%'
+        </if>
     </select>
 
+
+    <select id="selectFk">
+        SELECT project_id, project_name, project_num FROM project order by project_id desc
+    </select>
 
     <select id="selectListActorManagement" parameterType="com.example.yoonlove.dto.PageDto" resultType="com.example.yoonlove.dto.ActorManagementDto">
         select *
@@ -191,10 +201,18 @@
         from(select rownum as r, t.*
 
         <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
-        from (select * from ${table}
+        from (select * from actormanagementlist
         where 1=1  /*에러처리방지를 위한 코드*/
         <if test="title != null and search != ''">
             AND actor_name like '%${title}%'
+        </if>
+
+        <if test="writer != null and search != ''">
+            AND project_name like '%${writer}%'
+        </if>
+
+        <if test="content != null and search != ''">
+            AND day_title like '%${content}%'
         </if>
         order by ${id} desc) t)
 

@@ -231,10 +231,15 @@ public class PlanController {
     }
 
    @GetMapping("plan/insertactorManagementView")
-    public ModelAndView insertactorManagementView() {
+    public ModelAndView insertactorManagementView() throws JsonProcessingException {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("plan/insertactorManagementView");
-        mv.setStatus(HttpStatus.valueOf(200));
+
+       List<ProjectDto> projectDto = planService.selectFk();
+
+       String jsonList = planService.fkJson(projectDto);
+       mv.addObject("fkList",jsonList );
+
         return mv;
     }
 
