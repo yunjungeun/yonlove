@@ -28,7 +28,7 @@
             </tr>
             {{#selectListUser}}
                 <tr>
-                    <td><a href="/admin/{{user_id}}/selectuser">{{user_id}}</a></td>
+                    <td><a href="/admin/{{user_id}}/selectuser">{{user_id}}</a></td>   <!--관리자용 링크임/ 수정필요-->
                     <td>{{user_name}}</td>
                     <td>{{nickname}}</td>
                     <td>{{sign_date}}</td>
@@ -39,15 +39,31 @@
         </ul>
     </table>
 
+    <!--서브게시판 페이징-->
+    {{>layout/subpaging}}
 
+    <!--subPost 검색-->
+    <form action="/admin/user" method="GET">
+        <select id="searchType" name="searchType">
+            <option value="all">선택</option>
+            <option value="title">씬</option>
+            <option value="content">내용</option>
+            <!-- 필요한 항목 추가 -->
+        </select>
+        <input type="text" id="search" name="search" placeholder="검색">
+        <input type="submit" value="검색">
+    </form>
+    <!--subPost 검색 / end-->
 
-
+    <!--서브게시판 검색 js-->
+    <script><!--현제 뷰페이지기준 prefixUrl-->
+        var url = "/admin/{{selectDpt.dpt_id}}/selectdpt";
+    </script>
+    <script src="/static/js/search.js"></script>
 
 <a href="/admin/department">목록</a>
     <a href="/admin/{{selectDpt.dpt_id}}/updatedptview">수정</a>
     <a href="javascript:void(0);" onclick="deleteAlert('/admin/{{selectDpt.dpt_id}}/deletedpt')">삭제</a>
-
-
 
 <br/>현재까지 버그<br/>
 

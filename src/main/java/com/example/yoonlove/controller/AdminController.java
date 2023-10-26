@@ -1,9 +1,6 @@
 package com.example.yoonlove.controller;
 
-import com.example.yoonlove.dto.CompanyDto;
-import com.example.yoonlove.dto.DepartmentDto;
-import com.example.yoonlove.dto.PageDto;
-import com.example.yoonlove.dto.UserDto;
+import com.example.yoonlove.dto.*;
 import com.example.yoonlove.service.AdminService;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.UserService;
@@ -139,23 +136,25 @@ public class AdminController {
 
         //서브게시판
         PageDto pageDto = new PageDto("users","user_id",page,pdto);
-        PageDto pageInfo = pagingService.paging(pageDto);
+        pdto.setPkid(dto.getDpt_id());
+       PageDto pageInfo = pagingService.paging(pageDto);
 
-        List<PageDto> pagelist = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
-        String rink = pagingService.pageRink(pageDto);
+        List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
+        String rink = pagingService.subPageRink(pageDto,"scenario");
 
-        List<UserDto> pagedto = adminService.selectListUser(pageInfo);
-        mv.addObject("selectListUser", pagedto);
-
+        List<UserDto> subList = adminService.selectListUser(pageInfo);
+        mv.addObject("selectListUser", subList);
 
         //페이징에 필요한센션
-        mv.addObject("prefixUrl", "admin");
+        mv.addObject("pageDto", pageDto);
+        mv.addObject("prefixUrl", "scenario"); //컨트롤러 이름
         mv.addObject("paging", pageInfo);  //페이징정보
-        mv.addObject("pageList", pagelist); //페이지 하단부 페이지 리스트
+        mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
         //서브게시판
 
         mv.addObject("selectDpt", dto);
+
         return mv;
     }
 
