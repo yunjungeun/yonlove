@@ -1,10 +1,9 @@
 package com.example.yoonlove.controller;
 
-import com.example.yoonlove.dto.PageDto;
-import com.example.yoonlove.dto.ScriptPaperDto;
-import com.example.yoonlove.dto.TimeTableDto;
+import com.example.yoonlove.dto.*;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.ScriptPaperService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,8 +52,17 @@ public class ScriptPaperController {
     }
 
     @GetMapping("script/insertscriptpaperview")
-    public String insertscript(){
-        return "script/scriptinsert";
+    public ModelAndView insertscript() throws JsonProcessingException {
+        //fk값으로 db검색결과
+        List<SceneDto> sceneDto = scriptPaperService.selectFk();
+
+        //검색리스트를 json 리스트 문자열로 생성
+        String jsonList = scriptPaperService.fkJson(sceneDto);
+
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("fkList", jsonList);
+        mv.setViewName("/script/scriptinsert");
+        return mv;
     }
 
     @GetMapping("script/insertscriptpaper")
