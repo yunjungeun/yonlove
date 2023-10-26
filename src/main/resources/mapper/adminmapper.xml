@@ -38,7 +38,7 @@
 
     <insert id="insertDepartment" parameterType="com.example.yoonlove.dto.DepartmentDto">
         insert into department values(
-        (select concat('dpt', (nvl(max(substr(dpt_id, 4)), 0)+1)) from department),<!--pk코드 자동증가(수정)-->
+        (select concat('dpt', (nvl(max(to_number(substr(dpt_id, 4))), 0)+1)) from department),<!--pk코드 자동증가(수정2)-->
         #{dpt_name},
         #{dpt_function},
         'com1'
@@ -56,4 +56,68 @@
         delete from department where dpt_id=#{dpt_id}
     </delete>
 
+
+
+    <!--일반회원-->
+    <select id="selectListUser" parameterType="com.example.yoonlove.dto.PageDto" resultType="com.example.yoonlove.dto.UserDto">
+        select *
+        <!--notice검색결과에 rownum을 하고 r로 지정-->
+        from(select rownum as r, t.*
+        <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
+        from (select * from user_info
+        where 1=1
+        <if test="title != null and search != ''">
+            AND user_id like '%${title}%'
+        </if>
+        <if test="content != null and search != ''">
+            AND email like '%${title}%'
+        </if>
+        order by ${id} desc) t)
+        <!-- rownum을 기준(r)으로 시작번호부터 끝번호까지 검색   -->
+        where r between #{postStart} and #{postEnd}
+    </select>
+
+    <select id="totalUserPost" parameterType="com.example.yoonlove.dto.PageDto">
+        select count(${id}) as totalPost from ${table}
+        where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
+        <!--검색어가 있다면 아래 조건문을 실행-->
+        <if test="title != null and search != ''">
+            AND user_id like '%${title}%'
+        </if>
+        <if test="content != null and search != ''">
+            AND user_content like '%${content}%'
+        </if>
+    </select>
+
+    <select id="selectUser" resultType="com.example.yoonlove.dto.UserDto">
+        SELECT * FROM users where user_id=#{user_id}
+    </select>
+
+    <update id="updateUser">
+        update users
+        set
+        user_name = #{user_name},
+        nickname = #{nickname},
+        phone = #{phone},
+        email = #{email},
+        zip_code = #{zip_code},
+        address1 = #{address1},
+        address2 = #{address2},
+        address3 = #{address3},
+        company_user = #{company_user},
+        grade = #{grade},
+        authority = #{authority}
+        where user_id = #{user_id}
+    </update>
+
+    <delete id="deleteUser">
+        delete from users where user_id=#{user_id}
+    </delete>
+
+
+
+    <!--회사-->
+    <select id="selectCompany" resultType="com.example.yoonlove.dto.CompanyDto">
+        SELECT * FROM company where company_id=#{company_id}
+    </select>
 </mapper>

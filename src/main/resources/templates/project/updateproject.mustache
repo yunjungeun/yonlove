@@ -5,20 +5,49 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>수정-프로젝트</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
+
 </head>
 <body>
-<form action="/project/updateproject/{{selectProject.project_id}}" method="get">
+<form id="alert" action="/project/updateproject/{{selectProject.project_id}}" method="get">
 
-    <table border="1" cellpadding="1" cellspacing="1">
+    <table board="1" cellpascing="0" cellpading="0">
         <tr>
-            <td>수정할 기획명 <input name="project_name" type="text" placeholder="기획명"/></td>
-            <td>수정할 기획번호 <input name="project_num" type="number" placeholders="기획번호"/></td>
-
+            <td>기획명 <input class="field1" name="project_name" type="text" value="{{selectProject.project_name}}"/></td>
+            <td>기획번호 <input class="int1" name="project_num" type="number" value="{{selectProject.project_num}}"/></td>
         </tr>
-    </table>
-    <input type="submit" value="수정"/>
-</form>
-<a href="/project/listproject">전체 목록 보기</a>
+        <tr><td colspan="2">콘셉트<textarea class="field2" cols="50" rows="5" name="project_concept">{{selectProject.project_concept}}</textarea></td>
+        <tr><td colspan="2">기획 안<textarea class="field3" cols="50" rows="20"  name="project_content" >{{selectProject.project_content}}</textarea></td>
+        <tr><td colspan="2">시작일<input class="field4" type="date" id="format1" name="project_start_date">
+                       (예상)종료일<input class="field5" type="date" id="format2" name="project_end_date">
+            진행상태
+            <select class="field6" name="project_state">
+                <option {{selectProject.project_state}} selected>{{selectProject.project_state}}</option>
+                <option>----------</option>
+                <option value="작성 중">작성 중</option>
+                <option value="작성 완료">작성 완료</option>
+                <option value="진행 중">진행 중</option>
+                <option value="종료">종료</option>
+                <option value="중단">중단</option>
+                <option value="기타">기타</option>
+            </select>
+        </td>
+        </tr>
 
+    </table>
+
+    <input type="submit" value="수정" onclick="mappingurl('/project/updateproject/{{selectProject.project_id}}','/project/project', 6,'수정',1)"/>
+</form>
+<a href="/project/project">전체 목록 보기</a>
+
+<script>
+    <!--2023-11-02 00:00:00 뒤에 시간값을 없애주기기 위해 변수에 값을 저장하고 js파일에 넘겨줌-->
+    var dates = {date1 : '{{selectProject.project_start_date}}',
+                 date2 :'{{selectProject.project_end_date}}'
+                    };
+</script>
+<!--date 변수를 dateformat.js에 넘겨주는 링크-->
+<script src="/static/js/dateformat.js"></script>
 </body>
 </html>

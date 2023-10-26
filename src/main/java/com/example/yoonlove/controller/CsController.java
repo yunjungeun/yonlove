@@ -52,6 +52,7 @@ public class CsController {
 
         //페이징정보처리 메소드
         PageDto pageInfo = pagingService.paging(pageDto);
+        System.out.println("페이징정보 : "+pageInfo.toString());
 
 
         //뷰페이지에 하단 페이징처리를 해주는 리스트
@@ -141,7 +142,6 @@ public class CsController {
     }
     @GetMapping("/cs/qna")
     public ModelAndView selectListQnA(PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page){
-        System.out.println("질의응답 게시판리스트");
         PageDto pageDto = new PageDto("qna","qna_id",page,pdto);
         PageDto pageInfo = pagingService.paging(pageDto);
 

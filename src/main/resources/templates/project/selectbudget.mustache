@@ -5,6 +5,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/delete.js"></script>
 </head>
 <body>
 <div id="div_box">
@@ -48,8 +50,8 @@
     </table>
     <hr>
     <a href="/project/updatebudgetview/{{selectBudget.budget_id}}">게시글 수정</a>&nbsp;&nbsp;&nbsp;
-    <a href="/project/deletebudget/{{selectBudget.budget_id}}">게시글 삭제</a>&nbsp;
-    <a href="/project/listbudget">전체 목록 보기</a>
+    <a href="/project/deletebudget/{{selectBudget.budget_id}}"onclick="confirmDelete(event)">게시글 삭제</a>&nbsp;
+    <a href="/project/budget">전체 목록 보기</a>
 </div>
 </body>
 </html>

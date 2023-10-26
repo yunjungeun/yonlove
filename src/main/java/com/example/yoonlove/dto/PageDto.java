@@ -17,11 +17,11 @@ public class PageDto {
     private int totalPost; //글의 총 갯수 값
     private int postStart; //게시판의 시작 게시글 번호
     private int postEnd; //게시판의 마지막 게시글 번호
-    private int postCnt = 1; // 게시판에 보여주는 게시글의 수
+    private int postCnt = 10; // 게시판에 보여주는 게시글의 수
 
     private int pageCnt; //페이지의 총 갯수 값
     private int currentPage = 1; //현재 페이지
-    private boolean currentPageFlag; //페이지리스트 중에서 반복문 페이지가 현재페이지와 일치하는지 확인  현재페이지 true (굵은글씨체 ) 현재페이지가 아니면 flase..
+    private boolean currentPageFlag; //페이지리스트 중에서 반복문 페이지가 현재페이지와 일치하는지 확인
 
     private int paging = 10; //게시글 밑 페이징에서 표시될 페이지의 수 값
     private int pageStart; //페에징에서 시작 페이지 값
@@ -35,12 +35,12 @@ public class PageDto {
     private int nextPage;  //다음페이지 값
 
 
-    private String table;    /// ???????
+    private String table;
     private String id;
 
     //검색관련 프로퍼티
     private String pkid;
-    private String pkintid;   // string 아니고 int !!!!!!!!!
+    private int pkintid;
     private String writer;
     private String content;
     private String title;
@@ -49,7 +49,7 @@ public class PageDto {
     private String search;
 
     public PageDto(){}
-    public PageDto(String table, String pkid, int currentPage, PageDto dto){ //PageDto dto ==> 얘는 검색떄문에 넣은거임
+    public PageDto(String table, String pkid, int currentPage, PageDto dto){
         this.table = table;
         this.id = pkid;
         this.currentPage = currentPage;

@@ -5,19 +5,35 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>프로젝트 추가!!!!!</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
 </head>
 <body>
-<form action="/project/insertproject" method="get">
-
+<form id="alert" action="/project/insertproject" method="get">
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
-            <td>기획명 <input name="project_name" type="text" placeholder="기획명"/></td>
-            <td>기획번호 <input name="project_num" type="number" placeholders="기획번호"/></td>
-
+            <td>기획명 <input class="field1" name="project_name" type="text" placeholder="기획명"/></td>
+            <td>기획번호 <input class="int1" name="project_num" type="number" placeholder="미입력시 자동작성"/></td>
         </tr>
+        <tr><td colspan="2">콘셉트<textarea cols="50" rows="5" class="field2" name="project_concept"></textarea></td>
+        <tr><td colspan="2">기획 안<textarea cols="50" rows="20" class="field3" name="project_content"></textarea></td>
+        <tr><td colspan="2">시작일<input class="field4" type="date" id="default_start" name="project_start_date" >
+                       (예상)종료일<input class="field5" type="date" id="default_end"   name="project_end_date" >
+            진행상태
+            <select class="field6" name="project_state">
+                <option value="작성 중">작성 중</option>
+                <option value="작성 완료">작성 완료</option>
+                <option value="진행 중">진행 중</option>
+                <option value="기타">기타</option>
+            </select>
+        </td>
+    </tr>
+
     </table>
-    <input type="submit" value="등록"/>
+    <input type="submit" value="등록" onclick="mappingurl('/project/insertproject','/project/project', 6,'작성',1)"/>
 </form>
-<a href="/project/listproject">목록으로 가기</a>
+
+<a href="/project/project">목록</a>
+<script src="/static/js/projectjs/defaultdate.js"></script>
 </body>
 </html>

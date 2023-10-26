@@ -1,5 +1,6 @@
 package com.example.yoonlove.service;
 
+import com.example.yoonlove.dto.CompanyDto;
 import com.example.yoonlove.dto.UserDto;
 import com.example.yoonlove.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
@@ -65,4 +66,7 @@ public class UserService implements UserDetailsService {
         userMapper.signUp(dto);
     }
 
+    public void companysignup(CompanyDto companyDto){
+        userMapper.insertCompany(companyDto);
+    }
 }

@@ -33,6 +33,9 @@ public class PagingService {
     @Autowired
     private PlanMapper planMapper;
 
+    @Autowired
+    private ProjectMapper projectMapper;
+
 
     public PageDto paging(PageDto dto){
         PageDto pageDto = new PageDto();
@@ -44,7 +47,9 @@ public class PagingService {
             case "qna" : pageDto = csMapper.totalQnAPost(dto); break;
             case "actor" : pageDto = sceneMapper.totalActorPost(dto); break;
             case "actor_management" : pageDto = planMapper.totalActorManagementPost(dto); break;
-            case "budget" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
+            case "budget" : pageDto = projectMapper.totalBudgetPost(dto); break;
+            case "actor_managment" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
+            case "budget" : pageDto = projectMapper.totalBudgetPost(dto); break;
             case "company" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
             case "creater" : pageDto = creatorMapper.totalCreatorPost(dto); break;
             case "creater_profit" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
@@ -52,8 +57,8 @@ public class PagingService {
             case "film_plan" : pageDto = planMapper.totalFilmPlanPost(dto); break;
             case "log" : pageDto = logMapper.totalLogPost(dto); break;
             case "member" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
-            case "produce" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
-            case "project" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
+            case "produce" : pageDto = projectMapper.totalProducePost(dto); break;
+            case "project" : pageDto = projectMapper.totalProjectPost(dto); break;
             case "scenario" : pageDto = scenarioMapper.totalScenarioPost(dto); break;
             case "scene" : pageDto = sceneMapper.totalScenePost(dto); break;
             case "schedule_day" : pageDto = planMapper.totalSceduledayPost(dto); break;
@@ -61,7 +66,7 @@ public class PagingService {
             case "schedule_time" :  pageDto = planMapper.totalSceduletimePost(dto); break;
             case "scriptpaper" : pageDto = scriptPaperMapper.totalScriptPost(dto); break;
             case "timetable" : pageDto = scriptPaperMapper.totalTimeTablePost(dto); break;
-            case "users" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
+            case "users" : pageDto= adminMapper.totalUserPost(dto); break;
             case "video" : pageDto = videoMapper.totalContentPost(dto); break;
 
             //오류메세지 출력
@@ -116,8 +121,7 @@ public class PagingService {
         return pageDto;
     }
 
-    //뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드  //매개변수는 paging 매소드값의 결과이다. pageList 메소드는 paging 메소드에 의존함 ..
-    // paging 메소드를 실행되면 PageDto에는 페이지 시작번호 끝번호 등등의 정보가 이미 다 담겨있음 ..!!
+    //뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드  //매개변수는 paging 매소드값의 결과이다.
     public List<PageDto> pageList(int pageStart, int pageEnd, int currentPage){
         List<PageDto> pagelist = new ArrayList<>();
         for(int i = pageStart; i<= pageEnd; i++){
@@ -142,8 +146,8 @@ public class PagingService {
         String rink;
         String type=null;
         String keyword=null;
-        String[] keywords = {dto.getTitle(), dto.getWriter(), dto.getContent(), dto.getPkid(),dto.getPkintid()};
-        String[] types = {"title", "writer", "content", "pkid", "pkintid"};
+        String[] keywords = {dto.getTitle(), dto.getWriter(), dto.getContent(), dto.getPkid()};
+        String[] types = {"title", "writer", "content", "pkid"};
 
         //검색을 했는지 안했는지 검출하는 for문// 검색어가 있다면 검색어(keyword)와 검색타입(type)을 검출함
         for (int i = 0 ; i < keywords.length; i++){
@@ -153,11 +157,35 @@ public class PagingService {
                 break;
             }
         }
-        //검색 값이 없으면 일반적인 페이지링크를 만들고 값이 있다면 검색어에 대한 페이지링크 생성 ( 이 코드는 검색과 페이징을 동시에 했을떄 url에 검색은 안나오고 페이징만 나와서 반장님이 추가한 코드)
+        //검색 값이 없으면 일반적인 페이지링크를 만들고 값이 있다면 검색어에 대한 페이지링크 생성
         if(keyword == null){
             rink = dto.getTable()+"?page=";
         }else {
             rink = dto.getTable() + "?" + type+ "=" +keyword + "&page=";
+        }
+        return rink;
+    }
+
+    public String subPageRink(PageDto dto, String upwardPostTable){
+        String rink;
+        String type=null;
+        String keyword=null;
+        String[] keywords = {dto.getTitle(), dto.getWriter(), dto.getContent(), dto.getPkid()};
+        String[] types = {"title", "writer", "content", "pkid"};
+
+        //검색을 했는지 안했는지 검출하는 for문// 검색어가 있다면 검색어(keyword)와 검색타입(type)을 검출함
+        for (int i = 0 ; i < keywords.length; i++){
+            if(keywords[i] != null ){
+                keyword= keywords[i];
+                type = types[i];
+                break;
+            }
+        }
+        //검색 값이 없으면 일반적인 페이지링크를 만들고 값이 있다면 검색어에 대한 페이지링크 생성
+        if(keyword == null){
+            rink = "select"+upwardPostTable+"?page=";
+        }else {
+            rink = "select"+upwardPostTable + "?" + type+ "=" +keyword + "&page=";
         }
         return rink;
     }

@@ -1,11 +1,16 @@
 package com.example.yoonlove.controller;
 
-import com.example.yoonlove.dto.*;
+import com.example.yoonlove.dto.ActorDto;
+import com.example.yoonlove.dto.FileDto;
 import com.example.yoonlove.mapper.FileMapper;
 import com.example.yoonlove.service.FileService;
+import com.example.yoonlove.dto.PageDto;
+import com.example.yoonlove.dto.SceneDto;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.SceneService;
 import lombok.extern.slf4j.Slf4j;
+import com.example.yoonlove.service.ScriptPaperService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +33,8 @@ public class SceneController {
     private FileMapper fileMapper;
     @Autowired
     private PagingService pagingService;
+    @Autowired
+    private ScriptPaperService scriptPaperService;
 
 
     @GetMapping("scene/scene")
@@ -50,20 +57,47 @@ public class SceneController {
     }
 
     @GetMapping("scene/{scene_id}/selectscene")
-    public ModelAndView selectScene(SceneDto sceneDto){
+    public ModelAndView selectScene(SceneDto sceneDto, @RequestParam(name="page", defaultValue = "1") int page, PageDto pdto ){
         FileDto fileDto = fileService.selectFile(sceneDto);
         SceneDto dto = sceneService.selectScene(sceneDto);
-
         ModelAndView mv = new ModelAndView();
         mv.addObject("file",fileDto);
         mv.setViewName("scene/sceneselect");
-        mv.addObject("selectScene", dto); //여기까지 했어요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        mv.addObject("selectScene", dto);
+
+        //서브게시판 리스트
+        pdto.setPkid(dto.getScene_id());
+
+        PageDto pageDto = new PageDto("scriptpaper","script_id", page,pdto);
+        PageDto pageInfo = pagingService.paging(pageDto);
+        List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
+        String rink = pagingService.subPageRink(pageDto,"scene");
+
+        List<ScriptPaperDto> subList = scriptPaperService.selectListScriptPaper(pageInfo);
+        mv.addObject("selectListScriptPaper", subList);
+
+        //서브 페이징에 필요한섹션
+        mv.addObject("pageDto", pageDto);
+        mv.addObject("prefixUrl", "scene"); //컨트롤러 이름
+        mv.addObject("paging", pageInfo);  //페이징정보
+        mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
+        mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
+
         return mv;
     }
 
     @GetMapping("/scene/insertsceneview")
-    public String insertSceneView(){
-        return "/scene/sceneinsert";
+    public ModelAndView insertSceneView() throws JsonProcessingException{
+        //fk값으로 db검색결과
+        List<ScenarioDto> scenarioDto = sceneService.selectFk();
+
+        //검색리스트를 json 리스트 문자열로 생성
+        String jsonList = sceneService.fkJson(scenarioDto);
+
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("fkList", jsonList);
+        mv.setViewName("/scene/sceneinsert");
+        return mv;
     }
 
     @PostMapping("/scene/insertscene")
@@ -89,14 +123,9 @@ public class SceneController {
 
     @GetMapping("/scene/{scene_id}/updatesceneview")
     public ModelAndView updateSceneView(SceneDto sceneDto){
-
-        System.out.println("오류11");
         SceneDto dto = sceneService.selectScene(sceneDto);
         FileDto fileDto = fileService.selectFile(sceneDto);
-        System.out.println("오류22");
-        System.out.println("오류33");
         ModelAndView mv = new ModelAndView();
-        System.out.println("오류44");
         mv.setViewName("/scene/sceneupdate");
         mv.addObject("updateScene",dto);
         mv.addObject("file", fileDto);
@@ -129,11 +158,6 @@ public class SceneController {
         fileService.deletdb(dto);
         return "redirect:/scene/"+id+"/updatesceneview";
     }
-
-
-
-
-
 
 
 

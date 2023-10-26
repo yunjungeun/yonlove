@@ -3,6 +3,7 @@ package com.example.yoonlove.mapper;
 import com.example.yoonlove.dto.ActorDto;
 import com.example.yoonlove.dto.FileDto;
 import com.example.yoonlove.dto.PageDto;
+import com.example.yoonlove.dto.ScenarioDto;
 import com.example.yoonlove.dto.SceneDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,6 +15,7 @@ public interface SceneMapper {
     public List<SceneDto> selectListScene(PageDto pageInfo);
     public PageDto totalScenePost(PageDto dt);
     public SceneDto selectScene(SceneDto dto);
+    public List<ScenarioDto> selectFk();
     public void insertScene(SceneDto dto);
 
 

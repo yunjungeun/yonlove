@@ -14,17 +14,19 @@
             <td>제목</td>
             <td>작성자</td>
             <td>작성일</td>
-            <td>기획번호</td>
             <td>기획명</td>
+            <td>기획시작일</td>
+            <td>기획상태</td>
         </tr>
         {{#selectListScenario}}
             <tr>
                 <td>{{scenario_num}}</td>
-                <td><a href="/scenario/{{scenario_id}}/selectscenario/">{{scenario_name}}</a></td>
+                <td><a href="/scenario/{{scenario_id}}/selectscenario">{{scenario_name}}</a></td>
                 <td>{{scenario_writer}}</td>
                 <td>{{scenario_date}}</td>
-                <td>{{project_id}}</td>
-                <td>코딩예정<!--기획명을 조인 테이블로 해서 입력해야됨--></td>
+                <td>{{project_name}}</td> <!--기획명-->
+                <td>{{project_start_date}}</td> <!--기획시작일-->
+                <td>{{project_state}}</td><!--프로젝트 진행상태-->
 
             </tr>
         {{/selectListScenario}}
