@@ -27,8 +27,6 @@ public class SceneController {
     @Autowired
     private FileService fileService;
     @Autowired
-    private FileMapper fileMapper;
-    @Autowired
     private PagingService pagingService;
     @Autowired
     private ScriptPaperService scriptPaperService;
@@ -43,6 +41,7 @@ public class SceneController {
 
 
         List<SceneDto> dto = sceneService.selectListScene(pageInfo);
+        System.out.println(dto.get(0).toString());
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/scene/scene");
         mv.addObject("selectListScene", dto);
@@ -98,16 +97,18 @@ public class SceneController {
     }
 
     @PostMapping("/scene/insertscene")
-    public String insertScene(SceneDto dto, MultipartFile file) throws IOException {
+    public String insertScene(SceneDto dto, @RequestParam("file")MultipartFile file) throws IOException {
+        System.out.println(dto.toString());
             sceneService.insertScene(dto);
 
             int lastnum = sceneService.lastPost(dto);
 
-            if(file.isEmpty()){
+            if(file == null){
+                System.out.println("업로드파일없음");
                 fileService.insertNull(lastnum);
             }else {
                 try {
-
+                    System.out.println("있음");
                     fileService.insertFile(file, lastnum); // FileService를 사용하여 파일 업로드
                 } catch (IOException e) {
                     log.info(e.getMessage());
