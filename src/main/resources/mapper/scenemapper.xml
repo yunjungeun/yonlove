@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.yoonlove.mapper.SceneMapper">
-    <select id="selectScene">
+    <select id="selectScene" parameterType="com.example.yoonlove.dto.SceneDto">
         SELECT * FROM scene where scene_id = #{scene_id}
     </select>
 
@@ -50,7 +50,7 @@
         where r between #{postStart} and #{postEnd}
     </select>
 
-    <insert id="insertScene">
+    <insert id="insertScene"  parameterType="com.example.yoonlove.dto.SceneDto">
         insert into scene values(
         (select concat('scene', (nvl(max(to_number(substr(scene_id, 6))), 0)+1)) from scene),<!--pk코드 자동증가(수정2)-->
         <if test="scene_num == 0 or  scene_num == null">
@@ -65,6 +65,13 @@
         (select scenario_id from scenario where scenario_id=#{scenario_id})
         )
     </insert>
+
+    <!--마지막 작성글 불러오는 메소드-->
+    <select id="lastPost" parameterType="com.example.yoonlove.dto.SceneDto" resultType="int">
+        SELECT max(substr(scene_id,6)) from scene
+    </select>
+
+
 
     <update id="updateScene">
         update scene

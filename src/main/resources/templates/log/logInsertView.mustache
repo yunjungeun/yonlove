@@ -1,0 +1,33 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
+</head>
+<body>
+<form id="alert" action="/log/insertLog" method="get">
+    <table border="1" cellpadding="1" cellspacing="1">
+        <tr>
+            <td>일지번호<input name="log_num" type="text" placeholder="드롭다운" class="field1" ></td>
+            <td>작성일<input name="log_date" type="date" placeholder="미입력시 자동생성" class="field2"></td>
+        </tr>
+        <tr>
+            <td>일지내용<input name="log_content" type="text" placeholder="스토리보드 내용을 요약작성해 주세요" class="field3"></td>
+        </tr>
+        <tr>
+
+
+            <td>프로젝트아이디 <input name="project_id" type="text" class="field4"/></td>
+        </tr>
+    </table>
+    <input type="submit" value="등록" onclick="mappingurl('/log/insertLog','/log/log', 4,'작성')">
+</form>
+<a href="/log/log">취소</a>
+
+
+</body>
+</html>

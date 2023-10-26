@@ -1,0 +1,33 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
+</head>
+<body>
+<form id="alert" action="/vd/{{updateContent.video_id}}/updateContent" method="get">
+    <table border="1" cellpadding="1" cellspacing="1">
+        <tr>
+            <td>영상제목<input name="video_name" type="text" class="field1"value="{{updateContent.video_name}}" ></td>
+            <td>영상설명<input name="video_sub" type="text" class="field2" value="{{updateContent.video_sub}}"></td>
+        </tr>
+        <tr>
+            <td>영상주소<input name="video_url" type="text" class="field3" value="{{updateContent.video_url}}"/></td>
+            <td>업로드날짜<input name="upload_date" type="date"  class="field4"value="{{updateContent.upload_date}}"/></td>
+            <td>영상수익<input name="video_profit" type="number"  class="field5" value="{{updateContent.video_profit}}"/></td>
+            <td>좋아요수<input name="like_cnt" type="number"  class="field6"value="{{updateContent.like_cnt}}"/></td>
+            <td>조회수<input name="video_view" type="number" class="field7"value="{{updateContent.video_view}}"/></td>
+            <td>프로젝트아이디<input name="project_id" type="text" class="field8"value="{{updateContent.project_id}}"/></td>
+        </tr>
+    </table>
+    <input type="submit" value="등록"  onclick="mappingurl('/vd/{{updateContent.video_id}}/updateContent','/vd/video', 8,'수정')">
+</form>
+<a href="/vd/video">목록</a>
+
+
+</body>
+</html>

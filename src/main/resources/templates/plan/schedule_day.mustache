@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 리스트</title>
+</head>
+<body>
+<h1>공지사항</h1>
+<table border="1" cellpadding="1" cellspacing="1">
+    <ul>
+        <tr>
+            <td>촬영날짜</td>
+            <td>촬영계획명</td>
+            <td>날씨</td>
+            <td>조명</td>
+            <td>의상</td>
+            <td>촬영순서</td>
+            <td>연출/제작</td>
+            <td>프로젝트Id</td>
+
+        </tr>
+        {{#scheduleList}}
+            <tr>
+                <td>{{film_date}}</td>
+                <td><a href="/plan/schedule/{{day_id}}">{{day_title}}</a></td>
+                <td>{{weather}}</td>
+                <td>{{light}}</td>
+                <td>{{costume}}</td>
+                <td>{{prop}}</td>
+                <td>{{film_order}}</td>
+                <td>{{direct}}</td>
+                <td>{{project_id}}</td>
+            </tr>
+        {{/scheduleList}}
+    </ul>
+</table>
+
+{{>layout/paging}}
+
+<form action="/plan/schedule_day" method="GET">
+    <select id="searchType" name="searchType">
+        <option value="all">선택</option>
+        <option value="title">제목</option>
+        <option value="content">날씨</option>
+        <!-- 필요한 항목 추가 -->
+    </select>
+    <input type="text" id="search" name="search" placeholder="검색">
+
+    <input type="submit" value="검색">
+
+</form>
+
+
+<a href="/plan/insertScheduleView" role="button">새 일정표 작성</a>
+<a href="/plan/schedule_day">목록</a>
+
+
+<script>
+    var url = "/plan/schedule_day";
+</script>
+<script src="/static/js/search.js"></script>
+
+
+
+</body>
+</html>

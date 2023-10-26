@@ -1,0 +1,33 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
+</head>
+<body>
+<form id="alert" action="/plan/insertScheduleTime" method="get">
+    <table border="1" cellpadding="1" cellspacing="1">
+        <tr>
+
+
+            <td>촬영시간<input name="film_time" type="date"  class="field1"></td>
+            <td>촬영내용<input name="film_content" type="text"  class="field2" ></td>
+            <td>계획표id<input name="day_id" type="text"  class="field3"></td>
+
+
+
+        </tr>
+
+
+    </table>
+    <input type="submit" value="등록" onclick="mappingurl('/plan/insertScheduleTime','/plan/schedule_time',3,'작성')">
+</form>
+<a href="/plan/schedule_time">목록</a>
+
+
+</body>
+</html>
