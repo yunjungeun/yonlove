@@ -9,60 +9,65 @@
     <!--<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>-->
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
+    <script src="/static/js/join.js"></script>
     <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="container">
     <h2>회원가입</h2>
-    <form id="registrationForm" method="get" action="/signup">
+    <form id="alert" class="joinForm" method="get" action="/signup">
 
         <!-- required 란?
         사용자가 해당 필드를 작성하지 않고 제출하려고 할 때 브라우저가 사용자에게 경고를 표시하고 제출을 막는 역할
         즉, 사용자에게 필수 입력 사항이란것을 알려주는 요소이다.-->
 
-
         <label for="user_id">아이디:</label>
-        <input type="text" id="user_id" name="user_id" required>
+        <input type="text" class="field1" id="user_id" name="user_id" required>
+        <input type="hidden" name="decide_id" id="decide_id"> <!-- name="decide_id"  삭제여부 추후 확인예정!!!!!!-->
+        <p><span id="decide" style='color:red;'>ID 중복 여부를 확인</span>
+            <input type="button" id="check_button" value="ID 중복 검사" onclick="checkIdDuplicate();"></p>
+
 
         <label for="pw">비밀번호:</label>
-        <input type="password" id="pw" name="pw" required>
+        <input type="password" class="field2" id="pw" name="pw" required>
 
         <label for="confirm_password">비밀번호 확인:</label>
-        <input type="password" id="confirm_password" required>
+        <input type="password" class="field3" id="confirm_password" required>
 
         <label for="name">이름:</label>
-        <input type="text" id="user_name" name="user_name" required>
+        <input type="text" class="field4" id="user_name" name="user_name" required>
 
         <label for="nickname">닉네임 :</label>
-        <input type="text" id="nickname" name="nickname" required>
+        <input type="text" class="field5" id="nickname" name="nickname" required>
 
         <label for="phone">핸드폰번호:</label>
-        <input type="text" id="phone" name="phone" required>
+        <input type="text" class="field6" id="phone" name="phone" required>
 
         <label for="email">이메일:</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" class="field7" id="email" name="email" required>
 
         <label for="zip_code">우편번호:</label>
-        <input type="text" id="zip_code" name="zip_code" placeholder="우편번호" required>
+        <input type="text" class="field8" id="zip_code" name="zip_code" placeholder="우편번호" required>
         <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
 
         <label for="address">주소:</label>
-        <input type="text" id="address1"  name="address1" placeholder="주소" required ><br>
-        <input type="text" id="address2" name="address2" placeholder="상세주소">
-        <input type="text" id="extraAddress" name="address3" placeholder="참고항목">
+        <input type="text" class="field9" id="address1"  name="address1" placeholder="주소" required ><br>
+        <input type="text" class="field10" id="address2" name="address2" placeholder="상세주소">
+        <input type="text" class="field11"id="extraAddress" name="address3" placeholder="참고항목">
 
-      <!--  <label>성별:</label>
-        <input type="radio" id="male" name="gender" value="male">남성
-        <input type="radio" id="female" name="gender" value="female">여성-->
         <br/>
         <label for="terms">약관에 동의합니다:</label>
         <input type="checkbox" id="terms" required>
         <br/>
-        <button type="submit" id="submitBtn">회원가입</button>
+        <button type="submit" id="submitBtn" onclick="mappingurl('/signup','/cs/qna', 11,'작성')">회원가입</button>
     </form>
 </div>
 
-    <script>
+    <script> //  확인완료
+        var usercomfim = {{ConfirmId}}
+
         function execDaumPostcode {
             new daum.Postcode({
                 oncomplete: function(data) {
@@ -218,7 +223,6 @@
     extraAddressInput.addEventListener("input", validateForm);
     termsCheckbox.addEventListener("change", validateForm);
 </script>
-
 
 </body>
 </html>

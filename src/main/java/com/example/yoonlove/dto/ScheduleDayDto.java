@@ -1,13 +1,10 @@
 package com.example.yoonlove.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.sql.Date;
 
-@Getter
-@Setter
-
+@Data
 public class ScheduleDayDto {
     private String day_id;
     private Date film_date;
@@ -19,8 +16,5 @@ public class ScheduleDayDto {
     private String film_order;
     private String direct;
     private String project_id;
-
-
-
-
+    private Date plan_day_date;
 }

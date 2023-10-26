@@ -12,15 +12,56 @@
         <tr>
             <td>부서명 <input name="dpt_name" type="text" value="{{selectDpt.dpt_name}}" readonly/></td>
             <td>부서기능 <input name="dpt_function" type="text" value="{{selectDpt.dpt_function}}" readonly/></td>
-            <td>여기에 직원현황이 나와야하나?</td>
         </tr>
     </table>
+
+    <table border="1" cellpadding="1" cellspacing="1">
+        <ul>
+            <tr>
+                <td>직원ID</td>
+                <td>성명</td>
+                <td>닉네임</td>
+                <td>연락처</td>
+                <td>E-mail</td>
+            </tr>
+            {{#selectListUser}}
+                <tr>
+                    <td><a href="/admin/{{user_id}}/selectuser">{{user_id}}</a></td>   <!--관리자용 링크임/ 수정필요-->
+                    <td>{{user_name}}</td>
+                    <td>{{nickname}}</td>
+                    <td>{{phone}}</td>
+                    <td>{{email}}</td>
+                </tr>
+            {{/selectListUser}}
+        </ul>
+    </table>
+
+    <!--서브게시판 페이징-->
+    {{>layout/subpaging}}
+
+    <!--subPost 검색-->
+    <form action="/admin/user" method="GET">
+        <select id="searchType" name="searchType">
+            <option value="all">선택</option>
+            <option value="writer">ID</option>
+            <option value="title">이름</option>
+            <option value="content">E-mail</option>
+            <!-- 필요한 항목 추가 -->
+        </select>
+        <input type="text" id="search" name="search" placeholder="검색">
+        <input type="submit" value="검색">
+    </form>
+    <!--subPost 검색 / end-->
+
+    <!--서브게시판 검색 js-->
+    <script><!--현제 뷰페이지기준 prefixUrl-->
+        var url = "/admin/{{selectDpt.dpt_id}}/selectdpt";
+    </script>
+    <script src="/static/js/search.js"></script>
 
 <a href="/admin/department">목록</a>
     <a href="/admin/{{selectDpt.dpt_id}}/updatedptview">수정</a>
     <a href="javascript:void(0);" onclick="deleteAlert('/admin/{{selectDpt.dpt_id}}/deletedpt')">삭제</a>
-
-
 
 <br/>현재까지 버그<br/>
 

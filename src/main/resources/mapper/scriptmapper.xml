@@ -57,10 +57,16 @@
     </select>
 
 
+    <!--옵션값에 넣기 위한 fk테이블의 검색값을 가져오는 쿼리-->
+    <select id="selectFk">
+        SELECT scene_id, scene_num, scene_place, scenario_id FROM scene order by scene_id desc
+    </select>
+
+
     <insert id="insertScriptPaper">
         insert into scriptpaper values(
         (select concat('script', (nvl(max(to_number(substr(script_id, 7))), 0)+1)) from scriptpaper),<!--pk코드 자동증가(수정2)-->
-        #{scene_id}, <!--script id값 /나중에 조인해서 스크립트 번호가 가야됨-->
+        #{scene_id}, <!--옵션값으로 들어가야되는부분-->
         #{video_name}, <!--영상제목-->
         #{video_date}, <!--영상촬영 날짜-->
         #{video_time}, <!--영상 촬영시작시간-->
