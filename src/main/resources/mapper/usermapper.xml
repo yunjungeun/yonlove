@@ -43,4 +43,11 @@
         #{company_address3}
         )
     </insert>
+
+    <select id="selectId" resultType="boolean">  <!-- 아이디 중복체크 !!!!!!!!! -->
+        SELECT COUNT(*)
+        FROM USERS
+        WHERE user_id = #{user_id}
+    </select>
+
 </mapper>
