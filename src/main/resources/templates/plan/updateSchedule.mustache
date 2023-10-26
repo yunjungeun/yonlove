@@ -1,0 +1,42 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
+</head>
+<body>
+<form id="alert" action="/plan/{{updateSchedule.day_id}}/updateSchedule" method="get">
+<table border="1" cellpadding="1" cellspacing="1">
+    <tr>
+
+
+        <td>촬영계획표제목<input name="day_title" type="text" value="{{updateSchedule.day_title}}" class="field1" ></td>
+        <td>촬영날짜<input name="film_date" type="date" value="{{updateSchedule.film_date}}" class="field2"></td>
+        <td>촬영순서<input name="film_order" type="text" value="{{updateSchedule.film_order}}" class="field3"></td>
+        <td>날씨<input name="weather" type="text"value="{{updateSchedule.weather}}" class="field4"></td>
+        <td>조명<input name="light" type="text" value="{{updateSchedule.light}}" class="field5"></td>
+        <td>의상<input name="costume" type="text" value="{{updateSchedule.costume}}" class="field6" ></td>
+        <td>소품<input name="prop" type="text"  value="{{updateSchedule.prop}}" class="field7"></td>
+        <td>연출/제작<input name="direct" type="text" value="{{updateSchedule.direct}}" class="field8" ></td>
+        <td>기획ID<input name="project_id" type="text" value="{{updateSchedule.project_id}}" class="field9" ></td>
+
+
+    </tr>
+
+
+</table>
+    <input type="submit" value="등록" onclick="mappingurl('/plan/{{updateSchedule.day_id}}/updateSchedule','/plan/schedule_day', 9,'수정')">
+</form>
+
+<a href="/plan/schedule_day">목록</a>
+
+
+
+
+
+</body>
+</html>

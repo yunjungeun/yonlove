@@ -1,0 +1,33 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
+</head>
+<body>
+<form id="alert" action="/vd/contentInsert" method="get">
+<table border="1" cellpadding="1" cellspacing="1">
+    <tr>
+        <td>영상제목<input name="video_name" class="field1"type="text"  ></td>
+        <td>영상설명<input name="video_sub" class="field2"type="text"></td>
+    </tr>
+    <tr>
+        <td>영상주소<input name="video_url" class="field3" type="text" /></td>
+        <td>업로드날짜<input name="upload_date" class="field4" type="date" /></td>
+        <td>영상수익<input name="video_profit" class="field5" type="number" /></td>
+        <td>좋아요수<input name="like_cnt" class="field6"type="number" /></td>
+        <td>조회수<input name="video_view" class="field7"type="number" /></td>
+        <td>프로젝트아이디<input name="project_id"class="field8" type="text" /></td>
+    </tr>
+</table>
+    <input type="submit" value="등록" onclick="mappingurl('/vd/contentInsert','/vd/video', 8,'작성')">
+</form>
+
+<a href="/vd/video">취소</a>
+
+</body>
+</html>

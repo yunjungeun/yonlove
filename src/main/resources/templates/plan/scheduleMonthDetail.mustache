@@ -1,0 +1,37 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/delete.js"></script>
+</head>
+<body>
+
+<table border="1" cellpadding="1" cellspacing="1">
+    <tr>
+
+
+        <td>스케쥴명<input name="schedule_name" type="text"  value="{{scheduleMonth.schedule_name}}" ></td>
+        <td>스케쥴내용<input name="schedule_content" type="text" value="{{scheduleMonth.schedule_content}}" ></td>
+        <td>스케쥴일정<input name="schedule_date" type="date" value="{{scheduleMonth.schedule_date}}" ></td>
+        <td>프로젝트id<input name="project_id" type="text" value="{{scheduleMonth.project_id}}" ></td>
+
+
+
+
+    </tr>
+
+
+</table>
+
+
+<a href="/plan/schedule_month">목록</a>
+<a href="/plan/{{scheduleMonth.month_id}}/ScheduleMonthUpdateView">수정</a>
+<a href="/plan/{{scheduleMonth.month_id}}/deleteScheduleMonth" onclick="confirmDelete(event)">삭제</a>
+
+
+</body>
+</html>

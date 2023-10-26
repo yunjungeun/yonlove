@@ -10,12 +10,14 @@
 
 </head>
 <body>
-<form id="alert" action="/scene/insertscene" method="get">
+<form id="alert" action="/scene/insertscene" method="post" enctype="multipart/form-data">
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
             <td>시나리오
             <select id="fk" name="scenario_id"></select></td>
             <td>씬 번호<input class="int1" name="scene_num" type="number" placeholder="미입력시 자동생성"></td>
+            <td>첨부파일<input id="fileInput"  name="file" type="file" placeholder="파일을 첨부하세요" class="field3"></td>
+            <p id="errorText" style="color: red;"></p>
         </tr>
         <tr>
             <td>장면 요약<input class="field1" name="scene_content" type="text" placeholder="스토리보드 내용을 요약작성해 주세요"/></td>
@@ -26,20 +28,10 @@
             <td>촬영장소 <input class="field3" name="scene_place" type="text"/></td>
         </tr>
     </table>
+    <input type="submit" value="씬등록" onclick="checkFile('업로드');" >
     <input id="submit-button" type="submit" value="등록" onclick="mappingurl('/scene/insertscene','/scene/scene',3,'작성', 1)">
 </form>
-
-
-
-
 <a href="/scene/scene">취소</a>
-
-<br/>현재까지 버그<br/>
-작성칸이 공란이면 db에 null값이 들어가는게아닌 공란이 들어감<br/>
-number데이터형에 공란이 들어가면서 db오류 발생<br/>
-마이바티스 문법으로 if문으로 해결 가능<br/>
-시나리오 번호 자동증가는 공란이 들어갔을때 어떻게 처리될 것인지?<br/>
-
 
 <!--옵션 태그에 필요한 js-->
 <script>

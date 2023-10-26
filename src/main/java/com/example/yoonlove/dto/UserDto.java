@@ -13,6 +13,9 @@ import java.util.List;
 @Data
 public class UserDto implements UserDetails {
 
+
+
+
         private String user_id;
         private String pw;
         private String pw2;
@@ -32,6 +35,9 @@ public class UserDto implements UserDetails {
         private String sign_date;
         private String address3;
         private int total_pay;
+
+        //조인테이블 컬럼 : user_info
+    private String company_name;
 
 
     @Override//권한 반환                    스프링시큐리티 유저디테일 인터페이스에 정의된 메서드

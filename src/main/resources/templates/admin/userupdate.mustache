@@ -1,0 +1,66 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+<body>
+<form id="alert" method="get" action="/admin/{{selectUser.user_id}}/updateuser">
+
+<table border="1" cellpadding="1" cellspacing="1">
+    <tr>
+        <td>회원ID <input name="user_id" type="text" value="{{selectUser.user_id}}" readonly /></td>
+        <td colspan="2">성함 <input class="field1" name="user_name" type="text" value="{{selectUser.user_name}}" /></td>
+    </tr>
+    <tr>
+        <td colspan="3">닉네임 <input class="field2" name="nickname" type="text" value="{{selectUser.nickname}}" /></td>
+    </tr>
+    <tr>
+        <td colspan="3">핸드폰 <input class="field3" name="phone" type="text" value="{{selectUser.phone}}" /></td>
+    </tr>
+    <tr>
+        <td colspan="3">E-mail <input class="field4" name="email" type="text" value="{{selectUser.email}}" /></td>
+    </tr>
+    <tr>
+        <td colspan="3">우편번호 <input class="field5" name="zip_code" type="text" value="{{selectUser.zip_code}}" /></td>
+    </tr>
+    <tr>
+        <td colspan="3">주소 <input class="field6" name="address1" type="text" value="{{selectUser.address1}}" /></td>
+    </tr>
+    <tr>
+        <td colspan="3">주소2 <input class="field7" name="address2" type="text" value="{{selectUser.address2}}" /></td>
+    </tr>
+    <tr>
+        <td colspan="3">상세주소 <input class="field8" name="address3" type="text" value="{{selectUser.address3}}" /></td>
+    </tr>
+    <tr>
+        <td>기업회원여부 <input class="field9"  name="company_user" type="text" value="{{selectUser.company_user}}" /></td>
+        <td>회원등급 <input class="field10" name="grade" type="text" value="{{selectUser.grade}}" /></td>
+        <td>권한 <input class="field11" name="authority" type="text" value="{{selectUser.authority}}" /></td>
+    </tr>
+    <tr>
+        <td colspan="3">가입일 <input name="sign_date" type="text" value="{{selectUser.sign_date}}" readonly/></td>
+    </tr>
+    <tr>
+        <td colspan="3">소속회사 <input name="company_name" type="text" value="{{selectCompany.company_name}}" readonly/></td>
+    </tr>
+    <tr>
+        <td colspan="3">부서 <input name="dpt_name" type="text" value="{{selectDpt.dpt_name}}" readonly/></td>
+    </tr>
+
+</table>
+
+<input type="submit" value="수정"  onclick="mappingurl('/admin/{{selectUser.User_id}}/updateuser','/admin/user',11,'수정')"/>
+</form>
+
+<a href="/admin/user">취소</a>
+
+<br/>현재까지 버그<br/>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/static/js/cu_alert.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
+</head>
+<body>
+<form id="alert" action="/plan/{{actorManagementUpdate.actor_id}}/updateActorManagement" method="get">
+    <table border="1" cellpadding="1" cellspacing="1">
+        <tr>
+
+
+            <td>배우이름<input name="actor_name" type="text" value="{{actorManagementUpdate.actor_name}}" class="field1" ></td>
+            <td>도착시간<input name="arrival_time" type="date" value="{{actorManagementUpdate.arrival_time}}" class="field2" ></td>
+            <td>장소<input name="place" type="text"  value="{{actorManagementUpdate.place}}" class="field3"></td>
+            <td>셋콜<input name="set_call" type="text" value="{{actorManagementUpdate.set_call}}" class="field4"></td>
+            <td>일정id<input name="day_id" type="text" value="{{actorManagementUpdate.day_id}}" class="field5"></td>
+
+
+
+        </tr>
+
+
+    </table>
+    <input type="submit" value="등록" onclick="mappingurl('/plan/{{actorManagementUpdate.actor_id}}/updateActorManagement','/plan/actor_management',5,'수정')">
+</form>
+<a href="/plan/actor_management">목록</a>
+
+
+</body>
+</html>

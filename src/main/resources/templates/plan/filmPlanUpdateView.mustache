@@ -1,0 +1,38 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
+</head>
+<body>
+<form id="alert"action="/plan/{{filmPlanUpdate.film_id}}/updatefilm" method="get">
+<table border="1" cellpadding="1" cellspacing="1">
+    <tr>
+
+
+        <td>안/밖<input name="inside_flag" type="text" value="{{filmPlanUpdate.inside_flag}}" class="field1" ></td>
+        <td>낮/밤<input name="day_flag" type="text" value="{{filmPlanUpdate.day_flag}}" class="field2"></td>
+        <td>계획표id<input name="day_id" type="text" value="{{filmPlanUpdate.day_id}}" class="field3"></td>
+        <td>카메라씬id<input name="scene_id" type="text" value="{{filmPlanUpdate.scene_id}}" class="field4"></td>
+        <td>컷<input name="cut" type="text" value="{{filmPlanUpdate.cut}}" class="field5"></td>
+
+
+
+    </tr>
+
+
+</table>
+    <input type="submit" value="등록" onclick="mappingurl('/plan/{{filmPlanUpdate.film_id}}/updatefilm','/plan/film_plan',5,'수정')">
+</form>
+<a href="/plan/film_plan">목록</a>
+
+
+
+
+
+</body>
+</html>

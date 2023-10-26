@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 리스트</title>
+</head>
+<body>
+<h1>공지사항</h1>
+<table border="1" cellpadding="1" cellspacing="1">
+    <ul>
+        <tr>
+            <td>촬영시간</td>
+            <td>촬영내용</td>
+            <td>계획표id</td>
+
+
+        </tr>
+        {{#scheduleTimeList}}
+            <tr>
+                <td>{{film_time}}</td>
+                <td><a href="/plan/scheduleTime/{{time_id}}">{{film_content}}</a></td>
+                <td>{{day_id}}</td>
+
+            </tr>
+        {{/scheduleTimeList}}
+    </ul>
+</table>
+
+{{>layout/paging}}
+
+<form action="/plan/schedule_time" method="GET">
+    <select id="searchType" name="searchType">
+        <option value="all">선택</option>
+        <option value="title">제목</option>
+        <!-- 필요한 항목 추가 -->
+    </select>
+    <input type="text" id="search" name="search" placeholder="검색">
+
+    <input type="submit" value="검색">
+
+</form>
+
+
+<a href="/plan/insertScheduleTimeView" role="button">새 시간표 작성</a>
+<a href="/plan/schedule_time">목록</a>
+
+
+<script>
+    var url = "/plan/schedule_time";
+</script>
+<script src="/static/js/search.js"></script>
+
+
+</body>
+</html>

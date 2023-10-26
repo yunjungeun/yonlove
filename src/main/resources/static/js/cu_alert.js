@@ -6,6 +6,7 @@ function mappingurl(submiturl,sucessurl, int, text, cnt){
 
     var data = {};
 
+
         for(var i = 1; i <= int; i++){
             var name = ".field"+i;  // name <-  ". field" +i  클래스이름 대체 +1 갯수숫자의미  .점은 선택자 클래스라서 점으로 표시
             $(name).each(function() {    // $(클랙스이름) 넣고 반복해서 함수를

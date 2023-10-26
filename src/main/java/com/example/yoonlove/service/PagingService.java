@@ -26,6 +26,12 @@ public class PagingService {
     private SceneMapper sceneMapper;
     @Autowired
     private ScriptPaperMapper scriptPaperMapper;
+    @Autowired
+    private VideoMapper videoMapper;
+    @Autowired
+    private  LogMapper logMapper;
+    @Autowired
+    private PlanMapper planMapper;
 
     @Autowired
     private ProjectMapper projectMapper;
@@ -40,26 +46,27 @@ public class PagingService {
             case "notice" : pageDto = csMapper.totalNoticePost(dto);break;
             case "qna" : pageDto = csMapper.totalQnAPost(dto); break;
             case "actor" : pageDto = sceneMapper.totalActorPost(dto); break;
-            case "actor_managment" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
+            case "actor_management" : pageDto = planMapper.totalActorManagementPost(dto); break;
             case "budget" : pageDto = projectMapper.totalBudgetPost(dto); break;
+            case "actor_managment" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
             case "company" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
             case "creater" : pageDto = creatorMapper.totalCreatorPost(dto); break;
             case "creater_profit" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
             case "department" : pageDto = adminMapper.totalDptPost(dto); break;
-            case "film_plan" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
-            case "log" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
+            case "film_plan" : pageDto = planMapper.totalFilmPlanPost(dto); break;
+            case "log" : pageDto = logMapper.totalLogPost(dto); break;
             case "member" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
             case "produce" : pageDto = projectMapper.totalProducePost(dto); break;
             case "project" : pageDto = projectMapper.totalProjectPost(dto); break;
             case "scenario" : pageDto = scenarioMapper.totalScenarioPost(dto); break;
             case "scene" : pageDto = sceneMapper.totalScenePost(dto); break;
-            case "schedule_day" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
-            case "schedule_month" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
-            case "schedule_time" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
+            case "schedule_day" : pageDto = planMapper.totalSceduledayPost(dto); break;
+            case "schedule_month" :pageDto = planMapper.totalScheduleMonthPost(dto);  break;
+            case "schedule_time" :  pageDto = planMapper.totalSceduletimePost(dto); break;
             case "scriptpaper" : pageDto = scriptPaperMapper.totalScriptPost(dto); break;
             case "timetable" : pageDto = scriptPaperMapper.totalTimeTablePost(dto); break;
-            case "users" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
-            case "video" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
+            case "users" : pageDto= adminMapper.totalUserPost(dto); break;
+            case "video" : pageDto = videoMapper.totalContentPost(dto); break;
 
             //오류메세지 출력
             default:
