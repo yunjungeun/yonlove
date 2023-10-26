@@ -36,7 +36,6 @@ public class AdminController {
         List<PageDto> pagelist = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.pageRink(pageDto);
 
-        System.out.println(pageInfo.toString());
         List<UserDto> pagedto = adminService.selectListUser(pageInfo);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/admin/user");
@@ -133,10 +132,29 @@ public class AdminController {
 
 
     @GetMapping("/admin/{dpt_id}/selectdpt")
-    public ModelAndView selectDepartment(DepartmentDto departmentDto){
+    public ModelAndView selectDepartment(DepartmentDto departmentDto, PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page){
         DepartmentDto dto = adminService.selectDepartment(departmentDto);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/admin/dptselect");
+
+        //서브게시판
+        PageDto pageDto = new PageDto("users","user_id",page,pdto);
+        PageDto pageInfo = pagingService.paging(pageDto);
+
+        List<PageDto> pagelist = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
+        String rink = pagingService.pageRink(pageDto);
+
+        List<UserDto> pagedto = adminService.selectListUser(pageInfo);
+        mv.addObject("selectListUser", pagedto);
+
+
+        //페이징에 필요한센션
+        mv.addObject("prefixUrl", "admin");
+        mv.addObject("paging", pageInfo);  //페이징정보
+        mv.addObject("pageList", pagelist); //페이지 하단부 페이지 리스트
+        mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
+        //서브게시판
+
         mv.addObject("selectDpt", dto);
         return mv;
     }

@@ -16,6 +16,33 @@
         </tr>
     </table>
 
+    <table border="1" cellpadding="1" cellspacing="1">
+        <ul>
+            <tr>
+                <td>회원ID</td>
+                <td>회원이름</td>
+                <td>닉네임</td>
+                <td>회원가입 일시</td>
+                <td>권한</td>
+                <td>회사</td>
+            </tr>
+            {{#selectListUser}}
+                <tr>
+                    <td><a href="/admin/{{user_id}}/selectuser">{{user_id}}</a></td>
+                    <td>{{user_name}}</td>
+                    <td>{{nickname}}</td>
+                    <td>{{sign_date}}</td>
+                    <td>{{authority}}</td>
+                    <td>{{company_name}}</td>
+                </tr>
+            {{/selectListUser}}
+        </ul>
+    </table>
+
+
+
+
+
 <a href="/admin/department">목록</a>
     <a href="/admin/{{selectDpt.dpt_id}}/updatedptview">수정</a>
     <a href="javascript:void(0);" onclick="deleteAlert('/admin/{{selectDpt.dpt_id}}/deletedpt')">삭제</a>
