@@ -9,21 +9,15 @@
     <script src="/static/js/delete.js"></script>
 </head>
 <body>
-<div id="div_box">
     <h1>게시글 상세보기</h1>
     <hr>
-        <table board="1" cellpascing="0" cellpading="0">
+     <table border="1" cellpadding="1" cellspacing="1">
           <ul>
             <tr>
                 <td>채널 ID</td>
                 <td>채널 이름</td>
                 <td>구독자 수</td>
                 <td>유저 ID</td>
-                <td>영상제목</td>
-                <td>영상설명</td>
-                <td>조회수</td>
-                <td>좋아요수</td>
-                <td>프로젝트아이디</td>
             </tr>
 
             <tr>
@@ -31,19 +25,29 @@
                 <td>{{selectCreator.ch_name}}</td>
                 <td>{{selectCreator.ch_sub}}</td>
                 <td>{{selectCreator.user_id}}</td>
-                <td>{{selectContent.video_name}}</td>
-                <td>{{selectContent.video_sub}}</td>
-                <td>{{selectContent.video_view}}</td>
-                <td>{{selectContent.like_cnt}}</td>
-                <td>{{selectContent.project_id}}</td>
             </tr>
           </ul>
         </table>
+
+    <!--서브게시판 페이징-->
+    {{>layout/subpaging}}
+
+    <!--subPost 검색-->
+    <form action="/vd/video" method="GET">
+        <select id="searchType" name="searchType">
+            <option value="all">선택</option>
+            <option value="title">영상제목</option>
+            <!-- 필요한 항목 추가 -->
+        </select>
+        <input type="text" id="search" name="search" placeholder="검색">
+        <input type="submit" value="검색">
+    </form>
+    <!--subPost 검색 / end-->
 
     <hr>
     <a href="/creator/updatecreatorview/{{selectCreator.ch_id}}">게시글 수정</a>&nbsp;&nbsp;&nbsp;
     <a href="/creator/deletecreator/{{selectCreator.ch_id}}" onclick="confirmDelete(event)">게시글 삭제</a>&nbsp;
     <a href="/creator/creater">전체 목록 보기</a>
-</div>
+
 </body>
 </html>

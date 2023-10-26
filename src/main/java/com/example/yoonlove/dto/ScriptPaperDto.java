@@ -18,4 +18,12 @@ public class ScriptPaperDto {
     private String action_content;
     private String position_image;
     private String conti;
+
+    private String table_id;
+    private Date film_time;
+    private int time_num;
+    private String ok_ng;
+    private Date slate_time;
+
+
 }

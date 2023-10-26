@@ -60,11 +60,6 @@ import java.util.List;
           mv.setViewName("/creator/selectcreator");
           mv.addObject("selectCreator", dto);
           // 기존 크레이터 값 끝
-
-          // 이어붙일 테이블: 영상정보 start
-
-
-
           return mv;
       }
 

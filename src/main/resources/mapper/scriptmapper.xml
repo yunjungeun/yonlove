@@ -49,6 +49,10 @@
         SELECT scene_id, scene_num, scene_place, scenario_id FROM scene order by scene_id desc
     </select>
 
+    <select id="selectTimeFk">
+        SELECT table_id, film_time, time_num, ok_ng, slate_time FROM timetable order by table_id desc
+    </select>
+
 
     <insert id="insertScriptPaper">
         insert into scriptpaper values(
@@ -114,7 +118,7 @@
 
     <insert id="insertTimeTable">
         insert into timetable values(
-        (select concat('time',(nvl(max(to_number(substr(table_id, 4)), 0)+1))) from timetable),<!--pk코드 자동증가(수정2)-->
+        (select concat('time',(nvl(max(to_number(substr(table_id, 4))), 0)+1)) from timetable),<!--pk코드 자동증가(수정2)-->
         #{film_time},<!--촬영시간(몇시간 몇분)-->
         #{time_num},<!--타임테이블 번호 자동증가 해야됨-->
         #{ok_ng}, <!--ok판정-->
