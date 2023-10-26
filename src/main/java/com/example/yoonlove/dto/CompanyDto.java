@@ -14,6 +14,7 @@ public class CompanyDto {
     private String company_homepage;
     private String company_address1;
     private String company_address2;
+    private String company_address3;
     private String company_email;
     private String zip_code;
 
@@ -24,8 +25,9 @@ public class CompanyDto {
                 ", company_name='" + company_name + '\'' +
                 ", company_date=" + company_date +
                 ", company_homepage='" + company_homepage + '\'' +
-                ", company_adress1='" + company_address1 + '\'' +
-                ", company__adress2='" + company_address2 + '\'' +
+                ", company_address1='" + company_address1 + '\'' +
+                ", company_address2='" + company_address2 + '\'' +
+                ", company_address3='" + company_address3 + '\'' +
                 ", company_email='" + company_email + '\'' +
                 ", zip_code='" + zip_code + '\'' +
                 '}';
