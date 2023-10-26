@@ -37,16 +37,8 @@ function mappingurl(submiturl,sucessurl, int, text, cnt){
 
     $.ajax({
             url: submiturl,
-            type : "POST",
+            type : "GET",
             data : data,
-
-             enctype: 'multipart/form-data',
-        processData: false,
-             contentType: false,
-             cache: false,
-
-
-
             success:function(response){
                 alert("정상적으로 " +text+" 되었습니다");
                 window.location.href = sucessurl ;

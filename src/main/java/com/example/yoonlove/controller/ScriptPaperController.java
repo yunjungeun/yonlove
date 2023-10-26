@@ -67,6 +67,8 @@ public class ScriptPaperController {
 
     @GetMapping("script/insertscriptpaper")
     public String insertScriptPaper(ScriptPaperDto dto){
+        System.out.println(dto.toString());
+
         scriptPaperService.insertScriptPaper(dto);
         return "redirect:/script/scriptpaper";
     }

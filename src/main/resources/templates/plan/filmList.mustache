@@ -10,21 +10,22 @@
 <table border="1" cellpadding="1" cellspacing="1">
     <ul>
         <tr>
-            <td>안/밖</td>
+
+            <td>기획명</td>
+            <td>일일찰영계획</td>
             <td>낮/밤</td>
-            <td>계획표id</td>
-            <td>카메라씬id</td>
+            <td>안/밖</td>
             <td>컷</td>
 
 
         </tr>
         {{#filmList}}
             <tr>
-                <td>{{scene_id}}</td>
-                <td><a href="/plan/filmPlan/{{film_id}}">{{day_flag}}</a></td>
-                <td>{{day_id}}</td>
-                <td>{{cut}}</td>
+                <td>{{project_name}}</td>
+                <td>{{day_title}}</td>
+                <td>{{day_flag}}</td>
                 <td>{{inside_flag}}</td>
+                <td>{{cut}}</td>
 
             </tr>
         {{/filmList}}

@@ -1,11 +1,8 @@
 package com.example.yoonlove.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-
+@Data
 public class FilmPlanDto {
 
     private String film_id;
@@ -15,5 +12,9 @@ public class FilmPlanDto {
     private String day_flag;
     private String cut;
 
+    //조인 테이블 : dayplan_film
+    private String day_title;
+    private String project_id;
+    private String project_name;
 
 }

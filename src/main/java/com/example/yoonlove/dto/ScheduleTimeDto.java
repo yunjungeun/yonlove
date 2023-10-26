@@ -1,12 +1,10 @@
 package com.example.yoonlove.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.sql.Date;
 
-@Getter
-@Setter
+@Data
 
 public class ScheduleTimeDto {
 
@@ -14,6 +12,11 @@ public class ScheduleTimeDto {
     private String day_id;
     private Date film_time;
     private String film_content;
+
+    //조인테이블 dayplan_time
+    private String day_title;
+    private String project_id;
+    private String project_name;
 
 
 

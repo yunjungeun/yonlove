@@ -1,12 +1,10 @@
 package com.example.yoonlove.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.sql.Date;
 
-@Getter
-@Setter
+@Data
 public class ScriptPaperDto {
     private String script_id;
     private String scene_id;
@@ -19,7 +17,7 @@ public class ScriptPaperDto {
     private String position_image;
     private String conti;
 
-    //====================================
+    //==============3중조인 : scriptview======================
 
 
     private int scene_num;

@@ -10,18 +10,19 @@
 <table border="1" cellpadding="1" cellspacing="1">
     <ul>
         <tr>
+            <td>기획명</td>
+            <td>촬영계획</td>
             <td>촬영시간</td>
             <td>촬영내용</td>
-            <td>계획표id</td>
 
 
         </tr>
         {{#scheduleTimeList}}
             <tr>
+                <td>{{project_name}}</td>
+                <td>{{day_title}}</td>
                 <td>{{film_time}}</td>
                 <td><a href="/plan/scheduleTime/{{time_id}}">{{film_content}}</a></td>
-                <td>{{day_id}}</td>
-
             </tr>
         {{/scheduleTimeList}}
     </ul>
