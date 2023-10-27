@@ -80,12 +80,18 @@ public class PlanController {
     }
 
     @GetMapping("plan/{day_id}/scheduleUpdateView") //컨텐츠 업데이트하는 뷰
-    public ModelAndView scheduleUpdateView( ScheduleDayDto dto) {
-        ScheduleDayDto scheduleDayDto = planService.selectSchedule(dto);//업데이트를 하려면 해당 컨텐츠 불러와야하니까 위에 selectContent메소드를 다시씀!
+    public ModelAndView scheduleUpdateView(ScheduleDayDto dto) {
+        //일일촬영계획표 테이블1 :
+       // List<FilmPlanDto> daytable1 = planService.
+
+
+        //일일촬영계획 상세보기 코드// 건들지마세요
+        ScheduleDayDto scheduleDayDto = planService.selectSchedule(dto);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/updateSchedule");
         mv.setStatus(HttpStatus.valueOf(200));
         mv.addObject("updateSchedule", scheduleDayDto);
+        //일일 촬영계획 상세보기 end
         return mv;
     }
 
