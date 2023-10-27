@@ -66,7 +66,10 @@ public class PlanService {
         List<ScheduleTimeDto> scheduleTimeList = planMapper.selectListScheduleTime(pageInfo);
         return scheduleTimeList;
     }
-
+    public List<ScheduleTimeDto> selectListDayTable2(String day_id){
+        List<ScheduleTimeDto> scheduleTimeDto = planMapper.selectListDayTable2(day_id);
+        return scheduleTimeDto;
+    }
     public ScheduleTimeDto  selectScheduleTime(ScheduleTimeDto dto) {
         ScheduleTimeDto  scheduleTimeDetail = planMapper.selectScheduleTime(dto);
         return scheduleTimeDetail;

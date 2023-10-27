@@ -8,9 +8,6 @@ import java.util.List;
 @Mapper
 public interface PlanMapper {
 
-
-
-
     public List<ScheduleDayDto> selectListSchedule(PageDto pageInfo);
     public PageDto totalSceduledayPost(PageDto dto);
     public List<ProjectDto> selectFkDay();
@@ -22,7 +19,7 @@ public interface PlanMapper {
 //==============================================================
 
     public List<ScheduleTimeDto> selectListScheduleTime(PageDto pageInfo);
-
+    public List<ScheduleTimeDto> selectListDayTable2(String day_id);
     public PageDto totalSceduletimePost(PageDto dto);
     public List<ScheduleDayDto> selectFk();
     public ScheduleTimeDto selectScheduleTime(ScheduleTimeDto dto);

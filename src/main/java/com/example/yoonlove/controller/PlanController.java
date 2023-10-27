@@ -49,9 +49,15 @@ public class PlanController {
     public ModelAndView selectSchedule(ScheduleDayDto dto) {
         ModelAndView mv = new ModelAndView();
 
+        //테이블1 start : film_plan 조인 리스트
         List<FilmPlanDto> dayTable1 = planService.selectListDayTable1(dto.getDay_id());
-        System.out.println(dayTable1.get(0).toString());
         mv.addObject("table1",dayTable1);
+        //테이블1 end
+
+        //테이블2 start : schedule_time 조인 리스트
+        List<ScheduleTimeDto> dayTable2 = planService.selectListDayTable2(dto.getDay_id());
+        mv.addObject("table2",dayTable2);
+        //테이블2 end
 
         //일일촬영계획 코드  // 수정엄금
         ScheduleDayDto scheduleDetail = planService.selectSchedule(dto);
@@ -86,17 +92,12 @@ public class PlanController {
 
     @GetMapping("plan/{day_id}/scheduleUpdateView") //컨텐츠 업데이트하는 뷰
     public ModelAndView scheduleUpdateView(ScheduleDayDto dto) {
-        //일일촬영계획표 테이블1 :
-       // List<FilmPlanDto> daytable1 = planService.
 
-
-        //일일촬영계획 상세보기 코드// 건들지마세요
         ScheduleDayDto scheduleDayDto = planService.selectSchedule(dto);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/updateSchedule");
         mv.setStatus(HttpStatus.valueOf(200));
         mv.addObject("updateSchedule", scheduleDayDto);
-        //일일 촬영계획 상세보기 end
         return mv;
     }
 
@@ -156,7 +157,6 @@ public class PlanController {
 
         //검색리스트를 json 리스트 문자열로 생성
         String jsonList = planService.fkJson(scheduleDayDto);
-
 
         ModelAndView mv = new ModelAndView();
         mv.addObject("fkList", jsonList);

@@ -11,7 +11,8 @@
 
 <table border="1" cellpadding="1" cellspacing="1">
     <tr>
-        <h3>촬영계획표 '{{scheduleDetail.day_title}}'</h3>
+        <h1>일일 촬영계획표 </h1>
+        <h3>{{scheduleDetail.film_date}} : {{scheduleDetail.day_title}}'</h3>
         <h5>제목부분 중앙에 오게 해주세요</h5>
     </tr>
     <tr>
@@ -42,9 +43,24 @@
 </table>
 <!--table1 end-->
 
+<!--table2 start-->
 <table border="1" cellpadding="1" cellspacing="1">
-        <td>촬영계획표제목<input name="day_title" type="text" value="{{scheduleDetail.day_title}}" ></td>
-        <td>촬영날짜<input name="film_date" type="date" value="{{scheduleDetail.film_date}}"></td>
+    <tr><td colspan="2">진행시간표</td></tr>
+    <tr>
+        <td>시간</td>
+        <td>내용</td>
+    </tr>
+    {{#table2}}
+        <tr>
+            <td>{{start_time}} ~ {{end_time}}</td>
+            <td>{{film_content}}</td>
+        </tr>
+    {{/table2}}
+</table>
+<!--table2 end-->
+
+<table border="1" cellpadding="1" cellspacing="1">
+    <tr>
         <td>촬영순서<input name="film_order" type="text" value="{{scheduleDetail.film_order}}"></td>
         <td>날씨<input name="weather" type="text"value="{{scheduleDetail.weather}}" ></td>
         <td>조명<input name="light" type="text" value="{{scheduleDetail.light}}"></td>
@@ -52,8 +68,6 @@
         <td>소품<input name="prop" type="text"  value="{{scheduleDetail.prop}}"></td>
         <td>연출/제작<input name="direct" type="text" value="{{scheduleDetail.direct}}" ></td>
         <td>기획ID<input name="project_id" type="text" value="{{scheduleDetail.project_id}}" ></td>
-
-
     </tr>
 </table>
 <a href="/plan/schedule_day">목록</a>
