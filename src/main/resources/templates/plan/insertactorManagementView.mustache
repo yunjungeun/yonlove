@@ -6,22 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/static/js/cu_alert.js"></script>
-
-</head>
+    </head>
 <body>
 <form id="alert"action="/plan/insertactorManagement" method="get">
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
-
-
-            <td>배우이름<input name="actor_name" type="text"  class="field1" ></td>
-            <td>도착시간<input name="arrival_time" type="date" class="field2" ></td>
-            <td>장소<input name="place" type="text" class="field3" ></td>
-            <td>셋콜<input name="set_call" type="text" class="field4"></td>
-            <td>일정id<input name="day_id" type="text" class="field5" ></td>
-
-
+            <td>
+                일정id<select id="fk" name="day_id" class="field1"></select>
+            </td>
+            <td>배우이름<input name="actor_name" type="text"  class="field2" ></td>
+            <td>도착시간<input name="arrival_time" type="date" class="field3" ></td>
+            <td>장소<input name="place" type="text" class="field4" ></td>
+            <td>셋콜<input name="set_call" type="text" class="field5"></td>
 
         </tr>
 
@@ -33,5 +29,13 @@
 
 <a href="/plan/actor_management">목록</a>
 
+<!--옵션 태그에 필요한 js-->
+<script>
+    var jsonValue = '{{{fkList}}}';
+    <!--select 옵션 name값을 'cu_alert.js'에 보내주기 위한 변수 값/ 이게없으면 제출이 안됨-->
+    var selectName = "day_id";
+</script>
+<script src="/static/js/dropdown.js"></script>
+<script src="/static/js/cu_alert.js"></script>
 </body>
 </html>

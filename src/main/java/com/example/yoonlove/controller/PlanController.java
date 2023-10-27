@@ -209,16 +209,12 @@ public class PlanController {
 
     @GetMapping("/plan/actor_management")
     public ModelAndView selectListActorManagement(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
-
         PageDto pageDto = new PageDto("actor_management","actor_id", page,pdto);
-
         PageDto pageInfo = pagingService.paging(pageDto);
-        System.out.println(pageDto.getTotalPost());
 
         // paging ==> 전체게시글 갯수 구해오는 메소드
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
         String rink = pagingService.pageRink(pageDto);
-
 
         List<ActorManagementDto> dto = planService.selectListActorManagement(pageInfo);
         ModelAndView mv = new ModelAndView();
@@ -230,7 +226,6 @@ public class PlanController {
         mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
 
-
         return mv;
     }
 
@@ -241,25 +236,28 @@ public class PlanController {
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/actorManagementDetail");
-        mv.setStatus(HttpStatus.valueOf(200));
         mv.addObject("actorManagementDetail", actorManagementDetail);
         return mv;
     }
 
    @GetMapping("plan/insertactorManagementView")
     public ModelAndView insertactorManagementView() {
+       //여기서부터 해야됨
+        //fk값으로 db검색결과
+       List<ScenarioDto> scenarioDto = sceneService.selectFk();
+
+       //검색리스트를 json 리스트 문자열로 생성
+       String jsonList = sceneService.fkJson(scenarioDto);
+
         ModelAndView mv = new ModelAndView();
         mv.setViewName("plan/insertactorManagementView");
-        mv.setStatus(HttpStatus.valueOf(200));
         return mv;
     }
 
 
     @GetMapping("plan/insertactorManagement")  //컨텐츠 추가 처리
     public String insertActorManagement(ActorManagementDto dto) {
-
         planService.insertActorManagement(dto);
-
         return "redirect:/plan/actor_management";
     }
 
