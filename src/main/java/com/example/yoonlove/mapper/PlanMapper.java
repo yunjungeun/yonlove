@@ -13,6 +13,7 @@ public interface PlanMapper {
 
     public List<ScheduleDayDto> selectListSchedule(PageDto pageInfo);
     public PageDto totalSceduledayPost(PageDto dto);
+    public List<ProjectDto> selectFkDay();
     public ScheduleDayDto selectSchedule(ScheduleDayDto dto);
     public void insertSchedule(ScheduleDayDto dto);
     public void updateSchedule(ScheduleDayDto dto);

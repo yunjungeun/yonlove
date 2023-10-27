@@ -29,20 +29,31 @@ public class PlanService {
         return scheduleDetail;
     }
 
+    public List<ProjectDto> selectFkDay(){
+        return planMapper.selectFkDay();
+    }
+
+    //옵션헤쉬맵
+    public String fkJsonDay(List<ProjectDto> dto) throws JsonProcessingException {
+        Map<String, String> fkList = new LinkedHashMap<>();//해쉬맵은 삽입순서를 유지하지 않기 때문에, LinkedHashMap<>으로 사용자 편의를 위한 정렬삽입을 했음
+        for(int i=0; i< dto.size(); i++){
+            fkList.put(dto.get(i).getProject_id(),dto.get(i).getProject_name());
+        }
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonList = objectMapper.writeValueAsString(fkList);
+        return jsonList;
+    }
+
     public void insertSchedule(ScheduleDayDto dto) {
-
-
         planMapper.insertSchedule(dto);
     }
 
     public void updateSchedule(ScheduleDayDto dto) {
         planMapper.updateSchedule(dto);
-
     }
 
     public void deleteSchedule(ScheduleDayDto dto) {
         planMapper.deleteSchedule(dto);
-
     }
 
 

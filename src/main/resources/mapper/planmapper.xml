@@ -38,7 +38,10 @@
         where r between #{postStart} and #{postEnd}    /*where r between 1 and 10    where r between 11 and 20*/
     </select>
 
-
+    <!--옵션값에 넣기 위한 fk테이블의 검색값을 가져오는 쿼리-->
+    <select id="selectFkDay">
+        SELECT project_id, project_name FROM project order by project_id desc
+    </select>
 
     <select id="selectSchedule" parameterType="com.example.yoonlove.dto.ScheduleDayDto" resultType="com.example.yoonlove.dto.ScheduleDayDto">
         SELECT * FROM schedule_day WHERE day_id = #{day_id}

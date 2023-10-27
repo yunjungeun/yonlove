@@ -57,10 +57,16 @@ public class PlanController {
     }
 
     @GetMapping("plan/insertScheduleView")
-    public ModelAndView insertScheduleView() {
+    public ModelAndView insertScheduleView() throws JsonProcessingException{
+        //fk값으로 db검색결과
+        List<ProjectDto> projectdto = planService.selectFkDay();
+
+        //검색리스트를 json 리스트 문자열로 생성
+        String jsonList = planService.fkJsonDay(projectdto);
+
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("plan/insertSchedule");
-        mv.setStatus(HttpStatus.valueOf(200));
+        mv.setViewName("/plan/insertSchedule");
+        mv.addObject("fkList", jsonList);
         return mv;
     }
 
