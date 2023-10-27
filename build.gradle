@@ -42,6 +42,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	//developmentOnly 'org.springframework.boot:spring-boot-devtools'  // 정적리소스 적용
 
+
 }
 
 tasks.named('test') {
