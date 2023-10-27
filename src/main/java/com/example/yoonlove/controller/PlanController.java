@@ -117,18 +117,15 @@ public class PlanController {
 
     @GetMapping("plan/schedule_time")
     public ModelAndView selectListScheduleTime(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
-
         PageDto pageDto = new PageDto("schedule_time","time_id", page,pdto);  // page???
-
         PageDto pageInfo = pagingService.paging(pageDto);
-        System.out.println(pageDto.getTotalPost());
 
         // paging ==> 전체게시글 갯수 구해오는 메소드
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
         String rink = pagingService.pageRink(pageDto);
 
-
         List<ScheduleTimeDto> dto = planService.selectListScheduleTime(pageInfo);
+
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/scheduleTimeList");
         mv.addObject("scheduleTimeList", dto);
@@ -139,8 +136,6 @@ public class PlanController {
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
 
         return mv;
-
-
     }
 
 
@@ -150,19 +145,18 @@ public class PlanController {
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/scheduleTime");
-        mv.setStatus(HttpStatus.valueOf(200));
         mv.addObject("scheduleTime", scheduleDetail);
         return mv;
     }
 
     @GetMapping("plan/insertScheduleTimeView")
     public ModelAndView insertScheduleTimeView() throws JsonProcessingException {
-
         //fk값으로 db검색결과
         List<ScheduleDayDto> scheduleDayDto = planService.selectFk();
 
         //검색리스트를 json 리스트 문자열로 생성
         String jsonList = planService.fkJson(scheduleDayDto);
+
 
         ModelAndView mv = new ModelAndView();
         mv.addObject("fkList", jsonList);
@@ -174,7 +168,7 @@ public class PlanController {
 
     @GetMapping("plan/insertScheduleTime")  //컨텐츠 추가 처리
     public String insertTime(ScheduleTimeDto dto) {
-
+        System.out.println("값확인 / "+dto.toString());
         planService.insertTime(dto);
 
         return "redirect:/plan/schedule_time";

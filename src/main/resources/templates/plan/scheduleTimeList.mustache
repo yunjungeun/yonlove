@@ -12,7 +12,8 @@
         <tr>
             <td>기획명</td>
             <td>촬영계획</td>
-            <td>촬영시간</td>
+            <td>시작시간</td>
+            <td>종료시간</td>
             <td>촬영내용</td>
 
 
@@ -21,7 +22,8 @@
             <tr>
                 <td>{{project_name}}</td>
                 <td>{{day_title}}</td>
-                <td>{{film_time}}</td>
+                <td>{{start_time}}</td>
+                <td>{{end_time}}</td>
                 <td><a href="/plan/scheduleTime/{{time_id}}">{{film_content}}</a></td>
             </tr>
         {{/scheduleTimeList}}
@@ -47,9 +49,6 @@
 <a href="/plan/schedule_time">목록</a>
 
 
-<script>
-    var url = "/plan/schedule_time";
-</script>
 <script src="/static/js/search.js"></script>
 
 

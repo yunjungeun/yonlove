@@ -11,7 +11,7 @@
 
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
-            <td>촬영시간<input name="film_time" type="date"  value="{{scheduleTime.film_time}}" ></td>
+            <td>촬영시간<input name="film_time" type="date"  value="{{scheduleTime.start_time}}" ></td>
             <td>촬영내용<input name="film_content" type="text"  value="{{scheduleTime.film_content}}" ></td>
             <td>계획표id
                 <select id="fk" name="day_id" class="field1"></select>
@@ -23,6 +23,7 @@
     <a href="/plan/schedule_time">목록</a>
     <a href="/plan/{{scheduleTime.time_id}}/scheduleTimeUpdateView">수정</a>
     <a href="/plan/{{scheduleTime.time_id}}/deleteTime" onclick="confirmDelete(event)">삭제</a>
+
 
 
     <script src="/static/js/delete.js"></script>
