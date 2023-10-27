@@ -73,6 +73,7 @@ public class PlanController {
 
     @GetMapping("plan/insertSchedule")  //컨텐츠 추가 처리
     public String insertSchedule(ScheduleDayDto dto) {
+        System.out.println(dto.toString());
         planService.insertSchedule(dto);
 
         return "redirect:/plan/schedule_day";

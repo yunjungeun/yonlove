@@ -60,7 +60,13 @@
         #{prop},
         #{film_order},
         #{direct},
-        #{project_id}
+        #{project_id},
+        <if test="day_num == 0 or  day_num == null">
+            (select nvl(max(day_num),0)+1 from schedule_day where project_id=#{project_id})<!--일촬계 번호 자동증가-->
+        </if>
+        <if test="day_num != null and  day_num != 0">
+            #{day_num}
+        </if>
         )
     </insert>
 

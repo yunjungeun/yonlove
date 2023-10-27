@@ -17,4 +17,5 @@ public class ScheduleDayDto {
     private String direct;
     private String project_id;
     private Date plan_day_date;
+    private int day_num;
 }

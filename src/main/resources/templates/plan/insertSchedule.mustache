@@ -17,6 +17,7 @@
             </td>
             <td>촬영계획표제목<input name="day_title" type="text" class="field2"  ></td>
             <td>촬영날짜<input name="film_date" type="date" class="field3"  ></td>
+            <td><input name="day_num" type="number" class="int1" placeholder="미입력시 자동입력">회차</td>
         </tr>
         <tr>
             <td>촬영순서<input name="film_order" type="text" class="field4" ></td>
@@ -33,7 +34,7 @@
 
 
     </table>
-    <input type="submit" value="등록" onclick="mappingurl('/plan/insertSchedule','/plan/schedule_day', 9,'작성')">
+    <input type="submit" value="등록" onclick="mappingurl('/plan/insertSchedule','/plan/schedule_day', 9,'작성',1)">
 </form>
 <a href="/plan/schedule_day">목록</a>
 
