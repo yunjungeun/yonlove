@@ -131,6 +131,7 @@
         SELECT * FROM schedule_time WHERE time_id = #{time_id}
     </select>
 
+    <!--일일촬영계획 리스트 //촬영계획표-->
     <select id="selectListDayTable2" resultType="com.example.yoonlove.dto.ScheduleTimeDto">
         SELECT * FROM schedule_time WHERE day_id = #{day_id}
     </select>
@@ -165,7 +166,7 @@
 
 
 
-
+        <!--출연자 관리 테이블 satart -->
     <select id="totalActorManagementPost" parameterType="com.example.yoonlove.dto.PageDto">  /**/
         select count(${id}) as totalPost from ${table}
         where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
@@ -175,6 +176,10 @@
         </if>
     </select>
 
+    <!--일일촬영계획 리스트 //촬영계획표-->
+    <select id="selectListDayTable3" resultType="com.example.yoonlove.dto.ActorManagementDto">
+        SELECT * FROM actor_management WHERE day_id = #{day_id}
+    </select>
 
     <select id="selectListActorManagement" parameterType="com.example.yoonlove.dto.PageDto" resultType="com.example.yoonlove.dto.ActorManagementDto">
         select *

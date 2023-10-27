@@ -56,8 +56,14 @@ public class PlanController {
 
         //테이블2 start : schedule_time 조인 리스트
         List<ScheduleTimeDto> dayTable2 = planService.selectListDayTable2(dto.getDay_id());
+        System.out.println(dayTable2.get(0).toString());
         mv.addObject("table2",dayTable2);
         //테이블2 end
+
+        //테이블3 start : actor_management : 출연자관리
+        List<ActorManagementDto> dayTable3 = planService.selectListDayTable3(dto.getDay_id());
+        mv.addObject("table3",dayTable3);
+        //테이블3 end
 
         //일일촬영계획 코드  // 수정엄금
         ScheduleDayDto scheduleDetail = planService.selectSchedule(dto);
@@ -278,11 +284,9 @@ public class PlanController {
     public String deleteActorManagement( ActorManagementDto dto) {
         planService.deleteActorManagement(dto);
         return "redirect:/plan/actor_management";
-
     }
 
 //===========================================================================================출연진관라
-
 
     @GetMapping("plan/film_plan")
     public ModelAndView selectListFilmPlan(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
@@ -379,16 +383,12 @@ public class PlanController {
 
     @GetMapping("plan/schedule_month")
     public ModelAndView selectListPlan(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
-
         PageDto pageDto = new PageDto("schedule_month","month_id", page,pdto);
-
         PageDto pageInfo = pagingService.paging(pageDto);
-        System.out.println(pageDto.getTotalPost());
 
         // paging ==> 전체게시글 갯수 구해오는 메소드
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
         String rink = pagingService.pageRink(pageDto);
-
 
         List<ScheduleMonthDto> dto = planService.selectListPlan(pageInfo);
         ModelAndView mv = new ModelAndView();
@@ -400,11 +400,7 @@ public class PlanController {
         mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
 
-
         return mv;
-
-
-
     }
 
 
@@ -460,17 +456,4 @@ public class PlanController {
 
     }
 
-
-
-
-
-
-
 }
-
-
-
-
-
-
-

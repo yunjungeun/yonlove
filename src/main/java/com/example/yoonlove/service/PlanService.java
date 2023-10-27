@@ -66,6 +66,7 @@ public class PlanService {
         List<ScheduleTimeDto> scheduleTimeList = planMapper.selectListScheduleTime(pageInfo);
         return scheduleTimeList;
     }
+    //일일촬영계획표 리스트
     public List<ScheduleTimeDto> selectListDayTable2(String day_id){
         List<ScheduleTimeDto> scheduleTimeDto = planMapper.selectListDayTable2(day_id);
         return scheduleTimeDto;
@@ -101,13 +102,18 @@ public class PlanService {
         String jsonList = objectMapper.writeValueAsString(fkList);
         return jsonList;
     }
-//===================================================================================
+//==================================출연자관리=================================================
 
 
 
     public List<ActorManagementDto> selectListActorManagement(PageDto pageInfo) {
         List<ActorManagementDto> ActorManagementList = planMapper.selectListActorManagement(pageInfo);
         return ActorManagementList;
+    }
+    //일일촬영계획표 리스트
+    public List<ActorManagementDto> selectListDayTable3(String day_id){
+        List<ActorManagementDto> actorManagementDto = planMapper.selectListDayTable3(day_id);
+        return actorManagementDto;
     }
 
     public ActorManagementDto  selectActorManagement(ActorManagementDto dto) {
@@ -200,9 +206,6 @@ public class PlanService {
     public void deletePlan(ScheduleMonthDto dto) {
         planMapper.deletePlan(dto);
     }
-
-
-
 
 }
 

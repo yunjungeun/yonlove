@@ -16,9 +16,11 @@ public interface PlanMapper {
     public void updateSchedule(ScheduleDayDto dto);
     public void deleteSchedule(ScheduleDayDto dto);
 
-//==============================================================
+//===========================촬영 타입테이블===================================
 
     public List<ScheduleTimeDto> selectListScheduleTime(PageDto pageInfo);
+
+    //일일촬영 계획표 리스트
     public List<ScheduleTimeDto> selectListDayTable2(String day_id);
     public PageDto totalSceduletimePost(PageDto dto);
     public List<ScheduleDayDto> selectFk();
@@ -26,8 +28,11 @@ public interface PlanMapper {
     public void insertTime(ScheduleTimeDto dto);
     public void updateTime(ScheduleTimeDto dto);
     public void deleteTime(ScheduleTimeDto dto);
-//========================================================================
+//==============================출연자관리==========================================
     public List<ActorManagementDto> selectListActorManagement(PageDto pageInfo);
+
+    //일일촬영 계획표 리스트
+    public List<ActorManagementDto> selectListDayTable3(String day_id);
     public PageDto totalActorManagementPost(PageDto dto);
     public ActorManagementDto selectActorManagement(ActorManagementDto dto);
     public void insertActorManagement(ActorManagementDto dto);
