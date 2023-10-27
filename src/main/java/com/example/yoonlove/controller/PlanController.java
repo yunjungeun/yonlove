@@ -30,7 +30,16 @@ public class PlanController {
 
 
         PageDto pageDto = new PageDto("schedule_day","day_id", page,pdto);
+
+        System.out.println(pageDto.toString());
+
+
         PageDto pageInfo = pagingService.paging(pageDto); // paging ==> 전체게시글 갯수 구해오는 메소드
+
+
+        System.out.println(pageInfo.toString());
+
+
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
         String rink = pagingService.pageRink(pageDto);
 
@@ -40,7 +49,7 @@ public class PlanController {
         mv.setViewName("/plan/schedule_day");
         mv.addObject("scheduleList", dto);
 
-        System.out.println(dto.get(0).getProject_name());
+
 
 
         mv.addObject("prefixUrl","plan");
@@ -56,7 +65,7 @@ public class PlanController {
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/scheduleDetail");
-        mv.setStatus(HttpStatus.valueOf(200));
+
         mv.addObject("scheduleDetail", scheduleDetail);
         return mv;
     }
@@ -197,14 +206,14 @@ public class PlanController {
         PageDto pageDto = new PageDto("actor_management","actor_id", page,pdto);
 
         PageDto pageInfo = pagingService.paging(pageDto);
-        System.out.println(pageDto.getTotalPost());
+
 
         // paging ==> 전체게시글 갯수 구해오는 메소드
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
         String rink = pagingService.pageRink(pageDto);
 
-
         List<ActorManagementDto> dto = planService.selectListActorManagement(pageInfo);
+
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/actorManagementList");
         mv.addObject("actorManagementList", dto);
@@ -225,7 +234,7 @@ public class PlanController {
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/actorManagementDetail");
-        mv.setStatus(HttpStatus.valueOf(200));
+
         mv.addObject("actorManagementDetail", actorManagementDetail);
         return mv;
     }
@@ -235,9 +244,9 @@ public class PlanController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("plan/insertactorManagementView");
 
-       List<ProjectDto> projectDto = planService.selectFk();
+       List<ScheduleDayDto> scheduleDto = planService.selectDayFk();
 
-       String jsonList = planService.fkJson(projectDto);
+       String jsonList = planService.dayFkJson(scheduleDto);
        mv.addObject("fkList",jsonList );
 
         return mv;

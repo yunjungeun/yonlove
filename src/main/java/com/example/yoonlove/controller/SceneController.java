@@ -163,7 +163,7 @@ public class SceneController {
     //출연자 정보
     @GetMapping("scene/actor")
     public ModelAndView selectListActor(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
-        PageDto pageDto = new PageDto("actor","actor_id",page,pdto);
+        PageDto pageDto = new PageDto("actor","act_id",page,pdto);
         PageDto pageInfo = pagingService.paging(pageDto);
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.pageRink(pageDto);
@@ -181,7 +181,7 @@ public class SceneController {
         return mv;
     }
 
-    @GetMapping("scene/{actor_id}/selectactor")
+    @GetMapping("scene/{act_id}/selectactor")
     public ModelAndView selectActor(ActorDto actorDto){
         ActorDto dto = sceneService.selectActor(actorDto);
         ModelAndView mv = new ModelAndView();
@@ -201,7 +201,7 @@ public class SceneController {
     }
 
 
-    @GetMapping("scene/{actor_id}/updateactorview")
+    @GetMapping("scene/{act_id}/updateactorview")
     public ModelAndView updateActorView(ActorDto actorDto){
         ActorDto dto = sceneService.selectActor(actorDto);
         ModelAndView mv = new ModelAndView();
@@ -210,12 +210,12 @@ public class SceneController {
         return mv;
     }
 
-    @GetMapping("scene/{actor_id}/updateactor")
+    @GetMapping("scene/{act_id}/updateactor")
     public String updateActor(ActorDto dto){
         sceneService.updateActor(dto);
         return "redirect:/scene/actor";
     }
-    @GetMapping("scene/{actor_id}/deleteactor")
+    @GetMapping("scene/{act_id}/deleteactor")
     public String deleteActor(ActorDto dto){
         sceneService.deleteActor(dto);
         return "redirect:/scene/actor";

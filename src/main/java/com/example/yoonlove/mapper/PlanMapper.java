@@ -10,6 +10,9 @@ public interface PlanMapper {
 
 
     public List<ProjectDto> selectFk();
+    public List<ScheduleDayDto> selectDayFk();
+
+
 
     public List<ScheduleDayDto> selectListSchedule(PageDto pageInfo);
 

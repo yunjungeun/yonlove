@@ -11,32 +11,39 @@
     <ul>
         <tr>
 
-            <td>촬영계획명</td>
-            <td>기획명</td>
-            <td>출연자</td>
-            <td>출연자 배역/역할</td>
+            <td>촬영내용</td>
+            <td>연기자(배역)</td>
+
         </tr>
-        {{#selectListActor}}
+        {{#actorManagementList}}
             <tr>
 
 
-                <td>{{day_title}}</td>
-                <td>{{project_name}}</td>
-                <td><a href="plan/actorManagement/{{actor_id}}">{{actor_name}}</a></td>
-                <td>{{actor_info}}</td>
+                <!--<td>{1{day_title}}</td>
+                <td><a href="/plan/actorManagement/{1{actor_id}}">{1{actor_name}}</a></td>
+                <td>{1{arrival_time}}</td>
+                <td>{1{place}}</td>
+                <td>{1{set_call}}</td>-->
+
+
+                <td>{{scene_content}}</td>
+                <td>{{casting}}</td>
+
+
+
+
             </tr>
-        {{/selectListActor}}
+        {{/actorManagementList}}
     </ul>
 </table>
 
 <!--페이징 처리 레이아웃-->
 {{>layout/paging}}
 
-<form action="/scene/actor" method="GET">
+<form action="/plan/actorManagement/" method="GET">
     <select id="searchType" name="searchType">
         <option value="all">선택</option>
         <option value="title">출연자</option>
-        <option value="writer">기획명</option>
         <option value="content">촬영계획명</option>
         <!-- 필요한 항목 추가 -->
     </select>

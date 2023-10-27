@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<form id="alert" method="get" action="/scene/{{updateActor.actor_id}}/updateactor">
+<form id="alert" method="get" action="/scene/{{updateActor.act_id}}/updateactor">
 <table border="1" cellpadding="1" cellspacing="1">
     <tr>
         <td>씬 번호<input  class="field1" name="scene_id" type="text" readonly value="{{updateActor.scene_id}}"></td>
@@ -21,7 +21,7 @@
         <td>출연자 정보<input  class="field2" name="actor_info" type="text" value="{{updateActor.actor_info}}"/></td>
     </tr>
 </table>
-<input type="submit" value="수정"  onclick="mappingurl('/scene/{{updateActor.actor_id}}/updateactor','/scene/actor',2,'수정')"/>
+<input type="submit" value="수정"  onclick="mappingurl('/scene/{{updateActor.act_id}}/updateactor','/scene/actor',2,'수정')"/>
 </form>
 
 <a href="/scene/actor">취소</a>

@@ -10,17 +10,25 @@
 <table border="1" cellpadding="1" cellspacing="1">
     <ul>
         <tr>
-            <td>기획명</td>
-            <td>촬영계획명</td>
-            <td>촬영날짜</td>
+            <td>씬</td>
+            <td>장소</td>
+            <td>내용</td>
+            <td>연기자(배역)</td>
+            <td>안/밖</td>
+            <td>낮/밤</td>
+            <td>컷</td>
 
 
         </tr>
         {{#scheduleList}}
             <tr>
-                <td><a href="/project/{{project_id}}/selectproject">{{project_name}}</a></td>
-                <td><a href="/plan/schedule/{{day_id}}">{{day_title}}</a></td>
-                <td>{{film_date}}</td>
+                <td>{{scene_num}}</td>
+                <td>{{scene_place}}</td>
+                <td>{{scene_content}}</td>
+                <td>{{casting}}</td>
+                <td>{{inside_flag}}</td>
+                <td>{{day_flag}}</td>
+                <td>{{cut}}</td>
 
             </tr>
         {{/scheduleList}}
