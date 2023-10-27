@@ -37,6 +37,7 @@ public interface PlanMapper {
     public void updateActorManagement(ActorManagementDto dto);
     public void deleteActorManagement(ActorManagementDto dto);
 //====================================================================
+    public List<ScheduleDayDto> selectFkFilm();
     public List<FilmPlanDto> selectListFilmPlan(PageDto pageInfo);
     public PageDto totalFilmPlanPost(PageDto dto);
     public FilmPlanDto selectFilmPlan(FilmPlanDto dto);
