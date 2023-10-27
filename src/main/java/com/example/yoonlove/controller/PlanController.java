@@ -47,12 +47,17 @@ public class PlanController {
 
     @GetMapping("plan/schedule/{day_id}")
     public ModelAndView selectSchedule(ScheduleDayDto dto) {
-        ScheduleDayDto scheduleDetail = planService.selectSchedule(dto);
-
         ModelAndView mv = new ModelAndView();
+
+        List<FilmPlanDto> dayTable1 = planService.selectListDayTable1(dto.getDay_id());
+        System.out.println(dayTable1.get(0).toString());
+        mv.addObject("table1",dayTable1);
+
+        //일일촬영계획 코드  // 수정엄금
+        ScheduleDayDto scheduleDetail = planService.selectSchedule(dto);
         mv.setViewName("/plan/scheduleDetail");
-        mv.setStatus(HttpStatus.valueOf(200));
         mv.addObject("scheduleDetail", scheduleDetail);
+        //일일촬영계획 end
         return mv;
     }
 

@@ -15,6 +15,33 @@
         <h5>제목부분 중앙에 오게 해주세요</h5>
     </tr>
     <tr>
+</table>
+
+<!--테이블 1-->
+<table border="1" cellpadding="1" cellspacing="1">
+    <tr>
+        <td>씬</td>
+        <td>장소</td>
+        <td>내용</td>
+        <td>연기자</td>
+        <td>안/밖</td>
+        <td>낮/밤</td>
+        <td>컷수</td>
+    </tr>
+  {{#table1}}
+      <tr>
+          <td>{{scenario_name}}-#{{scenario_num}}-{{scene_num}}</td>
+          <td>{{scene_place}}</td>
+          <td>{{scene_content}}</td>
+          <td>아직미구현</td>
+          <td>{{inside_flag}}</td>
+          <td>{{day_flag}}</td>
+          <td>{{cut}}</td>
+      </tr>
+    {{/table1}}
+</table>
+
+<table border="1" cellpadding="1" cellspacing="1">
         <td>촬영계획표제목<input name="day_title" type="text" value="{{scheduleDetail.day_title}}" ></td>
         <td>촬영날짜<input name="film_date" type="date" value="{{scheduleDetail.film_date}}"></td>
         <td>촬영순서<input name="film_order" type="text" value="{{scheduleDetail.film_order}}"></td>
@@ -27,8 +54,6 @@
 
 
     </tr>
-
-
 </table>
 <a href="/plan/schedule_day">목록</a>
 <a href="/plan/{{scheduleDetail.day_id}}/scheduleUpdateView">수정</a>

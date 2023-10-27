@@ -149,6 +149,12 @@ public class PlanService {
         return FilmPlanList;
     }
 
+    //일일 촬영계획포 1테이블 리스트 생성 메소드
+    public List<FilmPlanDto> selectListDayTable1(String day_id){
+        List<FilmPlanDto> dayTable1 = planMapper.selectDayTable1(day_id);
+        return dayTable1;
+    }
+
     public FilmPlanDto selectFilmPlan(FilmPlanDto dto) {
         FilmPlanDto  ActorManagementDetail = planMapper.selectFilmPlan(dto);
         return ActorManagementDetail;

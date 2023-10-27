@@ -36,16 +36,19 @@ public interface PlanMapper {
     public void insertActorManagement(ActorManagementDto dto);
     public void updateActorManagement(ActorManagementDto dto);
     public void deleteActorManagement(ActorManagementDto dto);
-//====================================================================
+//=============================필름플랜테이블=======================================
     public List<ScheduleDayDto> selectFkFilm();
     public List<FilmPlanDto> selectListFilmPlan(PageDto pageInfo);
+
+    //일일 촬영계획표 1테이블 리스트생성 메소드
+    public List<FilmPlanDto> selectDayTable1(String day_id);
     public PageDto totalFilmPlanPost(PageDto dto);
     public FilmPlanDto selectFilmPlan(FilmPlanDto dto);
     public void insertFilm(FilmPlanDto dto);
     public void updateFilm(FilmPlanDto dto);
     public void deleteFilm(FilmPlanDto dto);
 
-//====================================================================
+//==============================월간계획======================================
 
     public List<ScheduleMonthDto> selectListPlan(PageDto pageInfo);
     public PageDto totalScheduleMonthPost(PageDto dto);
