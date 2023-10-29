@@ -242,7 +242,7 @@ public class PlanController {
 
    @GetMapping("plan/insertactorManagementView")
     public ModelAndView insertactorManagementView() {
-       //여기서부터 해야됨
+       //actorManagement 작성 옵션값 만들기 옵션은 시니라오에 있음.
         //fk값으로 db검색결과
        List<ScenarioDto> scenarioDto = sceneService.selectFk();
 
