@@ -15,7 +15,7 @@ public class DropdownController {
     private DropDownService dropDownService;
 
     //프로젝트 옵션 선택에따라 시나리오 옵션 재생성
-    @PostMapping("/fk3")
+    @PostMapping("/mainoption")
     @ResponseBody
     public String fk3test(@RequestParam ("pkid") String pkid) throws JsonProcessingException {
         String jsonList = dropDownService.scenarioOption(pkid);
@@ -23,7 +23,7 @@ public class DropdownController {
     }
 
     //시나리오 옵션 선택에따라 씬 옵션 재생성
-    @PostMapping("/fk2")
+    @PostMapping("/suboption")
     @ResponseBody
     public String fk2test(@RequestParam ("pkid") String pkid) throws JsonProcessingException {
         String jsonList = dropDownService.sceneOption(pkid);

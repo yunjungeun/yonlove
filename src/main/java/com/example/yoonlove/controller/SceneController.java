@@ -1,10 +1,7 @@
 package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.*;
-import com.example.yoonlove.service.FileService;
-import com.example.yoonlove.service.PagingService;
-import com.example.yoonlove.service.SceneService;
-import com.example.yoonlove.service.ScriptPaperService;
+import com.example.yoonlove.service.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +26,8 @@ public class SceneController {
     private PagingService pagingService;
     @Autowired
     private ScriptPaperService scriptPaperService;
-
+    @Autowired
+    private DropDownService dropDownService;
 
     @GetMapping("scene/scene")
     public ModelAndView selectListScene(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
@@ -83,14 +81,11 @@ public class SceneController {
 
     @GetMapping("/scene/insertsceneview")
     public ModelAndView insertSceneView() throws JsonProcessingException{
-        //fk값으로 db검색결과
-        List<ScenarioDto> scenarioDto = sceneService.selectFk();
 
-        //검색리스트를 json 리스트 문자열로 생성
-        String jsonList = sceneService.fkJson(scenarioDto);
+        String jsonListProject = dropDownService.dropDownOption("project",null);
 
         ModelAndView mv = new ModelAndView();
-        mv.addObject("fkList", jsonList);
+        mv.addObject("fkList", jsonListProject);
         mv.setViewName("/scene/sceneinsert");
         return mv;
     }

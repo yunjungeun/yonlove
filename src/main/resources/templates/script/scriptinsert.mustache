@@ -12,8 +12,12 @@
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
             <td>기획<select id="fk1" name="project_id"></select></td>
-            <td>시나리오<select id="fk2" name="scenario_id"></select></td>
-            <td>씬 번호<select id="fk3" name="scene_id"></select></td>
+            <td>시나리오<select id="fk2" name="scenario_id">
+                <option selected>선택</option>
+            </select></td>
+            <td>씬 번호<select id="fk3" name="scene_id">
+                <option selected>선택</option>
+            </select></td>
             <td>영상 제목<input class="field1" name="video_name" type="text" placeholder="영상제목 입력"></td>
             <td>촬영날짜<input class="field2" name="video_date" type="date" placeholder="날짜형식 yy/mm/dd 입력"></td>
             <td>촬영시작시간<input class="field3" name="video_time" type="date" placeholder="날짜형식입력(시간아직안됨)"></td>

@@ -13,8 +13,10 @@
 <form id="alert" action="/scene/insertscene" method="get" >
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
+            <td>기획명
+            <select id="fk1" name="project_id"></select></td>
             <td>시나리오
-            <select id="fk" name="scenario_id" class="field1"></select></td>
+            <select id="fk2" name="scenario_id" class="field1"></select></td>
             <td>씬 번호<input class="int1" name="scene_num" type="number" placeholder="미입력시 자동생성" ></td>
             <td>첨부파일<input id="fileInput"  name="file" type="file"   placeholder="파일을 첨부하세요" ></td>
 

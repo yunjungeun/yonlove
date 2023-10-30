@@ -32,7 +32,12 @@ function mappingurl(submiturl,sucessurl, int, text, cnt){
                 // 옵션값이 존재하는 확인하는 if문
     if(fkid != null){
         var selectedValue = $("#fk3").val(); // #fk는 select 요소의 ID입니다.
+        if(!selectedValue){
+            var result = $("#fk2").val();
+            data[fkid] = result;
+        }else{
         data[fkid] = selectedValue;
+        }
     }
 
 
