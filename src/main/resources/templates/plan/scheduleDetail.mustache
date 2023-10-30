@@ -13,7 +13,7 @@
     <tr>
         <h1>일일 촬영계획표 </h1>
         <h3>{{scheduleDetail.project_name}}</h3>
-        <h3>{{scheduleDetail.film_date}} : '{{scheduleDetail.day_title}}'</h3>
+        <h3>{{scheduleDetail.day_num}}회차 : '{{scheduleDetail.day_title}}'({{scheduleDetail.film_date}})</h3>
         <h5>날씨 : {{scheduleDetail.weather}}</h5>
     </tr>
     <tr>
@@ -81,14 +81,15 @@
 <!--table3 end-->
 
 
-
 <table border="1" cellpadding="1" cellspacing="1">
     <tr>
-        <td>촬영순서<input name="film_order" type="text" value="{{scheduleDetail.film_order}}"></td>
-        <td>조명<input name="light" type="text" value="{{scheduleDetail.light}}"></td>
-        <td>의상<input name="costume" type="text" value="{{scheduleDetail.costume}}" ></td>
-        <td>소품<input name="prop" type="text"  value="{{scheduleDetail.prop}}"></td>
-        <td>연출/제작<input name="direct" type="text" value="{{scheduleDetail.direct}}" ></td>
+        <td>촬영순서<textarea cols="30" rows="10" readonly>{{scheduleDetail.film_order}}</textarea></td>
+        <td>조명<textarea cols="30" rows="10" readonly>{{scheduleDetail.light}}</textarea></td>
+        <td>의상<textarea cols="30" rows="10" readonly>{{scheduleDetail.costume}}</textarea></td>
+    </tr>
+    <tr>
+        <td>소품<textarea cols="30" rows="10" readonly>{{scheduleDetail.prop}}</textarea></td>
+        <td>연출/제작<textarea cols="30" rows="10" readonly>{{scheduleDetail.direct}}</textarea></td>
     </tr>
 </table>
 <a href="/plan/schedule_day">목록</a>
