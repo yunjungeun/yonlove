@@ -56,24 +56,17 @@ public class ScriptPaperController {
 
     @GetMapping("script/insertscriptpaperview")
     public ModelAndView insertscript() throws JsonProcessingException {
-        //fk값으로 db검색결과
-        /*List<SceneDto> sceneDto = scriptPaperService.selectFk();
-        //검색리스트를 json 리스트 문자열로 생성
-        String jsonList = scriptPaperService.fkJson(sceneDto);*/
 
-        //test 개발중
-        String jsonList = dropDownService.test("scene","scene_id","scene_num");
-        System.out.println(jsonList);
+        String jsonListProject = dropDownService.dropDownOption("project",null);
 
         ModelAndView mv = new ModelAndView();
-        mv.addObject("fkList", jsonList);
+        mv.addObject("fkListProject", jsonListProject);
         mv.setViewName("/script/scriptinsert");
         return mv;
     }
 
     @GetMapping("script/insertscriptpaper")
     public String insertScriptPaper(ScriptPaperDto dto){
-        System.out.println(dto.toString());
 
         scriptPaperService.insertScriptPaper(dto);
         return "redirect:/script/scriptpaper";

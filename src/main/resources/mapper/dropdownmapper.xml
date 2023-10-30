@@ -3,15 +3,32 @@
 <mapper namespace="com.example.yoonlove.mapper.DropDownMapper">
 
     <select id="selectFkScenario">
-        SELECT ${pkId}, ${pkName} FROM ${table} order by ${pkId} desc
+        SELECT scenario_id, scenario_name FROM scenario
+        <if test="search != null and search !=''">
+            where project_id = #{search}
+        </if>
+        order by scenario_id desc
     </select>
 
     <select id="selectFkScene">
-        SELECT ${pkId}, ${pkName} FROM ${table} order by ${pkId} desc
+        SELECT scene_id, scene_num FROM scene
+        <if test="search != null and search !=''">
+            where scenario_id = #{search}
+        </if>
+        order by scene_id desc
     </select>
 
     <select id="selectFkProject">
-        SELECT ${pkId}, ${pkName} FROM ${table} order by ${pkId} desc
+        SELECT project_id, project_name FROM project
+        <!--현재 if문은 상위 테이블이 없어서 있으나 마나임-->
+        <if test="search != null and search !=''">
+            where project_id = #{search}
+        </if>
+        order by project_id desc
+    </select>
+
+    <select id="selectScenario">
+        SELECT scenario_id, scenario_name FROM scenario where project_id = #{pkId}
     </select>
 
 </mapper>

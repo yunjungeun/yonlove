@@ -19,7 +19,7 @@ public class DropDownService {
     @Autowired
     private DropDownMapper dropDownMapper;
 
-    public String test(String table, String pkId, String pkName)throws JsonProcessingException{
+    public String dropDownOption(String table, String search)throws JsonProcessingException{
         //문자열, 숫자 해시맵 + 문자열,문자열 해쉬맵 객체생성
         Map<String, Integer> fkIntList = new LinkedHashMap<>();
         Map<String, String> fkStringList = new LinkedHashMap<>();
@@ -29,30 +29,42 @@ public class DropDownService {
         //리스트 타입이 여러개임
         switch (table) {
             case "scenario" :
-                List<ScenarioDto> scenarioDtos = dropDownMapper.selectFkScenario(table, pkId, pkName);
+                List<ScenarioDto> scenarioDtos = dropDownMapper.selectFkScenario(search);
                 for(int i=0; i< scenarioDtos.size(); i++){
                     fkStringList.put(scenarioDtos.get(i).getScenario_id(),scenarioDtos.get(i).getScenario_name());
                 }
                 break;
             case "scene" :
-                List<SceneDto> sceneDtos = dropDownMapper.selectFkScene(table, pkId, pkName);
+                List<SceneDto> sceneDtos = dropDownMapper.selectFkScene(search);
                 for(int i=0; i< sceneDtos.size(); i++){
                     fkIntList.put(sceneDtos.get(i).getScene_id(),sceneDtos.get(i).getScene_num());
                 }
                 break;
             case "project" :
-                List<ProjectDto> projectDtos = dropDownMapper.selectFkProject(table, pkId, pkName);
+                List<ProjectDto> projectDtos = dropDownMapper.selectFkProject(search);
                 for(int i=0; i< projectDtos.size(); i++){
                     fkStringList.put(projectDtos.get(i).getProject_id(),projectDtos.get(i).getProject_name());
                 }
                 break;
         }
 
-        if(fkIntList != null){
-            jsonList = objectMapper.writeValueAsString(fkIntList);
-        }else {
+        if(fkIntList.isEmpty()){
             jsonList = objectMapper.writeValueAsString(fkStringList);
+        }else {
+            jsonList = objectMapper.writeValueAsString(fkIntList);
         }
+        return jsonList;
+    }
+
+    //프로젝트 옵션 선택에따라 시나리오 옵션을 재생성
+    public String scenarioOption(String pkId) throws JsonProcessingException{
+        String jsonList = dropDownOption("scenario", pkId);
+        return jsonList;
+    }
+
+    //시나리오 옵션 선택에따라 씬 옵션을 재생성
+    public String sceneOption(String pkId) throws JsonProcessingException{
+        String jsonList = dropDownOption("scene", pkId);
         return jsonList;
     }
 }

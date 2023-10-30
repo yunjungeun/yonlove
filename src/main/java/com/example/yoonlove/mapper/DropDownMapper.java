@@ -10,7 +10,10 @@ import java.util.List;
 @Mapper
 public interface DropDownMapper {
 
-    List<ScenarioDto> selectFkScenario(String table, String pkId, String pkName);
-    List<SceneDto> selectFkScene(String table, String pkId, String pkName);
-    List<ProjectDto> selectFkProject(String table, String pkId, String pkName);
+    List<ScenarioDto> selectFkScenario(String search);
+    List<SceneDto> selectFkScene(String search);
+    List<ProjectDto> selectFkProject(String search);
+
+    //프로젝트 옵션선택 값에 종속된 시나리오 검색
+    List<ScenarioDto> selectScenario(String pkId);
 }
