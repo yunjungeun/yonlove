@@ -35,13 +35,24 @@ public class SceneController {
     @GetMapping("scene/scene")
     public ModelAndView selectListScene(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
         PageDto pageDto = new PageDto("scene","scene_id",page,pdto);
+
+     /*   System.out.println("호재호재호재!!!!!!!!" + pageDto.toString());*/
+
+
         PageDto pageInfo = pagingService.paging(pageDto);
+
+
+        System.out.println("호재호재호재!!!!!!!!" +pageInfo.toString());
+
+
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.pageRink(pageDto);
 
 
         List<SceneDto> dto = sceneService.selectListScene(pageInfo);
-        System.out.println(dto.get(0).toString());
+
+        System.out.println("원인이 뭘까 도대체!!!!!"+dto.toString());
+
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/scene/scene");
         mv.addObject("selectListScene", dto);

@@ -1,10 +1,7 @@
 function checkFile(text) {
     const fileInput = document.getElementById('fileInput');
-
-    const allowedExtensions =/(\.jpg|\.jpeg|\.png|\.mp4)$/i;
-
+    const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.mp4)$/i;
     const maxFileSize = 5 * 1024 * 1024;
-
     const file = fileInput.files[0];
 
     if (!file) {
@@ -23,5 +20,11 @@ function checkFile(text) {
     }
 
     // 파일 업로드 로직
-    alert("파일 "+text+"성공!");
+    alert("파일 " + text + " 성공!");
+
+    var test = selectName;
+    alert(test);
+    // 파일 업로드 성공 후 다음 단계 진행
+    mappingurl('/scene/insertscene', '/scene/scene', 4, '작성', 1,test);
 }
+
