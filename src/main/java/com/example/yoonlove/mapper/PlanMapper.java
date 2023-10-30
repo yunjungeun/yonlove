@@ -33,6 +33,7 @@ public interface PlanMapper {
 
     //일일촬영 계획표 리스트
     public List<ActorManagementDto> selectListDayTable3(String day_id);
+    public List<ScenarioDto> selectFkAct();
     public PageDto totalActorManagementPost(PageDto dto);
     public ActorManagementDto selectActorManagement(ActorManagementDto dto);
     public void insertActorManagement(ActorManagementDto dto);

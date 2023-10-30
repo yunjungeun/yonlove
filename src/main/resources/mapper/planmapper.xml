@@ -201,10 +201,15 @@
 
 
 
-
+     <!--출연자관리 Actor Management-->
 
     <select id="selectActorManagement" parameterType="com.example.yoonlove.dto.ActorManagementDto" resultType="com.example.yoonlove.dto.ActorManagementDto">
         SELECT * FROM actor_management WHERE actor_id = #{actor_id}
+    </select>
+
+    <!--옵션값에 넣기 위한 fk테이블의 검색값을 가져오는 쿼리-->
+    <select id="selectFkAct">
+        SELECT scenario_id, scenario_name FROM scenario order by scenario_id desc
     </select>
 
     <insert id="insertActorManagement" parameterType="com.example.yoonlove.dto.ActorManagementDto" >

@@ -116,6 +116,20 @@ public class PlanService {
         return actorManagementDto;
     }
 
+    public List<ScenarioDto> selectFkAct(){
+        return planMapper.selectFkAct();
+    }
+    //옵션헤쉬맵
+    public String fkJsonAct(List<ScenarioDto> dto) throws JsonProcessingException {
+        Map<String, String> fkList = new LinkedHashMap<>();//해쉬맵은 삽입순서를 유지하지 않기 때문에, LinkedHashMap<>으로 사용자 편의를 위한 정렬삽입을 했음
+        for(int i=0; i< dto.size(); i++){
+            fkList.put(dto.get(i).getScenario_id(),dto.get(i).getScenario_name());
+        }
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonList = objectMapper.writeValueAsString(fkList);
+        return jsonList;
+    }
+
     public ActorManagementDto  selectActorManagement(ActorManagementDto dto) {
         ActorManagementDto  ActorManagementDetail = planMapper.selectActorManagement(dto);
         return ActorManagementDetail;

@@ -241,15 +241,16 @@ public class PlanController {
     }
 
    @GetMapping("plan/insertactorManagementView")
-    public ModelAndView insertactorManagementView() {
+    public ModelAndView insertactorManagementView() throws JsonProcessingException{
        //actorManagement 작성 옵션값 만들기 옵션은 시니라오에 있음.
         //fk값으로 db검색결과
-       List<ScenarioDto> scenarioDto = sceneService.selectFk();
+       List<ScheduleDayDto> scheduleDayDto = planService.selectFk();
 
        //검색리스트를 json 리스트 문자열로 생성
-       String jsonList = sceneService.fkJson(scenarioDto);
+       String jsonList = planService.fkJson(scheduleDayDto);
 
         ModelAndView mv = new ModelAndView();
+        mv.addObject("fkList", jsonList);
         mv.setViewName("plan/insertactorManagementView");
         return mv;
     }
@@ -284,7 +285,7 @@ public class PlanController {
         return "redirect:/plan/actor_management";
     }
 
-//===========================================================================================출연진관라
+//===========================================================================================출연자 관리 end
 
     @GetMapping("plan/film_plan")
     public ModelAndView selectListFilmPlan(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
