@@ -1,10 +1,11 @@
 var fkid = selectName;
 
-function mappingurl(submiturl, successurl, int, text, cnt) {
+function mappingurl(submiturl, successurl, int, text, cnt, test) {
     document.getElementById("alert").addEventListener("submit", function (event) {
         event.preventDefault();
 
         var data = new FormData(document.getElementById("alert")); // FormData 객체 생성
+
 
         for (var i = 1; i <= int; i++) {
             var name = ".field" + i;
@@ -30,7 +31,7 @@ function mappingurl(submiturl, successurl, int, text, cnt) {
        if (test != null) {
            var selectedValue = $("#fk").val();
            data.append(test, selectedValue);
-
+           alert("Tset");
        }
 
 

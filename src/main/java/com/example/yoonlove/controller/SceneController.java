@@ -36,22 +36,12 @@ public class SceneController {
     public ModelAndView selectListScene(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
         PageDto pageDto = new PageDto("scene","scene_id",page,pdto);
 
-     /*   System.out.println("호재호재호재!!!!!!!!" + pageDto.toString());*/
-
-
         PageDto pageInfo = pagingService.paging(pageDto);
-
-
-        System.out.println("호재호재호재!!!!!!!!" +pageInfo.toString());
-
 
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.pageRink(pageDto);
 
-
         List<SceneDto> dto = sceneService.selectListScene(pageInfo);
-
-        System.out.println("원인이 뭘까 도대체!!!!!"+dto.toString());
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/scene/scene");
@@ -109,8 +99,9 @@ public class SceneController {
 
     @PostMapping("/scene/insertscene")
     public String insertScene(SceneDto dto, @RequestParam("file")MultipartFile file) throws IOException {
-        System.out.println(dto.toString());
             sceneService.insertScene(dto);
+
+        System.out.println(dto.toString());
 
             int lastnum = sceneService.lastPost(dto);
 
@@ -143,7 +134,6 @@ public class SceneController {
 
     @PostMapping("/scene/{scene_id}/updatescene")
     public String updateScene(SceneDto dto, MultipartFile newfile) {
-
         try {
             fileService.updateFile(dto, newfile); // 파일수정해서 업로드하는 메소드!!!!!!!
         }catch (IOException e) {

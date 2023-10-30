@@ -23,8 +23,7 @@ function checkFile(text) {
     alert("파일 " + text + " 성공!");
 
     var test = selectName;
-    alert(test);
     // 파일 업로드 성공 후 다음 단계 진행
-    mappingurl('/scene/insertscene', '/scene/scene', 4, '작성', 1,test);
+    mappingurl('/scene/insertscene', '/scene/scene', 4, '작성', 1, test);
 }
 
