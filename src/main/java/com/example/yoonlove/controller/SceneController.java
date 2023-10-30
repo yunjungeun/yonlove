@@ -1,13 +1,12 @@
 package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.*;
-import com.example.yoonlove.mapper.FileMapper;
 import com.example.yoonlove.service.FileService;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.SceneService;
-import lombok.extern.slf4j.Slf4j;
 import com.example.yoonlove.service.ScriptPaperService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -96,25 +95,9 @@ public class SceneController {
         return mv;
     }
 
-    @PostMapping("/scene/insertscene")
-    public String insertScene(SceneDto dto, @RequestParam("file")MultipartFile file) throws IOException {
-        System.out.println(dto.toString());
+    @GetMapping("/scene/insertscene")
+    public String insertScene(SceneDto dto) {
             sceneService.insertScene(dto);
-
-            int lastnum = sceneService.lastPost(dto);
-
-            if(file == null){
-                System.out.println("업로드파일없음");
-                fileService.insertNull(lastnum);
-            }else {
-                try {
-                    System.out.println("있음");
-                    fileService.insertFile(file, lastnum); // FileService를 사용하여 파일 업로드
-                } catch (IOException e) {
-                    log.info(e.getMessage());
-                    // 예외 처리
-                }
-            }
 
         return "redirect:/scene/scene";
     }
