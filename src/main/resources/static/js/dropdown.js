@@ -1,3 +1,9 @@
+/*사용법
+최상위 옵션값부터 select 태그 id를 fk1 부터 지정해서 fk3까지 지정
+실제 서버로 넘어가는 값은 클래스 'field'로 지정할것
+
+만약 project 옵션이 최상위라면 project id를 fk1, 시나리오에 fk2을 지정*/
+
 /*js변수에 저장된 머스테치 변수를 불러옴*/
 var parsedJson = JSON.parse(jsonValue);
 var dropdown = document.getElementById("fk1");
