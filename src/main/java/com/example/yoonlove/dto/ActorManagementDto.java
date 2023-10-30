@@ -1,18 +1,14 @@
 package com.example.yoonlove.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-import java.sql.Date;
-
-@Getter
-@Setter
+@Data
 
 public class ActorManagementDto {
 
     private String actor_id;
     private String actor_name;
-    private Date arrival_time;
+    private String arrival_time;
     private String place;
     private String set_call;
     private String day_id;

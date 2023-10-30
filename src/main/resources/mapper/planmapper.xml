@@ -23,8 +23,8 @@
         from(select rownum as r, t.*
 
         <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
-        from (select * from ${table}
-        where 1=1  /*에러처리방지를 위한 코드*/
+        from (select * from scheduledaylist
+        where 1=1  <!--에러처리방지를 위한 코드-->
         <if test="title != null and search != ''">
             AND day_title like '%${title}%'
         </if>
@@ -44,7 +44,7 @@
     </select>
 
     <select id="selectSchedule" parameterType="com.example.yoonlove.dto.ScheduleDayDto" resultType="com.example.yoonlove.dto.ScheduleDayDto">
-        SELECT * FROM schedule_day WHERE day_id = #{day_id}
+        SELECT * FROM scheduledaylist WHERE day_id = #{day_id}
     </select>
 
 

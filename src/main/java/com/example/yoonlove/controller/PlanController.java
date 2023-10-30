@@ -56,7 +56,6 @@ public class PlanController {
 
         //테이블2 start : schedule_time 조인 리스트
         List<ScheduleTimeDto> dayTable2 = planService.selectListDayTable2(dto.getDay_id());
-        System.out.println(dayTable2.get(0).toString());
         mv.addObject("table2",dayTable2);
         //테이블2 end
 
@@ -90,7 +89,6 @@ public class PlanController {
 
     @GetMapping("plan/insertSchedule")  //컨텐츠 추가 처리
     public String insertSchedule(ScheduleDayDto dto) {
-        System.out.println(dto.toString());
         planService.insertSchedule(dto);
 
         return "redirect:/plan/schedule_day";
@@ -174,7 +172,6 @@ public class PlanController {
 
     @GetMapping("plan/insertScheduleTime")  //컨텐츠 추가 처리
     public String insertTime(ScheduleTimeDto dto) {
-        System.out.println("값확인 / "+dto.toString());
         planService.insertTime(dto);
 
         return "redirect:/plan/schedule_time";
