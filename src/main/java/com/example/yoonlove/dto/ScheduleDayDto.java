@@ -16,46 +16,11 @@ public class ScheduleDayDto {
     private String film_order;
     private String direct;
     private String project_id;
+    private String day_num;
 
-
-    //====================================
-
-
-    private String film_id;
-    private String scene_id;
-    private String inside_flag;
-    private String day_flag;
-    private String cut;
-
-//=========================================
-
-
-    private int scene_num;
-    private String scene_image;
-    private String scene_place;
-    private String story_board;
-    private String scene_content;
-
-//========================================
-
-    private String act_id;
-
-    private String pd_id;
-    private String actor_info;
-
- //========================================
-
-
-
-    private String pd_name;
-    private String role;
-    private String casting;
-    private String pj_id;
-    private String user_id;
-
-
-
-
-
+    //조인테이블 -  scheduledaylist
+    private String project_name;
+    private String company_id;
+    private String project_state;
 
 }

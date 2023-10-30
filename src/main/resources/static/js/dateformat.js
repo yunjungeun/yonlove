@@ -1,3 +1,5 @@
+//date에서 시간을 빼주는 js
+
 //머스테치에서 dates{} 로 저장된 키값만 들어가게됨.
 //keys = {date1, date2, date3} 키값만 들어있음
 var keys = Object.keys(dates);

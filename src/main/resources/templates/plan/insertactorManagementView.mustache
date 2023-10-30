@@ -6,22 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/static/js/cu_alert.js"></script>
-
-</head>
+    </head>
 <body>
 <form id="alert"action="/plan/insertactorManagement" method="get">
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
-
-
-            <td>촬영내용<select id="fk" name="day_id" class="field1"></select></td>
-
-            <td>연기자(배역)<input name="actor_name" type="text" class="field2"></td>
-
-
-
-
+            <td>
+                촬영계획표<select id="fk" name="day_id" class="field1"></select>
+            </td>
+            <td>배우이름<input name="actor_name" type="text"  class="field2" ></td>
+            <td>도착시간<input name="arrival_time" type="time" class="field3" ></td>
+            <td>장소<input name="place" type="text" class="field4" ></td>
+            <td>셋콜<input name="set_call" type="time" class="field5"></td>
 
         </tr>
 
@@ -33,17 +29,13 @@
 
 <a href="/plan/actor_management">목록</a>
 
-
-
+<!--옵션 태그에 필요한 js-->
 <script>
     var jsonValue = '{{{fkList}}}';
-    <!--select 옵션 name값을 cu_alert.js에 보내주기 위한 변수 값/이게없으면 제출이 안됨-->
+    <!--select 옵션 name값을 'cu_alert.js'에 보내주기 위한 변수 값/ 이게없으면 제출이 안됨-->
     var selectName = "day_id";
-    <!--selectName이 실행되기 위해선 cu_alert 스크립트소스가 이 아래 있어야함-->
 </script>
-
 <script src="/static/js/dropdown.js"></script>
 <script src="/static/js/cu_alert.js"></script>
-
 </body>
 </html>
