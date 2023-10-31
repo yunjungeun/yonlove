@@ -12,25 +12,29 @@
 
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
+    <!--d-flex flex-column: flex박스 스타일을 적용한 클래스 : 요소들 수평이나 수직으로 배치하고 간격을 조절하는 등의 작업 간편화
+       content-wrapper: 컨텐츠 섹션 감싸고  그 안의 요소들을 유연하게 배치하고 정렬 주로  다양한 화면 크기와 디바이스에 대응하는 반응형 디자인을 구현하는 데 유용-->
 
     <!-- Main Content -->
     <div id="content">
 
         <!-- Begin Page Content -->
-        <div class="container-fluid">
-
+        <div class="container-fluid">  <!--얘가 없으면 전체적으로 다 위로 올라가고 푸터가 사이드 옆쪽으로 붙어버림 -->
+            <!--container-fluid:  Bootstrap 프레임워크를 사용하여 생성된 컨테이너로, 웹 페이지의 내용을 감싸는 역할, 화면 폭에 맞게 자동으로 넓어져서 브라우저의 너비에 따라 반응형으로 조절-->
+            <!--mb-2:하단의 여백 -->
             <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800">공지사항</h1>
+            <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px;">공지사항</h1><!--공지사항이 너무 천장에 붙어있어서 margin-top: 50px을 줘서 내렸습니다-->
            <!-- <p class="mb-4">게시판 설명 넣는곳 <a target="_blank" href="https://datatables.net">이곳에 링크 넣으세요</a>.</p>-->
 
+
             <!-- DataTales Example -->
-            <div class="card shadow mb-4">
+            <div class="card shadow mb-4" style="margin-top: 50px;">
                 <div class="card-header py-3">
                     <!--<h6 class="m-0 font-weight-bold text-primary">공지사항</h6>-->
 
 
 
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
+                    <form  class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
                         <!--d-none: 화면에서 폼을 숨기는 기능
                         mr-auto: 오른쪽 마진을 자동으로 설정 ml-md-3:왼쪽 마진을 3단위만큼 설정
                         my-2 my-md-0: 수직여백 설정  mw-100: 최대너비 100%설정 navbar-search: 커스텀클래스 (폼을나타내는 클래스)-->
@@ -39,6 +43,7 @@
                                 <option value="all">선택</option>
                                 <option value="title">제목</option>
                                 <option value="writer">작성자</option>
+
                                 <!-- 필요한 항목 추가 -->
                             </select>
                             <!--input-group: 입력 그룹을 생성(입력 필드와 관련된 요소들을 그룹화-->
@@ -64,28 +69,28 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th>번호</th>
-                                <th>제목</th>
-                                <th>작성자</th>
-                                <th>날짜</th>
-                                <th>조회수</th>
+                                <th  style="text-align: center;">번호</th>
+                                <th  style="text-align: center;">제목</th>
+                                <th  style="text-align: center;">작성자</th>
+                                <th  style="text-align: center;">날짜</th>
+                                <th  style="text-align: center;">조회수</th>
                             </tr>
                             </thead>
                             <tbody>
                             {{#selectListNotice}}
                                 <tr>
-                                    <td>{{notice_id}}</td>
-                                    <td><a href="/cs/selectnotice/{{notice_id}}">{{notice_title}}</a></td>
-                                    <td>{{notice_writer}}</td>
-                                    <td>{{notice_date}}</td>
-                                    <td>{{notice_cnt}}</td>
+                                    <td style="text-align: center;">{{notice_id}}</td>
+                                    <td style="text-align: center;"><a href="/cs/selectnotice/{{notice_id}}">{{notice_title}}</a></td>
+                                    <td style="text-align: center;">{{notice_writer}}</td>
+                                    <td style="text-align: center;">{{notice_date}}</td>
+                                    <td style="text-align: center;">{{notice_cnt}}</td>
                                 </tr>
                             {{/selectListNotice}}
                             </tbody>
                         </table>
                         <!--페이징 처리 레이아웃-->
-                        <div cla
-                            {{>layout/paging}}
+
+                         {{>layout/paging}}
 
                     </div>
 
