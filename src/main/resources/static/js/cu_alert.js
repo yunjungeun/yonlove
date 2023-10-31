@@ -1,7 +1,7 @@
 //html 본문에서 옵션 값을 받아와 저장하는 변수
 var fkid = selectName;
 
-function mappingurl(submiturl,sucessurl, int, text, cnt){
+function mappingurl(submiturl, int, text, cnt){
     document.getElementById("alert").addEventListener("submit", function (event){
     event.preventDefault();
 
@@ -47,11 +47,11 @@ function mappingurl(submiturl,sucessurl, int, text, cnt){
             data : data,
             success:function(response){
                 alert("정상적으로 " +text+" 되었습니다");
-                window.location.href = sucessurl ;
+                window.location.href = response ;
             },
             error: function(error){
                 alert(text+" 중 오류가 발생 했습니다");
-                window.location.href = sucessurl ;
+                window.location.href = response ;
 
             }
        });

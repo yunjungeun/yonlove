@@ -14,7 +14,6 @@ import java.util.List;
 
 @Controller
 public class VideoController {
-
     @Autowired
     private VideoService videoService;
     @Autowired
@@ -22,13 +21,11 @@ public class VideoController {
 
     @GetMapping("vd/video") //컨텐츠 전체목록보기 뷰
     public ModelAndView selectListContent(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page) {
-
         PageDto pageDto = new PageDto("video","video_id", page,pdto);  // page???
 
         PageDto pageInfo = pagingService.paging(pageDto); // paging ==> 전체게시글 갯수 구해오는 메소드
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
         String rink = pagingService.pageRink(pageDto);
-
 
         List<VideoDto> contentList = videoService.selectListContent(pageInfo);
         ModelAndView mv = new ModelAndView();
@@ -54,14 +51,6 @@ public class VideoController {
         return mv;
     }
 
-
-    /* 127.0.0.1:8080/bbs/1?abc=123
-     * ?전: URL / ?후: 파라미터
-     * URL에 있는 1을 꺼낼 때 end-point에 {}를 사용. 즉,{bbsNo} -> 1
-     *
-     * */
-
-
     @GetMapping("vd/contentInsertView")  //컨텐츠 추가하는 뷰
     public ModelAndView selectVideoInsertView() {
         ModelAndView mv = new ModelAndView();
@@ -70,12 +59,10 @@ public class VideoController {
         return mv;
     }
 
-
     @GetMapping("vd/contentInsert")  //컨텐츠 추가 처리
+    @ResponseBody
     public String insertContent(VideoDto dto) {
-        System.out.println(dto.toString());
         videoService.insertContent(dto);
-        System.out.println(dto.toString());
         return "redirect:/vd/video";
     }
 
@@ -91,6 +78,7 @@ public class VideoController {
 
 
     @GetMapping("vd/{video_id}/updateContent") //업데이트 처리
+    @ResponseBody
     public String updateContent( VideoDto dto) {
         videoService.updateContent(dto);
         return "redirect:/vd/video";

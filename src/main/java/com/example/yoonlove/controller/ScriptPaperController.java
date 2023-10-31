@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -56,7 +57,6 @@ public class ScriptPaperController {
 
     @GetMapping("script/insertscriptpaperview")
     public ModelAndView insertscript() throws JsonProcessingException {
-
         String jsonListProject = dropDownService.dropDownOption("project",null);
 
         ModelAndView mv = new ModelAndView();
@@ -66,8 +66,8 @@ public class ScriptPaperController {
     }
 
     @GetMapping("script/insertscriptpaper")
+    @ResponseBody
     public String insertScriptPaper(ScriptPaperDto dto){
-
         scriptPaperService.insertScriptPaper(dto);
         return "redirect:/script/scriptpaper";
     }
@@ -82,6 +82,7 @@ public class ScriptPaperController {
     }
 
     @GetMapping("script/{script_id}/updatescriptpaper")
+    @ResponseBody
     public String updateScriptPaper(ScriptPaperDto dto){
         scriptPaperService.updateScriptPaper(dto);
         return "redirect:/script/scriptpaper";
@@ -129,6 +130,7 @@ public class ScriptPaperController {
     }
 
     @GetMapping("script/inserttimetable")
+    @ResponseBody
     public String insertTimeTable(TimeTableDto dto){
         scriptPaperService.insertTimeTable(dto);
         return "redirect:timetable";
@@ -143,8 +145,8 @@ public class ScriptPaperController {
         return mv;
     }
     @GetMapping("script/{table_id}/updatetimetable")
+    @ResponseBody
     public String updateTimeTable(TimeTableDto dto){
-        System.out.println(dto.toString());
         scriptPaperService.updateTimeTable(dto);
         return "redirect:/script/timetable";
     }

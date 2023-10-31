@@ -1,6 +1,9 @@
 package com.example.yoonlove.controller;
 
-import com.example.yoonlove.dto.*;
+import com.example.yoonlove.dto.CompanyDto;
+import com.example.yoonlove.dto.DepartmentDto;
+import com.example.yoonlove.dto.PageDto;
+import com.example.yoonlove.dto.UserDto;
 import com.example.yoonlove.service.AdminService;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.UserService;
@@ -8,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -121,6 +125,7 @@ public class AdminController {
         return mv;
     }
     @GetMapping("/admin/{user_id}/updateuser")
+    @ResponseBody
     public String updateUser(UserDto dto){
         System.out.println(dto.toString());
         adminService.updateUser(dto);
@@ -165,6 +170,7 @@ public class AdminController {
         return "admin/dptinsert";
     }
     @GetMapping("/admin/insertdpt")
+    @ResponseBody
     public String insertDepartment(DepartmentDto dto){
         adminService.insertDepartment(dto);
         return "redirect:/admin/department";
@@ -180,6 +186,7 @@ public class AdminController {
     }
 
     @GetMapping("/admin/{dpt_id}/updatedpt")
+    @ResponseBody
     public String updateDepartment(DepartmentDto dto){
         adminService.updateDepartment(dto);
         return "redirect:/admin/department";

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,7 +36,6 @@ public class SceneController {
         PageDto pageInfo = pagingService.paging(pageDto);
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.pageRink(pageDto);
-
 
         List<SceneDto> dto = sceneService.selectListScene(pageInfo);
         System.out.println(dto.get(0).toString());
@@ -91,6 +91,7 @@ public class SceneController {
     }
 
     @GetMapping("/scene/insertscene")
+    @ResponseBody
     public String insertScene(SceneDto dto) {
             sceneService.insertScene(dto);
 
@@ -109,6 +110,7 @@ public class SceneController {
     }
 
     @PostMapping("/scene/{scene_id}/updatescene")
+    @ResponseBody
     public String updateScene(SceneDto dto, MultipartFile newfile) {
 
         try {
@@ -173,6 +175,7 @@ public class SceneController {
         return "scene/actorinsert";
     }
     @GetMapping("scene/insertactor")
+    @ResponseBody
     public String insertActor(ActorDto dto){
         sceneService.insertActor(dto);
         return "redirect:/scene/actor";
@@ -189,6 +192,7 @@ public class SceneController {
     }
 
     @GetMapping("scene/{actor_id}/updateactor")
+    @ResponseBody
     public String updateActor(ActorDto dto){
         sceneService.updateActor(dto);
         return "redirect:/scene/actor";

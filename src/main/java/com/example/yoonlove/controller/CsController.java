@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -101,6 +102,7 @@ public class CsController {
     }
 
     @GetMapping("/cs/insertnotice")
+    @ResponseBody
     public String insertNotice(NoticeDto dto){
 
         csService.insertNotice(dto);
@@ -116,6 +118,7 @@ public class CsController {
         return mv;
     }
     @GetMapping("/cs/{notice_id}/updatenotice")
+    @ResponseBody
     public String updateNotice(NoticeDto dto){
         System.out.println(dto.toString());
         csService.updateNotice(dto);
@@ -167,6 +170,7 @@ public class CsController {
         return "/cs/insertqnaview";
     }
     @GetMapping("/cs/insertqna")
+    @ResponseBody
     public String insertQnA(QnADto dto){
         csService.insertQnA(dto);
         return "/cs/qna";
@@ -181,6 +185,7 @@ public class CsController {
         return mv;
     }
     @GetMapping("/cs/{qna_id}/updateqna")
+    @ResponseBody
     public String updateQnA(QnADto dto){
         csService.updateQnA(dto);
         return "/cs/qna";

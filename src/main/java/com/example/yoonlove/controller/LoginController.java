@@ -3,14 +3,11 @@ package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.CompanyDto;
 import com.example.yoonlove.dto.UserDto;
-import com.example.yoonlove.mapper.UserMapper;
 import com.example.yoonlove.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -49,8 +46,8 @@ public class LoginController {
     }
 
     @GetMapping("companysignup")
+    @ResponseBody
     public String companysign(CompanyDto dto) {
-        System.out.println("?11?" + dto.toString());
         userService.companysignup(dto);
         return "redirect:/index";
     }
@@ -58,8 +55,6 @@ public class LoginController {
 
     @PostMapping("ConfirmId")
     public ResponseEntity<?> confirmId(@RequestParam("user_id") String user_id) {
-        System.out.println("Controller running with id: " + user_id);
-
         ModelAndView mv = new ModelAndView();
         UserDto dto = new UserDto();
         dto.setUser_id(user_id);
@@ -67,7 +62,6 @@ public class LoginController {
         mv.addObject("ConfirmId", userService.selectId(dto));
 
         boolean isIdAvailable = userService.selectId(dto);
-        System.out.println("중복확인 값"+isIdAvailable);
         return ResponseEntity.ok(isIdAvailable);
     }
 
@@ -83,11 +77,9 @@ public class LoginController {
     }
 
     @GetMapping("signup")
+    @ResponseBody
     public String sign(UserDto dto){
-        System.out.println("sql실행전"+dto.toString());
-
         userService.signUp(dto);
-        System.out.println("sql실행후");
         return "/cs/qna";
     }
 

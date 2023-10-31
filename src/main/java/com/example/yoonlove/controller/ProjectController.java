@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -24,7 +25,6 @@ public class ProjectController {
     public ModelAndView selectListProject(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
         PageDto pageDto = new PageDto("project", "project_id", page, pdto);
         PageDto pageInfo = pagingService.paging(pageDto);
-
 
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(), pageInfo.getPageEnd(), page);
         String rink = pagingService.pageRink(pageDto);
@@ -57,8 +57,8 @@ public class ProjectController {
     }
 
     @GetMapping("project/insertproject")   // 작성 후 입력값 넘기는~
+    @ResponseBody
     public String insertProject(ProjectDto projectDto){
-        System.out.println("작성 내용"+projectDto.toString());
         projectService.insertProject(projectDto);
         return "redirect:/project/project";
     }
@@ -81,6 +81,7 @@ public class ProjectController {
     }
 
     @GetMapping("/project/updateproject/{project_id}") // 수정 //해당주소 머스터치에 액션값
+    @ResponseBody
     public String updateProject(ProjectDto dto){
         projectService.updateProject(dto);
         return "redirect:/project/project";   // 목록페이지로 이동
@@ -115,6 +116,7 @@ public class ProjectController {
     }
 
     @GetMapping("project/insertbudget")   // 작성 후 입력값 넘기는~
+    @ResponseBody
     public String insertBudget(BudgetDto budgetDto){
         projectService.insertBudget(budgetDto);
         return "redirect:/project/budget";
@@ -145,13 +147,12 @@ public class ProjectController {
     }
 
     @GetMapping("/project/updatebudget/{budget_id}") // 수정-해당주소 머스터치에 액션값
+    @ResponseBody
     public String updateBudget(BudgetDto dto){
-        System.out.println(dto.toString());
-
         projectService.updateBudget(dto);
         return "redirect:/project/budget";   // 목록페이지로 이동
     }
-                         // =====================budget 완료 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ // =====================budget 완료 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
     @GetMapping("/project/produce")   //목록
@@ -180,6 +181,7 @@ public class ProjectController {
     }
 
     @GetMapping("project/insertproduce")   // 작성 후 입력값 넘기는~ , 추가
+    @ResponseBody
     public String insertProduce(ProduceDto produceDto){
         projectService.insertProduce(produceDto);
         return "redirect:/project/produce";}
@@ -206,11 +208,11 @@ public class ProjectController {
         return mv;
     }
     @GetMapping("project/updateproduce/{pd_id}") // 수정-해당주소 머스터치에 액션값
+    @ResponseBody
     public String updateProduce(ProduceDto dto){
-        /*projectService.updateProduce(dto);*/
         projectService.updateProduce(dto);
         return "redirect:/project/produce"; }
-                    // 프로듀스 제작 완료 !!!!!!!!============================================
+// 프로듀스 제작 완료 !!!!!!!!============================================
 }
 
 

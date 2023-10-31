@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -29,12 +30,10 @@ public class PlanController {
 
     @GetMapping("/plan/schedule_day")
     public ModelAndView selectListSchedule(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page) {
-
         PageDto pageDto = new PageDto("schedule_day","day_id", page,pdto);
         PageDto pageInfo = pagingService.paging(pageDto); // paging ==> 전체게시글 갯수 구해오는 메소드
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
         String rink = pagingService.pageRink(pageDto);
-
 
         List<ScheduleDayDto> dto = planService.selectListSchedule(pageInfo);
         ModelAndView mv = new ModelAndView();
@@ -87,6 +86,7 @@ public class PlanController {
 
 
     @GetMapping("plan/insertSchedule")  //컨텐츠 추가 처리
+    @ResponseBody
     public String insertSchedule(ScheduleDayDto dto) {
         planService.insertSchedule(dto);
 
@@ -105,6 +105,7 @@ public class PlanController {
     }
 
     @GetMapping("plan/{day_id}/updateSchedule") //업데이트 처리
+    @ResponseBody
     public String updateSchedule( ScheduleDayDto dto) {
         planService.updateSchedule(dto);
         return "redirect:/plan/schedule_day";
@@ -167,8 +168,8 @@ public class PlanController {
 
 
     @GetMapping("plan/insertScheduleTime")  //컨텐츠 추가 처리
+    @ResponseBody
     public String insertTime(ScheduleTimeDto dto) {
-        System.out.println(dto.toString());
         planService.insertTime(dto);
 
         return "redirect:/plan/schedule_time";
@@ -186,6 +187,7 @@ public class PlanController {
     }
 
     @GetMapping("plan/{time_id}/updateScheduleTime") //업데이트 처리
+    @ResponseBody
     public String updateTime( ScheduleTimeDto dto) {
         planService.updateTime(dto);
         return "redirect:/plan/schedule_time";
@@ -195,7 +197,6 @@ public class PlanController {
     public String deleteTime( ScheduleTimeDto dto) {
         planService.deleteTime(dto);
         return "redirect:/plan/schedule_time";
-
     }
 
 //===================================출연자관리=========================================================
@@ -219,7 +220,6 @@ public class PlanController {
         mv.addObject("paging", pageInfo);  //페이징정보
         mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
-
         return mv;
     }
 
@@ -245,9 +245,11 @@ public class PlanController {
 
 
     @GetMapping("plan/insertactorManagement")  //컨텐츠 추가 처리
+    @ResponseBody
     public String insertActorManagement(ActorManagementDto dto) {
+        String dayId = dto.getDay_id();
         planService.insertActorManagement(dto);
-        return "redirect:/plan/actor_management";
+        return "/plan/schedule/"+dayId;
     }
 
 
@@ -256,12 +258,12 @@ public class PlanController {
         ActorManagementDto actorManagementDto = planService.selectActorManagement(dto);//업데이트를 하려면 해당 컨텐츠 불러와야하니까 위에 selectContent메소드를 다시씀!
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/actorManagementUpdateView");
-        mv.setStatus(HttpStatus.valueOf(200));
         mv.addObject("actorManagementUpdate", actorManagementDto);
         return mv;
     }
 
     @GetMapping("plan/{actor_id}/updateActorManagement") //업데이트 처리
+    @ResponseBody
     public String updateActorManagement( ActorManagementDto dto) {
         planService.updateActorManagement(dto);
         return "redirect:/plan/actor_management";
@@ -277,17 +279,12 @@ public class PlanController {
 
     @GetMapping("plan/film_plan")
     public ModelAndView selectListFilmPlan(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
-
         PageDto pageDto = new PageDto("film_plan","film_id", page,pdto);
-
         PageDto pageInfo = pagingService.paging(pageDto);
-        System.out.println(pageDto.getTotalPost());
 
         // paging ==> 전체게시글 갯수 구해오는 메소드
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
         String rink = pagingService.pageRink(pageDto);
-
-
 
         List<FilmPlanDto> dto = planService.selectListFilmPlan(pageInfo);
         ModelAndView mv = new ModelAndView();
@@ -298,7 +295,6 @@ public class PlanController {
         mv.addObject("paging", pageInfo);  //페이징정보
         mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
-
 
         return mv;
     }
@@ -328,9 +324,9 @@ public class PlanController {
 
 
     @GetMapping("plan/insertFilm")  //컨텐츠 추가 처리
+    @ResponseBody
     public String insertFilm(FilmPlanDto dto) {
         planService.insertFilm(dto);
-
         return "redirect:/plan/film_plan";
     }
 
@@ -346,6 +342,7 @@ public class PlanController {
     }
 
     @GetMapping("plan/{film_id}/updatefilm") //업데이트 처리
+    @ResponseBody
     public String updateFilm( FilmPlanDto dto) {
         planService.updateFilm(dto);
         return "redirect:/plan/film_plan";
@@ -355,7 +352,6 @@ public class PlanController {
     public String deleteFilm( FilmPlanDto dto) {
         planService.deleteFilm(dto);
         return "redirect:/plan/film_plan";
-
     }
 
 
@@ -403,15 +399,12 @@ public class PlanController {
         return mv;
     }
 
-
     @GetMapping("plan/insertPlan")  //컨텐츠 추가 처리
+    @ResponseBody
     public String insertPlan(ScheduleMonthDto dto) {
-
         planService.insertPlan(dto);
-
         return "redirect:/plan/schedule_month";
     }
-
 
     @GetMapping("plan/{month_id}/ScheduleMonthUpdateView") //컨텐츠 업데이트하는 뷰
     public ModelAndView ScheduleMonthUpdateView( ScheduleMonthDto dto) {
@@ -424,6 +417,7 @@ public class PlanController {
     }
 
     @GetMapping("plan/{month_id}/updateScheduleMonth") //업데이트 처리
+    @ResponseBody
     public String  updatePlan( ScheduleMonthDto dto) {
         planService. updatePlan(dto);
         return "redirect:/plan/schedule_month";

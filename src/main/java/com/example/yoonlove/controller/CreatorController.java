@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -49,6 +50,7 @@ import java.util.List;
         }
 
         @GetMapping("creator/insertcreator")
+        @ResponseBody
         public String insertCreator(CreatorDto creatorDto){
             creatorservice.insertCreator(creatorDto);
             return "redirect:/creator/creater";
@@ -73,6 +75,7 @@ import java.util.List;
     }
 
      @GetMapping("/creator/updatecreator/{ch_id}") // 수정
+     @ResponseBody
     public String updateCreator(CreatorDto dto){
             /*System.out.println(dto.toString());*/
         creatorservice.updateCreator(dto);

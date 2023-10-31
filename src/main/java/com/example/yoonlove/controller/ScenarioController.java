@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -24,7 +25,6 @@ public class ScenarioController {
     private PagingService pagingService;
     @Autowired
     private SceneService sceneService;
-
 
     @GetMapping("/scenario/scenario")
     public ModelAndView selectListScenario(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
@@ -90,9 +90,8 @@ public class ScenarioController {
     }
 
     @GetMapping("/scenario/insertscenario")
+    @ResponseBody
     public String insertScenario(ScenarioDto dto){
-        System.out.println(dto.toString());
-
         scenarioService.insertScenario(dto);
         return "redirect:/scenario/scenario";
     }
@@ -107,6 +106,7 @@ public class ScenarioController {
     }
 
     @GetMapping("/scenario/{scenario_id}/updatescenario")
+    @ResponseBody
     public String updateScenario(ScenarioDto dto){
         scenarioService.updateScenario(dto);
         return "redirect:/scenario/scenario";
