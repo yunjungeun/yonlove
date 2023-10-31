@@ -321,26 +321,19 @@ public class PlanController {
     }
 
     @GetMapping("plan/insertFilmPlanView")
-    public ModelAndView insertFilmPlanView() throws JsonProcessingException{
+    public ModelAndView insertFilmPlanView(ScheduleDayDto dto) throws JsonProcessingException{
         ModelAndView mv = new ModelAndView();
 
-        //fk값으로 db검색결과
-        List<ScheduleDayDto> scheduleDayDto = planService.selectFkFilm();
-
-        //검색리스트를 json 리스트 문자열로 생성
-        String jsonList = planService.fkJsonFilm(scheduleDayDto);
-
-
+        String jsonList = dropDownService.dropDownOption("project",null);
         mv.addObject("fkList", jsonList);
+        mv.addObject("dayId", dto.getDay_id());
         mv.setViewName("plan/insertFilmPlanView");
-        mv.setStatus(HttpStatus.valueOf(200));
         return mv;
     }
 
 
     @GetMapping("plan/insertFilm")  //컨텐츠 추가 처리
     public String insertFilm(FilmPlanDto dto) {
-
         planService.insertFilm(dto);
 
         return "redirect:/plan/film_plan";

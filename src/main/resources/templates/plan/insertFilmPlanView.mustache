@@ -9,17 +9,22 @@
 </head>
 <body>
 <form id="alert" action="/plan/insertFilm" method="get">
+    <input type="hidden" name="day_id"  class="field5" value="{{dayId}}">
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
-
-
-            <td>안/밖<input name="inside_flag" type="text" class="field1" ></td>
-            <td>낮/밤<input name="day_flag" type="text" class="field2"></td>
-            <td>
-                계획표id <select id="fk" name="day_id"></select>
-            </td>  <!--fk-->
-            <td>카메라씬id<input name="scene_id" type="text" class="field4"></td> <!--fk-->
-            <td>컷<<input name="cut" type="text"class="field5" ></td>
+            <td>기획
+                <select id="fk1" name="project_id"></select>
+            <td>시나리오
+                <select id="fk2" name="scenario_id"></select>
+            </td>
+            <td>씬
+                <select id="fk3" name="scene_id" class="field1"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>안/밖<input name="inside_flag" type="text" class="field2" ></td>
+            <td>낮/밤<input name="day_flag" type="text" class="field3"></td>
+            <td>컷<input name="cut" type="text" class="field4" ></td>
         </tr>
 
 
@@ -31,7 +36,7 @@
 <script>
     var jsonValue = '{{{fkList}}}';
     <!--select 옵션 name값을 cu_alert.js에 보내주기 위한 변수 값/이게없으면 제출이 안됨-->
-    var selectName = "day_id";
+    var selectName = "scene_id";
     <!--selectName이 실행되기 위해선 cu_alert 스크립트소스가 이 아래 있어야함-->
 </script>
 <script src="/static/js/dropdown.js"></script>

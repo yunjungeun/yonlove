@@ -18,7 +18,6 @@ public class DropdownController {
     @PostMapping("/dropdown/project_id")
     @ResponseBody
     public String dropdwonProject(@RequestParam ("pkid") String pkid) throws JsonProcessingException {
-        System.out.println("드롭다운컨트롤러");
         String jsonList = dropDownService.scenarioOption(pkid);
         return jsonList;
     }

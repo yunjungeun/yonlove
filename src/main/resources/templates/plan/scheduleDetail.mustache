@@ -97,6 +97,10 @@
 <a href="/plan/{{scheduleDetail.day_id}}/scheduleUpdateView">수정</a>
 <a href="/plan/{{scheduleDetail.day_id}}/deleteSchedule" onclick="confirmDelete(event)">삭제</a>
 
+<form method="get" action="/plan/insertFilmPlanView">
+    <input type="hidden" name="day_id" value="{{scheduleDetail.day_id}}">
+    <input type="submit" value="촬영방법">
+</form>
 
 <script> var base ="/plan/schedule_day";</script>
 <script src="/static/js/delete.js"></script>
