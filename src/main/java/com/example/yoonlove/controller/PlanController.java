@@ -154,10 +154,11 @@ public class PlanController {
     }
 
     @GetMapping("plan/insertScheduleTimeView")
-    public ModelAndView insertScheduleTimeView() throws JsonProcessingException {
+    public ModelAndView insertScheduleTimeView(ScheduleTimeDto dto) throws JsonProcessingException {
         String jsonList = dropDownService.dropDownOption("project",null);
 
         ModelAndView mv = new ModelAndView();
+        mv.addObject("dayId", dto.getDay_id());
         mv.addObject("fkList", jsonList);
         mv.setViewName("/scene/sceneinsert");
         mv.setViewName("plan/insertScheduleTime");
@@ -197,7 +198,7 @@ public class PlanController {
 
     }
 
-//============================================================================================촬영시간표
+//===================================출연자관리=========================================================
 
 
     @GetMapping("/plan/actor_management")
@@ -234,16 +235,10 @@ public class PlanController {
     }
 
    @GetMapping("plan/insertactorManagementView")
-    public ModelAndView insertactorManagementView() throws JsonProcessingException{
-       //actorManagement 작성 옵션값 만들기 옵션은 시니라오에 있음.
-        //fk값으로 db검색결과
-       List<ScheduleDayDto> scheduleDayDto = planService.selectFk();
-
-       //검색리스트를 json 리스트 문자열로 생성
-       String jsonList = planService.fkJson(scheduleDayDto);
+    public ModelAndView insertactorManagementView(ScheduleDayDto dto) throws JsonProcessingException{
 
         ModelAndView mv = new ModelAndView();
-        mv.addObject("fkList", jsonList);
+        mv.addObject("dayId", dto.getDay_id());
         mv.setViewName("plan/insertactorManagementView");
         return mv;
     }

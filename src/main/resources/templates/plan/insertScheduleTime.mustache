@@ -9,30 +9,20 @@
 </head>
 <body>
 <form id="alert" action="/plan/insertScheduleTime" method="get">
+    <input type="hidden" name="day_id" class="field4" value="{{dayId}}">
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
-            <td>기획명
-                <select id="fk1" name="project_id"></select>
-            <td>일정표명
-                <select id="fk2" name="day_id" class="field1"></select>
-            </td>
-            <td>시간시간<input name="start_time" type="time"  class="field2"></td>
+            <td>시간시간<input name="start_time" type="time"  class="field1"></td>
             <td>종료시간<input name="end_time" type="time"  class="field2"></td>
             <td>촬영내용<input name="film_content" type="text"  class="field3" ></td>
-
         </tr>
     </table>
 
-    <input type="submit" value="등록" onclick="mappingurl('/plan/insertScheduleTime','/plan/schedule_time',3,'작성')">
+    <input type="submit" value="등록" onclick="mappingurl('/plan/insertScheduleTime','/plan/schedule_time',4,'작성')">
 </form>
 <a href="/plan/schedule_time">목록</a>
 
-<script>
-    var jsonValue = '{{{fkList}}}';
-    <!--select 옵션 name값을 'cu_alert.js'에 보내주기 위한 변수 값/ 이게없으면 제출이 안됨-->
-    var selectName = "day_id";
 </script>
-<script src="/static/js/dropdown.js"></script>
 <script src="/static/js/cu_alert.js"></script>
 </body>
 </html>
