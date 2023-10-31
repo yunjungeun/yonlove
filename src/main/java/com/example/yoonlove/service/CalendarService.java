@@ -18,7 +18,7 @@ public class CalendarService {
         List<String> week = new ArrayList<>();
         //일요일로 시작하지 않으면 공란으로 채움
         if(startDayOfWeek != 7) {
-            for (int i = 1; i < startDayOfWeek; i++) {
+            for (int i = 1; i <= startDayOfWeek; i++) {
                 week.add(""); // 앞의 빈 날짜들을 공란으로 채움
             }
         }
