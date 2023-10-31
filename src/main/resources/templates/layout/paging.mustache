@@ -1,33 +1,31 @@
-<!-- Begin Page Content -->
-<div class="container-fluid">
-    <!-- ... 이전 코드 ... -->
+<!--이전 버튼-->
 
-    <!-- 페이징 처리 레이아웃 -->
-    <ul class="pagination">
-        {{#hasPre}}
-            <li class="page-item">
-                <a class="page-link" href="/{{prefixUrl}}/{{pageRink}}{{prePage}}" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-        {{/hasPre}}
+{{#paging}}
+    {{#hasPre}}
+        <!--{!{검색어유무에따른url}}/{!{실제페이지번호}}-->
+        <a href="/{{prefixUrl}}/{{pageRink}}{{prePage}}" class="btn btn-primary">이전</a>
+    {{/hasPre}}
+{{/paging}}
 
-        {{#pagelist}}
-            {{#currentPageFlag}}
-                <li class="page-item active"><span class="page-link">{{currentPage}}</span></li>
-            {{/currentPageFlag}}
-            {{^currentPageFlag}}
-                <li class="page-item"><a class="page-link" href="/{{prefixUrl}}/{{pageRink}}{{currentPage}}">{{currentPage}}</a></li>
-            {{/currentPageFlag}}
-        {{/pagelist}}
+<!-- 페이지 번호를 반복문으로 생성 -->
+{{#pagelist}}
+    <!--현재페이지는 링크가 없고 강조표시-->
+    {{#currentPageFlag}}
+        <strong class="btn btn-info">{{currentPage}}</strong>
+    {{/currentPageFlag}}
+    <!--현재 페이지가 아닌 숫자들은 해당페이지로 이동하는 링크생성-->
 
-        {{#hasNext}}
-            <li class="page-item">
-                <a class="page-link" href="/{{prefixUrl}}/{{pageRink}}{{nextPage}}" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        {{/hasNext}}
-    </ul>
-    <!-- 페이징 처리 레이아웃 끝 -->
-</div>
+
+    {{^currentPageFlag}}
+        <a href="/{{prefixUrl}}/{{pageRink}}{{currentPage}}" class="btn btn-info">{{currentPage}}</a>
+    {{/currentPageFlag}}
+{{/pagelist}}
+
+<!--다음페이지 버튼-->
+{{#paging}}
+    {{#hasNext}}
+        <a href="/{{prefixUrl}}/{{pageRink}}{{nextPage}}" class="btn btn-primary">다음</a>
+    {{/hasNext}}
+{{/paging}}
+
+

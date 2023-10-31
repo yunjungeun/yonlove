@@ -34,7 +34,7 @@
 
 
 
-                    <form  class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
+                    <form action="/cs/notice" method="GET" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
                         <!--d-none: 화면에서 폼을 숨기는 기능
                         mr-auto: 오른쪽 마진을 자동으로 설정 ml-md-3:왼쪽 마진을 3단위만큼 설정
                         my-2 my-md-0: 수직여백 설정  mw-100: 최대너비 100%설정 navbar-search: 커스텀클래스 (폼을나타내는 클래스)-->
@@ -47,8 +47,9 @@
                                 <!-- 필요한 항목 추가 -->
                             </select>
                             <!--input-group: 입력 그룹을 생성(입력 필드와 관련된 요소들을 그룹화-->
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                            <input type="text"  style="width: 150px;" class="form-control bg-light border-0 small" placeholder="Search for..."
                                    aria-label="Search" aria-describedby="basic-addon2">
+
                             <!--form-control:입력필드를 스타일링하는 부트스트랩클래스 입력필드를 보다 사용자 친화적으로 스타일링함
                             bg-light: 입력필드 배경색 밝게  border-0:입력필드 주변 경계선을 없앰 small:입력필드 크기를 작게설정 placeholder="Search for...": 입력필드에 힌트제공
                             aria-label, aria-describedby: 웹 접근성 향상용도 필드의 라벨 및 설명을 지정 -->
@@ -56,7 +57,7 @@
 
                             <div class="input-group-append">
                                 <!--input-group-append:입력 그룹에 추가 요소를 포함 이 경우, 추가 요소로 버튼이 추가-->
-                                <button class="btn btn-primary" type="button">
+                                <button  class="btn btn-primary" type="submit">
                                     <i class="fas fa-search fa-sm"></i><!--Font Awesome 아이콘을 추가하는데 사용 fas fa-search fa-sm" 클래스는 검색 아이콘을 표시-->
                                 </button>
                             </div>
