@@ -1,6 +1,7 @@
 package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.*;
+import com.example.yoonlove.service.DropDownService;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.PlanService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -21,7 +22,9 @@ public class PlanController {
     @Autowired
     private PlanService planService;
     @Autowired
-    PagingService pagingService;
+    private PagingService pagingService;
+    @Autowired
+    private DropDownService dropDownService;
 
 
     @GetMapping("/plan/schedule_day")
@@ -74,11 +77,7 @@ public class PlanController {
 
     @GetMapping("plan/insertScheduleView")
     public ModelAndView insertScheduleView() throws JsonProcessingException{
-        //fk값으로 db검색결과
-        List<ProjectDto> projectdto = planService.selectFkDay();
-
-        //검색리스트를 json 리스트 문자열로 생성
-        String jsonList = planService.fkJsonDay(projectdto);
+        String jsonList = dropDownService.dropDownOption("project",null);
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/insertSchedule");

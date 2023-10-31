@@ -18,8 +18,9 @@ public class DropDownService {
 
     @Autowired
     private DropDownMapper dropDownMapper;
-
-    public String dropDownOption(String table, String search)throws JsonProcessingException{
+                                    //매개변수 ajaxData는 ajax에서 넘어오는 key 속성임
+                                    // 드롭다운컨트롤러에서만 쓰이고 다른 컨트롤러에서는 null값을 넣으세요
+    public String dropDownOption(String table, String ajaxData)throws JsonProcessingException{
         //문자열, 숫자 해시맵 + 문자열,문자열 해쉬맵 객체생성
         Map<String, Integer> fkIntList = new LinkedHashMap<>();
         Map<String, String> fkStringList = new LinkedHashMap<>();
@@ -29,19 +30,19 @@ public class DropDownService {
         //리스트 타입이 여러개임
         switch (table) {
             case "scenario" :
-                List<ScenarioDto> scenarioDtos = dropDownMapper.selectFkScenario(search);
+                List<ScenarioDto> scenarioDtos = dropDownMapper.selectFkScenario(ajaxData);
                 for(int i=0; i< scenarioDtos.size(); i++){
                     fkStringList.put(scenarioDtos.get(i).getScenario_id(),scenarioDtos.get(i).getScenario_name());
                 }
                 break;
             case "scene" :
-                List<SceneDto> sceneDtos = dropDownMapper.selectFkScene(search);
+                List<SceneDto> sceneDtos = dropDownMapper.selectFkScene(ajaxData);
                 for(int i=0; i< sceneDtos.size(); i++){
                     fkIntList.put(sceneDtos.get(i).getScene_id(),sceneDtos.get(i).getScene_num());
                 }
                 break;
             case "project" :
-                List<ProjectDto> projectDtos = dropDownMapper.selectFkProject(search);
+                List<ProjectDto> projectDtos = dropDownMapper.selectFkProject(ajaxData);
                 for(int i=0; i< projectDtos.size(); i++){
                     fkStringList.put(projectDtos.get(i).getProject_id(),projectDtos.get(i).getProject_name());
                 }
