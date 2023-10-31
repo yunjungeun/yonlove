@@ -19,11 +19,24 @@ public class ScriptPaperDto {
     private String position_image;
     private String conti;
 
-    private String table_id;
-    private Date film_time;
-    private int time_num;
-    private String ok_ng;
-    private Date slate_time;
+    //==============3중조인 : scriptview======================
 
+
+    private int scene_num;
+    private String scene_image;
+    private String scene_place;
+    private String story_board;
+    private String scene_content;
+
+    //=======================================
+
+    private String scenario_id;
+    private int scenario_num;
+    private String scenario_name;
+    private String scenario_content;
+    private String scenario_writer;
+    private String scenario_date;
+    private String project_id;
+    private String scenario_update;
 
 }

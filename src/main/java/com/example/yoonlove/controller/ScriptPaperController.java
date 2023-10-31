@@ -1,6 +1,7 @@
 package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.*;
+import com.example.yoonlove.service.DropDownService;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.ScriptPaperService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -20,6 +21,8 @@ public class ScriptPaperController {
     private ScriptPaperService scriptPaperService;
     @Autowired
     private PagingService pagingService;
+    @Autowired
+    private DropDownService dropDownService;
 
     //스크립트페이퍼
     @GetMapping("script/scriptpaper")
@@ -76,20 +79,18 @@ public class ScriptPaperController {
 
     @GetMapping("script/insertscriptpaperview")
     public ModelAndView insertscript() throws JsonProcessingException {
-        //fk값으로 db검색결과
-        List<SceneDto> sceneDto = scriptPaperService.selectFk();
 
-        //검색리스트를 json 리스트 문자열로 생성
-        String jsonList = scriptPaperService.fkJson(sceneDto);
+        String jsonListProject = dropDownService.dropDownOption("project",null);
 
         ModelAndView mv = new ModelAndView();
-        mv.addObject("fkList", jsonList);
+        mv.addObject("fkListProject", jsonListProject);
         mv.setViewName("/script/scriptinsert");
         return mv;
     }
 
     @GetMapping("script/insertscriptpaper")
     public String insertScriptPaper(ScriptPaperDto dto){
+
         scriptPaperService.insertScriptPaper(dto);
         return "redirect:/script/scriptpaper";
     }

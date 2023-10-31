@@ -1,19 +1,13 @@
 package com.example.yoonlove.service;
 
-import com.example.yoonlove.dto.ActorDto;
-
-import com.example.yoonlove.dto.FileDto;
-import com.example.yoonlove.dto.PageDto;
-import com.example.yoonlove.dto.ScenarioDto;
-import com.example.yoonlove.dto.ScenarioDto;
-import com.example.yoonlove.dto.SceneDto;
+import com.example.yoonlove.dto.*;
 import com.example.yoonlove.mapper.FileMapper;
 import com.example.yoonlove.mapper.SceneMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
+
 import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -38,6 +32,8 @@ public class SceneService {
     public List<ScenarioDto> selectFk(){
         return sceneMapper.selectFk();
     }
+
+    //업로드관련 메소드인데 정확히 어떤 역할인지 작성바랍니다.
     public int lastPost(SceneDto dto){return sceneMapper.lastPost(dto);}
 
     public void insertScene(SceneDto dto){

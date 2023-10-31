@@ -12,31 +12,32 @@
 <form id="alert" action="/plan/insertSchedule" method="get">
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
-
-
-            <td>촬영계획표제목<input name="day_title" type="text" class="field1"  ></td>
-            <td>촬영날짜<input name="film_date" type="date" class="field2"  ></td>
+            <td>기획
+                <select id="fk1" name="project_id" class="field1"></select>
+            </td>
+            <td>촬영계획표제목<input name="day_title" type="text" class="field2"  ></td>
+            <td>촬영날짜<input name="film_date" type="date" class="field3"  ></td>
+            <td><input name="day_num" type="number" class="int1" placeholder="미입력시 자동입력">회차</td>
         </tr>
         <tr>
-            <td>촬영순서<input name="film_order" type="text" class="field3" ></td>
-            <td>날씨<input name="weather" type="text" class="field4" ></td>
+            <td>촬영순서<input name="film_order" type="text" class="field4" ></td>
+            <td>날씨<input name="weather" type="text" class="field5" ></td>
         </tr>
         <tr>
-            <td>조명<input name="light" type="text" class="field5" ></td>
-            <td>의상<input name="costume" type="text" class="field6" ></td>
-            <td>소품<input name="prop" type="text" class="field7" ></td>
+            <td>조명<input name="light" type="text" class="field6" ></td>
+            <td>의상<input name="costume" type="text" class="field7" ></td>
+            <td>소품<input name="prop" type="text" class="field8" ></td>
         </tr>
         <tr>
-            <td>연출/제작<input name="direct" type="text" class="field8" ></td>
+            <td>연출/제작<input name="direct" type="text" class="field9"></td>
         </tr>
 
 
     </table>
-    <input type="submit" value="등록" onclick="mappingurl('/plan/insertSchedule','/plan/schedule_day', 8,'작성')">
+    <input type="submit" value="등록" onclick="mappingurl('/plan/insertSchedule','/plan/schedule_day', 9,'작성',1)">
 </form>
 <a href="/plan/schedule_day">목록</a>
 
-<!--옵션태그 만드는 중!!!!!!!!!!!!!!!!!!!!!!!-->
 <!--옵션 태그에 필요한 js-->
 <script>
     var jsonValue = '{{{fkList}}}';

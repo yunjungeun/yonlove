@@ -1,8 +1,10 @@
 package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.*;
+import com.example.yoonlove.service.DropDownService;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.PlanService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -20,7 +22,9 @@ public class PlanController {
     @Autowired
     private PlanService planService;
     @Autowired
-    PagingService pagingService;
+    private PagingService pagingService;
+    @Autowired
+    private DropDownService dropDownService;
 
 
     @GetMapping("/plan/schedule_day")
@@ -46,20 +50,38 @@ public class PlanController {
 
     @GetMapping("plan/schedule/{day_id}")
     public ModelAndView selectSchedule(ScheduleDayDto dto) {
-        ScheduleDayDto scheduleDetail = planService.selectSchedule(dto);
-
         ModelAndView mv = new ModelAndView();
+
+        //테이블1 start : film_plan 조인 리스트
+        List<FilmPlanDto> dayTable1 = planService.selectListDayTable1(dto.getDay_id());
+        mv.addObject("table1",dayTable1);
+        //테이블1 end
+
+        //테이블2 start : schedule_time 조인 리스트
+        List<ScheduleTimeDto> dayTable2 = planService.selectListDayTable2(dto.getDay_id());
+        mv.addObject("table2",dayTable2);
+        //테이블2 end
+
+        //테이블3 start : actor_management : 출연자관리
+        List<ActorManagementDto> dayTable3 = planService.selectListDayTable3(dto.getDay_id());
+        mv.addObject("table3",dayTable3);
+        //테이블3 end
+
+        //일일촬영계획 코드  // 수정엄금
+        ScheduleDayDto scheduleDetail = planService.selectSchedule(dto);
         mv.setViewName("/plan/scheduleDetail");
-        mv.setStatus(HttpStatus.valueOf(200));
         mv.addObject("scheduleDetail", scheduleDetail);
+        //일일촬영계획 end
         return mv;
     }
 
     @GetMapping("plan/insertScheduleView")
-    public ModelAndView insertScheduleView() {
+    public ModelAndView insertScheduleView() throws JsonProcessingException{
+        String jsonList = dropDownService.dropDownOption("project",null);
+
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("plan/insertSchedule");
-        mv.setStatus(HttpStatus.valueOf(200));
+        mv.setViewName("/plan/insertSchedule");
+        mv.addObject("fkList", jsonList);
         return mv;
     }
 
@@ -72,8 +94,9 @@ public class PlanController {
     }
 
     @GetMapping("plan/{day_id}/scheduleUpdateView") //컨텐츠 업데이트하는 뷰
-    public ModelAndView scheduleUpdateView( ScheduleDayDto dto) {
-        ScheduleDayDto scheduleDayDto = planService.selectSchedule(dto);//업데이트를 하려면 해당 컨텐츠 불러와야하니까 위에 selectContent메소드를 다시씀!
+    public ModelAndView scheduleUpdateView(ScheduleDayDto dto) {
+
+        ScheduleDayDto scheduleDayDto = planService.selectSchedule(dto);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/updateSchedule");
         mv.setStatus(HttpStatus.valueOf(200));
@@ -98,18 +121,15 @@ public class PlanController {
 
     @GetMapping("plan/schedule_time")
     public ModelAndView selectListScheduleTime(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
-
         PageDto pageDto = new PageDto("schedule_time","time_id", page,pdto);  // page???
-
         PageDto pageInfo = pagingService.paging(pageDto);
-        System.out.println(pageDto.getTotalPost());
 
         // paging ==> 전체게시글 갯수 구해오는 메소드
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
         String rink = pagingService.pageRink(pageDto);
 
-
         List<ScheduleTimeDto> dto = planService.selectListScheduleTime(pageInfo);
+
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/scheduleTimeList");
         mv.addObject("scheduleTimeList", dto);
@@ -120,8 +140,6 @@ public class PlanController {
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
 
         return mv;
-
-
     }
 
 
@@ -131,23 +149,28 @@ public class PlanController {
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/scheduleTime");
-        mv.setStatus(HttpStatus.valueOf(200));
         mv.addObject("scheduleTime", scheduleDetail);
         return mv;
     }
 
     @GetMapping("plan/insertScheduleTimeView")
-    public ModelAndView insertScheduleTimeView() {
+    public ModelAndView insertScheduleTimeView() throws JsonProcessingException {
+        //fk값으로 db검색결과
+        List<ScheduleDayDto> scheduleDayDto = planService.selectFk();
+
+        //검색리스트를 json 리스트 문자열로 생성
+        String jsonList = planService.fkJson(scheduleDayDto);
+
         ModelAndView mv = new ModelAndView();
+        mv.addObject("fkList", jsonList);
+        mv.setViewName("/scene/sceneinsert");
         mv.setViewName("plan/insertScheduleTime");
-        mv.setStatus(HttpStatus.valueOf(200));
         return mv;
     }
 
 
     @GetMapping("plan/insertScheduleTime")  //컨텐츠 추가 처리
     public String insertTime(ScheduleTimeDto dto) {
-
         planService.insertTime(dto);
 
         return "redirect:/plan/schedule_time";
@@ -182,16 +205,12 @@ public class PlanController {
 
     @GetMapping("/plan/actor_management")
     public ModelAndView selectListActorManagement(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
-
         PageDto pageDto = new PageDto("actor_management","actor_id", page,pdto);
-
         PageDto pageInfo = pagingService.paging(pageDto);
-        System.out.println(pageDto.getTotalPost());
 
         // paging ==> 전체게시글 갯수 구해오는 메소드
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
         String rink = pagingService.pageRink(pageDto);
-
 
         List<ActorManagementDto> dto = planService.selectListActorManagement(pageInfo);
         ModelAndView mv = new ModelAndView();
@@ -203,7 +222,6 @@ public class PlanController {
         mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
 
-
         return mv;
     }
 
@@ -214,25 +232,29 @@ public class PlanController {
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/actorManagementDetail");
-        mv.setStatus(HttpStatus.valueOf(200));
         mv.addObject("actorManagementDetail", actorManagementDetail);
         return mv;
     }
 
    @GetMapping("plan/insertactorManagementView")
-    public ModelAndView insertactorManagementView() {
+    public ModelAndView insertactorManagementView() throws JsonProcessingException{
+       //actorManagement 작성 옵션값 만들기 옵션은 시니라오에 있음.
+        //fk값으로 db검색결과
+       List<ScheduleDayDto> scheduleDayDto = planService.selectFk();
+
+       //검색리스트를 json 리스트 문자열로 생성
+       String jsonList = planService.fkJson(scheduleDayDto);
+
         ModelAndView mv = new ModelAndView();
+        mv.addObject("fkList", jsonList);
         mv.setViewName("plan/insertactorManagementView");
-        mv.setStatus(HttpStatus.valueOf(200));
         return mv;
     }
 
 
     @GetMapping("plan/insertactorManagement")  //컨텐츠 추가 처리
     public String insertActorManagement(ActorManagementDto dto) {
-
         planService.insertActorManagement(dto);
-
         return "redirect:/plan/actor_management";
     }
 
@@ -257,11 +279,9 @@ public class PlanController {
     public String deleteActorManagement( ActorManagementDto dto) {
         planService.deleteActorManagement(dto);
         return "redirect:/plan/actor_management";
-
     }
 
-//===========================================================================================출연진관라
-
+//===========================================================================================출연자 관리 end
 
     @GetMapping("plan/film_plan")
     public ModelAndView selectListFilmPlan(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
@@ -304,8 +324,17 @@ public class PlanController {
     }
 
     @GetMapping("plan/insertFilmPlanView")
-    public ModelAndView insertFilmPlanView() {
+    public ModelAndView insertFilmPlanView() throws JsonProcessingException{
         ModelAndView mv = new ModelAndView();
+
+        //fk값으로 db검색결과
+        List<ScheduleDayDto> scheduleDayDto = planService.selectFkFilm();
+
+        //검색리스트를 json 리스트 문자열로 생성
+        String jsonList = planService.fkJsonFilm(scheduleDayDto);
+
+
+        mv.addObject("fkList", jsonList);
         mv.setViewName("plan/insertFilmPlanView");
         mv.setStatus(HttpStatus.valueOf(200));
         return mv;
@@ -349,16 +378,12 @@ public class PlanController {
 
     @GetMapping("plan/schedule_month")
     public ModelAndView selectListPlan(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
-
         PageDto pageDto = new PageDto("schedule_month","month_id", page,pdto);
-
         PageDto pageInfo = pagingService.paging(pageDto);
-        System.out.println(pageDto.getTotalPost());
 
         // paging ==> 전체게시글 갯수 구해오는 메소드
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
         String rink = pagingService.pageRink(pageDto);
-
 
         List<ScheduleMonthDto> dto = planService.selectListPlan(pageInfo);
         ModelAndView mv = new ModelAndView();
@@ -370,11 +395,7 @@ public class PlanController {
         mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
 
-
         return mv;
-
-
-
     }
 
 
@@ -430,17 +451,4 @@ public class PlanController {
 
     }
 
-
-
-
-
-
-
 }
-
-
-
-
-
-
-

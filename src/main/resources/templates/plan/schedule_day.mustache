@@ -12,15 +12,16 @@
         <tr>
             <td>기획명</td>
             <td>촬영계획명</td>
-            <td>촬영날짜</td>
-
-
+            <td>촬영일</td>
+            <td>촬영회차</td>
         </tr>
+
         {{#scheduleList}}
             <tr>
-                <td>{{project_id}}</td>
+                <td>{{project_name}}</td>
                 <td><a href="/plan/schedule/{{day_id}}">{{day_title}}</a></td>
                 <td>{{film_date}}</td>
+                <td>{{day_num}}</td>
 
             </tr>
         {{/scheduleList}}

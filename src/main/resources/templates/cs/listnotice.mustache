@@ -4,32 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시판 리스트</title>
+    {{>layout/header}}
 </head>
-<body>
-<h1>공지사항</h1>
-    <table border="1" cellpadding="1" cellspacing="1">
-        <ul>
-            <tr>
-                <td>번호</td>
-                <td>제목</td>
-                <td>작성자</td>
-                <td>날짜</td>
-                <td>조회수</td>
-            </tr>
-            {{#selectListNotice}}
-                <tr>
-                    <td>{{notice_id}}</td>
-                    <td><a href="/cs/selectnotice/{{notice_id}}">{{notice_title}}</a></td>
-                    <td>{{notice_writer}}</td>
-                    <td>{{notice_date}}</td>
-                    <td>{{notice_cnt}}</td>
-                </tr>
-            {{/selectListNotice}}
-        </ul>
-    </table>
+<body id="page-top">
+{{>layout/sidebar}}
+
+
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">공지사항</h1>
+    <p class="mb-4">게시판 설명 넣는곳 <a target="_blank"
+                                  href="https://datatables.net">이곳에 링크 넣으세요</a>.</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">게시판 이름</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>날짜</th>
+                        <th>조회수</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#selectListNotice}}
+                        <tr>
+                            <td>{{notice_id}}</td>
+                            <td><a href="/cs/selectnotice/{{notice_id}}">{{notice_title}}</a></td>
+                            <td>{{notice_writer}}</td>
+                            <td>{{notice_date}}</td>
+                            <td>{{notice_cnt}}</td>
+                        </tr>
+                    {{/selectListNotice}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+
 
 <!--페이징 처리 레이아웃-->
 {{>layout/paging}}
+</div>
 
 <br/>
 <form action="/cs/notice" method="GET">
@@ -52,9 +81,17 @@
 <a href="/index">홈 페이지</a>
 
 
+
+{{>layout/footer}}
+
+
+
+
 <script>
     var url = "/cs/notice";
 </script>
 <script src="/static/js/search.js"></script>
+
+{{>layout/bootstrapjs}}
 </body>
 </html>

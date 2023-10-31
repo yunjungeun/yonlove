@@ -10,6 +10,7 @@
 <table border="1" cellpadding="1" cellspacing="1">
     <ul>
         <tr>
+            <td>시나리오 제목</td>
             <td>씬 번호</td>
             <td>영상제목</td>
             <td>촬영일자</td>
@@ -17,7 +18,8 @@
         </tr>
         {{#selectListScriptPaper}}
             <tr>
-                <td>{{scene_id}}<!--씬 번호가 들어가야함(조인)--></td>
+                <td>{{scenario_name}}</td>
+                <td>{{scene_num}}<!--씬 번호가 들어가야함(조인)--></td>
                 <td><a href="/script/{{script_id}}/selectscriptpaper">{{video_name}}</a></td>
                 <td>{{video_date}}</td>
                 <td>{{conti}}</td>
@@ -32,7 +34,8 @@
 <form action="/script/scriptpaper" method="GET">
     <select id="searchType" name="searchType">
         <option value="all">선택</option>
-        <option value="title">스크립트 번호</option>
+        <option value="writer">시나리오</option>
+        <option value="title">씬번호</option>
         <option value="content">액션내용</option>
         <!-- 필요한 항목 추가 -->
     </select>

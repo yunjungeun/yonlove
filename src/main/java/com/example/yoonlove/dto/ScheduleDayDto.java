@@ -16,5 +16,11 @@ public class ScheduleDayDto {
     private String film_order;
     private String direct;
     private String project_id;
-    private Date plan_day_date;
+    private String day_num;
+
+    //조인테이블 -  scheduledaylist
+    private String project_name;
+    private String company_id;
+    private String project_state;
+
 }

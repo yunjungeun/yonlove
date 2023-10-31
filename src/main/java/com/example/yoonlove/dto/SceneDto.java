@@ -13,5 +13,18 @@ public class SceneDto {
     private String scene_place;
     private String story_board;
     private String scene_content;
+
+
+
+   //========================================
+
     private String scenario_id;
+    private int scenario_num;
+    private String scenario_name;
+    private String scenario_content;
+    private String scenario_writer;
+    private String scenario_date;
+    private String project_id;
+    private String scenario_update;
+
 }

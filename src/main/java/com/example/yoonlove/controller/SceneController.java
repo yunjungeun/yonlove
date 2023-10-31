@@ -1,13 +1,9 @@
 package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.*;
-import com.example.yoonlove.mapper.FileMapper;
-import com.example.yoonlove.service.FileService;
-import com.example.yoonlove.service.PagingService;
-import com.example.yoonlove.service.SceneService;
-import lombok.extern.slf4j.Slf4j;
-import com.example.yoonlove.service.ScriptPaperService;
+import com.example.yoonlove.service.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,12 +23,11 @@ public class SceneController {
     @Autowired
     private FileService fileService;
     @Autowired
-    private FileMapper fileMapper;
-    @Autowired
     private PagingService pagingService;
     @Autowired
     private ScriptPaperService scriptPaperService;
-
+    @Autowired
+    private DropDownService dropDownService;
 
     @GetMapping("scene/scene")
     public ModelAndView selectListScene(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
@@ -43,6 +38,7 @@ public class SceneController {
 
 
         List<SceneDto> dto = sceneService.selectListScene(pageInfo);
+        System.out.println(dto.get(0).toString());
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/scene/scene");
         mv.addObject("selectListScene", dto);
@@ -85,35 +81,18 @@ public class SceneController {
 
     @GetMapping("/scene/insertsceneview")
     public ModelAndView insertSceneView() throws JsonProcessingException{
-        //fk값으로 db검색결과
-        List<ScenarioDto> scenarioDto = sceneService.selectFk();
 
-        //검색리스트를 json 리스트 문자열로 생성
-        String jsonList = sceneService.fkJson(scenarioDto);
+        String jsonListProject = dropDownService.dropDownOption("project",null);
 
         ModelAndView mv = new ModelAndView();
-        mv.addObject("fkList", jsonList);
+        mv.addObject("fkList", jsonListProject);
         mv.setViewName("/scene/sceneinsert");
         return mv;
     }
 
-    @PostMapping("/scene/insertscene")
-    public String insertScene(SceneDto dto, MultipartFile file) throws IOException {
+    @GetMapping("/scene/insertscene")
+    public String insertScene(SceneDto dto) {
             sceneService.insertScene(dto);
-
-            int lastnum = sceneService.lastPost(dto);
-
-            if(file.isEmpty()){
-                fileService.insertNull(lastnum);
-            }else {
-                try {
-
-                    fileService.insertFile(file, lastnum); // FileService를 사용하여 파일 업로드
-                } catch (IOException e) {
-                    log.info(e.getMessage());
-                    // 예외 처리
-                }
-            }
 
         return "redirect:/scene/scene";
     }
