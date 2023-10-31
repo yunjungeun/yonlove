@@ -155,11 +155,7 @@ public class PlanController {
 
     @GetMapping("plan/insertScheduleTimeView")
     public ModelAndView insertScheduleTimeView() throws JsonProcessingException {
-        //fk값으로 db검색결과
-        List<ScheduleDayDto> scheduleDayDto = planService.selectFk();
-
-        //검색리스트를 json 리스트 문자열로 생성
-        String jsonList = planService.fkJson(scheduleDayDto);
+        String jsonList = dropDownService.dropDownOption("project",null);
 
         ModelAndView mv = new ModelAndView();
         mv.addObject("fkList", jsonList);
@@ -171,6 +167,7 @@ public class PlanController {
 
     @GetMapping("plan/insertScheduleTime")  //컨텐츠 추가 처리
     public String insertTime(ScheduleTimeDto dto) {
+        System.out.println(dto.toString());
         planService.insertTime(dto);
 
         return "redirect:/plan/schedule_time";

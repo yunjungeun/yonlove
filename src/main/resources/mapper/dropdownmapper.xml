@@ -27,6 +27,17 @@
         order by project_id desc
     </select>
 
+    <select id="selectFkDay">
+        SELECT day_id, day_title FROM schedule_day
+        <!--현재 if문은 상위 테이블이 없어서 있으나 마나임-->
+        <if test="search != null and search !=''">
+            where project_id = #{ajaxData}
+        </if>
+        order by project_id desc
+    </select>
+
+
+
     <select id="selectScenario">
         SELECT scenario_id, scenario_name FROM scenario where project_id = #{pkId}
     </select>

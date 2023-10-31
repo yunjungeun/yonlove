@@ -9,6 +9,18 @@ var parsedJson = JSON.parse(jsonValue);
 var dropdown = document.getElementById("fk1");
 
 
+//드롭다운 url을 만들어내기 위한 변수와 url생성
+
+//fk2 라는 id가 존재하지 않는경우도 있는데, if문이 없다면 null값으로 인해 다음라인이 실행되지 않음. if문이 있어야함.
+var subDropdown = document.getElementById("fk2");
+    if(subDropdown !== null){
+        var dropdownFk2Name = subDropdown.getAttribute('name');
+        var subUrl = "/dropdown/" + dropdownFk2Name;
+    }
+var dropdownFk1Name = dropdown.getAttribute('name');
+var mainUrl = "/dropdown/" + dropdownFk1Name;
+//url 생성구분 end
+
 for(var key in parsedJson){
     var option = document.createElement("option");
     option.value = key;
@@ -25,7 +37,7 @@ $(document).ready(function () {
         // AJAX 요청 보내기
         $.ajax({
             type: 'POST', // 요청 타입
-            url: '/mainoption', // 서버의 엔드포인트 URL
+            url: mainUrl, // 서버의 엔드포인트 URL
             data: { pkid : selectedFkValue }, // 보낼 데이터
             dataType: 'json', // 응답 데이터 타입
             success: function (response) {
@@ -61,7 +73,7 @@ $(document).ready(function () {
         // AJAX 요청 보내기
         $.ajax({
             type: 'POST', // 요청 타입
-            url: '/suboption', // 서버의 엔드포인트 URL
+            url: subUrl, // 서버의 엔드포인트 URL
             data: { pkid : selectedFkValue }, // 보낼 데이터
             dataType: 'json', // 응답 데이터 타입
             success: function (response) {

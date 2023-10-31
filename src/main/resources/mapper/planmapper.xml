@@ -139,7 +139,7 @@
     <insert id="insertTime" parameterType="com.example.yoonlove.dto.ScheduleTimeDto" >
         INSERT INTO schedule_time(time_id, day_id, start_time, end_time, film_content)  VALUES (
         (select concat('time', (nvl(max(to_number(substr(time_id, 5))), 0)+1)) from schedule_time),<!--pk코드 자동증가(수정2)-->
-        'day4',
+        #{day_id},
         #{start_time},
         #{end_time},
         #{film_content},
