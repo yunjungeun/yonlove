@@ -4,54 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>타임테이블 리스트</title>
+    {{>layout/header}}
 </head>
 <body>
-<h1>타임테이블 게시판</h1>
-<table border="1" cellpadding="1" cellspacing="1">
-    <ul>
-        <tr>
-            <td>스크립트 번호</td>
-            <td>촬영시간</td>
-            <td>타임테이블 번호</td>
-            <td>OK/NG</td>
-            <td>슬레이트</td>
-        </tr>
-        {{#selectListTimeTable}}
-            <tr>
-                <td><a href="/script/{{table_id}}/selecttimetable">{{script_id}}</td>
-                <td>{{film_time}}</a></td>
-                <td>{{time_num}}</td>
-                <td>{{ok_ng}}</td>
-                <td>{{slate_time}}</td>
-            </tr>
-        {{/selectListTimeTable}}
-    </ul>
-</table>
+{{>layout/sidebar}}
+{{>layout/topbar}}
 
+<div class="container">
+
+<h1>타임테이블 게시판</h1>
+        <table border="1" cellpadding="1" cellspacing="1">
+            <ul>
+                <tr>
+                    <td>스크립트 번호</td>
+                    <td>촬영시간</td>
+                    <td>타임테이블 번호</td>
+                    <td>OK/NG</td>
+                    <td>슬레이트</td>
+                </tr>
+                {{#selectListTimeTable}}
+                    <tr>
+                        <td><a href="/script/{{table_id}}/selecttimetable">{{script_id}}</td>
+                        <td>{{film_time}}</a></td>
+                        <td>{{time_num}}</td>
+                        <td>{{ok_ng}}</td>
+                        <td>{{slate_time}}</td>
+                    </tr>
+                {{/selectListTimeTable}}
+            </ul>
+        </table>
 
 <!--페이징 처리 레이아웃-->
 {{>layout/paging}}
 
-<form action="/script/timetable" method="GET">
-    <select id="searchType" name="searchType">
-        <option value="all">선택</option>
-        <option value="title">테이블 번호</option>
-        <!-- 필요한 항목 추가 -->
-    </select>
-    <input type="text" id="search" name="search" placeholder="검색">
-    <input type="submit" value="검색">
-</form>
+    <div class="container1">
+        <form action="/script/timetable" method="GET">
+            <select id="searchType" name="searchType">
+                <option value="all">선택</option>
+                <option value="title">테이블 번호</option>
+                <!-- 필요한 항목 추가 -->
+            </select>
+            <input type="text" id="search" name="search" placeholder="검색">
+            <input type="submit" value="검색">
+        </form>
+    </div>
 
+    <div class="container2">
+        근데 작성자는 잇어야되지 않을까요?<br/>
+        <a href="/script/inserttimeview" role="button">작성</a>&nbsp;&nbsp;
+        <a href="/script/timetable">목록</a>&nbsp;&nbsp;
+        <a href="/index">홈 페이지</a>&nbsp;&nbsp;
+    </div>
 
-근데 작성자는 잇어야되지 않을까요?<br/>
-<a href="/script/inserttimeview" role="button">작성</a>
-<a href="/script/timetable">목록</a>
-<a href="/index">홈 페이지</a>
-
+</div>
+{{>layout/footer}}
 <script>
     var url = "/script/timetable";
 </script>
 <script src="/static/js/search.js"></script>
-
+{{>layout/bootstrapjs}}
 </body>
 </html>

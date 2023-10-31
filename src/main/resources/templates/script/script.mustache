@@ -4,56 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>스크립트 리스트</title>
+    {{>layout/header}}
 </head>
+
 <body>
+{{>layout/sidebar}}
+{{>layout/topbar}}
+
+<div class="container">
+
 <h1>스크립트 게시판</h1>
-<table border="1" cellpadding="1" cellspacing="1">
-    <ul>
-        <tr>
-            <td>시나리오 제목</td>
-            <td>씬 번호</td>
-            <td>영상제목</td>
-            <td>촬영일자</td>
-            <td>콘티</td>
-        </tr>
-        {{#selectListScriptPaper}}
-            <tr>
-                <td>{{scenario_name}}</td>
-                <td>{{scene_num}}<!--씬 번호가 들어가야함(조인)--></td>
-                <td><a href="/script/{{script_id}}/selectscriptpaper">{{video_name}}</a></td>
-                <td>{{video_date}}</td>
-                <td>{{conti}}</td>
-            </tr>
-        {{/selectListScriptPaper}}
-    </ul>
-</table>
+        <table border="1" cellpadding="1" cellspacing="1">
+            <ul>
+                <tr>
+                    <td>시나리오 제목</td>
+                    <td>씬 번호</td>
+                    <td>영상제목</td>
+                    <td>촬영일자</td>
+                    <td>콘티</td>
+                </tr>
+                {{#selectListScriptPaper}}
+                    <tr>
+                        <td>{{scenario_name}}</td>
+                        <td>{{scene_num}}<!--씬 번호가 들어가야함(조인)--></td>
+                        <td><a href="/script/{{script_id}}/selectscriptpaper">{{video_name}}</a></td>
+                        <td>{{video_date}}</td>
+                        <td>{{conti}}</td>
+                    </tr>
+                {{/selectListScriptPaper}}
+            </ul>
+        </table>
 
 <!--페이징 처리 레이아웃-->
 {{>layout/paging}}
 
-<form action="/script/scriptpaper" method="GET">
-    <select id="searchType" name="searchType">
-        <option value="all">선택</option>
-        <option value="writer">시나리오</option>
-        <option value="title">씬번호</option>
-        <option value="content">액션내용</option>
-        <!-- 필요한 항목 추가 -->
-    </select>
-    <input type="text" id="search" name="search" placeholder="검색">
+    <div class="container1">
+        <form action="/script/scriptpaper" method="GET">
+            <select id="searchType" name="searchType">
+                <option value="all">선택</option>
+                <option value="writer">시나리오</option>
+                <option value="title">씬번호</option>
+                <option value="content">액션내용</option>
+                <!-- 필요한 항목 추가 -->
+            </select>
 
-    <input type="submit" value="검색">
+            <input type="text" id="search" name="search" placeholder="검색">
+            <input type="submit" value="검색">
+        </form>
+    </div>
 
-</form>
-
-근데 작성자는 잇어야되지 않을까요?<br/>
-<a href="/script/insertscriptpaperview" role="button">작성</a>
-<a href="/script/scriptpaper">목록</a>
-<a href="/index">홈 페이지</a>
-
+    <div class="container2">
+        근데 작성자는 잇어야되지 않을까요?<br/>
+        <a href="/script/insertscriptpaperview" role="button">작성</a>&nbsp;&nbsp;
+        <a href="/script/scriptpaper">목록</a>&nbsp;&nbsp;
+        <a href="/index">홈 페이지</a>&nbsp;&nbsp;
+    </div>
+</div>
+{{>layout/footer}}
 <script>
     var url = "/script/scriptpaper";
 </script>
 <script src="/static/js/search.js"></script>
-
+{{>layout/bootstrapjs}}
 </body>
 </html>

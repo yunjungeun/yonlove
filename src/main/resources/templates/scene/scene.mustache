@@ -4,59 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>스토리보드 리스트</title>
+    {{>layout/header}}
 </head>
+
 <body>
+{{>layout/sidebar}}
+{{>layout/topbar}}
+
+<div class="container">
 <h1>스토리보드 게시판</h1>
-<table border="1" cellpadding="1" cellspacing="1">
-    <ul>
-        <tr>
-            <td>시나리오 제목</td>
-            <td>씬 번호</td>
-            <td>촬영내용</td>
-            <td>찰영장소</td>
+        <table border="1" cellpadding="1" cellspacing="1">
+            <ul>
+                     <tr>
+                    <td>시나리오 제목</td>
+                    <td>씬 번호</td>
+                    <td>촬영내용</td>
+                    <td>찰영장소</td>
+                     </tr>
+                {{#selectListScene}}
 
-        </tr>
-        {{#selectListScene}}
-            <tr>
-                <td>{{scenario_name}}</td>
-                <td>{{scene_num}}<!--여기누르면 시나리오로 이동해야함--></td>
+                    <tr>
+                        <td>{{scenario_name}}</td>
+                        <td>{{scene_num}}<!--여기누르면 시나리오로 이동해야함--></td>
 
-                <td><a href="/scene/{{scene_id}}/selectscene">{{scene_content}}</a></td>
-                <td>{{scene_place}}</td>
+                        <td><a href="/scene/{{scene_id}}/selectscene">{{scene_content}}</a></td>
+                        <td>{{scene_place}}</td>
 
-            </tr>
-        {{/selectListScene}}
-    </ul>
-</table>
-
+                    </tr>
+                {{/selectListScene}}
+            </ul>
+        </table>
 
 <!--페이징 처리 레이아웃-->
 {{>layout/paging}}
 
-<form action="/scene/scene" method="GET">
-    <select id="searchType" name="searchType">
-        <option value="all">선택</option>
-        <option value="title">씬번호</option>
-        <option value="writer">시나리오</option>
-        <option value="content">내용</option>
-        <!-- 필요한 항목 추가 -->
-    </select>
-    <input type="text" id="search" name="search" placeholder="검색">
+    <div class="container1">
+        <form action="/scene/scene" method="GET">
+            <select id="searchType" name="searchType">
+                <option value="all">선택</option>
+                <option value="title">씬번호</option>
+                <option value="writer">시나리오</option>
+                <option value="content">내용</option>
+                <!-- 필요한 항목 추가 -->
+            </select>
 
-    <input type="submit" value="검색">
+            <input type="text" id="search" name="search" placeholder="검색">
+            <input type="submit" value="검색">
+        </form>
+    </div>
 
-</form>
+    <div class="container2">
+        근데 작성자는 잇어야되지 않을까요?><br/>
+        <a href="/scene/insertsceneview" role="button">작성</a>&nbsp;&nbsp;
+        <a href="/scene/scene">목록</a>&nbsp;&nbsp;
+        <a href="/index">홈 페이지</a>
+    </div>
 
-근데 작성자는 잇어야되지 않을까요?<br/>
-<a href="/scene/insertsceneview" role="button">작성</a>
-<a href="/scene/scene">목록</a>
-<a href="/index">홈 페이지</a>
-
+</div>
+{{>layout/footer}}
 <script>
     var url = "/scene/scene";
 </script>
 <script src="/static/js/search.js"></script>
-
-
+{{>layout/bootstrapjs}}
 </body>
 </html>

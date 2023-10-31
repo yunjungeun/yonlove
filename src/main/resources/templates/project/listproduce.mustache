@@ -4,46 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>프로듀스 리스트</title>
+
+    {{>layout/header}}
 </head>
+
 <body>
-<h1>프로듀스 현황</h1>
-<table border="1" cellpadding="1" cellspacing="1">
-    <ul>
-        <tr>
-            <td>제작 이름</td>
-            <td>제작 역할</td>
-        </tr>
-        {{#selectListProduce}}
-            <tr>
-                <td><a href="/project/{{pd_id}}/selectproduce">{{pd_name}}</a></td>
-                <td>{{role}}</td>
-            </tr>
-        {{/selectListProduce}}
-    </ul>
-</table>
-<a href="/project/insertproduceview" role="button">작성</a>
-<a href="/index">홈 페이지</a>
+{{>layout/sidebar}}
+
+{{>layout/topbar}}
+<div class="container">
+        <h1>프로듀스 현황</h1>
+            <table border="1" cellpadding="1" cellspacing="1">
+                <ul>
+                    <tr>
+                        <td>제작 이름</td>
+                        <td>제작 역할</td>
+                    </tr>
+                    {{#selectListProduce}}
+                        <tr>
+                            <td><a href="/project/{{pd_id}}/selectproduce">{{pd_name}}</a></td>
+                            <td>{{role}}</td>
+                        </tr>
+                    {{/selectListProduce}}
+                </ul>
+            </table>
+    <div class="container1">
+        <a href="/project/insertproduceview" role="button">작성</a>&nbsp;&nbsp;
+        <a href="/index">홈 페이지</a>&nbsp;&nbsp;
+    </div>
 <!--페이징 처리 레이아웃-->
 {{>layout/paging}}
 
 <!--검색-->
 <br/>
-<form action="/project/project" method="GET">
-    <select id="searchType" name="searchType">
-        <option value="all">선택</option>
-        <option value="title">제작 이름</option>
-        <!-- 필요한 항목 추가 -->
-    </select>
-    <input type="text" id="search" name="search" placeholder="검색">
+        <div class="container2">
+            <form action="/project/project" method="GET">
+            <select id="searchType" name="searchType">
+                <option value="all">선택</option>
+                <option value="title">제작 이름</option>
+                <!-- 필요한 항목 추가 -->
+            </select>
 
-    <input type="submit" value="검색">
-</form>
-
+            <input type="text" id="search" name="search" placeholder="검색">
+            <input type="submit" value="검색">
+            </form>
+        </div>
+</div>
+{{>layout/footer}}
 <script>
     var url = "/project/produce";
 </script>
 <script src="/static/js/search.js"></script>
-
-
+{{>layout/bootstrapjs}}
 </body>
 </html>

@@ -3,57 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시판 리스트</title>
+    <title>스케쥴</title>
+    {{>layout/header}}
 </head>
 <body>
-<h1>공지사항</h1>
-<table border="1" cellpadding="1" cellspacing="1">
-    <ul>
-        <tr>
-            <td>기획명</td>
-            <td>촬영계획명</td>
-            <td>촬영일</td>
-            <td>촬영회차</td>
-        </tr>
+{{>layout/sidebar}}
+{{>layout/topbar}}
 
-        {{#scheduleList}}
-            <tr>
-                <td>{{project_name}}</td>
-                <td><a href="/plan/schedule/{{day_id}}">{{day_title}}</a></td>
-                <td>{{film_date}}</td>
-                <td>{{day_num}}</td>
+<div class="container">
 
-            </tr>
-        {{/scheduleList}}
-    </ul>
-</table>
+<h1>일일 촬영 계획표</h1>
+        <table border="1" cellpadding="1" cellspacing="1">
+            <ul>
+                <tr>
+                    <td>기획명</td>
+                    <td>촬영계획명</td>
+                    <td>촬영일</td>
+                    <td>촬영회차</td>
+                </tr>
+
+                {{#scheduleList}}
+                    <tr>
+                        <td>{{project_name}}</td>
+                        <td><a href="/plan/schedule/{{day_id}}">{{day_title}}</a></td>
+                        <td>{{film_date}}</td>
+                        <td>{{day_num}}</td>
+
+                    </tr>
+                {{/scheduleList}}
+            </ul>
+        </table>
 
 {{>layout/paging}}
 
-<form action="/plan/schedule_day" method="GET">
-    <select id="searchType" name="searchType">
-        <option value="all">선택</option>
-        <option value="title">제목</option>
-        <option value="content">날씨</option>
-        <!-- 필요한 항목 추가 -->
-    </select>
-    <input type="text" id="search" name="search" placeholder="검색">
+    <div class="container1">
+        <form action="/plan/schedule_day" method="GET">
+            <select id="searchType" name="searchType">
+                <option value="all">선택</option>
+                <option value="title">제목</option>
+                <option value="content">날씨</option>
+                <!-- 필요한 항목 추가 -->
+            </select>
+            <input type="text" id="search" name="search" placeholder="검색">
+            <input type="submit" value="검색">
+        </form>
+    </div>
 
-    <input type="submit" value="검색">
+    <div class="container2">
+        <a href="/plan/insertScheduleView" role="button">새 일정표 작성</a>&nbsp;&nbsp;
+        <a href="/plan/schedule_day">목록</a>&nbsp;&nbsp;
+        <a href="/index">홈 페이지</a>
 
-</form>
+    </div>
 
-
-<a href="/plan/insertScheduleView" role="button">새 일정표 작성</a>
-<a href="/plan/schedule_day">목록</a>
-
-
+</div>
+{{>layout/footer}}
 <script>
     var url = "/plan/schedule_day";
 </script>
 <script src="/static/js/search.js"></script>
-
-
-
+{{>layout/bootstrapjs}}
 </body>
 </html>

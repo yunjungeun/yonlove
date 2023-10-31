@@ -3,67 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시판 리스트</title>
+    <title>영상</title>
+    {{>layout/header}}
 </head>
 <body>
-<h1>공지사항</h1>
-<table border="1" cellpadding="1" cellspacing="1">
-    <ul>
-        <tr>
-            <td>영상제목</td>
-            <td>영상설명</td>
-            <td>영상주소</td>
-            <td>업로드날짜</td>
-            <td>영상수익</td>
-            <td>조회수</td>
-            <td>좋아요수</td>
-            <td>프로젝트아이디</td>
-        </tr>
-        {{#selectContentList}}
-            <tr>
-                <td><a href="/vd/content/{{video_id}}">{{video_name}}</a></td>
-                <td>{{video_sub}}</td>
-                <td>{{video_url}}</td>
-                <td>{{upload_date}}</td>
-                <td>{{video_profit}}</td>
-                <td>{{video_view}}</td>
-                <td>{{like_cnt}}</td>
-                <td>{{project_id}}</td>
-            </tr>
-        {{/selectContentList}}
-    </ul>
-</table>
+{{>layout/sidebar}}
+{{>layout/topbar}}
+
+<div class="container">
+
+<h1>영상 현황</h1>
+        <table border="1" cellpadding="1" cellspacing="1">
+            <ul>
+                <tr>
+                    <td>영상제목</td>
+                    <td>영상설명</td>
+                    <td>영상주소</td>
+                    <td>업로드날짜</td>
+                    <td>영상수익</td>
+                    <td>조회수</td>
+                    <td>좋아요수</td>
+                    <td>프로젝트아이디</td>
+                </tr>
+                {{#selectContentList}}
+                    <tr>
+                        <td><a href="/vd/content/{{video_id}}">{{video_name}}</a></td>
+                        <td>{{video_sub}}</td>
+                        <td>{{video_url}}</td>
+                        <td>{{upload_date}}</td>
+                        <td>{{video_profit}}</td>
+                        <td>{{video_view}}</td>
+                        <td>{{like_cnt}}</td>
+                        <td>{{project_id}}</td>
+                    </tr>
+                {{/selectContentList}}
+            </ul>
+        </table>
 
 {{>layout/paging}}
 
+    <div class="container1">
+        <form action="/vd/video" method="GET">
+            <select id="searchType" name="searchType">
+                <option value="all">선택</option>
+                <option value="title">제목</option>
+                <!-- 필요한 항목 추가 -->
+            </select>
 
+            <input type="text" id="search" name="search" placeholder="검색">
+            <input type="submit" value="검색">
+        </form>
+    </div>
 
+    <div class="container2">
+        <a href="/vd/contentInsertView" role="button">새 영상 작성</a>&nbsp;&nbsp;
+        <a href="/vd/video">목록</a>&nbsp;&nbsp;
+        <a href="/index">홈 페이지</a>
+    </div>
 
-
-
-
-<form action="/vd/video" method="GET">
-    <select id="searchType" name="searchType">
-        <option value="all">선택</option>
-        <option value="title">제목</option>
-
-        <!-- 필요한 항목 추가 -->
-    </select>
-    <input type="text" id="search" name="search" placeholder="검색">
-
-    <input type="submit" value="검색">
-
-</form>
-
-
-<a href="/vd/contentInsertView" role="button">새 영상 작성</a>
-<a href="/vd/video">목록</a>
-
-
+</div>
+{{>layout/footer}}
 <script>
     var url = "/vd/video";
 </script>
 <script src="/static/js/search.js"></script>
-
+{{>layout/bootstrapjs}}
 </body>
 </html>
