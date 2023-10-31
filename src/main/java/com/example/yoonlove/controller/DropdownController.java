@@ -15,18 +15,27 @@ public class DropdownController {
     private DropDownService dropDownService;
 
     //프로젝트 옵션 선택에따라 시나리오 옵션 재생성
-    @PostMapping("/mainoption")
+    @PostMapping("/dropdown/project_id")
     @ResponseBody
-    public String fk3test(@RequestParam ("pkid") String pkid) throws JsonProcessingException {
+    public String dropdwonProject(@RequestParam ("pkid") String pkid) throws JsonProcessingException {
+        System.out.println("드롭다운컨트롤러");
         String jsonList = dropDownService.scenarioOption(pkid);
         return jsonList;
     }
 
     //시나리오 옵션 선택에따라 씬 옵션 재생성
-    @PostMapping("/suboption")
+    @PostMapping("/dropdown/scenario_id")
     @ResponseBody
-    public String fk2test(@RequestParam ("pkid") String pkid) throws JsonProcessingException {
+    public String dropdwonScenario(@RequestParam ("pkid") String pkid) throws JsonProcessingException {
         String jsonList = dropDownService.sceneOption(pkid);
         return jsonList;
     }
+
+    @PostMapping("/dropdown/day_id")
+    @ResponseBody
+    public String dropdwonDay(@RequestParam ("pkid") String pkid) throws JsonProcessingException {
+        String jsonList = dropDownService.dayOption(pkid);
+        return jsonList;
+    }
+
 }

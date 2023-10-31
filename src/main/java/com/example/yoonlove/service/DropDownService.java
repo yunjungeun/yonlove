@@ -3,6 +3,7 @@ package com.example.yoonlove.service;
 import com.example.yoonlove.dto.ProjectDto;
 import com.example.yoonlove.dto.ScenarioDto;
 import com.example.yoonlove.dto.SceneDto;
+import com.example.yoonlove.dto.ScheduleDayDto;
 import com.example.yoonlove.mapper.DropDownMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,7 +28,7 @@ public class DropDownService {
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonList = null;
 
-        //리스트 타입이 여러개임
+        //리스트 타입이 여러개이기 때문에 스위치문으로 작성 / 인터페이스로 바꾸면 간소화 가능 //추후 인터페이스로 변형
         switch (table) {
             case "scenario" :
                 List<ScenarioDto> scenarioDtos = dropDownMapper.selectFkScenario(ajaxData);
@@ -45,6 +46,12 @@ public class DropDownService {
                 List<ProjectDto> projectDtos = dropDownMapper.selectFkProject(ajaxData);
                 for(int i=0; i< projectDtos.size(); i++){
                     fkStringList.put(projectDtos.get(i).getProject_id(),projectDtos.get(i).getProject_name());
+                }
+                break;
+            case "schedule_day" :
+                List<ScheduleDayDto> scheduleDayDtos = dropDownMapper.selectFkDay(ajaxData);
+                for(int i=0; i< scheduleDayDtos.size(); i++){
+                    fkStringList.put(scheduleDayDtos.get(i).getDay_id(),scheduleDayDtos.get(i).getDay_title());
                 }
                 break;
         }
@@ -66,6 +73,11 @@ public class DropDownService {
     //시나리오 옵션 선택에따라 씬 옵션을 재생성
     public String sceneOption(String pkId) throws JsonProcessingException{
         String jsonList = dropDownOption("scene", pkId);
+        return jsonList;
+    }
+    //시나리오 옵션 선택에따라 씬 옵션을 재생성
+    public String dayOption(String pkId) throws JsonProcessingException{
+        String jsonList = dropDownOption("schedule_day", pkId);
         return jsonList;
     }
 }
