@@ -56,7 +56,7 @@ public class ScriptPaperController {
         // 기존 값 셀럭트
 
         // 이어붙일 타임테이블 셀럭트 값
-        pdto.setPkid(dto.getTable_id());
+       // pdto.setPkid(dto.getTable_id());
 
         PageDto pageDto = new PageDto("timetable","table_id", page, pdto);
         PageDto pageInfo = pagingService.paging(pageDto);
