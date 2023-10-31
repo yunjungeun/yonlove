@@ -3,7 +3,6 @@ package com.example.yoonlove.mapper;
 import com.example.yoonlove.dto.FileDto;
 import com.example.yoonlove.dto.SceneDto;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.web.multipart.MultipartFile;
 
 @Mapper
 public interface FileMapper {
@@ -24,6 +23,6 @@ public interface FileMapper {
 
     void deleteFile(SceneDto dto);
 
-
+    int lastScenePkNum();
 
 }

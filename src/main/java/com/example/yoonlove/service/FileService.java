@@ -5,18 +5,50 @@ import com.example.yoonlove.dto.SceneDto;
 import com.example.yoonlove.mapper.FileMapper;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.UUID;
 
 @Service
 public class FileService {
 
     @Autowired
     private FileMapper fileMapper;
+
+
+
+    public ResponseEntity<String> uploadFile(MultipartFile file, String path)throws IOException{
+        String savePath = path + "/"+file.getOriginalFilename();
+        System.out.println(savePath);
+        int lastScenePkNum = fileMapper.lastScenePkNum();
+
+        try {
+            // 저장할 위치에 파일객체생성
+            File dest = new File(path);
+            file.transferTo(dest);    // 파일 저장
+
+            //file 테이블 처리
+            FileDto fileDto = new FileDto();
+            fileDto.setScene_id("scene"+(lastScenePkNum+1));  //파일 fk
+            fileDto.setFile_name(file.getOriginalFilename());  //파일 이름
+            fileDto.setFile_path(savePath);  //파일 경로
+            fileDto.setFile_data(file.getBytes());  //파일크기
+            fileMapper.insertFile(fileDto);
+            //file 테이블 처리 end
+
+            return ResponseEntity.ok("파일 업로드 성공");
+        } catch (IOException e) {
+            // 파일 업로드 실패 시 에러 응답을 반환
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("파일 업로드 실패");
+        }
+    }
+
+
+
 
     public void insertNull(int lastnum){
         SceneDto dto = new SceneDto();
@@ -29,12 +61,9 @@ public class FileService {
     @Transactional
     public void insertFile(MultipartFile file, int lastnum) throws IOException {
 
-
         if(file.isEmpty()){
             System.out.println("test!!!");
         }
-
-
 
         if (file != null && !file.isEmpty()) {
             FileDto fileDto = new FileDto();
@@ -52,9 +81,6 @@ public class FileService {
     }
 
     @Transactional
-
-
-
     public void updateFile(SceneDto dto, MultipartFile newFile) throws IOException {
         // 1. 기존 파일 정보 가져오기
         FileDto existingFile = fileMapper.selectFile(dto);

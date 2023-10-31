@@ -48,12 +48,8 @@
         WHERE scene_id = #{scene_id}
     </select>
 
-
-
-
-
-
-
-
+    <select id="lastScenePkNum" parameterType="com.example.yoonlove.dto.SceneDto" >
+        select max(to_number(substr(scene_id,6))) from scene
+    </select>
 
 </mapper>

@@ -18,7 +18,7 @@
             <td>시나리오
             <select id="fk2" name="scenario_id" class="field1"></select></td>
             <td>씬 번호<input class="int1" name="scene_num" type="number" placeholder="미입력시 자동생성" ></td>
-            <td>첨부파일<input id="fileInput"  name="file" type="file"   placeholder="파일을 첨부하세요" ></td>
+            <td>첨부파일<input id="fileInput"  name="file" type="file"   placeholder="파일을 첨부하세요"></td>
 
             <p id="errorText" style="color: red;"></p>
         </tr>
@@ -32,7 +32,8 @@
         </tr>
     </table>
 
-    <input id="submit-button" type="submit" value="등록" onclick="mappingurl('/scene/insertscene',4,'작성',1)">
+    <input type="button" value="업로드" onclick="uploadFile()"/>
+    <!--<input id="submit-button" type="submit" value="등록" onclick="mappingurl('/scene/insertscene',4,'작성',1)">-->
 </form>
 <a href="/scene/scene">취소</a>
 
@@ -44,5 +45,6 @@
 </script>
 <script src="/static/js/dropdown.js"></script>
 <script src="/static/js/cu_alert.js"></script>
+<script src="/static/js/uploadFile.js"></script>
 </body>
 </html>
