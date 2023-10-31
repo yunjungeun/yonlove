@@ -76,14 +76,12 @@ public class VideoController {
         return mv;
     }
 
-
     @GetMapping("vd/{video_id}/updateContent") //업데이트 처리
     @ResponseBody
     public String updateContent( VideoDto dto) {
         videoService.updateContent(dto);
         return "redirect:/vd/video";
     }
-
 
     @GetMapping("/vd/{video_id}/delete") //삭제 처리
     public String deleteContent( VideoDto dto) {

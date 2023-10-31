@@ -1,6 +1,7 @@
 package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.*;
+import com.example.yoonlove.service.CalendarService;
 import com.example.yoonlove.service.DropDownService;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.PlanService;
@@ -16,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 
-
 @Controller
 public class PlanController {
 
@@ -26,6 +26,8 @@ public class PlanController {
     private PagingService pagingService;
     @Autowired
     private DropDownService dropDownService;
+    @Autowired
+    private CalendarService calendarService;
 
 
     @GetMapping("/plan/schedule_day")
@@ -429,5 +431,51 @@ public class PlanController {
         return "redirect:/plan/schedule_month";
 
     }
+
+    //월력형 개발중
+    @GetMapping("/calendar")
+    public ModelAndView showCalendar(@RequestParam(defaultValue = "2023") int year, @RequestParam(defaultValue = "10")int month) {
+        ModelAndView mv = new ModelAndView();
+
+        List<List<String>> calendarData = calendarService.generateCalendarData(year,month);
+
+        // 뷰로 데이터를 전달하기 위해 모델에 "calendar" 속성 추가
+        mv.setViewName("/plan/test");
+        mv.addObject("year", year);
+        mv.addObject("month", month);
+        mv.addObject("calendar", calendarData);
+
+        return mv;
+    }
+
+    @GetMapping("/calendar/pre")
+    public ModelAndView showCalendar1(@RequestParam(defaultValue = "2023") int year, @RequestParam(defaultValue = "10")int month) {
+        ModelAndView mv = new ModelAndView();
+
+        List<List<String>> calendarData = calendarService.generateCalendarData(year,month-1);
+
+        // 뷰로 데이터를 전달하기 위해 모델에 "calendar" 속성 추가
+        mv.setViewName("/plan/test");
+        mv.addObject("year", year);
+        mv.addObject("month", month-1);
+        mv.addObject("calendar", calendarData);
+
+        return mv;
+    }
+    @GetMapping("/calendar/next")
+    public ModelAndView showCalendar2(@RequestParam(defaultValue = "2023") int year, @RequestParam(defaultValue = "10")int month) {
+        ModelAndView mv = new ModelAndView();
+
+        List<List<String>> calendarData = calendarService.generateCalendarData(year,month+1);
+
+        // 뷰로 데이터를 전달하기 위해 모델에 "calendar" 속성 추가
+        mv.setViewName("/plan/test");
+        mv.addObject("year", year);
+        mv.addObject("month", month+1);
+        mv.addObject("calendar", calendarData);
+
+        return mv;
+    }
+
 
 }
