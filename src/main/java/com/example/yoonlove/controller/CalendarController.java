@@ -34,12 +34,15 @@ public class CalendarController {
         List<String> calendar = new ArrayList<>();
         for (int day = 1; day <= lastDayOfMonth; day++) {
             // 날짜와 요일을 한국 날짜 형식으로 포맷하여 목록에 추가
-            String formattedDate = currentDate.format(koreanDateFormatter) + " " + dayOfWeek[startDayOfWeek];
+            String formattedDate = Integer.toString(day);
             calendar.add(formattedDate);
 
-            // 다음 날짜로 이동
             startDayOfWeek = (startDayOfWeek + 1) % 7; // 다음 요일 계산
             currentDate = currentDate.plusDays(1); // 다음 날짜로 이동
+
+            if (startDayOfWeek < 0) {
+                startDayOfWeek = 6; // 요일이 0보다 작으면 6으로 설정 (일요일)
+            }
         }
 
         // 뷰로 데이터를 전달하기 위해 모델에 "calendar" 속성 추가
