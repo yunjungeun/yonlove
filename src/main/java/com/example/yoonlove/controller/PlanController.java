@@ -444,38 +444,23 @@ public class PlanController {
         mv.addObject("year", year);
         mv.addObject("month", month);
         mv.addObject("calendar", calendarData);
-
         return mv;
     }
 
-    @GetMapping("/calendar/pre")
-    public ModelAndView showCalendar1(@RequestParam(defaultValue = "2023") int year, @RequestParam(defaultValue = "10")int month) {
+
+    /*@PostMapping("/calendar")
+    @ResponseBody
+    public Map<String, Object> preMonth(int year, int month){
+        Map<String, Object> response = new HashMap<>();
+
         ModelAndView mv = new ModelAndView();
+        List<List<String>> calendarData = calendarService.generateCalendarData(year,month);
 
-        List<List<String>> calendarData = calendarService.generateCalendarData(year,month-1);
-
-        // 뷰로 데이터를 전달하기 위해 모델에 "calendar" 속성 추가
         mv.setViewName("/plan/test");
         mv.addObject("year", year);
-        mv.addObject("month", month-1);
+        mv.addObject("month", month);
         mv.addObject("calendar", calendarData);
-
-        return mv;
-    }
-    @GetMapping("/calendar/next")
-    public ModelAndView showCalendar2(@RequestParam(defaultValue = "2023") int year, @RequestParam(defaultValue = "10")int month) {
-        ModelAndView mv = new ModelAndView();
-
-        List<List<String>> calendarData = calendarService.generateCalendarData(year,month+1);
-
-        // 뷰로 데이터를 전달하기 위해 모델에 "calendar" 속성 추가
-        mv.setViewName("/plan/test");
-        mv.addObject("year", year);
-        mv.addObject("month", month+1);
-        mv.addObject("calendar", calendarData);
-
-        return mv;
-    }
-
+       // return mv;
+    }*/
 
 }

@@ -23,14 +23,24 @@
         </tr>
     {{/calendar}}
 </table>
-<form method="get" action="/calendar">
+<form method="post" action="/calendar">
     년<input type="number" name="year">
     월<input type="number" name="month">
     <input type="submit" value="검색">
 </form>
 
-<a href="/calendar/pre?year={{year}}&month={{month}}">전월</a>
-<a href="/calendar/next?year={{year}}&month={{month}}">다음달</a>
+<button type="button" id="preYear" >전년</button>
+<button type="button" id="preMonth" onclick="preMonth()">이전달</button>
+<button type="button" id="nextMonth">다음달</button>
+<button type="button" id="nextYear">내년</button>
 
+
+<!--js에 넘겨주기 위한 히든값 start-->
+<input id="year" type="hidden" value="{{year}}">
+<input id="month" type="hidden" value="{{month}}">
+<!--js에 넘겨주기 위한 히든값 end-->
+
+
+<script src="/static/js/calendar.js"></script>
 </body>
 </html>
