@@ -1,5 +1,6 @@
 //html 본문에서 옵션 값을 받아와 저장하는 변수
 var fkid = selectName;
+
 function mappingurl(submiturl,sucessurl, int, text, cnt){
     document.getElementById("alert").addEventListener("submit", function (event){
         event.preventDefault();

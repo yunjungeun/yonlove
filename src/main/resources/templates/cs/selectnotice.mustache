@@ -36,13 +36,13 @@
 
 
                     <div class="mb-3" style="text-align: center;">
-                        <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>제목</strong></label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" value="{{selectNotice.notice_title}}" style="width: 300px; display: block; margin: 0 auto;">
+                        <label for="formGroupExampleInput" class="form-label" style="display: block; text-align: center"><strong>제목</strong></label>
+                        <input type="text" class="card shadow mb-4" id="formGroupExampleInput" value="{{selectNotice.notice_title}}" style="width: 30%; display: block; margin: 0 auto;">
                     </div>
 
                     <div class="mb-3" style="text-align: center">
                         <label for="formGroupExampleInput" class="form-label" style="display: block;">공지내용</label>
-                        <textarea type="text" class="form-control" id="formGroupExampleInput" style="height: 100px; width: 500px;  display: block; margin: 0 auto;">{{selectNotice.notice_content}}</textarea>
+                        <textarea type="text" class="card shadow mb-4" id="formGroupExampleInput" style="height: 30vh; width:60%;  display: block; margin: 0 auto;">{{selectNotice.notice_content}}</textarea>
                     </div>
                     <div style="text-align: center">
                         <a style="display: inline-block " href="/cs/notice">목록</a>&nbsp; <a href="/cs/{{selectNotice.notice_id}}/updatenoticeview" style="display: inline-block">수정</a>&nbsp; <a href="javascript:void(0);" style="display: inline-block" onclick="deleteAlert('/cs/{{selectNotice.notice_id}}/deletenotice')" >삭제</a>

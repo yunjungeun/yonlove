@@ -97,6 +97,8 @@ public class CsController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/cs/insertnoticeview");
         mv.addObject("writer", userService.getnick(user));
+
+
         return mv;
     }
 
@@ -106,6 +108,8 @@ public class CsController {
         dto.setUser_id(user.getName());
 
         csService.insertNotice(dto);
+        System.out.println(dto.toString());
+
         return "/cs/notice";
     }
 

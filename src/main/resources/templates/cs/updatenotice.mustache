@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시판 리스트</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
     {{>layout/header}}
 </head>
 <body id="page-top">
@@ -36,10 +38,18 @@
 
                     <form id="alert" action="/cs/{{updateNotice.notice_id}}/updatenotice" method="get">
                         <input name="notice_id" type="hidden" value="{{updateNotice.notice_id}}"/>
-                        <div class="mb-3" style="text-align: center;">
-                            <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>제목</strong></label>
-                            <input class="form-control" id="formGroupExampleInput" class="field1" name="notice_title" type="text" value="{{updateNotice.notice_title}}" style="width: 300px; display: block; margin: 0 auto;">
-                        </div>
+
+
+                       <div>
+                            <div class="mb-3" style="text-align: center; display: inline-block;">
+                                <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>제목</strong></label>
+                            </div>
+
+                            <div class="mb-3" style="text-align: center; display: inline-block;">
+                                <input id="formGroupExampleInput" class="field1 card shadow mb-4" name="notice_title" type="text" value="{{updateNotice.notice_title}}" style="width: 70%; ">
+                            </div>
+                       </div>
+
 
                         <!--<div class="mb-3" style="text-align: center;">
                             <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>작성자</strong></label>
@@ -48,14 +58,14 @@
 
                         <div class="mb-3" style="text-align: center">
                             <label for="formGroupExampleInput" class="form-label" style="display: block;">공지내용</label>
-                            <textarea type="text" class="form-control" id="formGroupExampleInput" class="field2" name="notice_content" style="height: 100px; width: 500px;  display: block; margin: 0 auto;">{{updateNotice.notice_content}}</textarea>
+                            <textarea type="text" id="formGroupExampleInput" class="field2 card shadow mb-4" name="notice_content" style="height: 30vh; width: 60%;  display: block; margin: 0 auto;">{{updateNotice.notice_content}}</textarea>
                         </div>
 
 
 
 
                         <div style="text-align: center">
-                            <input type="submit"  id="insert" value="등록"  onclick="mappingurl('/cs/{{updateNotice.notice_id}}/updatenotice','/cs/notice',2,'수정')">&nbsp; <a href="/cs/notice">취소</a> &nbsp;
+                            <input type="submit"  value="등록"  onclick="mappingurl('/cs/{{updateNotice.notice_id}}/updatenotice','/cs/notice',2,'수정')">&nbsp; <a href="/cs/notice">취소</a> &nbsp;
                         </div>
 
 
