@@ -24,14 +24,14 @@
             <!--mb-2:하단의 여백 -->
             <!-- Page Heading -->
             <div style="text-align: center; display: block; margin-top:100px;" >
-            <h1 class="h3 mb-2 text-gray-800" >공지사항</h1><!--공지사항이 너무 천장에 붙어있어서 margin-top: 50px을 줘서 내렸습니다-->
+            <h1 class="h3 mb-2 text-gray-800"  >공지사항</h1><!--공지사항이 너무 천장에 붙어있어서 margin-top: 50px을 줘서 내렸습니다-->
             </div>
             <!-- <p class="mb-4">게시판 설명 넣는곳 <a target="_blank" href="https://datatables.net">이곳에 링크 넣으세요</a>.</p>-->
 
 
             <!-- DataTales Example -->
-            <div class="card shadow mb-4" style="margin-top: 150px; margin-right: 300px; margin-left: 300px">
-                <div class="card-header py-3">
+            <div class="card shadow mb-4" style="margin-top: 70px; margin-right: 300px; margin-left: 300px;">
+                <div class="card-header py-3" >
                     <!--<h6 class="m-0 font-weight-bold text-primary">공지사항</h6>-->
 
                     <div style="margin-left: 20%; margin-top: 5%;">
@@ -77,7 +77,9 @@
 
 
                     <div style="text-align: center">
-                        <a style="display: inline-block " href="/cs/notice">목록</a>&nbsp; <a href="/cs/{{selectNotice.notice_id}}/updatenoticeview" style="display: inline-block">수정</a>&nbsp; <a href="javascript:void(0);" style="display: inline-block" onclick="deleteAlert('/cs/{{selectNotice.notice_id}}/deletenotice')" >삭제</a>
+                        <a href="/cs/notice" class="btn btn-primary">목록</a>
+                        <a href="/cs/{{selectNotice.notice_id}}/updatenoticeview" class="btn btn-success">수정</a>
+                        <a href="javascript:void(0);" class="btn btn-danger" onclick="deleteAlert('/cs/{{selectNotice.notice_id}}/deletenotice')">삭제</a>
                     </div>
 
                 </div>
