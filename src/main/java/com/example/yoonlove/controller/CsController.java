@@ -123,7 +123,13 @@ public class CsController {
     }
     @GetMapping("/cs/{notice_id}/updatenotice")
     public String updateNotice(NoticeDto dto){
-        csService.updateNotice(dto);
+
+        System.out.println("업데이트 오류111" +dto.toString());
+
+         csService.updateNotice(dto);
+
+        System.out.println("업데이트 오류2222" +dto.toString());
+
         return "/cs/notice";
     }
 
