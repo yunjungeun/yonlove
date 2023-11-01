@@ -39,7 +39,6 @@
                     <form id="alert" action="/cs/{{updateNotice.notice_id}}/updatenotice" method="get">
                         <input name="notice_id" type="hidden" value="{{updateNotice.notice_id}}"/>
 
-
                         <div style="margin-left: 20%; margin-top: 5%;">
                             <div style="display: inline-block;">
                                 <div class="mb-3" style="text-align: center; display: inline-block;">
@@ -47,7 +46,7 @@
                                 </div>
 
                                 <div class="mb-3" style="text-align: center; display: inline-block;">
-                                    <input id="formGroupExampleInput" class="field1 card shadow mb-4" name="notice_title" type="text" value="{{updateNotice.notice_title}}"  style="width: 90%; ">
+                                    <input id="formGroupExampleInput" class="field1 card shadow mb-4" name="notice_title" type="text" value="{{updateNotice.notice_title}}"  style="width: 90%; text-align: center ">
                                 </div>
                             </div>
 
@@ -56,14 +55,18 @@
                                     <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>작성자</strong></label>
                                 </div>
                                 <div class="mb-3" style="text-align: center; display: inline-block;">
-                                    <input  id="formGroupExampleInput" class="card shadow mb-4"  name="notice_writer" type="text" value="{{updateNotice.notice_writer}}" readonly style="width: 90%;">
+                                    <input  id="formGroupExampleInput" class="card shadow mb-4"  name="notice_writer" type="text" value="{{updateNotice.notice_writer}}" readonly style="width: 90%; text-align: center">
                                 </div>
                             </div>
+
                         </div>
+
+
+
 
                         <div class="mb-3" style="text-align: center">
                             <label for="formGroupExampleInput" class="form-label" style="display: block;"></label>
-                            <textarea type="text"  id="formGroupExampleInput" class="field2 card shadow mb-4" name="notice_content"  style="height: 30vh; width: 60%;  display: block; margin: 0 auto;">{{updateNotice.notice_content}}</textarea>
+                            <textarea type="text" class="field2 card shadow mb-4" id="formGroupExampleInput" style="height: 30vh; width:60%;  display: block; margin: 0 auto;">{{updateNotice.notice_content}}</textarea>
                         </div>
 
 

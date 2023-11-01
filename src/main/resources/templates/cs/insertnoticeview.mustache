@@ -27,20 +27,16 @@
             <div style="text-align: center; display: block; margin-top:100px;" >
                 <h1 class="h3 mb-2 text-gray-800" >공지사항</h1><!--공지사항이 너무 천장에 붙어있어서 margin-top: 50px을 줘서 내렸습니다-->
             </div>
-            <!-- <p class="mb-4">게시판 설명 넣는곳 <a target="_blank" href="https://datatables.net">이곳에 링크 넣으세요</a>.</p>-->
+
 
 
 
             <div class="card shadow mb-4" style="margin-top: 150px; margin-right: 300px; margin-left: 300px">
                 <div class="card-header py-3">
-                    <!--<h6 class="m-0 font-weight-bold text-primary">공지사항</h6>-->
+
 
                     <form id="alert" action="/cs/insertnotice" method="get">
-                 <!--   <div class="mb-3" style="text-align: center;">
-                        <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>제목</strong></label>
-                        <input  id="formGroupExampleInput" class="field1 card shadow mb-4" name="notice_title" type="text" style="width: 30%; display: block; margin: 0 auto;">
-                       &lt;!&ndash; <input type="text"  name="notice_title"  class="field1 form-control bg-light border-0 small" placeholder="제목을 입력하세요" aria-label="Search" aria-describedby="basic-addon2">&ndash;&gt;
-                    </div>-->
+
                       <div style="margin-left: 20%; margin-top: 5%;">
                            <div style="display: inline-block;">
                               <div class="mb-3" style="text-align: center; display: inline-block;">
@@ -48,7 +44,7 @@
                               </div>
 
                                <div class="mb-3" style="text-align: center; display: inline-block;">
-                                    <input id="formGroupExampleInput" class="field1 card shadow mb-4" name="notice_title" type="text"   style="width: 90%; ">
+                                    <input id="formGroupExampleInput" class="field1 card shadow mb-4" name="notice_title" type="text"   style="width: 90%; text-align: center">
                                </div>
                            </div>
 
@@ -57,7 +53,7 @@
                                      <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>작성자</strong></label>
                                 </div>
                                 <div class="mb-3" style="text-align: center; display: inline-block;">
-                                     <input  id="formGroupExampleInput" class="field2 card shadow mb-4"  name="notice_writer" type="text" value="{{writer}}" readonly style="width: 90%;">
+                                     <input  id="formGroupExampleInput" class="field2 card shadow mb-4"  name="notice_writer" type="text" value="{{writer}}" readonly style="width: 90%; text-align: center">
                                 </div>
                             </div>
                       </div>
