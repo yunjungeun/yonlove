@@ -34,16 +34,49 @@
                 <div class="card-header py-3">
                     <!--<h6 class="m-0 font-weight-bold text-primary">공지사항</h6>-->
 
+                    <div style="margin-left: 20%; margin-top: 5%;">
+                        <div style="display: inline-block;">
+                            <div class="mb-3" style="text-align: center; display: inline-block;">
+                                <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>제목</strong></label>
+                            </div>
 
-                    <div class="mb-3" style="text-align: center;">
-                        <label for="formGroupExampleInput" class="form-label" style="display: block; text-align: center"><strong>제목</strong></label>
-                        <input type="text" class="card shadow mb-4" id="formGroupExampleInput" value="{{selectNotice.notice_title}}" style="width: 30%; display: block; margin: 0 auto;">
+                            <div class="mb-3" style="text-align: center; display: inline-block;">
+                                <input id="formGroupExampleInput" class="card shadow mb-4" name="notice_title" type="text" value="{{selectNotice.notice_title}}"   style="width: 90%; ">
+                            </div>
+                        </div>
+
+                        <div style="display: inline-block;">
+                            <div class="mb-3" style="text-align: center; display: inline-block;">
+                                <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>작성자</strong></label>
+                            </div>
+                            <div class="mb-3" style="text-align: center; display: inline-block;">
+                                <input  id="formGroupExampleInput" class="card shadow mb-4"  name="notice_writer" type="text" value="{{selectNotice.notice_writer}}" readonly style="width: 90%;">
+                            </div>
+                        </div>
                     </div>
+
 
                     <div class="mb-3" style="text-align: center">
-                        <label for="formGroupExampleInput" class="form-label" style="display: block;">공지내용</label>
-                        <textarea type="text" class="card shadow mb-4" id="formGroupExampleInput" style="height: 30vh; width:60%;  display: block; margin: 0 auto;">{{selectNotice.notice_content}}</textarea>
+                        <label for="formGroupExampleInput" class="form-label" style="display: block;"></label>
+                        <textarea type="text"  id="formGroupExampleInput" class="card shadow mb-4" name="notice_content"  style="height: 30vh; width: 60%;  display: block; margin: 0 auto;">{{selectNotice.notice_content}}</textarea>
                     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     <div style="text-align: center">
                         <a style="display: inline-block " href="/cs/notice">목록</a>&nbsp; <a href="/cs/{{selectNotice.notice_id}}/updatenoticeview" style="display: inline-block">수정</a>&nbsp; <a href="javascript:void(0);" style="display: inline-block" onclick="deleteAlert('/cs/{{selectNotice.notice_id}}/deletenotice')" >삭제</a>
                     </div>
