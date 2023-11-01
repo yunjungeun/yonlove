@@ -47,6 +47,8 @@ function mappingurl(submiturl, int, text, cnt){
             data : data,
             success:function(response){
                 alert("정상적으로 " +text+" 되었습니다");
+                uploadFile();
+
                 window.location.href = response ;
             },
             error: function(error){

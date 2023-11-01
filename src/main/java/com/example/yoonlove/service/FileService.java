@@ -24,21 +24,20 @@ public class FileService {
         String savePath = path + "/src/main/resources/static/img/"+file.getOriginalFilename();
 
         int lastScenePkNum = fileMapper.lastScenePkNum();
-
+        System.out.println("scene"+(lastScenePkNum+1));
         try {
-            // 저장할 위치에 파일객체생성
-            File dest = new File(savePath);
-            file.transferTo(dest);    // 파일 저장
-
             //file 테이블 처리
             FileDto fileDto = new FileDto();
-            fileDto.setScene_id("scene"+(lastScenePkNum+1));  //파일 fk
+            fileDto.setScene_id("scene"+(lastScenePkNum));  //파일 fk
             fileDto.setFile_name(file.getOriginalFilename());  //파일 이름
             fileDto.setFile_path(savePath);  //파일 경로
             fileDto.setFile_data(file.getBytes());  //파일크기
             fileMapper.insertFile(fileDto);
             //file 테이블 처리 end
-            System.out.println("여기까지됫나");
+
+            // 저장할 위치에 파일객체생성
+            File dest = new File(savePath);
+            file.transferTo(dest);    // 파일 저장
 
             return ResponseEntity.ok("파일 업로드 성공");
         } catch (IOException e) {
