@@ -72,10 +72,11 @@
                 </table>
 
                 <!--페이징 처리 레이아웃-->
-                {{>layout/paging}}
-                <a style="margin-left: 20px" href="/cs/insertnotice-view" role="button">글 작성</a>
-                <a style="margin-left: 20px" href="/cs/notice">목록</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                <a style="margin-left: 20px" href="/index">홈 페이지</a>
+                <div class="d-flex justify-content-between align-items-center">
+                {{>layout/paging}} <br/>
+                <a href="/cs/insertnotice-view" role="button"class="btn btn-primary">글 작성</a>
+                </div>
+            </div>
             </div>
         </div>
 

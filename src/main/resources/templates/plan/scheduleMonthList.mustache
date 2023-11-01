@@ -9,56 +9,104 @@
 <body>
 {{>layout/sidebar}}
 {{>layout/topbar}}
-<div class="container">
-<h1>월 촬영 계획표</h1>
-        <table border="1" cellpadding="1" cellspacing="1">
-            <ul>
-                <tr>
-                    <td>스케쥴명</td>
-                    <td>스케쥴내용</td>
-                    <td>스케쥴일정</td>
-                    <td>프로젝트id</td>
-                </tr>
-                {{#scheduleMonthList}}
-                    <tr>
-                        <td>{{schedule_name}}</td>
-                        <td><a href="/plan/scheduleMonth/{{month_id}}">{{schedule_content}}</a></td>
-                        <td>{{schedule_date}}</td>
-                        <td>{{project_id}}</td>
 
-                    </tr>
-                {{/scheduleMonthList}}
-            </ul>
-        </table>
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
 
-{{>layout/paging}}
+    <!-- Main Content -->
+    <div id="content">
 
-    <div class="container1">
-        <form action="/plan/schedule_month" method="GET">
-            <select id="searchType" name="searchType">
-                <option value="all">선택</option>
-                <option value="title">스케쥴명</option>
-                <option value="content">스케쥴내용</option>
-                <option value="date">스케쥴일정</option>
-                <!-- 필요한 항목 추가 -->
-            </select>
-            <input type="text" id="search" name="search" placeholder="검색">
-            <input type="submit" value="검색">
-        </form>
-    </div>
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+            <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px;">월 촬영 계획표</h1>
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4" style="margin-top: 50px;">
+                <div class="card-header py-3">
+    <!-- 검색 -->
+    <form action="/plan/schedule_month" method="GET" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">>
+        <div class="input-group">
+        <select id="searchType" name="searchType">
+            <option value="all">선택</option>
+            <option value="title">스케쥴명</option>
+            <option value="content">스케쥴내용</option>
+            <option value="date">스케쥴일정</option>
+            <!-- 필요한 항목 추가 -->
+        </select>
 
-    <div class="container2">
-        <a href="/plan/insertScheduleMonthView" role="button">새 스케쥴 작성</a>&nbsp;&nbsp;
-        <a href="/plan/schedule_month">목록</a>&nbsp;&nbsp;
-        <a href="/index">홈 페이지</a>
-    </div>
+            <input id="search" name="search" type="text"  style="width: 150px;" class="form-control bg-light border-0 small" placeholder="Search for..."
+                   aria-label="Search" aria-describedby="basic-addon2">
+
+            <div class="input-group-append">
+                <input class="btn btn-primary" type="submit" value="검색">
+            </div>
+        </div>
+    </form>
 
 </div>
-{{>layout/footer}}
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th style="text-align: center;">스케쥴명</th>
+                    <th style="text-align: center;">스케쥴내용</th>
+                    <th style="text-align: center;">스케쥴일정</th>
+                    <th style="text-align: center;">프로젝트id</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#scheduleMonthList}}
+                    <tr>
+                        <td style="text-align: center;">{{schedule_name}}</td>
+                        <td style="text-align: center;"><a href="/plan/scheduleMonth/{{month_id}}">{{schedule_content}}</a></td>
+                        <td style="text-align: center;">{{schedule_date}}</td>
+                        <td style="text-align: center;">{{project_id}}</td>
+                    </tr>
+                {{/scheduleMonthList}}
+                </tbody>
+            </table>
+
+        <!--페이징 처리 레이아웃-->
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <!-- 테이블 헤더 및 데이터 부분 -->
+            </table>
+
+            <div class="d-flex justify-content-between align-items-center">
+                {{>layout/paging}}
+                <a href="/plan/insertScheduleMonthView" role="button" class="btn btn-primary">글 작성</a>
+
+            </div>
+        </div>
+
+        </div>
+
+    </div>
+</div>
+<br/>
+</div>
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- /.container-fluid -->
+</div>
+    <!-- End of Main Content -->
+    {{>layout/footer}}
+</div>
+
+<!-- End of Content Wrapper -->
 <script>
     var url = "/plan/schedule_month";
 </script>
+
 <script src="/static/js/search.js"></script>
+<!-- 페이징 처리와 관련된 부트스트랩 라이브러리-->
+<script src="/static/bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- 페이징 처리와 관련된 부트스트랩 라이브러리 -->
+<script src="/static/bootstrap/js/demo/datatables-demo.js"></script>
+
 {{>layout/bootstrapjs}}
 </body>
 </html>

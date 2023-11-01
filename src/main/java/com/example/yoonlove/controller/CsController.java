@@ -63,7 +63,7 @@ public class CsController {
 
         List<NoticeDto> dto = csService.selectListNotice(pageInfo);
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/layout/listnotice");
+        mv.setViewName("/cs/listnotice");
         mv.addObject("selectListNotice", dto);
 
 
