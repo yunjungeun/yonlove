@@ -21,13 +21,13 @@ public class FileService {
 
 
     public ResponseEntity<String> uploadFile(MultipartFile file, String path)throws IOException{
-        String savePath = path + "/"+file.getOriginalFilename();
-        System.out.println(savePath);
+        String savePath = path + "/src/main/resources/static/img/"+file.getOriginalFilename();
+
         int lastScenePkNum = fileMapper.lastScenePkNum();
 
         try {
             // 저장할 위치에 파일객체생성
-            File dest = new File(path);
+            File dest = new File(savePath);
             file.transferTo(dest);    // 파일 저장
 
             //file 테이블 처리
@@ -38,6 +38,7 @@ public class FileService {
             fileDto.setFile_data(file.getBytes());  //파일크기
             fileMapper.insertFile(fileDto);
             //file 테이블 처리 end
+            System.out.println("여기까지됫나");
 
             return ResponseEntity.ok("파일 업로드 성공");
         } catch (IOException e) {
