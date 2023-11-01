@@ -108,7 +108,7 @@ public class SceneController {
     @GetMapping("/scene/{scene_id}/updatesceneview")
     public ModelAndView updateSceneView(SceneDto sceneDto){
         SceneDto dto = sceneService.selectScene(sceneDto);
-        FileDto fileDto = fileService.selectFile(sceneDto);
+        FileDto fileDto = fileService.selectSceneFile(sceneDto);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/scene/sceneupdate");
         mv.addObject("updateScene",dto);
