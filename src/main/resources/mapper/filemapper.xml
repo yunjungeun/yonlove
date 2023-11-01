@@ -12,10 +12,13 @@
 
     <insert id="insertFile" parameterType="com.example.yoonlove.dto.FileDto">
         INSERT INTO files
-
-        VALUES
-            ((select concat('file_id', (nvl(max(substr(file_id, 8)), 0)+1)) from files),
-             #{file_name}, #{file_path}, #{file_data}, #{scene_id})
+        VALUES(
+        (select concat('file', (nvl(max(to_number(substr(file_id, 5))), 0)+1)) from files),<!--pk코드 자동증가(수정2)-->
+        #{file_name},
+        #{file_path},
+        #{file_data},
+        #{scene_id}
+        )
     </insert>
 
         <!--첨부파일이 없을때 임시테이블 생성-->
@@ -50,6 +53,11 @@
 
     <select id="lastScenePkNum" parameterType="com.example.yoonlove.dto.SceneDto" >
         select max(to_number(substr(scene_id,6))) from scene
+    </select>
+
+    <select id="searchFk" parameterType="com.example.yoonlove.dto.SceneDto" >
+        SELECT * FROM files
+        WHERE scene_id = #{fk}
     </select>
 
 </mapper>

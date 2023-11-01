@@ -7,13 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -38,7 +35,6 @@ public class SceneController {
         String rink = pagingService.pageRink(pageDto);
 
         List<SceneDto> dto = sceneService.selectListScene(pageInfo);
-        System.out.println(dto.get(0).toString());
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/scene/scene");
         mv.addObject("selectListScene", dto);
@@ -109,18 +105,11 @@ public class SceneController {
         return mv;
     }
 
-    @PostMapping("/scene/{scene_id}/updatescene")
+    @GetMapping("/scene/{scene_id}/updatescene")
     @ResponseBody
-    public String updateScene(SceneDto dto, MultipartFile newfile) {
-
-        try {
-            fileService.updateFile(dto, newfile); // 파일수정해서 업로드하는 메소드!!!!!!!
-        }catch (IOException e) {
-            e.printStackTrace();
-
-        }
+    public String updateScene(SceneDto dto) {
         sceneService.updateScene(dto);
-        return "redirect:/scene/scene";
+        return "/scene/scene";
     }
     @GetMapping("/scene/{scene_id}/deletescene")
     public String deleteScene(SceneDto dto){

@@ -23,6 +23,9 @@ public interface FileMapper {
 
     void deleteFile(SceneDto dto);
 
+    //마지막 scene테이블의 pk를 찾는 메소드
     int lastScenePkNum();
+
+    FileDto searchFk(String fk);
 
 }
