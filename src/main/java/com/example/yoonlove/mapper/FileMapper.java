@@ -26,6 +26,9 @@ public interface FileMapper {
     //마지막 scene테이블의 pk를 찾는 메소드
     int lastScenePkNum();
 
+    //마지막 script 테이블의 pk를 찾는 메소드
+    int lastScriptPkNum();
+
     FileDto searchFk(String fk);
 
 }

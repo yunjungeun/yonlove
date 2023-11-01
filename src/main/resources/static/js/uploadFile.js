@@ -3,10 +3,12 @@
         //fileInput 가 비어있으면 로직실행안함
        if(fileInput){
             var file = fileInput.files[0];
+            var tableId= document.getElementById('tableId').value;
 
             if (file) {
                 var formData = new FormData();
                 formData.append('file', file);
+                formData.append('table', tableId);
 
          $.ajax({
            url: '/upload',  // 서버로 업로드를 처리하는 API endpoint URL

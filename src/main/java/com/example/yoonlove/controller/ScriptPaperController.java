@@ -69,7 +69,7 @@ public class ScriptPaperController {
     @ResponseBody
     public String insertScriptPaper(ScriptPaperDto dto){
         scriptPaperService.insertScriptPaper(dto);
-        return "redirect:/script/scriptpaper";
+        return "/script/scriptpaper";
     }
 
     @GetMapping("script/{script_id}/updatescriptview")

@@ -71,7 +71,7 @@
         #{video_date}, <!--영상촬영 날짜-->
         #{video_time}, <!--영상 촬영시작시간-->
         #{video_end_time}, <!--영상 촬영 종료시간-->
-        #{action_image}, <!--액션이미지 첨부파일 주소-->
+        null, <!--이부분 이제 안씀 테이블삭제 해도됨-->
         #{action_content}, <!--액션 내용-->
         #{position_image}, <!--카메라포지션 첨부파일 주소-->
         #{conti} <!--콘티-->

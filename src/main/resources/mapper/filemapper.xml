@@ -17,7 +17,15 @@
         #{file_name},
         #{file_path},
         #{file_data},
-        #{scene_id}
+        <if test="scene_id != null and script_id == null">
+            #{scene_id},
+            null
+        </if>
+        <if test="scene_id == null and script_id != null">
+            null,
+            #{script_id}
+        </if>
+
         )
     </insert>
 
@@ -54,10 +62,16 @@
         WHERE scene_id = #{fk}
     </update>
 
-    <!--파일 업로드시 작성된 글의 pk를 가져와 파일테이블의 fk를 만드는 메소드-->
+    <!--파일 업로드시 작성된 글의 scene pk를 가져와 파일테이블의 fk를 만드는 메소드-->
     <select id="lastScenePkNum" parameterType="com.example.yoonlove.dto.SceneDto" >
         select max(to_number(substr(scene_id,6))) from scene
     </select>
+
+    <!--파일 업로드시 작성된 글의 script pk를 가져와 파일테이블의 fk를 만드는 메소드-->
+    <select id="lastScriptPkNum" parameterType="com.example.yoonlove.dto.ScriptPaperDto" >
+        select max(to_number(substr(script_id,7))) from scriptpaper
+    </select>
+
 
     <!--파일 수정에서 특정 게시글의 pk를 가져와서 파일 테이블의 fk와 비교하기 위한 메소드-->
     <select id="searchFk" parameterType="com.example.yoonlove.dto.SceneDto" >

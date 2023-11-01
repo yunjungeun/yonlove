@@ -9,6 +9,8 @@
 </head>
 <body>
 <form id="alert" action="/script/insertscriptpaper" method="get">
+    <input type="hidden" id="tableId" value="scriptpaper">
+
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
             <td>기획<select id="fk1" name="project_id"></select></td>
@@ -24,13 +26,13 @@
             <td>촬영종료시간<input class="field4" name="video_end_time" type="date" placeholder="날짜형식입력"></td>
         </tr>
         <tr>
-            <td>액션 이미지 첨부파일 <input class="field5" name="action_image" type="text" placeholder="varchar2"/></td>
-            <td>액션 내용 <input class="field6" name="action_content" type="text" placeholder="varchar2"/></td>
-            <td>카메라포지션 첨부파일 <input class="field7" name="position_image" type="text" placeholder="varchar2"/></td>
-            <td>콘티 <input class="field8" name="conti" type="text" placeholder="varchar2"/></td>
+            <td>액션 이미지 첨부파일 <input id="fileInput" name="action_image" type="file" /></td>
+            <td>액션 내용 <input class="field5" name="action_content" type="text" placeholder="varchar2"/></td>
+            <td>카메라포지션 첨부파일 <input class="field6" name="position_image" type="text" placeholder="varchar2"/></td>
+            <td>콘티 <input class="field7" name="conti" type="text" placeholder="varchar2"/></td>
         </tr>
     </table>
-    <input type="submit" value="등록" onclick="mappingurl('/script/insertscriptpaper',8,'작성')"/>
+    <input type="submit" value="등록" onclick="mappingurl('/script/insertscriptpaper',7,'작성')"/>
 </form>
 <a href="/script/scriptpaper">취소</a>
 
@@ -45,6 +47,7 @@
 
 </script>
 <script src="/static/js/dropdown.js"></script>
+<script src="/static/js/uploadFile.js"></script>
 <script src="/static/js/cu_alert.js"></script>
 </body>
 </html>

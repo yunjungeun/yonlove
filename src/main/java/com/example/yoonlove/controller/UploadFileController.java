@@ -22,10 +22,10 @@ public class UploadFileController {
 
     @PostMapping("/upload")
     @ResponseBody
-    public ResponseEntity<String> fileUpload(@RequestParam("file") MultipartFile file) throws IOException {
+    public ResponseEntity<String> fileUpload(@RequestParam("file") MultipartFile file, String table) throws IOException {
         String basePath = "C:/Users/강의실3_PC014/IdeaProjects/yonlove";
 
-        return fileService.uploadFile(file,basePath);
+        return fileService.uploadFile(file,basePath, table);
     }
 
     @PostMapping("/updateFile")

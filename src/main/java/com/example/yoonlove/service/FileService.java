@@ -18,23 +18,32 @@ public class FileService {
     private FileMapper fileMapper;
 
     //파일 업로드처리
-    public ResponseEntity<String> uploadFile(MultipartFile file, String path)throws IOException{
+    public ResponseEntity<String> uploadFile(MultipartFile file, String path, String table)throws IOException{
         //db에 저장할 상대경로
         String relativePath ="/static/img/"+file.getOriginalFilename();
         //실제 파일을 업로드할 절대경로 조립
         String savePath = path + "/src/main/resources" + relativePath;
 
-        int lastScenePkNum = fileMapper.lastScenePkNum();
         try {
             //file 테이블 처리
             FileDto fileDto = new FileDto();
-            fileDto.setScene_id("scene"+(lastScenePkNum));  //파일 fk
+
             fileDto.setFile_name(file.getOriginalFilename());  //파일 이름
             fileDto.setFile_path(relativePath);  //파일 상대경로
             fileDto.setFile_data(file.getBytes());  //파일크기
 
+            //업로드 요청 테이블에 따라 fk값 생성
+            if(table.equals("scene")) {
+                //scene 마지막 키값 가져오기
+                int lastScenePkNum = fileMapper.lastScenePkNum();
+                fileDto.setScene_id(table + (lastScenePkNum));  //scene fk
+            }else {
+                //script 마지막 키값 가져오기
+                int lastScriptPkNum = fileMapper.lastScriptPkNum();
+                fileDto.setScript_id("script" + (lastScriptPkNum));  //script fk
+            }
             fileMapper.insertFile(fileDto);
-            //file 테이블 처리 end
+              //file 테이블 처리 end
 
             // 저장할 위치에 파일객체생성
             File dest = new File(savePath);
