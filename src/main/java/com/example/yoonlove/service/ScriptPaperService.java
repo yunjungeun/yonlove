@@ -47,6 +47,10 @@ public class ScriptPaperService {
         return scriptPaperMapper.selectFk();
     }
 
+    public List<TimeTableDto> selectTimeFk(PageDto pageInfo){
+        return scriptPaperMapper.selectTimeFk(pageInfo);
+    }
+
     //타임테이블
     public TimeTableDto selectTimeTable(TimeTableDto dto){
         return scriptPaperMapper.selectTimeTable(dto);

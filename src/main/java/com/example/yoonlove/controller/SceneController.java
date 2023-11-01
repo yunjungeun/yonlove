@@ -1,13 +1,9 @@
 package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.*;
-import com.example.yoonlove.mapper.FileMapper;
-import com.example.yoonlove.service.FileService;
-import com.example.yoonlove.service.PagingService;
-import com.example.yoonlove.service.SceneService;
-import lombok.extern.slf4j.Slf4j;
-import com.example.yoonlove.service.ScriptPaperService;
+import com.example.yoonlove.service.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +26,8 @@ public class SceneController {
     private PagingService pagingService;
     @Autowired
     private ScriptPaperService scriptPaperService;
-
+    @Autowired
+    private DropDownService dropDownService;
 
     @GetMapping("scene/scene")
     public ModelAndView selectListScene(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
@@ -38,6 +35,7 @@ public class SceneController {
         PageDto pageInfo = pagingService.paging(pageDto);
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.pageRink(pageDto);
+
 
         List<SceneDto> dto = sceneService.selectListScene(pageInfo);
         ModelAndView mv = new ModelAndView();
@@ -82,22 +80,18 @@ public class SceneController {
 
     @GetMapping("/scene/insertsceneview")
     public ModelAndView insertSceneView() throws JsonProcessingException{
-        //fk값으로 db검색결과
-        List<ScenarioDto> scenarioDto = sceneService.selectFk();
 
-        //검색리스트를 json 리스트 문자열로 생성
-        String jsonList = sceneService.fkJson(scenarioDto);
+        String jsonListProject = dropDownService.dropDownOption("project",null);
 
         ModelAndView mv = new ModelAndView();
-        mv.addObject("fkList", jsonList);
+        mv.addObject("fkList", jsonListProject);
         mv.setViewName("/scene/sceneinsert");
         return mv;
     }
 
     @GetMapping("/scene/insertscene")
     public String insertScene(SceneDto dto) {
-        System.out.println(dto.toString());
-        sceneService.insertScene(dto);
+            sceneService.insertScene(dto);
 
 /*        int lastnum = sceneService.lastPost(dto);
 

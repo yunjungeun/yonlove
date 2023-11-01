@@ -5,8 +5,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    {{>layout/header}}
 </head>
-<body>
+
+<body id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
 
     <input name="scenario_id" type="hidden" value="{{selectScenario.scenario_id}}"/>
     <table border="1" cellpadding="1" cellspacing="1">

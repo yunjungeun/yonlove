@@ -6,12 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{>layout/header}}
 </head>
-<body>
+
+<body id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
 <form id="alert" action="/script/insertscriptpaper" method="get">
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
-            <td>씬 번호<select id="fk" name="scene_id"></select></td>
+            <td>기획<select id="fk1" name="project_id"></select></td>
+            <td>시나리오<select id="fk2" name="scenario_id">
+                <option selected>선택</option>
+            </select></td>
+            <td>씬 번호<select id="fk3" name="scene_id">
+                <option selected>선택</option>
+            </select></td>
             <td>영상 제목<input class="field1" name="video_name" type="text" placeholder="영상제목 입력"></td>
             <td>촬영날짜<input class="field2" name="video_date" type="date" placeholder="날짜형식 yy/mm/dd 입력"></td>
             <td>촬영시작시간<input class="field3" name="video_time" type="date" placeholder="날짜형식입력(시간아직안됨)"></td>
@@ -33,9 +43,10 @@
 
 <!--옵션 태그에 필요한 js-->
 <script>
-    var jsonValue = '{{{fkList}}}';
+    var jsonValue = '{{{fkListProject}}}';
     <!--select 옵션 name값을 'cu_alert.js'에 보내주기 위한 변수 값/ 이게없으면 제출이 안됨-->
     var selectName = "scene_id";
+
 </script>
 <script src="/static/js/dropdown.js"></script>
 <script src="/static/js/cu_alert.js"></script>

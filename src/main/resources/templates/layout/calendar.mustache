@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+</head>
+<body>
+<h1>2023 년 10 월 달력</h1>
+<table style="width: 100%;">
+    <tr>
+        <th>일</th>
+        <th>월</th>
+        <th>화</th>
+        <th>수</th>
+        <th>목</th>
+        <th>금</th>
+        <th>토</th>
+    </tr>
+<tr>
+    {{#calendar}}
+        <td>{{.}}</td>
+        {{#saturday}}
+        </tr><tr>
+        {{/saturday}}
+    {{/calendar}}
+</tr>
+</table>
+</body>
+</html>

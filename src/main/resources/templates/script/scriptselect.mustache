@@ -5,8 +5,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    {{>layout/header}}
 </head>
-<body>
+
+<body id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
             <td>씬 번호(자동입력 필요)<input name="scene_id" type="text" value="{{selectScriptPaper.scene_id}}" readonly></td>
@@ -23,11 +27,35 @@
             <td>콘티 <input name="conti" type="text" value="{{selectScriptPaper.conti}}" readonly/></td>
         </tr>
     </table>
-<a href="/script/scriptpaper">목록</a>
-    <a href="/script/{{selectScriptPaper.script_id}}/updatescriptview">수정</a>
-    <a href="javascript:void(0);" onclick="deleteAlert('/script/{{selectScriptPaper.script_id}}/deletescriptpaper')">삭제</a>
-<br/>현재까지 버그<br/>
+    <br/>
+    <br/>
+    <!-- 서브페이지 타임테이블 -->
+    <table border="1" cellpadding="1" cellspacing="1">
+        <tr>
+         {{#selectListTimeTable}}
+            <td>스크립트 번호 <input name="script_id" type="text" value="{{script_id}}" readonly></td>
+            <td>촬영시간 <input name="film_time" type="date" value="{{film_time}}" readonly/></td>
+            <td>타임테이블 번호<input name="time_num" type="number" value="{{time_num}}" readonly></td>
+            <td>OK/NG<input name="ok_ng" type="text" value="{{ok_ng}}" readonly></td>
+            <td>슬레이트<input name="slate_time" type="date" value="{{slate_time}}" readonly></td>
+          {{/selectListTimeTable}}
+        </tr>
+    </table>
 
+    <!--서브게시판 페이징-->
+    {{>layout/subpaging}}
+    <br/>
+
+
+<a href="/script/timetable">목록</a> &nbsp;&nbsp;
+    <a href="/script/{{selectScriptPaper.script_id}}/updatescriptview">수정</a>&nbsp;&nbsp;
+    <a href="javascript:void(0);" onclick="deleteAlert('/script/{{selectScriptPaper.script_id}}/deletescriptpaper')">삭제</a>&nbsp;&nbsp;
+
+
+    <!--서브게시판 검색 js-->
+    <script><!--서브게시판에 넘겨준 prefix url-->
+        var url = "/script/{{selectScriptPaper.script_id}}/selectscriptpaper";
+    </script>
     <script src="/static/js/deletepost.js"></script>
 </body>
 </html>

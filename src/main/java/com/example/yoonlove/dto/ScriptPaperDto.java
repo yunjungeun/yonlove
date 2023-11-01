@@ -1,10 +1,12 @@
 package com.example.yoonlove.dto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Date;
 
-@Data
+@Getter
+@Setter
 public class ScriptPaperDto {
     private String script_id;
     private String scene_id;

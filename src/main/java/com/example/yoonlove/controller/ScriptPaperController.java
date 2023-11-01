@@ -1,15 +1,18 @@
 package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.*;
+import com.example.yoonlove.service.DropDownService;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.ScriptPaperService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.net.SocketTimeoutException;
 import java.util.List;
 
 @Controller
@@ -18,6 +21,8 @@ public class ScriptPaperController {
     private ScriptPaperService scriptPaperService;
     @Autowired
     private PagingService pagingService;
+    @Autowired
+    private DropDownService dropDownService;
 
     //스크립트페이퍼
     @GetMapping("script/scriptpaper")
@@ -34,7 +39,7 @@ public class ScriptPaperController {
         mv.addObject("selectListScriptPaper", dto);
 
         //페이징에 필요한센션
-        mv.addObject("prefixUrl", "script");
+        mv.addObject("prefixUrl", "scriptpaper");
         mv.addObject("paging", pageInfo);  //페이징정보
         mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
@@ -42,32 +47,49 @@ public class ScriptPaperController {
         return mv;
     }
 
-    @GetMapping("script/{script_id}/selectscriptpaper")
-    public ModelAndView selectScriptPaper(ScriptPaperDto scriptPaperDto){
+    @GetMapping("script/{script_id}/selectscriptpaper") // 하단에 타임테이블 붙이기 !!!!
+    public ModelAndView selectScriptPaper(ScriptPaperDto scriptPaperDto, @RequestParam(name="page", defaultValue="1") int page, PageDto pdto){
         ScriptPaperDto dto = scriptPaperService.selectScriptPaper(scriptPaperDto);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/script/scriptselect");
         mv.addObject("selectScriptPaper", dto);
+        // 기존 값 셀럭트
+
+        // 이어붙일 타임테이블 셀럭트 값
+       // pdto.setPkid(dto.getTable_id());
+
+        PageDto pageDto = new PageDto("timetable","table_id", page, pdto);
+        PageDto pageInfo = pagingService.paging(pageDto);
+        List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
+        String rink = pagingService.subPageRink(pageDto, "scriptpaper");
+
+        List<TimeTableDto> subList = scriptPaperService.selectListTimeTable(pageInfo); //
+        mv.addObject("selectListTimeTable", subList);
+
+        //서브 페이징에 필요한섹션
+        mv.addObject("pageDto", pageDto);
+        mv.addObject("prefixUrl", "scriptpaper"); //컨트롤러 이름
+        mv.addObject("paging", pageInfo);  //페이징정보
+        mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
+        mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
+
+
         return mv;
     }
 
     @GetMapping("script/insertscriptpaperview")
     public ModelAndView insertscript() throws JsonProcessingException {
-        //fk값으로 db검색결과
-        List<SceneDto> sceneDto = scriptPaperService.selectFk();
 
-        //검색리스트를 json 리스트 문자열로 생성
-        String jsonList = scriptPaperService.fkJson(sceneDto);
+        String jsonListProject = dropDownService.dropDownOption("project",null);
 
         ModelAndView mv = new ModelAndView();
-        mv.addObject("fkList", jsonList);
+        mv.addObject("fkListProject", jsonListProject);
         mv.setViewName("/script/scriptinsert");
         return mv;
     }
 
     @GetMapping("script/insertscriptpaper")
     public String insertScriptPaper(ScriptPaperDto dto){
-        System.out.println(dto.toString());
 
         scriptPaperService.insertScriptPaper(dto);
         return "redirect:/script/scriptpaper";
@@ -131,6 +153,7 @@ public class ScriptPaperController {
 
     @GetMapping("script/inserttimetable")
     public String insertTimeTable(TimeTableDto dto){
+        System.out.println("11111"+dto.toString());
         scriptPaperService.insertTimeTable(dto);
         return "redirect:timetable";
     }

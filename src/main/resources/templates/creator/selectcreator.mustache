@@ -7,37 +7,51 @@
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/static/js/delete.js"></script>
+    {{>layout/header}}
 </head>
-<body>
-<div id="div_box">
+
+<body id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
     <h1>게시글 상세보기</h1>
     <hr>
-        <table board="1" cellpascing="0" cellpading="0">
+     <table border="1" cellpadding="1" cellspacing="1">
+          <ul>
             <tr>
-                <td bgcolor="pink" width="70">채널명</td>
-                <td align="left">{{selectCreator.ch_name}}</td>
+                <td>채널 ID</td>
+                <td>채널 이름</td>
+                <td>구독자 수</td>
+                <td>유저 ID</td>
             </tr>
 
             <tr>
-                <td bgcolor="pink">채널ID</td>
-                <td align="left">{{selectCreator.ch_id}}</td>
+                <td>{{selectCreator.ch_id}}</td>
+                <td>{{selectCreator.ch_name}}</td>
+                <td>{{selectCreator.ch_sub}}</td>
+                <td>{{selectCreator.user_id}}</td>
             </tr>
-
-            <tr>
-                <td bgcolor="pink">구독자수</td>
-                <td align="left"> {{selectCreator.ch_sub}}</td>
-            </tr>
-
-            <tr>
-                <td bgcolor="pink">유저ID</td>
-                <td align="left">{{selectCreator.user_id}}</td>
-            </tr>
+          </ul>
         </table>
+
+    <!--서브게시판 페이징-->
+    {{>layout/subpaging}}
+
+    <!--subPost 검색-->
+    <form action="/vd/video" method="GET">
+        <select id="searchType" name="searchType">
+            <option value="all">선택</option>
+            <option value="title">영상제목</option>
+            <!-- 필요한 항목 추가 -->
+        </select>
+        <input type="text" id="search" name="search" placeholder="검색">
+        <input type="submit" value="검색">
+    </form>
+    <!--subPost 검색 / end-->
 
     <hr>
     <a href="/creator/updatecreatorview/{{selectCreator.ch_id}}">게시글 수정</a>&nbsp;&nbsp;&nbsp;
     <a href="/creator/deletecreator/{{selectCreator.ch_id}}" onclick="confirmDelete(event)">게시글 삭제</a>&nbsp;
     <a href="/creator/creater">전체 목록 보기</a>
-</div>
+
 </body>
 </html>

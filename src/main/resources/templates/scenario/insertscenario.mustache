@@ -4,12 +4,17 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>시나리오 작성</title>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    <script src="/static/js/cu_alert.js"></script>
+    {{>layout/header}}
 </head>
+
 <body>
+{{>layout/sidebar}}
+{{>layout/topbar}}
+
 <form id="alert" action="/scenario/insertscenario" method="get">
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
