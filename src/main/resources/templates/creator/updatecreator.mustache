@@ -7,8 +7,12 @@
     <title>업뎃수정</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/static/js/cu_alert.js"></script>
+    {{>layout/header}}
 </head>
-<body>
+
+<body id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
 <form id="alert" method="get" action="/creator/updatecreator/{{selectCreator.ch_id}}">
 <div id="div_box">
     <h1>게시글 수정</h1>

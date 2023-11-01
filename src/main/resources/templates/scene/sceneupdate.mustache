@@ -5,8 +5,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    {{>layout/header}}
 </head>
-<body>
+
+<body id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
 <form method="post" action="/scene/{{updateScene.scene_id}}/updatescene" enctype="multipart/form-data">
     <input type="hidden" name="scene_id" value="{{updateScene.scene_id}}">
 

@@ -8,8 +8,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/static/js/cu_alert.js"></script>
 
+    {{>layout/header}}
 </head>
-<body>
+
+<body id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
 <form id="alert" action="/project/updateproject/{{selectProject.project_id}}" method="get">
 
     <table board="1" cellpascing="0" cellpading="0">

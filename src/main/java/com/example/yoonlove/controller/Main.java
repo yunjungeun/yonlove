@@ -32,5 +32,10 @@ public class Main {
     public String testPage3(){
         return "/layout/header";
     }
+
+    @GetMapping("/일반회원가입")
+    public String testPage4(){
+        return "/login/signup";
+    }
 }
 

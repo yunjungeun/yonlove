@@ -9,8 +9,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/static/js/cu_alert.js"></script>
 
+    {{>layout/header}}
 </head>
-<body>
+
+<body id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
 <form id="alert" method="get" action="/cs/{{updateQnA.qna_id}}/updateqna">
     <input name="qna_id" type="hidden" value="{{updateQnA.qna_id}}"/>
     <table border="1" cellpadding="1" cellspacing="1">

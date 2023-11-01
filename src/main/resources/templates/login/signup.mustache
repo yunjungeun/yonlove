@@ -5,17 +5,26 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>회원가입 폼</title>
-    <!--<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>-->
+    <title>회원가입</title>
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/static/js/cu_alert.js"></script>
-    <script src="/static/js/join.js"></script>
+    <script src="/static/js/join.js"></script>  <!--아이디,비밀번호 확인기능 -->
     <link rel="stylesheet" href="/static/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <!-- Custom fonts for this template-->
+    <link href="/static/bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/static/bootstrap/css/sb-admin-2.min.css" rel="stylesheet">
 </head>
-<body>
-<div class="container">
+
+<body class="bg-gradient-primary">
+<div class="container" style="max-width: 550px;">
     <h2>회원가입</h2>
     <form id="alert" class="joinForm" method="get" action="/signup">
 
@@ -31,10 +40,11 @@
 
 
         <label for="pw">비밀번호:</label>
-        <input type="password" class="field2" id="pw" name="pw" required>
+        <input type="password" class="field2" id="pw" name="pw" onkeyup="passwordCheckFunction();" required>
 
         <label for="confirm_password">비밀번호 확인:</label>
-        <input type="password" class="field3" id="confirm_password" required>
+        <input type="password" class="field3" id="confirm_password" onkeyup="passwordCheckFunction();"  required>
+        <div id="passwordCheckMessage" style="color: red;"></div>
 
         <label for="name">이름:</label>
         <input type="text" class="field4" id="user_name" name="user_name" required>
@@ -61,11 +71,12 @@
         <label for="terms">약관에 동의합니다:</label>
         <input type="checkbox" id="terms" required>
         <br/>
-        <button type="submit" id="submitBtn" onclick="mappingurl('/signup','/cs/qna', 11,'작성')">회원가입</button>
+        <button type="submit" id="submitBtn" onclick="mappingurl('/signup','/cs/qna', 11,'작성')"
+                style="display: block; margin: 0 auto;">회원가입</button>
     </form>
 </div>
 
-    <script> //  확인완료
+    <script> //아래는 카카오 주소검색 API 내용입니다.
         var usercomfim = {{ConfirmId}}
 
         function execDaumPostcode {
