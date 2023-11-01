@@ -47,10 +47,22 @@ public class SceneController {
 
     @GetMapping("scene/{scene_id}/selectscene")
     public ModelAndView selectScene(SceneDto sceneDto, @RequestParam(name="page", defaultValue = "1") int page, PageDto pdto ){
-        FileDto fileDto = fileService.selectFile(sceneDto);
-        SceneDto dto = sceneService.selectScene(sceneDto);
         ModelAndView mv = new ModelAndView();
-        mv.addObject("file",fileDto);
+        SceneDto dto = sceneService.selectScene(sceneDto);
+
+
+        FileDto fileDto = fileService.selectFile(sceneDto);
+
+        //파일 없이 업로드해서 파일테이블이 생성이 안되 오류발생하는 부분을 처리//근본없는 해결방법인거 같음
+        if(fileDto != null){
+            mv.addObject("file",fileDto);
+        }else{
+            FileDto nullFileDto = new FileDto();
+            nullFileDto.setFile_path(" ");
+            mv.addObject("file",nullFileDto);
+        }
+
+
         mv.setViewName("scene/sceneselect");
         mv.addObject("selectScene", dto);
 
