@@ -7,77 +7,111 @@
     {{>layout/header}}
 </head>
 
-<body>
+<body id="page-top">
 {{>layout/sidebar}}
-
 {{>layout/topbar}}
 
-<div class="container">
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
 
-    <h1>프로젝트 현황</h1>
 
-        <table border="1" cellpadding="1" cellspacing="1">
-            <ul>
-                <tr>
-                    <td>기획명</td>
-                    <td>기획번호</td>
-                    <td>기획번호</td>
-                    <td>작성자</td>
-                    <td>작성일</td>
-                    <td>기획시작</td>
-                    <td>기획(예상)종료</td>
-                    <td>기획상태</td>
-                    <td>종료사유</td>
+    <!-- Main Content -->
+    <div id="content">
 
-                </tr>
-                {{#selectListProject}}
-                    <tr>
-                        <td><a href="/project/{{project_id}}/selectproject">{{project_name}}</a></td>
-                        <td>{{project_num}}</td>
-                        <td>{{project_name}}</td>
-                        <td>{{project_writer}}</td>
-                        <td>{{project_date}}</td>
-                        <td>{{string_start_date}}</td>
-                        <td>{{string_end_date}}</td>
-                        <td>{{project_state}}</td>
-                        <td>{{project_reason}}</td>
-                    </tr>
-                {{/selectListProject}}
-            </ul>
-        </table>
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
 
-            <div class="container1">
-            <a href="/project/insertprojectview" role="button">작성</a>&nbsp;&nbsp;
-            <a href="/project/project">목록</a> &nbsp;&nbsp;  <!-- 목록의 url 주소값은 컨트롤러 주소와 동일 -->
-            <a href="/index">홈 페이지</a>
+            <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px;">프로젝트 현황</h1>
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4" style="margin-top: 50px;">
+                <div class="card-header py-3">
+
+        <!--검색-->
+        <br/>
+       <form action="/cs/notice" method="get" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
+           <div class="input-group">
+
+           <select id="searchType" name="searchType">
+                    <option value="all">선택</option>
+                    <option value="title">프로젝트이름</option>
+                    <!-- 필요한 항목 추가 -->
+                </select>
+                    <input id="search" name="search" type="text"  style="width: 150px;" class="form-control bg-light border-0 small" placeholder="Search for..."
+                      aria-label="Search" aria-describedby="basic-addon2">
+               <div class="input-group-append">
+                   <input class="btn btn-primary" type="submit">
+               </div>
+           </div>
+       </form>
+    </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th  style="text-align: center;">기획명</th>
+                            <th  style="text-align: center;">기획번호</th>
+                            <th  style="text-align: center;">기획이름</th>
+                            <th  style="text-align: center;">작성자</th>
+                            <th  style="text-align: center;">작성일</th>
+                            <th  style="text-align: center;">기획시작</th>
+                            <th  style="text-align: center;">예상종료</th>
+                            <th  style="text-align: center;">기획상태</th>
+                            <th  style="text-align: center;">종료사유</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#selectListProject}}
+                            <tr>
+                                <td style="text-align: center;"> <a href="/project/{{project_id}}/selectproject">{{project_name}}</a></td>
+                                <td style="text-align: center;">{{project_num}}</td>
+                                <td style="text-align: center;">{{project_writer}}</td>
+                                <td style="text-align: center;">{{project_date}}</td>
+                                <td style="text-align: center;">{{string_start_date}}</td>
+                                <td style="text-align: center;">{{string_end_date}}</td>
+                                <td style="text-align: center;">{{project_state}}</td>
+                                <td style="text-align: center;">{{project_reason}}</td>
+                            </tr>
+                        {{/selectListProject}}
+                        </tbody>
+                    </table>
+
+                    <!--페이징 처리 레이아웃-->
+                    {{>layout/paging}} <br/>
+                    <a style="margin-left: 20px" href="/project/insertprojectview" role="button">글 작성</a>&nbsp;&nbsp;
+                    <a style="margin-left: 20px" href="/project/project">목록</a>&nbsp;&nbsp;
+                    <a style="margin-left: 20px" href="/index">홈페이지</a>
+                </div>
             </div>
 
-<!--페이징 처리 레이아웃-->
-{{>layout/paging}}
+        </div>
+        <br/>
+    </div>
 
-<!--검색-->
-<br/>
-            <div class="container2">
-                <form action="/project/project" method="GET">
-                    <select id="searchType" name="searchType">
-                        <option value="all">선택</option>
-                        <option value="title">프로젝트이름</option>
-                        <!-- 필요한 항목 추가 -->
-                    </select>
-                    <input type="text" id="search" name="search" placeholder="검색">
-
-                    <input type="submit" value="검색">
-                </form>
-            </div>
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- /.container-fluid -->
 </div>
+<!-- End of Main Content -->
 {{>layout/footer}}
+</div>
+<!-- End of Content Wrapper -->
+
 <script>
-    <!--페이징처리를 위한 prefix url-->
     var url = "/project/project";
 </script>
+
 <script src="/static/js/search.js"></script>
-<!--date 변수를 dateformat.js에 넘겨주는 링크-->
-<script src="/static/js/dateformat.js"></script>
+<!-- 페이징 처리와 관련된 부트스트랩 라이브러리-->
+<script src="/static/bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- 페이징 처리와 관련된 부트스트랩 라이브러리 -->
+<script src="/static/bootstrap/js/demo/datatables-demo.js"></script>
+
 {{>layout/bootstrapjs}}
 </body>
 </html>

@@ -7,39 +7,26 @@
     {{>layout/header}}
 </head>
 
-<body>
+<body id="page-top">
 {{>layout/sidebar}}
 {{>layout/topbar}}
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
 
-<div class="container">
-<h1>스토리보드 게시판</h1>
-        <table border="1" cellpadding="1" cellspacing="1">
-            <ul>
-                     <tr>
-                    <td>시나리오 제목</td>
-                    <td>씬 번호</td>
-                    <td>촬영내용</td>
-                    <td>찰영장소</td>
-                     </tr>
-                {{#selectListScene}}
+    <!-- Main Content -->
+    <div id="content">
 
-                    <tr>
-                        <td>{{scenario_name}}</td>
-                        <td>{{scene_num}}<!--여기누르면 시나리오로 이동해야함--></td>
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+            <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px;">스토리보드 게시판</h1>
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4" style="margin-top: 50px;">
+                <div class="card-header py-3">
 
-                        <td><a href="/scene/{{scene_id}}/selectscene">{{scene_content}}</a></td>
-                        <td>{{scene_place}}</td>
+    <!--검색-->
+    <form action="/cs/notice" method="get" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
 
-                    </tr>
-                {{/selectListScene}}
-            </ul>
-        </table>
-
-<!--페이징 처리 레이아웃-->
-{{>layout/paging}}
-
-    <div class="container1">
-        <form action="/scene/scene" method="GET">
+        <div class="input-group">
             <select id="searchType" name="searchType">
                 <option value="all">선택</option>
                 <option value="title">씬번호</option>
@@ -48,24 +35,74 @@
                 <!-- 필요한 항목 추가 -->
             </select>
 
-            <input type="text" id="search" name="search" placeholder="검색">
-            <input type="submit" value="검색">
-        </form>
+            <input id="search" name="search" type="text"  style="width: 150px;" class="form-control bg-light border-0 small" placeholder="Search for..."
+                   aria-label="Search" aria-describedby="basic-addon2">
+
+            <div class="input-group-append">
+                <input class="btn btn-primary" type="submit">
+            </div>
+        </div>
+    </form>
     </div>
 
-    <div class="container2">
-        근데 작성자는 잇어야되지 않을까요?><br/>
-        <a href="/scene/insertsceneview" role="button">작성</a>&nbsp;&nbsp;
-        <a href="/scene/scene">목록</a>&nbsp;&nbsp;
-        <a href="/index">홈 페이지</a>
-    </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th  style="text-align: center;">시나리오 제목</th>
+                        <th  style="text-align: center;">씬번호</th>
+                        <th  style="text-align: center;">촬영내용</th>
+                        <th  style="text-align: center;">촬영장소</th>
 
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#selectListScene}}
+                        <tr>
+                            <td style="text-align: center;">{{scenario_name}}</td>
+                            <td style="text-align: center;">{{scene_num}}<!--여기누르면 시나리오로 이동해야함--></td>
+                            <td style="text-align: center;"><a href="/scene/{{scene_id}}/selectscene">{{scene_content}}</a></td>
+                            <td style="text-align: center;"><td>{{scene_place}}</td>
+                        </tr>
+                    {{/selectListScene}}
+                    </tbody>
+                </table>
+
+                <!--페이징 처리 레이아웃-->
+                {{>layout/paging}}
+                <a style="margin-left: 20px" href="/scene/insertsceneview" role="button">글 작성</a>
+                <a style="margin-left: 20px" href="/scene/scene">목록</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a style="margin-left: 20px" href="/index">홈 페이지</a>
+            </div>
+        </div>
+
+    </div>
+    <br/>
 </div>
-{{>layout/footer}}
+
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- End of Main Content -->
+    {{>layout/footer}}
+</div>
+<!-- End of Content Wrapper -->
+
 <script>
     var url = "/scene/scene";
 </script>
+
 <script src="/static/js/search.js"></script>
+<!-- 페이징 처리와 관련된 부트스트랩 라이브러리-->
+<script src="/static/bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- 페이징 처리와 관련된 부트스트랩 라이브러리 -->
+<script src="/static/bootstrap/js/demo/datatables-demo.js"></script>
+
 {{>layout/bootstrapjs}}
 </body>
 </html>

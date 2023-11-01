@@ -4,57 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>프로듀스 리스트</title>
-
     {{>layout/header}}
 </head>
 
-<body>
+<body id="page-top">
 {{>layout/sidebar}}
-
 {{>layout/topbar}}
-<div class="container">
-        <h1>프로듀스 현황</h1>
-            <table border="1" cellpadding="1" cellspacing="1">
-                <ul>
-                    <tr>
-                        <td>제작 이름</td>
-                        <td>제작 역할</td>
-                    </tr>
-                    {{#selectListProduce}}
-                        <tr>
-                            <td><a href="/project/{{pd_id}}/selectproduce">{{pd_name}}</a></td>
-                            <td>{{role}}</td>
-                        </tr>
-                    {{/selectListProduce}}
-                </ul>
-            </table>
-    <div class="container1">
-        <a href="/project/insertproduceview" role="button">작성</a>&nbsp;&nbsp;
-        <a href="/index">홈 페이지</a>&nbsp;&nbsp;
-    </div>
-<!--페이징 처리 레이아웃-->
-{{>layout/paging}}
 
-<!--검색-->
-<br/>
-        <div class="container2">
-            <form action="/project/project" method="GET">
-            <select id="searchType" name="searchType">
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+    <!-- Main Content -->
+    <div id="content">
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+            <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px;">프로듀스 현황</h1>
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4" style="margin-top: 50px;">
+                <div class="card-header py-3">
+
+        <!--검색-->
+        <form action="/cs/notice" method="get" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
+
+            <div class="input-group">
+                <select id="searchType" name="searchType">
                 <option value="all">선택</option>
-                <option value="title">제작 이름</option>
+                <option value="title">제작이름</option>
                 <!-- 필요한 항목 추가 -->
-            </select>
+                </select>
 
-            <input type="text" id="search" name="search" placeholder="검색">
-            <input type="submit" value="검색">
-            </form>
+                <input id="search" name="search" type="text"  style="width: 150px;" class="form-control bg-light border-0 small" placeholder="Search for..."
+                       aria-label="Search" aria-describedby="basic-addon2">
+
+                <div class="input-group-append">
+                    <input class="btn btn-primary" type="submit">
+                </div>
+            </div>
+        </form>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th  style="text-align: center;">제작이름</th>
+                                <th  style="text-align: center;">제작역할</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {{#selectListProduce}}
+                                <tr>
+                                    <td style="text-align: center;"> <a href="/project/{{pd_id}}/selectproduce">{{pd_name}}</a></td>
+                                    <td style="text-align: center;">{{role}}</td>
+                                </tr>
+                            {{/selectListProduce}}
+                            </tbody>
+                        </table>
+
+                        <!--페이징 처리 레이아웃-->
+                        {{>layout/paging}}
+                        <a style="margin-left: 20px" href="/project/insertproduceview" role="button">글 작성</a>
+                        <a style="margin-left: 20px" href="/project/project">목록</a> &nbsp;&nbsp;
+                        <a style="margin-left: 20px" href="/index">홈 페이지</a>
+                    </div>
+                </div>
+
+            </div>
+            <br/>
         </div>
+
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- End of Main Content -->
+    {{>layout/footer}}
 </div>
-{{>layout/footer}}
+
+<!-- End of Content Wrapper -->
+
 <script>
     var url = "/project/produce";
 </script>
+
 <script src="/static/js/search.js"></script>
+<!-- 페이징 처리와 관련된 부트스트랩 라이브러리-->
+<script src="/static/bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- 페이징 처리와 관련된 부트스트랩 라이브러리 -->
+<script src="/static/bootstrap/js/demo/datatables-demo.js"></script>
+
 {{>layout/bootstrapjs}}
+
 </body>
 </html>
