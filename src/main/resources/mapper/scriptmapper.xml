@@ -80,12 +80,11 @@
 
     <update id="updateScriptPaper">
         update scriptpaper
-        set scene_id = #{scene_id},
+        set
         video_name = #{video_name},
         video_date = #{video_date},
         video_time = #{video_time},
-        video_end_time = #{video_end_time},
-        action_image = #{action_image},
+        video_start_time = #{video_start_time},
         action_content = #{action_content},
         position_image = #{position_image},
         conti = #{conti}

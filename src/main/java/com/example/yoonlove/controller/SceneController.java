@@ -50,8 +50,7 @@ public class SceneController {
         ModelAndView mv = new ModelAndView();
         SceneDto dto = sceneService.selectScene(sceneDto);
 
-
-        FileDto fileDto = fileService.selectFile(sceneDto);
+        FileDto fileDto = fileService.selectSceneFile(sceneDto);
 
         //파일 없이 업로드해서 파일테이블이 생성이 안되 오류발생하는 부분을 처리//근본없는 해결방법인거 같음
         if(fileDto != null){

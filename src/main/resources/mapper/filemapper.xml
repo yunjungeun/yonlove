@@ -47,19 +47,23 @@
     </update>
 
 
-
-    <select id="selectFile" parameterType="com.example.yoonlove.dto.SceneDto" >
+        <!--scene fk값을 가지고 파일을 불러오는 메소드-->
+    <select id="selectSceneFile" parameterType="com.example.yoonlove.dto.SceneDto" >
         SELECT * FROM files
         WHERE scene_id = #{scene_id}
     </select>
-
+    <!--script fk값을 가지고 파일을 불러오는 메소드-->
+    <select id="selectScriptFile" parameterType="com.example.yoonlove.dto.SceneDto" >
+        SELECT * FROM files
+        WHERE script_id = #{script_id}
+    </select>
 
     <update id="deleteFile" parameterType="com.example.yoonlove.dto.SceneDto">
         UPDATE files
         SET file_name = '파일 없음',
         file_path = '파일 없음',
         file_data = null
-        WHERE scene_id = #{fk}
+        WHERE ${fkId} = #{fk}
     </update>
 
     <!--파일 업로드시 작성된 글의 scene pk를 가져와 파일테이블의 fk를 만드는 메소드-->
@@ -76,7 +80,7 @@
     <!--파일 수정에서 특정 게시글의 pk를 가져와서 파일 테이블의 fk와 비교하기 위한 메소드-->
     <select id="searchFk" parameterType="com.example.yoonlove.dto.SceneDto" >
         SELECT * FROM files
-        WHERE scene_id = #{fk}
+        WHERE ${fkId} = #{fk}
     </select>
 
 </mapper>

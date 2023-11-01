@@ -11,7 +11,7 @@ public class ScriptPaperDto {
     private String video_name;
     private Date video_date;
     private Date video_time;
-    private Date video_end_time;
+    private Date video_start_time;
     private String action_image;
     private String action_content;
     private String position_image;

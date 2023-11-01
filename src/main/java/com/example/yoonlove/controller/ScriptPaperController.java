@@ -2,6 +2,7 @@ package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.*;
 import com.example.yoonlove.service.DropDownService;
+import com.example.yoonlove.service.FileService;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.ScriptPaperService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -22,6 +23,8 @@ public class ScriptPaperController {
     private PagingService pagingService;
     @Autowired
     private DropDownService dropDownService;
+    @Autowired
+    private FileService fileService;
 
     //스크립트페이퍼
     @GetMapping("script/scriptpaper")
@@ -50,6 +53,18 @@ public class ScriptPaperController {
     public ModelAndView selectScriptPaper(ScriptPaperDto scriptPaperDto){
         ScriptPaperDto dto = scriptPaperService.selectScriptPaper(scriptPaperDto);
         ModelAndView mv = new ModelAndView();
+
+        //파일 없이 업로드해서 파일테이블이 생성이 안되 오류발생하는 부분을 처리//근본없는 해결방법인거 같음
+        FileDto fileDto = fileService.selectScriptFile(scriptPaperDto);
+        if(fileDto != null){
+            mv.addObject("file",fileDto);
+        }else{
+            FileDto nullFileDto = new FileDto();
+            nullFileDto.setFile_path(" ");
+            mv.addObject("file",nullFileDto);
+        }
+
+
         mv.setViewName("/script/scriptselect");
         mv.addObject("selectScriptPaper", dto);
         return mv;
@@ -75,6 +90,7 @@ public class ScriptPaperController {
     @GetMapping("script/{script_id}/updatescriptview")
     public ModelAndView updatescript(ScriptPaperDto scriptPaperDto){
         ScriptPaperDto dto = scriptPaperService.selectScriptPaper(scriptPaperDto);
+
         ModelAndView mv = new ModelAndView();
         mv.setViewName("script/scriptupdate");
         mv.addObject("selectScriptPaper", dto);
@@ -85,7 +101,7 @@ public class ScriptPaperController {
     @ResponseBody
     public String updateScriptPaper(ScriptPaperDto dto){
         scriptPaperService.updateScriptPaper(dto);
-        return "redirect:/script/scriptpaper";
+        return "/script/scriptpaper";
     }
     @GetMapping("script/{script_id}/deletescriptpaper")
     public String deleteScriptPaper(ScriptPaperDto dto){

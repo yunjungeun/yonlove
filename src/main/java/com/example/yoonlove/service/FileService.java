@@ -2,6 +2,7 @@ package com.example.yoonlove.service;
 
 import com.example.yoonlove.dto.FileDto;
 import com.example.yoonlove.dto.SceneDto;
+import com.example.yoonlove.dto.ScriptPaperDto;
 import com.example.yoonlove.mapper.FileMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -60,9 +61,17 @@ public class FileService {
 
     public ResponseEntity<String> updateFile(MultipartFile newFile, String basePath, String fk) throws IOException {
 
-        // 1. 기존 파일 정보 가져오기
-        FileDto existingFileDto = fileMapper.searchFk(fk);
+        //수정요청이 스크립트인지 scene인지 구분하는 로직
+        String fkId;
+        if(fk.substring(0,6).equals("script")){
+            fkId =fk.substring(0,6)+"_id";
+        }else{
+            fkId =fk.substring(0,5)+"_id";
+        }
 
+
+        // 1. 기존 파일 정보 가져오기
+            FileDto existingFileDto = fileMapper.searchFk(fk, fkId);
         //기존파일 절대경로 생성
         String absolutePath = basePath + "/src/main/resources" + existingFileDto.getFile_path();
 
@@ -94,21 +103,35 @@ public class FileService {
     }
 
     public ResponseEntity<String> deleteFile(String basePath, String fk){
-        FileDto existingFileDto = fileMapper.searchFk(fk);
+        //삭제요청이 스크립트인지 scene인지 구분하는 로직
+        String fkId;
+        if(fk.substring(0,6).equals("script")){
+            fkId =fk.substring(0,6)+"_id";
+        }else{
+            fkId =fk.substring(0,5)+"_id";
+        }
+
+        FileDto existingFileDto = fileMapper.searchFk(fk, fkId);
+
         String absolutePath = basePath + "/src/main/resources" + existingFileDto.getFile_path();
 
         File existingFile = new File(absolutePath);
         if (existingFile.exists()) {
             existingFile.delete();
         }
-        fileMapper.deleteFile(fk);
+        fileMapper.deleteFile(fk, fkId);
         return ResponseEntity.ok("파일 삭제");
     }
 
 
-    //fk값 가지고 파일dto를 가저오는 메소드
-    public FileDto selectFile(SceneDto dto){
-        return fileMapper.selectFile(dto);
+    //scene fk값 가지고 파일dto를 가저오는 메소드
+    public FileDto selectSceneFile(SceneDto dto){
+        return fileMapper.selectSceneFile(dto);
+    };
+
+    //script fk값 가지고 파일dto를 가저오는 메소드
+    public FileDto selectScriptFile(ScriptPaperDto dto){
+        return fileMapper.selectScriptFile(dto);
     };
 
 }
