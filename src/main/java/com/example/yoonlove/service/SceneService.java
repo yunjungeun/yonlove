@@ -1,6 +1,9 @@
 package com.example.yoonlove.service;
 
-import com.example.yoonlove.dto.*;
+import com.example.yoonlove.dto.ActorDto;
+import com.example.yoonlove.dto.PageDto;
+import com.example.yoonlove.dto.ScenarioDto;
+import com.example.yoonlove.dto.SceneDto;
 import com.example.yoonlove.mapper.FileMapper;
 import com.example.yoonlove.mapper.SceneMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -8,7 +11,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,10 +45,6 @@ public class SceneService {
         sceneMapper.updateScene(dto);
     }
     public void deleteScene(SceneDto dto){
-        FileDto fileDto = fileMapper.selectFile(dto);
-
-        File file = new File(fileDto.getFile_path());
-        file.delete();
         sceneMapper.deleteScene(dto);
     }
 
