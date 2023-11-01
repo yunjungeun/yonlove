@@ -31,7 +31,8 @@
 
          //fileInput이 비어있으면 로직실행안함
         if(fileInput){
-            var fkValue = document.getElementById('pk').value;
+        //게시글에 있는 히든값
+           var fkValue = document.getElementById('pk').value;
            var file = fileInput.files[0];
 
             if (file) {
@@ -56,3 +57,21 @@
             }
            }
        }
+
+function deleteFile() {
+    //게시글에 있는 히든값 pk 값
+   var fkValue = document.getElementById('pk').value;
+    if(fkValue){
+            $.ajax({
+            url: '/deleteFile',
+            type : 'POST',
+            data : {fk : fkValue},
+            success : function(respone){
+                alert("파일삭제 완료")
+            },
+            error : function(respone){
+                 console.error('파일삭제 실패');
+            }
+        });
+    }
+}

@@ -118,17 +118,6 @@ public class SceneController {
     }
 
 
-    @GetMapping("/scene/{scene_id}/deletefile")
-    public String deletefile(SceneDto dto){
-        String id= dto.getScene_id();
-        fileService.deleFile(dto);
-        fileService.deletdb(dto);
-        return "redirect:/scene/"+id+"/updatesceneview";
-    }
-
-
-
-
     //출연자 정보
     @GetMapping("scene/actor")
     public ModelAndView selectListActor(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){

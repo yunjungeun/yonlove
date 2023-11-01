@@ -21,7 +21,7 @@ public interface FileMapper {
 
     FileDto selectFile(SceneDto dto);
 
-    void deleteFile(SceneDto dto);
+    void deleteFile(String fk);
 
     //마지막 scene테이블의 pk를 찾는 메소드
     int lastScenePkNum();

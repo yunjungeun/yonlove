@@ -33,7 +33,6 @@ public class FileService {
             fileDto.setFile_path(relativePath);  //파일 상대경로
             fileDto.setFile_data(file.getBytes());  //파일크기
 
-            System.out.println(fileDto.toString());
             fileMapper.insertFile(fileDto);
             //file 테이블 처리 end
 
@@ -85,27 +84,23 @@ public class FileService {
         return ResponseEntity.status(500).body("파일 업로드 실패");
     }
 
+    public ResponseEntity<String> deleteFile(String basePath, String fk){
+        FileDto existingFileDto = fileMapper.searchFk(fk);
+        String absolutePath = basePath + "/src/main/resources" + existingFileDto.getFile_path();
+
+        File existingFile = new File(absolutePath);
+        if (existingFile.exists()) {
+            existingFile.delete();
+        }
+        fileMapper.deleteFile(fk);
+        return ResponseEntity.ok("파일 삭제");
+    }
+
+
     //fk값 가지고 파일dto를 가저오는 메소드
     public FileDto selectFile(SceneDto dto){
         return fileMapper.selectFile(dto);
     };
-
-
-
-    public void deleFile(SceneDto dto){
-
-        FileDto existingFile = fileMapper.selectFile(dto);
-
-        File file = new File(existingFile.getFile_path());
-        if (file.exists()) {
-            file.delete();
-        }
-    }
-
-    public void deletdb(SceneDto dto){
-        fileMapper.deleteFile(dto);
-    }
-
 
 }
 

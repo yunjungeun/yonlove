@@ -36,4 +36,12 @@ public class UploadFileController {
         String basePath = "C:/Users/강의실3_PC014/IdeaProjects/yonlove";
         return fileService.updateFile(newfile, basePath, fk);
     }
+
+    @PostMapping("/deleteFile")
+    @ResponseBody
+    public ResponseEntity<String> deleteFile(@RequestParam String fk) throws IOException {
+        System.out.println(fk);
+        String basePath = "C:/Users/강의실3_PC014/IdeaProjects/yonlove";
+        return fileService.deleteFile(basePath, fk);
+    }
 }
