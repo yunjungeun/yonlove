@@ -95,7 +95,7 @@ public class SceneController {
     public String insertScene(SceneDto dto) {
             sceneService.insertScene(dto);
 
-        return "redirect:/scene/scene";
+        return "/scene/scene";
     }
 
     @GetMapping("/scene/{scene_id}/updatesceneview")

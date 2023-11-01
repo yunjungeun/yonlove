@@ -1,7 +1,6 @@
   function uploadFile() {
             var fileInput = document.getElementById('fileInput');
             var file = fileInput.files[0];
-            alert("js에서 펑션실행")
 
             if (file) {
                 var formData = new FormData();

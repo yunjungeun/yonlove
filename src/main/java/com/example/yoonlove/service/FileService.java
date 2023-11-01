@@ -24,7 +24,6 @@ public class FileService {
         String savePath = path + "/src/main/resources/static/img/"+file.getOriginalFilename();
 
         int lastScenePkNum = fileMapper.lastScenePkNum();
-        System.out.println("scene"+(lastScenePkNum+1));
         try {
             //file 테이블 처리
             FileDto fileDto = new FileDto();
