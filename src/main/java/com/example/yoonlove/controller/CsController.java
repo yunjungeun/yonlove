@@ -97,13 +97,19 @@ public class CsController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/cs/insertnoticeview");
         mv.addObject("writer", userService.getnick(user));
+
+
         return mv;
     }
 
     @GetMapping("/cs/insertnotice")
-    public String insertNotice(NoticeDto dto){
+    public String insertNotice(NoticeDto dto, Principal user){
+
+        dto.setUser_id(user.getName());
 
         csService.insertNotice(dto);
+        System.out.println(dto.toString());
+
         return "/cs/notice";
     }
 
@@ -117,8 +123,13 @@ public class CsController {
     }
     @GetMapping("/cs/{notice_id}/updatenotice")
     public String updateNotice(NoticeDto dto){
-        System.out.println(dto.toString());
-        csService.updateNotice(dto);
+
+        System.out.println("업데이트 오류111" +dto.toString());
+
+         csService.updateNotice(dto);
+
+        System.out.println("업데이트 오류2222" +dto.toString());
+
         return "/cs/notice";
     }
 

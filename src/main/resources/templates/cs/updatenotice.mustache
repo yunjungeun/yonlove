@@ -1,31 +1,171 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 리스트</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/static/js/cu_alert.js"></script>
-
+    {{>layout/header}}
 </head>
-<body>
-<form id="alert" method="get" action="/cs/{{updateNotice.notice_id}}/updatenotice">
-    <input name="notice_id" type="hidden" value="{{updateNotice.notice_id}}"/>
-<table border="1" cellpadding="1" cellspacing="1">
-    <tr>
-        <td>제목</td>
-        <td><input class="field1" name="notice_title" type="text" value="{{updateNotice.notice_title}}"><td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <textarea class="field2" name="notice_content" cols="50" rows="20">{{updateNotice.notice_content}}</textarea>
-        </td>
-    </tr>
-</table>
-    <input type="submit" value="수정" onclick="mappingurl('/cs/{{updateNotice.notice_id}}/updatenotice','/cs/notice',2,'수정')"/>
-</form>
-<a href="/cs/notice">목록</a>
+<body id="page-top">
+
+{{>layout/sidebar}}
+
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+    <!--d-flex flex-column: flex박스 스타일을 적용한 클래스 : 요소들 수평이나 수직으로 배치하고 간격을 조절하는 등의 작업 간편화
+       content-wrapper: 컨텐츠 섹션 감싸고  그 안의 요소들을 유연하게 배치하고 정렬 주로  다양한 화면 크기와 디바이스에 대응하는 반응형 디자인을 구현하는 데 유용-->
+
+    <!-- Main Content -->
+    <div id="content">
+
+
+        <div class="container-fluid">  <!--얘가 없으면 전체적으로 다 위로 올라가고 푸터가 사이드 옆쪽으로 붙어버림 -->
+            <!--container-fluid:  Bootstrap 프레임워크를 사용하여 생성된 컨테이너로, 웹 페이지의 내용을 감싸는 역할, 화면 폭에 맞게 자동으로 넓어져서 브라우저의 너비에 따라 반응형으로 조절-->
+            <!--mb-2:하단의 여백 -->
+            <!-- Page Heading -->
+            <div style="text-align: center; display: block; margin-top:100px;" >
+                <h1 class="h3 mb-2 text-gray-800" >공지사항</h1><!--공지사항이 너무 천장에 붙어있어서 margin-top: 50px을 줘서 내렸습니다-->
+            </div>
+            <!-- <p class="mb-4">게시판 설명 넣는곳 <a target="_blank" href="https://datatables.net">이곳에 링크 넣으세요</a>.</p>-->
+
+
+
+            <div class="card shadow mb-4" style="margin-top: 150px; margin-right: 300px; margin-left: 300px">
+                <div class="card-header py-3">
+                    <!--<h6 class="m-0 font-weight-bold text-primary">공지사항</h6>-->
+
+                    <form id="alert" action="/cs/{{updateNotice.notice_id}}/updatenotice" method="get">
+                        <input name="notice_id" type="hidden" value="{{updateNotice.notice_id}}"/>
+
+                        <div style="margin-left: 20%; margin-top: 5%;">
+                            <div style="display: inline-block;">
+                                <div class="mb-3" style="text-align: center; display: inline-block;">
+                                    <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>제목</strong></label>
+                                </div>
+
+                                <div class="mb-3" style="text-align: center; display: inline-block;">
+                                    <input id="formGroupExampleInput" class="field1 card shadow mb-4" name="notice_title" type="text" value="{{updateNotice.notice_title}}"  style="width: 90%; text-align: center">
+                                </div>
+                            </div>
+
+                            <div style="display: inline-block;">
+                                <div class="mb-3" style="text-align: center; display: inline-block;">
+                                    <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>작성자</strong></label>
+                                </div>
+                                <div class="mb-3" style="text-align: center; display: inline-block;">
+                                    <input  id="formGroupExampleInput" class="card shadow mb-4"  name="notice_writer" type="text" value="{{updateNotice.notice_writer}}" readonly style="width: 90%; text-align: center">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3" style="text-align: center">
+                            <label for="formGroupExampleInput" class="form-label" style="display: block;"></label>
+                            <textarea type="text"  id="formGroupExampleInput" class="field2 card shadow mb-4" name="notice_content"  style="height: 30vh; width: 60%;  display: block; margin: 0 auto;">{{updateNotice.notice_content}}</textarea>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                       <!-- <div style="margin-left: 20%; margin-top: 5%;">
+                            <div style="display: inline-block;">
+                                <div class="mb-3" style="text-align: center; display: inline-block;">
+                                    <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>제목</strong></label>
+                                </div>
+
+                                <div class="mb-3" style="text-align: center; display: inline-block;">
+                                    <input id="formGroupExampleInput" class="field1 card shadow mb-4" name="notice_title" type="text" value="{{updateNotice.notice_title}}"  style="width: 90%; text-align: center ">
+                                </div>
+                            </div>
+
+                            <div style="display: inline-block;">
+                                <div class="mb-3" style="text-align: center; display: inline-block;">
+                                    <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>작성자</strong></label>
+                                </div>
+                                <div class="mb-3" style="text-align: center; display: inline-block;">
+                                    <input  id="formGroupExampleInput" class="card shadow mb-4"  name="notice_writer" type="text" value="{{updateNotice.notice_writer}}" readonly style="width: 90%; text-align: center">
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+                        <div class="mb-3" style="text-align: center">
+                            <label for="formGroupExampleInput" class="form-label" style="display: block;"></label>
+                            <textarea type="text" class="field2 card shadow mb-4" id="formGroupExampleInput" style="height: 30vh; width:60%;  display: block; margin: 0 auto;">{{updateNotice.notice_content}}</textarea>
+                        </div>-->
+
+
+
+
+
+
+
+
+                        <div style="text-align: center">
+                            <button type="submit" class="btn btn-primary" onclick="mappingurl('/cs/{{updateNotice.notice_id}}/updatenotice','/cs/notice',2,'수정')">등록</button>
+                            <button class="btn btn-secondary" onclick="location.href='/cs/notice'">취소</button>
+                        </div>
+
+
+                    </form>
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+        <!-- /.container-fluid -->
+
+
+
+
+    </div>
+    <!-- End of Main Content -->
+
+
+    {{>layout/footer}}
+
+
+</div>
+<!-- End of Content Wrapper -->
+
+<script>
+    var url = "/cs/notice";
+</script>
+
+
+
+
+
+{{>layout/bootstrapjs}}
 </body>
 </html>

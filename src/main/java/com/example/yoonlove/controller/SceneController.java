@@ -81,6 +81,8 @@ public class SceneController {
 
     @GetMapping("/scene/insertsceneview")
     public ModelAndView insertSceneView() throws JsonProcessingException{
+        //fk값으로 db검색결과
+        List<ScenarioDto> scenarioDto = sceneService.selectFk();
 
         String jsonListProject = dropDownService.dropDownOption("project",null);
 
@@ -93,6 +95,26 @@ public class SceneController {
     @GetMapping("/scene/insertscene")
     public String insertScene(SceneDto dto) {
             sceneService.insertScene(dto);
+    @GetMapping("/scene/insertscene")
+    public String insertScene(SceneDto dto) {
+        System.out.println(dto.toString());
+        sceneService.insertScene(dto);
+
+/*        int lastnum = sceneService.lastPost(dto);
+
+        if(file == null){
+            System.out.println("업로드파일없음");
+            fileService.insertNull(lastnum);
+        }else {
+            try {
+                System.out.println("있음");
+                fileService.insertFile(file, lastnum); // FileService를 사용하여 파일 업로드
+            } catch (IOException e) {
+                System.out.println("test");
+                log.info(e.getMessage());
+                // 예외 처리
+            }
+        }*/
 
         return "redirect:/scene/scene";
     }
