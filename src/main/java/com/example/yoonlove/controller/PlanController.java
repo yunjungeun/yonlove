@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -434,22 +435,32 @@ public class PlanController {
 
     }
 
-    //월력형 개발중
+
+
+    //------------------------월력형 테이블 로직---------------------------------//
     @GetMapping("/calendar")
-    public ModelAndView showCalendar(@RequestParam(defaultValue = "2023") int year, @RequestParam(defaultValue = "10")int month) {
+    public ModelAndView showCalendar(@RequestParam(defaultValue = "-1") int year, @RequestParam(defaultValue = "-1")int month) {
+
+        //년월 기본값(-1년-1월) 이라면 현재 년월 기준으로 year/month 값 출력
+        if(year+month == -2){
+            LocalDate currentDate = LocalDate.now();
+            year= currentDate.getYear();
+            month = currentDate.getMonthValue();
+        }
+
         ModelAndView mv = new ModelAndView();
 
         List<List<String>> calendarData = calendarService.generateCalendarData(year,month);
 
         // 뷰로 데이터를 전달하기 위해 모델에 "calendar" 속성 추가
         mv.setViewName("/plan/test");
-        mv.addObject("year", year);
         mv.addObject("month", month);
+        mv.addObject("year", year);
         mv.addObject("calendar", calendarData);
         return mv;
     }
 
-
+    //전월 버튼 눌럿을때 응답
     @PostMapping("/calendar/premonth")
     @ResponseBody
     public Map<String, Object> preMonth(int year, int month){
@@ -458,7 +469,7 @@ public class PlanController {
         int preMonth = month-1;
         int resultYear = year;
         if(preMonth < 1){
-            resultYear =- year;
+            resultYear = year-1;
             preMonth = 12;
         }
 
@@ -469,8 +480,65 @@ public class PlanController {
         response.put("month", preMonth);
         response.put("calendar", calendarData);
 
-        System.out.println(response);
         return response;
     }
+
+    //전년 버튼 눌럿을때 응답
+    @PostMapping("/calendar/preyear")
+    @ResponseBody
+    public Map<String, Object> preYear(int year, int month){
+        //현재 년에서 1을 뺌
+        year = year - 1;
+
+        Map<String, Object> response = new HashMap<>();
+        List<List<String>> calendarData = calendarService.generateCalendarData(year,month);
+
+        response.put("year", year);
+        response.put("month", month);
+        response.put("calendar", calendarData);
+
+        return response;
+    }
+
+    //다음달 버튼 눌럿을때 응답
+    @PostMapping("/calendar/nextmonth")
+    @ResponseBody
+    public Map<String, Object> nextMonth(int year, int month){
+
+        //1월이 되면 전년도의 12월로 입력해주는 로직
+        int nextMonth = month+1;
+        int resultYear = year;
+        if(nextMonth > 12){
+            resultYear = year + 1;
+            nextMonth = 1;
+        }
+
+        Map<String, Object> response = new HashMap<>();
+        List<List<String>> calendarData = calendarService.generateCalendarData(resultYear,nextMonth);
+
+        response.put("year", resultYear);
+        response.put("month", nextMonth);
+        response.put("calendar", calendarData);
+
+        return response;
+    }
+
+    //내년 버튼 눌럿을때 응답
+    @PostMapping("/calendar/nextyear")
+    @ResponseBody
+    public Map<String, Object> nextYear(int year, int month){
+        //현재 년에서 1을 더함
+        year = year + 1;
+
+        Map<String, Object> response = new HashMap<>();
+        List<List<String>> calendarData = calendarService.generateCalendarData(year,month);
+
+        response.put("year", year);
+        response.put("month", month);
+        response.put("calendar", calendarData);
+
+        return response;
+    }
+
 
 }

@@ -9,43 +9,43 @@
 
 </head>
 <body>
-<h1>{{year}}년 {{month}}월 달력</h1>
-<div id="calendar-template">
-<table id="calendar-container" border="1" >
-    <tr>
-        <th>일</th>
-        <th>월</th>
-        <th>화</th>
-        <th>수</th>
-        <th>목</th>
-        <th>금</th>
-        <th>토</th>
-    </tr>
-    {{#calendar}}
-        <tr>
-            {{#this}}
-                <td>{{.}}</td>
-            {{/this}}
-        </tr>
-    {{/calendar}}
-</table>
+
+<!--id="currentDate" 수정시 calendar.js도 같이 수정해야됨. 수정필요시 문의  -->
+<div id="currentDate">
+    <h1><span id="year">{{year}}</span>년 <span id="month">{{month}}</span>월</h1>
 </div>
+
+<!--id="calendar-container" 수정시 calendar.js도 같이 수정해야됨. 수정필요시 문의  -->
+    <table  id="calendar-container" border="1" >
+        <tr>
+            <th>일</th>
+            <th>월</th>
+            <th>화</th>
+            <th>수</th>
+            <th>목</th>
+            <th>금</th>
+            <th>토</th>
+        </tr>
+        {{#calendar}}
+            <tr>
+                {{#this}}
+                    <td>{{.}}</td>
+                {{/this}}
+            </tr>
+        {{/calendar}}
+    </table>
+
+
 <form method="post" action="/calendar">
     년<input type="number" name="year">
     월<input type="number" name="month">
     <input type="submit" value="검색">
 </form>
 
-<button type="button" id="preYear" >전년</button>
-<button type="button" id="preMonth" onclick="preMonth()">이전달</button>
-<button type="button" id="nextMonth">다음달</button>
-<button type="button" id="nextYear">내년</button>
-
-
-<!--js에 넘겨주기 위한 히든값 start-->
-<input id="year" type="hidden" value="{{year}}">
-<input id="month" type="hidden" value="{{month}}">
-<!--js에 넘겨주기 위한 히든값 end-->
+<button type="button" onclick="dateButton('preYear')">전년</button>
+<button type="button" onclick="dateButton('preMonth')">이전달</button>
+<button type="button" onclick="dateButton('nextMonth')">다음달</button>
+<button type="button" onclick="dateButton('nextYear')" >내년</button>
 
 
 <script src="/static/js/calendar.js"></script>
