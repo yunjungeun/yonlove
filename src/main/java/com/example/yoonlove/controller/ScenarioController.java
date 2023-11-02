@@ -93,7 +93,7 @@ public class ScenarioController {
     @ResponseBody
     public String insertScenario(ScenarioDto dto){
         scenarioService.insertScenario(dto);
-        return "redirect:/scenario/scenario";
+        return "/scenario/scenario";
     }
 
     @GetMapping("/scenario/{scenario_id}/updatescenarioview")
@@ -109,7 +109,7 @@ public class ScenarioController {
     @ResponseBody
     public String updateScenario(ScenarioDto dto){
         scenarioService.updateScenario(dto);
-        return "redirect:/scenario/scenario";
+        return "/scenario/scenario";
     }
 
 

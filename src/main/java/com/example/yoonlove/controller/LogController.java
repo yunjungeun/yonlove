@@ -64,7 +64,7 @@ public class LogController {
     @ResponseBody
     public String insertLog(LogDto dto) {
         logService.insertLog(dto);
-        return "redirect:/log/log";
+        return "/log/log";
     }
 
     @GetMapping("log/{log_id}/logUpdateView")
@@ -80,7 +80,7 @@ public class LogController {
     @ResponseBody
     public String updateLog(LogDto dto){
         logService.updateLog(dto);
-        return "redirect:/log/log";
+        return "/log/log";
     }
 
     @GetMapping("log/{log_id}/deleteLog")

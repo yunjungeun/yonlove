@@ -60,7 +60,7 @@ public class ProjectController {
     @ResponseBody
     public String insertProject(ProjectDto projectDto){
         projectService.insertProject(projectDto);
-        return "redirect:/project/project";
+        return "/project/project";
     }
 
         // 삭제 !!!!!!!!!!!!!!!!!!
@@ -84,7 +84,7 @@ public class ProjectController {
     @ResponseBody
     public String updateProject(ProjectDto dto){
         projectService.updateProject(dto);
-        return "redirect:/project/project";   // 목록페이지로 이동
+        return "/project/project";   // 목록페이지로 이동
     }
     // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ프로젝트 끝
 
@@ -119,7 +119,7 @@ public class ProjectController {
     @ResponseBody
     public String insertBudget(BudgetDto budgetDto){
         projectService.insertBudget(budgetDto);
-        return "redirect:/project/budget";
+        return "/project/budget";
     }
 
     @GetMapping("project/{budget_id}/selectbudget")
@@ -150,7 +150,7 @@ public class ProjectController {
     @ResponseBody
     public String updateBudget(BudgetDto dto){
         projectService.updateBudget(dto);
-        return "redirect:/project/budget";   // 목록페이지로 이동
+        return "/project/budget";   // 목록페이지로 이동
     }
  // =====================budget 완료 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -184,7 +184,7 @@ public class ProjectController {
     @ResponseBody
     public String insertProduce(ProduceDto produceDto){
         projectService.insertProduce(produceDto);
-        return "redirect:/project/produce";}
+        return "/project/produce";}
 
     @GetMapping("project/{pd_id}/selectproduce")   //상세보기
     public ModelAndView selectProduce(ProduceDto produceDto){
@@ -211,7 +211,7 @@ public class ProjectController {
     @ResponseBody
     public String updateProduce(ProduceDto dto){
         projectService.updateProduce(dto);
-        return "redirect:/project/produce"; }
+        return "/project/produce"; }
 // 프로듀스 제작 완료 !!!!!!!!============================================
 }
 

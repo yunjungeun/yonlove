@@ -129,7 +129,7 @@ public class AdminController {
     public String updateUser(UserDto dto){
         System.out.println(dto.toString());
         adminService.updateUser(dto);
-        return "redirect:/admin/user";
+        return "/admin/user";
     }
 
 
@@ -173,7 +173,7 @@ public class AdminController {
     @ResponseBody
     public String insertDepartment(DepartmentDto dto){
         adminService.insertDepartment(dto);
-        return "redirect:/admin/department";
+        return "/admin/department";
     }
 
     @GetMapping("/admin/{dpt_id}/updatedptview")
@@ -189,7 +189,7 @@ public class AdminController {
     @ResponseBody
     public String updateDepartment(DepartmentDto dto){
         adminService.updateDepartment(dto);
-        return "redirect:/admin/department";
+        return "/admin/department";
     }
     @GetMapping("/admin/{dpt_id}/deletedpt")
     public String deleteDepartment(DepartmentDto dto){

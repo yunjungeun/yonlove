@@ -166,7 +166,7 @@ public class SceneController {
     @ResponseBody
     public String insertActor(ActorDto dto){
         sceneService.insertActor(dto);
-        return "redirect:/scene/actor";
+        return "/scene/actor";
     }
 
 
@@ -183,7 +183,7 @@ public class SceneController {
     @ResponseBody
     public String updateActor(ActorDto dto){
         sceneService.updateActor(dto);
-        return "redirect:/scene/actor";
+        return "/scene/actor";
     }
     @GetMapping("scene/{actor_id}/deleteactor")
     public String deleteActor(ActorDto dto){

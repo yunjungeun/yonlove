@@ -63,7 +63,7 @@ public class VideoController {
     @ResponseBody
     public String insertContent(VideoDto dto) {
         videoService.insertContent(dto);
-        return "redirect:/vd/video";
+        return "/vd/video";
     }
 
     @GetMapping("vd/{video_id}/UpdateView") //컨텐츠 업데이트하는 뷰
@@ -80,7 +80,7 @@ public class VideoController {
     @ResponseBody
     public String updateContent( VideoDto dto) {
         videoService.updateContent(dto);
-        return "redirect:/vd/video";
+        return "/vd/video";
     }
 
     @GetMapping("/vd/{video_id}/delete") //삭제 처리

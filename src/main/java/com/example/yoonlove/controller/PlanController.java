@@ -96,7 +96,7 @@ public class PlanController {
     public String insertSchedule(ScheduleDayDto dto) {
         planService.insertSchedule(dto);
 
-        return "redirect:/plan/schedule_day";
+        return "/plan/schedule_day";
     }
 
     @GetMapping("plan/{day_id}/scheduleUpdateView") //컨텐츠 업데이트하는 뷰
@@ -114,7 +114,7 @@ public class PlanController {
     @ResponseBody
     public String updateSchedule( ScheduleDayDto dto) {
         planService.updateSchedule(dto);
-        return "redirect:/plan/schedule_day";
+        return "/plan/schedule_day";
     }
 
     @GetMapping("plan/{day_id}/deleteSchedule") //삭제 처리
@@ -177,7 +177,7 @@ public class PlanController {
     public String insertTime(ScheduleTimeDto dto) {
         planService.insertTime(dto);
 
-        return "redirect:/plan/schedule_time";
+        return "/plan/schedule_time";
     }
 
 
@@ -195,7 +195,7 @@ public class PlanController {
     @ResponseBody
     public String updateTime( ScheduleTimeDto dto) {
         planService.updateTime(dto);
-        return "redirect:/plan/schedule_time";
+        return "/plan/schedule_time";
     }
 
     @GetMapping("plan/{time_id}/deleteTime") //삭제 처리
@@ -271,7 +271,7 @@ public class PlanController {
     @ResponseBody
     public String updateActorManagement( ActorManagementDto dto) {
         planService.updateActorManagement(dto);
-        return "redirect:/plan/actor_management";
+        return "/plan/actor_management";
     }
 
     @GetMapping("plan/{actor_id}/deleteActorManagement") //삭제 처리
@@ -332,7 +332,7 @@ public class PlanController {
     @ResponseBody
     public String insertFilm(FilmPlanDto dto) {
         planService.insertFilm(dto);
-        return "redirect:/plan/film_plan";
+        return "/plan/film_plan";
     }
 
 
@@ -350,7 +350,7 @@ public class PlanController {
     @ResponseBody
     public String updateFilm( FilmPlanDto dto) {
         planService.updateFilm(dto);
-        return "redirect:/plan/film_plan";
+        return "/plan/film_plan";
     }
 
     @GetMapping("plan/{film_id}/deleteFilm") //삭제 처리
@@ -408,7 +408,7 @@ public class PlanController {
     @ResponseBody
     public String insertPlan(ScheduleMonthDto dto) {
         planService.insertPlan(dto);
-        return "redirect:/plan/schedule_month";
+        return "/plan/schedule_month";
     }
 
     @GetMapping("plan/{month_id}/ScheduleMonthUpdateView") //컨텐츠 업데이트하는 뷰
@@ -425,7 +425,7 @@ public class PlanController {
     @ResponseBody
     public String  updatePlan( ScheduleMonthDto dto) {
         planService. updatePlan(dto);
-        return "redirect:/plan/schedule_month";
+        return "/plan/schedule_month";
     }
 
     @GetMapping("plan/{month_id}/deleteScheduleMonth") //삭제 처리
