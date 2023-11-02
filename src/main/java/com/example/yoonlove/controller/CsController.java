@@ -103,7 +103,9 @@ public class CsController {
 
     @GetMapping("/cs/insertnotice")
     @ResponseBody
-    public String insertNotice(NoticeDto dto){
+    public String insertNotice(NoticeDto dto, Principal user){
+
+        dto.setUser_id(user.getName());
 
         csService.insertNotice(dto);
         return "/cs/notice";

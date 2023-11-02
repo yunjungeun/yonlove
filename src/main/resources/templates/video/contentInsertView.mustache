@@ -7,8 +7,12 @@
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/static/js/cu_alert.js"></script>
+    {{>layout/header}}
 </head>
-<body>
+
+<body id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
 <form id="alert" action="/vd/contentInsert" method="get">
 <table border="1" cellpadding="1" cellspacing="1">
     <tr>

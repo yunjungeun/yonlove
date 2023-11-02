@@ -7,8 +7,12 @@
     <title>업뎃수정</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/static/js/cu_alert.js"></script>
+    {{>layout/header}}
 </head>
-<body>
+
+<body id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
 <form id="alert" method="get" action="/creator/updatecreator/{{selectCreator.ch_id}}">
 <div id="div_box">
     <h1>게시글 수정</h1>
@@ -53,7 +57,7 @@
         var user_id = $("input[name='user_id']").val();
 
         // Mustache 템플릿에서 추출한 ch_id 값
-        var ch_id = "{{selectCreator.ch_id}}";  // 이 부분을 실제 Mustache 데이터로 대체해야 합니다.
+        var ch_id = "1{selectCreator.ch_id}}";  // 이 부분을 실제 Mustache 데이터로 대체해야 합니다.
 
         // API로 데이터 전송
         $.ajax({

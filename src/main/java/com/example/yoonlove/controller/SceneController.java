@@ -101,7 +101,6 @@ public class SceneController {
     @ResponseBody
     public String insertScene(SceneDto dto) {
             sceneService.insertScene(dto);
-
         return "/scene/scene";
     }
 
@@ -191,5 +190,4 @@ public class SceneController {
         sceneService.deleteActor(dto);
         return "redirect:/scene/actor";
     }
-
 }

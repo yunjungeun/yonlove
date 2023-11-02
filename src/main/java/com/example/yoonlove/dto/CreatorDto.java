@@ -3,6 +3,8 @@ package com.example.yoonlove.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 public class CreatorDto {
@@ -11,13 +13,5 @@ public class CreatorDto {
     private int ch_sub;
     private String user_id;
 
-    @Override
-    public String toString() {
-        return "CreatorDto{" +
-                "ch_id='" + ch_id + '\'' +
-                ", ch_name='" + ch_name + '\'' +
-                ", ch_sub=" + ch_sub +
-                ", user_id='" + user_id + '\'' +
-                '}';
     }
-}
+

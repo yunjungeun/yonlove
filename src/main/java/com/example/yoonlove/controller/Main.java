@@ -21,4 +21,21 @@ public class Main {
     public String testPage1(){
         return "/main/posttest";
     }
+
+
+    @GetMapping("/로그인")
+    public String testPage2(){
+        return "/main/login";
+    }
+
+    @GetMapping("/헤더")
+    public String testPage3(){
+        return "/layout/header";
+    }
+
+    @GetMapping("/일반회원가입")
+    public String testPage4(){
+        return "/login/signup";
+    }
 }
+

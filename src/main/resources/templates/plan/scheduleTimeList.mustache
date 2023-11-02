@@ -3,54 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시판 리스트</title>
+    <title>스케쥴</title>
+    {{>layout/header}}
 </head>
 <body>
-<h1>공지사항</h1>
-<table border="1" cellpadding="1" cellspacing="1">
-    <ul>
-        <tr>
-            <td>기획명</td>
-            <td>촬영계획</td>
-            <td>시작시간</td>
-            <td>종료시간</td>
-            <td>촬영내용</td>
+{{>layout/sidebar}}
+{{>layout/topbar}}
 
-
-        </tr>
-        {{#scheduleTimeList}}
-            <tr>
-                <td>{{project_name}}</td>
-                <td>{{day_title}}</td>
-                <td>{{start_time}}</td>
-                <td>{{end_time}}</td>
-                <td><a href="/plan/scheduleTime/{{time_id}}">{{film_content}}</a></td>
-            </tr>
-        {{/scheduleTimeList}}
-    </ul>
-</table>
+<div class="container">
+<h1>Time 촬영계획표</h1>
+        <table border="1" cellpadding="1" cellspacing="1">
+            <ul>
+                <tr>
+                    <td>기획명</td>
+                    <td>촬영계획</td>
+                    <td>시작시간</td>
+                    <td>종료시간</td>
+                    <td>촬영내용</td>
+                </tr>
+                {{#scheduleTimeList}}
+                    <tr>
+                        <td>{{project_name}}</td>
+                        <td>{{day_title}}</td>
+                        <td>{{start_time}}</td>
+                        <td>{{end_time}}</td>
+                        <td><a href="/plan/scheduleTime/{{time_id}}">{{film_content}}</a></td>
+                    </tr>
+                {{/scheduleTimeList}}
+            </ul>
+        </table>
 
 {{>layout/paging}}
 
-<form action="/plan/schedule_time" method="GET">
-    <select id="searchType" name="searchType">
-        <option value="all">선택</option>
-        <option value="title">제목</option>
-        <!-- 필요한 항목 추가 -->
-    </select>
-    <input type="text" id="search" name="search" placeholder="검색">
+    <div class="container1">
+        <form action="/plan/schedule_time" method="GET">
+            <select id="searchType" name="searchType">
+                <option value="all">선택</option>
+                <option value="title">제목</option>
+                <!-- 필요한 항목 추가 -->
+            </select>
+            <input type="text" id="search" name="search" placeholder="검색">
+            <input type="submit" value="검색">
+        </form>
+    </div>
 
-    <input type="submit" value="검색">
+    <div class="containe2">
+        <a href="/plan/insertScheduleTimeView" role="button">새 시간표 작성</a>&nbsp;&nbsp;
+        <a href="/plan/schedule_time">목록</a>&nbsp;&nbsp;
+        <a href="/index">홈 페이지</a>
+    </div>
 
-</form>
-
-
-<a href="/plan/insertScheduleTimeView" role="button">새 시간표 작성</a>
-<a href="/plan/schedule_time">목록</a>
-
-
+</div>
+{{>layout/footer}}
 <script src="/static/js/search.js"></script>
-
-
+{{>layout/bootstrapjs}}
 </body>
 </html>

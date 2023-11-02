@@ -4,108 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>제작예산 리스트</title>
+    {{>layout/header}}
 </head>
-<body>
-<h1>예산서 리스트</h1>
-<form action="/project/budget" method="GET" >
-    <table border="1" cellpadding="1" cellspacing="1">
-        <ul>
+<body id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+    <!-- Main Content -->
+    <div id="content">
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+            <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px;">예산서 현황</h1>
 
-            <tr>
-                <td>항목이름</td>
-                <td>프로젝트아이디</td>
-            </tr>
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4" style="margin-top: 50px;">
+                <div class="card-header py-3">
 
-            {{#selectListBudget}}
-                <tr>
-                    <td><a href="/project/{{budget_id}}/selectbudget">{{budget_name}}</a></td>
-                    <td>{{project_id}}</td>
-                </tr>
-            {{/selectListBudget}}
-        </ul>
-    </table>
-</form>
+        <!--검색 -->
+        <form action="/project/budget" method="get" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
 
-<a href="/project/insertbudgetview" role="button">작성</a>
-<a href="/project/budget" role="button">목록으로 </a>
+            <div class="input-group">
+                <select id="searchType" name="searchType">
+                    <option value="all">선택</option>
+                    <option value="title">제작예산서 이름</option>
+                    <!-- 필요한 항목 추가 -->
+                </select>
+                <input id="search" name="search" type="text"  style="width: 150px;" class="form-control bg-light border-0 small" placeholder="Search for..."
+                       aria-label="Search" aria-describedby="basic-addon2">
 
-<a href="/index">홈 페이지</a>
+                <div class="input-group-append">
+                    <input class="btn btn-primary" type="submit" value="검색">
+                </div>
+            </div>
+        </form>
+        </div>
 
-{{>layout/paging}}
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th  style="text-align: center;">항목이름</th>
+                        <th  style="text-align: center;">프로젝트ID</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#selectListBudget}}
+                        <tr>
+                            <td style="text-align: center;"> <a href="/project/{{budget_id}}/selectbudget">{{budget_name}}</a></td>
+                            <td style="text-align: center;">{{project_id}}</td>
+                        </tr>
+                    {{/selectListBudget}}
+                    </tbody>
+                </table>
 
+                <!--페이징 처리 레이아웃-->
+                {{>layout/paging}}
+                <a style="margin-left: 20px"  href="/project/insertbudgetview" role="button">글 작성</a>
+                <a style="margin-left: 20px" href="/project/budget">목록</a> &nbsp;&nbsp;
+                <a style="margin-left: 20px" href="/index">홈 페이지</a>
+            </div>
+        </div>
 
-<!--  검색!!!!!!!
-원래 URL주소는: searchType=projectId&content=311 로 get주소로 나옴
-따로 DB 검색 Dto(BudgetSearchDto)에 name,projectId를 설정해놔서
-주소 값을 변경해야함 -> 이부분은 자바스크립트로 변경처리
--->
+        </div>
+    <br/>
+</div>
 
-<br/>
-<form action="/project/budget" method="GET">
-    <select id="searchType" name="searchType">
-        <option value="all">선택</option>
-        <option value="title">제작예산서 이름</option>
-        <!-- 필요한 항목 추가 -->
-    </select>
-
-    <input type="text" id="search" name="search" placeholder="검색">
-    <input type="submit" value="검색">
-</form>
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- /.container-fluid -->
+</div>
+<!-- End of Main Content -->
+{{>layout/footer}}
+</div>
+<!-- End of Content Wrapper -->
 
 <script>
     var url = "/project/budget";
 </script>
+
 <script src="/static/js/search.js"></script>
+<!-- 페이징 처리와 관련된 부트스트랩 라이브러리-->
+<script src="/static/bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
+<!-- 페이징 처리와 관련된 부트스트랩 라이브러리 -->
+<script src="/static/bootstrap/js/demo/datatables-demo.js"></script>
 
-<!--<script>
-    // search 할때, 기본 URL 주소값을 변경하기 위해..
-    function submitForm() {
-        //  위의 select의 name인 서치타입을 가져오고 해당 입력값을 가져옴
-        var searchTypeSelect = document.getElementById("searchType");
-        var selectedSearchType = searchTypeSelect.value;
-
-
-        //인풋 값을 컨텐츠에 담음
-        var search = document.getElementById("search").value;
-
-
-        // 프로젝트Id 로 검색 또는 입력값이 없을때
-        if (selectedSearchType === "id" && search !== "") {  // 검색시, projectId와 빈칸일때
-            // URL 주소를 아래로 변경해라 (베이스URL / 서치 URL)
-            var baseUrl = "/project/listbudget";
-            var searchUrl = baseUrl + "?id=" + search;
-
-            //  searchUrl로 이동
-            window.location.href = searchUrl;
-        }
-
-        if (selectedSearchType === "title" && search !== "") {
-            // Construct the URL
-            var baseUrl = "/project/listbudget";
-            var searchUrl = baseUrl + "?title=" + search;
-
-            window.location.href = searchUrl;
-        }
-           // 폼 제출을 막고, Enter 키 이벤트도 처리
-        return false;
-    }
-     // "검색" 버튼 클릭 시 이벤트 핸들러
-    document.querySelector('input[type="submit"]').addEventListener("click", function(event) {
-        event.preventDefault(); // 폼 제출 방지
-        submitForm();
-    });
-
-    // Enter 키를 눌렀을 때 검색 버튼 클릭 시키는 이벤트 핸들러 추가
-    document.getElementById("content").addEventListener("keyup", function(event) {
-        if (event.key === "Enter") {
-            submitForm();
-        }
-    });
-
- // event.preventDefault()는 "검색" 버튼 클릭 시 폼이 서버로 데이터를 전송하는 기본 동작을 중단시키는 역할을 합니다.
-//그 후, JavaScript 코드에서 사용자 정의 동작을 수행할 수 있게 됩니다.
-</script>-->
+{{>layout/bootstrapjs}}
 </body>
 </html>
-

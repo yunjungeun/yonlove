@@ -3,67 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시판 리스트</title>
+    <title>영상</title>
+    {{>layout/header}}
 </head>
-<body>
-<h1>공지사항</h1>
-<table border="1" cellpadding="1" cellspacing="1">
-    <ul>
-        <tr>
-            <td>영상제목</td>
-            <td>영상설명</td>
-            <td>영상주소</td>
-            <td>업로드날짜</td>
-            <td>영상수익</td>
-            <td>조회수</td>
-            <td>좋아요수</td>
-            <td>프로젝트아이디</td>
-        </tr>
-        {{#selectContentList}}
-            <tr>
-                <td><a href="/vd/content/{{video_id}}">{{video_name}}</a></td>
-                <td>{{video_sub}}</td>
-                <td>{{video_url}}</td>
-                <td>{{upload_date}}</td>
-                <td>{{video_profit}}</td>
-                <td>{{video_view}}</td>
-                <td>{{like_cnt}}</td>
-                <td>{{project_id}}</td>
-            </tr>
-        {{/selectContentList}}
-    </ul>
-</table>
+<body id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
 
-{{>layout/paging}}
+    <!-- Main Content -->
+    <div id="content">
 
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+            <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px;">영상 현황</h1>
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4" style="margin-top: 50px;">
+                <div class="card-header py-3">
+            <!-- 검색 -->
+    <form action="/vd/video" method="get" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
 
+        <div class="input-group">
+            <select id="searchType" name="searchType">
+                <option value="all">선택</option>
+                <option value="title">제목</option>
+                <!-- 필요한 항목 추가 -->
+            </select>
 
+            <input id="search" name="search" type="text"  style="width: 150px;" class="form-control bg-light border-0 small" placeholder="Search for..."
+                   aria-label="Search" aria-describedby="basic-addon2">
 
+            <div class="input-group-append">
+                <input class="btn btn-primary" type="submit" value="검색">
+            </div>
+        </div>
+    </form>
 
+    </div>
 
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th  style="text-align: center;">영상제목</th>
+                    <th  style="text-align: center;">영상설명</th>
+                    <th  style="text-align: center;">영상주소</th>
+                    <th  style="text-align: center;">업로드날짜</th>
+                    <th  style="text-align: center;">영상수익</th>
+                    <th  style="text-align: center;">조회수</th>
+                    <th  style="text-align: center;">좋아요 수</th>
+                    <th  style="text-align: center;">프로젝트ID</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#selectContentList}}
+                    <tr>
+                        <td style="text-align: center;"><a href="/vd/content/{{video_id}}">{{video_name}}</a></td>
+                        <td style="text-align: center;">{{video_sub}}</td>
+                        <td style="text-align: center;">{{video_url}}</td>
+                        <td style="text-align: center;">{{upload_date}}</td>
+                        <td style="text-align: center;">{{video_profit}}</td>
+                        <td style="text-align: center;">{{video_view}}</td>
+                        <td style="text-align: center;">{{like_cnt}}</td>
+                        <td style="text-align: center;">{{project_id}}</td>
+                    </tr>
+                {{/selectContentList}}
+                </tbody>
+            </table>
 
-<form action="/vd/video" method="GET">
-    <select id="searchType" name="searchType">
-        <option value="all">선택</option>
-        <option value="title">제목</option>
+            <!--페이징 처리 레이아웃-->
+            {{>layout/paging}} <br/>
+            <a style="margin-left: 20px" href="/vd/contentInsertView" role="button">글 작성</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="margin-left: 20px" href="/vd/video" >목록</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="margin-left: 20px" href="/index">홈 페이지</a>
+        </div>
+    </div>
 
-        <!-- 필요한 항목 추가 -->
-    </select>
-    <input type="text" id="search" name="search" placeholder="검색">
+</div>
+<br/>
+</div>
 
-    <input type="submit" value="검색">
-
-</form>
-
-
-<a href="/vd/contentInsertView" role="button">새 영상 작성</a>
-<a href="/vd/video">목록</a>
-
+<a class="scroll-to-top rounded" href="#page-top">
+<i class="fas fa-angle-up"></i>
+</a>
+<!-- /.container-fluid -->
+</div>
+<!-- End of Main Content -->
+{{>layout/footer}}
+</div>
+<!-- End of Content Wrapper -->
 
 <script>
     var url = "/vd/video";
 </script>
-<script src="/static/js/search.js"></script>
 
+<script src="/static/js/search.js"></script>
+<!-- 페이징 처리와 관련된 부트스트랩 라이브러리-->
+<script src="/static/bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- 페이징 처리와 관련된 부트스트랩 라이브러리 -->
+<script src="/static/bootstrap/js/demo/datatables-demo.js"></script>
+
+{{>layout/bootstrapjs}}
 </body>
 </html>

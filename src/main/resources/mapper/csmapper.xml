@@ -57,7 +57,7 @@
         (select * from todaytime)<!--현재 날짜+시간 뷰테이블-->,
         '23-9-12',
         0,
-        'test')
+        #{user_id})
     </insert>
 
     <update id="updateNotice">

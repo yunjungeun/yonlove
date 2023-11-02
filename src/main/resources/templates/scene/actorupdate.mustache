@@ -8,10 +8,14 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/static/js/cu_alert.js"></script>
 
+    {{>layout/header}}
 </head>
-<body>
 
-<form id="alert" method="get" action="/scene/{{updateActor.actor_id}}/updateactor">
+<body id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
+
+<form id="alert" method="get" action="/scene/{{updateActor.act_id}}/updateactor">
 <table border="1" cellpadding="1" cellspacing="1">
     <tr>
         <td>씬 번호<input  class="field1" name="scene_id" type="text" readonly value="{{updateActor.scene_id}}"></td>

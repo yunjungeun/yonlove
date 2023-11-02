@@ -135,7 +135,6 @@ public class PlanController {
         String rink = pagingService.pageRink(pageDto);
 
         List<ScheduleTimeDto> dto = planService.selectListScheduleTime(pageInfo);
-
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/scheduleTimeList");
         mv.addObject("scheduleTimeList", dto);

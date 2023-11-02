@@ -5,8 +5,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    {{>layout/header}}
 </head>
-<body>
+
+<body id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
             <td>씬 번호<input name="scene_id" type="text" readonly value="{{selectActor.scene_id}}"></td>
@@ -18,8 +22,8 @@
     </table>
 
     <a href="/scene/actor">목록</a>
-    <a href="/scene/{{selectActor.actor_id}}/updateactorview">수정</a>
-    <a href="javascript:void(0);" onclick="deleteAlert('/scene/{{selectActor.actor_id}}/deleteactor')">삭제</a>
+    <a href="/scene/{{selectActor.act_id}}/updateactorview">수정</a>
+    <a href="javascript:void(0);" onclick="deleteAlert('/scene/{{selectActor.act_id}}/deleteactor')">삭제</a>
 
     <script src="/static/js/deletepost.js"></script>
 </body>

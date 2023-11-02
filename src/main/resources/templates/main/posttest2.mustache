@@ -28,54 +28,40 @@
 <body id="page-top">
 
     <!-- Page Wrapper -->
-    <div id="wrapper">  <!-- "wrapper" ==>  전체 페이지 콘텐츠를 감싸는 컨테이너로 사용!!-->
+    <div id="wrapper">
 
     <!--사이드바-->
         {{>layout/sidebar}}
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-            <!--d-flex flex-column(플렉스박스 레이아웃) ==> CSS의 레이아웃 모듈 중 하나로, 웹 페이지 레이아웃을 구성하는 데 사용되는 레이아웃 기술. 플렉스박스 레이아웃은 요소 간의 공간 배분과 정렬을 조절하기 위해 사용됩니다.
-            웹 페이지의 구성 요소를 더 쉽게 정렬하고 배치가능 다양한 화면 크기와 디바이스에 대한 반응형 디자인을 개발하는 데 유용  -->
+
 
             <!-- Main Content -->
             <div id="content">
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    <!--navbar-light: 네비바 색상  bg-white: 내비게이션 바의 배경색 topbar: 내비게이션 바의 상단 바 부분
-                     mb-4: 요소간의 마진설정 "mb-4" 클래스는 아래쪽 여백(margin-bottom)을 추가하여 내비게이션 바와 다른 콘텐츠 사이의 간격을 늘림
-                     static-top: 내비게이션 바의 위치를 고정 내비게이션 바를 화면 위쪽에 고정하므로 스크롤해도 내비게이션 바가 고정됨-->
+
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <form class="form-inline">
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                            <!--btn:버튼스타일 btn-link:하이퍼링크식으로 스타일링 btn-link" 클래스를 사용하면 버튼이 일반적인 버튼보다는 링크처럼 보임
-                            d-md-none:반응형 디자인을 위해 사용됨 중간크기 이상일때 이 버튼을 숨김 rounded-circle:버튼을 원모양으로 스타일링
-                            mr-3: 버튼 마진 추가 인접한 버튼끼리의 간격 설정-->
+
                             <i class="fa fa-bars"></i>
-                            <!--fa fa-bars: Font Awesome 라이브러리를 사용하여 "fa-bars"라는 아이콘을 나타냄 (사이드바를 토글하거나 메뉴를 열고 닫는 버튼으로 사용됨)-->
+
                         </button>
                     </form>
 
                     <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <!--d-none: 화면에서 폼을 숨기는 기능
-                        mr-auto: 오른쪽 마진을 자동으로 설정 ml-md-3:왼쪽 마진을 3단위만큼 설정
-                        my-2 my-md-0: 수직여백 설정  mw-100: 최대너비 100%설정 navbar-search: 커스텀클래스 (폼을나타내는 클래스)-->
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <!--input-group: 입력 그룹을 생성(입력 필드와 관련된 요소들을 그룹화-->
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
                                 aria-label="Search" aria-describedby="basic-addon2">
-                            <!--form-control:입력필드를 스타일링하는 부트스트랩클래스 입력필드를 보다 사용자 친화적으로 스타일링함
-                            bg-light: 입력필드 배경색 밝게  border-0:입력필드 주변 경계선을 없앰 small:입력필드 크기를 작게설정 placeholder="Search for...": 입력필드에 힌트제공
-                            aria-label, aria-describedby: 웹 접근성 향상용도 필드의 라벨 및 설명을 지정 -->
-
-
                             <div class="input-group-append">
-                                <!--input-group-append:입력 그룹에 추가 요소를 포함 이 경우, 추가 요소로 버튼이 추가-->
                                 <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i><!--Font Awesome 아이콘을 추가하는데 사용 fas fa-search fa-sm" 클래스는 검색 아이콘을 표시-->
+                                    <i class="fas fa-search fa-sm"></i>
                                 </button>
                             </div>
                         </div>
@@ -83,31 +69,17 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <!-- 부트스트랩의 "navbar-nav" 클래스를 사용하여 내비게이션 바의 목록을 나타냄
-                        "ml-auto" 클래스는 왼쪽 마진을 자동으로 설정하여 목록을 오른쪽으로 밀착시킴.-->
-
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
-                            <!--네브 드롭다운기능 no-arrow" 클래스는 화살표를 숨김 드롭다운 메뉴에 보통 화살표 아이콘이 포함되지만,
-                            d-sm-none 클래스를 사용하면 화살표를 숨김  작은(sm 이상) 화면 크기에서 이 항목을 숨김 즉, 작은 화면에서는 이 목록 항목이 보이지 않음-->
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <!--dropdown-toggle:드롭다운 토글 역할  data-toggle="dropdown": 클릭시 드롭다운 메뉴 토글함
-                                aria-haspopup="true": 드롭다운 메뉴가 나타날 때 사용자 에이전트에게 드롭다운 메뉴가 있는 것을 알려줌
-                                aria-expanded="false":  드롭다운 메뉴가 현재 숨겨져 있음을 나타냄-->
-
-                                <i class="fas fa-search fa-fw"></i> <!-- Font Awesome 아이콘을 추가하는데 사용됩니다. "fas fa-search fa-fw" 클래스는 검색 아이콘을 나타냄
-                                    드롭다운 메뉴를 나타내는 버튼에 사용됨-->
+                                <i class="fas fa-search fa-fw"></i>
                             </a>
                             <!-- Dropdown - Messages -->
                             <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                                 aria-labelledby="searchDropdown">
-                                <!--"dropdown-menu-right": 드롭다운 메뉴가 오른쪽으로 표시되도록함 "p-3":드롭다운 메뉴의 경계 사이에 간격을 만듬
-                                animated--grow-in": 드롭다운 메뉴 등장시 성장하는 애니메이션효과 aria-labelledby="searchDropdown": 드롭다운 메뉴가 어떤 요소에 의해 제어되는지를 나타내는 접근성(ARIA) 레이블을 제공-->
                                 <form class="form-inline mr-auto w-100 navbar-search">
-                                    <!--form-inline": 이 클래스는 폼 요소를 수평으로 배치하며, 일반적으로 내비게이션 바에서 사용됨 mr-auto: 오른쪽 마진 자동설정
-                                    w-100:폼의 최대 너비100%지정  navbar-search: 커스텀 클래스 폼을 나타내는 클래스-->
                                     <div class="input-group">
                                         <input type="text" class="form-control bg-light border-0 small"
                                             placeholder="Search for..." aria-label="Search"
@@ -123,7 +95,7 @@
                         </li>
 
                         <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1"> <!--mx-1" 클래스는 왼쪽 및 오른쪽 여백을 1단위로 설정. 목록 항목을 좀 더 간격을 두고 배치함-->
+                        <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
@@ -283,7 +255,7 @@
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">공지사항</h1>
                     <p class="mb-4">게시판 설명 넣는곳 <a target="_blank"
-                            href="https://datatables.net">이곳에 링크 넣으세요</a>.</p>
+                                                  href="https://datatables.net">이곳에 링크 넣으세요</a>.</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -294,24 +266,24 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
+                                    <tr>
+                                        <th>번호</th>
+                                        <th>제목</th>
+                                        <th>작성자</th>
+                                        <th>날짜</th>
+                                        <th>조회수</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
+                                    {{#selectListNotice}}
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
+                                            <td>{{notice_id}}</td>
+                                            <td><a href="/cs/selectnotice/{{notice_id}}">{{notice_title}}</a></td>
+                                            <td>{{notice_writer}}</td>
+                                            <td>{{notice_date}}</td>
+                                            <td>{{notice_cnt}}</td>
                                         </tr>
+                                    {{/selectListNotice}}
                                     </tbody>
                                 </table>
                             </div>
@@ -319,19 +291,11 @@
                     </div>
 
                 </div>
-                <!-- /.container-fluid -->
+        <!-- End of Main Content -->
 
-            </div>
-            <!-- End of Main Content -->
+        {{>layout/footer}}
 
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
-                    </div>
-                </div>
-            </footer>
+         </div>
             <!-- End of Footer -->
 
         </div>

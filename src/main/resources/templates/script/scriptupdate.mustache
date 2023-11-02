@@ -8,8 +8,12 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    {{>layout/header}}
 </head>
-<body>
+
+<body id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
 <form id="alert" method="get" action="/script/{{selectScriptPaper.script_id}}/updatescriptpaper">
     <input id="pk" name="script_id" type="hidden" value="{{selectScriptPaper.script_id}}"/>
 

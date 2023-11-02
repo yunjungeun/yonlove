@@ -27,8 +27,21 @@
                         alert("못보냄");
                     }
         	}); //End Ajax
-    	}
+    	}   // End function checkIdDuplicate()
+
     $("#check_button").on("click", function() {
                 checkIdDuplicate();
-            });
-        });
+            });  // End
+        });    // End   $(document).ready(function()
+
+        function passwordCheckFunction() {
+        		var userPassword1 = $('#pw').val();
+        		var userPassword2 = $('#confirm_password').val();
+
+        		if(userPassword1 != userPassword2) {
+        			$('#passwordCheckMessage').html('비밀번호가 서로 일치하지 않습니다.');
+        		} else {
+        			$('#passwordCheckMessage').html('');	//일치하면 메시지가 사라지게함!!
+        		}
+        	}
+
