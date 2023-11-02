@@ -39,35 +39,35 @@
 
                     <form id="alert" action="/cs/insertnotice" method="get">
 
-                      <div style="margin-left: 20%; margin-top: 5%;">
-                           <div style="display: inline-block;">
-                              <div class="mb-3" style="text-align: center; display: inline-block;">
+                        <div style="margin-left: 20%; margin-top: 5%;">
+                            <div style="display: inline-block;">
+                                <div class="mb-3" style="text-align: center; display: inline-block;">
                                     <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>제목</strong></label>
-                              </div>
+                                </div>
 
-                               <div class="mb-3" style="text-align: center; display: inline-block;">
+                                <div class="mb-3" style="text-align: center; display: inline-block;">
                                     <input id="formGroupExampleInput" class="field1 card shadow mb-4" name="notice_title" type="text"   style="width: 90%; text-align: center">
-                               </div>
-                           </div>
+                                </div>
+                            </div>
 
                             <div style="display: inline-block;">
                                 <div class="mb-3" style="text-align: center; display: inline-block;">
-                                     <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>작성자</strong></label>
+                                    <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>작성자</strong></label>
                                 </div>
                                 <div class="mb-3" style="text-align: center; display: inline-block;">
-                                     <input  id="formGroupExampleInput" class="field2 card shadow mb-4"  name="notice_writer" type="text" value="{{writer}}" readonly style="width: 90%; text-align: center">
+                                    <input  id="formGroupExampleInput" class="field2 card shadow mb-4"  name="notice_writer" type="text" value="{{writer}}" readonly style="width: 90%; text-align: center">
                                 </div>
                             </div>
-                      </div>
+                        </div>
 
 
-                    <div class="mb-3" style="text-align: center">
-                        <label for="formGroupExampleInput" class="form-label" style="display: block;"></label>
-                        <textarea type="text"  placeholder="내용을 입력하세요.." id="formGroupExampleInput" class="field3 card shadow mb-4" name="notice_content"  style="height: 30vh; width: 60%;  display: block; margin: 0 auto;"></textarea>
-                    </div>
+                        <div class="mb-3" style="text-align: center">
+                            <label for="formGroupExampleInput" class="form-label" style="display: block;"></label>
+                            <textarea type="text"  placeholder="내용을 입력하세요.." id="formGroupExampleInput" class="field3 card shadow mb-4" name="notice_content"  style="height: 30vh; width: 60%;  display: block; margin: 0 auto;"></textarea>
+                        </div>
 
                         <div style="text-align: center">
-                            <button type="submit" class="btn btn-primary" onclick="mappingurl('/cs/insertnotice','/cs/notice',3,'작성')">등록</button>
+                            <button type="submit" class="btn btn-primary" onclick="mappingurl('/cs/insertnotice',3,'작성')">등록</button>
                             <a href="/cs/notice" class="btn btn-secondary" style="text-decoration: none;">취소</a>
                         </div>
 
@@ -91,7 +91,7 @@
     <!-- End of Main Content -->
 
 
-        {{>layout/footer}}
+    {{>layout/footer}}
 
 
 </div>

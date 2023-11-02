@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>부서</title>
+    <title>회원(user)</title>
     {{>layout/header}}
 </head>
 <body id="page-top">
 {{>layout/sidebar}}
 {{>layout/topbar}}
+
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
 
@@ -17,82 +18,85 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-            <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px;">(회사명 들어갈곳 인데 태그넣으면 여러개 회사 다뜸/현재는 회사id) 부서현황</h1>
+            <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px;">회원 현황</h1>
             <!-- DataTales Example -->
             <div class="card shadow mb-4" style="margin-top: 50px;">
                 <div class="card-header py-3">
-            <!-- 검색 -->
-    <form action="/admin/department" method="get"
-          class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
+                    <!--검색 -->
+                    <form action="/cs/notice" method="get" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
 
-        <div class="input-group">
-            <select id="searchType" name="searchType">
-                <option value="all">선택</option>
-                <option value="title">부서명</option>
-                <!-- 필요한 항목 추가 -->
-            </select>
+                        <div class="input-group">
+                            <select id="searchType" name="searchType">
+                                <option value="all">선택</option>
+                                <option value="title">제목</option>
+                                <option value="writer">작성자</option>
+                                <!-- 필요한 항목 추가 -->
+                            </select>
 
-            <input id="search" name="search" type="text"  style="width: 150px;" class="form-control bg-light border-0 small" placeholder="Search for..."
-                   aria-label="Search" aria-describedby="basic-addon2">
+                            <input id="search" name="search" type="text"  style="width: 150px;" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                   aria-label="Search" aria-describedby="basic-addon2">
 
-            <div class="input-group-append">
-                <input class="btn btn-primary" type="submit" value="검색">
+                            <div class="input-group-append">
+                                <input class="btn btn-primary" type="submit" value="검색">
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th style="text-align: center;">회원ID</th>
+                                <th style="text-align: center;">회원이름</th>
+                                <th style="text-align: center;">닉네임</th>
+                                <th style="text-align: center;">회원가입 일시</th>
+                                <th style="text-align: center;">권한</th>
+                                <th style="text-align: center;">회사</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {{#selectListUser}}
+                                <tr>
+                                    <td style="text-align: center;"><a href="/admin/{{user_id}}/selectuser">{{user_id}}</a></td>
+                                    <td style="text-align: center;">{{user_name}}</td>
+                                    <td style="text-align: center;">{{nickname}}</td>
+                                    <td style="text-align: center;">{{sign_date}}</td>
+                                    <td style="text-align: center;">{{authority}}</td>
+                                    <td style="text-align: center;">{{company_name}}</td>
+                                </tr>
+                            {{/selectListUser}}
+                            </tbody>
+                        </table>
+
+                        <!--페이징 처리 레이아웃-->
+                        <div class="d-flex justify-content-between align-items-center">
+                            {{>layout/paging}} <br/>
+                            <a href="/cs/insertnotice-view" role="button"class="btn btn-primary">글 작성</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-</form>
-
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                <tr>
-                    <th  style="text-align: center;">부서명</th>
-                    <th  style="text-align: center;">부서기능</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{#selectListDpt}}
-                    <tr>
-                        <td style="text-align: center;"><a href="/admin/{{dpt_id}}/selectdpt">{{dpt_name}}</a></td>
-                        <td style="text-align: center;">{{dpt_function}}</td>
-                    </tr>
-                {{/selectListDpt}}
-                </tbody>
-            </table>
-
-            <!--페이징 처리 레이아웃-->
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <!-- 테이블 헤더 및 데이터 부분 -->
-                </table>
-
-        <div class="d-flex justify-content-between align-items-center">
-            {{>layout/paging}}
-            <a href="/admin/insertdptview" role="button" class="btn btn-primary">글 작성</a>
 
         </div>
+        <br/>
     </div>
 
-
-
-            </div>
-
-      </div>
-    </div>
-  <br/>
-</div>
-
-
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-<!-- /.container-fluid -->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- /.container-fluid -->
 </div>
 <!-- End of Main Content -->
 {{>layout/footer}}
 </div>
 <!-- End of Content Wrapper -->
+
+<script>
+    var url = "/admin/department";
+</script>
 
 <script src="/static/js/search.js"></script>
 <!-- 페이징 처리와 관련된 부트스트랩 라이브러리-->
