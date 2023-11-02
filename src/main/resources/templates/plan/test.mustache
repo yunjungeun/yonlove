@@ -2,10 +2,16 @@
 <html>
 <head>
     <title>Calendar</title>
+    <!--jQuery 라이브러리 소스 이게 없으면 ajax못씀-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!--머스테치 라이브러리 소스-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+
 </head>
 <body>
 <h1>{{year}}년 {{month}}월 달력</h1>
-<table border="1">
+<div id="calendar-template">
+<table id="calendar-container" border="1" >
     <tr>
         <th>일</th>
         <th>월</th>
@@ -23,6 +29,7 @@
         </tr>
     {{/calendar}}
 </table>
+</div>
 <form method="post" action="/calendar">
     년<input type="number" name="year">
     월<input type="number" name="month">

@@ -10,11 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -448,19 +451,27 @@ public class PlanController {
     }
 
 
-    /*@PostMapping("/calendar")
+    @PostMapping("/calendar/premonth")
     @ResponseBody
     public Map<String, Object> preMonth(int year, int month){
+
+        //1월이 되면 전년도의 12월로 입력해주는 로직
+        int preMonth = month-1;
+        int resultYear = year;
+        if(preMonth < 1){
+            resultYear =- year;
+            preMonth = 12;
+        }
+
         Map<String, Object> response = new HashMap<>();
+        List<List<String>> calendarData = calendarService.generateCalendarData(resultYear,preMonth);
 
-        ModelAndView mv = new ModelAndView();
-        List<List<String>> calendarData = calendarService.generateCalendarData(year,month);
+        response.put("year", resultYear);
+        response.put("month", preMonth);
+        response.put("calendar", calendarData);
 
-        mv.setViewName("/plan/test");
-        mv.addObject("year", year);
-        mv.addObject("month", month);
-        mv.addObject("calendar", calendarData);
-       // return mv;
-    }*/
+        System.out.println(response);
+        return response;
+    }
 
 }
