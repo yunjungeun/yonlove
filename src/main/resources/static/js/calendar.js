@@ -1,4 +1,74 @@
+//get방식
+    function dateButtonGet(buttonId){
+        switch (buttonId){
+            case 'preYear' :
+                var preYear = year - 1;
+                window.location.href ='/calendar?year=' + preYear + '&month=' + month; break;
+            case 'preMonth' :
+                if(month == 1){
+                    var preMonth = 12;
+                    var resultYear = year - 1;
+                }else{
+                    var preMonth = month - 1;
+                    var resultYear = year;
+                }
+                window.location.href ='/calendar?year=' + resultYear + '&month=' + preMonth; break;
+            case 'nextMonth' :
+                if(month == 12){
+                    var nextMonth = 1;
+                    var resultYear = year + 1;
+                }else{
+                    var nextMonth = month + 1;
+                    var resultYear = year;
+                }
+                window.location.href ='/calendar?year=' + resultYear + '&month=' + nextMonth; break;
+            case 'nextYear' :
+                var nextYear = year + 1;
+                window.location.href = '/calendar?year=' + nextYear + '&month=' + month; break;
+        }
+    }
 
+//제작일지를 달력에 표기해주는 로직
+var logJsonCalender = logJson;
+for(var key in logJsonCalender) {
+    //키의 대한 값을 꺼내서 저장함.
+    var value =logJsonCalender[key];
+    //td id와 키의 값을 비교해서 td요소를 가져옴
+    var element = document.getElementById(value);
+    // 새로운 <a> 요소를 생성
+    var link = document.createElement('a');
+    // 링크의 href url설정
+    link.href = '/log/selectlog/'+ key;
+    // 링크 텍스트를 설정한다
+    link.textContent = '일지';
+
+    var blank = document.createElement('br')
+    element.appendChild(blank)
+    // <td> 요소에 <a> 요소를 추가한다
+    element.appendChild(link);
+    };
+
+//촬영계획을 달력에 표기해주는 로직
+var dayJsonCalender = dayJson;
+for(var key in dayJsonCalender) {
+    //키의 대한 값을 꺼내서 저장함.
+    var value =dayJsonCalender[key];
+    //td id와 키의 값을 비교해서 td요소를 가져옴
+    var element = document.getElementById(value);
+    // 새로운 <a> 요소를 생성
+    var link = document.createElement('a');
+    // 링크의 href url설정
+    link.href = '/plan/schedule/'+ key;
+    // 링크 텍스트를 설정한다
+    link.textContent = '촬영일정';
+
+    var blank = document.createElement('br')
+    element.appendChild(blank)
+    // <td> 요소에 <a> 요소를 추가한다
+    element.appendChild(link);
+    };
+
+//포스트방식  로직이 길어서 안씀/ 구현만함
 function dateButton(buttonId){
     switch (buttonId){
         case 'preYear' :  var url ='/calendar/preyear'; break;
@@ -34,24 +104,3 @@ function dateButton(buttonId){
              }
     });
 };
-
-var logJsonCalender = logJson;
-var logday = Object.values(logJsonCalender);
-console.log(logday);
-for(var key in logJsonCalender) {
-    //키의 대한 값을 꺼내서 저장함.
-    var value =logJsonCalender[key];
-    //td id와 키의 값을 비교해서 td요소를 가져옴
-    var element = document.getElementById(value);
-    // 새로운 <a> 요소를 생성
-    var link = document.createElement('a');
-    // 링크의 href url설정
-    link.href = '/log/selectlog/'+key;
-    // 링크 텍스트를 설정한다
-    link.textContent = '일지';
-
-    var blank = document.createElement('br')
-    element.appendChild(blank)
-    // <td> 요소에 <a> 요소를 추가한다
-    element.appendChild(link);
-    };

@@ -450,21 +450,23 @@ public class PlanController {
         ModelAndView mv = new ModelAndView();
         List<List<String>> calendarData = calendarService.generateCalendarData(year,month);
 
-        //제작일지 추가 개발중//
-        System.out.println(calendarData);
-        String calendarLog = calendarService.test(year,month);
-        System.out.println(calendarLog);
-        //제작일지 개발공간//
+        //제작일지 Json 불러오기 : {log1 : 작성일자} 식으로 존재함
+        String calendarLog = calendarService.logJson(year,month);
+        mv.addObject("logJson",calendarLog);
+
+        //촬영일정표 Json 불러오기 : {day1 : 작성일자} 식으로 존재함
+        String calendarDay = calendarService.dayJson(year,month);
+        mv.addObject("dayJson",calendarDay);
 
         // 뷰로 데이터를 전달하기 위해 모델에 "calendar" 속성 추가
-        mv.setViewName("/plan/test");
+        mv.setViewName("/plan/calendar");
         mv.addObject("month", month);
         mv.addObject("year", year);
         mv.addObject("calendar", calendarData);
-        mv.addObject("test",calendarLog);
         return mv;
     }
 
+    //-----------------Post방식(로직이 길이서 안씀) 구현만 함-----------------//
     //전월 버튼 눌럿을때 응답
     @PostMapping("/calendar/premonth")
     @ResponseBody

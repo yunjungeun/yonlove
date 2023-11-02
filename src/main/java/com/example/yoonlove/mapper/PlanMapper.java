@@ -16,6 +16,9 @@ public interface PlanMapper {
     public void updateSchedule(ScheduleDayDto dto);
     public void deleteSchedule(ScheduleDayDto dto);
 
+    //월력형 테이블에 들어갈 메소드
+    List<ScheduleDayDto> currentMonth(int year, int month);
+
 //===========================촬영 타입테이블===================================
 
     public List<ScheduleTimeDto> selectListScheduleTime(PageDto pageInfo);

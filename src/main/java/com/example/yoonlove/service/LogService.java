@@ -41,6 +41,7 @@ public class LogService {
         logMapper.deleteLog(dto);
     }
 
+    //월력형 테이블에 제작일지 현황 가져오는 메소드
     public List<LogDto> currentMonthLog(int year, int month){
         return logMapper.currentMonthLog(year,month);
     }

@@ -1,6 +1,7 @@
 package com.example.yoonlove.service;
 
 import com.example.yoonlove.dto.LogDto;
+import com.example.yoonlove.dto.ScheduleDayDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,10 @@ public class CalendarService {
 
     @Autowired
     private LogService logService;
+    @Autowired
+    private PlanService planService;
 
+    //월력형 테이블 생성해주는 메소드
     public List<List<String>> generateCalendarData(int year, int month) {
 
         List<List<String>> calendar = new ArrayList<>();
@@ -52,7 +56,8 @@ public class CalendarService {
         return calendar;
     }
 
-    public String test(int year, int month) throws JsonProcessingException {
+    //제작일지를 json으로 만듬
+    public String logJson(int year, int month) throws JsonProcessingException {
 
             //제작일지 생성로직
         List<LogDto> dto = logService.currentMonthLog(year,month);
@@ -63,6 +68,28 @@ public class CalendarService {
             int day = Integer.parseInt(logDate);
             // log_id를 키로 하고 log_date의 일자를 값으로 하는 해쉬맵에 추가
             hashMap.put(logId, day);
+        }
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        // 해시맵을 JSON 문자열로 변환
+        String jsonString = objectMapper.writeValueAsString(hashMap);
+
+        return jsonString;
+    }
+
+    //일일촬영계획을 json으로 만듬
+    public String dayJson(int year, int month) throws JsonProcessingException {
+
+        //제작일지 생성로직
+        List<ScheduleDayDto> dto = planService.currentMonth(year,month);
+        HashMap<String, Integer> hashMap = new HashMap<>();
+        for (ScheduleDayDto dayDto : dto) {
+            String dayId = dayDto.getDay_id();
+            String dayDate = dayDto.getFilm_date().toString().substring(8,10); // log_date가 Date 타입인 경우 문자열로 변환
+
+            int day = Integer.parseInt(dayDate);
+            // log_id를 키로 하고 log_date의 일자를 값으로 하는 해쉬맵에 추가
+            hashMap.put(dayId, day);
         }
 
         ObjectMapper objectMapper = new ObjectMapper();

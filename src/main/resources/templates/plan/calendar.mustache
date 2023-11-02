@@ -37,19 +37,23 @@
 
 
 
-<form method="post" action="/calendar">
+<form method="get" action="/calendar">
     년<input type="number" name="year">
     월<input type="number" name="month">
     <input type="submit" value="검색">
 </form>
 
-<button type="button" onclick="dateButton('preYear')">전년</button>
-<button type="button" onclick="dateButton('preMonth')">이전달</button>
-<button type="button" onclick="dateButton('nextMonth')">다음달</button>
-<button type="button" onclick="dateButton('nextYear')" >내년</button>
+<button type="button" onclick="dateButtonGet('preYear')">전년</button>
+<button type="button" onclick="dateButtonGet('preMonth')">이전달</button>
+<button type="button" onclick="dateButtonGet('nextMonth')">다음달</button>
+<button type="button" onclick="dateButtonGet('nextYear')" >내년</button>
 
 <script>
-    var logJson = {{{test}}}
+    var logJson = {{{logJson}}};
+    var dayJson = {{{dayJson}}};
+
+    var year = {{year}};
+    var month = {{month}};
 </script>
 
 <script src="/static/js/calendar.js"></script>

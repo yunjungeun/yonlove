@@ -16,6 +16,14 @@
         </if>
     </select>
 
+    <!--해당월에 대한 촬영일지 기록 모두 출력-->
+    <select id="currentMonth" resultType="com.example.yoonlove.dto.ScheduleDayDto">
+        <![CDATA[
+        SELECT * FROM schedule_day
+        WHERE EXTRACT(YEAR FROM film_date) = #{year}
+          AND EXTRACT(MONTH FROM film_date) = #{month}
+    ]]>
+    </select>
 
     <select id="selectListSchedule" parameterType="com.example.yoonlove.dto.PageDto" resultType="com.example.yoonlove.dto.ScheduleDayDto">
         select *
