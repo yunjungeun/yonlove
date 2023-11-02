@@ -3,8 +3,6 @@
 
 <mapper namespace="com.example.yoonlove.mapper.LogMapper">
 
-
-
     <select id="totalLogPost" parameterType="com.example.yoonlove.dto.PageDto">
         select count(${id}) as totalPost from ${table}
         where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
@@ -13,12 +11,6 @@
             AND log_content like '%${title}%'
         </if>
     </select>
-
-
-
-
-
-
 
     <select id="selectListLog" parameterType="com.example.yoonlove.dto.PageDto" resultType="com.example.yoonlove.dto.LogDto">
         select *
@@ -36,14 +28,6 @@
         <!-- rownum을 기준(r)으로 시작번호부터 끝번호까지 검색   -->
         where r between #{postStart} and #{postEnd}    /*where r between 1 and 10    where r between 11 and 20*/
     </select>
-
-
-
-
-
-
-
-
 
     <select id="selectLog"  parameterType="com.example.yoonlove.dto.LogDto"  resultType="com.example.yoonlove.dto.LogDto">
         SELECT * FROM log WHERE log_id = #{log_id}
@@ -81,5 +65,13 @@
         DELETE FROM log WHERE log_id = #{log_id}
     </delete>
 
+    <!--해당월에 대한 제작일지 기록 모두 출력-->
+    <select id="currentMonthLog"  resultType="com.example.yoonlove.dto.LogDto">
+        <![CDATA[
+        SELECT * FROM log
+        WHERE EXTRACT(YEAR FROM log_date) = #{year}
+          AND EXTRACT(MONTH FROM log_date) = #{month}
+    ]]>
+    </select>
 
 </mapper>

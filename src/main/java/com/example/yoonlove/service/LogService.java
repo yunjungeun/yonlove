@@ -13,7 +13,6 @@ public class LogService {
     @Autowired
     private LogMapper logMapper;
 
-
     public List<LogDto> selectListLog(PageDto pageInfo) {
         List<LogDto> logList = logMapper.selectListLog(pageInfo);
         return logList;
@@ -30,18 +29,19 @@ public class LogService {
         return dto;
     }*/
 
-    public void insertLog(LogDto dto) {
+    public void insertLog(LogDto dto){
         logMapper.insertLog(dto);
-
     }
 
-    public void updateLog(LogDto dto) {
+    public void updateLog(LogDto dto){
         logMapper.updateLog(dto);
-
     }
 
-    public void deleteLog(LogDto dto) {
+    public void deleteLog(LogDto dto){
         logMapper.deleteLog(dto);
+    }
 
+    public List<LogDto> currentMonthLog(int year, int month){
+        return logMapper.currentMonthLog(year,month);
     }
 }

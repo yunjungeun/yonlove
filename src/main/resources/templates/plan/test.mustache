@@ -29,11 +29,12 @@
         {{#calendar}}
             <tr>
                 {{#this}}
-                    <td>{{.}}</td>
+                    <td id="{{.}}">{{.}}</td>
                 {{/this}}
             </tr>
         {{/calendar}}
     </table>
+
 
 
 <form method="post" action="/calendar">
@@ -47,6 +48,9 @@
 <button type="button" onclick="dateButton('nextMonth')">다음달</button>
 <button type="button" onclick="dateButton('nextYear')" >내년</button>
 
+<script>
+    var logJson = {{{test}}}
+</script>
 
 <script src="/static/js/calendar.js"></script>
 </body>

@@ -439,7 +439,7 @@ public class PlanController {
 
     //------------------------월력형 테이블 로직---------------------------------//
     @GetMapping("/calendar")
-    public ModelAndView showCalendar(@RequestParam(defaultValue = "-1") int year, @RequestParam(defaultValue = "-1")int month) {
+    public ModelAndView showCalendar(@RequestParam(defaultValue = "-1") int year, @RequestParam(defaultValue = "-1")int month) throws JsonProcessingException {
 
         //년월 기본값(-1년-1월) 이라면 현재 년월 기준으로 year/month 값 출력
         if(year+month == -2){
@@ -447,16 +447,21 @@ public class PlanController {
             year= currentDate.getYear();
             month = currentDate.getMonthValue();
         }
-
         ModelAndView mv = new ModelAndView();
-
         List<List<String>> calendarData = calendarService.generateCalendarData(year,month);
+
+        //제작일지 추가 개발중//
+        System.out.println(calendarData);
+        String calendarLog = calendarService.test(year,month);
+        System.out.println(calendarLog);
+        //제작일지 개발공간//
 
         // 뷰로 데이터를 전달하기 위해 모델에 "calendar" 속성 추가
         mv.setViewName("/plan/test");
         mv.addObject("month", month);
         mv.addObject("year", year);
         mv.addObject("calendar", calendarData);
+        mv.addObject("test",calendarLog);
         return mv;
     }
 
