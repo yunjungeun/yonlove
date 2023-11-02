@@ -117,7 +117,7 @@
     </select>
 
     <select id="selectBudget" resultType="com.example.yoonlove.dto.BudgetDto">
-        SELECT * FROM budget
+        SELECT * FROM budgetjoin
         where budget_id = #{budget_id}
     </select>
 
