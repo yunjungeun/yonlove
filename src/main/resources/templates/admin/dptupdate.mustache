@@ -29,11 +29,9 @@
             <!--container-fluid:  Bootstrap 프레임워크를 사용하여 생성된 컨테이너로, 웹 페이지의 내용을 감싸는 역할, 화면 폭에 맞게 자동으로 넓어져서 브라우저의 너비에 따라 반응형으로 조절-->
             <!--mb-2:하단의 여백 -->
             <!-- Page Heading -->
-            <div style="text-align: center; display: block; margin-top:100px;" >
-                <h1 class="h3 mb-2 text-gray-800" ></h1><!--공지사항이 너무 천장에 붙어있어서 margin-top: 50px을 줘서 내렸습니다-->
+            <div style="text-align: center; display: block; margin-top:100px;">
+                <h1 class="h3 mb-2 text-gray-800"></h1><!--공지사항이 너무 천장에 붙어있어서 margin-top: 50px을 줘서 내렸습니다-->
             </div>
-
-
 
 
             <div class="card shadow mb-4" style="margin-top: 150px; margin-right: 300px; margin-left: 300px">
@@ -45,44 +43,45 @@
                             <div class="parent" style="margin-left: 20%; margin-top: 5%; ">
                                 <div style="display: inline-block;">
                                     <div class="mb-3" style="text-align: center; display: inline-block;">
-                                        <label for="formGroupExampleInput" class="form-label"  ><strong>부서명</strong></label>
+                                        <label for="formGroupExampleInput"
+                                               class="form-label"><strong>부서명</strong></label>
                                     </div>
 
                                     <div class="mb-3" style="text-align: center; display: inline-block ">
-                                        <input id="formGroupExampleInput" class="field1 card shadow mb-4" name="dpt_name" type="text" value="{{selectDpt.dpt_name}}" style="width: 90%; text-align: center">
+                                        <input id="formGroupExampleInput" class="field1 card shadow mb-4"
+                                               name="dpt_name" type="text" value="{{selectDpt.dpt_name}}"
+                                               style="width: 90%; text-align: center">
                                     </div>
                                 </div>
 
                                 <div style="display: inline-block;">
                                     <div class="mb-3" style="text-align: center; display: inline-block;">
-                                        <label for="formGroupExampleInput" class="form-label" ><strong>부서기능</strong></label>
+                                        <label for="formGroupExampleInput"
+                                               class="form-label"><strong>부서기능</strong></label>
                                     </div>
                                     <div class="mb-3" style="text-align: center; display: inline-block ">
-                                        <input  id="formGroupExampleInput" class="field2 card shadow mb-4"  name="dpt_function" type="text" value="{{selectDpt.dpt_function}}"style="width: 90%; text-align: center ">
+                                        <input id="formGroupExampleInput" class="field2 card shadow mb-4"
+                                               name="dpt_function" type="text" value="{{selectDpt.dpt_function}}"
+                                               style="width: 90%; text-align: center ">
                                     </div>
                                 </div>
 
-
                             </div>
-
-
-
-
-
 
                             <div style="text-align: center">
-                                <button type="submit" class="btn btn-primary" onclick="mappingurl('/admin/{{selectDpt.dpt_id}}/updatedpt','/admin/department',2,'수정')">등록</button>
-                                <button class="btn btn-secondary" onclick="location.href='/admin/department'">취소</button>
+                                <button type="submit" class="btn btn-primary"
+                                        onclick="mappingurl('/admin/{{selectDpt.dpt_id}}/updatedpt','/admin/department',2,'수정')">
+                                    등록
+                                </button>
+                                <button class="btn btn-secondary" onclick="location.href='/admin/department'">취소
+                                </button>
                             </div>
-
 
 
                         </form>
                     </div>
                 </div>
             </div>
-
-
 
 
         </div>
@@ -92,8 +91,6 @@
             <i class="fas fa-angle-up"></i>
         </a>
         <!-- /.container-fluid -->
-
-
 
 
     </div>

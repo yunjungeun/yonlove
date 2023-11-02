@@ -23,46 +23,54 @@
             <div class="card shadow mb-4" style="margin-top: 50px;">
                 <div class="card-header py-3">
                     <!--검색 -->
-
-
-
-
-                <div class="card-body">
+                    <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th style="text-align: center;">회원ID<input name="user_id" type="text" value="{{selectUser.user_id}}" readonly/></th>
-                                <th style="text-align: center;">이름<input name="user_name" type="text" value="{{selectUser.user_name}}" readonly/></th>
-                                <th style="text-align: center;">닉네임<input name="nickname" type="text" value="{{selectUser.nickname}}" readonly/></th>
-                                <th style="text-align: center;">핸드폰<input name="phone" type="text" value="{{selectUser.phone}}" readonly/></th>
-                                <th style="text-align: center;">E-mail<input name="email" type="text" value="{{selectUser.email}}" readonly/></th>
+                                <th style="text-align: center;">회원ID</th>
+                                <th style="text-align: center;">이름</th>
+                                <th style="text-align: center;">닉네임</th>
+                                <th style="text-align: center;">핸드폰</th>
+                                <th style="text-align: center;">E-mail</th>
                             </tr>
-
                             <tr>
-                                <th style="text-align: center;">우편번호<input name="zip_code" type="text" value="{{selectUser.zip_code}}" readonly/></th>
-                                <th style="text-align: center;">주소<input name="address1" type="text" value="{{selectUser.address1}}" readonly/></th>
-                                <th style="text-align: center;">주소2<input name="address2" type="text" value="{{selectUser.address2}}" readonly/></th>
-                                <th style="text-align: center;">상세주소<input name="address3" type="text" value="{{selectUser.address3}}" readonly/></th>
-                                <th style="text-align: center;">기업회원여부<input name="company_user" type="text" value="{{selectUser.company_user}}" readonly/></th>
+                                <td style="text-align: center; vertical-align: middle;"><input name="user_id" type="text" value="{{selectUser.user_id}}" readonly/></td>
+                                <td style="text-align: center; vertical-align: middle;"><input name="user_name" type="text" value="{{selectUser.user_name}}" readonly/></td>
+                                <td style="text-align: center; vertical-align: middle;"><input name="nickname" type="text" value="{{selectUser.nickname}}" readonly/></td>
+                                <td style="text-align: center; vertical-align: middle;"><input name="phone" type="text" value="{{selectUser.phone}}" readonly/></td>
+                                <td style="text-align: center; vertical-align: middle;"><input name="email" type="text" value="{{selectUser.email}}" readonly/></td>
                             </tr>
-
                             <tr>
-                                <th style="text-align: center;">회원등급<input name="grade" type="text" value="{{selectUser.grade}}" readonly/></th>
-                                <th style="text-align: center;">권한<input name="authority" type="text" value="{{selectUser.authority}}" readonly/></th>
-                                <th style="text-align: center;">가입일<input name="sign_date" type="text" value="{{selectUser.sign_date}}" readonly/></th>
-                                <th style="text-align: center;">소속회사<input name="company_name" type="text" value="{{selectCompany.company_name}}" readonly/></th>
-                                <th style="text-align: center;">부서<input name="dpt_name" type="text" value="{{selectDpt.dpt_name}}" readonly/></th>
+                                <th style="text-align: center;">우편번호</th>
+                                <th style="text-align: center;">주소</th>
+                                <th style="text-align: center;">주소2</th>
+                                <th style="text-align: center;">상세주소</th>
+                                <th style="text-align: center;">기업회원여부</th>
                             </tr>
-
+                            <tr>
+                                <td style="text-align: center; vertical-align: middle;"><input name="zip_code" type="text" value="{{selectUser.zip_code}}" readonly/></td>
+                                <td style="text-align: center; vertical-align: middle;"><input name="address1" type="text" value="{{selectUser.address1}}" readonly/></td>
+                                <td style="text-align: center; vertical-align: middle;"><input name="address2" type="text" value="{{selectUser.address2}}" readonly/></td>
+                                <td style="text-align: center; vertical-align: middle;"><input name="address3" type="text" value="{{selectUser.address3}}" readonly/></td>
+                                <td style="text-align: center; vertical-align: middle;"><input name="company_user" type="text" value="{{selectUser.company_user}}" readonly/></td>
+                            </tr>
+                            <tr>
+                                <th style="text-align: center;">회원등급</th>
+                                <th style="text-align: center;">권한</th>
+                                <th style="text-align: center;">가입일</th>
+                                <th style="text-align: center;">소속회사</th>
+                                <th style="text-align: center;">부서</th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; vertical-align: middle;"><input name="grade" type="text" value="{{selectUser.grade}}" readonly/></td>
+                                <td style="text-align: center; vertical-align: middle;"><input name="authority" type="text" value="{{selectUser.authority}}" readonly/></td>
+                                <td style="text-align: center; vertical-align: middle;"><input name="sign_date" type="text" value="{{selectUser.sign_date}}" readonly/></td>
+                                <td style="text-align: center; vertical-align: middle;"><input name="company_name" type="text" value="{{selectCompany.company_name}}" readonly/></td>
+                                <td style="text-align: center; vertical-align: middle;"><input name="dpt_name" type="text" value="{{selectDpt.dpt_name}}" readonly/></td>
+                            </tr>
                             </thead>
-
                         </table>
-
-
-
-
-
                     </div>
                 </div>
 
@@ -92,14 +100,8 @@
     var url = "/admin/user";
 </script>
 
-<script src="/static/js/search.js"></script>
-<!-- 페이징 처리와 관련된 부트스트랩 라이브러리-->
-<script src="/static/bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="/static/bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-<!-- 페이징 처리와 관련된 부트스트랩 라이브러리 -->
-<script src="/static/bootstrap/js/demo/datatables-demo.js"></script>
-
+<script src="/static/js/deletepost.js"></script>
 {{>layout/bootstrapjs}}
 </body>
 </html>

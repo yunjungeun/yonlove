@@ -30,38 +30,55 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                    <th style="text-align: center;">회원ID<input name="user_id" type="text" value="{{selectUser.user_id}}" ></th>
-                                    <th style="text-align: center;">이름<input name="user_name" type="text" value="{{selectUser.user_name}}" ></th>
-                                    <th style="text-align: center;">닉네임<input name="nickname" type="text" value="{{selectUser.nickname}}" ></th>
-                                    <th style="text-align: center;">핸드폰<input name="phone" type="text" value="{{selectUser.phone}}" ></th>
-                                    <th style="text-align: center;">E-mail<input name="email" type="text" value="{{selectUser.email}}" ></th>
+                                    <th style="text-align: center;">회원ID</th>
+                                    <th style="text-align: center;">이름</th>
+                                    <th style="text-align: center;">닉네임</th>
+                                    <th style="text-align: center;">핸드폰</th>
+                                    <th style="text-align: center;">E-mail</th>
                                 </tr>
-
                                 <tr>
-                                    <th style="text-align: center;">우편번호<input name="zip_code" type="text" value="{{selectUser.zip_code}}" ></th>
-                                    <th style="text-align: center;">주소<input name="address1" type="text" value="{{selectUser.address1}}" ></th>
-                                    <th style="text-align: center;">주소2<input name="address2" type="text" value="{{selectUser.address2}}" ></th>
-                                    <th style="text-align: center;">상세주소<input name="address3" type="text" value="{{selectUser.address3}}" ></th>
-                                    <th style="text-align: center;">기업회원여부<input name="company_user" type="text" value="{{selectUser.company_user}}" ></th>
+                                    <td style="text-align: center; vertical-align: middle;"><input class="field1" name="user_id" type="text" value="{{selectUser.user_id}}" ></td>
+                                    <td style="text-align: center; vertical-align: middle;"><input class="field2" name="user_name" type="text" value="{{selectUser.user_name}}" ></td>
+                                    <td style="text-align: center; vertical-align: middle;"><input class="field3" name="nickname" type="text" value="{{selectUser.nickname}}" ></td>
+                                    <td style="text-align: center; vertical-align: middle;"><input class="field4" name="phone" type="text" value="{{selectUser.phone}}" ></td>
+                                    <td style="text-align: center; vertical-align: middle;"><input class="field5" name="email" type="text" value="{{selectUser.email}}" ></td>
                                 </tr>
-
                                 <tr>
-                                    <th style="text-align: center;">회원등급<input name="grade" type="text" value="{{selectUser.grade}}" ></th>
-                                    <th style="text-align: center;">권한<input name="authority" type="text" value="{{selectUser.authority}}" ></th>
-                                    <th style="text-align: center;">가입일<input name="sign_date" type="text" value="{{selectUser.sign_date}}" ></th>
-                                    <th style="text-align: center;">소속회사<input name="company_name" type="text" value="{{selectCompany.company_name}}" ></th>
-                                    <th style="text-align: center;">부서<input name="dpt_name" type="text" value="{{selectDpt.dpt_name}}" ></th>
+                                    <th style="text-align: center;">우편번호</th>
+                                    <th style="text-align: center;">주소</th>
+                                    <th style="text-align: center;">주소2</th>
+                                    <th style="text-align: center;">상세주소</th>
+                                    <th style="text-align: center;">기업회원여부</th>
                                 </tr>
-
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;"><input class="field6" name="zip_code" type="text" value="{{selectUser.zip_code}}" ></td>
+                                    <td style="text-align: center; vertical-align: middle;"><input class="field7" name="address1" type="text" value="{{selectUser.address1}}" ></td>
+                                    <td style="text-align: center; vertical-align: middle;"><input class="field8" name="address2" type="text" value="{{selectUser.address2}}" ></td>
+                                    <td style="text-align: center; vertical-align: middle;"><input class="field9" name="address3" type="text" value="{{selectUser.address3}}" ></td>
+                                    <td style="text-align: center; vertical-align: middle;"><input class="field10" name="company_user" type="text" value="{{selectUser.company_user}}" ></td>
+                                </tr>
+                                <tr>
+                                    <th style="text-align: center;">회원등급</th>
+                                    <th style="text-align: center;">권한</th>
+                                    <th style="text-align: center;">가입일</th>
+                                    <th style="text-align: center;">소속회사</th>
+                                    <th style="text-align: center;">부서</th>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;"><input class="field11" name="grade" type="text" value="{{selectUser.grade}}" ></td>
+                                    <td style="text-align: center; vertical-align: middle;"><input class="field12" name="authority" type="text" value="{{selectUser.authority}}" ></td>
+                                    <td style="text-align: center; vertical-align: middle;"><input class="field13" name="sign_date" type="text" value="{{selectUser.sign_date}}" ></td>
+                                    <td style="text-align: center; vertical-align: middle;"><input class="field14" name="company_name" type="text" value="{{selectCompany.company_name}}" ></td>
+                                    <td style="text-align: center; vertical-align: middle;"><input class="field15" name="dpt_name" type="text" value="{{selectDpt.dpt_name}}" ></td>
+                                </tr>
                                 </thead>
-
                             </table>
 
                         </div>
 
 
                     <div style="text-align: center">
-                        <button type="submit" class="btn btn-primary" onclick="mappingurl('/admin/{{selectUser.User_id}}/updateuser',11,'수정')">등록</button>
+                        <button type="submit" class="btn btn-primary" onclick="mappingurl('/admin/{{selectUser.User_id}}/updateuser',15,'수정')">등록</button>
                         <button class="btn btn-secondary" onclick="location.href='/admin/user'">취소</button>
                     </div>
                     </form>
