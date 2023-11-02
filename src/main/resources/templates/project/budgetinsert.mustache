@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>예산 추가 </title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/static/js/cu_alert.js"></script>
 
     {{>layout/header}}
 </head>
@@ -14,18 +13,31 @@
 <body id="page-top">
 {{>layout/sidebar}}
 {{>layout/topbar}}
-<form action="/project/insertbudget" method="get">
+<form id="alert" action="/project/insertbudget" method="get">
 
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
-            <td>예산이름 <input class="field1" name="budget_name" type="text" placeholder="예산이름"/></td>
-            <td>예산금액 <input class="field2" name="budget_amount" type="number" placeholders="예산금액"/></td>
+            <td>프로젝트
+                <select id="fk1" class="field1" name="project_id"></select></td>
+            <td>항목명 <input class="field2" name="budget_name" type="text" placeholder="예산이름"/></td>
+            <td>사용내역<input class="field3" name="budget_content" type="text" placeholder="예산이름"/></td>
+            <td>금액 <input class="int1" name="budget_amount" type="number" placeholders="예산금액"/></td>
 
         </tr>
     </table>
-    <input type="submit" value="등록" onclick="mappingurl('/project/insertbudget', 2,'작성')"/>
+    <input type="submit" value="등록" onclick="mappingurl('/project/insertbudget', 3,'작성',1)"/>
 </form>
-<a href="/project/listbudget">목록으로 가기</a>
+<a href="/project/budget">목록으로 가기</a>
 
+<!--옵션 태그에 필요한 js-->
+<script>
+    var jsonValue = '{{{fkList}}}';
+    <!--select 옵션 name값을 cu_alert.js에 보내주기 위한 변수 값/이게없으면 제출이 안됨-->
+    var selectName = "project_id";
+    <!--selectName이 실행되기 위해선 cu_alert 스크립트소스가 이 아래 있어야함-->
+</script>
+
+<script src="/static/js/dropdown.js"></script>
+<script src="/static/js/cu_alert.js"></script>
 </body>
 </html>

@@ -40,6 +40,10 @@ public class ProjectService {
     public void updateBudget(BudgetDto dto){
         projectMapper.updateBudget(dto);}
 
+    //예산총액 구하는 메서드
+    public int getTotalBudget(PageDto dto){
+        return projectMapper.getTotalBudget(dto);
+    }
     // ============================== Budget  끝 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     public List<ProduceDto> selectListProduce(PageDto pageDto){

@@ -172,6 +172,7 @@ public class ScriptPaperController {
     @GetMapping("script/inserttimetable")
     @ResponseBody
     public String insertTimeTable(TimeTableDto dto){
+        System.out.println(dto.toString());
         scriptPaperService.insertTimeTable(dto);
         return "/script/timetable";
     }

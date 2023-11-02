@@ -18,6 +18,7 @@ var subDropdown = document.getElementById("fk2");
         var subUrl = "/dropdown/" + dropdownFk2Name;
     }
 var dropdownFk1Name = dropdown.getAttribute('name');
+
 var mainUrl = "/dropdown/" + dropdownFk1Name;
 //url 생성구분 end
 

@@ -31,15 +31,19 @@ function mappingurl(submiturl, int, text, cnt){
 
                 // 옵션값이 존재하는 확인하는 if문
     if(fkid != null){
-        var selectedValue = $("#fk3").val(); // #fk는 select 요소의 ID입니다.
-        if(!selectedValue){
-            var result = $("#fk2").val();
-            data[fkid] = result;
+        var selectedValueFk3 = $("#fk3").val(); // #fk는 select 요소의 ID입니다.
+        if(!selectedValueFk3){
+            var selectedValueFk2 = $("#fk2").val();
+            if(!selectedValueFk2){
+                var selectedValueFk1 = $("#fk1").val();
+                data[fkid] = selectedValueFk1;
+            }else{
+                data[fkid] = selectedValueFk2;
+            }
         }else{
-        data[fkid] = selectedValue;
+        data[fkid] = selectedValueFk3;
         }
     }
-
 
     $.ajax({
             url: submiturl,
