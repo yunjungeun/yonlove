@@ -86,8 +86,12 @@ public class PlanController {
     }
 
     @GetMapping("plan/insertScheduleView")
-    public ModelAndView insertScheduleView() throws JsonProcessingException{
-        String jsonList = dropDownService.dropDownOption("project",null);
+    public ModelAndView insertScheduleView(Principal user) throws JsonProcessingException{
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        String jsonList = dropDownService.dropDownOption("project",null, companyId);
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/insertSchedule");
@@ -166,7 +170,7 @@ public class PlanController {
 
     @GetMapping("plan/insertScheduleTimeView")
     public ModelAndView insertScheduleTimeView(ScheduleTimeDto dto) throws JsonProcessingException {
-        String jsonList = dropDownService.dropDownOption("project",null);
+        String jsonList = dropDownService.dropDownOption("project",null, null);
 
         ModelAndView mv = new ModelAndView();
         mv.addObject("dayId", dto.getDay_id());
@@ -325,7 +329,7 @@ public class PlanController {
     public ModelAndView insertFilmPlanView(ScheduleDayDto dto) throws JsonProcessingException{
         ModelAndView mv = new ModelAndView();
 
-        String jsonList = dropDownService.dropDownOption("project",null);
+        String jsonList = dropDownService.dropDownOption("project",null, null);
         mv.addObject("fkList", jsonList);
         mv.addObject("dayId", dto.getDay_id());
         mv.setViewName("plan/insertFilmPlanView");

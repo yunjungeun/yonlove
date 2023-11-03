@@ -95,9 +95,12 @@ public class SceneController {
     }
 
     @GetMapping("/scene/insertsceneview")
-    public ModelAndView insertSceneView() throws JsonProcessingException{
+    public ModelAndView insertSceneView(Principal user) throws JsonProcessingException{
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
 
-        String jsonListProject = dropDownService.dropDownOption("project",null);
+        String jsonListProject = dropDownService.dropDownOption("project",null, companyId);
 
         ModelAndView mv = new ModelAndView();
         mv.addObject("fkList", jsonListProject);

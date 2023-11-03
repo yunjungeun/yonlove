@@ -3,17 +3,19 @@
 <mapper namespace="com.example.yoonlove.mapper.DropDownMapper">
 
     <select id="selectFkScenario">
-        SELECT scenario_id, scenario_name FROM scenario
-        <if test="search != null and search !=''">
-            where project_id = #{ajaxData}
+        SELECT scenario_id, scenario_name FROM scenariolist
+        where company_id = #{company_id}
+        <if test="ajaxData != null and ajaxData !=''">
+            and project_id = #{ajaxData}
         </if>
         order by scenario_id desc
     </select>
 
     <select id="selectFkScene">
-        SELECT scene_id, scene_num FROM scene
-        <if test="search != null and search !=''">
-            where scenario_id = #{ajaxData}
+        SELECT scene_id, scene_num FROM storyboardlist
+        where company_id = #{company_id}
+        <if test="ajaxData != null and ajaxData !=''">
+            and scenario_id = #{ajaxData}
         </if>
         order by scene_id desc
     </select>
@@ -21,17 +23,18 @@
     <select id="selectFkProject">
         SELECT project_id, project_name FROM project
         <!--현재 if문은 상위 테이블이 없어서 있으나 마나임-->
-        <if test="search != null and search !=''">
-            where project_id = #{ajaxData}
+        where company_id = #{company_id}
+        <if test="ajaxData != null and ajaxData !=''">
+            and project_id = #{ajaxData}
         </if>
         order by project_id desc
     </select>
 
     <select id="selectFkDay">
-        SELECT day_id, day_title FROM schedule_day
-        <!--현재 if문은 상위 테이블이 없어서 있으나 마나임-->
-        <if test="search != null and search !=''">
-            where project_id = #{ajaxData}
+        SELECT day_id, day_title FROM scheduledaylist
+        where company_id = #{company_id}
+        <if test="ajaxData != null and ajaxData !=''">
+            and project_id = #{ajaxData}
         </if>
         order by project_id desc
     </select>

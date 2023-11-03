@@ -97,8 +97,12 @@ public class ScriptPaperController {
     }
 
     @GetMapping("script/insertscriptpaperview")
-    public ModelAndView insertscript() throws JsonProcessingException {
-        String jsonListProject = dropDownService.dropDownOption("project",null);
+    public ModelAndView insertscript(Principal user) throws JsonProcessingException {
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        String jsonListProject = dropDownService.dropDownOption("project",null, companyId);
 
         ModelAndView mv = new ModelAndView();
         mv.addObject("fkListProject", jsonListProject);
