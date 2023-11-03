@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -105,18 +106,23 @@ public class AdminController {
 
     //부서관리
     @GetMapping("/admin/department")
-    public ModelAndView selectListDepartment(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
-        PageDto pageDto = new PageDto("department","dpt_id",page,pdto);
+    public ModelAndView selectListDepartment(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page,
+                                             Principal user){
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        //유저의 회사정보를 가저오는 코드
+        String company = userInfo.getCompany_id(); //회사 id 스트링
+
+        PageDto pageDto = new PageDto("department","dpt_id",page,pdto, company);
 
         PageDto pageInfo = pagingService.paging(pageDto);
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.pageRink(pageDto);
-
         List<DepartmentDto> dto = adminService.selectListDepartment(pageInfo);
+
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/admin/dpt");
         mv.addObject("selectListDpt", dto);
-
         mv.addObject("prefixUrl", "admin");
         mv.addObject("paging", pageInfo);  //페이징정보
         mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
@@ -124,10 +130,10 @@ public class AdminController {
 
         return mv;
     }
+
     @GetMapping("/admin/{user_id}/updateuser")
     @ResponseBody
     public String updateUser(UserDto dto){
-        System.out.println(dto.toString());
         adminService.updateUser(dto);
         return "/admin/user";
     }
@@ -136,6 +142,7 @@ public class AdminController {
     @GetMapping("/admin/{dpt_id}/selectdpt")
     public ModelAndView selectDepartment(DepartmentDto departmentDto, PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page){
         DepartmentDto dto = adminService.selectDepartment(departmentDto);
+
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/admin/dptselect");
 
@@ -169,9 +176,15 @@ public class AdminController {
     public String insertDptView(){
         return "admin/dptinsert";
     }
+
+
     @GetMapping("/admin/insertdpt")
     @ResponseBody
-    public String insertDepartment(DepartmentDto dto){
+    public String insertDepartment(DepartmentDto dto, Principal user){
+        //로그인한 유저의 dto정보를 가져옴
+        UserDto userInfo = userService.getUser(user.getName());
+        // 유저 정보에서 company_id를 추춣하여 부서dto에 저장함
+        dto.setCompany_id(userInfo.getCompany_id());
         adminService.insertDepartment(dto);
         return "/admin/department";
     }

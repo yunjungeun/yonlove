@@ -9,8 +9,8 @@
 
     <!--검색유무에 따라 게시판의 총 게시글 수는 구하는 쿼리-->
     <select id="totalDptPost" parameterType="com.example.yoonlove.dto.PageDto">
-        select count(${id}) as totalPost from ${table}
-        where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
+        select count(${id}) as totalPost from departmentjoin
+        where company_id = #{company_id} <!--로그인한 유저의 회사정보만 획득-->
         <!--검색어가 있다면 아래 조건문을 실행-->
         <if test="title != null and search != ''">
             AND dpt_name like '%${title}%'
@@ -24,8 +24,8 @@
         from(select rownum as r, t.*
 
         <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
-        from (select * from ${table}
-        where 1=1
+        from (select * from departmentjoin
+        where company_id = #{company_id}
         <if test="title != null and search != ''">
             AND dpt_name like '%${title}%'
         </if>
@@ -41,7 +41,7 @@
         (select concat('dpt', (nvl(max(to_number(substr(dpt_id, 4))), 0)+1)) from department),<!--pk코드 자동증가(수정2)-->
         #{dpt_name},
         #{dpt_function},
-        'com1'
+        #{company_id}
         )
     </insert>
 

@@ -117,6 +117,8 @@ public class PagingService {
         pageDto.setTable(dto.getTable());
         pageDto.setId(dto.getId());
 
+        //소속회사에 관한 정보를 저장
+        pageDto.setCompany_id(dto.getCompany_id());
         return pageDto;
     }
 

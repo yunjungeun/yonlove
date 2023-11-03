@@ -27,7 +27,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
                 .requestMatchers("/login","/cs/qna","/signupview","/signup","/index","/static/**").permitAll()
-                .requestMatchers("cs/selectqna/**").hasAuthority("admin")
+                .requestMatchers("admin/**").hasAuthority("admin")
                 .anyRequest().permitAll()     //.authenticated()
                 )
                 .formLogin(form -> form
