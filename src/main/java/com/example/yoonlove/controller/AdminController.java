@@ -1,19 +1,18 @@
 package com.example.yoonlove.controller;
 
-import com.example.yoonlove.dto.CompanyDto;
-import com.example.yoonlove.dto.DepartmentDto;
-import com.example.yoonlove.dto.PageDto;
-import com.example.yoonlove.dto.UserDto;
+import com.example.yoonlove.dto.*;
 import com.example.yoonlove.service.AdminService;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -132,6 +131,49 @@ public class AdminController {
         adminService.updateUser(dto);
         return "/admin/user";
     }
+
+
+    @GetMapping("/admin/adduserview")
+    public ModelAndView adduser(){
+
+        ModelAndView mv = new ModelAndView();
+
+
+        mv.setViewName("/admin/adduser");
+
+        return mv;
+
+    }
+
+    @GetMapping("/admin/adduser")
+    public String updateContent(Principal user, UserDto userDto) {
+
+        System.out.println(user.getName());
+
+      String userId = user.getName();
+
+      UserDto myUser = userService.getUser(userId);
+
+        System.out.println(myUser.getCompany_id());
+
+        userDto.setCompany_id(myUser.getCompany_id());
+
+        System.out.println(userDto.toString());
+
+
+
+       userService.updateUser(userDto);
+
+        System.out.println("test111");
+        return "/admin/user";
+    }
+
+
+
+
+
+
+
 
 
     @GetMapping("/admin/{dpt_id}/selectdpt")
