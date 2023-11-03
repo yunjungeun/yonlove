@@ -52,10 +52,13 @@ function mappingurl(submiturl, int, text, cnt){
             success:function(response){
                 alert("정상적으로 " +text+" 되었습니다");
 
-                //업로드관련된 함수, uploadFile.js참조
-                uploadFile();
-                updateFile();
-                //업로드파일이 없으면 아무결과도 출력하지않고 다음라인 진행
+
+                //업로드 js페이지를 안달아놨을경우 건너뜀
+                if (typeof uploadFile === 'function'){
+                    //업로드관련된 함수, uploadFile.js참조
+                    uploadFile();
+                    updateFile();
+                }
 
                 window.location.href = response ;
             },

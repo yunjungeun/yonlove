@@ -29,12 +29,12 @@
 
         <tr>
             <td bgcolor="pink">금액</td>
-            <td align="left">{{selectBudget.budget_amount}}</td>
+            <td align="left">{{selectBudget.fomattedAmount}} 원</td>
         </tr>
     </table>
     <hr>
     <a href="/project/updatebudgetview/{{selectBudget.budget_id}}">게시글 수정</a>&nbsp;&nbsp;&nbsp;
-    <a href="/project/deletebudget/{{selectBudget.budget_id}}"onclick="confirmDelete(event)">게시글 삭제</a>&nbsp;
+    <a href="/project/deletebudget/{{selectBudget.budget_id}}" onclick="confirmDelete(event)">게시글 삭제</a>&nbsp;
     <a href="/project/budget">전체 목록 보기</a>
 </div>
 </body>

@@ -133,10 +133,11 @@
         )
     </insert>
 
-    <update id ="updateBudget">
+    <update id ="updateBudget" parameterType="com.example.yoonlove.dto.BudgetDto">
         UPDATE budget
         SET
         budget_name = #{budget_name},
+        budget_content = #{budget_content},
         budget_amount = #{budget_amount}
         where budget_id = #{budget_id}
     </update>

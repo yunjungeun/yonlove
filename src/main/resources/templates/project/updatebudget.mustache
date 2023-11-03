@@ -7,7 +7,7 @@
     <title>예산 수정하기</title>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/static/js/cu_alert.js"></script>
+
     {{>layout/header}}
 </head>
 
@@ -15,17 +15,33 @@
 {{>layout/sidebar}}
 {{>layout/topbar}}
 <form id="alert" action="/project/updatebudget/{{selectBudget.budget_id}}" method="get">
-
+    <h1> {{selectBudget.budget_name}}</h1>
+    <hr>
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
-            <td>예산이름 <input class="field1" name="budget_name" type="text" placeholder="수정할 예산이름"/></td>
-            <td>예산금액 <input class="field2" name="budget_amount" type="number" placeholders="수정할 예산금액"/></td>
+            <td bgcolor="pink">기획명</td>
+            <td align="left">{{selectBudget.project_name}}</td>
+        </tr>
 
+        <tr>
+            <td bgcolor="pink">항목명</td>
+            <td align="left"><input class="field1" name="budget_name" type="text" value="{{selectBudget.budget_name}}"></td>
+        </tr>
+
+        <tr>
+            <td bgcolor="pink">내용</td>
+            <td align="left"><input class="field2" name="budget_content" type="text" value="{{selectBudget.budget_content}}"></td>
+        </tr>
+
+        <tr>
+            <td bgcolor="pink">금액</td>
+            <td align="left"><input class="int1" name="budget_amount" type="number" value="{{selectBudget.budget_amount}}">원</td>
         </tr>
     </table>
-    <input type="submit" value="수정" onclick="mappingurl('/project/updatebudget/{{selectBudget.budget_id}}', 2,'수정')" />
+    <input type="submit" value="수정" onclick="mappingurl('/project/updatebudget/{{selectBudget.budget_id}}', 2,'수정',1)" />
 </form>
 <a href="/project/budget">전체 목록 보기</a>
 
+<script src="/static/js/cu_alert.js"></script>
 </body>
 </html>

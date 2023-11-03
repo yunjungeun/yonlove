@@ -153,6 +153,11 @@ public class ProjectController {
     @GetMapping("project/{budget_id}/selectbudget")
     public ModelAndView selectProject(BudgetDto budgetDto){
         BudgetDto dto = projectService.selectBudget(budgetDto);
+
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");  //숫자를 금액처럼 , 붙여줌
+        String formattedAmount = decimalFormat.format(dto.getBudget_amount());
+        dto.setFomattedAmount(formattedAmount);
+
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/project/selectbudget");
         mv.addObject("selectBudget", dto);
@@ -169,6 +174,7 @@ public class ProjectController {
     public ModelAndView updateBudgetView(BudgetDto budgetDto){
         ModelAndView mv = new ModelAndView();
         BudgetDto dto = projectService.selectBudget(budgetDto);
+
         mv.setViewName("/project/updatebudget");
         mv.addObject("selectBudget", dto);
         return mv;
@@ -178,6 +184,7 @@ public class ProjectController {
     @ResponseBody
     public String updateBudget(BudgetDto dto){
         projectService.updateBudget(dto);
+
         return "/project/budget";   // 목록페이지로 이동
     }
  // =====================budget 완료 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
