@@ -20,11 +20,12 @@
     <!-- Custom styles for this template-->
     <link href="/static/bootstrap/css/sb-admin-2.min.css" rel="stylesheet">
 
+
 </head>
 
 <body class="bg-gradient-primary">
 
-    <div class="container">
+    <div class="container" >
 
         <!-- Outer Row -->
         <div class="row justify-content-center">
@@ -44,14 +45,15 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user">
+
+                                    <form action="/loginProc" method="post" class="user">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
+                                            <input type="text" name="user_id" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
+                                                placeholder="Enter ID..">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
+                                            <input type="password" name="pw" class="form-control form-control-user"
                                                 id="exampleInputPassword" placeholder="Password">
                                         </div>
                                         <div class="form-group">
@@ -61,9 +63,14 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
-                                            Login
-                                        </a>
+                                        <div id="errorMessage" class="text-danger small-text" style="font-size: 11px;">
+                                            {{#errorMessage}}
+                                                {{errorMessage}}
+                                            {{/errorMessage}}
+                                        </div>
+
+                                        <button class="btn btn-primary btn-user btn-block" type="submit"><!-- href="/index"-->
+                                            Login</button>
                                         <!--<hr>-->
                                        <!-- <a href="index.html" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
@@ -72,6 +79,8 @@
                                             <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
                                         </a>-->
                                     </form>
+
+
                                     <hr>
                                     <!--<div class="text-center">
                                         <a class="small" href="../../../../../../../Downloads/startbootstrap-sb-admin-2-gh-pages/startbootstrap-sb-admin-2-gh-pages/forgot-password.html">Forgot Password?</a>

@@ -47,7 +47,12 @@ public class CsController {
         return mv;
     }
     @GetMapping("/cs/notice")
-    public ModelAndView selectListNotice(PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page){
+    public ModelAndView selectListNotice(PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page, Principal user_id){
+        System.out.println(user_id);
+
+        String user= user_id.getName();
+        System.out.println(user);
+
         //페이징에 필요한 매개변수, 객체생성
         PageDto pageDto = new PageDto("notice","notice_id",page, pdto);
 

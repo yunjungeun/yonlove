@@ -3,11 +3,14 @@ package com.example.yoonlove.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.security.Principal;
+
 @Controller
 public class Main {
 
     @GetMapping("/index")
-    public String mainPage(){
+    public String mainPage(Principal user){
+
         return "/main/index2";
     }
 

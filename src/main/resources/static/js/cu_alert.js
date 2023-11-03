@@ -40,7 +40,6 @@ function mappingurl(submiturl, int, text, cnt){
         }
     }
 
-
     $.ajax({
             url: submiturl,
             type : "GET",
@@ -49,8 +48,10 @@ function mappingurl(submiturl, int, text, cnt){
                 alert("정상적으로 " +text+" 되었습니다");
 
                 //업로드관련된 함수, uploadFile.js참조
+                if(typeof uploadFile === 'function'){
                 uploadFile();
                 updateFile();
+                }
                 //업로드파일이 없으면 아무결과도 출력하지않고 다음라인 진행
 
                 window.location.href = response ;
