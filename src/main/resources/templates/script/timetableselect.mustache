@@ -11,21 +11,81 @@
 <body id="page-top">
 {{>layout/sidebar}}
 {{>layout/topbar}}
-<table border="1" cellpadding="1" cellspacing="1">
-    <tr>
-        <td>스크립트 번호 <input name="script_id" type="text" value="{{selectTimeTable.script_id}}" readonly></td>
-        <td>촬영시간 <input name="film_time" type="date" value="{{selectTimeTable.film_time}}" readonly/></td>
-        <td>타임테이블 번호<input name="time_num" type="number" value="{{selectTimeTable.time_num}}" readonly></td>
-        <td>OK/NG<input name="ok_ng" type="text" value="{{selectTimeTable.ok_ng}}" readonly></td>
-        <td>슬레이트<input name="slate_time" type="date" value="{{selectTimeTable.slate_time}}" readonly></td>
-    </tr>
-</table>
-<a href="/script/timetable">목록</a>
-<a href="/script/{{selectTimeTable.table_id}}/updatetimeview">수정</a>
-<a href="javascript:void(0);" onclick="deleteAlert('/script/{{selectTimeTable.table_id}}/deletetimetable')">삭제</a>
 
-<br/>현재까지 버그<br/>
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
 
-<script src="/static/js/deletepost.js"></script>
+<!-- Main Content -->
+<div id="content">
+
+<!-- Begin Page Content -->
+<div class="container-fluid">  <!--얘가 없으면 전체적으로 다 위로 올라가고 푸터가 사이드 옆쪽으로 붙어버림 -->
+
+    <div style="text-align: center; display: block; margin-top:100px;" >
+        <h1 class="h3 mb-2 text-gray-800">타임테이블 상세보기</h1>
+    </div>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4" style="margin-top: 70px; margin-right: 300px; margin-left: 300px;">
+        <div class="card-header py-3" >
+
+            <div style="margin-left: 30%; margin-right: 30%; margin-top: 5%;">
+                <div style="display: inline-block;">
+
+                    <div class="mb-3" style="display: inline-block;">
+                        <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>스크립트 번호</strong></label>
+                        <input name="script_id" type="text" value="{{selectTimeTable.script_id}}" readonly></div> <br/>
+
+                    <div class="mb-3" style="display: inline-block;">
+                        <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>촬영시간</strong></label>
+                        <input name="film_time" type="date" value="{{selectTimeTable.film_time}}" readonly/></div> <br/>
+
+                    <div class="mb-3" style="display: inline-block;">
+                        <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>타임테이블 번호</strong></label>
+                        <input name="time_num" type="number" value="{{selectTimeTable.time_num}}" readonly></div> <br/>
+
+                    <div class="mb-3" style="display: inline-block;">
+                        <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>OK/NG</strong></label>
+                        <input name="ok_ng" type="text" value="{{selectTimeTable.ok_ng}}" readonly></div> <br/>
+
+                    <div class="mb-3" style="display: inline-block;">
+                        <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>슬레이트</strong></label>
+                        <input name="slate_time" type="date" value="{{selectTimeTable.slate_time}}" readonly></div> <br/>
+
+
+<div style="text-align: center">
+<a href="/script/timetable" class="btn btn-primary">목록</a> &nbsp;&nbsp;
+    <a href="/script/{{selectTimeTable.table_id}}/updatetimeview" class="btn btn-success">수정</a>&nbsp;&nbsp;
+<a href="javascript:void(0);" class="btn btn-danger" onclick="deleteAlert('/script/{{selectTimeTable.table_id}}/deletetimetable')">삭제</a>
+</div>
+
+
+    </div>
+</div>
+
+</div>
+    </div>
+</div>
+</div>
+</div>
+<a class="scroll-to-top rounded" href="#page-top">
+<i class="fas fa-angle-up"></i>
+</a>
+<!-- /.container-fluid -->
+</div>
+<!-- End of Main Content -->
+
+{{>layout/footer}}
+
+</div>
+    <!-- End of Content Wrapper -->
+    <script>
+        var url = "/cs/notice";
+    </script>
+    <script src="/static/js/deletepost.js"></script>
+    {{>layout/bootstrapjs}}
 </body>
 </html>
+
+
+
