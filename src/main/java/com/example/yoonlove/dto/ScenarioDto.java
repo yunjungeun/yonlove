@@ -24,6 +24,7 @@ public class ScenarioDto {
     private String project_date;
     private String project_state;
     private Date project_start_date;  //값을 출력할때는 date타입, js로 넣어줄대는 string타입
+    private String company_id;
 
 
 }

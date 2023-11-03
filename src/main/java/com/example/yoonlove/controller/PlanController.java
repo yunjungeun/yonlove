@@ -1,10 +1,7 @@
 package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.*;
-import com.example.yoonlove.service.CalendarService;
-import com.example.yoonlove.service.DropDownService;
-import com.example.yoonlove.service.PagingService;
-import com.example.yoonlove.service.PlanService;
+import com.example.yoonlove.service.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -32,11 +30,18 @@ public class PlanController {
     private DropDownService dropDownService;
     @Autowired
     private CalendarService calendarService;
+    @Autowired
+    private UserService userService;
 
 
     @GetMapping("/plan/schedule_day")
-    public ModelAndView selectListSchedule(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page) {
-        PageDto pageDto = new PageDto("schedule_day","day_id", page,pdto);
+    public ModelAndView selectListSchedule(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page,
+                                           Principal user) {
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        PageDto pageDto = new PageDto("schedule_day","day_id", page,pdto, companyId);
         PageDto pageInfo = pagingService.paging(pageDto); // paging ==> 전체게시글 갯수 구해오는 메소드
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
         String rink = pagingService.pageRink(pageDto);

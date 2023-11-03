@@ -5,8 +5,8 @@
 
 
     <select id="totalSceduledayPost" parameterType="com.example.yoonlove.dto.PageDto">
-        select count(${id}) as totalPost from ${table}
-        where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
+        select count(${id}) as totalPost from scheduledaylist
+        where company_id = #{company_id} <!--검색어가 공란이면 전체 리스트 조회-->
         <!--검색어가 있다면 아래 조건문을 실행-->
         <if test="title != null and search != ''">
             AND day_title like '%${title}%'
@@ -32,7 +32,7 @@
 
         <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
         from (select * from scheduledaylist
-        where 1=1  <!--에러처리방지를 위한 코드-->
+        where company_id = #{company_id}  <!--에러처리방지를 위한 코드-->
         <if test="title != null and search != ''">
             AND day_title like '%${title}%'
         </if>

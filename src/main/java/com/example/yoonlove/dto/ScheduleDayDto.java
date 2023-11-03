@@ -22,5 +22,4 @@ public class ScheduleDayDto {
     private String project_name;
     private String company_id;
     private String project_state;
-
 }

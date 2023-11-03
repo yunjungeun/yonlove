@@ -1,8 +1,6 @@
 package com.example.yoonlove.dto;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 
 @Data
@@ -16,7 +14,7 @@ public class SceneDto {
 
 
 
-   //========================================
+   //==============조인테이블 : storyboardlist
 
     private String scenario_id;
     private int scenario_num;
@@ -26,5 +24,5 @@ public class SceneDto {
     private String scenario_date;
     private String project_id;
     private String scenario_update;
-
+    private String company_id;
 }

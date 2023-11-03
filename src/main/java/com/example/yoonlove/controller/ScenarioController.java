@@ -1,12 +1,10 @@
 package com.example.yoonlove.controller;
 
-import com.example.yoonlove.dto.PageDto;
-import com.example.yoonlove.dto.ProjectDto;
-import com.example.yoonlove.dto.ScenarioDto;
-import com.example.yoonlove.dto.SceneDto;
+import com.example.yoonlove.dto.*;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.ScenarioService;
 import com.example.yoonlove.service.SceneService;
+import com.example.yoonlove.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -25,10 +24,17 @@ public class ScenarioController {
     private PagingService pagingService;
     @Autowired
     private SceneService sceneService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/scenario/scenario")
-    public ModelAndView selectListScenario(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
-        PageDto pageDto = new PageDto("scenario","scenario_id",page,pdto);
+    public ModelAndView selectListScenario(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page,
+                                           Principal user){
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        PageDto pageDto = new PageDto("scenario","scenario_id",page,pdto, companyId);
         PageDto pageInfo = pagingService.paging(pageDto);
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.pageRink(pageDto);
