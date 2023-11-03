@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calendar</title>
+    <!--jQuery 라이브러리 소스 이게 없으면 ajax못씀-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!--머스테치 라이브러리 소스-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+
+</head>
+<body>
+
+<!--id="currentDate" 수정시 calendar.js도 같이 수정해야됨. 수정필요시 문의  -->
+<div id="currentDate">
+    <h1><span id="year">{{year}}</span>년 <span id="month">{{month}}</span>월</h1>
+</div>
+
+<!--id="calendar-container" 수정시 calendar.js도 같이 수정해야됨. 수정필요시 문의  -->
+    <table  id="calendar-container" border="1" >
+        <tr>
+            <th>일</th>
+            <th>월</th>
+            <th>화</th>
+            <th>수</th>
+            <th>목</th>
+            <th>금</th>
+            <th>토</th>
+        </tr>
+        {{#calendar}}
+            <tr>
+                {{#this}}
+                    <td id="{{.}}">{{.}}</td>
+                {{/this}}
+            </tr>
+        {{/calendar}}
+    </table>
+
+
+
+<form method="get" action="/calendar">
+    년<input type="number" name="year">
+    월<input type="number" name="month">
+    <input type="submit" value="검색">
+</form>
+
+<button type="button" onclick="dateButtonGet('preYear')">전년</button>
+<button type="button" onclick="dateButtonGet('preMonth')">이전달</button>
+<button type="button" onclick="dateButtonGet('nextMonth')">다음달</button>
+<button type="button" onclick="dateButtonGet('nextYear')" >내년</button>
+
+<script>
+    var logJson = {{{logJson}}};
+    var dayJson = {{{dayJson}}};
+
+    var year = {{year}};
+    var month = {{month}};
+</script>
+
+<script src="/static/js/calendar.js"></script>
+</body>
+</html>

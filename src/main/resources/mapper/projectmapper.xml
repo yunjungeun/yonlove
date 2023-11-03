@@ -97,10 +97,10 @@
         <!--notice검색결과에 rownum을 하고 r로 지정-->
         from(select rownum as r, t.*
         <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
-        from (select * from ${table}
+        from (select * from budgetjoin
         where 1=1
         <if test="title != null and search != ''">
-            AND budget_name like '%${title}%'
+            AND project_name like '%${title}%'
         </if>
         order by ${id} desc) t)
         <!-- rownum을 기준(r)으로 시작번호부터 끝번호까지 검색   -->
@@ -108,40 +108,49 @@
     </select>
 
     <select id="totalBudgetPost" parameterType="com.example.yoonlove.dto.PageDto">
-        select count(${id}) as totalPost from ${table}
+        select count(${id}) as totalPost from budgetjoin
         where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
         <!--검색어가 있다면 아래 조건문을 실행-->
         <if test="title != null and search != ''">
-            AND budget_name like '%${title}%'
+            AND project_name like '%${title}%'
         </if>
     </select>
 
     <select id="selectBudget" resultType="com.example.yoonlove.dto.BudgetDto">
-        SELECT * FROM budget
+        SELECT * FROM budgetjoin
         where budget_id = #{budget_id}
     </select>
 
     <insert id="insertBudget">
         insert into budget values(
-        (select concat('budget', (nvl(max(substr(budget_id, 7)), 0)+1)) from budget),<!--pk코드 자동증가(수정)-->
+        (select concat('budget', (nvl(max(to_number(substr(budget_id, 7))), 0)+1)) from budget),<!--pk코드 자동증가(수정2)-->
         #{budget_name},
-       '테스트내용',
+        #{budget_content},
         #{budget_amount},
-        'code101',
-        '예산서테스터01',
-        'project2'
+        null,
+        null,
+        #{project_id}
         )
     </insert>
 
-    <update id ="updateBudget">
+    <update id ="updateBudget" parameterType="com.example.yoonlove.dto.BudgetDto">
         UPDATE budget
         SET
         budget_name = #{budget_name},
+        budget_content = #{budget_content},
         budget_amount = #{budget_amount}
         where budget_id = #{budget_id}
     </update>
 
     <delete id="deleteBudget"> DELETE FROM budget WHERE budget_id = #{budget_id}</delete>
+
+    <!--예산 총액 구하는 sql-->
+    <select id="getTotalBudget">
+        SELECT sum(budget_amount) FROM budgetjoin
+        <if test="title != null and search != ''">
+        where project_name like '%${title}%'
+        </if>
+    </select>
 
     <!--=========================================Budget 완료 !!!!!!!!!!======================== -->
     <select id="selectListProduce" parameterType="com.example.yoonlove.dto.PageDto" resultType="com.example.yoonlove.dto.ProduceDto">

@@ -26,6 +26,9 @@ public interface ProjectMapper {
     public void insertBudget(BudgetDto dto);
     public void updateBudget(BudgetDto dto);
     public void deleteBudget(BudgetDto dto);
+
+    //예산 총액 구하는 메소드
+    int getTotalBudget(PageDto dto);
     // -------------------------====================================Budget 끝
     public List<ProduceDto> selectListProduce(PageDto pageDto);
     public PageDto totalProducePost(PageDto dto);

@@ -14,17 +14,12 @@
 {{>layout/sidebar}}
 {{>layout/topbar}}
 <div id="div_box">
-    <h1> 예산서 상세보기</h1>
+    <h1> {{selectBudget.budget_name}}</h1>
     <hr>
     <table board="1" cellpascing="0" cellpading="0">
         <tr>
-            <td bgcolor="pink" width="70">예산아이디 </td>
-            <td align="left">{{selectBudget.budget_id}}</td>
-        </tr>
-
-        <tr>
-            <td bgcolor="pink">항목명</td>
-            <td align="left">{{selectBudget.budget_name}}</td>
+            <td bgcolor="pink">기획명</td>
+            <td align="left">{{selectBudget.project_name}}</td>
         </tr>
 
         <tr>
@@ -34,27 +29,12 @@
 
         <tr>
             <td bgcolor="pink">금액</td>
-            <td align="left">{{selectBudget.budget_amount}}</td>
-        </tr>
-
-        <tr>
-            <td bgcolor="pink">항목코드</td>
-            <td align="left">{{selectBudget.budget_code}}</td>
-        </tr>
-
-        <tr>
-            <td bgcolor="pink">예산서</td>
-            <td align="left">{{selectBudget.budget_flag}}</td>
-        </tr>
-
-        <tr>
-            <td bgcolor="pink">기획아이디</td>
-            <td align="left">{{selectBudget.project_id}}</td>
+            <td align="left">{{selectBudget.fomattedAmount}} 원</td>
         </tr>
     </table>
     <hr>
     <a href="/project/updatebudgetview/{{selectBudget.budget_id}}">게시글 수정</a>&nbsp;&nbsp;&nbsp;
-    <a href="/project/deletebudget/{{selectBudget.budget_id}}"onclick="confirmDelete(event)">게시글 삭제</a>&nbsp;
+    <a href="/project/deletebudget/{{selectBudget.budget_id}}" onclick="confirmDelete(event)">게시글 삭제</a>&nbsp;
     <a href="/project/budget">전체 목록 보기</a>
 </div>
 </body>

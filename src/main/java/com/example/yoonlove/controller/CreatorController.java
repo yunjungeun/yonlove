@@ -52,7 +52,7 @@ import java.util.List;
         @ResponseBody
         public String insertCreator(CreatorDto creatorDto){
             creatorservice.insertCreator(creatorDto);
-            return "redirect:/creator/creater";
+            return "/creator/creater";
         }
 
       @GetMapping("/creator/{ch_id}/selectcreator")
@@ -79,7 +79,7 @@ import java.util.List;
     public String updateCreator(CreatorDto dto){
             /*System.out.println(dto.toString());*/
         creatorservice.updateCreator(dto);
-        return "redirect:/creator/creater";   // 목록페이지로 이동
+        return "/creator/creater";   // 목록페이지로 이동
     }
 
     @GetMapping("/creator/deletecreator/{ch_id}")

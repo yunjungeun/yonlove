@@ -1,20 +1,21 @@
 package com.example.yoonlove.controller;
 
-import com.example.yoonlove.dto.*;
+import com.example.yoonlove.dto.FileDto;
+import com.example.yoonlove.dto.PageDto;
+import com.example.yoonlove.dto.ScriptPaperDto;
+import com.example.yoonlove.dto.TimeTableDto;
 import com.example.yoonlove.service.DropDownService;
 import com.example.yoonlove.service.FileService;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.ScriptPaperService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.net.SocketTimeoutException;
 import java.util.List;
 
 @Controller
@@ -171,9 +172,9 @@ public class ScriptPaperController {
     @GetMapping("script/inserttimetable")
     @ResponseBody
     public String insertTimeTable(TimeTableDto dto){
-        System.out.println("11111"+dto.toString());
+        System.out.println(dto.toString());
         scriptPaperService.insertTimeTable(dto);
-        return "redirect:timetable";
+        return "/script/timetable";
     }
 
     @GetMapping("script/{table_id}/updatetimeview")
@@ -188,7 +189,7 @@ public class ScriptPaperController {
     @ResponseBody
     public String updateTimeTable(TimeTableDto dto){
         scriptPaperService.updateTimeTable(dto);
-        return "redirect:/script/timetable";
+        return "/script/timetable";
     }
 
     @GetMapping("script/{table_id}/deletetimetable")

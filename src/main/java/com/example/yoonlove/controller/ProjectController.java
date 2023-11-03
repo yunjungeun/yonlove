@@ -1,8 +1,13 @@
 package com.example.yoonlove.controller;
 
-import com.example.yoonlove.dto.*;
+import com.example.yoonlove.dto.BudgetDto;
+import com.example.yoonlove.dto.PageDto;
+import com.example.yoonlove.dto.ProduceDto;
+import com.example.yoonlove.dto.ProjectDto;
+import com.example.yoonlove.service.DropDownService;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.ProjectService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 @Controller
 public class ProjectController {
@@ -18,6 +24,10 @@ public class ProjectController {
 
     @Autowired
     private PagingService pagingService;
+
+    @Autowired
+    private DropDownService dropDownService;
+
     //페이징처리를 위해 불러옴
 
     //프로젝트(기획)
@@ -60,7 +70,7 @@ public class ProjectController {
     @ResponseBody
     public String insertProject(ProjectDto projectDto){
         projectService.insertProject(projectDto);
-        return "redirect:/project/project";
+        return "/project/project";
     }
 
         // 삭제 !!!!!!!!!!!!!!!!!!
@@ -84,7 +94,7 @@ public class ProjectController {
     @ResponseBody
     public String updateProject(ProjectDto dto){
         projectService.updateProject(dto);
-        return "redirect:/project/project";   // 목록페이지로 이동
+        return "/project/project";   // 목록페이지로 이동
     }
     // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ프로젝트 끝
 
@@ -103,6 +113,18 @@ public class ProjectController {
         mv.setViewName("/project/listbudget");  // 머스터치 이름
         mv.addObject("selectListBudget", dto);
 
+        //예산 총계 구하는 메서드
+        int totalInt = projectService.getTotalBudget(pdto);
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");  //숫자를 금액처럼 , 붙여줌
+        String total = decimalFormat.format(totalInt);
+        mv.addObject("total", total);
+
+        //숫자로 된 amount를 3,000 금액으로 바꾸는 for문
+        for(int i = 0; i<dto.size(); i++){
+            String formattedAmount = decimalFormat.format(dto.get(i).getBudget_amount());
+            dto.get(i).setFomattedAmount(formattedAmount);
+        }
+
         mv.addObject("prefixUrl", "project");  //컨트롤러 이름
         mv.addObject("paging", pageInfo);  //페이징정보
         mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
@@ -110,21 +132,32 @@ public class ProjectController {
         return mv;
     }
 
-    @GetMapping("project/insertbudgetview")  // 작성클릭 후 페이지 리턴하는
-    public String insertbudgetview(){
-        return "project/budgetinsert";
+    @GetMapping("/project/insertbudgetview")  // 작성클릭 후 페이지 리턴하는
+    public ModelAndView insertbudgetview()throws JsonProcessingException {
+        String jsonListProject = dropDownService.dropDownOption("project",null);
+
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("fkList", jsonListProject);
+        mv.setViewName("project/budgetinsert");
+        return mv;
     }
 
     @GetMapping("project/insertbudget")   // 작성 후 입력값 넘기는~
     @ResponseBody
     public String insertBudget(BudgetDto budgetDto){
+        System.out.println(budgetDto.toString());
         projectService.insertBudget(budgetDto);
-        return "redirect:/project/budget";
+        return "/project/budget";
     }
 
     @GetMapping("project/{budget_id}/selectbudget")
     public ModelAndView selectProject(BudgetDto budgetDto){
         BudgetDto dto = projectService.selectBudget(budgetDto);
+
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");  //숫자를 금액처럼 , 붙여줌
+        String formattedAmount = decimalFormat.format(dto.getBudget_amount());
+        dto.setFomattedAmount(formattedAmount);
+
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/project/selectbudget");
         mv.addObject("selectBudget", dto);
@@ -141,6 +174,7 @@ public class ProjectController {
     public ModelAndView updateBudgetView(BudgetDto budgetDto){
         ModelAndView mv = new ModelAndView();
         BudgetDto dto = projectService.selectBudget(budgetDto);
+
         mv.setViewName("/project/updatebudget");
         mv.addObject("selectBudget", dto);
         return mv;
@@ -150,7 +184,8 @@ public class ProjectController {
     @ResponseBody
     public String updateBudget(BudgetDto dto){
         projectService.updateBudget(dto);
-        return "redirect:/project/budget";   // 목록페이지로 이동
+
+        return "/project/budget";   // 목록페이지로 이동
     }
  // =====================budget 완료 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -184,7 +219,7 @@ public class ProjectController {
     @ResponseBody
     public String insertProduce(ProduceDto produceDto){
         projectService.insertProduce(produceDto);
-        return "redirect:/project/produce";}
+        return "/project/produce";}
 
     @GetMapping("project/{pd_id}/selectproduce")   //상세보기
     public ModelAndView selectProduce(ProduceDto produceDto){
@@ -211,7 +246,7 @@ public class ProjectController {
     @ResponseBody
     public String updateProduce(ProduceDto dto){
         projectService.updateProduce(dto);
-        return "redirect:/project/produce"; }
+        return "/project/produce"; }
 // 프로듀스 제작 완료 !!!!!!!!============================================
 }
 
