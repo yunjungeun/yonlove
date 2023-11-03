@@ -444,7 +444,11 @@ public class PlanController {
 
     //------------------------월력형 테이블 로직---------------------------------//
     @GetMapping("/calendar")
-    public ModelAndView showCalendar(@RequestParam(defaultValue = "-1") int year, @RequestParam(defaultValue = "-1")int month) throws JsonProcessingException {
+    public ModelAndView showCalendar(@RequestParam(defaultValue = "-1") int year, @RequestParam(defaultValue = "-1")int month,
+                                     Principal user) throws JsonProcessingException {
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
 
         //년월 기본값(-1년-1월) 이라면 현재 년월 기준으로 year/month 값 출력
         if(year+month == -2){
@@ -456,11 +460,11 @@ public class PlanController {
         List<List<String>> calendarData = calendarService.generateCalendarData(year,month);
 
         //제작일지 Json 불러오기 : {log1 : 작성일자} 식으로 존재함
-        String calendarLog = calendarService.logJson(year,month);
+        String calendarLog = calendarService.logJson(year,month,companyId);
         mv.addObject("logJson",calendarLog);
 
         //촬영일정표 Json 불러오기 : {day1 : 작성일자} 식으로 존재함
-        String calendarDay = calendarService.dayJson(year,month);
+        String calendarDay = calendarService.dayJson(year,month,companyId);
         mv.addObject("dayJson",calendarDay);
 
         // 뷰로 데이터를 전달하기 위해 모델에 "calendar" 속성 추가

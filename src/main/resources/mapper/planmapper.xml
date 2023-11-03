@@ -19,8 +19,9 @@
     <!--해당월에 대한 촬영일지 기록 모두 출력-->
     <select id="currentMonth" resultType="com.example.yoonlove.dto.ScheduleDayDto">
         <![CDATA[
-        SELECT * FROM schedule_day
-        WHERE EXTRACT(YEAR FROM film_date) = #{year}
+        SELECT * FROM scheduledaylist
+        WHERE company_id = #{company_id}
+          AND EXTRACT(YEAR FROM film_date) = #{year}
           AND EXTRACT(MONTH FROM film_date) = #{month}
     ]]>
     </select>

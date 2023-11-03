@@ -17,7 +17,7 @@ public interface PlanMapper {
     public void deleteSchedule(ScheduleDayDto dto);
 
     //월력형 테이블에 들어갈 메소드
-    List<ScheduleDayDto> currentMonth(int year, int month);
+    List<ScheduleDayDto> currentMonth(int year, int month, String company_id);
 
 //===========================촬영 타입테이블===================================
 

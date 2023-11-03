@@ -19,5 +19,5 @@ public interface LogMapper {
     public void deleteLog(LogDto dto);
 
     //월력형 테이블에 들어갈 메소드
-    List<LogDto> currentMonthLog(int year, int month);
+    List<LogDto> currentMonthLog(int year, int month, String company_id);
 }

@@ -57,10 +57,10 @@ public class CalendarService {
     }
 
     //제작일지를 json으로 만듬
-    public String logJson(int year, int month) throws JsonProcessingException {
+    public String logJson(int year, int month, String company_id) throws JsonProcessingException {
 
             //제작일지 생성로직
-        List<LogDto> dto = logService.currentMonthLog(year,month);
+        List<LogDto> dto = logService.currentMonthLog(year,month, company_id);
         HashMap<String, Integer> hashMap = new HashMap<>();
             for (LogDto logDto : dto) {
             String logId = logDto.getLog_id();
@@ -78,10 +78,10 @@ public class CalendarService {
     }
 
     //일일촬영계획을 json으로 만듬
-    public String dayJson(int year, int month) throws JsonProcessingException {
+    public String dayJson(int year, int month, String company_id) throws JsonProcessingException {
 
         //제작일지 생성로직
-        List<ScheduleDayDto> dto = planService.currentMonth(year,month);
+        List<ScheduleDayDto> dto = planService.currentMonth(year,month, company_id);
         HashMap<String, Integer> hashMap = new HashMap<>();
         for (ScheduleDayDto dayDto : dto) {
             String dayId = dayDto.getDay_id();

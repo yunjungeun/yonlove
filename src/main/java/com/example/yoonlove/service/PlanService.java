@@ -58,8 +58,8 @@ public class PlanService {
 
 
     //월력형 테이블에 촬영일정표 현황 가져오는 메소드
-    public List<ScheduleDayDto> currentMonth(int year, int month){
-        return planMapper.currentMonth(year,month);
+    public List<ScheduleDayDto> currentMonth(int year, int month, String company_id){
+        return planMapper.currentMonth(year,month, company_id);
     }
 
 

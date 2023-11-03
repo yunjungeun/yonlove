@@ -62,14 +62,17 @@
     </update>
 
     <delete id="deleteLog" parameterType="com.example.yoonlove.dto.LogDto">
-        DELETE FROM log WHERE log_id = #{log_id}
+        DELETE FROM logjoin
+        WHERE company_id = #{company_id}
+        and log_id = #{log_id}
     </delete>
 
     <!--해당월에 대한 제작일지 기록 모두 출력-->
     <select id="currentMonthLog"  resultType="com.example.yoonlove.dto.LogDto">
         <![CDATA[
-        SELECT * FROM log
-        WHERE EXTRACT(YEAR FROM log_date) = #{year}
+        SELECT * FROM logjoin
+        WHERE company_id = #{company_id}
+          AND EXTRACT(YEAR FROM log_date) = #{year}
           AND EXTRACT(MONTH FROM log_date) = #{month}
     ]]>
     </select>

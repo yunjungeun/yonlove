@@ -31,8 +31,14 @@ public class AdminController {
 
     //유저관리
     @GetMapping("/admin/user")
-    public ModelAndView selectListUser(PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page){
-        PageDto pageDto = new PageDto("users","user_id",page,pdto);
+    public ModelAndView selectListUser(PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page,
+                                       Principal user){
+
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        PageDto pageDto = new PageDto("users","user_id",page,pdto,companyId);
         PageDto pageInfo = pagingService.paging(pageDto);
 
         List<PageDto> pagelist = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
