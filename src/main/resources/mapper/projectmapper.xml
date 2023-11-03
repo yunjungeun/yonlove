@@ -178,7 +178,7 @@
     </select>
     
     <select id="selectProduce" resultType="com.example.yoonlove.dto.ProduceDto">
-        select * from produce
+        select * from producejoin
         where pd_id = #{pd_id}
     </select>
 
