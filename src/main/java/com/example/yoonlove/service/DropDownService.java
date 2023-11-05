@@ -1,9 +1,6 @@
 package com.example.yoonlove.service;
 
-import com.example.yoonlove.dto.ProjectDto;
-import com.example.yoonlove.dto.ScenarioDto;
-import com.example.yoonlove.dto.SceneDto;
-import com.example.yoonlove.dto.ScheduleDayDto;
+import com.example.yoonlove.dto.*;
 import com.example.yoonlove.mapper.DropDownMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -54,6 +51,12 @@ public class DropDownService {
                     fkStringList.put(scheduleDayDtos.get(i).getDay_id(),scheduleDayDtos.get(i).getDay_title());
                 }
                 break;
+            case "produce" :
+                List<ProduceDto> produceDtos = dropDownMapper.selectFkProduce(ajaxData);
+                for(int i=0; i< produceDtos.size(); i++){
+                    fkStringList.put(produceDtos.get(i).getPd_id(),produceDtos.get(i).getPd_name());
+                }
+                break;
         }
 
         if(fkIntList.isEmpty()){
@@ -78,6 +81,12 @@ public class DropDownService {
     //시나리오 옵션 선택에따라 씬 옵션을 재생성
     public String dayOption(String pkId) throws JsonProcessingException{
         String jsonList = dropDownOption("schedule_day", pkId,null);
+        return jsonList;
+    }
+
+    //기획명 옵션 선택에따라 출연자 옵션을 재생성
+    public String produceOption(String pkId) throws JsonProcessingException {
+        String jsonList = dropDownOption("produce", pkId, null);
         return jsonList;
     }
 }

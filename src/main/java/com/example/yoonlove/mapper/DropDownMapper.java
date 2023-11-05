@@ -1,9 +1,6 @@
 package com.example.yoonlove.mapper;
 
-import com.example.yoonlove.dto.ProjectDto;
-import com.example.yoonlove.dto.ScenarioDto;
-import com.example.yoonlove.dto.SceneDto;
-import com.example.yoonlove.dto.ScheduleDayDto;
+import com.example.yoonlove.dto.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -16,6 +13,7 @@ public interface DropDownMapper {
     List<SceneDto> selectFkScene(String ajaxData, String company_id);
     List<ProjectDto> selectFkProject(String ajaxData, String company_id);
     List<ScheduleDayDto> selectFkDay(String ajaxData, String company_id);
+    List<ProduceDto> selectFkProduce(String ajaxData);
     //dropDownOption 메소드 end------------>
 
 

@@ -177,13 +177,24 @@ public class SceneController {
     }
 
     @GetMapping("scene/insertactorview")
-    public String insertActorView(){
-        return "scene/actorinsert";
+    public ModelAndView insertActorView(Principal user) throws JsonProcessingException {
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        String jsonListProject = dropDownService.dropDownOption("project",null, companyId);
+
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("fkList", jsonListProject);
+        mv.setViewName("/scene/actorinsert");
+        return mv;
     }
     @GetMapping("scene/insertactor")
     @ResponseBody
     public String insertActor(ActorDto dto){
+        System.out.println(dto.toString());
         sceneService.insertActor(dto);
+        System.out.println("여기까지 나온거아닌가?");
         return "/scene/actor";
     }
 

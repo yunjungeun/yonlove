@@ -135,8 +135,8 @@
 
     <insert id="insertActor">
         insert into actor values(
-        (select concat('actor', (nvl(max(to_number(substr(act_id, 6)), 0)+1))) from actor),<!--pk코드 자동증가(수정2)-->
-        'scene1', <!--외래키로, 조인해온 외래키를 드롭다운으로 선택하게끔 해야함-->
+        (select concat('actor', (nvl(max(to_number(substr(act_id, 6))), 0)+1)) from actor),<!--pk코드 자동증가(수정2)-->
+        #{scene_id},
         'pd1', <!--외래키로, 조인해온 외래키를 드롭다운으로 선택하게끔 해야함-->
         #{actor_info}<!--출연자정보-->
         )

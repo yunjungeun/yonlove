@@ -53,4 +53,13 @@ public class DropdownController {
         return jsonList;
     }
 
+
+    //기획명 옵션 선택에 따라 제작인원 편성
+    @PostMapping("/dropdown/produce")
+    @ResponseBody
+    public String dropdwonProduce(@RequestParam ("pkid") String pkid) throws JsonProcessingException {
+
+        String jsonList = dropDownService.produceOption(pkid);
+        return jsonList;
+    }
 }

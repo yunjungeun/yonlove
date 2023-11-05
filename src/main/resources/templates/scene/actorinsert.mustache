@@ -16,15 +16,35 @@
 <form id="alert" action="/scene/insertactor" method="get">
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
-            <td>씬 번호<input class="field1" name="scene_id" type="text" readonly value="조인에서 들어는 고정값임"></td>
+            <td>기획<select id="fk1" name="project_id"></select></td>
+            <td>시나리오<select id="fk2" name="scenario_id">
+                <option selected>선택</option>
+            </select></td>
+            <td>씬 번호<select id="fk3" name="scene_id">
+                <option selected>선택</option>
+            </select></td>
+            <td>출연자<select id="fk4" name="pd_id">
+                <option selected>선택</option>
+            </select></td>
         </tr>
         <tr>
-            <td>출연자 정보<input class="field2" name="actor_info" type="text" placeholder="출연자 정보를 작성하세요"/></td>
+            <td>출연자 정보<input class="field1" name="actor_info" type="text" placeholder="출연자 정보를 작성하세요"/></td>
         </tr>
     </table>
-    <input type="submit" value="등록" onclick="mappingurl('/scene/insertactor',2,'작성')" >
+    <input type="submit" value="등록" onclick="mappingurl('/scene/insertactor',1,'작성')" >
 </form>
 <a href="/scene/actor">취소</a>
+
+
+<script>
+    var jsonValue = '{{{fkList}}}';
+    <!--select 옵션 name값을 'cu_alert.js'에 보내주기 위한 변수 값/ 이게없으면 제출이 안됨-->
+    var selectName = "scene_id";
+    var prodcueId = "pd_id";
+
+</script>
+<script src="/static/js/dropdown.js"></script>
+<script src="/static/js/cu_alert.js"></script>
 
 </body>
 </html>

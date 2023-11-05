@@ -1,5 +1,6 @@
 //html 본문에서 옵션 값을 받아와 저장하는 변수
 var fkid = selectName;
+var produce = prodcueId;
 
 function mappingurl(submiturl, int, text, cnt){
     document.getElementById("alert").addEventListener("submit", function (event){
@@ -45,13 +46,18 @@ function mappingurl(submiturl, int, text, cnt){
         }
     }
 
+    if(produce != null){
+        var produceSelect = $("#fk4").val();
+        data[produce] = produceSelect;
+    }
+
+    console.log(data);
     $.ajax({
             url: submiturl,
             type : "GET",
             data : data,
             success:function(response){
                 alert("정상적으로 " +text+" 되었습니다");
-
 
                 //업로드 js페이지를 안달아놨을경우 건너뜀
                 if (typeof uploadFile === 'function'){
