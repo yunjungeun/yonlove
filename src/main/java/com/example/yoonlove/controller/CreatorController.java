@@ -4,6 +4,7 @@ import com.example.yoonlove.dto.CreatorDto;
 import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.service.CreatorService;
 import com.example.yoonlove.service.PagingService;
+import com.example.yoonlove.service.YouTubeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.List;
 
 @Controller
@@ -21,6 +24,8 @@ import java.util.List;
 
         @Autowired
         private PagingService pagingService;
+        @Autowired
+        private YouTubeService youTubeService;
 
 
         @GetMapping("creator/creater")  // 뒤에 테이블명
@@ -86,5 +91,17 @@ import java.util.List;
     public String deleteCreator(CreatorDto dto){
         creatorservice.deleteCreator(dto);
         return "redirect:/creator/creater";
+    }
+
+    //검색어로 채널 리스트 검색
+    @GetMapping("test2")
+    public void test(String searchKeyword) throws GeneralSecurityException, IOException {
+        youTubeService.test22(searchKeyword);
+    }
+
+    //채널id로 채널검색
+    @GetMapping("test3")
+    public void test2(String channelId) throws GeneralSecurityException, IOException {
+        youTubeService.channel(channelId);
     }
 }
