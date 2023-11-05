@@ -169,8 +169,11 @@ public class PlanController {
     }
 
     @GetMapping("plan/insertScheduleTimeView")
-    public ModelAndView insertScheduleTimeView(ScheduleTimeDto dto) throws JsonProcessingException {
-        String jsonList = dropDownService.dropDownOption("project",null, null);
+    public ModelAndView insertScheduleTimeView(ScheduleTimeDto dto, Principal user) throws JsonProcessingException {
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        String jsonList = dropDownService.dropDownOption("project",null, companyId);
 
         ModelAndView mv = new ModelAndView();
         mv.addObject("dayId", dto.getDay_id());
@@ -238,7 +241,7 @@ public class PlanController {
     }
 
 
-    @GetMapping("plan/actorManagement/{actor_id}")
+    @GetMapping("plan/actorManagement/{act_id}")
     public ModelAndView selectActorManagement(ActorManagementDto dto) {
         ActorManagementDto actorManagementDetail = planService.selectActorManagement(dto);
 
@@ -268,7 +271,7 @@ public class PlanController {
 
 
     @GetMapping("plan/{actor_id}/actorManagementUpdateView") //컨텐츠 업데이트하는 뷰
-    public ModelAndView actorManagementUpdateView( ActorManagementDto dto) {
+    public ModelAndView actorManagementUpdateView(ActorManagementDto dto) {
         ActorManagementDto actorManagementDto = planService.selectActorManagement(dto);//업데이트를 하려면 해당 컨텐츠 불러와야하니까 위에 selectContent메소드를 다시씀!
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/actorManagementUpdateView");
@@ -325,11 +328,14 @@ public class PlanController {
         return mv;
     }
 
-    @GetMapping("plan/insertFilmPlanView")
-    public ModelAndView insertFilmPlanView(ScheduleDayDto dto) throws JsonProcessingException{
+    @GetMapping("plan/insertFilmPlanView/{day_id}")
+    public ModelAndView insertFilmPlanView(ScheduleDayDto dto, Principal user) throws JsonProcessingException{
         ModelAndView mv = new ModelAndView();
 
-        String jsonList = dropDownService.dropDownOption("project",null, null);
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        String jsonList = dropDownService.dropDownOption("project",null, companyId);
         mv.addObject("fkList", jsonList);
         mv.addObject("dayId", dto.getDay_id());
         mv.setViewName("plan/insertFilmPlanView");

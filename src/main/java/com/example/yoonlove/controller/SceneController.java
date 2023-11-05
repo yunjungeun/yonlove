@@ -192,9 +192,7 @@ public class SceneController {
     @GetMapping("scene/insertactor")
     @ResponseBody
     public String insertActor(ActorDto dto){
-        System.out.println(dto.toString());
         sceneService.insertActor(dto);
-        System.out.println("여기까지 나온거아닌가?");
         return "/scene/actor";
     }
 

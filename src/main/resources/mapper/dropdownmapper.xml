@@ -22,8 +22,8 @@
 
     <select id="selectFkProject">
         SELECT project_id, project_name FROM project
-        <!--현재 if문은 상위 테이블이 없어서 있으나 마나임-->
         where company_id = #{company_id}
+        <!--현재 if문은 상위 테이블이 없어서 있으나 마나임-->
         <if test="ajaxData != null and ajaxData !=''">
             and project_id = #{ajaxData}
         </if>
@@ -41,7 +41,7 @@
 
     <select id="selectFkProduce">
         SELECT pd_id, pd_name FROM produce
-        where 1=1
+        where role = '출연자'
         <if test="ajaxData != null and ajaxData !=''">
             and project_id = #{ajaxData}
         </if>

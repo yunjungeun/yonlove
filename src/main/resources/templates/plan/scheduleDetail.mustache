@@ -43,7 +43,7 @@
     {{/table1}}
 </table>
 <!--table1 end-->
-<form method="get" action="/plan/insertFilmPlanView">
+<form method="get" action="/plan/insertFilmPlanView/{{scheduleDetail.day_id}}">
     <input type="hidden" name="day_id" value="{{scheduleDetail.day_id}}">
     <input type="submit" value="작성">
 </form>
