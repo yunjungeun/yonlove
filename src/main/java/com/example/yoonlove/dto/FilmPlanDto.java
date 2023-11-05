@@ -11,6 +11,7 @@ public class FilmPlanDto {
     private String inside_flag;
     private String day_flag;
     private String cut;
+    private String act_id;
 
     //조인 테이블 : dayplan_film
     private String day_title;
@@ -23,4 +24,6 @@ public class FilmPlanDto {
     private int scene_num;
     private String scene_content;
     private String scene_place;
+    private String pd_name;
+    private String casting;
 }
