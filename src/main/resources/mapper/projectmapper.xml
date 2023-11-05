@@ -199,7 +199,9 @@
         update produce
         set
         pd_name = #{pd_name},
+        <if test="role != null and role !=''">
         role = #{role},
+        </if>
         casting = #{casting}
 
         where pd_id = #{pd_id}

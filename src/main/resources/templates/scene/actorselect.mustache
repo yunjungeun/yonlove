@@ -13,11 +13,14 @@
 {{>layout/topbar}}
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
-            <td>씬 번호<input name="scene_id" type="text" readonly value="{{selectActor.scene_id}}"></td>
-            <td>시나리오 번호(조인 테이블로 생성된 값이 들어가야함)<input name="pd_id" type="text" value="{{selectActor.pd_id}}" readonly> </td>
+            <td>기획<input name="project_name" type="text" readonly value="{{selectActor.project_name}}" /></td>
+            <td>시나리오 <input name="scenario_name" type="text" value="{{selectActor.scenario_name}}" readonly/> </td>
+            <td>씬<input name="scene_num" type="text" readonly value="{{selectActor.scene_num}}"/></td>
         </tr>
         <tr>
-            <td>출연자 정보<input name="actor_info" type="text" value="{{selectActor.actor_info}}" readonly/></td>
+            <td>출연자 이름<input name="pd_name" type="text" value="{{selectActor.pd_name}}" readonly /></td>
+            <td>출연자 배역<input name="casting" type="text" value="{{selectActor.casting}}" readonly /></td>
+            <td>출연자 정보<input name="actor_info" type="text" value="{{selectActor.actor_info}}" readonly /></td>
         </tr>
     </table>
 

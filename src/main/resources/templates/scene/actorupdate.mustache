@@ -16,16 +16,20 @@
 {{>layout/topbar}}
 
 <form id="alert" method="get" action="/scene/{{updateActor.act_id}}/updateactor">
+    <input type="hidden" class="field7" name="pd_id" value="{{updateActor.pd_id}}" />
 <table border="1" cellpadding="1" cellspacing="1">
     <tr>
-        <td>씬 번호<input  class="field1" name="scene_id" type="text" readonly value="{{updateActor.scene_id}}"></td>
-        <td>시나리오 번호(조인 테이블로 생성된 값이 들어가야함)<input name="pd_id" type="text" value="{{updateActor.pd_id}}" readonly> </td>
+        <td>기획<input class="field1" name="project_name" type="text" readonly value="{{updateActor.project_name}}" /></td>
+        <td>시나리오 <input class="field2" name="scenario_name" type="text" value="{{updateActor.scenario_name}}" readonly/> </td>
+        <td>씬<input class="field3" name="scene_num" type="text" readonly value="{{updateActor.scene_num}}"/></td>
     </tr>
     <tr>
-        <td>출연자 정보<input  class="field2" name="actor_info" type="text" value="{{updateActor.actor_info}}"/></td>
+        <td>출연자 이름<input class="field4" name="pd_name" type="text" value="{{updateActor.pd_name}}" /></td>
+        <td>출연자 배역<input class="field5" name="casting" type="text" value="{{updateActor.casting}}" /></td>
+        <td>출연자 정보<input class="field6" name="actor_info" type="text" value="{{updateActor.actor_info}}"/></td>
     </tr>
 </table>
-<input type="submit" value="수정"  onclick="mappingurl('/scene/{{updateActor.actor_id}}/updateactor',2,'수정')"/>
+<input type="submit" value="수정"  onclick="mappingurl('/scene/{{updateActor.act_id}}/updateactor',7,'수정')"/>
 </form>
 
 <a href="/scene/actor">취소</a>

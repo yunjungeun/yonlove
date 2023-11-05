@@ -1,9 +1,6 @@
 package com.example.yoonlove.service;
 
-import com.example.yoonlove.dto.ActorDto;
-import com.example.yoonlove.dto.PageDto;
-import com.example.yoonlove.dto.ScenarioDto;
-import com.example.yoonlove.dto.SceneDto;
+import com.example.yoonlove.dto.*;
 import com.example.yoonlove.mapper.FileMapper;
 import com.example.yoonlove.mapper.SceneMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -77,6 +74,16 @@ public class SceneService {
     public void updateActor(ActorDto dto){
         sceneMapper.updateActor(dto);
     }
+
+    //actdto를 produceDto로 전환해주는 메소드
+    public ProduceDto transToProduceDto(ActorDto dto){
+        ProduceDto produceDto = new ProduceDto();
+        produceDto.setPd_id(dto.getPd_id());
+        produceDto.setCasting(dto.getCasting());
+        produceDto.setPd_name(dto.getPd_name());
+        return produceDto;
+    }
+
     public void deleteActor(ActorDto dto){
         sceneMapper.deleteActor(dto);
     }

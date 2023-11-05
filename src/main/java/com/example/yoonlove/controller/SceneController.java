@@ -29,6 +29,8 @@ public class SceneController {
     private DropDownService dropDownService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ProjectService projectService;
 
     @GetMapping("scene/scene")
     public ModelAndView selectListScene(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page,
@@ -165,7 +167,7 @@ public class SceneController {
         return mv;
     }
 
-    @GetMapping("scene/{actor_id}/selectactor")
+    @GetMapping("scene/{act_id}/selectactor")
     public ModelAndView selectActor(ActorDto actorDto){
         ActorDto dto = sceneService.selectActor(actorDto);
         ModelAndView mv = new ModelAndView();
@@ -186,7 +188,7 @@ public class SceneController {
     }
 
 
-    @GetMapping("scene/{actor_id}/updateactorview")
+    @GetMapping("scene/{act_id}/updateactorview")
     public ModelAndView updateActorView(ActorDto actorDto){
         ActorDto dto = sceneService.selectActor(actorDto);
         ModelAndView mv = new ModelAndView();
@@ -195,13 +197,17 @@ public class SceneController {
         return mv;
     }
 
-    @GetMapping("scene/{actor_id}/updateactor")
+    @GetMapping("scene/{act_id}/updateactor")
     @ResponseBody
     public String updateActor(ActorDto dto){
         sceneService.updateActor(dto);
+
+        ProduceDto produceDto = new ProduceDto();
+        produceDto = sceneService.transToProduceDto(dto);
+        projectService.updateProduce(produceDto);
         return "/scene/actor";
     }
-    @GetMapping("scene/{actor_id}/deleteactor")
+    @GetMapping("scene/{act_id}/deleteactor")
     public String deleteActor(ActorDto dto){
         sceneService.deleteActor(dto);
         return "redirect:/scene/actor";
