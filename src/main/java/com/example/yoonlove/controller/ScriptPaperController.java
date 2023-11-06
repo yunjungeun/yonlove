@@ -69,20 +69,19 @@ public class ScriptPaperController {
             mv.addObject("file",nullFileDto);
         }
 
-
         mv.setViewName("/script/scriptselect");
         mv.addObject("selectScriptPaper", dto);
         // 기존 값 셀럭트
 
         // 이어붙일 타임테이블 셀럭트 값
        // pdto.setPkid(dto.getTable_id());
-
         PageDto pageDto = new PageDto("timetable","table_id", page, pdto);
         PageDto pageInfo = pagingService.paging(pageDto);
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.subPageRink(pageDto, "scriptpaper");
 
         List<TimeTableDto> subList = scriptPaperService.selectListTimeTable(pageInfo); //
+
         mv.addObject("selectListTimeTable", subList);
 
         //서브 페이징에 필요한섹션

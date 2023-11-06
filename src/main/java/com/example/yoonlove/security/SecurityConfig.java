@@ -25,7 +25,7 @@ public class SecurityConfig {
              http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
-                .requestMatchers("/login","/cs/qna","/signupview","/signup","/index","/static/**").permitAll()
+                .requestMatchers("/login","/signupview","/signup","/index","/static/**").permitAll()
                 .requestMatchers("admin/**").hasAuthority("admin")
                 .anyRequest().authenticated()
                 )
@@ -39,7 +39,7 @@ public class SecurityConfig {
                 )
                 .logout(logout -> logout
                         .logoutUrl("/login/logout")
-                        .logoutSuccessUrl("/cs/notice")
+                        .logoutSuccessUrl("/index")
                         .invalidateHttpSession(true)
                 );
              return http.build();

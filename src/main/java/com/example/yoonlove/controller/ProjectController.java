@@ -48,7 +48,6 @@ public class ProjectController {
         String rink = pagingService.pageRink(pageDto);
 
         List<ProjectDto> dto = projectService.selectListProject(pageInfo);
-        System.out.println(dto.toString());
         mv.setViewName("project/listproject");
         mv.addObject("selectListProject", dto);
 
