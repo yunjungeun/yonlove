@@ -321,8 +321,6 @@
         UPDATE
         film_plan
         set
-        day_id = #{day_id},
-        scene_id = #{scene_id},
         inside_flag = #{inside_flag},
         day_flag = #{day_flag},
         cut = #{cut}

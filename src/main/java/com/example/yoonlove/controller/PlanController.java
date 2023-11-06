@@ -345,21 +345,20 @@ public class PlanController {
     @GetMapping("plan/insertFilm")  //컨텐츠 추가 처리
     @ResponseBody
     public String insertFilm(FilmPlanDto dto) {
+        //dto에는 insert에 들어갈 act_id가 없음. dto에 있는 pd_id와 scene_id로 act_id를 획득하는 로직
         String actId = planService.selectFilmJoinActID(dto.getPd_id(), dto.getScene_id());
-        dto.setAct_id(actId);
+        dto.setAct_id(actId);   //획득된 act_id를 dto에 바인드
         planService.insertFilm(dto);
 
         return "/plan/film_plan";
     }
 
-
     @GetMapping("plan/{film_id}/filmPlanUpdateView") //컨텐츠 업데이트하는 뷰
     public ModelAndView filmPlanUpdateView( FilmPlanDto dto) {
-        FilmPlanDto filmPlanUpdate = planService.selectFilmPlan(dto);//업데이트를 하려면 해당 컨텐츠 불러와야하니까 위에 selectContent메소드를 다시씀!
+        FilmPlanDto filmPlanDto = planService.selectFilmPlan(dto);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/filmPlanUpdateView");
-        mv.setStatus(HttpStatus.valueOf(200));
-        mv.addObject("filmPlanUpdate", filmPlanUpdate);
+        mv.addObject("filmPlanUpdate", filmPlanDto);
         return mv;
     }
 
