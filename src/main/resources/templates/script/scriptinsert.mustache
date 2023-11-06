@@ -4,7 +4,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>스크립트 작성</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {{>layout/header}}
 </head>
@@ -12,46 +12,120 @@
 <body id="page-top">
 {{>layout/sidebar}}
 {{>layout/topbar}}
-<form id="alert" action="/script/insertscriptpaper" method="get">
-    <input type="hidden" id="tableId" value="scriptpaper">
 
-    <table border="1" cellpadding="1" cellspacing="1">
-        <tr>
-            <td>기획<select id="fk1" name="project_id"></select></td>
-            <td>시나리오<select id="fk2" name="scenario_id">
-                <option selected>선택</option>
-            </select></td>
-            <td>씬 번호<select id="fk3" name="scene_id">
-                <option selected>선택</option>
-            </select></td>
-            <td>영상 제목<input class="field1" name="video_name" type="text" placeholder="영상제목 입력"></td>
-            <td>촬영날짜<input class="field2" name="video_date" type="date" placeholder="날짜형식 yy/mm/dd 입력"></td>
-            <td>촬영시작시간<input class="field3" name="video_time" type="date" placeholder="날짜형식입력(시간아직안됨)"></td>
-            <td>촬영종료시간<input class="field4" name="video_end_time" type="date" placeholder="날짜형식입력"></td>
-        </tr>
-        <tr>
-            <td>액션 이미지 첨부파일 <input id="fileInput" name="action_image" type="file" /></td>
-            <td>액션 내용 <input class="field5" name="action_content" type="text" placeholder="varchar2"/></td>
-            <td>카메라포지션 첨부파일 <input class="field6" name="position_image" type="text" placeholder="varchar2"/></td>
-            <td>콘티 <input class="field7" name="conti" type="text" placeholder="varchar2"/></td>
-        </tr>
-    </table>
-    <input type="submit" value="등록" onclick="mappingurl('/script/insertscriptpaper',7,'작성')"/>
-</form>
-<a href="/script/scriptpaper">취소</a>
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
 
-<br/>현재까지 버그<br/>
+    <!-- Main Content -->
+    <div id="content">
+
+        <div class="container-fluid">
+            <div style="text-align: center; display: block; margin-top:40px;" > <!-- 수정 ! 마진 탑 100->수정 -->
+                <h1 class="h3 mb-2 text-gray-800" >스크립트페이퍼 작성</h1>
+            </div>
+            <!-- DataTales Example -->
+    <div class="card shadow mb-4" style="margin-top: 50px; margin-right: 300px; margin-left: 300px">
+        <div class="card-header py-3">
+
+            <form id="alert" action="/script/insertscriptpaper" method="get">
+
+    <div style="margin-left: 15%; margin-right: 15%; margin-top: 5%;">
+        <div style="display: inline-block;">
 
 
-<!--옵션 태그에 필요한 js-->
+        <div class="mb-3" style="text-align: center; display: inline-block;">
+            <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>기획</strong>
+                <select id="fk1" name="project_id"></select>
+            </label></div>
+
+        <div class="mb-3" style="text-align: center; display: inline-block;">
+            <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>시나리오</strong>
+                <select id="fk2" name="scenario_id"><option selected>선택</option></select>
+            </label> </div>
+
+        <div class="mb-3" style="text-align: center; display: inline-block;">
+            <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>씬 번호</strong>
+                <select id="fk3" name="scene_id"><option selected>선택</option></select>
+            </label> </div>
+
+        <div class="mb-3" style="text-align: center; display: inline-block;">
+            <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>영상 제목</strong>
+                <input class="field1" name="video_name" type="text" placeholder="영상제목 입력">
+            </label> </div>
+
+        <div class="mb-3" style="text-align: center; display: inline-block;">
+            <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>촬영 날짜</strong>
+                <input class="field2" name="video_date" type="date" placeholder="날짜형식 yy/mm/dd 입력">
+            </label> </div>
+
+        <div class="mb-3" style="text-align: center; display: inline-block;">
+            <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>촬영시작시간</strong>
+                <input class="field3" name="video_time" type="date" placeholder="날짜형식입력(시간아직안됨)">
+            </label> </div>
+
+        <div class="mb-3" style="text-align: center; display: inline-block;">
+            <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>촬영종료시간</strong>
+                <input class="field4" name="video_end_time" type="date" placeholder="날짜형식입력">
+            </label> </div>
+
+
+
+        <div class="mb-3" style="text-align: center; display: inline-block;">
+            <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>액션 이미지</strong>
+                <input id="fileInput" name="action_image" type="file" />
+            </label> </div>
+
+        <div class="mb-3" style="text-align: center; display: inline-block;">
+            <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>액션 내용</strong>
+                <input class="field5" name="action_content" type="text" placeholder="작성.."/>
+            </label> </div>
+
+        <div class="mb-3" style="text-align: center; display: inline-block;">
+            <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>카메라포지션</strong>
+                <input class="field6" name="position_image" type="text" placeholder="작성.."/>
+            </label> </div>
+
+        <div class="mb-3" style="text-align: center; display: inline-block;">
+            <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>콘티</strong>
+                <input class="field7" name="conti" type="text" placeholder="작성.."/>
+            </label> </div>
+
+
+        <div style="text-align: center">
+            <button type="submit" class="btn btn-primary" onclick="mappingurl('/script/insertscriptpaper',7,'작성')"/>등록</button>
+            <a href="/script/scriptpaper" class="btn btn-secondary" style="text-decoration: none;">취소</a>
+        </div>
+
+    </div>
+</div>
+    </form>
+
+
+</div>
+
+    </div>
+            <br/>  <!-- 추가 -->
+        </div>
+
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+</div>
+<!-- End of Content Wrapper -->
+<br/>
+
+
 <script>
-    var jsonValue = '{{{fkListProject}}}';
-    <!--select 옵션 name값을 'cu_alert.js'에 보내주기 위한 변수 값/ 이게없으면 제출이 안됨-->
-    var selectName = "scene_id";
-
+    var url = "script/scriptpaper";
 </script>
-<script src="/static/js/dropdown.js"></script>
-<script src="/static/js/uploadFile.js"></script>
 <script src="/static/js/cu_alert.js"></script>
+
+
+{{>layout/bootstrapjs}}
 </body>
+
 </html>

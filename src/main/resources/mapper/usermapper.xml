@@ -21,8 +21,8 @@
         #{address3},  <!--주소3-->
         #{zip_code},   <!--우편번호-->
         '일반',   <!--권한-->
-        (select * from todaytime)    <!--가입일-->
-        'company2'
+        (select * from todaytime),   <!--가입일-->
+        'company9'
         )
     </insert>
 

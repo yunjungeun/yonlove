@@ -194,6 +194,7 @@ public class ScriptPaperController {
     @GetMapping("script/{table_id}/updatetimetable")
     @ResponseBody
     public String updateTimeTable(TimeTableDto dto){
+        System.out.println("???????뭐냐 " + toString());
         scriptPaperService.updateTimeTable(dto);
         return "/script/timetable";
     }

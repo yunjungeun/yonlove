@@ -33,6 +33,7 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/loginProc")
+                        .failureUrl("/login?error")
                         .usernameParameter("user_id")
                         .passwordParameter("pw")
                         .defaultSuccessUrl("/index")

@@ -7,55 +7,121 @@
     <title>Document</title>
     {{>layout/header}}
 </head>
-
 <body id="page-top">
 {{>layout/sidebar}}
 {{>layout/topbar}}
-    <table border="1" cellpadding="1" cellspacing="1">
-        <tr>
-            <td>씬 번호(자동입력 필요)<input name="scene_id" type="text" value="{{selectScriptPaper.scene_id}}" readonly></td>
-            <td>영상 제목<input name="video_name" type="text" value="{{selectScriptPaper.video_name}}" readonly></td>
-            <td>촬영날짜<input name="video_date" type="date" value="{{selectScriptPaper.video_date}}" readonly></td>
-            <td>촬영시작시간<input name="video_time" type="date" value="{{selectScriptPaper.video_time}}" readonly></td>
-            <!--db테이블에 추가 필요 end_time 컬럼은 없음-->
-            <!--<td>촬영종료시간<input name="video_end_time" type="date" value="{1{selectScriptPaper.video_end_time}}" readonly></td>-->
-        </tr>
-        <tr>
-            <td>액션 이미지 첨부파일 <input name="action_image" type="text" readonly/></td>
-            <td>액션 내용 <input name="action_content" type="text" value="{{selectScriptPaper.action_content}}" readonly/></td>
-            <td>카메라포지션 첨부파일 <input name="position_image" type="text" value="{{selectScriptPaper.position_image}}" readonly/></td>
-            <td>콘티 <input name="conti" type="text" value="{{selectScriptPaper.conti}}" readonly/></td>
-        </tr>
-    </table>
-    <br/>
-    <br/>
-    <!-- 서브페이지 타임테이블 -->
-    <table border="1" cellpadding="1" cellspacing="1">
-        <tr>
-         {{#selectListTimeTable}}
-            <td>스크립트 번호 <input name="script_id" type="text" value="{{script_id}}" readonly></td>
-            <td>촬영시간 <input name="film_time" type="date" value="{{film_time}}" readonly/></td>
-            <td>타임테이블 번호<input name="time_num" type="number" value="{{time_num}}" readonly></td>
-            <td>OK/NG<input name="ok_ng" type="text" value="{{ok_ng}}" readonly></td>
-            <td>슬레이트<input name="slate_time" type="date" value="{{slate_time}}" readonly></td>
-          {{/selectListTimeTable}}
-        </tr>
-    </table>
-
-    <!--서브게시판 페이징-->
-    {{>layout/subpaging}}
-    <br/>
 
 
-<a href="/script/timetable">목록</a> &nbsp;&nbsp;
-    <a href="/script/{{selectScriptPaper.script_id}}/updatescriptview">수정</a>&nbsp;&nbsp;
-    <a href="javascript:void(0);" onclick="deleteAlert('/script/{{selectScriptPaper.script_id}}/deletescriptpaper')">삭제</a>&nbsp;&nbsp;
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+
+<!-- Main Content -->
+<div id="content">
 
 
-    <!--서브게시판 검색 js-->
-    <script><!--서브게시판에 넘겨준 prefix url-->
-        var url = "/script/{{selectScriptPaper.script_id}}/selectscriptpaper";
-    </script>
-    <script src="/static/js/deletepost.js"></script>
+<div class="container-fluid">
+    <div style="text-align: center; display: block; margin-top:40px;" > <!-- 수정 ! 마진 탑 100->수정 -->
+        <h1 class="h3 mb-2 text-gray-800" >스크립트페이퍼</h1>
+    </div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4" style="margin-top: 50px; margin-right: 300px; margin-left: 300px">
+
+
+        <div class="card-header py-3">
+
+        <div style="margin-left: 20%; margin-right: 20%; margin-top: 5%;">
+            <div style="display: inline-block;">
+
+                <div class="mb-3" style="display: inline-block;">
+                    <label for="formGroupExampleInput" class="form-label"><strong>씬 번호</strong></label>
+                    <input name="scene_id" type="text" value="{{selectScriptPaper.scene_id}}" readonly><br/>
+
+                    <label for="formGroupExampleInput" class="form-label"><strong>영상 제목</strong></label>
+                    <input name="video_name" type="text" value="{{selectScriptPaper.video_name}}" readonly><br/>
+
+                    <label for="formGroupExampleInput" class="form-label"><strong>촬영 날짜</strong></label>
+                    <input name="video_date" type="date" value="{{selectScriptPaper.video_date}}" readonly><br/>
+
+                    <label for="formGroupExampleInput" class="form-label"><strong>촬영 총시간</strong></label>
+                    <input name="video_time" type="time" value="{{selectScriptPaper.video_time}}" readonly><br/>
+
+                    <label for="formGroupExampleInput" class="form-label"><strong>촬영 시작시간</strong></label>
+                    <input name="video_time" type="time" value="{{selectScriptPaper.video_start_time}}" readonly><br/>
+                </div>
+
+                <div class="mb-3" style="display: inline-block;">
+                    <label for="formGroupExampleInput" class="form-label"><strong>액션 이미지</strong></label>
+                    <input name="action_image" type="text" readonly/><br/>
+
+                    <label for="formGroupExampleInput" class="form-label"><strong>액션 내용</strong></label>
+                    <input name="action_content" type="text" value="{{selectScriptPaper.action_content}}" readonly/><br/>
+
+                    <label for="formGroupExampleInput" class="form-label"><strong>카메라포지션</strong></label>
+                    <input name="position_image" type="text" value="{{selectScriptPaper.position_image}}" readonly/><br/>
+
+                    <label for="formGroupExampleInput" class="form-label"><strong>콘티</strong></label>
+                    <input name="conti" type="text" value="{{selectScriptPaper.conti}}" readonly/><br/>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- 서브페이지 타임테이블 -->
+<div class="card shadow mb-4" style="margin-top: 50px; margin-right: 300px; margin-left: 300px">
+    <div class="card-header py-3">
+
+                    <div style="margin-left: 20%; margin-right: 20%; margin-top: 5%;">
+                        <div style="display: inline-block;">
+
+<!-- 서브페이지 타임테이블 -->
+        <div class="mb-3" style="text-align: center; display: inline-block;">
+        {{#selectListTimeTable}}
+            <label for="formGroupExampleInput" class="form-label"><strong>스크립트 번호</strong></label>
+            <input name="script_id" type="text" value="{{selectscript_id}}" readonly><br/>
+
+            <label for="formGroupExampleInput" class="form-label"><strong>촬영시간</strong></label>
+            <input name="film_time" type="date" value="{{film_time}}" readonly/><br/>
+
+            <label for="formGroupExampleInput" class="form-label"><strong>타임테이블 번호</strong></label>
+            <input name="time_num" type="number" value="{{time_num}}" readonly><br/>
+
+            <label for="formGroupExampleInput" class="form-label"><strong>OK/NG</strong></label>
+            <input name="ok_ng" type="text" value="{{ok_ng}}" readonly><br/>
+
+            <label for="formGroupExampleInput" class="form-label"><strong>슬레이트</strong></label>
+            <input name="slate_time" type="date" value="{{slate_time}}" readonly>
+        {{/selectListTimeTable}}
+        </div>
+
+    <div style="text-align: center">
+<a href="/script/timetable" class="btn btn-primary">목록</a> &nbsp;&nbsp;
+<a href="/script/{{selectScriptPaper.script_id}}/updatescriptview" class="btn btn-success">수정</a>&nbsp;&nbsp;
+<a href="javascript:void(0);" class="btn btn-danger" onclick="deleteAlert('/script/{{selectScriptPaper.script_id}}/deletescriptpaper')">삭제</a>
+    </div>
+                 </div>
+
+            </div>
+        </div>
+</div>
+
+
+
+<script>
+    var url = "script/scriptpaper";
+</script>
+<script src="/static/js/cu_alert.js"></script>
+
+<!--서브게시판 검색 js-->
+<script><!--서브게시판에 넘겨준 prefix url-->
+var url = "/script/{{selectScriptPaper.script_id}}/selectscriptpaper";
+</script>
+<script src="/static/js/deletepost.js"></script>
+
+{{>layout/bootstrapjs}}
 </body>
 </html>
+

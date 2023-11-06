@@ -6,17 +6,22 @@ import com.example.yoonlove.dto.UserDto;
 import com.example.yoonlove.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+import java.security.Principal;
 
 @Controller
 public class LoginController {
@@ -26,9 +31,20 @@ public class LoginController {
     @Autowired
     public BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @GetMapping("login")
-    public String login() {
-        return "/login/login";
+
+    /*@RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String loginSuccess(Model model, HttpSession session) {
+        session.setAttribute("userLoggedIn", true);
+        return "redirect:/index";
+    }*/
+
+    @RequestMapping("/login")
+    public String login(@RequestParam(name = "error", required = false) String error, Model model){
+
+        if (error != null) {
+            model.addAttribute("errorMessage", "아이디와 비밀번호를 확인하세요.");
+        }
+          return "/main/login";
     }
 
    /* @PostMapping("login/porc")
@@ -49,7 +65,8 @@ public class LoginController {
     @ResponseBody
     public String companysign(CompanyDto dto) {
         userService.companysignup(dto);
-        return "redirect:/index";
+        System.out.println("dddd"+dto.toString());
+        return "/index";
     }
 
 
