@@ -1,6 +1,10 @@
 package com.example.yoonlove.controller;
 
+import jakarta.servlet.http.HttpSession;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.security.Principal;
@@ -9,11 +13,14 @@ import java.security.Principal;
 public class Main {
 
     @GetMapping("/index")
-    public String mainPage(Principal user){
-
+    public String mainPage(Principal user, Model model, HttpSession session){
+        if(user == null){
+            model.addAttribute("loggedIn", false);  // 로그인 안한 상태
+        }else {
+            model.addAttribute("loggedIn", true);
+        }
         return "/main/index2";
     }
-
 
     @GetMapping("/임시")
     public String mainPage2(){
