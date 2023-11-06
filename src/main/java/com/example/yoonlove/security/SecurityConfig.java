@@ -20,7 +20,6 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
              http
@@ -45,14 +44,4 @@ public class SecurityConfig {
                 );
              return http.build();
     }
-
-    //인증관리자 관련 설정
-    /*@Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder, UserService userService) throws Exception{
-        return http.getSharedObject(AuthenticationManagerBuilder.class)
-                .userDetailsService(userService)
-                .passwordEncoder(bCryptPasswordEncoder);
-    }*/
-
-
 }
