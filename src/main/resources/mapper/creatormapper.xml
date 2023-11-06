@@ -39,10 +39,14 @@
 
     <insert id="insertCreator">
         insert into creater values(
-        (select concat('ch', (nvl(max(to_number(substr(ch_id, 3))), 0)+1)) from creater),<!--pk코드 자동증가(수정2)-->
+        #{ch_id},
         #{ch_name},
         #{ch_sub},
-        #{user_id}
+        #{user_id},
+        #{description},
+        #{videocount},
+        #{viewcount},
+        #{createrurl}
         )
     </insert>
 

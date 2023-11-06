@@ -16,16 +16,19 @@
         <table border="1" cellpadding="1" cellspacing="1">
             <ul>
                 <tr>
-                    <td>채널 ID </td>
                     <td>채널 이름 </td>
                     <td>구독자 수 </td>
-                    <td>유저 ID </td>
+                    <td>업로드 영상</td>
+                    <td>채널주소</td>
+                    <td>소유계정</td>
+
                 </tr>
                 {{#selectListCreator}}
                     <tr>
-                        <td><a href="/creator/{{ch_id}}/selectcreator">{{ch_id}}</a></td>
-                        <td>{{ch_name}}</td>
-                        <td>{{ch_sub}}</td>
+                        <td><a href="/creator/{{ch_id}}/selectcreator">{{ch_name}}</a></td>
+                        <td>{{formattedCh_sub}} 명</td>
+                        <td>{{formattedVideocount}} 개</td>
+                        <td><a href="{{createrurl}}">{{createrurl}}</a></td>
                         <td>{{user_id}}</td>
                     </tr>
                 {{/selectListCreator}}
@@ -34,7 +37,11 @@
 <br/>
 
     <div class="container1">
-        <a href="/creator/insertcreatorview" role="button">작성</a> &nbsp;&nbsp;
+        <form method="post" action="/creator/search" >
+            <input type="text" name="userId" placeholder="회원ID" />
+            <input type="text" name="searchKeyword" placeholder="크리에이터 검색" />
+            <button type="submit">추가</button>
+        </form>
         <a href="/creator/creater">목록</a> &nbsp;&nbsp;
         <a href="/index">홈 페이지</a> <br/>
     </div>
@@ -43,24 +50,10 @@
 {{>layout/paging}}
 
 <br/>
-    <div class="container2">
-        <form action="/creator/creater" method="GET">
-            <select id="searchType" name="searchType">
-                <option value="all">선택</option>
-                <option value="title">크리에이터 이름</option>
 
-            </select>
-            <input type="text" id="search" name="search" placeholder="검색">
-            <input type="submit" value="검색">
-        </form>
-    </div>
 
 </div>
 {{>layout/footer}}
-<script>
-    var url = "/creator/creater";
-</script>
-<script src="/static/js/search.js"></script>
 {{>layout/bootstrapjs}}
 </body>
 </html>

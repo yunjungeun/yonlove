@@ -74,22 +74,6 @@ public class CsController {
         mv.addObject("pagelist", pagelist); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
 
-
-       //유튜브 api 부분
-     /*   try {
-            System.out.println(youTubeService.searchVideos("ytn"));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return mv;
-        }
-
-        try {
-            youTubeService.searchCh();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }*/
-        //유튜브 api 끝
-
         return mv;
     }
 

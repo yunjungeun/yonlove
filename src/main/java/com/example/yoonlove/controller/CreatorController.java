@@ -8,12 +8,16 @@ import com.example.yoonlove.service.YouTubeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -36,9 +40,20 @@ import java.util.List;
             String rink = pagingService.pageRink(pageDto);
 
             List<CreatorDto> dto = creatorservice.selectListCreator(pageInfo);
+
+            DecimalFormat decimalFormat = new DecimalFormat("#,###");
+            for(int i = 0; i<dto.size(); i++){
+                String formattedVideoCount = decimalFormat.format(dto.get(i).getVideocount());
+                String formattedCh_sub =  decimalFormat.format(dto.get(i).getCh_sub());
+                dto.get(i).setFormattedVideocount(formattedVideoCount);
+                dto.get(i).setFormattedCh_sub(formattedCh_sub);
+            }
+
             ModelAndView mv = new ModelAndView();
             mv.setViewName("creator/creator");
             mv.addObject("selectListCreator", dto);
+
+
 
             //페이징에 필요한센션
             mv.addObject("prefixUrl", "creator"); // 컨트롤러 앞부분 /명
@@ -48,22 +63,33 @@ import java.util.List;
             return mv;
         }
 
-        @GetMapping("creator/insertcreatorview")
-        public String insertcreatorview(){
+        @GetMapping("creator/insertcreator")
+        public String insertcreatorview(String userId, String channelId, String title) throws GeneralSecurityException, IOException {
+            CreatorDto dto = youTubeService.channel(channelId);
+            dto.setCh_name(title);
+            dto.setUser_id(userId);
+            creatorservice.insertCreator(dto);
+
             return "creator/creatorinsert";
         }
 
-        @GetMapping("creator/insertcreator")
-        @ResponseBody
-        public String insertCreator(CreatorDto creatorDto){
-            creatorservice.insertCreator(creatorDto);
-            return "/creator/creater";
-        }
 
       @GetMapping("/creator/{ch_id}/selectcreator")
       public ModelAndView selectCreator(CreatorDto creatorDto){
           CreatorDto dto = creatorservice.selectCreator(creatorDto);
           ModelAndView mv = new ModelAndView();
+
+          //dto의 조회수, 영상수, 구독자수를 쉼표를 포함한 문자열로 변환
+          DecimalFormat decimalFormat = new DecimalFormat("#,###");
+          String formattedVideoCount = decimalFormat.format(dto.getVideocount());
+          String formattedViewCount = decimalFormat.format(dto.getViewcount());
+          String formattedCh_sub =  decimalFormat.format(dto.getCh_sub());
+
+          //변환값을 dto에 바인드
+          dto.setFormattedVideocount(formattedVideoCount);
+          dto.setFormattedViewcount(formattedViewCount);
+          dto.setFormattedCh_sub(formattedCh_sub);
+
           mv.setViewName("/creator/selectcreator");
           mv.addObject("selectCreator", dto);
           // 기존 크레이터 값 끝
@@ -94,14 +120,14 @@ import java.util.List;
     }
 
     //검색어로 채널 리스트 검색
-    @GetMapping("test2")
-    public void test(String searchKeyword) throws GeneralSecurityException, IOException {
-        youTubeService.test22(searchKeyword);
-    }
-
-    //채널id로 채널검색
-    @GetMapping("test3")
-    public void test2(String channelId) throws GeneralSecurityException, IOException {
-        youTubeService.channel(channelId);
+    @PostMapping("/creator/search")
+    public ModelAndView searchChannel(String searchKeyword, String userId) throws GeneralSecurityException, IOException {
+        ArrayList<HashMap<String, String>> result = youTubeService.searchId(searchKeyword);
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/creator/creatorinsert");
+        mv.addObject("userId", userId);
+        mv.addObject("hashmap", result);
+        mv.addObject("openInNewTab", true);
+        return mv;
     }
 }

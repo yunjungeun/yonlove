@@ -16,21 +16,25 @@
     <h1>게시글 상세보기</h1>
     <hr>
      <table border="1" cellpadding="1" cellspacing="1">
-          <ul>
             <tr>
-                <td>채널 ID</td>
-                <td>채널 이름</td>
+                <td>채널 명</td>
+                <td>채널 소유계정</td>
                 <td>구독자 수</td>
-                <td>유저 ID</td>
+                <td>업로드 영상</td>
+                <td>조회수</td>
+            </tr>
+            <tr>
+                <td>{{selectCreator.ch_name}}</td>
+                <td>{{selectCreator.user_id}}</td>
+                <td>{{selectCreator.formattedCh_sub}}</td>
+                <td>{{selectCreator.formattedVideocount}}</td>
+                <td>{{selectCreator.formattedViewcount}}</td>
             </tr>
 
-            <tr>
-                <td>{{selectCreator.ch_id}}</td>
-                <td>{{selectCreator.ch_name}}</td>
-                <td>{{selectCreator.ch_sub}}</td>
-                <td>{{selectCreator.user_id}}</td>
-            </tr>
-          </ul>
+              <tr>
+                  <td>채널 설명</td>
+                  <td colspan="4">{{selectCreator.description}}</td>
+              </tr>
         </table>
 
     <!--서브게시판 페이징-->
