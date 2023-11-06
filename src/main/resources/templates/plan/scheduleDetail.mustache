@@ -73,16 +73,16 @@
 
 <!--table3 start-->
 <table border="1" cellpadding="1" cellspacing="1">
-    <tr><td colspan="4">주 / 조연 배우</td></tr>
+    <tr><td colspan="4">출연자 준비</td></tr>
     <tr>
-        <td>연기자</td>
+        <td>출연자</td>
         <td>도착시간</td>
         <td>장소</td>
         <td>SET_CALL</td>
     </tr>
     {{#table3}}
         <tr>
-            <td>{{actor_name}}</td>
+            <td><a href="/plan/actorManagement/{{actor_id}}">{{actor_name}}</a> </td>
             <td>{{arrival_time}}</td>
             <td>{{place}}</td>
             <td>{{set_call}}</td>

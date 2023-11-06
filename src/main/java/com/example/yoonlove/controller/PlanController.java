@@ -241,7 +241,7 @@ public class PlanController {
     }
 
 
-    @GetMapping("plan/actorManagement/{act_id}")
+    @GetMapping("plan/actorManagement/{actor_id}")
     public ModelAndView selectActorManagement(ActorManagementDto dto) {
         ActorManagementDto actorManagementDetail = planService.selectActorManagement(dto);
 
