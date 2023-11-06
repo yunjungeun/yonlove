@@ -132,7 +132,7 @@ public class PlanController {
         return "redirect:/plan/schedule_day";
 
     }
-//===================================================================================================================================== 촬영계획표
+//=====================================촬영계획표=================================================================================
 
 
     @GetMapping("plan/schedule_time")
@@ -252,9 +252,14 @@ public class PlanController {
     }
 
    @GetMapping("plan/insertactorManagementView")
-    public ModelAndView insertactorManagementView(ScheduleDayDto dto) throws JsonProcessingException{
+    public ModelAndView insertactorManagementView(ScheduleDayDto dto, Principal user) throws JsonProcessingException{
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        String jsonList = dropDownService.dropDownOption("table1",null, companyId);
 
         ModelAndView mv = new ModelAndView();
+        mv.addObject("fkList", jsonList);
         mv.addObject("dayId", dto.getDay_id());
         mv.setViewName("plan/insertactorManagementView");
         return mv;
@@ -265,6 +270,10 @@ public class PlanController {
     @ResponseBody
     public String insertActorManagement(ActorManagementDto dto) {
         String dayId = dto.getDay_id();
+        //pd_id로 proudce를 검색해서 출연자 이름을 획득하고 dto에 바인드
+        String actorName = planService.searchActorName(dto.getPd_id());
+        dto.setActor_name(actorName);
+
         planService.insertActorManagement(dto);
         return "/plan/schedule/"+dayId;
     }

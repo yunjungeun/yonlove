@@ -138,20 +138,19 @@ public class PlanService {
         return ActorManagementDetail;
     }
 
+    public String searchActorName(String pd_id){
+        return planMapper.searchActorName(pd_id);
+    }
     public void insertActorManagement(ActorManagementDto dto) {
-
-
         planMapper.insertActorManagement(dto);
     }
 
     public void updateActorManagement(ActorManagementDto dto) {
         planMapper.updateActorManagement(dto);
-
     }
 
     public void deleteActorManagement(ActorManagementDto dto) {
         planMapper.deleteActorManagement(dto);
-
     }
 
     //================================================

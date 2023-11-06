@@ -39,6 +39,8 @@ public interface PlanMapper {
     public List<ScenarioDto> selectFkAct();
     public PageDto totalActorManagementPost(PageDto dto);
     public ActorManagementDto selectActorManagement(ActorManagementDto dto);
+    //pd_id로 출연자이름찾는 메서드
+    String searchActorName(String pd_id);
     public void insertActorManagement(ActorManagementDto dto);
     public void updateActorManagement(ActorManagementDto dto);
     public void deleteActorManagement(ActorManagementDto dto);

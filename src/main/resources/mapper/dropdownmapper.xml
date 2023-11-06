@@ -48,6 +48,13 @@
         order by project_id desc
     </select>
 
+    <select id="selectFkTable1">
+        SELECT pd_id, pd_name FROM day_table1
+        <if test="ajaxData != null and ajaxData !=''">
+            and pd_id = #{ajaxData}
+        </if>
+        order by pd_id desc
+    </select>
 
 
     <select id="selectScenario">

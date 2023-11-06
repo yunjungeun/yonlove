@@ -57,6 +57,12 @@ public class DropDownService {
                     fkStringList.put(produceDtos.get(i).getPd_id(),produceDtos.get(i).getPd_name());
                 }
                 break;
+            case "table1" :
+                List<FilmPlanDto> filmPlanDtos = dropDownMapper.selectFkTable1(ajaxData);
+                for(int i=0; i< filmPlanDtos.size(); i++){
+                    fkStringList.put(filmPlanDtos.get(i).getPd_id(),filmPlanDtos.get(i).getPd_name());
+                }
+                break;
         }
 
         if(fkIntList.isEmpty()){

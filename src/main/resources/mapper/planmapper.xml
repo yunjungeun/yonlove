@@ -221,9 +221,13 @@
         SELECT scenario_id, scenario_name FROM scenario order by scenario_id desc
     </select>
 
+    <select id="searchActorName">
+        SELECT pd_name FROM produce where pd_id = #{pd_id}
+    </select>
+
     <insert id="insertActorManagement" parameterType="com.example.yoonlove.dto.ActorManagementDto" >
         INSERT INTO actor_management values (
-        (select concat('actor',(substr(NVL(max(actor_id),'actor0'),6)+1)) from actor_management),
+        (select concat('actor', (nvl(max(to_number(substr(actor_id, 3))), 0)+1)) from actor_management),<!--pk코드 자동증가(수정2)-->
 
         #{actor_name},
         #{arrival_time},
