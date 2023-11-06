@@ -51,17 +51,14 @@ public class PagingService {
             case "actor_managment" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
             case "company" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
             case "creater" : pageDto = creatorMapper.totalCreatorPost(dto); break;
-            case "creater_profit" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
             case "department" : pageDto = adminMapper.totalDptPost(dto); break;
             case "film_plan" : pageDto = planMapper.totalFilmPlanPost(dto); break;
             case "log" : pageDto = logMapper.totalLogPost(dto); break;
-            case "member" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
             case "produce" : pageDto = projectMapper.totalProducePost(dto); break;
             case "project" : pageDto = projectMapper.totalProjectPost(dto); break;
             case "scenario" : pageDto = scenarioMapper.totalScenarioPost(dto); break;
             case "scene" : pageDto = sceneMapper.totalScenePost(dto); break;
             case "schedule_day" : pageDto = planMapper.totalSceduledayPost(dto); break;
-            case "schedule_month" :pageDto = planMapper.totalScheduleMonthPost(dto);  break;
             case "schedule_time" :  pageDto = planMapper.totalSceduletimePost(dto); break;
             case "scriptpaper" : pageDto = scriptPaperMapper.totalScriptPost(dto); break;
             case "timetable" : pageDto = scriptPaperMapper.totalTimeTablePost(dto); break;
