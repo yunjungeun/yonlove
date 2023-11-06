@@ -2,6 +2,8 @@ package com.example.yoonlove.dto;
 
 import lombok.Data;
 
+import java.sql.Date;
+
 @Data
 public class FilmPlanDto {
 
@@ -29,4 +31,5 @@ public class FilmPlanDto {
     private String pd_id;
     private String pd_name;
     private String casting;
+    private Date film_date;
 }

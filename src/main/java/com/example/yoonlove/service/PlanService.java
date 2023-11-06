@@ -182,8 +182,7 @@ public class PlanService {
     }
 
     public FilmPlanDto selectFilmPlan(FilmPlanDto dto) {
-        FilmPlanDto  ActorManagementDetail = planMapper.selectFilmPlan(dto);
-        return ActorManagementDetail;
+        return planMapper.selectFilmPlan(dto);
     }
 
     //insert에 act_id를 획득하기 위한 메소드

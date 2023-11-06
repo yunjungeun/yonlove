@@ -319,12 +319,11 @@ public class PlanController {
 
     @GetMapping("plan/filmPlan/{film_id}")
     public ModelAndView selectFilmPlan(FilmPlanDto dto) {
-        FilmPlanDto filmPlanDetail = planService.selectFilmPlan(dto);
+        FilmPlanDto filmPlanDto = planService.selectFilmPlan(dto);
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/filmPlanDetail");
-        mv.setStatus(HttpStatus.valueOf(200));
-        mv.addObject("filmPlanDetail", filmPlanDetail);
+        mv.addObject("filmPlanDetail", filmPlanDto);
         return mv;
     }
 
@@ -348,8 +347,6 @@ public class PlanController {
     public String insertFilm(FilmPlanDto dto) {
         String actId = planService.selectFilmJoinActID(dto.getPd_id(), dto.getScene_id());
         dto.setAct_id(actId);
-        //코딩확인
-        System.out.println(dto.toString());
         planService.insertFilm(dto);
 
         return "/plan/film_plan";

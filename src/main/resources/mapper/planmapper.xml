@@ -297,7 +297,7 @@
     </select>
 
     <select id="selectFilmPlan" parameterType="com.example.yoonlove.dto.FilmPlanDto" resultType="com.example.yoonlove.dto.FilmPlanDto">
-        SELECT * FROM film_plan WHERE film_id = #{film_id}
+        SELECT * FROM day_table1 WHERE film_id = #{film_id}
     </select>
 
     <!--film_plan에 act_id를 구하기위한 메소드-->
