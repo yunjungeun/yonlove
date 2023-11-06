@@ -2,8 +2,10 @@ package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.LogDto;
 import com.example.yoonlove.dto.PageDto;
+import com.example.yoonlove.dto.UserDto;
 import com.example.yoonlove.service.LogService;
 import com.example.yoonlove.service.PagingService;
+import com.example.yoonlove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -20,10 +23,16 @@ public class LogController {
     private LogService logService;
     @Autowired
     private PagingService pagingService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("log/log")
-    public ModelAndView selectListLog(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
-        PageDto pageDto = new PageDto("log","log_id", page,pdto);  // page???
+    public ModelAndView selectListLog(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page, Principal user){
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        PageDto pageDto = new PageDto("log","log_id", page,pdto, companyId);  // page???
         PageDto pageInfo = pagingService.paging(pageDto);
 
 

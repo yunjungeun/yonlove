@@ -33,7 +33,6 @@ public class AdminController {
     @GetMapping("/admin/user")
     public ModelAndView selectListUser(PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page,
                                        Principal user){
-
         //유저정보 가저오는 dto
         UserDto userInfo = userService.getUser(user.getName());
         String companyId = userInfo.getCompany_id(); //회사 id 스트링

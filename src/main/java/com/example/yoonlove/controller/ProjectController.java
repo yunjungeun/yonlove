@@ -109,8 +109,13 @@ public class ProjectController {
     //제작예산
     // httpserveltrequest -> @RequestParam -> Command Object (dto)
     @GetMapping("/project/budget")   // ddl 테이블명
-        public ModelAndView selectListBudget(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
-        PageDto pageDto = new PageDto("budget", "budget_id", page, pdto);
+        public ModelAndView selectListBudget(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page,
+                                             Principal user){
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        PageDto pageDto = new PageDto("budget", "budget_id", page, pdto,companyId);
         PageDto pageInfo = pagingService.paging(pageDto);
 
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
