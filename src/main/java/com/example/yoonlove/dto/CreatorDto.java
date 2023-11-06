@@ -12,9 +12,14 @@ public class CreatorDto {
     private int videocount;
     private long viewcount;
     private String createrurl;
+    private String thumbnail;
 
     private String formattedVideocount;
     private String formattedViewcount;
     private String formattedCh_sub;
+
+    //조인 테이블 : createjoin
+    private String company_id;
+    private String company_name;
     }
 

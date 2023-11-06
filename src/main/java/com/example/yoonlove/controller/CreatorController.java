@@ -1,10 +1,10 @@
 package com.example.yoonlove.controller;
 
+import com.example.yoonlove.dto.CompanyDto;
 import com.example.yoonlove.dto.CreatorDto;
 import com.example.yoonlove.dto.PageDto;
-import com.example.yoonlove.service.CreatorService;
-import com.example.yoonlove.service.PagingService;
-import com.example.yoonlove.service.YouTubeService;
+import com.example.yoonlove.dto.UserDto;
+import com.example.yoonlove.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.security.Principal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,11 +31,24 @@ import java.util.List;
         private PagingService pagingService;
         @Autowired
         private YouTubeService youTubeService;
+        @Autowired
+        private UserService userService;
+        @Autowired
+        private AdminService adminService;
 
 
         @GetMapping("creator/creater")  // 뒤에 테이블명
-        public ModelAndView selectListCreaotr(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
-            PageDto pageDto = new PageDto("creater", "ch_id", page, pdto);
+        public ModelAndView selectListCreaotr(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page,
+                                              Principal user){
+            //유저정보 가저오는 dto
+            UserDto userInfo = userService.getUser(user.getName());
+            String companyId = userInfo.getCompany_id(); //회사 id 스트링
+            //회사이름을 가져오는 객체
+            CompanyDto companyDto = new CompanyDto();
+            companyDto.setCompany_id(companyId);
+            CompanyDto companyName = adminService.selectCompany(companyDto);
+
+            PageDto pageDto = new PageDto("creater", "ch_id", page, pdto, companyId);
             PageDto pageInfo=pagingService.paging(pageDto);
             List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(), pageInfo.getPageEnd(), page);
             String rink = pagingService.pageRink(pageDto);
@@ -52,8 +66,7 @@ import java.util.List;
             ModelAndView mv = new ModelAndView();
             mv.setViewName("creator/creator");
             mv.addObject("selectListCreator", dto);
-
-
+            mv.addObject("companyName", companyName.getCompany_name());
 
             //페이징에 필요한센션
             mv.addObject("prefixUrl", "creator"); // 컨트롤러 앞부분 /명
@@ -69,8 +82,7 @@ import java.util.List;
             dto.setCh_name(title);
             dto.setUser_id(userId);
             creatorservice.insertCreator(dto);
-
-            return "creator/creatorinsert";
+            return "creator/creater";
         }
 
 
@@ -127,7 +139,6 @@ import java.util.List;
         mv.setViewName("/creator/creatorinsert");
         mv.addObject("userId", userId);
         mv.addObject("hashmap", result);
-        mv.addObject("openInNewTab", true);
         return mv;
     }
 }
