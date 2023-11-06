@@ -346,7 +346,12 @@ public class PlanController {
     @GetMapping("plan/insertFilm")  //컨텐츠 추가 처리
     @ResponseBody
     public String insertFilm(FilmPlanDto dto) {
+        String actId = planService.selectFilmJoinActID(dto.getPd_id(), dto.getScene_id());
+        dto.setAct_id(actId);
+        //코딩확인
+        System.out.println(dto.toString());
         planService.insertFilm(dto);
+
         return "/plan/film_plan";
     }
 

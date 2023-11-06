@@ -50,6 +50,7 @@ public interface PlanMapper {
     public List<FilmPlanDto> selectDayTable1(String day_id);
     public PageDto totalFilmPlanPost(PageDto dto);
     public FilmPlanDto selectFilmPlan(FilmPlanDto dto);
+    String selectFilmJoinActID(String pd_id, String scene_id);
     public void insertFilm(FilmPlanDto dto);
     public void updateFilm(FilmPlanDto dto);
     public void deleteFilm(FilmPlanDto dto);

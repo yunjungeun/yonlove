@@ -186,6 +186,10 @@ public class PlanService {
         return ActorManagementDetail;
     }
 
+    //insert에 act_id를 획득하기 위한 메소드
+    public String selectFilmJoinActID(String pd_id, String scene_id){
+        return planMapper.selectFilmJoinActID(pd_id, scene_id);
+    }
     public void insertFilm(FilmPlanDto dto) {
         planMapper.insertFilm(dto);
     }
