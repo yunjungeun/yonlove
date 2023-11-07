@@ -82,7 +82,7 @@ import java.util.List;
             dto.setCh_name(title);
             dto.setUser_id(userId);
             creatorservice.insertCreator(dto);
-            return "creator/creater";
+            return "redirect:/creator/creater";
         }
 
 

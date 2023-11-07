@@ -54,8 +54,10 @@
 
     <hr>
     <a href="/creator/updatecreatorview/{{selectCreator.ch_id}}">게시글 수정</a>&nbsp;&nbsp;&nbsp;
-    <a href="/creator/deletecreator/{{selectCreator.ch_id}}" onclick="confirmDelete(event)">게시글 삭제</a>&nbsp;
+    <a href="/creator/deletecreator/{{selectCreator.ch_id}}" onclick="confirmDelete(event,'/creator/creater')">게시글 삭제</a>&nbsp;
     <a href="/creator/creater">전체 목록 보기</a>
 {{>layout/bootstrapjs}}
+
+<script src="/static/js/delete.js"></script>
 </body>
 </html>

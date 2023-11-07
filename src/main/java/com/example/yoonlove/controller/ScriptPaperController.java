@@ -91,7 +91,6 @@ public class ScriptPaperController {
         mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
 
-
         return mv;
     }
 
@@ -104,7 +103,7 @@ public class ScriptPaperController {
         String jsonListProject = dropDownService.dropDownOption("project",null, companyId);
 
         ModelAndView mv = new ModelAndView();
-        mv.addObject("fkListProject", jsonListProject);
+        mv.addObject("fkList", jsonListProject);
         mv.setViewName("/script/scriptinsert");
         return mv;
     }
