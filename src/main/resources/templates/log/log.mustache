@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시판 리스트</title>
-    <link rel="stylesheet" href="../../static/css/setting.css"
     {{>layout/header}}
 </head>
 <body id="page-top">
@@ -16,10 +15,8 @@
 <div id="content-wrapper" class="d-flex flex-column">
     <!--d-flex flex-column: flex박스 스타일을 적용한 클래스 : 요소들 수평이나 수직으로 배치하고 간격을 조절하는 등의 작업 간편화
        content-wrapper: 컨텐츠 섹션 감싸고  그 안의 요소들을 유연하게 배치하고 정렬 주로  다양한 화면 크기와 디바이스에 대응하는 반응형 디자인을 구현하는 데 유용-->
-
     <!-- Main Content -->
     <div id="content">
-
         <!-- Begin Page Content -->
         <div class="container-fluid">  <!--얘가 없으면 전체적으로 다 위로 올라가고 푸터가 사이드 옆쪽으로 붙어버림 -->
             <!--container-fluid:  Bootstrap 프레임워크를 사용하여 생성된 컨테이너로, 웹 페이지의 내용을 감싸는 역할, 화면 폭에 맞게 자동으로 넓어져서 브라우저의 너비에 따라 반응형으로 조절-->
@@ -28,14 +25,10 @@
             <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px;"일지목록</h1>
             <!--공지사항이 너무 천장에 붙어있어서 margin-top: 50px을 줘서 내렸습니다-->
             <!-- <p class="mb-4">게시판 설명 넣는곳 <a target="_blank" href="https://datatables.net">이곳에 링크 넣으세요</a>.</p>-->
-
-
             <!-- DataTales Example -->
             <div class="card shadow mb-4" style="margin-top: 50px;">
                 <div class="card-header py-3">
                     <!--<h6 class="m-0 font-weight-bold text-primary">공지사항</h6>-->
-
-
                     <form action="/log/log" method="get"
                           class="d-flex justify-content-end form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
                         <!--d-none: 화면에서 폼을 숨기는 기능
@@ -45,9 +38,6 @@
                             <select id="searchType" name="searchType">
                                 <option value="all">선택</option>
                                 <option value="title">제목</option>
-
-
-
                                 <!-- 필요한 항목 추가 -->
                             </select>
                             <!--input-group: 입력 그룹을 생성(입력 필드와 관련된 요소들을 그룹화-->
@@ -59,17 +49,14 @@
                             bg-light: 입력필드 배경색 밝게  border-0:입력필드 주변 경계선을 없앰 small:입력필드 크기를 작게설정 placeholder="Search for...": 입력필드에 힌트제공
                             aria-label, aria-describedby: 웹 접근성 향상용도 필드의 라벨 및 설명을 지정 -->
 
-
                             <div class="input-group-append">
                                 <!--input-group-append:입력 그룹에 추가 요소를 포함 이 경우, 추가 요소로 버튼이 추가-->
                                 <input class="btn btn-primary" type="submit" value="검색">
                                 <!--   <i class="fas fa-search fa-sm"></i>-->
                                 <!--Font Awesome 아이콘을 추가하는데 사용 fas fa-search fa-sm" 클래스는 검색 아이콘을 표시-->
-
                             </div>
                         </div>
                     </form>
-
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -80,67 +67,49 @@
                                 <th style="text-align: center;">일지내용</th>
                                 <th style="text-align: center;">작성일</th>
                                 <th style="text-align: center;">기획명</th>
-
                             </tr>
                             </thead>
                             <tbody>
                             {{#selectListLog}}
                                 <tr>
-
                                     <td style="text-align: center;">{{log_num}}</td>
                                     <td style="text-align: center;"><a
                                             href="/log/selectlog/{{log_id}}">{{log_content}}</a></td>
                                     <td style="text-align: center;">{{log_date}}</td>
                                     <td style="text-align: center;">{{project_name}}</td>
-
                                 </tr>
                             {{/selectListLog}}
                             </tbody>
                         </table>
                         <!--페이징 처리 레이아웃-->
-
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <!-- 테이블 헤더 및 데이터 부분 -->
                             </table>
-
                             <div class="d-flex justify-content-between align-items-center">
                                 {{>layout/paging}}
-
-
                                 <a href="/log/insertLogView" role="button" class="btn btn-primary">일지작성</a>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
             </div>
 
             <br/>
         </div>
-
-
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
         <!-- .container-fluid -->
-
-
     </div>
     <!-- End of Main Content -->
-
     {{>layout/footer}}
-
 </div>
 <!-- End of Content Wrapper -->
-
 <script>
     var url = "/log/log";
 </script>
 <script src="/static/js/search.js"></script>
-
-
 {{>layout/bootstrapjs}}
 </body>
 </html>

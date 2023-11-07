@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시판 리스트</title>
-    <link rel="stylesheet" href="../../static/css/setting.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/static/js/cu_alert.js"></script>
 
@@ -21,7 +20,6 @@
 
     <!-- Main Content -->
     <div id="content">
-
         <!-- Begin Page Content -->
         <div class="container-fluid">  <!--얘가 없으면 전체적으로 다 위로 올라가고 푸터가 사이드 옆쪽으로 붙어버림 -->
             <!--container-fluid:  Bootstrap 프레임워크를 사용하여 생성된 컨테이너로, 웹 페이지의 내용을 감싸는 역할, 화면 폭에 맞게 자동으로 넓어져서 브라우저의 너비에 따라 반응형으로 조절-->
@@ -31,14 +29,10 @@
             <!--공지사항이 너무 천장에 붙어있어서 margin-top: 50px을 줘서 내렸습니다-->
             <!-- <p class="mb-4">게시판 설명 넣는곳 <a target="_blank" href="https://datatables.net">이곳에 링크 넣으세요</a>.</p>-->
 
-
             <!-- DataTales Example -->
             <div class="card shadow mb-4" style="margin-top: 50px;">
                 <div class="card-header py-3">
                     <!--<h6 class="m-0 font-weight-bold text-primary">공지사항</h6>-->
-
-
-
                 </div>
                 <form id="alert" method="get" action="/admin/adduser">
                 <div class="card-body">
@@ -48,15 +42,9 @@
                             <tr>
                                 <th style="text-align: center;" >회원ID</th>
                                 <th style="text-align: center;"><input class="field1" type = text name="user_id" style="margin: 0 auto; display: block; text-align: center;" /></th>
-
                             </tr>
                             </thead>
-
                         </table>
-
-
-
-
                         <div style="text-align: center">
                             <button type="submit" class="btn btn-primary" onclick="mappingurl('/admin/adduser',1,'추가')">등록</button>
                             <button class="btn btn-secondary">
@@ -66,32 +54,22 @@
                     </div>
 
                 </div>
-
                 </form>
             </div>
 
             <br/>
         </div>
 
-
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
         <!-- .container-fluid -->
-
-
     </div>
     <!-- End of Main Content -->
-
     {{>layout/footer}}
-
 </div>
 <!-- End of Content Wrapper -->
-
 <script src="/static/js/cu_alert.js"></script>
-
-
-
 {{>layout/bootstrapjs}}
 </body>
 </html>
