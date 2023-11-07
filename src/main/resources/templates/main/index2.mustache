@@ -73,12 +73,13 @@
 
 {{^loggedIn}}
             <a class="nav-link dropdown-toggle" href="/login" id="userDropdown" role="button">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="userAction">로그인</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="userAction">로그인
                 <!-- svg 로그인아이콘 추가함 -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
                     <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
                 </svg>
+                </span>
             </a>
 {{/loggedIn}}
 
@@ -92,20 +93,20 @@
                 </nav>
                 <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
+              <!--  &lt;!&ndash; Begin Page Content &ndash;&gt;
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
+                    &lt;!&ndash; Page Heading &ndash;&gt;
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
 
-                    <!-- Content Row -->
+                    &lt;!&ndash; Content Row &ndash;&gt;
                     <div class="row">
 
-                        <!-- Earnings (Monthly) Card Example -->
+                        &lt;!&ndash; Earnings (Monthly) Card Example &ndash;&gt;
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
@@ -123,7 +124,7 @@
                             </div>
                         </div>
 
-                        <!-- Earnings (Monthly) Card Example -->
+                        &lt;!&ndash; Earnings (Monthly) Card Example &ndash;&gt;
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
@@ -141,7 +142,7 @@
                             </div>
                         </div>
 
-                        <!-- Earnings (Monthly) Card Example -->
+                        &lt;!&ndash; Earnings (Monthly) Card Example &ndash;&gt;
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-info shadow h-100 py-2">
                                 <div class="card-body">
@@ -170,7 +171,7 @@
                             </div>
                         </div>
 
-                        <!-- Pending Requests Card Example -->
+                        &lt;!&ndash; Pending Requests Card Example &ndash;&gt;
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
@@ -189,14 +190,14 @@
                         </div>
                     </div>
 
-                    <!-- Content Row -->
+                    &lt;!&ndash; Content Row &ndash;&gt;
 
                     <div class="row">
 
-                        <!-- Area Chart -->
+                        &lt;!&ndash; Area Chart &ndash;&gt;
                         <div class="col-xl-8 col-lg-7">
                             <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
+                                &lt;!&ndash; Card Header - Dropdown &ndash;&gt;
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
@@ -215,7 +216,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Card Body -->
+                                &lt;!&ndash; Card Body &ndash;&gt;
                                 <div class="card-body">
                                     <div class="chart-area">
                                         <canvas id="myAreaChart"></canvas>
@@ -224,10 +225,10 @@
                             </div>
                         </div>
 
-                        <!-- Pie Chart -->
+                        &lt;!&ndash; Pie Chart &ndash;&gt;
                         <div class="col-xl-4 col-lg-5">
                             <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
+                                &lt;!&ndash; Card Header - Dropdown &ndash;&gt;
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
@@ -246,7 +247,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Card Body -->
+                                &lt;!&ndash; Card Body &ndash;&gt;
                                 <div class="card-body">
                                     <div class="chart-pie pt-4 pb-2">
                                         <canvas id="myPieChart"></canvas>
@@ -267,13 +268,13 @@
                         </div>
                     </div>
 
-                    <!-- Content Row -->
+                    &lt;!&ndash; Content Row &ndash;&gt;
                     <div class="row">
 
-                        <!-- Content Column -->
+                        &lt;!&ndash; Content Column &ndash;&gt;
                         <div class="col-lg-6 mb-4">
 
-                            <!-- Project Card Example -->
+                            &lt;!&ndash; Project Card Example &ndash;&gt;
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
@@ -312,7 +313,7 @@
                                 </div>
                             </div>
 
-                            <!-- Color System -->
+                            &lt;!&ndash; Color System &ndash;&gt;
                             <div class="row">
                                 <div class="col-lg-6 mb-4">
                                     <div class="card bg-primary text-white shadow">
@@ -382,10 +383,10 @@
 
                         </div>
 
-                        <div class="col-lg-6 mb-4">
+                        <div class="col-lg-6 mb-4">-->
 
                             <!-- Illustrations -->
-                            <div class="card shadow mb-4">
+                            <!--<div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
                                 </div>
@@ -401,10 +402,10 @@
                                     <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
                                         unDraw &rarr;</a>
                                 </div>
-                            </div>
+                            </div>-->
 
                             <!-- Approach -->
-                            <div class="card shadow mb-4">
+                           <!-- <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
                                 </div>
@@ -415,7 +416,7 @@
                                     <p class="mb-0">Before working with this theme, you should become familiar with the
                                         Bootstrap framework, especially the utility classes.</p>
                                 </div>
-                            </div>
+                            </div>-->
 
                         </div>
                     </div>

@@ -56,7 +56,12 @@ public class SceneController {
     }
 
     @GetMapping("scene/{scene_id}/selectscene")
-    public ModelAndView selectScene(SceneDto sceneDto, @RequestParam(name="page", defaultValue = "1") int page, PageDto pdto ){
+    public ModelAndView selectScene(SceneDto sceneDto, @RequestParam(name="page", defaultValue = "1") int page, PageDto pdto,
+                                    Principal user){
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
         ModelAndView mv = new ModelAndView();
         SceneDto dto = sceneService.selectScene(sceneDto);
 
@@ -78,7 +83,7 @@ public class SceneController {
         //서브게시판 리스트
         pdto.setPkid(dto.getScene_id());
 
-        PageDto pageDto = new PageDto("scriptpaper","script_id", page,pdto);
+        PageDto pageDto = new PageDto("scriptpaper","script_id", page,pdto,companyId);
         PageDto pageInfo = pagingService.paging(pageDto);
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.subPageRink(pageDto,"scene");
