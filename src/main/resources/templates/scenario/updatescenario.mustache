@@ -16,13 +16,13 @@
 {{>layout/sidebar}}
 {{>layout/topbar}}
 <form id="alert" method="get" action="/scenario/{{updateScenario.scenario_id}}/updatescenario">
-    <input name="scenario_id" type="text" value="{{updateScenario.scenario_id}}"/>
+    <input name="scenario_id" type="hidden" value="{{updateScenario.scenario_id}}"/>
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
             <td>시나리오 제목
                 <input class="field1" name="scenario_name" type="text" value="{{updateScenario.scenario_name}}"></td>
-            <td>기획ID / 나중에 기획명으로 바꿔야함
-                <input class="field2" name="project_id" type="text" value="{{updateScenario.project_id}}" readonly></td>
+            <td>기획
+                <input class="field2" name="project_id" type="text" value="{{updateScenario.project_name}}" readonly></td>
             <td>시나리오 번호
                 <input class="field3" name="scenario_num" type="text" value="{{updateScenario.scenario_num}}"></td>
         </tr>

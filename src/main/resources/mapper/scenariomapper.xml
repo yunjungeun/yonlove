@@ -3,7 +3,7 @@
 
 <mapper namespace="com.example.yoonlove.mapper.ScenarioMapper">
     <select id="selectScenario" resultType="com.example.yoonlove.dto.ScenarioDto">
-        SELECT * FROM scenario where scenario_id=#{scenario_id}
+        SELECT * FROM scenariolist where scenario_id=#{scenario_id}
     </select>
 
     <!--옵션값에 넣기 위한 fk테이블의 검색값을 가져오는 쿼리-->

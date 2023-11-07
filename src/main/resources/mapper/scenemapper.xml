@@ -30,6 +30,9 @@
         <if test="writer != null and search != ''">
             AND scenario_name like '%${writer}%'
         </if>
+        <if test="pkid != null">
+            AND scenario_id = #{pkid}
+        </if>
     </select>
 
 

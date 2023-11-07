@@ -67,8 +67,8 @@ public class ScenarioController {
         //fk 검색 값 설정
         pdto.setPkid(dto.getScenario_id());
         PageDto pageDto = new PageDto("scene","scene_id",page,pdto,companyId);
-
         PageDto pageInfo = pagingService.paging(pageDto);
+
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.subPageRink(pageDto,"scenario");
         List<SceneDto> subList = sceneService.selectListScene(pageInfo);
