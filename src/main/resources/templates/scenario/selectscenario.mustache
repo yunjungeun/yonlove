@@ -12,8 +12,22 @@
 {{>layout/sidebar}}
 {{>layout/topbar}}
 
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4" style="margin-top: 50px;">
+                <div class="card-header py-3">
+                    <div class="table-responsive">
     <input name="scenario_id" type="hidden" value="{{selectScenario.scenario_id}}"/>
-    <table border="1" cellpadding="1" cellspacing="1">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
         <tr>
             <td>시나리오 제목
                 <input name="scenario_name" type="text" value="{{selectScenario.scenario_name}}" readonly></td>
@@ -22,20 +36,35 @@
             <td>시나리오 번호
                 <input name="scenario_num" type="text" value="{{selectScenario.scenario_num}}" readonly></td>
         </tr>
+        </thead>
+        <tbody>
         <tr>
             <td colspan="3"><textarea name="scenario_content" cols="50" rows="20" readonly>{{selectScenario.scenario_content}}</textarea></td>
-        </tr>
+        </tbody>
     </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br/>
+</div>
+
+
 
 <!--서브 게시판 / 스토리보드-->
-    <table border="1" cellpadding="1" cellspacing="1">
-        <ul>
+<div class="table-responsive">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
             <tr>
                 <td>시나리오 번호</td>
                 <td>씬 번호</td>
                 <td>촬영내용</td>
                 <td>찰영장소</td>
             </tr>
+            </thead>
+            <tbody>
             {{#selectListScene}}
                 <tr>
                     <td>{{scenario_id}}<!--여기누르면 시나리오로 이동해야함--></td>
@@ -44,34 +73,48 @@
                     <td>{{scene_place}}</td>
                 </tr>
             {{/selectListScene}}
-        </ul>
-    </table>
-    <!--서브게시판 / end-->
+            </tbody>
+    </table>  <!--서브게시판 / end-->
 
     <!--서브게시판 페이징-->
+    <div class="d-flex justify-content-between align-items-center">
     {{>layout/subpaging}}
 
     <!--subPost 검색-->
-    <form action="/scene/scene" method="GET">
+    <form action="/scene/scene" method="GET"
+          class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
+        <div class="input-group">
         <select id="searchType" name="searchType">
             <option value="all">선택</option>
             <option value="title">씬</option>
             <option value="content">내용</option>
             <!-- 필요한 항목 추가 -->
         </select>
-        <input type="text" id="search" name="search" placeholder="검색">
-        <input type="submit" value="검색">
+        <input type="text" id="search" name="search"tyle="width: 150px;"
+               class="form-control bg-light border-0 small" placeholder="Search for..."
+               aria-label="Search" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+        <input class="btn btn-primary" type="submit" value="검색">
+
+        </div>
+        </div>
     </form>
+    </div>
     <!--subPost 검색 / end-->
-
-
     <br/>
     <!--시나리오 게시판 이동-->
-<a href="/scenario/scenario">목록</a>
-<a href="/scenario/{{selectScenario.scenario_id}}/updatescenarioview">수정</a>
-<a href="javascript:void(0);" onclick="deleteAlert('/scenario/{{selectScenario.scenario_id}}/deletescenario')">삭제</a>
-
-
+    <div class="d-flex justify-content-center align-items-center">
+<a href="/scenario/scenario" role="button" class="btn btn-info">목록</a> &nbsp;&nbsp;
+<a href="/scenario/{{selectScenario.scenario_id}}/updatescenarioview" role="button" class="btn btn-success">수정</a>&nbsp;&nbsp;
+<a href="javascript:void(0);" role="button" class="btn btn-secondary"
+   onclick="deleteAlert('/scenario/{{selectScenario.scenario_id}}/deletescenario')">삭제</a>
+    </div>
+</div>
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+<!-- End of Main Content -->
+{{>layout/footer}}
     <!--서브게시판 검색 js-->
     <script><!--서브게시판에 넘겨준 prefix url-->
         var url = "/scenario/{{selectScenario.scenario_id}}/selectscenario";
@@ -80,6 +123,16 @@
 
 <!--게시글 삭제시 경고문 js-->
 <script src="/static/js/deletepost.js"></script>
+{{>layout/bootstrapjs}}
+
+<script src="/static/js/search.js"></script>
+<!-- 페이징 처리와 관련된 부트스트랩 라이브러리-->
+<script src="/static/bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- 페이징 처리와 관련된 부트스트랩 라이브러리 -->
+<script src="/static/bootstrap/js/demo/datatables-demo.js"></script>
+
 {{>layout/bootstrapjs}}
 </body>
 </html>
