@@ -175,7 +175,6 @@ public class SceneController {
         actorDto.setAct_id(act_id);
         actorDto.setDay_id(day_id);
 
-        System.out.println(actorDto.toString());
         ActorDto dto = sceneService.selectActor(actorDto);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("scene/actorselect");
