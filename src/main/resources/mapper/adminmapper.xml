@@ -85,7 +85,7 @@
             AND user_id like '%${writer}%'
         </if>
         <if test="content != null and search != ''">
-            AND email like '%${content}%'
+            AND nick_name like '%${content}%'
         </if>
         <if test="title != null and search != ''">
             AND user_name like '%${title}%'

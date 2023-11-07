@@ -4,6 +4,8 @@ import com.example.yoonlove.dto.CompanyDto;
 import com.example.yoonlove.dto.UserDto;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.security.Principal;
+
 @Mapper
 public interface UserMapper {
 
@@ -13,5 +15,11 @@ public interface UserMapper {
     public UserDto getNick(String user_id);
     public void insertCompany(CompanyDto companyDto);
 
-    public boolean selectId(UserDto dto); //
+   public String lastCompanyID();
+
+    public boolean selectId(UserDto dto);
+
+    public void updateUserCompanyID(String user, String company);
+
+    public void updateUser(UserDto userDto);
 }

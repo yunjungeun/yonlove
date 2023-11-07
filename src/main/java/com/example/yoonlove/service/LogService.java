@@ -2,6 +2,7 @@ package com.example.yoonlove.service;
 
 import com.example.yoonlove.dto.LogDto;
 import com.example.yoonlove.dto.PageDto;
+import com.example.yoonlove.dto.ProjectDto;
 import com.example.yoonlove.mapper.LogMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

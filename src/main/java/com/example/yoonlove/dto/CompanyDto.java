@@ -18,6 +18,8 @@ public class CompanyDto {
     private String company_email;
     private String zip_code;
 
+
+
     @Override
     public String toString() {
         return "CompanyDto{" +

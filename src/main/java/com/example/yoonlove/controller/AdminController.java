@@ -1,13 +1,11 @@
 package com.example.yoonlove.controller;
 
-import com.example.yoonlove.dto.CompanyDto;
-import com.example.yoonlove.dto.DepartmentDto;
-import com.example.yoonlove.dto.PageDto;
-import com.example.yoonlove.dto.UserDto;
+import com.example.yoonlove.dto.*;
 import com.example.yoonlove.service.AdminService;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -121,6 +119,7 @@ public class AdminController {
         PageDto pageDto = new PageDto("department","dpt_id",page,pdto, company);
 
         PageDto pageInfo = pagingService.paging(pageDto);
+        System.out.println("test");
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.pageRink(pageDto);
         List<DepartmentDto> dto = adminService.selectListDepartment(pageInfo);
@@ -132,7 +131,7 @@ public class AdminController {
         mv.addObject("paging", pageInfo);  //페이징정보
         mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
-
+        System.out.println("실행완료");
         return mv;
     }
 
@@ -142,6 +141,39 @@ public class AdminController {
         adminService.updateUser(dto);
         return "/admin/user";
     }
+
+
+    @GetMapping("/admin/adduserview")
+    public ModelAndView adduser(){
+
+        ModelAndView mv = new ModelAndView();
+
+
+        mv.setViewName("/admin/adduser");
+
+        return mv;
+
+    }
+
+    @GetMapping("/admin/adduser")
+    @ResponseBody
+    public String updateContent(Principal user, UserDto userDto) {
+
+      String userId = user.getName();
+
+      UserDto myUser = userService.getUser(userId);
+      userDto.setCompany_id(myUser.getCompany_id());
+      userService.updateUser(userDto);
+
+      return "/admin/user";
+    }
+
+
+
+
+
+
+
 
 
     @GetMapping("/admin/{dpt_id}/selectdpt")

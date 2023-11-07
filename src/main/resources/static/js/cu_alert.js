@@ -4,6 +4,8 @@ var produce = prodcueId;
 var radio = selectRadio;
 
 
+alert('test111');
+
 function mappingurl(submiturl, int, text, cnt){
     document.getElementById("alert").addEventListener("submit", function (event){
     event.preventDefault();
@@ -11,6 +13,7 @@ function mappingurl(submiturl, int, text, cnt){
     var data = {};
 
 
+     alert('test222');
      /*   var fileData = new FormData(document.getElementById("alert"));
         data.append("file", fileData);*/
 
@@ -59,6 +62,9 @@ function mappingurl(submiturl, int, text, cnt){
 
     console.log(data);
     $.ajax({
+
+            alert('test333');
+
             url: submiturl,
             type : "GET",
             data : data,

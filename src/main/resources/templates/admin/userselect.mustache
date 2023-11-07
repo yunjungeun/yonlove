@@ -1,64 +1,106 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원(user)</title>
+    {{>layout/header}}
 </head>
-<body>
-<table border="1" cellpadding="1" cellspacing="1">
-    <tr>
-        <td>회원ID <input name="user_id" type="text" value="{{selectUser.user_id}}" readonly/></td>
-        <td colspan="2">성함 <input name="user_name" type="text" value="{{selectUser.user_name}}" readonly/></td>
-    </tr>
-    <tr>
-        <td colspan="3">닉네임 <input name="nickname" type="text" value="{{selectUser.nickname}}" readonly/></td>
-    </tr>
-    <tr>
-        <td colspan="3">핸드폰 <input name="phone" type="text" value="{{selectUser.phone}}" readonly/></td>
-    </tr>
-    <tr>
-        <td colspan="3">E-mail <input name="email" type="text" value="{{selectUser.email}}" readonly/></td>
-    </tr>
-    <tr>
-        <td colspan="3">우편번호 <input name="zip_code" type="text" value="{{selectUser.zip_code}}" readonly/></td>
-    </tr>
-    <tr>
-        <td colspan="3">주소 <input name="address1" type="text" value="{{selectUser.address1}}" readonly/></td>
-    </tr>
-    <tr>
-        <td colspan="3">주소2 <input name="address2" type="text" value="{{selectUser.address2}}" readonly/></td>
-    </tr>
-    <tr>
-        <td colspan="3">상세주소 <input name="address3" type="text" value="{{selectUser.address3}}" readonly/></td>
-    </tr>
-    <tr>
-        <td>기업회원여부 <input name="company_user" type="text" value="{{selectUser.company_user}}" readonly/></td>
-        <td>회원등급 <input name="grade" type="text" value="{{selectUser.grade}}" readonly/></td>
-        <td>권한 <input name="authority" type="text" value="{{selectUser.authority}}" readonly/></td>
-    </tr>
-    <tr>
-        <td colspan="3">가입일 <input name="sign_date" type="text" value="{{selectUser.sign_date}}" readonly/></td>
-    </tr>
-    <tr>
-        <td colspan="3">소속회사 <input name="company_name" type="text" value="{{selectCompany.company_name}}" readonly/></td>
-    </tr>
-    <tr>
-        <td colspan="3">부서 <input name="dpt_name" type="text" value="{{selectDpt.dpt_name}}" readonly/></td>
-    </tr>
+<body id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
 
-</table>
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
 
-<a href="/admin/user">목록</a>
-<a href="/admin/{{selectUser.user_id}}/updateuserview">수정</a>
-<a href="javascript:void(0);" onclick="deleteAlert('/admin/{{selectUser.user_id}}/deleteuser')">삭제</a>
+    <!-- Main Content -->
+    <div id="content">
 
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+            <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px;">회원 현황</h1>
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4" style="margin-top: 50px;">
+                <div class="card-header py-3">
+                    <!--검색 -->
+                    <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th style="text-align: center;">회원ID</th>
+                                <th style="text-align: center;">이름</th>
+                                <th style="text-align: center;">닉네임</th>
+                                <th style="text-align: center;">핸드폰</th>
+                                <th style="text-align: center;">E-mail</th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; vertical-align: middle;"><input name="user_id" type="text" value="{{selectUser.user_id}}" readonly/></td>
+                                <td style="text-align: center; vertical-align: middle;"><input name="user_name" type="text" value="{{selectUser.user_name}}" readonly/></td>
+                                <td style="text-align: center; vertical-align: middle;"><input name="nickname" type="text" value="{{selectUser.nickname}}" readonly/></td>
+                                <td style="text-align: center; vertical-align: middle;"><input name="phone" type="text" value="{{selectUser.phone}}" readonly/></td>
+                                <td style="text-align: center; vertical-align: middle;"><input name="email" type="text" value="{{selectUser.email}}" readonly/></td>
+                            </tr>
+                            <tr>
+                                <th style="text-align: center;">우편번호</th>
+                                <th style="text-align: center;">주소</th>
+                                <th style="text-align: center;">주소2</th>
+                                <th style="text-align: center;">상세주소</th>
+                                <th style="text-align: center;">기업회원여부</th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; vertical-align: middle;"><input name="zip_code" type="text" value="{{selectUser.zip_code}}" readonly/></td>
+                                <td style="text-align: center; vertical-align: middle;"><input name="address1" type="text" value="{{selectUser.address1}}" readonly/></td>
+                                <td style="text-align: center; vertical-align: middle;"><input name="address2" type="text" value="{{selectUser.address2}}" readonly/></td>
+                                <td style="text-align: center; vertical-align: middle;"><input name="address3" type="text" value="{{selectUser.address3}}" readonly/></td>
+                                <td style="text-align: center; vertical-align: middle;"><input name="company_user" type="text" value="{{selectUser.company_user}}" readonly/></td>
+                            </tr>
+                            <tr>
+                                <th style="text-align: center;">회원등급</th>
+                                <th style="text-align: center;">권한</th>
+                                <th style="text-align: center;">가입일</th>
+                                <th style="text-align: center;">소속회사</th>
+                                <th style="text-align: center;">부서</th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; vertical-align: middle;"><input name="grade" type="text" value="{{selectUser.grade}}" readonly/></td>
+                                <td style="text-align: center; vertical-align: middle;"><input name="authority" type="text" value="{{selectUser.authority}}" readonly/></td>
+                                <td style="text-align: center; vertical-align: middle;"><input name="sign_date" type="text" value="{{selectUser.sign_date}}" readonly/></td>
+                                <td style="text-align: center; vertical-align: middle;"><input name="company_name" type="text" value="{{selectCompany.company_name}}" readonly/></td>
+                                <td style="text-align: center; vertical-align: middle;"><input name="dpt_name" type="text" value="{{selectDpt.dpt_name}}" readonly/></td>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
 
+                    <div style="text-align: center">
+                        <a href="/admin/user" class="btn btn-primary">목록</a>
+                        <a href="/admin/{{selectUser.user_id}}/updateuserview" class="btn btn-success">수정</a>
+                        <a href="javascript:void(0);" class="btn btn-danger" onclick="deleteAlert('/admin/{{selectUser.user_id}}/deleteuser')">삭제</a>
+                    </div>
 
-<br/>현재까지 버그<br/>
+            </div>
+
+        </div>
+        <br/>
+    </div>
+
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- /.container-fluid -->
+</div>
+<!-- End of Main Content -->
+{{>layout/footer}}
+</div>
+<!-- End of Content Wrapper -->
+
+<script>
+    var url = "/admin/user";
+</script>
 
 <script src="/static/js/deletepost.js"></script>
+{{>layout/bootstrapjs}}
 </body>
 </html>

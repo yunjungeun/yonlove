@@ -28,6 +28,7 @@ public class UserService implements UserDetailsService {
     @Autowired
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+
     public String getnick(Principal user) {
         UserDto dto = userMapper.getNick(user.getName());
         String user_nick = dto.getNickname();
@@ -69,7 +70,15 @@ public class UserService implements UserDetailsService {
     }
 
     public void companysignup(CompanyDto companyDto) {
-        userMapper.insertCompany(companyDto);
+
+
+        userMapper.insertCompany(companyDto);  //  기업 회원가입 처리
+
+    }
+    public void updateUserCompanyID(String user, String company) {
+
+        userMapper.updateUserCompanyID(user, company);
+
     }
 
     public boolean selectId(UserDto dto) {
@@ -80,5 +89,14 @@ public class UserService implements UserDetailsService {
        }else {
         return false;
        }
-    } //
+    }
+
+    public String lastCompanyID(){
+        return userMapper.lastCompanyID();
+    }
+
+
+    public void updateUser(UserDto userDto){
+         userMapper.updateUser(userDto);
+    }
 }
