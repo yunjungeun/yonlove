@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시판 리스트</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {{>layout/header}}
 </head>
 <body id="page-top">
@@ -28,7 +29,6 @@
             <!-- Page Heading -->
             <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px;">일지목록</h1><!--공지사항이 너무 천장에 붙어있어서 margin-top: 50px을 줘서 내렸습니다-->
             <!-- <p class="mb-4">게시판 설명 넣는곳 <a target="_blank" href="https://datatables.net">이곳에 링크 넣으세요</a>.</p>-->
-
 
             <!-- DataTales Example -->
             <div class="card shadow mb-4" style="margin-top: 50px;">
@@ -67,7 +67,7 @@
             <div style="text-align: center">
                 <a href="/log/log" class="btn btn-primary">목록</a>
                 <a href="/log/{{selectLog.log_id}}/logUpdateView" class="btn btn-success">수정</a>
-                <a href="javascript:void(0);" class="btn btn-danger" onclick="deleteAlert('/log/{{selectLog.log_id}}/deleteuser')">삭제</a>
+                <a href="javascript:void(0);" class="btn btn-danger" onclick="deleteAlert('/log/{{selectLog.log_id}}/deletelog')">삭제</a>
             </div>
 
         </div>
@@ -83,7 +83,16 @@
 
 </div>
 <!-- End of Content Wrapper -->
-<script src="/static/js/cu_alert.js"></script>
+
+<script>
+
+    var jsonValue = '{{{fkList}}}';
+
+    var selectName = "project_id";
+        var url = "/log/log";
+</script>
+
+<script src="/static/js/dropdown.js"></script>
 
 {{>layout/bootstrapjs}}
 </body>

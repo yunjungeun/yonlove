@@ -28,7 +28,7 @@
             <!--container-fluid:  Bootstrap 프레임워크를 사용하여 생성된 컨테이너로, 웹 페이지의 내용을 감싸는 역할, 화면 폭에 맞게 자동으로 넓어져서 브라우저의 너비에 따라 반응형으로 조절-->
             <!--mb-2:하단의 여백 -->
             <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px;">일지목록</h1><!--공지사항이 너무 천장에 붙어있어서 margin-top: 50px을 줘서 내렸습니다-->
+            <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px;">일지수정</h1><!--공지사항이 너무 천장에 붙어있어서 margin-top: 50px을 줘서 내렸습니다-->
             <!-- <p class="mb-4">게시판 설명 넣는곳 <a target="_blank" href="https://datatables.net">이곳에 링크 넣으세요</a>.</p>-->
 
 
@@ -70,7 +70,9 @@
             <div style="text-align: center">
 
                 <button type="submit" class="btn btn-primary" onclick="mappingurl('/log/{{updateLog.log_id}}/updateLog',3,'수정')">등록</button>
-                <button class="btn btn-secondary" onclick="window.location.href='/log/log'">취소</button>
+                <button class="btn btn-secondary">
+                    <a href="/log/log" style="text-decoration: none; color: white;">취소</a>
+                </button>
             </div>
 
         </div>
