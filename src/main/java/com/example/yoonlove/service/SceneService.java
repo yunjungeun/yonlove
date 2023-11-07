@@ -68,6 +68,10 @@ public class SceneService {
     public List<ActorDto> selectListActor(PageDto pageInfo) {
         return sceneMapper.selectListActor(pageInfo);
     }
+
+    public ActorDto selectActorOne(ActorDto dto){
+        return sceneMapper.selectActorOne(dto);
+    }
     public void insertActor(ActorDto dto){
         sceneMapper.insertActor(dto);
     }

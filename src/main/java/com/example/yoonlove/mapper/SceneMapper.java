@@ -27,6 +27,7 @@ public interface SceneMapper {
     public List<ActorDto> selectListActor(PageDto pageInfo);
     public PageDto totalActorPost(PageDto dt);
     public ActorDto selectActor(ActorDto dto);
+    public ActorDto selectActorOne(ActorDto dto);
     public void insertActor(ActorDto dto);
     public void updateActor(ActorDto dto);
     public void deleteActor(ActorDto dto);
