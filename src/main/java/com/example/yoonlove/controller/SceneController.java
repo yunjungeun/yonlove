@@ -169,8 +169,13 @@ public class SceneController {
         return mv;
     }
 
-    @GetMapping("scene/{act_id}/selectactor")
-    public ModelAndView selectActor(ActorDto actorDto){
+    @GetMapping("scene/selectactor")
+    public ModelAndView selectActor(String act_id, String day_id){
+        ActorDto actorDto = new ActorDto();
+        actorDto.setAct_id(act_id);
+        actorDto.setDay_id(day_id);
+
+        System.out.println(actorDto.toString());
         ActorDto dto = sceneService.selectActor(actorDto);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("scene/actorselect");

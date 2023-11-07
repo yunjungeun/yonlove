@@ -110,6 +110,9 @@
     <!--Actor SQL-->
     <select id="selectActor" resultType="com.example.yoonlove.dto.ActorDto">
         SELECT * FROM actorjoin where act_id = #{act_id}
+        <if test="day_id != null and day_id != ''">
+            and day_id = #{day_id}
+        </if>
     </select>
 
     <select id="totalActorPost" parameterType="com.example.yoonlove.dto.PageDto">
