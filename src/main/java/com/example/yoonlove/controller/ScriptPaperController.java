@@ -177,7 +177,6 @@ public class ScriptPaperController {
     @GetMapping("script/inserttimetable")
     @ResponseBody
     public String insertTimeTable(TimeTableDto dto){
-        System.out.println(dto.toString());
         scriptPaperService.insertTimeTable(dto);
         return "/script/timetable";
     }
@@ -193,7 +192,6 @@ public class ScriptPaperController {
     @GetMapping("script/{table_id}/updatetimetable")
     @ResponseBody
     public String updateTimeTable(TimeTableDto dto){
-        System.out.println("???????뭐냐 " + toString());
         scriptPaperService.updateTimeTable(dto);
         return "/script/timetable";
     }

@@ -3,6 +3,7 @@ package com.example.yoonlove.controller;
 import com.example.yoonlove.dto.NoticeDto;
 import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.QnADto;
+import com.example.yoonlove.dto.UserDto;
 import com.example.yoonlove.service.CsService;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.UserService;
@@ -48,18 +49,13 @@ public class CsController {
     }
     @GetMapping("/cs/notice")
     public ModelAndView selectListNotice(PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page, Principal user_id){
-        System.out.println(user_id);
 
         String user= user_id.getName();
-        System.out.println(user);
-
         //페이징에 필요한 매개변수, 객체생성
         PageDto pageDto = new PageDto("notice","notice_id",page, pdto);
 
         //페이징정보처리 메소드
         PageDto pageInfo = pagingService.paging(pageDto);
-        System.out.println("페이징정보 : "+pageInfo.toString());
-
 
         //뷰페이지에 하단 페이징처리를 해주는 리스트
         List<PageDto> pagelist = pagingService.pageList(pageInfo.getPageStart(), pageInfo.getPageEnd(), page);
@@ -71,7 +67,6 @@ public class CsController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/cs/listnotice");
         mv.addObject("selectListNotice", dto);
-
 
         //페이징에 필요한센션
         mv.addObject("prefixUrl", "cs");
@@ -93,9 +88,7 @@ public class CsController {
     @GetMapping("/cs/insertnotice")
     @ResponseBody
     public String insertNotice(NoticeDto dto, Principal user){
-
         dto.setUser_id(user.getName());
-
         csService.insertNotice(dto);
         return "/cs/notice";
     }
@@ -111,7 +104,6 @@ public class CsController {
     @GetMapping("/cs/{notice_id}/updatenotice")
     @ResponseBody
     public String updateNotice(NoticeDto dto){
-        System.out.println(dto.toString());
         csService.updateNotice(dto);
         return "/cs/notice";
     }
@@ -162,7 +154,12 @@ public class CsController {
     }
     @GetMapping("/cs/insertqna")
     @ResponseBody
-    public String insertQnA(QnADto dto){
+    public String insertQnA(QnADto dto, Principal user){
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        dto.setUser_id(userInfo.getUser_id());
+        dto.setQna_writer(userInfo.getNickname());
+
         csService.insertQnA(dto);
         return "/cs/qna";
     }

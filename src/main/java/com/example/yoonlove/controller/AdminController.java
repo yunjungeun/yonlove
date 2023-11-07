@@ -145,15 +145,19 @@ public class AdminController {
 
 
     @GetMapping("/admin/{dpt_id}/selectdpt")
-    public ModelAndView selectDepartment(DepartmentDto departmentDto, PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page){
-        DepartmentDto dto = adminService.selectDepartment(departmentDto);
+    public ModelAndView selectDepartment(DepartmentDto departmentDto, PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page,
+                                         Principal user){
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
 
+        DepartmentDto dto = adminService.selectDepartment(departmentDto);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/admin/dptselect");
 
         //서브게시판
         pdto.setPkid(dto.getDpt_id());
-        PageDto pageDto = new PageDto("users","user_id",page,pdto);
+        PageDto pageDto = new PageDto("users","user_id",page,pdto,companyId);
 
         PageDto pageInfo = pagingService.paging(pageDto);
 
