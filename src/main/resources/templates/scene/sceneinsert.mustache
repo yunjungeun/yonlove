@@ -14,11 +14,27 @@
 <body id="page-top">
 {{>layout/sidebar}}
 {{>layout/topbar}}
+
+<!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4" style="margin-top: 50px;">
+                    <div class="card-header py-3">
+                        <div class="table-responsive">
+
+<!--scene 테이블의 업로드 파일이 있다는 것을 알려주는 히든값-->
 <form id="alert" action="/scene/insertscene" method="get" >
-    <!--scene 테이블의 업로드 파일이 있다는 것을 알려주는 히든값-->
     <input type="hidden" id="tableId" value="scene"/>
 
-    <table border="1" cellpadding="1" cellspacing="1">
+    <table  class="table table-bordered" id="dataTable" width="100%" cellspacing="0">>
+        <thead>
         <tr>
             <td>기획명
             <select id="fk1" name="project_id"></select></td>
@@ -29,6 +45,7 @@
 
             <p id="errorText" style="color: red;"></p>
         </tr>
+
         <tr>
             <td>장면 요약<input  name="scene_content" type="text" placeholder="스토리보드 내용을 요약작성해 주세요" class="field2"/></td>
         </tr>
@@ -37,11 +54,33 @@
             <td colspan="2"><textarea  name="story_board" cols="50" rows="20" placeholder="스토리보드 내용" class="field3"></textarea></td>
             <td>촬영장소 <input  name="scene_place" type="text" class="field4"/></td>
         </tr>
+        </thead>
     </table>
 
-    <input id="submit-button" type="submit" value="등록" onclick="mappingurl('/scene/insertscene',4,'작성',1)">
+    <div class="d-flex justify-content-center align-items-center">
+        <input id="submit-button" type="submit" value="등록" onclick="mappingurl('/scene/insertscene',4,'작성',1)">
+        <a href="/scene/scene" role="button" class="btn btn-info">취소</a>
+    </div>
 </form>
-<a href="/scene/scene">취소</a>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+<br/>
+</div>
+
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+<!-- /.container-fluid -->
+</div>
+<!-- End of Main Content -->
+{{>layout/footer}}
+</div>
+<!-- End of Content Wrapper -->
 
 <!--옵션 태그에 필요한 js-->
 <script>
@@ -52,5 +91,13 @@
 <script src="/static/js/dropdown.js"></script>
 <script src="/static/js/cu_alert.js"></script>
 <script src="/static/js/uploadFile.js"></script>
+<!-- 페이징 처리와 관련된 부트스트랩 라이브러리-->
+<script src="/static/bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- 페이징 처리와 관련된 부트스트랩 라이브러리 -->
+<script src="/static/bootstrap/js/demo/datatables-demo.js"></script>
+
+{{>layout/bootstrapjs}}
 </body>
 </html>
