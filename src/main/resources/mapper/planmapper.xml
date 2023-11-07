@@ -95,7 +95,7 @@
         SET
         film_date = #{film_date},
         day_title = #{day_title},
-        weather = #{film_date},
+        weather = #{weather},
         light = #{light},
         costume = #{costume},
         prop = #{prop},

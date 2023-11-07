@@ -49,6 +49,7 @@ public class PlanService {
     public void updateSchedule(ScheduleDayDto dto) {
         planMapper.updateSchedule(dto);
     }
+
     //날씨 라디오 버튼에 대한 기본값 해쉬맵을 생성해주는 메서드
     public HashMap<String, Boolean> weatherCheck(ScheduleDayDto dto){
         HashMap<String, Boolean> weatherList = new LinkedHashMap<>();

@@ -108,12 +108,18 @@ public class PlanController {
     }
 
     @GetMapping("plan/{day_id}/scheduleUpdateView") //컨텐츠 업데이트하는 뷰
-    public ModelAndView scheduleUpdateView(ScheduleDayDto dto) {
+    public ModelAndView scheduleUpdateView(ScheduleDayDto dto, Principal user) throws JsonProcessingException {
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+        String jsonList = dropDownService.dropDownOption("project",null, companyId);
+
         ScheduleDayDto scheduleDayDto = planService.selectSchedule(dto);
         //저장된 날씨의 값을 해쉬맵으로 저장, 해쉬맵은 머스테치에서 라디오 버튼 체크를 설정하게함
         HashMap<String, Boolean> weather = planService.weatherCheck(scheduleDayDto);
 
         ModelAndView mv = new ModelAndView();
+        mv.addObject("fkList", jsonList);
         mv.setViewName("/plan/updateSchedule");
         mv.addObject("updateSchedule", scheduleDayDto);
         mv.addObject("weather", weather);
@@ -123,7 +129,8 @@ public class PlanController {
     @GetMapping("plan/{day_id}/updateSchedule") //업데이트 처리
     @ResponseBody
     public String updateSchedule(ScheduleDayDto dto) {
-        planService.updateSchedule(dto);
+        System.out.println(dto.toString());
+          planService.updateSchedule(dto);
         return "/plan/schedule_day";
     }
 
