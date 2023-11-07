@@ -112,6 +112,10 @@
         SELECT * FROM actorjoin where act_id = #{act_id}
     </select>
 
+    <select id="selectActorOne">
+        SELECT * FROM actor where act_id = #{act_id}
+    </select>
+
     <select id="totalActorPost" parameterType="com.example.yoonlove.dto.PageDto">
         select count(${id}) as totalPost from actorjoin
         <if test="company_id == 'company1'">

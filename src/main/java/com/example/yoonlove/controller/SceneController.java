@@ -172,7 +172,7 @@ public class SceneController {
 
     @GetMapping("scene/{act_id}/selectactor")
     public ModelAndView selectActor(ActorDto actorDto){
-        ActorDto dto = sceneService.selectActor(actorDto);
+        ActorDto dto = sceneService.selectActorOne(actorDto);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("scene/actorselect");
         mv.addObject("selectActor", dto);
