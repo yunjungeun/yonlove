@@ -17,8 +17,8 @@
         <tr>
             <td>시나리오 제목
                 <input name="scenario_name" type="text" value="{{selectScenario.scenario_name}}" readonly></td>
-            <td>기획ID / 나중에 기획명으로 바꿔야함
-                <input name="project_id" type="text" value="{{selectScenario.project_id}}" readonly></td>
+            <td>기획명
+                <input name="project_id" type="text" value="{{selectScenario.project_name}}" readonly></td>
             <td>시나리오 번호
                 <input name="scenario_num" type="text" value="{{selectScenario.scenario_num}}" readonly></td>
         </tr>
@@ -80,6 +80,6 @@
 
 <!--게시글 삭제시 경고문 js-->
 <script src="/static/js/deletepost.js"></script>
-
+{{>layout/bootstrapjs}}
 </body>
 </html>

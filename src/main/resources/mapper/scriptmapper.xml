@@ -9,7 +9,12 @@
 
     <select id="totalScriptPost" parameterType="com.example.yoonlove.dto.PageDto">
         select count(${id}) as totalPost from scriptview
-        where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
         <!--검색어가 있다면 아래 조건문을 실행-->
         <if test="title != null and search != ''">
             AND script_id like '%${title}%'
@@ -35,7 +40,12 @@
 
         <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
         from (select * from scriptview
-        where 1=1
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
         <if test="title != null and search != ''">
             AND scene_num like '%${title}%'
         </if>
@@ -47,11 +57,7 @@
         <if test="writer != null and search != ''">
             AND scenario_name like '%${writer}%'
         </if>
-
-
-
         order by ${id} desc) t)
-
         <!-- rownum을 기준(r)으로 시작번호부터 끝번호까지 검색   -->
         where r between #{postStart} and #{postEnd}
     </select>
@@ -103,7 +109,7 @@
     <!--타임테이블-->
     <select id="totalTimeTablePost" parameterType="com.example.yoonlove.dto.PageDto">
         select count(${id}) as totalPost from ${table}
-        where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
+            where 1=1
         <!--검색어가 있다면 아래 조건문을 실행-->
         <if test="title != null and search != ''">
             AND table_id like '%${title}%'
@@ -118,7 +124,7 @@
 
         <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
         from (select * from ${table}
-        where 1=1
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
         <if test="title != null and search != ''">
             AND table_id like '%${title}%'
         </if>
@@ -130,7 +136,7 @@
 
     <insert id="insertTimeTable">
         insert into timetable values(
-        (select concat('time',(nvl(max(to_number(substr(table_id, 4))), 0)+1)) from timetable),<!--pk코드 자동증가(수정2)-->
+        (select concat('time',(nvl(max(to_number(substr(table_id, 5))), 0)+1)) from timetable),<!--pk코드 자동증가(수정2)-->
         #{film_time},<!--촬영시간(몇시간 몇분)-->
         #{time_num},<!--타임테이블 번호 자동증가 해야됨-->
         #{ok_ng}, <!--ok판정-->

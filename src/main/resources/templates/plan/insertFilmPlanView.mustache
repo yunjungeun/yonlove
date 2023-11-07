@@ -20,14 +20,15 @@
             <td>씬
                 <select id="fk3" name="scene_id" class="field1"></select>
             </td>
+            <td>출연자
+                <select id="fk4" name="pd_id" class="field2"></select>
+            </td>
         </tr>
         <tr>
-            <td>안/밖<input name="inside_flag" type="text" class="field2" ></td>
-            <td>낮/밤<input name="day_flag" type="text" class="field3"></td>
-            <td>컷<input name="cut" type="text" class="field4" ></td>
+            <td>안/밖<input name="inside_flag" type="text" class="field3" ></td>
+            <td>낮/밤<input name="day_flag" type="text" class="field4"></td>
+            <td>컷<input name="cut" type="text" class="field5" ></td>
         </tr>
-
-
     </table>
     <input type="submit" value="등록" onclick="mappingurl('/plan/insertFilm',5,'작성')">
 </form>
@@ -37,6 +38,7 @@
     var jsonValue = '{{{fkList}}}';
     <!--select 옵션 name값을 cu_alert.js에 보내주기 위한 변수 값/이게없으면 제출이 안됨-->
     var selectName = "scene_id";
+    var produceId = "pd_id";
     <!--selectName이 실행되기 위해선 cu_alert 스크립트소스가 이 아래 있어야함-->
 </script>
 <script src="/static/js/dropdown.js"></script>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 
 @Slf4j
@@ -26,10 +27,19 @@ public class SceneController {
     private ScriptPaperService scriptPaperService;
     @Autowired
     private DropDownService dropDownService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private ProjectService projectService;
 
     @GetMapping("scene/scene")
-    public ModelAndView selectListScene(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
-        PageDto pageDto = new PageDto("scene","scene_id",page,pdto);
+    public ModelAndView selectListScene(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page,
+                                        Principal user){
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        PageDto pageDto = new PageDto("scene","scene_id",page,pdto, companyId);
         PageDto pageInfo = pagingService.paging(pageDto);
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.pageRink(pageDto);
@@ -87,9 +97,12 @@ public class SceneController {
     }
 
     @GetMapping("/scene/insertsceneview")
-    public ModelAndView insertSceneView() throws JsonProcessingException{
+    public ModelAndView insertSceneView(Principal user) throws JsonProcessingException{
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
 
-        String jsonListProject = dropDownService.dropDownOption("project",null);
+        String jsonListProject = dropDownService.dropDownOption("project",null, companyId);
 
         ModelAndView mv = new ModelAndView();
         mv.addObject("fkList", jsonListProject);
@@ -130,8 +143,13 @@ public class SceneController {
 
     //출연자 정보
     @GetMapping("scene/actor")
-    public ModelAndView selectListActor(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
-        PageDto pageDto = new PageDto("actor","actor_id",page,pdto);
+    public ModelAndView selectListActor(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page,
+                                        Principal user){
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        PageDto pageDto = new PageDto("actor","act_id",page,pdto, companyId);
         PageDto pageInfo = pagingService.paging(pageDto);
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.pageRink(pageDto);
@@ -149,7 +167,7 @@ public class SceneController {
         return mv;
     }
 
-    @GetMapping("scene/{actor_id}/selectactor")
+    @GetMapping("scene/{act_id}/selectactor")
     public ModelAndView selectActor(ActorDto actorDto){
         ActorDto dto = sceneService.selectActor(actorDto);
         ModelAndView mv = new ModelAndView();
@@ -159,8 +177,17 @@ public class SceneController {
     }
 
     @GetMapping("scene/insertactorview")
-    public String insertActorView(){
-        return "scene/actorinsert";
+    public ModelAndView insertActorView(Principal user) throws JsonProcessingException {
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        String jsonListProject = dropDownService.dropDownOption("project",null, companyId);
+
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("fkList", jsonListProject);
+        mv.setViewName("/scene/actorinsert");
+        return mv;
     }
     @GetMapping("scene/insertactor")
     @ResponseBody
@@ -170,7 +197,7 @@ public class SceneController {
     }
 
 
-    @GetMapping("scene/{actor_id}/updateactorview")
+    @GetMapping("scene/{act_id}/updateactorview")
     public ModelAndView updateActorView(ActorDto actorDto){
         ActorDto dto = sceneService.selectActor(actorDto);
         ModelAndView mv = new ModelAndView();
@@ -179,13 +206,17 @@ public class SceneController {
         return mv;
     }
 
-    @GetMapping("scene/{actor_id}/updateactor")
+    @GetMapping("scene/{act_id}/updateactor")
     @ResponseBody
     public String updateActor(ActorDto dto){
         sceneService.updateActor(dto);
+
+        ProduceDto produceDto = new ProduceDto();
+        produceDto = sceneService.transToProduceDto(dto);
+        projectService.updateProduce(produceDto);
         return "/scene/actor";
     }
-    @GetMapping("scene/{actor_id}/deleteactor")
+    @GetMapping("scene/{act_id}/deleteactor")
     public String deleteActor(ActorDto dto){
         sceneService.deleteActor(dto);
         return "redirect:/scene/actor";

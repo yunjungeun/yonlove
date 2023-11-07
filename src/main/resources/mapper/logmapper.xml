@@ -5,7 +5,12 @@
 
     <select id="totalLogPost" parameterType="com.example.yoonlove.dto.PageDto">
         select count(${id}) as totalPost from ${table}
-        where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
         <!--검색어가 있다면 아래 조건문을 실행-->
         <if test="title != null and search != ''">
             AND log_content like '%${title}%'
@@ -19,7 +24,12 @@
 
         <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
         from (select * from ${table}
-        where 1=1  /*에러처리방지를 위한 코드*/
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
         <if test="title != null and search != ''">
             AND log_content like '%${title}%'
         </if>
@@ -62,14 +72,17 @@
     </update>
 
     <delete id="deleteLog" parameterType="com.example.yoonlove.dto.LogDto">
-        DELETE FROM log WHERE log_id = #{log_id}
+        DELETE FROM logjoin
+        WHERE company_id = #{company_id}
+        and log_id = #{log_id}
     </delete>
 
     <!--해당월에 대한 제작일지 기록 모두 출력-->
     <select id="currentMonthLog"  resultType="com.example.yoonlove.dto.LogDto">
         <![CDATA[
-        SELECT * FROM log
-        WHERE EXTRACT(YEAR FROM log_date) = #{year}
+        SELECT * FROM logjoin
+        WHERE company_id = #{company_id}
+          AND EXTRACT(YEAR FROM log_date) = #{year}
           AND EXTRACT(MONTH FROM log_date) = #{month}
     ]]>
     </select>

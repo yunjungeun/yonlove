@@ -48,7 +48,25 @@ public class PageDto {
 
     private String search;
 
+    //회사 정보에 관한 프로퍼티
+    private String company_id;
+
     public PageDto(){}
+    public PageDto(String table, String pkid, int currentPage, PageDto dto, String company_id){
+        this.table = table;
+        this.id = pkid;
+        this.currentPage = currentPage;
+        this.pkid = dto.getPkid();
+        this.pkintid = dto.getPkintid();
+        this.writer = dto.getWriter();
+        this.content = dto.getContent();
+        this.title = dto.getTitle();
+        this.date = dto.getDate();
+        this.search = dto.getSearch();
+        this.company_id = company_id;
+    }
+
+    //버려져야할 임시 생성자
     public PageDto(String table, String pkid, int currentPage, PageDto dto){
         this.table = table;
         this.id = pkid;
@@ -61,6 +79,9 @@ public class PageDto {
         this.date = dto.getDate();
         this.search = dto.getSearch();
     }
+
+
+
     public PageDto(int currentPage, boolean currentPageFlag){
         this.currentPage = currentPage;
         this.currentPageFlag = currentPageFlag;

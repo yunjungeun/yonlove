@@ -14,48 +14,27 @@
 <body id="page-top">
 {{>layout/sidebar}}
 {{>layout/topbar}}
-<form id="alert" action="/creator/insertcreator" method="get">
-    <table border="1" cellpadding="1" cellspacing="1">
+
+    <table>
+        <thead>
         <tr>
-            <td>이름 <input class="field1" name="ch_name" type="text" placeholder="이름"/></td>
-            <td>SUB <input class="field2" name="ch_sub" type="number" placeholder="SUB"/></td>
-            <td>유저아이디<input type="text" class="field3" name="user_id" placeholder="유저아이디" ></td>
+            <th>채널 제목</th>
+            <th>썸네일</th>
         </tr>
+        </thead>
+        <tbody>
+        {{#hashmap}}
+            <tr>
+                <td><a href="/creator/insertcreator?channelId={{channelId}}&title={{channelTitle}}&userId={{userId}}">{{channelTitle}}</a></td>
+                <td><img src="{{thumbnailsUrl}}" alt="Thumbnail"></td>
+            </tr>
+        {{/hashmap}}
+        </tbody>
     </table>
-    <input type="submit" value="등록" id="submitBtn" onclick="mappingurl('/creator/insertcreator', 3,'작성')" />
-                                                                        <!--컨트롤러 insert 주소 ,    클릭 후 메인주소, 작성값의 갯수 , text 나오는값 -->
-</form>
+
 <a href="/creator/creater">목록으로 가기</a>
 
-
-<!--<script>
-    document.getElementById("insertForm").addEventListener("submit", function (event) {
-        event.preventDefault();  // 기본 제출동작을 멈추게함
-
-        // 입력된 데이터 가져오기
-        var ch_name = $("input[name='ch_name']").val();
-        var ch_sub = $("input[name='ch_sub']").val();
-        var user_id = $("input[name='user_id']").val();
-
-        // API로 데이터 전송
-        $.ajax({
-            url: "/creator/insertcreator", // API 엔드포인트 URL을 여기에 입력
-            type: "GET", // GET 또는 POST, API가 지원하는 메서드로 설정
-            data: {
-                ch_name: ch_name,
-                ch_sub: ch_sub,
-                user_id: user_id
-            },
-            success: function (response) {  // 성공일때 아래 메시지 띄우고 크레이터페이지로 이동
-                alert("글추가 완료! " );
-                window.location.href = "/creator/creater";
-            },
-            error: function (error) {  //실패시 아래 메시지 띄우기!
-                alert("API 요청 중 오류가 발생했습니다.");
-            }
-        });
-    });
-</script>-->
+<script src="/static/js/youtubejs.js"></script>
 </body>
 </html>
 

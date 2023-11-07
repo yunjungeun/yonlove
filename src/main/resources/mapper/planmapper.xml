@@ -5,8 +5,13 @@
 
 
     <select id="totalSceduledayPost" parameterType="com.example.yoonlove.dto.PageDto">
-        select count(${id}) as totalPost from ${table}
-        where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
+        select count(${id}) as totalPost from scheduledaylist
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
         <!--검색어가 있다면 아래 조건문을 실행-->
         <if test="title != null and search != ''">
             AND day_title like '%${title}%'
@@ -19,8 +24,9 @@
     <!--해당월에 대한 촬영일지 기록 모두 출력-->
     <select id="currentMonth" resultType="com.example.yoonlove.dto.ScheduleDayDto">
         <![CDATA[
-        SELECT * FROM schedule_day
-        WHERE EXTRACT(YEAR FROM film_date) = #{year}
+        SELECT * FROM scheduledaylist
+        WHERE company_id = #{company_id}
+          AND EXTRACT(YEAR FROM film_date) = #{year}
           AND EXTRACT(MONTH FROM film_date) = #{month}
     ]]>
     </select>
@@ -32,7 +38,12 @@
 
         <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
         from (select * from scheduledaylist
-        where 1=1  <!--에러처리방지를 위한 코드-->
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
         <if test="title != null and search != ''">
             AND day_title like '%${title}%'
         </if>
@@ -104,7 +115,12 @@
 
     <select id="totalSceduletimePost" parameterType="com.example.yoonlove.dto.PageDto">  /**/
         select count(${id}) as totalPost from ${table}
-        where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
         <!--검색어가 있다면 아래 조건문을 실행-->
         <if test="title != null and search != ''">
             AND film_content like '%${title}%'
@@ -124,7 +140,12 @@
 
         <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
         from (select * from dayplan_time
-        where 1=1  /*에러처리방지를 위한 코드*/
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
         <if test="title != null and search != ''">
             AND film_content like '%${title}%'
         </if>
@@ -177,7 +198,12 @@
         <!--출연자 관리 테이블 satart -->
     <select id="totalActorManagementPost" parameterType="com.example.yoonlove.dto.PageDto">  /**/
         select count(${id}) as totalPost from ${table}
-        where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
         <!--검색어가 있다면 아래 조건문을 실행-->
         <if test="title != null and search != ''">
             AND actor_name like '%${title}%'
@@ -196,7 +222,12 @@
 
         <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
         from (select * from ${table}
-        where 1=1  /*에러처리방지를 위한 코드*/
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
         <if test="title != null and search != ''">
             AND actor_name like '%${title}%'
         </if>
@@ -220,9 +251,13 @@
         SELECT scenario_id, scenario_name FROM scenario order by scenario_id desc
     </select>
 
+    <select id="searchActorName">
+        SELECT pd_name FROM produce where pd_id = #{pd_id}
+    </select>
+
     <insert id="insertActorManagement" parameterType="com.example.yoonlove.dto.ActorManagementDto" >
         INSERT INTO actor_management values (
-        (select concat('actor',(substr(NVL(max(actor_id),'actor0'),6)+1)) from actor_management),
+        (select concat('actor', (nvl(max(to_number(substr(actor_id, 3))), 0)+1)) from actor_management),<!--pk코드 자동증가(수정2)-->
 
         #{actor_name},
         #{arrival_time},
@@ -257,7 +292,12 @@
 <!--film_plan start-->
     <select id="totalFilmPlanPost" parameterType="com.example.yoonlove.dto.PageDto">
         select count(${id}) as totalPost from ${table}
-        where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
         <!--검색어가 있다면 아래 조건문을 실행-->
         <if test="title != null and search != ''">
             AND inside_flag like '%${title}%'
@@ -285,7 +325,12 @@
 
         <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
         from (select * from dayplan_film
-        where 1=1  /*에러처리방지를 위한 코드*/
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
         <if test="title != null and search != ''">
             AND inside_flag like '%${title}%'
         </if>
@@ -295,40 +340,34 @@
         where r between #{postStart} and #{postEnd}    /*where r between 1 and 10    where r between 11 and 20*/
     </select>
 
-
-
-
-
-
     <select id="selectFilmPlan" parameterType="com.example.yoonlove.dto.FilmPlanDto" resultType="com.example.yoonlove.dto.FilmPlanDto">
-        SELECT * FROM film_plan WHERE film_id = #{film_id}
+        SELECT * FROM day_table1 WHERE film_id = #{film_id}
+    </select>
+
+    <!--film_plan에 act_id를 구하기위한 메소드-->
+    <select id="selectFilmJoinActID">
+        select act_id from actorjoin where pd_id= #{pd_id} and scene_id = #{scene_id}
     </select>
 
     <insert id="insertFilm" parameterType="com.example.yoonlove.dto.FilmPlanDto" >
         INSERT INTO film_plan values(
-        (select concat('film',(substr(NVL(max(film_id),'film0'),5)+1)) from film_plan),
+        (select concat('film', (nvl(max(to_number(substr(film_id, 5))), 0)+1)) from film_plan),<!--pk코드 자동증가(수정2)-->
         #{day_id},
         #{scene_id},
         #{inside_flag},
         #{day_flag},
-        #{cut}
+        #{cut},
+        #{act_id}  <!--act_id 추가-->
         )
     </insert>
 
-
     <update id="updateFilm" parameterType="com.example.yoonlove.dto.FilmPlanDto" >
         UPDATE
-
         film_plan
-
         set
-
-        day_id = #{day_id},
-        scene_id = #{scene_id},
         inside_flag = #{inside_flag},
         day_flag = #{day_flag},
         cut = #{cut}
-
         WHERE
         film_id = #{film_id}
     </update>
@@ -356,75 +395,6 @@
         <if test="date != null and search != ''">
             AND schedule_date like 'YYYY-MM-DD'
         </if>
-
     </select>
-
-
-    <select id="selectListPlan" parameterType="com.example.yoonlove.dto.PageDto" resultType="com.example.yoonlove.dto.ScheduleMonthDto">
-        select *
-        <!--notice검색결과에 rownum을 하고 r로 지정-->
-        from(select rownum as r, t.*
-
-        <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
-        from (select * from ${table}
-        where 1=1  /*에러처리방지를 위한 코드*/
-        <if test="title != null and search != ''">
-            AND schedule_name like '%${title}%'
-        </if>
-
-        <if test="content != null and search != ''">
-            AND schedule_content like '%${content}%'
-        </if>
-
-        <if test="date != null and search != ''">
-            AND schedule_date like 'YYYY-MM-DD'
-        </if>
-
-
-        order by ${id} desc) t)
-
-        <!-- rownum을 기준(r)으로 시작번호부터 끝번호까지 검색   -->
-        where r between #{postStart} and #{postEnd}    /*where r between 1 and 10    where r between 11 and 20*/
-    </select>
-
-
-
-
-    <select id="selectPlan" parameterType="com.example.yoonlove.dto.ScheduleMonthDto" resultType="com.example.yoonlove.dto.ScheduleMonthDto">
-        SELECT * FROM schedule_month WHERE month_id = #{month_id}
-    </select>
-
-
-
-
-    <insert id="insertPlan" parameterType="com.example.yoonlove.dto.ScheduleMonthDto" >
-        INSERT INTO schedule_month values(
-        (select concat('month',(substr(NVL(max(month_id),'month0'),6)+1)) from schedule_month),
-        #{schedule_name},
-        #{schedule_content},
-        #{schedule_date},
-        #{project_id}
-
-        )
-    </insert>
-
-    <update id="updatePlan" parameterType="com.example.yoonlove.dto.ScheduleMonthDto" >
-        UPDATE
-        schedule_month
-        SET
-        schedule_name = #{schedule_name},
-        schedule_content = #{schedule_content},
-        schedule_date = #{schedule_date},
-        project_id = #{project_id}
-
-        WHERE
-        month_id = #{month_id}
-    </update>
-
-    <delete id="deletePlan" parameterType="com.example.yoonlove.dto.ScheduleMonthDto">
-        DELETE FROM schedule_month WHERE month_id = #{month_id}
-    </delete>
-
-    <!--schedule_month CRUD쿼리문 작성완료-->
 
 </mapper>

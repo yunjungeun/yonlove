@@ -14,6 +14,9 @@ public class LogDto {
     private String log_content;
     private String project_id;
 
+    //조인테이블 : logjoin
+    private String company_id;
+
     @Override
     public String toString() {
         return "LogDto{" +

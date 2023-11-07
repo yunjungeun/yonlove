@@ -60,7 +60,7 @@ for(var key in dayJsonCalender) {
     // 링크의 href url설정
     link.href = '/plan/schedule/'+ key;
     // 링크 텍스트를 설정한다
-    link.textContent = '촬영일정';
+    link.textContent = '촬영';
 
     var blank = document.createElement('br')
     element.appendChild(blank)

@@ -1,10 +1,7 @@
 package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.*;
-import com.example.yoonlove.service.CalendarService;
-import com.example.yoonlove.service.DropDownService;
-import com.example.yoonlove.service.PagingService;
-import com.example.yoonlove.service.PlanService;
+import com.example.yoonlove.service.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -32,11 +30,18 @@ public class PlanController {
     private DropDownService dropDownService;
     @Autowired
     private CalendarService calendarService;
+    @Autowired
+    private UserService userService;
 
 
     @GetMapping("/plan/schedule_day")
-    public ModelAndView selectListSchedule(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page) {
-        PageDto pageDto = new PageDto("schedule_day","day_id", page,pdto);
+    public ModelAndView selectListSchedule(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page,
+                                           Principal user) {
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        PageDto pageDto = new PageDto("schedule_day","day_id", page,pdto, companyId);
         PageDto pageInfo = pagingService.paging(pageDto); // paging ==> 전체게시글 갯수 구해오는 메소드
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
         String rink = pagingService.pageRink(pageDto);
@@ -81,8 +86,12 @@ public class PlanController {
     }
 
     @GetMapping("plan/insertScheduleView")
-    public ModelAndView insertScheduleView() throws JsonProcessingException{
-        String jsonList = dropDownService.dropDownOption("project",null);
+    public ModelAndView insertScheduleView(Principal user) throws JsonProcessingException{
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        String jsonList = dropDownService.dropDownOption("project",null, companyId);
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/insertSchedule");
@@ -123,7 +132,7 @@ public class PlanController {
         return "redirect:/plan/schedule_day";
 
     }
-//===================================================================================================================================== 촬영계획표
+//=====================================촬영계획표=================================================================================
 
 
     @GetMapping("plan/schedule_time")
@@ -160,8 +169,11 @@ public class PlanController {
     }
 
     @GetMapping("plan/insertScheduleTimeView")
-    public ModelAndView insertScheduleTimeView(ScheduleTimeDto dto) throws JsonProcessingException {
-        String jsonList = dropDownService.dropDownOption("project",null);
+    public ModelAndView insertScheduleTimeView(ScheduleTimeDto dto, Principal user) throws JsonProcessingException {
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        String jsonList = dropDownService.dropDownOption("project",null, companyId);
 
         ModelAndView mv = new ModelAndView();
         mv.addObject("dayId", dto.getDay_id());
@@ -240,9 +252,14 @@ public class PlanController {
     }
 
    @GetMapping("plan/insertactorManagementView")
-    public ModelAndView insertactorManagementView(ScheduleDayDto dto) throws JsonProcessingException{
+    public ModelAndView insertactorManagementView(ScheduleDayDto dto, Principal user) throws JsonProcessingException{
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        String jsonList = dropDownService.dropDownOption("table1",null, companyId);
 
         ModelAndView mv = new ModelAndView();
+        mv.addObject("fkList", jsonList);
         mv.addObject("dayId", dto.getDay_id());
         mv.setViewName("plan/insertactorManagementView");
         return mv;
@@ -253,13 +270,17 @@ public class PlanController {
     @ResponseBody
     public String insertActorManagement(ActorManagementDto dto) {
         String dayId = dto.getDay_id();
+        //pd_id로 proudce를 검색해서 출연자 이름을 획득하고 dto에 바인드
+        String actorName = planService.searchActorName(dto.getPd_id());
+        dto.setActor_name(actorName);
+
         planService.insertActorManagement(dto);
         return "/plan/schedule/"+dayId;
     }
 
 
     @GetMapping("plan/{actor_id}/actorManagementUpdateView") //컨텐츠 업데이트하는 뷰
-    public ModelAndView actorManagementUpdateView( ActorManagementDto dto) {
+    public ModelAndView actorManagementUpdateView(ActorManagementDto dto) {
         ActorManagementDto actorManagementDto = planService.selectActorManagement(dto);//업데이트를 하려면 해당 컨텐츠 불러와야하니까 위에 selectContent메소드를 다시씀!
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/actorManagementUpdateView");
@@ -307,20 +328,22 @@ public class PlanController {
 
     @GetMapping("plan/filmPlan/{film_id}")
     public ModelAndView selectFilmPlan(FilmPlanDto dto) {
-        FilmPlanDto filmPlanDetail = planService.selectFilmPlan(dto);
+        FilmPlanDto filmPlanDto = planService.selectFilmPlan(dto);
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/filmPlanDetail");
-        mv.setStatus(HttpStatus.valueOf(200));
-        mv.addObject("filmPlanDetail", filmPlanDetail);
+        mv.addObject("filmPlanDetail", filmPlanDto);
         return mv;
     }
 
-    @GetMapping("plan/insertFilmPlanView")
-    public ModelAndView insertFilmPlanView(ScheduleDayDto dto) throws JsonProcessingException{
+    @GetMapping("plan/insertFilmPlanView/{day_id}")
+    public ModelAndView insertFilmPlanView(ScheduleDayDto dto, Principal user) throws JsonProcessingException{
         ModelAndView mv = new ModelAndView();
 
-        String jsonList = dropDownService.dropDownOption("project",null);
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        String jsonList = dropDownService.dropDownOption("project",null, companyId);
         mv.addObject("fkList", jsonList);
         mv.addObject("dayId", dto.getDay_id());
         mv.setViewName("plan/insertFilmPlanView");
@@ -331,18 +354,20 @@ public class PlanController {
     @GetMapping("plan/insertFilm")  //컨텐츠 추가 처리
     @ResponseBody
     public String insertFilm(FilmPlanDto dto) {
+        //dto에는 insert에 들어갈 act_id가 없음. dto에 있는 pd_id와 scene_id로 act_id를 획득하는 로직
+        String actId = planService.selectFilmJoinActID(dto.getPd_id(), dto.getScene_id());
+        dto.setAct_id(actId);   //획득된 act_id를 dto에 바인드
         planService.insertFilm(dto);
+
         return "/plan/film_plan";
     }
 
-
     @GetMapping("plan/{film_id}/filmPlanUpdateView") //컨텐츠 업데이트하는 뷰
     public ModelAndView filmPlanUpdateView( FilmPlanDto dto) {
-        FilmPlanDto filmPlanUpdate = planService.selectFilmPlan(dto);//업데이트를 하려면 해당 컨텐츠 불러와야하니까 위에 selectContent메소드를 다시씀!
+        FilmPlanDto filmPlanDto = planService.selectFilmPlan(dto);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/filmPlanUpdateView");
-        mv.setStatus(HttpStatus.valueOf(200));
-        mv.addObject("filmPlanUpdate", filmPlanUpdate);
+        mv.addObject("filmPlanUpdate", filmPlanDto);
         return mv;
     }
 
@@ -359,87 +384,13 @@ public class PlanController {
         return "redirect:/plan/film_plan";
     }
 
-
-//=================================================================================
-
-    @GetMapping("plan/schedule_month")
-    public ModelAndView selectListPlan(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
-        PageDto pageDto = new PageDto("schedule_month","month_id", page,pdto);
-        PageDto pageInfo = pagingService.paging(pageDto);
-
-        // paging ==> 전체게시글 갯수 구해오는 메소드
-        List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
-        String rink = pagingService.pageRink(pageDto);
-
-        List<ScheduleMonthDto> dto = planService.selectListPlan(pageInfo);
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("/plan/scheduleMonthList");
-        mv.addObject("scheduleMonthList", dto);
-
-        mv.addObject("prefixUrl","plan");
-        mv.addObject("paging", pageInfo);  //페이징정보
-        mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
-        mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
-
-        return mv;
-    }
-
-
-    @GetMapping("plan/scheduleMonth/{month_id}")
-    public ModelAndView selectPlan(ScheduleMonthDto dto) {
-        ScheduleMonthDto scheduleMonth = planService.selectPlan(dto);
-
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("/plan/scheduleMonthDetail");
-        mv.setStatus(HttpStatus.valueOf(200));
-        mv.addObject("scheduleMonth", scheduleMonth);
-        return mv;
-    }
-
-    @GetMapping("plan/insertScheduleMonthView")
-    public ModelAndView insertScheduleMonthView() {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("plan/insertScheduleMonthView");
-        mv.setStatus(HttpStatus.valueOf(200));
-        return mv;
-    }
-
-    @GetMapping("plan/insertPlan")  //컨텐츠 추가 처리
-    @ResponseBody
-    public String insertPlan(ScheduleMonthDto dto) {
-        planService.insertPlan(dto);
-        return "/plan/schedule_month";
-    }
-
-    @GetMapping("plan/{month_id}/ScheduleMonthUpdateView") //컨텐츠 업데이트하는 뷰
-    public ModelAndView ScheduleMonthUpdateView( ScheduleMonthDto dto) {
-        ScheduleMonthDto ScheduleMonthUpdate = planService.selectPlan(dto);//업데이트를 하려면 해당 컨텐츠 불러와야하니까 위에 selectContent메소드를 다시씀!
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("/plan/ScheduleMonthUpdateView");
-        mv.setStatus(HttpStatus.valueOf(200));
-        mv.addObject("ScheduleMonthUpdate", ScheduleMonthUpdate);
-        return mv;
-    }
-
-    @GetMapping("plan/{month_id}/updateScheduleMonth") //업데이트 처리
-    @ResponseBody
-    public String  updatePlan( ScheduleMonthDto dto) {
-        planService. updatePlan(dto);
-        return "/plan/schedule_month";
-    }
-
-    @GetMapping("plan/{month_id}/deleteScheduleMonth") //삭제 처리
-    public String deletePlan( ScheduleMonthDto dto) {
-        planService.deletePlan(dto);
-        return "redirect:/plan/schedule_month";
-
-    }
-
-
-
     //------------------------월력형 테이블 로직---------------------------------//
     @GetMapping("/calendar")
-    public ModelAndView showCalendar(@RequestParam(defaultValue = "-1") int year, @RequestParam(defaultValue = "-1")int month) throws JsonProcessingException {
+    public ModelAndView showCalendar(@RequestParam(defaultValue = "-1") int year, @RequestParam(defaultValue = "-1")int month,
+                                     Principal user) throws JsonProcessingException {
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
 
         //년월 기본값(-1년-1월) 이라면 현재 년월 기준으로 year/month 값 출력
         if(year+month == -2){
@@ -451,11 +402,11 @@ public class PlanController {
         List<List<String>> calendarData = calendarService.generateCalendarData(year,month);
 
         //제작일지 Json 불러오기 : {log1 : 작성일자} 식으로 존재함
-        String calendarLog = calendarService.logJson(year,month);
+        String calendarLog = calendarService.logJson(year,month,companyId);
         mv.addObject("logJson",calendarLog);
 
         //촬영일정표 Json 불러오기 : {day1 : 작성일자} 식으로 존재함
-        String calendarDay = calendarService.dayJson(year,month);
+        String calendarDay = calendarService.dayJson(year,month,companyId);
         mv.addObject("dayJson",calendarDay);
 
         // 뷰로 데이터를 전달하기 위해 모델에 "calendar" 속성 추가
@@ -546,6 +497,4 @@ public class PlanController {
 
         return response;
     }
-
-
 }

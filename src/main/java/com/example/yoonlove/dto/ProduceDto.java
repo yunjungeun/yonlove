@@ -14,4 +14,8 @@ public class ProduceDto {
     private String project_id;
     private String user_id;
 
+    // 조인테이블 : producejoin
+    private String company_id;
+    private String project_name;
+
 }

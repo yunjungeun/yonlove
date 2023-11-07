@@ -12,18 +12,24 @@
 
 <table border="1" cellpadding="1" cellspacing="1">
     <tr>
-
-
-        <td>안/밖<input name="inside_flag" type="text" value="{{filmPlanDetail.inside_flag}}" ></td>
-        <td>낮/밤<input name="day_flag" type="text" value="{{filmPlanDetail.day_flag}}"></td>
-        <td>계획표id<input name="day_id" type="text" value="{{filmPlanDetail.day_id}}"></td>
-        <td>카메라씬id<input name="scene_id" type="text"value="{{filmPlanDetail.scene_id}}" ></td>
-        <td>컷<input name="cut" type="text" value="{{filmPlanDetail.cut}}"></td>
-
-
-
+        <td>기획</td>
+        <td>시나리오</td>
+        <td>씬</td>
+        <td>출연자 / 배역</td>
+        <td>촬영일</td>
     </tr>
-
+    <tr>
+        <td>{{filmPlanDetail.project_name}}</td>
+        <td>{{filmPlanDetail.scenario_name}}</td>
+        <td>{{filmPlanDetail.scene_num}}</td>
+        <td>{{filmPlanDetail.pd_name}} / {{filmPlanDetail.casting}}</td>
+        <td>{{filmPlanDetail.film_date}}</td>
+    </tr>
+    <tr>
+        <td>안/밖 : {{filmPlanDetail.inside_flag}}</td>
+        <td>낮/밤 : {{filmPlanDetail.day_flag}}</td>
+        <td>컷 : {{filmPlanDetail.cut}}</td>
+    </tr>
 
 </table>
 <a href="/plan/film_plan">목록</a>

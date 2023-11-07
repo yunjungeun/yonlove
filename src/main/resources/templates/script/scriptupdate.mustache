@@ -14,30 +14,80 @@
 <body id="page-top">
 {{>layout/sidebar}}
 {{>layout/topbar}}
-<form id="alert" method="get" action="/script/{{selectScriptPaper.script_id}}/updatescriptpaper">
-    <input id="pk" name="script_id" type="hidden" value="{{selectScriptPaper.script_id}}"/>
 
-<table border="1" cellpadding="1" cellspacing="1">
-    <tr>
-        <td>영상 제목<input class="field1" name="video_name" type="text" value="{{selectScriptPaper.video_name}}" ></td>
-        <td>촬영날짜<input class="field2" name="video_date" type="date" value="{{selectScriptPaper.video_date}}" ></td>
-        <td>촬영시간<input class="field3" name="video_time" type="date" value="{{selectScriptPaper.video_time}}" ></td>
-        <td>촬영시작시간<input class="field4" name="video_start_time" type="date" value="{{selectScriptPaper.video_start_time}}" ></td>
-    </tr>
-    <tr>
-        <td>액션 이미지 첨부파일 <input id="updateFile" name="action_image" type="file"/>
-            <input id="deletefile" type="button" onclick="deleteFile()" value="파일삭제" /></td>
-        <td>액션 내용 <input class="field5" name="action_content" type="text" value="{{selectScriptPaper.action_content}}" /></td>
-        <td>카메라포지션 첨부파일 <input class="field6" name="position_image" type="text" value="{{selectScriptPaper.position_image}}" /></td>
-        <td>콘티 <input class="field7" name="conti" type="text" value="{{selectScriptPaper.conti}}" /></td>
-    </tr>
-</table>
-    <input type="submit" value="수정" onclick="mappingurl('/script/{{selectScriptPaper.script_id}}/updatescriptpaper',7,'수정')"/>
-</form>
-<a href="/script/scriptpaper">취소</a>
-<br/>현재까지 버그<br/>
 
-<script src="/static/js/cu_alert.js"></script>
-<script src="/static/js/uploadFile.js"></script>
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+
+<!-- Main Content -->
+<div id="content">
+
+<div class="container-fluid">
+    <div style="text-align: center; display: block; margin-top:40px;" > <!-- 수정 ! 마진 탑 100->수정 -->
+        <h1 class="h3 mb-2 text-gray-800" >스크립트페이퍼</h1>
+    </div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4" style="margin-top: 50px; margin-right: 300px; margin-left: 300px">
+        <div class="card-header py-3">
+
+            <form id="alert" method="get" action="/script/{{selectScriptPaper.script_id}}/updatescriptpaper">
+            <div style="margin-left: 20%; margin-right: 20%; margin-top: 5%;">
+                <div style="display: inline-block;">
+                    <div class="mb-3" style="display: inline-block;">
+                        <label for="formGroupExampleInput" class="form-label"><strong>영상 제목</strong></label>
+                        <input class="field1" name="video_name" type="text" value="{{selectScriptPaper.video_name}}"/><br/>
+
+                        <label for="formGroupExampleInput" class="form-label"><strong>촬영 날짜</strong></label>
+                        <input class="field2" name="video_date" type="date" value="{{selectScriptPaper.video_date}}"/><br/>
+
+                        <label for="formGroupExampleInput" class="form-label"><strong>촬영 총시간</strong></label>
+                        <input class="field3" name="video_time" type="date" value="{{selectScriptPaper.video_time}}"/><br/>
+
+                        <label for="formGroupExampleInput" class="form-label"><strong>촬영 시작시간</strong></label>
+                        <input class="field4" name="video_start_time" type="date" value="{{selectScriptPaper.video_start_time}}"/><br/>
+                    </div>
+
+                    <div class="mb-3" style="display: inline-block;">
+                        <label for="formGroupExampleInput" class="form-label"><strong>액션 이미지</strong></label>
+                        <input id="updateFile" name="action_image" type="file"/>
+                        <input id="deletefile" type="button" onclick="deleteFile()" value="파일삭제"/>
+                        <br/>
+
+                        <label for="formGroupExampleInput" class="form-label"><strong>액션 내용</strong></label>
+                        <input class="field5" name="action_content" type="text" value="{{selectScriptPaper.action_content}}"/><br/>
+
+                        <label for="formGroupExampleInput" class="form-label"><strong>카메라포지션</strong></label>
+                        <input class="field6" name="position_image" type="text" value="{{selectScriptPaper.position_image}}"/><br/>
+
+                        <label for="formGroupExampleInput" class="form-label"><strong>콘티</strong></label>
+                        <input class="field7" name="conti" type="text" value="{{selectScriptPaper.conti}}"/>
+                    </div>
+
+        <div style="text-align: center">
+            <button type="submit" class="btn btn-primary" onclick="mappingurl('/script/{{selectScriptPaper.script_id}}/updatescriptpaper',7,'수정')">수정</button>
+            <a href="/script/scriptpaper" class="btn btn-secondary" style="text-decoration: none;">취소</a>
+        </div>
+        </div>
+            </div>
+                </form>
+
+        </div>
+    </div>
+</div>
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- /.container-fluid -->
+</div>
+    <!-- End of Main Content -->
+    {{>layout/footer}}
+</div>
+<!-- End of Content Wrapper -->
+
+<script>
+    var url = "script/scriptpaper";
+</script>
+
+{{>layout/bootstrapjs}}
 </body>
 </html>

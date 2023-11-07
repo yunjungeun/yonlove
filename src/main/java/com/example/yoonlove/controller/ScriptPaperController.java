@@ -1,13 +1,7 @@
 package com.example.yoonlove.controller;
 
-import com.example.yoonlove.dto.FileDto;
-import com.example.yoonlove.dto.PageDto;
-import com.example.yoonlove.dto.ScriptPaperDto;
-import com.example.yoonlove.dto.TimeTableDto;
-import com.example.yoonlove.service.DropDownService;
-import com.example.yoonlove.service.FileService;
-import com.example.yoonlove.service.PagingService;
-import com.example.yoonlove.service.ScriptPaperService;
+import com.example.yoonlove.dto.*;
+import com.example.yoonlove.service.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -28,11 +23,18 @@ public class ScriptPaperController {
     private DropDownService dropDownService;
     @Autowired
     private FileService fileService;
+    @Autowired
+    private UserService userService;
 
     //스크립트페이퍼
     @GetMapping("script/scriptpaper")
-    public ModelAndView selectListScriptPaper(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
-        PageDto pageDto = new PageDto("scriptpaper","script_id", page,pdto);
+    public ModelAndView selectListScriptPaper(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page,
+                                              Principal user){
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        PageDto pageDto = new PageDto("scriptpaper","script_id", page,pdto, companyId);
         PageDto pageInfo = pagingService.paging(pageDto);
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.pageRink(pageDto);
@@ -67,20 +69,19 @@ public class ScriptPaperController {
             mv.addObject("file",nullFileDto);
         }
 
-
         mv.setViewName("/script/scriptselect");
         mv.addObject("selectScriptPaper", dto);
         // 기존 값 셀럭트
 
         // 이어붙일 타임테이블 셀럭트 값
        // pdto.setPkid(dto.getTable_id());
-
         PageDto pageDto = new PageDto("timetable","table_id", page, pdto);
         PageDto pageInfo = pagingService.paging(pageDto);
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.subPageRink(pageDto, "scriptpaper");
 
         List<TimeTableDto> subList = scriptPaperService.selectListTimeTable(pageInfo); //
+
         mv.addObject("selectListTimeTable", subList);
 
         //서브 페이징에 필요한섹션
@@ -95,8 +96,12 @@ public class ScriptPaperController {
     }
 
     @GetMapping("script/insertscriptpaperview")
-    public ModelAndView insertscript() throws JsonProcessingException {
-        String jsonListProject = dropDownService.dropDownOption("project",null);
+    public ModelAndView insertscript(Principal user) throws JsonProcessingException {
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        String jsonListProject = dropDownService.dropDownOption("project",null, companyId);
 
         ModelAndView mv = new ModelAndView();
         mv.addObject("fkListProject", jsonListProject);
@@ -172,7 +177,6 @@ public class ScriptPaperController {
     @GetMapping("script/inserttimetable")
     @ResponseBody
     public String insertTimeTable(TimeTableDto dto){
-        System.out.println(dto.toString());
         scriptPaperService.insertTimeTable(dto);
         return "/script/timetable";
     }

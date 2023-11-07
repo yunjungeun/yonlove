@@ -50,16 +50,22 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                     <tr>
-                        <th  style="text-align: center;">씬 번호</th>
-                        <th  style="text-align: center;">출연자 id(조인으로 성명들어가야함)</th>
-                        <th  style="text-align: center;">출연장 배역/역할</th>
+                        <th  style="text-align: center;">기획</th>
+                        <th  style="text-align: center;">시나리오</th>
+                        <th  style="text-align: center;">씬</th>
+                        <th  style="text-align: center;">성명</th>
+                        <th  style="text-align: center;">출연자 배역</th>
+                        <th  style="text-align: center;">기타</th>
                     </tr>
                     </thead>
                     <tbody>
                     {{#selectListActor}}
                         <tr>
-                            <td style="text-align: center;">{{actor_id}}<!--여기누르면 시나리오로 이동해야함--></td>
-                            <td style="text-align: center;"><a href="/scene/{{actor_id}}/selectactor">{{scene_id}}</a></td>
+                            <td style="text-align: center;">{{project_name}}</td>
+                            <td style="text-align: center;">{{scenario_name}}</td>
+                            <td style="text-align: center;">{{scene_num}}</td>
+                            <td style="text-align: center;"><a href="/scene/{{act_id}}/selectactor">{{pd_name}}</a></td>
+                            <td style="text-align: center;">{{casting}}</td>
                             <td style="text-align: center;">{{actor_info}}</td>
                         </tr>
                     {{/selectListActor}}

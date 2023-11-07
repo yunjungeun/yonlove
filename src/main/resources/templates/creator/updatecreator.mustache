@@ -47,36 +47,6 @@
 </div>
 </form>
 
-<!--<script>
-    document.getElementById("updateFrom").addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        // 입력된 데이터 가져오기
-        var ch_name = $("input[name='ch_name']").val();
-        var ch_sub = $("input[name='ch_sub']").val();
-        var user_id = $("input[name='user_id']").val();
-
-        // Mustache 템플릿에서 추출한 ch_id 값
-        var ch_id = "1{selectCreator.ch_id}}";  // 이 부분을 실제 Mustache 데이터로 대체해야 합니다.
-
-        // API로 데이터 전송
-        $.ajax({
-            url: "/creator/updatecreator/" + ch_id,
-            type: "GET",
-            data: {
-                ch_name: ch_name,
-                ch_sub: ch_sub,
-                user_id: user_id
-            },
-            success: function (response) {
-                alert("글 수정 처리 완료" );
-                window.location.href = "/creator/creator" ;
-            },
-            error: function (error) {
-                alert("오류가 발생.");
-            }
-        });
-    });
-</script>-->
+{{>layout/bootstrapjs}}
 </body>
 </html>

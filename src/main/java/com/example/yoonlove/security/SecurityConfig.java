@@ -20,38 +20,28 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
              http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
-                .requestMatchers("/login","/cs/qna","/signupview","/signup","/index","/static/**").permitAll()
-                .requestMatchers("cs/selectqna/**").hasAuthority("admin")
-                .anyRequest().permitAll()     //.authenticated()
+                .requestMatchers("/login","/signupview","/signup","/index","/static/**").permitAll()
+                .requestMatchers("admin/**").hasAuthority("admin")
+                .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/loginProc")
+                        .failureUrl("/login?error")
                         .usernameParameter("user_id")
                         .passwordParameter("pw")
                         .defaultSuccessUrl("/index")
                 )
                 .logout(logout -> logout
                         .logoutUrl("/login/logout")
-                        .logoutSuccessUrl("/cs/notice")
+                        .logoutSuccessUrl("/index")
                         .invalidateHttpSession(true)
                 );
              return http.build();
     }
-
-    //인증관리자 관련 설정
-    /*@Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder, UserService userService) throws Exception{
-        return http.getSharedObject(AuthenticationManagerBuilder.class)
-                .userDetailsService(userService)
-                .passwordEncoder(bCryptPasswordEncoder);
-    }*/
-
-
 }

@@ -25,7 +25,8 @@
         <td>씬</td>
         <td>장소</td>
         <td>내용</td>
-        <td>연기자</td>
+        <td>출연자</td>
+        <td>배역</td>
         <td>안/밖</td>
         <td>낮/밤</td>
         <td>컷수</td>
@@ -34,8 +35,9 @@
       <tr>
           <td>{{scenario_name}}-#{{scenario_num}}-{{scene_num}}</td>
           <td>{{scene_place}}</td>
-          <td>{{scene_content}}</td>
-          <td>아직미구현</td>
+          <td><a href="/plan/filmPlan/{{film_id}}" >{{scene_content}}</a></td>
+          <td>{{pd_name}}</td>
+          <td>{{casting}}</td>
           <td>{{inside_flag}}</td>
           <td>{{day_flag}}</td>
           <td>{{cut}}</td>
@@ -43,7 +45,7 @@
     {{/table1}}
 </table>
 <!--table1 end-->
-<form method="get" action="/plan/insertFilmPlanView">
+<form method="get" action="/plan/insertFilmPlanView/{{scheduleDetail.day_id}}">
     <input type="hidden" name="day_id" value="{{scheduleDetail.day_id}}">
     <input type="submit" value="작성">
 </form>
@@ -71,16 +73,16 @@
 
 <!--table3 start-->
 <table border="1" cellpadding="1" cellspacing="1">
-    <tr><td colspan="4">주 / 조연 배우</td></tr>
+    <tr><td colspan="4">출연자 준비</td></tr>
     <tr>
-        <td>연기자</td>
+        <td>출연자</td>
         <td>도착시간</td>
         <td>장소</td>
         <td>SET_CALL</td>
     </tr>
     {{#table3}}
         <tr>
-            <td>{{actor_name}}</td>
+            <td><a href="/plan/actorManagement/{{actor_id}}">{{actor_name}}</a> </td>
             <td>{{arrival_time}}</td>
             <td>{{place}}</td>
             <td>{{set_call}}</td>

@@ -3,7 +3,7 @@
 
 <mapper namespace="com.example.yoonlove.mapper.ScenarioMapper">
     <select id="selectScenario" resultType="com.example.yoonlove.dto.ScenarioDto">
-        SELECT * FROM scenario where scenario_id=#{scenario_id}
+        SELECT * FROM scenariolist where scenario_id=#{scenario_id}
     </select>
 
     <!--옵션값에 넣기 위한 fk테이블의 검색값을 가져오는 쿼리-->
@@ -12,8 +12,13 @@
     </select>
 
     <select id="totalScenarioPost" parameterType="com.example.yoonlove.dto.PageDto">
-        select count(${id}) as totalPost from ${table}
-        where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
+        select count(${id}) as totalPost from scenariolist
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
         <!--검색어가 있다면 아래 조건문을 실행-->
         <if test="title != null and search != ''">
             AND scenario_name like '%${title}%'
@@ -34,7 +39,12 @@
 
         <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
         from (select * from scenariolist
-        where 1=1
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
         <if test="title != null and search != ''">
             AND scenario_name like '%${title}%'
         </if>

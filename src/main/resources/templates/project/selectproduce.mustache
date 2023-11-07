@@ -14,13 +14,9 @@
 {{>layout/sidebar}}
 {{>layout/topbar}}
 <div id="div_box">
-    <h1> 제작 상세보기</h1>
+    <h1> {{selectProduce.project_name}}</h1>
     <hr>
     <table board="1" cellpascing="0" cellpading="0">
-        <tr>
-            <td bgcolor="pink" width="70">제작인원 아이디 </td>
-            <td align="left">{{selectProduce.pd_id}}</td>
-        </tr>
 
         <tr>
             <td bgcolor="pink">이름</td>
@@ -37,15 +33,6 @@
             <td align="left">{{selectProduce.casting}}</td>
         </tr>
 
-        <tr>
-            <td bgcolor="pink">기획아이디</td>
-            <td align="left">{{selectProduce.project_id}}</td>
-        </tr>
-
-        <tr>
-            <td bgcolor="pink">유저아이디</td>
-            <td align="left">{{selectProduce.user_id}}</td>
-        </tr>
     </table>
     <hr>
     <a href="/project/updateproduceview/{{selectProduce.pd_id}}">게시글 수정</a>&nbsp;&nbsp;&nbsp;

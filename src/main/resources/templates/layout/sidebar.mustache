@@ -9,7 +9,7 @@ data-target의 값과 같은 id를 작동시킴-->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index2.mustache">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/index">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
@@ -25,9 +25,16 @@ data-target의 값과 같은 id를 작동시킴-->
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>대쉬보드</span></a>
     </li>
-
     <!-- 나누는 줄 -->
     <hr class="sidebar-divider">
+
+
+    <li class="nav-item active">
+        <a class="nav-link" href="/creator/creater">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>크리에이터</span></a>
+    </li>
+
 
     <!-- 소주제(컨트롤러) -->
     <div class="sidebar-heading">
@@ -44,7 +51,6 @@ data-target의 값과 같은 id를 작동시킴-->
         <!--소주제-->
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Components:</h6>
                 <a class="collapse-item" href="/project/project">기획현황</a>
                 <a class="collapse-item" href="/project/insertprojectview">기획작성</a>
             </div>
@@ -81,7 +87,6 @@ data-target의 값과 같은 id를 작동시킴-->
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
              data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Utilities:</h6>
                 <a class="collapse-item" href="/scenario/scenario">시나리오</a>
                 <a class="collapse-item" href="/scenario/insertscenarioview">시나리오 작성</a>
                 <hr/>  <!--줄나눈기-->
@@ -105,8 +110,7 @@ data-target의 값과 같은 id를 작동시킴-->
         <div id="collapseUtilities1" class="collapse" aria-labelledby="headingUtilities"
              data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="/plan/schedule_month">일정표</a>
+                <a class="collapse-item" href="/calendar">일정표</a>
                 <a class="collapse-item" href="/plan/schedule_day">일일 촬영계획</a>
                 <a class="collapse-item" href="/log/log">제작일지</a>
             </div>
@@ -128,7 +132,6 @@ data-target의 값과 같은 id를 작동시킴-->
         </a>
         <div id="mycompany" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Login Screens:</h6>
                 <a class="collapse-item" href="/admin/department">부서</a>
                 <a class="collapse-item" href="/admin/user">직원</a>
             </div>
@@ -152,7 +155,6 @@ data-target의 값과 같은 id를 작동시킴-->
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Login Screens:</h6>
                 <a class="collapse-item" href="/cs/notice">공지사항</a>
                 <a class="collapse-item" href="/cs/qna">문의사항</a>
             </div>
@@ -176,7 +178,7 @@ data-target의 값과 같은 id를 작동시킴-->
 
     <!-- Sidebar Message -->
     <div class="sidebar-card d-none d-lg-flex">
-        <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
+        <img class="sidebar-card-illustration mb-2" src="#" alt="없음">
         <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
         <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
     </div>

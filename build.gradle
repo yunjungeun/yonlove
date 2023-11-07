@@ -33,6 +33,7 @@ dependencies {
 	implementation 'com.google.apis:google-api-services-youtube:v3-rev20230123-2.0.0'  //유튜브api
 	implementation 'com.google.api-client:google-api-client-gson:1.32.1' //gson
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.5' //json
+	implementation 'org.json:json:20210307'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
