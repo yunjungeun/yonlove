@@ -156,26 +156,16 @@ public class AdminController {
     }
 
     @GetMapping("/admin/adduser")
+    @ResponseBody
     public String updateContent(Principal user, UserDto userDto) {
-
-        System.out.println(user.getName());
 
       String userId = user.getName();
 
       UserDto myUser = userService.getUser(userId);
+      userDto.setCompany_id(myUser.getCompany_id());
+      userService.updateUser(userDto);
 
-        System.out.println(myUser.getCompany_id());
-
-        userDto.setCompany_id(myUser.getCompany_id());
-
-        System.out.println(userDto.toString());
-
-
-
-       userService.updateUser(userDto);
-
-        System.out.println("test111");
-        return "/admin/user";
+      return "/admin/user";
     }
 
 

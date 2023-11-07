@@ -72,7 +72,13 @@ public class LogController {
     @GetMapping("log/insertLog")
     @ResponseBody
     public String insertLog(LogDto dto) {
+
+        System.out.println("test111!!!!!"+dto.toString());
+
         logService.insertLog(dto);
+
+        System.out.println("test222!!!!!"+dto.toString());
+
         return "/log/log";
     }
 

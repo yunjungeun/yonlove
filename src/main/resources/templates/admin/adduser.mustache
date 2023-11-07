@@ -47,7 +47,7 @@
                             <thead>
                             <tr>
                                 <th style="text-align: center;" >회원ID</th>
-                                <th style="text-align: center;"><input class="field1" type = text name="user_id" /></th>
+                                <th style="text-align: center;"><input class="field1" type = text name="user_id" style="margin: 0 auto; display: block; text-align: center;" /></th>
 
                             </tr>
                             </thead>
@@ -58,8 +58,10 @@
 
 
                         <div style="text-align: center">
-                            <button type="submit" class="btn btn-primary" onclick="mappingurl('/admin/adduser',1,'수정')">등록</button>
-                            <button class="btn btn-secondary" onclick="location.href='/admin/user'">취소</button>
+                            <button type="submit" class="btn btn-primary" onclick="mappingurl('/admin/adduser',1,'추가')">등록</button>
+                            <button class="btn btn-secondary">
+                                <a href="/admin/user" style="text-decoration: none; color: white;">취소</a>
+                            </button>
                         </div>
                     </div>
 
