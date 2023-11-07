@@ -76,7 +76,6 @@ public class SceneController {
             mv.addObject("file",nullFileDto);
         }
 
-
         mv.setViewName("scene/sceneselect");
         mv.addObject("selectScene", dto);
 

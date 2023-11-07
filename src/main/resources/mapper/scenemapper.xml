@@ -108,7 +108,7 @@
 
 
     <!--Actor SQL-->
-    <select id="selectActor">
+    <select id="selectActor" resultType="com.example.yoonlove.dto.ActorDto">
         SELECT * FROM actorjoin where act_id = #{act_id}
     </select>
 
