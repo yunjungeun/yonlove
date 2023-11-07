@@ -1,6 +1,8 @@
 //html 본문에서 옵션 값을 받아와 저장하는 변수
 var fkid = selectName;
 var produce = prodcueId;
+var radio = selectRadio;
+
 
 function mappingurl(submiturl, int, text, cnt){
     document.getElementById("alert").addEventListener("submit", function (event){
@@ -49,6 +51,10 @@ function mappingurl(submiturl, int, text, cnt){
     if(produce != null){
         var produceSelect = $("#fk4").val();
         data[produce] = produceSelect;
+    }
+
+    if(radio != null){
+        data[weather] = radio;
     }
 
     console.log(data);

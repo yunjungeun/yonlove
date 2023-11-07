@@ -76,7 +76,6 @@ public class SceneController {
             mv.addObject("file",nullFileDto);
         }
 
-
         mv.setViewName("scene/sceneselect");
         mv.addObject("selectScene", dto);
 
@@ -170,9 +169,13 @@ public class SceneController {
         return mv;
     }
 
-    @GetMapping("scene/{act_id}/selectactor")
-    public ModelAndView selectActor(ActorDto actorDto){
-        ActorDto dto = sceneService.selectActorOne(actorDto);
+    @GetMapping("scene/selectactor")
+    public ModelAndView selectActor(String act_id, String day_id){
+        ActorDto actorDto = new ActorDto();
+        actorDto.setAct_id(act_id);
+        actorDto.setDay_id(day_id);
+
+        ActorDto dto = sceneService.selectActor(actorDto);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("scene/actorselect");
         mv.addObject("selectActor", dto);

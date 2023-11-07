@@ -104,7 +104,6 @@ public class PlanController {
     @ResponseBody
     public String insertSchedule(ScheduleDayDto dto) {
         planService.insertSchedule(dto);
-
         return "/plan/schedule_day";
     }
 
