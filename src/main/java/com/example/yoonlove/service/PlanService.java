@@ -8,9 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Service
@@ -50,6 +48,19 @@ public class PlanService {
 
     public void updateSchedule(ScheduleDayDto dto) {
         planMapper.updateSchedule(dto);
+    }
+    //날씨 라디오 버튼에 대한 기본값 해쉬맵을 생성해주는 메서드
+    public HashMap<String, Boolean> weatherCheck(ScheduleDayDto dto){
+        HashMap<String, Boolean> weatherList = new LinkedHashMap<>();
+        String[] weather = {"맑음","흐림","안개","비","눈"};
+        for(int i = 0; i < 5; i++){
+            if(weather[i].equals(dto.getWeather())){
+                weatherList.put(weather[i],true);
+            }else {
+                weatherList.put(weather[i], false);
+            }
+        }
+        return weatherList;
     }
 
     public void deleteSchedule(ScheduleDayDto dto) {

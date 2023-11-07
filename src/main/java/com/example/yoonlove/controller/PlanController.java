@@ -109,18 +109,20 @@ public class PlanController {
 
     @GetMapping("plan/{day_id}/scheduleUpdateView") //컨텐츠 업데이트하는 뷰
     public ModelAndView scheduleUpdateView(ScheduleDayDto dto) {
-
         ScheduleDayDto scheduleDayDto = planService.selectSchedule(dto);
+        //저장된 날씨의 값을 해쉬맵으로 저장, 해쉬맵은 머스테치에서 라디오 버튼 체크를 설정하게함
+        HashMap<String, Boolean> weather = planService.weatherCheck(scheduleDayDto);
+
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/updateSchedule");
-        mv.setStatus(HttpStatus.valueOf(200));
         mv.addObject("updateSchedule", scheduleDayDto);
+        mv.addObject("weather", weather);
         return mv;
     }
 
     @GetMapping("plan/{day_id}/updateSchedule") //업데이트 처리
     @ResponseBody
-    public String updateSchedule( ScheduleDayDto dto) {
+    public String updateSchedule(ScheduleDayDto dto) {
         planService.updateSchedule(dto);
         return "/plan/schedule_day";
     }
