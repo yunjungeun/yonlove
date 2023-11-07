@@ -106,18 +106,7 @@
     <!--select 옵션 name값을 cu_alert.js에 보내주기 위한 변수 값/이게없으면 제출이 안됨-->
     var selectName = "project_id";
     <!--selectName이 실행되기 위해선 cu_alert 스크립트소스가 이 아래 있어야함-->
-
-    <!--라디오버튼을 처리하는 로직-->
-    var radioButtons = document.querySelectorAll('.radio');
-    var selectRadio
-
-    function handleRadioChange(event) {
-    selectRadio = event.target.value;
-    }
-    radioButtons.forEach(function(radioButton) {
-        radioButton.addEventListener('change', handleRadioChange);
-    });
-    alert(selectRadio);
+    var radioButtonName = "weather";
 </script>
 
 <script src="/static/js/dropdown.js"></script>

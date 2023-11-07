@@ -1,8 +1,9 @@
 //html 본문에서 옵션 값을 받아와 저장하는 변수
 var fkid = selectName;
-var produce = prodcueId;
-var radio = selectRadio;
-
+try{var produce = prodcueId;}catch (error){}
+try{
+var radioName = radioButtonName;
+}catch (error){}
 
 function mappingurl(submiturl, int, text, cnt){
     document.getElementById("alert").addEventListener("submit", function (event){
@@ -53,11 +54,14 @@ function mappingurl(submiturl, int, text, cnt){
         data[produce] = produceSelect;
     }
 
-    if(radio != null){
-        data[weather] = radio;
-    }
+          //<!--라디오 버튼의 값을 가져오기 위해 라디오 버튼 요소들을 선택합니다.-->
+        var selectedRadio = null;
+        if(radioName != null){
+           var radioButtons = document.querySelectorAll('.radio');
+           selectedRadio = document.querySelector('input[name='+radioName+']:checked').value;
+           data[radioName] = selectedRadio;
+        } else{}
 
-    console.log(data);
     $.ajax({
             url: submiturl,
             type : "GET",
