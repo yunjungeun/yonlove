@@ -24,7 +24,6 @@ public class DropDownService {
         Map<String, String> fkStringList = new LinkedHashMap<>();
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonList = null;
-
         //리스트 타입이 여러개이기 때문에 스위치문으로 작성 / 인터페이스로 바꾸면 간소화 가능 //추후 인터페이스로 변형
         switch (table) {
             case "scenario" :
