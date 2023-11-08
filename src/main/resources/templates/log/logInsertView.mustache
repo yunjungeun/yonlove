@@ -16,7 +16,7 @@
         <div class="container">
 
             <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
-                제작일지
+                제작일지 작성
             </h1>
 
             <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
@@ -30,7 +30,7 @@
                             <tr>
                                 <th style="text-align: center;">기획명</th>
                                 <th style="text-align: center;">일지번호</th>
-                                <th style="text-align: center;">일지기록일</th>
+                                <th style="text-align: center;">일지 기록일</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -38,8 +38,11 @@
                             <tr>
                                 <td style="text-align: center;"> <select id="fk1" name="project_id"></select></td>
                                 <td style="text-align: center;"><input name="log_num" type="number" placeholder="미입력시 자동입력" class="field1" ></td>
-                                <td style="text-align: center;"><textarea name="log_content" placeholder="" class="field2"></textarea>
-                                <td style="text-align: center;"><input name="log_date" type="date" placeholder="" class="field3"></td>
+                                <td style="text-align: center;"><input name="log_date" type="date" class="field2"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="text-align: center;">
+                                    <textarea name="log_content" placeholder="내용을 입력하세요" class="field3" style="height: 30vh; width: 100%;  display: block; margin: 0 auto;"></textarea>
                             </tr>
                             </tbody>
                         </table>
