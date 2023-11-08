@@ -60,6 +60,7 @@ public class LogController {
     @GetMapping("log/selectlog/{log_id}")
     public ModelAndView selectLog(LogDto logdto){
         LogDto dto = logService.selectLog(logdto);
+
         ModelAndView mv = new ModelAndView();
         mv.setViewName("log/logdetail");
         mv.addObject("selectLog", dto);

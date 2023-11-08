@@ -6,38 +6,66 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/static/js/delete.js"></script>
+    {{>layout/header}}
 </head>
 <body>
+<div id="page-top">
+    {{>layout/sidebar}}
+    {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container">
 
-<table border="1" cellpadding="1" cellspacing="1">
-    <tr>
-        <td>기획</td>
-        <td>시나리오</td>
-        <td>씬</td>
-        <td>출연자 / 배역</td>
-        <td>촬영일</td>
-    </tr>
-    <tr>
-        <td>{{filmPlanDetail.project_name}}</td>
-        <td>{{filmPlanDetail.scenario_name}}</td>
-        <td>{{filmPlanDetail.scene_num}}</td>
-        <td>{{filmPlanDetail.pd_name}} / {{filmPlanDetail.casting}}</td>
-        <td>{{filmPlanDetail.film_date}}</td>
-    </tr>
-    <tr>
-        <td>안/밖 : {{filmPlanDetail.inside_flag}}</td>
-        <td>낮/밤 : {{filmPlanDetail.day_flag}}</td>
-        <td>컷 : {{filmPlanDetail.cut}}</td>
-    </tr>
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                제목머임? : 상세보기
+            </h1>
 
-</table>
-<a href="/plan/film_plan">목록</a>
-<a href="/plan/{{filmPlanDetail.film_id}}/filmPlanUpdateView">수정</a>
-<a href="/plan/{{filmPlanDetail.film_id}}/deleteFilm" onclick="confirmDelete(event)">삭제</a>
+            <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
+                <div class="card-header py-3" style="center;"> <!--카드헤더 div-->
+                </div><!--카드헤더 end-->
 
+                <div class="card-body"><!--카드 바디-->
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;">기&nbsp;&nbsp;획</th>
+                                <th style="text-align: center;">시나리오</th>
+                                <th style="text-align: center;">씬</th>
+                                <th style="text-align: center;">출연자 / 배역</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center;">{{filmPlanDetail.project_name}}</td>
+                                <td style="text-align: center;">{{filmPlanDetail.scenario_name}}</td>
+                                <td style="text-align: center;"> {{filmPlanDetail.scene_num}}</td>
+                                <td style="text-align: center;">{{filmPlanDetail.pd_name}} / {{filmPlanDetail.casting}}</td>
+                            </tr>
 
+                            <tr>
+                                <th style="text-align: center;">안&nbsp;/&nbsp;밖 :&nbsp;{{filmPlanDetail.inside_flag}}</th>
+                                <th style="text-align: center;">낮&nbsp;/&nbsp;밤 :&nbsp;{{filmPlanDetail.day_flag}}</th>
+                                <th style="text-align: center;">컷 수 :&nbsp;{{filmPlanDetail.cut}}</th>
+                                <th style="text-align: center;">촬영일 :&nbsp;{{filmPlanDetail.film_date}}</th>
+                            </tr>
+                        </tbody>
+                    </table>
 
+                    <div class="d-flex justify-content-end">
+                        <a href="/plan/film_plan" class="btn btn-primary mr-2">목록</a>
+                        <a href="/plan/{{filmPlanDetail.film_id}}/filmPlanUpdateView" class="btn btn-primary mr-2">수정</a>
+                        <a href="/plan/{{filmPlanDetail.film_id}}/deleteFilm" class="btn btn-primary" onclick="confirmDelete(event)">삭제</a>
+                    </div>
 
+                </div><!--카드바디-->
+            </div><!--카드 end-->
+
+        </div><!--컨테이너 end-->
+    </div><!--warpper end-->
+</div><!--page-top end-->
+{{>layout/footer}}
+</div>
+
+<script src="/static/js/delete.js"></script>
+{{>layout/bootstrapjs}}
 </body>
 </html>

@@ -6,33 +6,64 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{>layout/header}}
 </head>
 <body>
-<form id="alert" action="/plan/insertFilm" method="get">
-    <input type="hidden" name="day_id"  class="field5" value="{{dayId}}">
-    <table border="1" cellpadding="1" cellspacing="1">
-        <tr>
-            <td>기획
-                <select id="fk1" name="project_id"></select>
-            <td>시나리오
-                <select id="fk2" name="scenario_id"></select>
-            </td>
-            <td>씬
-                <select id="fk3" name="scene_id" class="field1"></select>
-            </td>
-            <td>출연자
-                <select id="fk4" name="pd_id" class="field2"></select>
-            </td>
-        </tr>
-        <tr>
-            <td>안/밖<input name="inside_flag" type="text" class="field3" ></td>
-            <td>낮/밤<input name="day_flag" type="text" class="field4"></td>
-            <td>컷<input name="cut" type="text" class="field5" ></td>
-        </tr>
-    </table>
-    <input type="submit" value="등록" onclick="mappingurl('/plan/insertFilm',5,'작성')">
-</form>
-<a href="/plan/film_plan">목록</a>
+<div id="page-top">
+    {{>layout/sidebar}}
+    {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container">
+
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                제목머임?
+            </h1>
+
+            <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
+                <div class="card-header py-3" style="center;"> <!--카드헤더 div-->
+
+                </div><!--카드헤더 end-->
+
+                <div class="card-body"><!--카드 바디-->
+                    <form id="alert" action="/plan/insertFilm" method="get">
+                        <input type="hidden" name="day_id"  class="field5" value="{{dayId}}">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <tr>
+                                <th>기&nbsp;&nbsp;획
+                                    <select id="fk1" class="ml-2" name="project_id"></select>
+                                <th>시나리오
+                                    <select id="fk2" class="ml-2" name="scenario_id"></select>
+                                </th>
+                                <th>씬
+                                    <select id="fk3" name="scene_id" class="field1 ml-2"></select>
+                                </th>
+                                <th>출연자
+                                    <select id="fk4" name="pd_id" class="field2 ml-2"></select>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>안&nbsp;/&nbsp;밖<input name="inside_flag" type="text" class="field3 ml-2" ></th>
+                                <th>낮&nbsp;/&nbsp;밤<input name="day_flag" type="text" class="field4 ml-2"></th>
+                                <th colspan="2">컷 수<input name="cut" type="text" class="field5 ml-2" ></th>
+                            </tr>
+                            낮밤 / 안밖은 라디오버튼 적용시키면 될듯?
+                        </table>
+
+                        <div class="d-flex justify-content-end">
+                            <input type="submit" value="등록" class="btn btn-primary mr-2" onclick="mappingurl('/plan/insertFilm',5,'작성')">
+                            <a href="/plan/film_plan" class="btn btn-primary">뒤로가기</a>
+                        </div>
+                    </form>
+
+
+                </div><!--카드바디-->
+            </div><!--카드 end-->
+
+        </div><!--컨테이너 end-->
+    </div><!--warpper end-->
+</div><!--page-top end-->
+{{>layout/footer}}
+</div>
 
 <script>
     var jsonValue = '{{{fkList}}}';
@@ -43,5 +74,6 @@
 </script>
 <script src="/static/js/dropdown.js"></script>
 <script src="/static/js/cu_alert.js"></script>
+ {{>layout/bootstrapjs}}
 </body>
 </html>

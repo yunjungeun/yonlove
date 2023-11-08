@@ -152,6 +152,7 @@ public class CsController {
     public String insertQnAView(){
         return "/cs/insertqnaview";
     }
+
     @GetMapping("/cs/insertqna")
     @ResponseBody
     public String insertQnA(QnADto dto, Principal user){
