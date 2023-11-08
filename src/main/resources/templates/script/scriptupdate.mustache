@@ -15,74 +15,73 @@
 {{>layout/sidebar}}
 {{>layout/topbar}}
 
-
-<!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
+    <div class="container">
+        <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+            스크립트 페이퍼
+        </h1>
 
-<!-- Main Content -->
-<div id="content">
+        <div class="card shadow mb-4" style="margin-top: 50px; margin-right: 300px; margin-left: 300px">
+            <div class="card-header py-3">
 
-<div class="container-fluid">
-    <div style="text-align: center; display: block; margin-top:40px;" > <!-- 수정 ! 마진 탑 100->수정 -->
-        <h1 class="h3 mb-2 text-gray-800" >스크립트페이퍼</h1>
-    </div>
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4" style="margin-top: 50px; margin-right: 300px; margin-left: 300px">
-        <div class="card-header py-3">
+                <form id="alert" method="get" action="/script/{{selectScriptPaper.script_id}}/updatescriptpaper">
+                    <div style="margin-left: 20%; margin-right: 20%; margin-top: 5%;">
+                        <div style="display: inline-block;">
+                            <div class="mb-3" style="display: inline-block;">
+                                <label for="formGroupExampleInput" class="form-label"><strong>영상 제목</strong></label>
+                                <input class="field1" name="video_name" type="text"
+                                       value="{{selectScriptPaper.video_name}}"/><br/>
 
-            <form id="alert" method="get" action="/script/{{selectScriptPaper.script_id}}/updatescriptpaper">
-            <div style="margin-left: 20%; margin-right: 20%; margin-top: 5%;">
-                <div style="display: inline-block;">
-                    <div class="mb-3" style="display: inline-block;">
-                        <label for="formGroupExampleInput" class="form-label"><strong>영상 제목</strong></label>
-                        <input class="field1" name="video_name" type="text" value="{{selectScriptPaper.video_name}}"/><br/>
+                                <label for="formGroupExampleInput" class="form-label"><strong>촬영 날짜</strong></label>
+                                <input class="field2" name="video_date" type="date"
+                                       value="{{selectScriptPaper.video_date}}"/><br/>
 
-                        <label for="formGroupExampleInput" class="form-label"><strong>촬영 날짜</strong></label>
-                        <input class="field2" name="video_date" type="date" value="{{selectScriptPaper.video_date}}"/><br/>
+                                <label for="formGroupExampleInput" class="form-label"><strong>촬영 총시간</strong></label>
+                                <input class="field3" name="video_time" type="date"
+                                       value="{{selectScriptPaper.video_time}}"/><br/>
 
-                        <label for="formGroupExampleInput" class="form-label"><strong>촬영 총시간</strong></label>
-                        <input class="field3" name="video_time" type="date" value="{{selectScriptPaper.video_time}}"/><br/>
+                                <label for="formGroupExampleInput" class="form-label"><strong>촬영 시작시간</strong></label>
+                                <input class="field4" name="video_start_time" type="date"
+                                       value="{{selectScriptPaper.video_start_time}}"/><br/>
+                            </div>
 
-                        <label for="formGroupExampleInput" class="form-label"><strong>촬영 시작시간</strong></label>
-                        <input class="field4" name="video_start_time" type="date" value="{{selectScriptPaper.video_start_time}}"/><br/>
+                            <div class="mb-3" style="display: inline-block;">
+                                <label for="formGroupExampleInput" class="form-label"><strong>액션 이미지</strong></label>
+                                <input id="updateFile" name="action_image" type="file"/>
+                                <input id="deletefile" type="button" onclick="deleteFile()" value="파일삭제"/>
+                                <br/>
+
+                                <label for="formGroupExampleInput" class="form-label"><strong>액션 내용</strong></label>
+                                <input class="field5" name="action_content" type="text"
+                                       value="{{selectScriptPaper.action_content}}"/><br/>
+
+                                <label for="formGroupExampleInput" class="form-label"><strong>카메라포지션</strong></label>
+                                <input class="field6" name="position_image" type="text"
+                                       value="{{selectScriptPaper.position_image}}"/><br/>
+
+                                <label for="formGroupExampleInput" class="form-label"><strong>콘티</strong></label>
+                                <input class="field7" name="conti" type="text" value="{{selectScriptPaper.conti}}"/>
+                            </div>
+
+                            <div style="text-align: center">
+                                <button type="submit" class="btn btn-primary"
+                                        onclick="mappingurl('/script/{{selectScriptPaper.script_id}}/updatescriptpaper',7,'수정')">
+                                    수정
+                                </button>
+                                <a href="/script/scriptpaper" class="btn btn-secondary" style="text-decoration: none;">취소</a>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="mb-3" style="display: inline-block;">
-                        <label for="formGroupExampleInput" class="form-label"><strong>액션 이미지</strong></label>
-                        <input id="updateFile" name="action_image" type="file"/>
-                        <input id="deletefile" type="button" onclick="deleteFile()" value="파일삭제"/>
-                        <br/>
-
-                        <label for="formGroupExampleInput" class="form-label"><strong>액션 내용</strong></label>
-                        <input class="field5" name="action_content" type="text" value="{{selectScriptPaper.action_content}}"/><br/>
-
-                        <label for="formGroupExampleInput" class="form-label"><strong>카메라포지션</strong></label>
-                        <input class="field6" name="position_image" type="text" value="{{selectScriptPaper.position_image}}"/><br/>
-
-                        <label for="formGroupExampleInput" class="form-label"><strong>콘티</strong></label>
-                        <input class="field7" name="conti" type="text" value="{{selectScriptPaper.conti}}"/>
-                    </div>
-
-        <div style="text-align: center">
-            <button type="submit" class="btn btn-primary" onclick="mappingurl('/script/{{selectScriptPaper.script_id}}/updatescriptpaper',7,'수정')">수정</button>
-            <a href="/script/scriptpaper" class="btn btn-secondary" style="text-decoration: none;">취소</a>
-        </div>
-        </div>
-            </div>
                 </form>
-
+            </div>
         </div>
     </div>
 </div>
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-    <!-- /.container-fluid -->
 </div>
-    <!-- End of Main Content -->
+
+<div>
     {{>layout/footer}}
 </div>
-<!-- End of Content Wrapper -->
 
 <script>
     var url = "script/scriptpaper";
