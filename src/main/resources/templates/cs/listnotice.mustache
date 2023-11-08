@@ -38,7 +38,7 @@
 
 
 
-                    <form action="/cs/notice" method="get" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
+                    <form action="/cs/notice" method="get" class="d-flex justify-content-end form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
                         <!--d-none: 화면에서 폼을 숨기는 기능
                         mr-auto: 오른쪽 마진을 자동으로 설정 ml-md-3:왼쪽 마진을 3단위만큼 설정
                         my-2 my-md-0: 수직여백 설정  mw-100: 최대너비 100%설정 navbar-search: 커스텀클래스 (폼을나타내는 클래스)-->
@@ -75,11 +75,11 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th  style="text-align: center;">번호</th>
-                                <th  style="text-align: center;">제목</th>
-                                <th  style="text-align: center;">작성자</th>
-                                <th  style="text-align: center;">날짜</th>
-                                <th  style="text-align: center;">조회수</th>
+                                <th style="text-align: center;">번호</th>
+                                <th style="text-align: center;">제목</th>
+                                <th style="text-align: center;">작성자</th>
+                                <th style="text-align: center;">날짜</th>
+                                <th style="text-align: center;">조회수</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -102,8 +102,9 @@
                             </table>
 
                             <div class="d-flex justify-content-between align-items-center">
-                                {{>layout/paging}}
-                                <a href="/cs/insertnotice-view" role="button" class="btn btn-primary">글 작성</a>
+                                <span></span>
+                                <span>{{>layout/paging}}</span>
+                                <a href="/cs/insertnotice-view" role="button" class="btn btn-primary">작성</a>
                             </div>
                         </div>
 

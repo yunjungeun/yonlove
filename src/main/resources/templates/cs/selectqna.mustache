@@ -17,42 +17,36 @@
 
     <!-- Main Content -->
     <div id="content">
-
         <!-- Begin Page Content -->
         <div class="container-fluid">  <!--얘가 없으면 전체적으로 다 위로 올라가고 푸터가 사이드 옆쪽으로 붙어버림 -->
             <!--container-fluid:  Bootstrap 프레임워크를 사용하여 생성된 컨테이너로, 웹 페이지의 내용을 감싸는 역할, 화면 폭에 맞게 자동으로 넓어져서 브라우저의 너비에 따라 반응형으로 조절-->
             <!--mb-2:하단의 여백 -->
             <!-- Page Heading -->
             <div style="text-align: center; display: block; margin-top:100px;" >
-                <h1 class="h3 mb-2 text-gray-800"  >공지사항</h1><!--공지사항이 너무 천장에 붙어있어서 margin-top: 50px을 줘서 내렸습니다-->
+                <h1 class="h3 mb-2 text-gray-800"  >문의사항</h1><!--공지사항이 너무 천장에 붙어있어서 margin-top: 50px을 줘서 내렸습니다-->
             </div>
             <!-- <p class="mb-4">게시판 설명 넣는곳 <a target="_blank" href="https://datatables.net">이곳에 링크 넣으세요</a>.</p>-->
-
-
             <!-- DataTales Example -->
             <div class="card shadow mb-4" style="margin-top: 70px; margin-right: 300px; margin-left: 300px;">
                 <div class="card-header py-3" >
                     <!--<h6 class="m-0 font-weight-bold text-primary">공지사항</h6>-->
 
-                    <div style="margin-left: 20%; margin-top: 5%;">
+                    <div style="margin-left: 40%; margin-top: 5%;">
                         <div style="display: inline-block;">
                             <div class="mb-3" style="text-align: center; display: inline-block;">
                                 <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>제목</strong></label>
                             </div>
 
                             <div class="mb-3" style="text-align: center; display: inline-block;">
-                                <input id="formGroupExampleInput" class="card shadow mb-4" name="qna_title" type="text" value="{{selectQnA.qna_title}}"  readonly style="width: 90%; ">
+                                <input id="formGroupExampleInput" class="card shadow mb-4" name="qna_title" type="text" value="{{selectQnA.qna_title}}"  readonly style="width: 90%; text-align:center">
                             </div>
                         </div>
-
-
                     </div>
 
                     <div class="mb-3" style="text-align: center">
                         <label for="formGroupExampleInput" class="form-label" style="display: block;"></label>
                         <textarea type="text"  id="formGroupExampleInput" class="card shadow mb-4" name="qna_content" readonly style="height: 30vh; width: 60%;  display: block; margin: 0 auto;">{{selectQnA.qna_content}}</textarea>
                     </div>
-
 
                     <div style="text-align: center">
                         <a href="/cs/qna" class="btn btn-primary">목록</a>
@@ -62,19 +56,12 @@
 
                 </div>
             </div>
-
-
         </div>
-
 
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
         <!-- /.container-fluid -->
-
-
-
-
     </div>
     <!-- End of Main Content -->
 
@@ -87,10 +74,6 @@
     var url = "/cs/notice";
 </script>
 <script src="/static/js/deletepost.js"></script>
-
-
-
-
 {{>layout/bootstrapjs}}
 </body>
 </html>
