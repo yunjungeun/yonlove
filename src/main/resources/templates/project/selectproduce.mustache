@@ -13,31 +13,69 @@
 <body id="page-top">
 {{>layout/sidebar}}
 {{>layout/topbar}}
-<div id="div_box">
-    <h1> {{selectProduce.project_name}}</h1>
-    <hr>
-    <table board="1" cellpascing="0" cellpading="0">
 
-        <tr>
-            <td bgcolor="pink">이름</td>
-            <td align="left">{{selectProduce.pd_name}}</td>
-        </tr>
 
-        <tr>
-            <td bgcolor="pink">역할</td>
-            <td align="left">{{selectProduce.role}}</td>
-        </tr>
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
 
-        <tr>
-            <td bgcolor="pink">배역</td>
-            <td align="left">{{selectProduce.casting}}</td>
-        </tr>
+    <!-- Main Content -->
+    <div id="content">
 
-    </table>
-    <hr>
-    <a href="/project/updateproduceview/{{selectProduce.pd_id}}">게시글 수정</a>&nbsp;&nbsp;&nbsp;
-    <a href="/project/deleteproduce/{{selectProduce.pd_id}}"onclick="confirmDelete(event)">게시글 삭제</a>&nbsp;
-    <a href="/project/produce">전체 목록 보기</a>
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+            <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px;">기획명: {{selectProduce.project_name}}</h1>
+
+    <!-- DataTales Example -->
+            <div class="card shadow mb-4" style="margin-top: 50px;">
+                <div class="card-header py-3">
+                    <div class="d-flex justify-content-center align-items-center">
+
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <tr>
+                                <td style="text-align: center;">이름</td>
+                                <td>{{selectProduce.pd_name}}</td>
+                            </tr>
+
+                            <tr>
+                                <td style="text-align: center;"">역할</td>
+                                <td>{{selectProduce.role}}</td>
+                            </tr>
+
+                            <tr>
+                                <td style="text-align: center;">배역</td>
+                                <td>{{selectProduce.casting}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+<div class="d-flex justify-content-center align-items-center">
+    <a href="/project/updateproduceview/{{selectProduce.pd_id}}" role="button" class="btn btn-success">수정</a>&nbsp;&nbsp;&nbsp;
+    <a href="/project/deleteproduce/{{selectProduce.pd_id}}"onclick="confirmDelete(event)"
+    role="button" class="btn btn-secondary">삭제</a>&nbsp;&nbsp;&nbsp;
+    <a href="/project/produce" role="button" class="btn btn-info">목록</a>
 </div>
+      </div>
+    </div>
+
+
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- /.container-fluid -->
+</div>
+</div>
+<!-- End of Main Content -->
+{{>layout/footer}}
+</div>
+<!-- End of Content Wrapper -->
+
+<!--date 변수를 dateformat.js에 넘겨주는 링크-->
+<script src="/static/js/dateformat.js"></script>
+<script src="/static/js/cu_alert.js"></script>
+<script src="/static/js/projectjs/defaultdate.js"></script>
+{{>layout/bootstrapjs}}
 </body>
 </html>
