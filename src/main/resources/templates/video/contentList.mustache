@@ -22,7 +22,7 @@
             <div class="card shadow mb-4" style="margin-top: 50px;">
                 <div class="card-header py-3">
             <!-- 검색 -->
-    <form action="/vd/video" method="get" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
+    <form action="/vd/video" method="get" class="d-flex justify-content-end form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
 
         <div class="input-group">
             <select id="searchType" name="searchType">
@@ -75,7 +75,9 @@
 
             <!--페이징 처리 레이아웃-->
             <div class="d-flex justify-content-between align-items-center">
-            {{>layout/paging}} <br/>
+                <span></span>
+                <span>
+                    {{>layout/paging}}</span>
             <a href="/vd/contentInsertView" role="button" class="btn btn-primary">글 작성</a>
             </div>
         </div>

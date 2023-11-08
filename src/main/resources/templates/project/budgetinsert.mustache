@@ -9,13 +9,30 @@
 
     {{>layout/header}}
 </head>
-
 <body id="page-top">
 {{>layout/sidebar}}
 {{>layout/topbar}}
-<form id="alert" action="/project/insertbudget" method="get">
 
-    <table border="1" cellpadding="1" cellspacing="1">
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4" style="margin-top: 50px;">
+                <div class="card-header py-3">
+
+
+
+
+<form id="alert" action="/project/insertbudget" method="get"
+      class="d-flex justify-content-end form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
+
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <tr>
             <td>프로젝트
                 <select id="fk1" class="field1" name="project_id"></select></td>
@@ -27,7 +44,7 @@
     </table>
     <input type="submit" value="등록" onclick="mappingurl('/project/insertbudget', 3,'작성',1)"/>
 </form>
-<a href="/project/budget">목록으로 가기</a>
+<a href="/project/budget">목록</a>
 
 <!--옵션 태그에 필요한 js-->
 <script>
