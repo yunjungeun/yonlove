@@ -26,9 +26,6 @@
             <div class="card shadow mb-4" style="margin-top: 50px;">
                 <div class="card-header py-3">
 
-
-
-
 <form id="alert" action="/project/insertbudget" method="get"
       class="d-flex justify-content-end form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
 
@@ -42,9 +39,30 @@
 
         </tr>
     </table>
-    <input type="submit" value="등록" onclick="mappingurl('/project/insertbudget', 3,'작성',1)"/>
+    <div class="d-flex justify-content-between align-items-center">
+        <span></span>
+        <span>
+            {{>layout/paging}}</span>
+    <input type="submit" value="등록" onclick="mappingurl('/project/insertbudget', 3,'작성',1)"
+           role="button" class="btn btn-primary"/>
+    <a href="/project/budget" role="button" class="btn btn-info">목록</a>
+    </div>
 </form>
-<a href="/project/budget">목록</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+<!-- /.container-fluid -->
+</div>
+<!-- End of Main Content -->
+{{>layout/footer}}
+</div>
+
 
 <!--옵션 태그에 필요한 js-->
 <script>
@@ -54,7 +72,13 @@
     <!--selectName이 실행되기 위해선 cu_alert 스크립트소스가 이 아래 있어야함-->
 </script>
 
+<script>
+    var url = "/project/budget";
+</script>
+
 <script src="/static/js/dropdown.js"></script>
 <script src="/static/js/cu_alert.js"></script>
+
+{{>layout/bootstrapjs}}
 </body>
 </html>

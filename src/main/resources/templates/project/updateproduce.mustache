@@ -4,7 +4,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>제작 수정하기</title>
+    <title>제작 수정</title>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {{>layout/header}}
@@ -26,24 +26,24 @@
             <div class="card shadow mb-4" style="margin-top: 50px;">
                 <div class="card-header py-3">
 
-                <form id="alert" action="/project/updateproduce/{{selectProduce.pd_id}}" method="get"
-                      class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                        <tr>
-                            <td>이름 <input class="field1" name="pd_name" type="text" placeholder="이름"/></td>
-                            <td>역할 <input class="field2" name="role" type="text" placeholders="역할"/></td>
-                            <td>배역 <input class="field3" name="casting" type="text" placeholders="배역"/></td>
-                        </tr>
-                        </thead>
-                    </table>
-                    <div class="d-flex justify-content-center align-items-center">
-                        <input type="submit" value="수정" class="btn btn-success"
-                           onclick="mappingurl('/project/updateproduce/{{selectProduce.pd_id}}', 3,'수정')"/>&nbsp;&nbsp;
+                        <form id="alert" action="/project/updateproduce/{{selectProduce.pd_id}}" method="get"
+                              class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <td>이름 <input class="field1" name="pd_name" type="text" placeholder="이름"/></td>
+                                    <td>역할 <input class="field2" name="role" type="text" placeholders="역할"/></td>
+                                    <td>배역 <input class="field3" name="casting" type="text" placeholders="배역"/></td>
+                                </tr>
+                                </thead>
+                            </table>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <input type="submit" value="수정" class="btn btn-success"
+                                   onclick="mappingurl('/project/updateproduce/{{selectProduce.pd_id}}', 3,'수정')"/>&nbsp;&nbsp;
 
-                         <a href="/project/produce" role="button" class="btn btn-secondary">목록</a>
-                    </div>
-                </form>
+                                 <a href="/project/produce" role="button" class="btn btn-secondary">목록</a>
+                            </div>
+                        </form>
 
                 </div>
             </div>

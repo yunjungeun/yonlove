@@ -10,37 +10,71 @@
     {{>layout/header}}
 </head>
 
-<body id="page-top">
+<body>
+<div id="page-top">
 {{>layout/sidebar}}
 {{>layout/topbar}}
-<div id="div_box">
-    <h1>프로젝트 상세보기</h1>
-    <hr>
-    <table board="1" cellpascing="0" cellpading="0">
-            <tr>
-                <td>기획명 <input  name="project_name" type="text" value="{{selectProject.project_name}}" readonly/></td>
-                <td>기획번호 <input name="project_num" type="number" value="{{selectProject.project_num}}" readonly/></td>
-            </tr>
-            <tr><td colspan="2">콘셉트<textarea cols="50" rows="5" name="project_concept" readonly>{{selectProject.project_concept}}</textarea></td>
-            <tr><td colspan="2">기획 안<textarea cols="50" rows="20"  name="project_content" readonly>{{selectProject.project_content}}</textarea></td>
-            <tr><td colspan="2">시작일<input type="text" id="format1" name="project_start_date" readonly>
-                           (예상)종료일<input type="text" id="format2" name="project_end_date" readonly>
-                진행상태
-                <select name="project_state">
-                    <option {{selectProject.project_state}} selected>{{selectProject.project_state}}</option>
-                </select>
-            </td>
-            </tr>
 
-        </table>
 
-    <hr>
-    <a href="/project/updateprojectview/{{selectProject.project_id}}">게시글 수정</a>&nbsp;&nbsp;&nbsp;
-    <a href="/project/deleteproject/{{selectProject.project_id}}"onclick="confirmDelete(event)">게시글 삭제</a>&nbsp;
+<div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+            <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px;">프로젝트 상세보기</h1>
 
-    <a href="/project/project">전체 목록 보기</a>
+           <!--카드섹션 start-->
+            <div class="card shadow mb-4" style="margin-top: 50px;">
+                <div class="card-header py-3"> </div><!--카드해드-->
+
+                <div class="card-body"><!--카드바디 start-->
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <thead style="text-align:center;">
+                        <tr>
+                            <td>기획명 <input  name="project_name" type="text" value="{{selectProject.project_name}}" readonly/></td>
+                            <td>기획번호 <input name="project_num" type="number" value="{{selectProject.project_num}}" readonly/></td>
+                        </tr>
+                        </thead>
+
+                        <tbody style="text-align:center;">
+                        <tr><td  colspan="2">콘셉트<textarea cols="50" rows="5" name="project_concept" readonly>{{selectProject.project_concept}}</textarea></td>
+                        <tr><td colspan="2">기획 안<textarea cols="50" rows="20"  name="project_content" readonly>{{selectProject.project_content}}</textarea></td>
+
+                        <tr>
+                            <td colspan="2">
+                                시작일<input type="text" id="format1" name="project_start_date" readonly>
+                                (예상)종료일<input type="text" id="format2" name="project_end_date" readonly>
+                                진행상태
+                                <select name="project_state">
+                                    <option {{selectProject.project_state}} selected>{{selectProject.project_state}}</option>
+                                </select>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div><!--카드 바디 end-->
+                 </div><!--카드섹션 end-->
+
+            <div class="d-flex justify-content-center align-items-center">
+                <a href="/project/updateprojectview/{{selectProject.project_id}}" class="btn btn-success">수정</a>&nbsp;&nbsp;&nbsp;
+                <a href="/project/deleteproject/{{selectProject.project_id}}" class="btn btn-secondary"
+                   onclick="confirmDelete(event)">삭제</a>&nbsp;&nbsp;&nbsp;
+                <a href="/project/project" role="button" class="btn btn-info">목록</a>
+            </div>
+
+             </div><!--컨테이너end-->
+        </div><!--wreper ned-->
+    </div><!--탑 페이지 end-->
+
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+<!-- /.container-fluid -->
+
+<!-- End of Main Content -->
+{{>layout/footer}}
 </div>
-
+<!-- End of Content Wrapper -->
+<script>
+    var url="project/project";
+</script>
 <script>
     <!--2023-11-02 00:00:00 뒤에 시간값을 없애주기기 위해 변수에 값을 저장하고 js파일에 넘겨줌-->
     var dates = {date1 : '{{selectProject.project_start_date}}',
@@ -49,6 +83,9 @@
 </script>
 <!--date 변수를 dateformat.js에 넘겨주는 링크-->
 <script src="/static/js/dateformat.js"></script>
+
+<script src="/static/js/cu_alert.js"></script>
+
 {{>layout/bootstrapjs}}
 </body>
 </html>
