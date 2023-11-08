@@ -6,8 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{>layout/header}}
 </head>
 <body>
+<div id="page-top">
+    {{>layout/sidebar}}
+    {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container">
+
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                제목
+            </h1>
+
+            <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
+                <div class="card-header py-3" style="center;"> <!--카드헤더 div-->
+                </div><!--카드헤더 end-->
+
+                <div class="card-body"><!--카드 바디-->
 
     <table border="1" cellpadding="1" cellspacing="1">
         <tr>
@@ -19,11 +35,20 @@
         </tr>
 
     </table>
-    <a href="/plan/schedule_time">목록</a>
-    <a href="/plan/{{scheduleTime.time_id}}/scheduleTimeUpdateView">수정</a>
-    <a href="/plan/{{scheduleTime.time_id}}/deleteTime" onclick="confirmDelete(event)">삭제</a>
+    <a href="/plan/schedule_time" class="btn btn-primary mr-2">돌아가기</a>
+    <a href="/plan/{{scheduleTime.time_id}}/scheduleTimeUpdateView"  class="btn btn-success mr-2">수정</a>
+    <a href="/plan/{{scheduleTime.time_id}}/deleteTime" class="btn btn-danger" onclick="confirmDelete(event)">삭제</a>
+
+                </div><!--카드바디-->
+            </div><!--카드 end-->
+
+        </div><!--컨테이너 end-->
+    </div><!--warpper end-->
+</div><!--page-top end-->
+{{>layout/footer}}
+</div>
 
     <script src="/static/js/delete.js"></script>
-
+{{>layout/bootstrapjs}}
 </body>
 </html>
