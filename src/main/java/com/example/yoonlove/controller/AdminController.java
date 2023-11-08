@@ -29,8 +29,7 @@ public class AdminController {
 
     //유저관리
     @GetMapping("/admin/user")
-    public ModelAndView selectListUser(PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page,
-                                       Principal user){
+    public ModelAndView selectListUser(PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page, Principal user){
         //유저정보 가저오는 dto
         UserDto userInfo = userService.getUser(user.getName());
         String companyId = userInfo.getCompany_id(); //회사 id 스트링
@@ -131,7 +130,7 @@ public class AdminController {
         mv.addObject("paging", pageInfo);  //페이징정보
         mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
-        System.out.println("실행완료");
+
         return mv;
     }
 
@@ -167,14 +166,6 @@ public class AdminController {
 
       return "/admin/user";
     }
-
-
-
-
-
-
-
-
 
     @GetMapping("/admin/{dpt_id}/selectdpt")
     public ModelAndView selectDepartment(DepartmentDto departmentDto, PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page,
