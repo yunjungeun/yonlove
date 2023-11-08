@@ -31,7 +31,7 @@ public class UploadFileController {
     @PostMapping("/updateFile")
     @ResponseBody
     public ResponseEntity<String> updateFile(@RequestParam("newfile") MultipartFile newfile,
-                                             @RequestParam("fk") String fk) throws IOException {
+                                             @RequestParam("") String fk) throws IOException {
 
         String basePath = "C:/Users/강의실3_PC014/IdeaProjects/yonlove";
         return fileService.updateFile(newfile, basePath, fk);

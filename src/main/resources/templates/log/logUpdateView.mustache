@@ -1,34 +1,98 @@
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 리스트</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/static/js/cu_alert.js"></script>
+    {{>layout/header}}
 </head>
-<body>
-<form id="alert" action="/log/{{updateLog.log_id}}/updateLog" method="get">   <!--왜 selectLog.log_id 가 이니고 updateLog.log_id일까....-->
-    <input name="log_id" type="hidden" value="{{updateLog.log_id}}" />
-    <table border="1" cellpadding="1" cellspacing="1">
-        <tr>
-            <td>일지번호<input name="log_num" type="text"  value="{{updateLog.log_num}}" class="field1"></td>
-            <td>작성일<input name="log_date" type="date" value="{{updateLog.log_date}}" class="field2"></td>
-        </tr>
-        <tr>
-            <td>일지내용<input name="log_content" type="text" value="{{updateLog.log_content}}" class="field3"/></td>
-        </tr>
-        <tr>
+<body id="page-top">
 
 
-            <td>프로젝트아이디 <input name="project_id" type="text" value="{{updateLog.project_id}}"class="field4"/></td>
-        </tr>
-    </table>
-    <input type="submit" value="등록" onclick="mappingurl('/log/{{updateLog.log_id}}/updateLog', 4,'수정')">
-</form>
-<a href="/log/log">목록</a>
+{{>layout/sidebar}}
+{{>layout/topbar}}
+
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+    <!--d-flex flex-column: flex박스 스타일을 적용한 클래스 : 요소들 수평이나 수직으로 배치하고 간격을 조절하는 등의 작업 간편화
+       content-wrapper: 컨텐츠 섹션 감싸고  그 안의 요소들을 유연하게 배치하고 정렬 주로  다양한 화면 크기와 디바이스에 대응하는 반응형 디자인을 구현하는 데 유용-->
+
+    <!-- Main Content -->
+    <div id="content">
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">  <!--얘가 없으면 전체적으로 다 위로 올라가고 푸터가 사이드 옆쪽으로 붙어버림 -->
+            <!--container-fluid:  Bootstrap 프레임워크를 사용하여 생성된 컨테이너로, 웹 페이지의 내용을 감싸는 역할, 화면 폭에 맞게 자동으로 넓어져서 브라우저의 너비에 따라 반응형으로 조절-->
+            <!--mb-2:하단의 여백 -->
+            <!-- Page Heading -->
+            <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px;">일지수정</h1><!--공지사항이 너무 천장에 붙어있어서 margin-top: 50px을 줘서 내렸습니다-->
+            <!-- <p class="mb-4">게시판 설명 넣는곳 <a target="_blank" href="https://datatables.net">이곳에 링크 넣으세요</a>.</p>-->
 
 
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4" style="margin-top: 50px;">
+                <div class="card-header py-3"  style="text-align: center;">
+                    <!--<h6 class="m-0 font-weight-bold text-primary">공지사항</h6>-->
+
+                    <!--d-none: 화면에서 폼을 숨기는 기능
+                    mr-auto: 오른쪽 마진을 자동으로 설정 ml-md-3:왼쪽 마진을 3단위만큼 설정
+                    my-2 my-md-0: 수직여백 설정  mw-100: 최대너비 100%설정 navbar-search: 커스텀클래스 (폼을나타내는 클래스)-->
+                    <form  id="alert" action="/log/{{updateLog.log_id}}/updateLog" method="get">
+                    <div class="card-body" style="display: inline-block; text-align: left;" >
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th  style="text-align: center;">기획명</th>
+                                    <th  style="text-align: center;">일지번호</th>
+                                    <th  style="text-align: center;">일지내용</th>
+                                    <th  style="text-align: center;">일지기록일</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr>
+                                    <td style="text-align: center; width:100%"> <select style="width:100%" id="fk1"   name="project_id" ></select></td>
+                                    <td style="text-align: center;"><input name="log_num" type="text" placeholder="" class="field1" value="{{updateLog.log_num}}"  ></td>
+                                    <td style="text-align: center;"><textarea name="log_content" placeholder="" class="field2">{{updateLog.log_content}}</textarea>
+                                    <td style="text-align: center;"><input name="log_date" type="date" placeholder="" class="field3" value="{{updateLog.log_date}}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+            <div style="text-align: center">
+
+                <button type="submit" class="btn btn-primary" onclick="mappingurl('/log/{{updateLog.log_id}}/updateLog',3,'수정')">등록</button>
+                <button class="btn btn-secondary">
+                    <a href="/log/log" style="text-decoration: none; color: white;">취소</a>
+                </button>
+            </div>
+
+        </div>
+    </div>
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- /.container-fluid -->
+</div>
+<!-- End of Main Content -->
+
+{{>layout/footer}}
+
+
+</div>
+<!-- End of Content Wrapper -->
+
+<script src="/static/js/cu_alert.js"></script>
+
+{{>layout/bootstrapjs}}
 </body>
 </html>
+

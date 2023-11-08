@@ -2,6 +2,7 @@ package com.example.yoonlove.mapper;
 
 import com.example.yoonlove.dto.LogDto;
 import com.example.yoonlove.dto.PageDto;
+import com.example.yoonlove.dto.ProjectDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

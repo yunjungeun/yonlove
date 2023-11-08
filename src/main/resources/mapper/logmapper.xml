@@ -4,7 +4,7 @@
 <mapper namespace="com.example.yoonlove.mapper.LogMapper">
 
     <select id="totalLogPost" parameterType="com.example.yoonlove.dto.PageDto">
-        select count(${id}) as totalPost from ${table}
+        select count(${id}) as totalPost from logjoin
         <if test="company_id == 'company1'">
             where 1=1 <!--시스템 계정이면 모든 데이터보기-->
         </if>
@@ -23,7 +23,7 @@
         from(select rownum as r, t.*
 
         <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
-        from (select * from ${table}
+        from (select * from logjoin
         <if test="company_id == 'company1'">
             where 1=1 <!--시스템 계정이면 모든 데이터보기-->
         </if>
@@ -49,8 +49,14 @@
 
     <insert id="insertLog" parameterType="com.example.yoonlove.dto.LogDto">
         INSERT INTO log VALUES (
-        (select concat('log',(substr(NVL(max(log_id),'log0'),4)+1)) from log),<!--pk코드 자동증가-->
-        #{log_num},
+        (select concat('log',(nvl(max(to_number(substr(log_id,4))), 0)+1)) from log),<!--pk코드 자동증가(수정22)-->
+
+        <if test="log_num == 0 or  log_num == null">
+            (select nvl(max(log_num),0)+1 from log where project_id=#{project_id}),
+        </if>
+        <if test="log_num != null and  log_num != 0">
+            #{log_num},
+        </if>
         #{log_date},
         #{log_content},
         #{project_id}
@@ -70,6 +76,10 @@
         WHERE
         log_id = #{log_id}
     </update>
+
+
+
+
 
     <delete id="deleteLog" parameterType="com.example.yoonlove.dto.LogDto">
         DELETE FROM logjoin

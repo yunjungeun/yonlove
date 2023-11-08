@@ -11,6 +11,7 @@
 <body id="page-top">
 
 {{>layout/sidebar}}
+{{>layout/topbar}}
 
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
@@ -67,7 +68,9 @@
 
                         <div style="text-align: center">
                             <button type="submit" class="btn btn-primary" onclick="mappingurl('/cs/{{updateNotice.notice_id}}/updatenotice',2,'수정')">등록</button>
-                            <button class="btn btn-secondary" onclick="window.location.href='/cs/notice'">취소</button>
+                            <button class="btn btn-secondary">
+                                <a href="/cs/notice" style="text-decoration: none; color: white;">취소</a>
+                            </button>
                         </div>
                     </form>
                 </div>

@@ -3,9 +3,11 @@ package com.example.yoonlove.controller;
 import com.example.yoonlove.dto.LogDto;
 import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.UserDto;
+import com.example.yoonlove.service.DropDownService;
 import com.example.yoonlove.service.LogService;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +27,8 @@ public class LogController {
     private PagingService pagingService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private DropDownService dropDownService;
 
     @GetMapping("log/log")
     public ModelAndView selectListLog(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page, Principal user){
@@ -56,6 +60,9 @@ public class LogController {
     @GetMapping("log/selectlog/{log_id}")
     public ModelAndView selectLog(LogDto logdto){
         LogDto dto = logService.selectLog(logdto);
+
+        System.out.println("project_id값 확인하기!!" +dto.toString());
+
         ModelAndView mv = new ModelAndView();
         mv.setViewName("log/logdetail");
         mv.addObject("selectLog", dto);
@@ -63,16 +70,28 @@ public class LogController {
     }
 
     @GetMapping("log/insertLogView")
-    public  ModelAndView insertLogView(){
+    public  ModelAndView insertLogView(Principal user) throws JsonProcessingException {
+
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        String jsonList = dropDownService.dropDownOption("project",null, companyId);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("log/logInsertView");
+        mv.addObject("fkList", jsonList);
         return mv;
     }
 
     @GetMapping("log/insertLog")
     @ResponseBody
     public String insertLog(LogDto dto) {
+
+        System.out.println("test111!!!!!"+dto.toString());
+
         logService.insertLog(dto);
+
+        System.out.println("test222!!!!!"+dto.toString());
+
         return "/log/log";
     }
 

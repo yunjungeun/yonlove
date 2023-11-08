@@ -1,70 +1,129 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 리스트</title>
+    {{>layout/header}}
 </head>
-<body>
-    <table border="1" cellpadding="1" cellspacing="1">
-        <tr>
-            <td>부서명 <input name="dpt_name" type="text" value="{{selectDpt.dpt_name}}" readonly/></td>
-            <td>부서기능 <input name="dpt_function" type="text" value="{{selectDpt.dpt_function}}" readonly/></td>
-        </tr>
-    </table>
+<body id="page-top">
 
-    <table border="1" cellpadding="1" cellspacing="1">
-        <ul>
-            <tr>
-                <td>직원ID</td>
-                <td>성명</td>
-                <td>닉네임</td>
-                <td>연락처</td>
-                <td>E-mail</td>
-            </tr>
-            {{#selectListUser}}
-                <tr>
-                    <td><a href="/admin/{{user_id}}/selectuser">{{user_id}}</a></td>   <!--관리자용 링크임/ 수정필요-->
-                    <td>{{user_name}}</td>
-                    <td>{{nickname}}</td>
-                    <td>{{phone}}</td>
-                    <td>{{email}}</td>
-                </tr>
-            {{/selectListUser}}
-        </ul>
-    </table>
+{{>layout/sidebar}}
+{{>layout/topbar}}
 
-    <!--서브게시판 페이징-->
-    {{>layout/subpaging}}
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+    <!--d-flex flex-column: flex박스 스타일을 적용한 클래스 : 요소들 수평이나 수직으로 배치하고 간격을 조절하는 등의 작업 간편화
+       content-wrapper: 컨텐츠 섹션 감싸고  그 안의 요소들을 유연하게 배치하고 정렬 주로  다양한 화면 크기와 디바이스에 대응하는 반응형 디자인을 구현하는 데 유용-->
 
-    <!--subPost 검색-->
-    <form action="/admin/user" method="GET">
-        <select id="searchType" name="searchType">
-            <option value="all">선택</option>
-            <option value="writer">ID</option>
-            <option value="title">이름</option>
-            <option value="content">E-mail</option>
-            <!-- 필요한 항목 추가 -->
-        </select>
-        <input type="text" id="search" name="search" placeholder="검색">
-        <input type="submit" value="검색">
-    </form>
-    <!--subPost 검색 / end-->
+    <!-- Main Content -->
+    <div id="content">
 
-    <!--서브게시판 검색 js-->
-    <script><!--현제 뷰페이지기준 prefixUrl-->
-        var url = "/admin/{{selectDpt.dpt_id}}/selectdpt";
-    </script>
-    <script src="/static/js/search.js"></script>
+        <!-- Begin Page Content -->
+        <div class="container-fluid">  <!--얘가 없으면 전체적으로 다 위로 올라가고 푸터가 사이드 옆쪽으로 붙어버림 -->
+            <!--container-fluid:  Bootstrap 프레임워크를 사용하여 생성된 컨테이너로, 웹 페이지의 내용을 감싸는 역할, 화면 폭에 맞게 자동으로 넓어져서 브라우저의 너비에 따라 반응형으로 조절-->
+            <!--mb-2:하단의 여백 -->
+            <!-- Page Heading -->
 
-<a href="/admin/department">목록</a>
-    <a href="/admin/{{selectDpt.dpt_id}}/updatedptview">수정</a>
-    <a href="javascript:void(0);" onclick="deleteAlert('/admin/{{selectDpt.dpt_id}}/deletedpt')">삭제</a>
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4" style="margin-top: 50px;">
+                <div class="card-header py-3">
+                    <!--<h6 class="m-0 font-weight-bold text-primary">공지사항</h6>-->
 
-<br/>현재까지 버그<br/>
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th style="text-align: center;">부서명<input
+                                    style="margin-left: 10px; border-radius: 2px; text-align: center" name="dpt_name"
+                                    type="text" value="{{selectDpt.dpt_name}}" readonly/></th>
+                            <th style="text-align: center;">부서기능<input style="margin-left: 10px; border-radius: 2px;"
+                                                                       name="dpt_function" type="text"
+                                                                       value="{{selectDpt.dpt_function}}" readonly/>
+                            </th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th style="text-align: center;">직원ID</th>
+                                <th style="text-align: center;">성명</th>
+                                <th style="text-align: center;">닉네임</th>
+                                <th style="text-align: center;">연락처</th>
+                                <th style="text-align: center;">E-mail</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {{#selectListUser}}
+                                <tr>
+                                    <td style="text-align: center;"><a
+                                            href="/admin/{{user_id}}/selectuser">{{user_id}}</a></td>
+                                    <td style="text-align: center;">{{user_name}}</td>
+                                    <td style="text-align: center;">{{nickname}}</td>
+                                    <td style="text-align: center;">{{phone}}</td>
+                                    <td style="text-align: center;">{{email}}</td>
+                                </tr>
+                            {{/selectListUser}}
+                            </tbody>
+                        </table>
+                        <!--페이징 처리 레이아웃-->
 
-    <script src="/static/js/deletepost.js"></script>
+                        <div class="d-flex justify-content-between align-items-center mt-6" style="margin-top: 50px">
+
+                            <span></span>
+                            <span>{{>layout/paging}}</span> <!-- 페이징은 왼쪽에 배치 -->
+
+                            <div style="margin-left: 250px">
+                                <a href="/admin/department" class="btn btn-primary">목록</a> <!-- 목록 버튼 -->
+                                <a href="/admin/{{selectDpt.dpt_id}}/updatedptview" class="btn btn-success">수정</a>
+                                <!-- 수정 버튼 -->
+                                <a href="javascript:void(0);" class="btn btn-danger"
+                                   onclick="deleteAlert('/admin/{{selectDpt.dpt_id}}/deletedpt')">삭제</a> <!-- 삭제 버튼 -->
+                            </div>
+
+                            <form action="/admin/user" method="get" class="d-none d-sm-inline-block form-inline">
+                                <div class="input-group">
+                                    <select id="searchType" name="searchType">
+                                        <option value="all">선택</option>
+                                        <option value="title">이름</option>
+                                        <option value="content">닉네임</option>
+                                        <!-- 필요한 항목 추가 -->
+                                    </select>
+                                    <input id="search" name="search" type="text" style="width: 150px;"
+                                           class="form-control bg-light border-0 small" placeholder="Search for..."
+                                           aria-label="Search" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <input class="btn btn-primary" type="submit" value="검색">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <br/>
+                </div>
+
+                <a class="scroll-to-top rounded" href="#page-top">
+                    <i class="fas fa-angle-up"></i>
+                </a>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+
+            {{>layout/footer}}
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+        <script>
+            var url = "/admin/user";
+        </script>
+        <script src="/static/js/search.js"></script>
+
+        {{>layout/bootstrapjs}}
 </body>
+
 </html>

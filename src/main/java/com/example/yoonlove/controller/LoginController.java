@@ -23,6 +23,8 @@ import org.slf4j.LoggerFactory;
 
 import java.security.Principal;
 
+import java.security.Principal;
+
 @Controller
 public class LoginController {
 
@@ -56,6 +58,10 @@ public class LoginController {
     }*/
 
 
+
+
+
+
     @GetMapping("companysignupview")
     public String companysignupview() {
         return "/login/companysignup";
@@ -63,11 +69,47 @@ public class LoginController {
 
     @GetMapping("companysignup")
     @ResponseBody
-    public String companysign(CompanyDto dto) {
+    public String companysign(CompanyDto dto, Principal user, UserDto userDto ) {
+
+        //기업회원가입 로직 sql
+
+        System.out.println("test1"+dto.toString());
+
         userService.companysignup(dto);
-        System.out.println("dddd"+dto.toString());
-        return "/index";
+
+        System.out.println("test2");
+
+        String companyID = userService.lastCompanyID();
+
+        System.out.println("test3"+companyID);
+
+
+
+        //-------------테이블생성
+        System.out.println("principal 의 내용 : "+user);
+
+        String userId = user.getName(); // 유저id
+        System.out.println("유저의 id는 "+userId);
+
+
+        System.out.println(userId);
+        System.out.println(companyID);
+
+        userService.updateUserCompanyID(userId, companyID);
+
+        return "redirect:/index";
     }
+
+
+
+    @GetMapping("/test1")
+    public void test(Principal user){
+
+        String companyID = "company20";
+        String userId = user.getName(); // 유저id
+        userService.updateUserCompanyID(userId, companyID);
+    }
+
 
 
     @PostMapping("ConfirmId")

@@ -36,6 +36,8 @@ public class UserDto implements UserDetails {
         private String address3;
         private int total_pay;
 
+        private CompanyDto companyDto;
+
         //조인테이블 컬럼 : user_info
     private String company_name;
 

@@ -33,7 +33,7 @@
 
     <insert id="insertCompany" parameterType="com.example.yoonlove.dto.CompanyDto">
         INSERT INTO company VALUES (
-        (select concat('company', (nvl(max(substr(company_id, 8)), 0)+1)) from company),<!--pk코드 자동증가(수정)-->
+        (select concat('company', (nvl(max(to_number(substr(company_id, 8))), 0)+1)) from company),<!--pk코드 자동증가(수정2)-->
          #{company_name},
         '2023/10/25',
         #{company_homepage},
@@ -44,6 +44,38 @@
         #{company_address3}
         )
     </insert>
+
+    <select id="lastCompanyID"  >
+
+        select concat('company',max(to_number(substr(company_id,8)))) from  company
+    </select>
+
+    <update id="updateUserCompanyID" >
+        UPDATE users
+        SET company_id = #{company},
+            authority = 'admin'
+        WHERE user_id = #{user}
+    </update>
+
+
+
+
+
+    <update id="updateUser" parameterType="com.example.yoonlove.dto.UserDto" >
+
+        update users
+        set company_id = #{company_id}
+
+        where user_id = #{user_id}
+
+
+    </update>
+
+
+
+
+
+
 
     <select id="selectId" resultType="boolean">  <!-- !!!!!!아이디 중복체크 !!!!!!!!! -->
         SELECT COUNT(*)
