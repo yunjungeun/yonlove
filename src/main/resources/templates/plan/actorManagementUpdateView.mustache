@@ -6,30 +6,58 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/static/js/cu_alert.js"></script>
+    {{>layout/header}}
 </head>
 <body>
-<form id="alert" action="/plan/{{actorManagementUpdate.actor_id}}/updateActorManagement" method="get">
-    <table border="1" cellpadding="1" cellspacing="1">
-        <tr>
+<div id="page-top">
+    {{>layout/sidebar}}
+    {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container">
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                출연자 관리//수정? 일정명이 추가되면?
+            </h1>
 
+            <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
+                <div class="card-header py-3" style="center;"> <!--카드헤더 div-->
+                </div><!--카드헤더 end-->
+                <div class="card-body"><!--카드 바디-->
+                    <form id="alert" action="/plan/{{actorManagementUpdate.actor_id}}/updateActorManagement" method="get">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead style="text-align: center;">
+                            <tr>
+                                <th>출연자</th>
+                                <th>도착시간</th>
+                                <th>장소</th>
+                                <th>셋콜</th>
+                            </tr>
+                            </thead>
+                            <tbody style="text-align: center;">
+                            <tr>
+                                <td><input name="actor_name" type="text" value="{{actorManagementUpdate.actor_name}}" class="field1" ></td>
+                                <td><input name="arrival_time" type="date" value="{{actorManagementUpdate.arrival_time}}" class="field2" ></td>
+                                <td><input name="place" type="text"  value="{{actorManagementUpdate.place}}" class="field3"></td>
+                                <td><input name="set_call" type="text" value="{{actorManagementUpdate.set_call}}" class="field4"></td>
+                            </tr>
+                            </tbody>
+                        </table>
 
-            <td>배우이름<input name="actor_name" type="text" value="{{actorManagementUpdate.actor_name}}" class="field1" ></td>
-            <td>도착시간<input name="arrival_time" type="date" value="{{actorManagementUpdate.arrival_time}}" class="field2" ></td>
-            <td>장소<input name="place" type="text"  value="{{actorManagementUpdate.place}}" class="field3"></td>
-            <td>셋콜<input name="set_call" type="text" value="{{actorManagementUpdate.set_call}}" class="field4"></td>
-            <td>일정id<input name="day_id" type="text" value="{{actorManagementUpdate.day_id}}" class="field5"></td>
+                        <div class="d-flex justify-content-end">
+                            <input type="submit" value="등록" class="btn btn-primary mr-2" onclick="mappingurl('/plan/{{actorManagementUpdate.actor_id}}/updateActorManagement',5,'수정')">
+                            <a href="/plan/actor_management" class="btn btn-primary">목록</a>
+                        </div>
+                    </form>
 
+                </div><!--카드바디-->
+            </div><!--카드 end-->
 
+        </div><!--컨테이너 end-->
+    </div><!--warpper end-->
+</div><!--page-top end-->
+{{>layout/footer}}
+</div>
 
-        </tr>
-
-
-    </table>
-    <input type="submit" value="등록" onclick="mappingurl('/plan/{{actorManagementUpdate.actor_id}}/updateActorManagement',5,'수정')">
-</form>
-<a href="/plan/actor_management">목록</a>
-
-
+{{>layout/bootstrapjs}}
+<script src="/static/js/cu_alert.js"></script>
 </body>
 </html>

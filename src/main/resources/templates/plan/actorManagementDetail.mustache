@@ -7,20 +7,55 @@
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/static/js/delete.js"></script>
+    {{>layout/header}}
 </head>
 <body>
+<div id="page-top">
+    {{>layout/sidebar}}
+    {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container">
 
-    <table border="1" cellpadding="1" cellspacing="1">
-        <tr>
-            <td>출연자<input name="actor_name" type="text"  value="{{actorManagementDetail.actor_name}}" ></td>
-            <td>도착시간<input name="arrival_time" type="text" value="{{actorManagementDetail.arrival_time}}" ></td>
-            <td>장소<input name="place" type="text" value="{{actorManagementDetail.place}}" ></td>
-            <td>셋콜<input name="set_call" type="text" value="{{actorManagementDetail.set_call}}" ></td>
-        </tr>
-    </table>
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                출연자 관리///상세보기
+            </h1>
 
-<a href="/plan/actor_management">목록</a>
-<a href="/plan/{{actorManagementDetail.actor_id}}/actorManagementUpdateView">수정</a>
-<a href="/plan/{{actorManagementDetail.actor_id}}/deleteActorManagement" onclick="confirmDelete(event)">삭제</a>
+            <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
+                <div class="card-header py-3" style="center;"> <!--카드헤더 div-->
+
+                </div><!--카드헤더 end-->
+                <div class="card-body"><!--카드 바디-->
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <thead>
+                        <tr style="text-align: center;">
+                            <th>출연자</th>
+                            <th>도착시간</th>
+                            <th>장소</th>
+                            <th>셋콜</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr style="text-align: center;">
+                            <td>{{actorManagementDetail.actor_name}}</td>
+                            <td>{{actorManagementDetail.arrival_time}}</td>
+                            <td>{{actorManagementDetail.place}}</td>
+                            <td>{{actorManagementDetail.set_call}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-end">
+                        <a href="/plan/actor_management" class="btn btn-primary mr-2">뒤로가기</a>
+                        <a href="/plan/{{actorManagementDetail.actor_id}}/actorManagementUpdateView" class="btn btn-success mr-2">수정</a>
+                        <a href="/plan/{{actorManagementDetail.actor_id}}/deleteActorManagement" class="btn btn-danger" onclick="confirmDelete(event)">삭제</a>
+                    </div>
+                </div><!--카드바디-->
+            </div><!--카드 end-->
+
+        </div><!--컨테이너 end-->
+    </div><!--warpper end-->
+</div><!--page-top end-->
+{{>layout/footer}}
+</div>
+{{>layout/bootstrapjs}}
 </body>
 </html>

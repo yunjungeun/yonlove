@@ -6,25 +6,49 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    </head>
+    {{>layout/header}}
+</head>
 <body>
-<form id="alert"action="/plan/insertactorManagement" method="get">
-    <input type="hidden" class="field1" name="day_id" value="{{dayId}}">
+<div id="page-top">
+    {{>layout/sidebar}}
+    {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container">
 
-    <table border="1" cellpadding="1" cellspacing="1">
-        <tr>
-            <td>출연자 <select id="fk1" name="pd_id"></select></td>
-            <td>도착시간<input name="arrival_time" type="time" class="field2" ></td>
-            <td>장소<input name="place" type="text" class="field3" ></td>
-            <td>셋콜<input name="set_call" type="time" class="field4"></td>
-        </tr>
-    </table>
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                출연자 관리/// 작성
+            </h1>
 
-    <input type="submit" value="등록"  onclick="mappingurl('/plan/insertactorManagement',4,'작성')">
-</form>
+            <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
+                <div class="card-header py-3" style="center;"> <!--카드헤더 div-->
 
+                </div><!--카드헤더 end-->
+                <div class="card-body"><!--카드 바디-->
+                    <form id="alert"action="/plan/insertactorManagement" method="get">
+                        <input type="hidden" class="field1" name="day_id" value="{{dayId}}">
 
-<a href="/plan/actor_management">목록</a>
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <tr>
+                                <th style="text-align: center;">출연자 <select id="fk1" class="ml-2" name="pd_id"></select></th>
+                                <th style="text-align: center;">도착시간<input name="arrival_time" type="time" class="field2 ml-2" ></th>
+                                <th style="text-align: center;">장소<input name="place" type="text" class="field3 ml-2" ></th>
+                                <th style="text-align: center;">셋콜<input name="set_call" type="time" class="field4 ml-2"></th>
+                            </tr>
+                        </table>
+                        <div class="d-flex justify-content-end">
+                            <input type="submit" value="등록" class="btn btn-primary mr-2" onclick="mappingurl('/plan/insertactorManagement',4,'작성')">
+                            <a href="/plan/actor_management" class="btn btn-secondary">취소</a>
+                        </div>
+                    </form>
+
+                </div><!--카드바디-->
+            </div><!--카드 end-->
+
+        </div><!--컨테이너 end-->
+    </div><!--warpper end-->
+</div><!--page-top end-->
+{{>layout/footer}}
+</div>
 
 <script>
     var jsonValue = '{{{fkList}}}';
@@ -34,5 +58,6 @@
 </script>
 <script src="/static/js/dropdown.js"></script>
 <script src="/static/js/cu_alert.js"></script>
+{{>layout/bootstrapjs}}
 </body>
 </html>
