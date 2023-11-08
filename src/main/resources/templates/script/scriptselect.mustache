@@ -7,59 +7,56 @@
     <title>Document</title>
     {{>layout/header}}
 </head>
-<body id="page-top">
+<body>
+<div id="page-top">
 {{>layout/sidebar}}
 {{>layout/topbar}}
 
 
-<!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
-
-<!-- Main Content -->
 <div id="content">
 
 
-<div class="container-fluid">
-    <div style="text-align: center; display: block; margin-top:40px;" > <!-- 수정 ! 마진 탑 100->수정 -->
-        <h1 class="h3 mb-2 text-gray-800" >스크립트페이퍼</h1>
-    </div>
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4" style="margin-top: 50px; margin-right: 300px; margin-left: 300px">
-        <div class="card-header py-3">
+    <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+        스크립트페이퍼
+    </h1>
 
-        <div style="margin-left: 20%; margin-right: 20%; margin-top: 5%;">
-            <div style="display: inline-block;">
+        <div class="card shadow mb-4" style="margin-top: 50px; margin-right: 200px; margin-left: 200px">
+            <div class="card-body">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr style="text-align: center;">
+                        <th>씬</th>
+                        <th>영상제목</th>
+                        <th>촬영날짜</th>
+                        <th>영상 길이</th>
+                        <th>촬영 시작시간</th>
+                    </tr>
+                    </thead>
+                    <tr style="text-align: center;">
+                        <td>{{selectScriptPaper.scene_num}}</td>
+                        <td>{{selectScriptPaper.video_name}}</td>
+                        <td>{{selectScriptPaper.video_date}}</td>
+                        <td>{{selectScriptPaper.video_time}}</td>
+                        <td>{{selectScriptPaper.video_start_time}}</td>
+                    </tr>
 
-                <div class="mb-3" style="display: inline-block;">
-                    <label for="formGroupExampleInput" class="form-label"><strong>씬 번호</strong></label>
-                    <input name="scene_id" type="text" value="{{selectScriptPaper.scene_id}}" readonly><br/>
+                    <tr style="text-align: center;">
+                        <th colspan="3">액션 이미지</th>
+                        <th colspan="2">액션 내용</th>
+                    </tr>
+                    <tr style="text-align: center;">
+                        <td colspan="3">여기 이미지 뜨게 해줘</td>
+                        <td colspan="2">{{selectScriptPaper.action_content}}</td>
+                    </tr>
+                    <tr style="text-align: center;">
+                        <th colspan="5">콘티</th>
+                    </tr>
+                    <tr>
+                        <td colspan="5">{{selectScriptPaper.conti}}</td>
+                    </tr>
+                </table>
 
-                    <label for="formGroupExampleInput" class="form-label"><strong>영상 제목</strong></label>
-                    <input name="video_name" type="text" value="{{selectScriptPaper.video_name}}" readonly><br/>
-
-                    <label for="formGroupExampleInput" class="form-label"><strong>촬영 날짜</strong></label>
-                    <input name="video_date" type="date" value="{{selectScriptPaper.video_date}}" readonly><br/>
-
-                    <label for="formGroupExampleInput" class="form-label"><strong>촬영 총시간</strong></label>
-                    <input name="video_time" type="time" value="{{selectScriptPaper.video_time}}" readonly><br/>
-
-                    <label for="formGroupExampleInput" class="form-label"><strong>촬영 시작시간</strong></label>
-                    <input name="video_time" type="time" value="{{selectScriptPaper.video_start_time}}" readonly><br/>
-                </div>
-
-                <div class="mb-3" style="display: inline-block;">
-                    <label for="formGroupExampleInput" class="form-label"><strong>액션 이미지</strong></label>
-                    <input name="action_image" type="text" readonly/><br/>
-
-                    <label for="formGroupExampleInput" class="form-label"><strong>액션 내용</strong></label>
-                    <input name="action_content" type="text" value="{{selectScriptPaper.action_content}}" readonly/><br/>
-
-                    <label for="formGroupExampleInput" class="form-label"><strong>카메라포지션</strong></label>
-                    <input name="position_image" type="text" value="{{selectScriptPaper.position_image}}" readonly/><br/>
-
-                    <label for="formGroupExampleInput" class="form-label"><strong>콘티</strong></label>
-                    <input name="conti" type="text" value="{{selectScriptPaper.conti}}" readonly/><br/>
-                </div>
 
                 <div style="text-align: center">
                     <a href="/script/timetable" class="btn btn-primary">목록</a> &nbsp;&nbsp;
@@ -67,23 +64,12 @@
                     <a href="javascript:void(0);" class="btn btn-danger" onclick="deleteAlert('/script/{{selectScriptPaper.script_id}}/deletescriptpaper')">삭제</a>
                 </div>
 
-            </div>
-        </div>
-        </div>
-    </div>
-</div>
+            </div><!--1번 카드바디-->
+         </div><!--1번 카드섹션-->
 
-
-
-<!-- 서브페이지 타임테이블 -->
-<div class="card shadow mb-4" style="margin-top: 50px; margin-right: 300px; margin-left: 300px">
-    <div class="card-header py-3">
-
-        <div style="margin-left: 20%; margin-right: 20%; margin-top: 5%;">
-        <div style="display: inline-block;">
-
-<!-- 서브페이지 타임테이블 -->
-        <div class="mb-3" style="text-align: center; display: inline-block;">
+    <!-- 서브페이지 타임테이블 -->
+    <div class="card shadow mb-4" style="margin-top: 50px; margin-right: 200px; margin-left: 200px">
+        <div class="card-body">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                 <tr>
@@ -107,14 +93,16 @@
                 {{/selectListTimeTable}}
                 </tbody>
             </table>
-        </div>
-            {{>layout/subpaging}}
-        </div>
-        </div>
-        </div>
-</div>
+            <div style="text-align: center">
+                {{>layout/subpaging}}
+            </div>
+        </div><!--카드바디-->
+        </div><!--카드섹션-->
 
 </div>
+</div>
+</div>
+{{>layout/footer}}
 </div>
 
 <script>
@@ -131,4 +119,3 @@ var url = "/script/{{selectScriptPaper.script_id}}/selectscriptpaper";
 {{>layout/bootstrapjs}}
 </body>
 </html>
-
