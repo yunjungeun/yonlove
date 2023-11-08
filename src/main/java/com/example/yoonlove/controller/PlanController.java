@@ -312,8 +312,12 @@ public class PlanController {
 //===========================================================================================출연자 관리 end
 
     @GetMapping("plan/film_plan")
-    public ModelAndView selectListFilmPlan(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
-        PageDto pageDto = new PageDto("film_plan","film_id", page,pdto);
+    public ModelAndView selectListFilmPlan(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page,
+                                           Principal user){
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        PageDto pageDto = new PageDto("film_plan","film_id", page,pdto, companyId);
         PageDto pageInfo = pagingService.paging(pageDto);
 
         // paging ==> 전체게시글 갯수 구해오는 메소드
@@ -361,10 +365,14 @@ public class PlanController {
 
     @GetMapping("plan/insertFilm")  //컨텐츠 추가 처리
     @ResponseBody
-    public String insertFilm(FilmPlanDto dto) {
+    public String insertFilm(FilmPlanDto dto, Principal user) {
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
         //dto에는 insert에 들어갈 act_id가 없음. dto에 있는 pd_id와 scene_id로 act_id를 획득하는 로직
-        String actId = planService.selectFilmJoinActID(dto.getPd_id(), dto.getScene_id());
+        String actId = planService.selectFilmJoinActID(dto.getPd_id(), dto.getScene_id());// day_id 값이 여러개가 나와서
         dto.setAct_id(actId);   //획득된 act_id를 dto에 바인드
+        System.out.println("dto 내용 최종 : "+dto.toString());
         planService.insertFilm(dto);
 
         return "/plan/film_plan";
@@ -381,7 +389,7 @@ public class PlanController {
 
     @GetMapping("plan/{film_id}/updatefilm") //업데이트 처리
     @ResponseBody
-    public String updateFilm( FilmPlanDto dto) {
+    public String updateFilm(FilmPlanDto dto) {
         planService.updateFilm(dto);
         return "/plan/film_plan";
     }
