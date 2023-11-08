@@ -75,7 +75,7 @@
             (select * from todaytime),   <!--작성일-->
             'false', <!--종료여부-->
             '-',   <!--종료사유-->
-            'com1', <!--회사table pk 자동입력-->
+            #{company_id},
             #{project_state} <!--작성상태-->
         )
     </insert>

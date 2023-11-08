@@ -6,114 +6,171 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{>layout/header}}
 </head>
 <body>
+<div id="page-top">
+    {{>layout/sidebar}}
+    {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container">
 
-<table border="1" cellpadding="1" cellspacing="1">
-    <tr>
-        <h1>일일 촬영계획표 </h1>
-        <h3>{{scheduleDetail.project_name}}</h3>
-        <h3>{{scheduleDetail.day_num}}회차 : '{{scheduleDetail.day_title}}'({{scheduleDetail.film_date}})</h3>
-        <h5>날씨 : {{scheduleDetail.weather}}</h5>
-    </tr>
-    <tr>
-</table>
-
-<!--테이블 1 start-->
-<table border="1" cellpadding="1" cellspacing="1">
-    <tr>
-        <td>씬</td>
-        <td>장소</td>
-        <td>내용</td>
-        <td>출연자</td>
-        <td>배역</td>
-        <td>안/밖</td>
-        <td>낮/밤</td>
-        <td>컷수</td>
-    </tr>
-  {{#table1}}
-      <tr>
-          <td>{{scenario_name}}-#{{scenario_num}}-{{scene_num}}</td>
-          <td>{{scene_place}}</td>
-          <td><a href="/plan/filmPlan/{{film_id}}" >{{scene_content}}</a></td>
-          <td>{{pd_name}}</td>
-          <td>{{casting}}</td>
-          <td>{{inside_flag}}</td>
-          <td>{{day_flag}}</td>
-          <td>{{cut}}</td>
-      </tr>
-    {{/table1}}
-</table>
-<!--table1 end-->
-<form method="get" action="/plan/insertFilmPlanView/{{scheduleDetail.day_id}}">
-    <input type="hidden" name="day_id" value="{{scheduleDetail.day_id}}">
-    <input type="submit" value="작성">
-</form>
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                일일 촬영계획표 : '{{scheduleDetail.day_title}}'
+            </h1>
+            <h5 class="h5 mb-2 font-weight-bold text-gray-600" style="text-align: center;">({{scheduleDetail.film_date}} : '{{scheduleDetail.weather}}')</h5>
 
 
-<!--table2 start-->
-<table border="1" cellpadding="1" cellspacing="1">
-    <tr><td colspan="2">진행시간표</td></tr>
-    <tr>
-        <td>시간</td>
-        <td>내용</td>
-    </tr>
-    {{#table2}}
-        <tr>
-            <td>{{start_time}} ~ {{end_time}}</td>
-            <td>{{film_content}}</td>
-        </tr>
-    {{/table2}}
-</table>
-<!--table2 end-->
-<form method="get" action="/plan/insertScheduleTimeView">
-    <input type="hidden" name="day_id" value="{{scheduleDetail.day_id}}">
-    <input type="submit" value="작성">
-</form>
+            <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
+                <div class="card-header py-3" style="center;"> <!--카드헤더 div-->
+                    <h4 style="h4 font-weight-bold text-gray-800">'{{scheduleDetail.project_name}}' : {{scheduleDetail.day_num}} 회차 촬영계획</h4>
+                </div><!--카드헤더 end-->
 
-<!--table3 start-->
-<table border="1" cellpadding="1" cellspacing="1">
-    <tr><td colspan="4">출연자 준비</td></tr>
-    <tr>
-        <td>출연자</td>
-        <td>도착시간</td>
-        <td>장소</td>
-        <td>SET_CALL</td>
-    </tr>
-    {{#table3}}
-        <tr>
-            <td><a href="/plan/actorManagement/{{actor_id}}">{{actor_name}}</a> </td>
-            <td>{{arrival_time}}</td>
-            <td>{{place}}</td>
-            <td>{{set_call}}</td>
-        </tr>
-    {{/table3}}
-</table>
-<!--table3 end-->
-<form method="get" action="/plan/insertactorManagementView">
-    <input type="hidden" name="day_id" value="{{scheduleDetail.day_id}}">
-    <input type="submit" value="작성">
-</form>
 
-<!--table4 start-->
-<table border="1" cellpadding="1" cellspacing="1">
-    <tr>
-        <td>촬영순서<textarea cols="30" rows="10" readonly>{{scheduleDetail.film_order}}</textarea></td>
-        <td>조명<textarea cols="30" rows="10" readonly>{{scheduleDetail.light}}</textarea></td>
-        <td>의상<textarea cols="30" rows="10" readonly>{{scheduleDetail.costume}}</textarea></td>
-    </tr>
-    <tr>
-        <td>소품<textarea cols="30" rows="10" readonly>{{scheduleDetail.prop}}</textarea></td>
-        <td>연출/제작<textarea cols="30" rows="10" readonly>{{scheduleDetail.direct}}</textarea></td>
-    </tr>
-</table>
-<!--table4 end-->
-<a href="/plan/schedule_day">목록</a>
-<a href="/plan/{{scheduleDetail.day_id}}/scheduleUpdateView">수정</a>
-<a href="/plan/{{scheduleDetail.day_id}}/deleteSchedule" onclick="confirmDelete(event)">삭제</a>
+                <div class="card-body"><!--카드 바디-->
 
+                    <!--테이블 1 start-->
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <tr>
+                            <th style="text-align: center;">씬</th>
+                            <th style="text-align: center;">장소</th>
+                            <th style="text-align: center;">내용</th>
+                            <th style="text-align: center;">출연자</th>
+                            <th style="text-align: center;">배역</th>
+                            <th style="text-align: center;">안/밖</th>
+                            <th style="text-align: center;">낮/밤</th>
+                            <th style="text-align: center;">컷수</th>
+                        </tr>
+                        {{#table1}}
+                            <tr>
+                                <td style="text-align: center;">{{scenario_name}}-#{{scenario_num}}-{{scene_num}}</td>
+                                <td style="text-align: center;">{{scene_place}}</td>
+                                <td style="text-align: center;"><a href="/plan/filmPlan/{{film_id}}" >{{scene_content}}</a></td>
+                                <td style="text-align: center;">{{pd_name}}</td>
+                                <td style="text-align: center;">{{casting}}</td>
+                                <td style="text-align: center;">{{inside_flag}}</td>
+                                <td style="text-align: center;">{{day_flag}}</td>
+                                <td style="text-align: center;">{{cut}}</td>
+                            </tr>
+                        {{/table1}}
+                    </table>
+                    <div class="d-flex justify-content-end">
+                        <form method="get" action="/plan/insertFilmPlanView/{{scheduleDetail.day_id}}">
+                            <input type="hidden" name="day_id" value="{{scheduleDetail.day_id}}">
+                            <input type="submit" class="btn btn-primary" value="작성">
+                        </form>
+                    </div>
+                    <!--table1 end-->
+
+                    <div id="table-group" class="d-flex justify-content-between"><!--테이블그룹 start-->
+
+                        <div style="width:45%;"><!--table2 start-->
+                            <table class="table-bordered" width="100%" cellspacing="0">
+                                <tr>
+                                    <th style="text-align: center;" colspan="2">진행시간표</th>
+                                </tr>
+                                <tr>
+                                    <th style="text-align: center;">시&nbsp&nbsp간</th>
+                                    <th style="text-align: center;">내&nbsp&nbsp용</th>
+                                </tr>
+                                {{#table2}}
+                                    <tr>
+                                        <td style="text-align: center;">{{start_time}} ~ {{end_time}}</td>
+                                        <td style="text-align: center;"><a href="/plan/scheduleTime/{{time_id}}">{{film_content}}</a></td>
+                                    </tr>
+                                {{/table2}}
+                            </table>
+                            <div class="d-flex justify-content-end mt-3">
+                                <form method="get" action="/plan/insertScheduleTimeView">
+                                    <input type="hidden" name="day_id" value="{{scheduleDetail.day_id}}">
+                                    <input type="submit" class="btn btn-primary" value="작성">
+                                </form>
+                            </div>
+                        </div><!--table2 end-->
+
+
+                        <div style="width:45%;"><!--table3 start-->
+                            <table class="table-bordered" width="100%" cellspacing="0">
+                                <tr>
+                                    <th style="text-align: center;" colspan="4">출연자 준비</th>
+                                </tr>
+                                <tr>
+                                    <th style="text-align: center;">출연자</th>
+                                    <th style="text-align: center;">도착시간</th>
+                                    <th style="text-align: center;">장소</th>
+                                    <th style="text-align: center;">SET_CALL</th>
+                                </tr>
+                                {{#table3}}
+                                    <tr>
+                                        <td style="text-align: center;"><a href="/plan/actorManagement/{{actor_id}}">{{actor_name}}</a> </td>
+                                        <td style="text-align: center;">{{arrival_time}}</td>
+                                        <td style="text-align: center;">{{place}}</td>
+                                        <td style="text-align: center;">{{set_call}}</td>
+                                    </tr>
+                                {{/table3}}
+                            </table>
+                            <div class="d-flex justify-content-end mt-3">
+                                <form method="get" action="/plan/insertactorManagementView">
+                                    <input type="hidden" name="day_id" value="{{scheduleDetail.day_id}}">
+                                    <input type="submit" class="btn btn-primary" value="작성">
+                                </form>
+                            </div>
+                        </div><!--table3 end-->
+                    </div><!--테이블 그룹 end-->
+
+                    <!--table4 start-->
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                            <tr>
+                            <th style="text-align: center;">조명</th>
+                            <th style="text-align: center;">의상</th>
+                            <th style="text-align: center;">소품</th>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                <textarea name="light" rows="5" cols="30" readonly>{{scheduleDetail.light}}</textarea>
+                            </td>
+                            <td style="text-align: center;">
+                                <textarea name="costume"  rows="5" cols="30" readonly>{{scheduleDetail.costume}}</textarea>
+                            </td>
+                            <td style="text-align: center;">
+                                <textarea name="prop" rows="5" cols="30" readonly>{{scheduleDetail.prop}}</textarea>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th style="text-align: center;">촬영순서</th>
+                            <th style="text-align: center;">연출/제작</th>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                <textarea name="film_order" rows="5" cols="30" readonly>{{scheduleDetail.film_order}}</textarea>
+                            </td>
+                            <td style="text-align: center;">
+                                <textarea name="direct" rows="5" cols="30"  readonly>{{scheduleDetail.direct}}</textarea>
+                            </td>
+                        </tr>
+                    </table>
+                    <!--table4 end-->
+
+
+                    <div class="d-flex justify-content-end">
+                        <a href="/plan/schedule_day" class="btn btn-primary mr-2">목록</a>
+                        <a href="/plan/{{scheduleDetail.day_id}}/scheduleUpdateView" class="btn btn-success mr-2">수정</a>
+                        <a href="/plan/{{scheduleDetail.day_id}}/deleteSchedule" class="btn btn-danger" onclick="confirmDelete(event)">삭제</a>
+                    </div>
+
+
+                </div><!--카드바디-->
+            </div><!--카드 end-->
+
+        </div><!--컨테이너 end-->
+    </div><!--warpper end-->
+</div><!--page-top end-->
+{{>layout/footer}}
+</div>
 
 <script> var base ="/plan/schedule_day";</script>
 <script src="/static/js/delete.js"></script>
+    {{>layout/bootstrapjs}}
 </body>
 </html>

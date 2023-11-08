@@ -75,7 +75,13 @@ public class ProjectController {
 
     @GetMapping("project/insertproject")   // 작성 후 입력값 넘기는~
     @ResponseBody
-    public String insertProject(ProjectDto projectDto){
+    public String insertProject(ProjectDto projectDto, Principal user){
+
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        projectDto.setCompany_id(companyId);
         projectService.insertProject(projectDto);
         return "/project/project";
     }
