@@ -62,8 +62,7 @@
 
     <update id="updateCreator" >
         UPDATE CREATER
-        SET ch_name=#{ch_name},
-        ch_sub=#{ch_sub},
+        SET
         user_id=#{user_id}
         where ch_id = #{ch_id}
     </update>

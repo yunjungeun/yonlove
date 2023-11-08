@@ -120,8 +120,9 @@ import java.util.List;
      @GetMapping("/creator/updatecreator/{ch_id}") // 수정
      @ResponseBody
     public String updateCreator(CreatorDto dto){
-            /*System.out.println(dto.toString());*/
+            System.out.println("test111" +dto.toString());
         creatorservice.updateCreator(dto);
+         System.out.println("test222" +dto.toString());
         return "/creator/creater";   // 목록페이지로 이동
     }
 
