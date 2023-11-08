@@ -33,7 +33,7 @@
                 <div class="card-header py-3">
                     <!--<h6 class="m-0 font-weight-bold text-primary">공지사항</h6>-->
                     <form action="/admin/user" method="get"
-                          class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
+                          class="d-flex justify-content-end form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
                         <!--d-none: 화면에서 폼을 숨기는 기능
                         mr-auto: 오른쪽 마진을 자동으로 설정 ml-md-3:왼쪽 마진을 3단위만큼 설정
                         my-2 my-md-0: 수직여백 설정  mw-100: 최대너비 100%설정 navbar-search: 커스텀클래스 (폼을나타내는 클래스)-->
@@ -98,9 +98,8 @@
                             </table>
 
                             <div class="d-flex justify-content-between align-items-center">
-                                {{>layout/paging}}
-
-
+                                <span></span>
+                                <span>{{>layout/paging}}</span>
                                 <a href="/admin/adduserview" role="button" class="btn btn-primary">회원추가</a>
                             </div>
                         </div>
