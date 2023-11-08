@@ -50,7 +50,13 @@
     <insert id="insertLog" parameterType="com.example.yoonlove.dto.LogDto">
         INSERT INTO log VALUES (
         (select concat('log',(nvl(max(to_number(substr(log_id,4))), 0)+1)) from log),<!--pk코드 자동증가(수정22)-->
-        #{log_num},
+
+        <if test="log_num == 0 or  log_num == null">
+            (select nvl(max(log_num),0)+1 from log where project_id=#{project_id}),
+        </if>
+        <if test="log_num != null and  log_num != 0">
+            #{log_num},
+        </if>
         #{log_date},
         #{log_content},
         #{project_id}
