@@ -202,7 +202,7 @@ public class PlanController {
 
 
     @GetMapping("plan/{time_id}/scheduleTimeUpdateView") //컨텐츠 업데이트하는 뷰
-    public ModelAndView scheduleTimeUpdateView( ScheduleTimeDto dto) {
+    public ModelAndView scheduleTimeUpdateView(ScheduleTimeDto dto) {
         ScheduleTimeDto scheduleTimeDto = planService.selectScheduleTime(dto);//업데이트를 하려면 해당 컨텐츠 불러와야하니까 위에 selectContent메소드를 다시씀!
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/updateScheduleTime");

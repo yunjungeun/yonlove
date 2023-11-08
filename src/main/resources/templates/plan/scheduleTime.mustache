@@ -16,28 +16,31 @@
         <div class="container">
 
             <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
-                제목
+                촬영 시간표
             </h1>
 
             <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
                 <div class="card-header py-3" style="center;"> <!--카드헤더 div-->
+
                 </div><!--카드헤더 end-->
 
                 <div class="card-body"><!--카드 바디-->
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <tr>
+                            <th>촬영시간<input name="film_time" type="date"  value="{{scheduleTime.start_time}}" ></th>
+                            <th>촬영내용<input name="film_content" type="text"  value="{{scheduleTime.film_content}}" ></th>
+                            <th>계획표id
+                                <select id="fk" name="day_id" class="field1"></select>
+                            </th>
+                        </tr>
+                    </table>
 
-    <table border="1" cellpadding="1" cellspacing="1">
-        <tr>
-            <td>촬영시간<input name="film_time" type="date"  value="{{scheduleTime.start_time}}" ></td>
-            <td>촬영내용<input name="film_content" type="text"  value="{{scheduleTime.film_content}}" ></td>
-            <td>계획표id
-                <select id="fk" name="day_id" class="field1"></select>
-            </td>
-        </tr>
 
-    </table>
-    <a href="/plan/schedule_time" class="btn btn-primary mr-2">돌아가기</a>
-    <a href="/plan/{{scheduleTime.time_id}}/scheduleTimeUpdateView"  class="btn btn-success mr-2">수정</a>
-    <a href="/plan/{{scheduleTime.time_id}}/deleteTime" class="btn btn-danger" onclick="confirmDelete(event)">삭제</a>
+                    <div class="d-flex justify-content-end">
+                        <a href="/plan/schedule_time" class="btn btn-primary mr-2">돌아가기</a>
+                        <a href="/plan/{{scheduleTime.time_id}}/scheduleTimeUpdateView"  class="btn btn-success mr-2">수정</a>
+                        <a href="/plan/{{scheduleTime.time_id}}/deleteTime" class="btn btn-danger" onclick="confirmDelete(event)">삭제</a>
+                    </div>
 
                 </div><!--카드바디-->
             </div><!--카드 end-->
