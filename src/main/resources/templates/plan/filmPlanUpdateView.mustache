@@ -6,38 +6,75 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/static/js/cu_alert.js"></script>
+
+    {{>layout/header}}
 </head>
 <body>
-<form id="alert"action="/plan/{{filmPlanUpdate.film_id}}/updatefilm" method="get">
-<table border="1" cellpadding="1" cellspacing="1">
-    <tr>
-        <td>기획</td>
-        <td>시나리오</td>
-        <td>씬</td>
-        <td>출연자 / 배역</td>
-        <td>촬영일</td>
-    </tr>
-    <tr>
-        <td>{{filmPlanUpdate.project_name}}</td>
-        <td>{{filmPlanUpdate.scenario_name}}</td>
-        <td>{{filmPlanUpdate.scene_num}}</td>
-        <td>{{filmPlanUpdate.pd_name}} / {{filmPlanUpdate.casting}}</td>
-        <td>{{filmPlanUpdate.film_date}}</td>
-    </tr>
-    <tr>
-        <td>안/밖 : <input type="text" class="field1" name="inside_flag" value="{{filmPlanUpdate.inside_flag}}" /></td>
-        <td>낮/밤 : <input type="text" class="field2" name="day_flag" value="{{filmPlanUpdate.day_flag}}" /></td>
-        <td>컷 : <input type="text" class="field3" name="cut" value="{{filmPlanUpdate.cut}}"/></td>
-    </tr>
-</table>
-    <input type="submit" value="등록" onclick="mappingurl('/plan/{{filmPlanUpdate.film_id}}/updatefilm',3,'수정')">
-</form>
-<a href="/plan/film_plan">목록</a>
+<div id="page-top">
+    {{>layout/sidebar}}
+    {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container">
+
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                제목머임? : 수정하기
+            </h1>
+
+            <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
+                <div class="card-header py-3" style="center;"> <!--카드헤더 div-->
+
+                </div><!--카드헤더 end-->
+
+                <div class="card-body"><!--카드 바디-->
+                    <form id="alert"action="/plan/{{filmPlanUpdate.film_id}}/updatefilm" method="get">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+
+                            <thead>
+                            <tr>
+                                <th style="text-align: center;">기&nbsp;&nbsp;획</th>
+                                <th style="text-align: center;">시나리오</th>
+                                <th style="text-align: center;">씬</th>
+                                <th style="text-align: center;">출연자 / 배역</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td style="text-align: center;">{{filmPlanUpdate.project_name}}</td>
+                                <td style="text-align: center;">{{filmPlanUpdate.scenario_name}}</td>
+                                <td style="text-align: center;"> {{filmPlanUpdate.scene_num}}</td>
+                                <td style="text-align: center;">{{filmPlanUpdate.pd_name}} / {{filmPlanUpdate.casting}}</td>
+                            </tr>
+
+                            <tr>
+                                <th style="text-align: center;">안&nbsp;/&nbsp;밖 :&nbsp;
+                                    <input type="text" class="field1" name="inside_flag" value="{{filmPlanUpdate.inside_flag}}" />
+                                </th>
+                                <th style="text-align: center;">낮&nbsp;/&nbsp;밤 :&nbsp;
+                                    <input type="text" class="field2" name="day_flag" value="{{filmPlanUpdate.day_flag}}" />
+                                </th>
+                                <th colspan="2" style="text-align: center;">컷 수 :&nbsp;
+                                    <input type="text" class="field3" name="cut" value="{{filmPlanUpdate.cut}}"/>
+                                </th>
+                            </tr>
+                            </tbody>
+                        </table>
+                        라디오 버튼 만들고 / 출연자 배역도 바꿀수 있게 해야되지 않을까..싶음..
+                        <div class="d-flex justify-content-end">
+                            <input type="submit" value="등록" class="btn btn-primary mr-2" onclick="mappingurl('/plan/{{filmPlanUpdate.film_id}}/updatefilm',3,'수정')">
+                            <a href="/plan/film_plan" class="btn btn-primary">목록</a>
+                        </div>
+                    </form>
 
 
+                </div><!--카드바디-->
+            </div><!--카드 end-->
 
+        </div><!--컨테이너 end-->
+    </div><!--warpper end-->
+</div><!--page-top end-->
+{{>layout/footer}}
+</div>
 
-
+<script src="/static/js/cu_alert.js"></script>
 </body>
 </html>
