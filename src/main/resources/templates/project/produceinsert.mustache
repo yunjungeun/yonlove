@@ -13,18 +13,56 @@
 <body id="page-top">
 {{>layout/sidebar}}
 {{>layout/topbar}}
-<form id="alert" action="/project/insertproduce" method="get">
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
 
-    <table border="1" cellpadding="1" cellspacing="1">
+    <!-- Main Content -->
+    <div id="content">
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4" style="margin-top: 50px;">
+
+                <div class="card-header py-3">
+
+<form id="alert" action="/project/insertproduce" method="get"
+      class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
+
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <tr>
             <td>이름 <input class="field1" name="pd_name" type="text" placeholder="이름"/></td>
             <td>역할 <input class="field2" name="role" type="text" placeholders="역할"/></td>
             <td>배역 <input class="field3" name="casting" type="text" placeholders="배역"/></td>
         </tr>
     </table>
-    <input type="submit" value="등록" onclick="mappingurl('/project/insertproduce', 3,'작성')"/>
+        <div class="d-flex justify-content-between align-items-center">
+            <input type="submit" value="등록" role="button" class="btn btn-primary"
+                   onclick="mappingurl('/project/insertproduce', 3,'작성')"/>
+            <a role="button" class="btn btn-info" href="/project/produce">목록</a>
+        </div>
 </form>
-<a href="/project/produce">목록으로 가기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+<!-- /.container-fluid -->
+</div>
+<!-- End of Main Content -->
+{{>layout/footer}}
+</div>
+<!-- End of Content Wrapper -->
+
+<script>
+    var url = "/project/produce";
+</script>
+
+{{>layout/bootstrapjs}}
 </body>
 </html>
