@@ -12,7 +12,7 @@ function mappingurl(submiturl, int, text, cnt){
     var data = {};
 
     var hasEmptyField = false;   //추가
-
+    var nextflag = true;
 
      /*   var fileData = new FormData(document.getElementById("alert"));
         data.append("file", fileData);*/
@@ -21,31 +21,22 @@ function mappingurl(submiturl, int, text, cnt){
             var name = ".field"+i;  // name <-  ". field" +i  클래스이름 대체 +1 갯수숫자의미  .점은 선택자 클래스라서 점으로 표시
             $(name).each(function() {    // $(클랙스이름) 넣고 반복해서 함수를
              var field = $(this).attr("name");   // 클래스 필드=  뷰페이지의 네임 값을 넣음
-             data[field] = $(this).val();  // 데이터안에 값을 넣음
+             //data[field] = $(this).val();  // 데이터안에 값을 넣음
 
              // 추가
-             if (value.trim() === "") {
+             if ($(this).val().trim() === '') {
                                 // 입력값이 비어있을 경우
-                                alert("입력창을 모두 입력하세요.");
-                                hasEmptyField = true;
-                                return false; // submit 멈추기
+                                alert("빈칸을 모두 입력하세요.");
+                                nextflag = false
+                                return false; // for문 중단
+                            }else{
+                            data[field] = $(this).val();
                             }
-
-
-              data[field] = value;
                         });
-
-                        if (hasEmptyField) {
-                            break; // 이미 비어있는 필드가 있으면 나머지 필드를 체크하지 않음
-                        }
-                    }
-
-                    if (!hasEmptyField) {
-                  console.log(data);
-                alert("데이터가 성공적으로 제출");
-                    }
-                });
-            }
+                }
+        if(nextflag == false){
+            return false; // submit 멈추기
+        }
 
 
         //숫자형 name값을 처리하는 for문

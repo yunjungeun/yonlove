@@ -61,8 +61,6 @@ public class LogController {
     public ModelAndView selectLog(LogDto logdto){
         LogDto dto = logService.selectLog(logdto);
 
-        System.out.println("project_id값 확인하기!!" +dto.toString());
-
         ModelAndView mv = new ModelAndView();
         mv.setViewName("log/logdetail");
         mv.addObject("selectLog", dto);

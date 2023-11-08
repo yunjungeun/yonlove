@@ -40,7 +40,7 @@
     </select>
 
     <select id="selectLog"  parameterType="com.example.yoonlove.dto.LogDto"  resultType="com.example.yoonlove.dto.LogDto">
-        SELECT * FROM log WHERE log_id = #{log_id}
+        SELECT * FROM logjoin WHERE log_id = #{log_id}
     </select>
 
     <!--<update id="updateBbsView" parameterType="">
