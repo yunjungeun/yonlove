@@ -13,6 +13,8 @@ function mappingurl(submiturl, int, text, cnt){
 
     var data = {};
 
+    var hasEmptyField = false;   //추가
+
 
      alert('test222');
      /*   var fileData = new FormData(document.getElementById("alert"));
@@ -23,8 +25,31 @@ function mappingurl(submiturl, int, text, cnt){
             $(name).each(function() {    // $(클랙스이름) 넣고 반복해서 함수를
              var field = $(this).attr("name");   // 클래스 필드=  뷰페이지의 네임 값을 넣음
              data[field] = $(this).val();  // 데이터안에 값을 넣음
-            });
-        }
+
+             // 추가
+             if (value.trim() === "") {
+                                // 입력값이 비어있을 경우
+                                alert("입력창을 모두 입력하세요.");
+                                hasEmptyField = true;
+                                return false; // submit 멈추기
+                            }
+
+
+              data[field] = value;
+                        });
+
+                        if (hasEmptyField) {
+                            break; // 이미 비어있는 필드가 있으면 나머지 필드를 체크하지 않음
+                        }
+                    }
+
+                    if (!hasEmptyField) {
+                  console.log(data);
+                alert("데이터가 성공적으로 제출");
+                    }
+                });
+            }
+
 
         //숫자형 name값을 처리하는 for문
         for(var j = 1; j<= cnt; j++){
