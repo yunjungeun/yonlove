@@ -1,8 +1,10 @@
 package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.PageDto;
+import com.example.yoonlove.dto.UserDto;
 import com.example.yoonlove.dto.VideoDto;
 import com.example.yoonlove.service.PagingService;
+import com.example.yoonlove.service.UserService;
 import com.example.yoonlove.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -19,9 +22,17 @@ public class VideoController {
     @Autowired
     private PagingService pagingService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("vd/video") //컨텐츠 전체목록보기 뷰
-    public ModelAndView selectListContent(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page) {
-        PageDto pageDto = new PageDto("video","video_id", page,pdto);  // page???
+    public ModelAndView selectListContent(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page,
+                                          Principal user) {
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        PageDto pageDto = new PageDto("video","video_id", page,pdto, companyId);  // page???
 
         PageDto pageInfo = pagingService.paging(pageDto); // paging ==> 전체게시글 갯수 구해오는 메소드
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드

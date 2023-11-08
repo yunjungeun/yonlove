@@ -13,22 +13,16 @@
 
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
-    <!--d-flex flex-column: flex박스 스타일을 적용한 클래스 : 요소들 수평이나 수직으로 배치하고 간격을 조절하는 등의 작업 간편화
-       content-wrapper: 컨텐츠 섹션 감싸고  그 안의 요소들을 유연하게 배치하고 정렬 주로  다양한 화면 크기와 디바이스에 대응하는 반응형 디자인을 구현하는 데 유용-->
 
     <!-- Main Content -->
     <div id="content">
 
         <!-- Begin Page Content -->
-        <div class="container-fluid">  <!--얘가 없으면 전체적으로 다 위로 올라가고 푸터가 사이드 옆쪽으로 붙어버림 -->
-            <!--container-fluid:  Bootstrap 프레임워크를 사용하여 생성된 컨테이너로, 웹 페이지의 내용을 감싸는 역할, 화면 폭에 맞게 자동으로 넓어져서 브라우저의 너비에 따라 반응형으로 조절-->
-            <!--mb-2:하단의 여백 -->
-            <!-- Page Heading -->
+        <div class="container-fluid">
 
             <!-- DataTales Example -->
             <div class="card shadow mb-4" style="margin-top: 50px;">
                 <div class="card-header py-3">
-                    <!--<h6 class="m-0 font-weight-bold text-primary">공지사항</h6>-->
 
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
@@ -37,8 +31,7 @@
                                     style="margin-left: 10px; border-radius: 2px; text-align: center" name="dpt_name"
                                     type="text" value="{{selectDpt.dpt_name}}" readonly/></th>
                             <th style="text-align: center;">부서기능<input style="margin-left: 10px; border-radius: 2px;"
-                                                                       name="dpt_function" type="text"
-                                                                       value="{{selectDpt.dpt_function}}" readonly/>
+                                name="dpt_function" type="text" value="{{selectDpt.dpt_function}}" readonly/>
                             </th>
                         </tr>
                         </thead>
