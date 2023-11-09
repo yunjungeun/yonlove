@@ -248,6 +248,7 @@ public class ProjectController {
 
     @GetMapping("project/{pd_id}/selectproduce")   //상세보기
     public ModelAndView selectProduce(ProduceDto produceDto){
+        System.out.println(produceDto);
         ProduceDto dto = projectService.selectProduce(produceDto);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/project/selectproduce");

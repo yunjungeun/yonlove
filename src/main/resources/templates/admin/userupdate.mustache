@@ -100,8 +100,8 @@
                         <tr>
                          <th style="text-align:center; color:white;">
                              <strong>권한: &nbsp;</strong>
-                             <input type="radio" class="field11" name="authority" value="admin" {{#isAdmin}}checked{{/isAdmin}} > admin &nbsp;&nbsp;
-                             <input type="radio" class="field11" name="authority" value="일반" {{#isNormal}}checked{{/isNormal}} > 일반
+                             <input type="radio"  name="authority" value="admin" {{#authority}}{{#admin}}checked{{/admin}}{{/authority}}> 관리자 &nbsp;&nbsp;
+                             <input type="radio"  name="authority" value="user" {{#authority}}{{#user}}checked{{/user}}{{/authority}}> 일반
                          </th>
                         </tr>
                         <thead>
@@ -138,7 +138,9 @@
 <!-- End of Content Wrapper -->
 {{>layout/bootstrapjs}}
 
-
+<script>
+    var radioButtonName = "authority";
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/static/js/cu_alert.js"></script>
 </body>

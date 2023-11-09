@@ -73,7 +73,7 @@ function mappingurl(submiturl, int, text, cnt){
         var selectedRadio = null;
         if(radioName != null){
            var radioButtons = document.querySelectorAll('.radio');
-           selectedRadio = document.querySelector('input[name='+radioName+']:checked').value;
+           selectedRadio = document.querySelector('input[name='+radioName+']:checked').value; alert(selectedRadio);
            data[radioName] = selectedRadio;
         } else{}
 
