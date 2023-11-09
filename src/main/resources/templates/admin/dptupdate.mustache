@@ -12,7 +12,9 @@
     {{>layout/topbar}}
     <div id="content-wrapper" class="d-flex flex-column">
         <div class="container">
-
+            <!-- Page Heading -->
+            <div style="text-align: center; display: block; margin-top:50px;" >
+                <h1 class="h3 mb-2 text-gray-800" >부서 수정</h1>
 
             <div class="card shadow mb-4" style="margin-top: 150px; margin-right: 300px; margin-left: 300px">
                 <div class="card-header py-3">
@@ -31,10 +33,10 @@
 
                         <div class="mb-2" style="text-align: center">
                             <button type="submit" class="btn btn-primary"
-                                    onclick="mappingurl('/admin/{{selectDpt.dpt_id}}/updatedpt','/admin/department',2,'수정')">등록
+                                    onclick="mappingurl('/admin/{{selectDpt.dpt_id}}/updatedpt','수정',2)">등록
                             </button>
-                            <button class="btn btn-secondary " onclick="location.href='/admin/department'">취소
-                            </button>
+                            <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
+
                         </div>
                     </form>
                 </div>
@@ -43,7 +45,9 @@
         </div>
     </div>
 </div>
+</div>
     {{>layout/footer}}
+</div>
 </div>
 
 <script>

@@ -24,6 +24,10 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
+                <!-- Page Heading -->
+                <div style="text-align: center; display: block; margin-top:50px;" >
+                    <h1 class="h3 mb-2 text-gray-800" >스토리보드 작성</h1>
+
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4" style="margin-top: 50px;">
                     <div class="card-header py-3">
@@ -33,7 +37,7 @@
 <form id="alert" action="/scene/insertscene" method="get" >
     <input type="hidden" id="tableId" value="scene"/>
 
-    <table  class="table table-bordered" id="dataTable" width="100%" cellspacing="0">>
+    <table  class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
         <tr>
             <td>기획명
@@ -58,7 +62,8 @@
     </table>
 
     <div class="d-flex justify-content-center align-items-center">
-        <input id="submit-button" type="submit" value="등록" onclick="mappingurl('/scene/insertscene',4,'작성',1)">
+        <input id="submit-button" type="submit" value="등록" class="btn btn-primary"
+               onclick="mappingurl('/scene/insertscene',4,'작성',1)">
         <a href="/scene/scene" role="button" class="btn btn-info">취소</a>
     </div>
 </form>

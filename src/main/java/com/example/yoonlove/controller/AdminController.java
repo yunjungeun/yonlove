@@ -104,24 +104,12 @@ public class AdminController {
         mv.addAllObjects(model);
 
         return mv;
-        /*mv.addObject("selectDpt",dptname);
-        mv.addObject("selectCompany",companyname);
-
-        mv.setViewName("/admin/userupdate");
-        mv.addObject("selectUser", dto);
-        return mv;*/
     }
 
     @GetMapping("/admin/{user_id}/updateuser")
     @ResponseBody
-    /*public String updateUser(HttpServletRequest request, @ModelAttribute("dto") UserDto dto) {
-        String authority = request.getParameter("authority");
-        dto.setAuthority(authority);
-        adminService.updateUser(dto);
-        */
-
         public String updateUser(UserDto dto){
-
+        adminService.updateUser(dto);
         return "/admin/user";
     }
 
@@ -167,10 +155,7 @@ public class AdminController {
     public ModelAndView adduser(){
 
         ModelAndView mv = new ModelAndView();
-
-
         mv.setViewName("/admin/adduser");
-
         return mv;
 
     }
@@ -257,9 +242,10 @@ public class AdminController {
         adminService.updateDepartment(dto);
         return "/admin/department";
     }
+
     @GetMapping("/admin/{dpt_id}/deletedpt")
     public String deleteDepartment(DepartmentDto dto){
         adminService.deleteDepartment(dto);
-        return "redirect:/admin/department";
+        return "redirect:/admin/dpt";
     }
 }

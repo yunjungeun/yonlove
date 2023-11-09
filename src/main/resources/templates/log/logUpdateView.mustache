@@ -17,7 +17,7 @@
         <div class="container">
 
             <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
-                제작일지
+                제작일지 수정
             </h1>
 
             <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
@@ -51,9 +51,7 @@
 
                         <div style="text-align: center">
                             <button type="submit" class="btn btn-primary" onclick="mappingurl('/log/{{updateLog.log_id}}/updateLog',3,'수정')">등록</button>
-                            <button class="btn btn-secondary">
-                                <a href="/log/log" style="text-decoration: none; color: white;">취소</a>
-                            </button>
+                            <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
                         </div>
                     </form>
 

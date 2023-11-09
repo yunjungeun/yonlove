@@ -151,8 +151,12 @@ public class ProjectController {
     }
 
     @GetMapping("/project/insertbudgetview")  // 작성클릭 후 페이지 리턴하는
-    public ModelAndView insertbudgetview()throws JsonProcessingException {
-        String jsonListProject = dropDownService.dropDownOption("project",null, null);
+    public ModelAndView insertbudgetview(Principal user)throws JsonProcessingException {
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        String jsonListProject = dropDownService.dropDownOption("project",null, companyId);
 
         ModelAndView mv = new ModelAndView();
         mv.addObject("fkList", jsonListProject);
@@ -238,11 +242,18 @@ public class ProjectController {
         return "project/produceinsert";
     }
 
+
     @GetMapping("project/insertproduce")   // 작성 후 입력값 넘기는~ , 추가
     @ResponseBody
-    public String insertProduce(ProduceDto produceDto){
+    public String insertProduce(ProduceDto produceDto,Principal user){
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        produceDto.setCompany_id(companyId);
         projectService.insertProduce(produceDto);
-        return "/project/produce";}
+        return "/project/produce";
+    }
 
     @GetMapping("project/{pd_id}/selectproduce")   //상세보기
     public ModelAndView selectProduce(ProduceDto produceDto){

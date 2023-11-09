@@ -1,4 +1,3 @@
-var url = base;
 
 function confirmDelete(event, url) {
     event.preventDefault(); // 링크의 기본 동작(페이지 이동)을 중지합니다.

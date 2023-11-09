@@ -16,7 +16,7 @@
         <div class="container">
 
             <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
-                공지사항
+                공지사항 수정
             </h1>
 
             <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
@@ -45,10 +45,8 @@
                         </tbody>
                     </table>
                     <div style="text-align: center">
-                        <button type="submit" class="btn btn-primary" onclick="mappingurl('/cs/{{updateNotice.notice_id}}/updatenotice',2,'수정')">등록</button>
-                        <button class="btn btn-secondary">
-                            <a href="/cs/notice" style="text-decoration: none; color: white;">취소</a>
-                        </button>
+                        <button type="submit" class="btn btn-primary" onclick="mappingurl('/cs/{{updateNotice.notice_id}}/updatenotice',2,'수정')">수정</button>
+                        <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
                     </div>
                     </form>
 

@@ -6,33 +6,6 @@
     <title>회원(user)</title>
     {{>layout/header}}
 
-
-<!--    <script>
-        var adminRadio = document.querySelector('input[name="authority"][value="admin"]');
-        var normalRadio = document.querySelector('input[name="authority"][value="일반"]');
-        var selectedAuthority = ""; // 선택된 값을 저장할 변수
-
-        adminRadio.addEventListener('change', function() {
-        if (adminRadio.checked) {
-        selectedAuthority = "admin";
-        console.log("Selected1 Authority:", selectedAuthority);
-        }
-        });
-
-        normalRadio.addEventListener('change', function() {
-        if (normalRadio.checked) {
-        selectedAuthority = "일반";
-        console.log("Selected2 Authority:", selectedAuthority);
-        }
-        });
-
-        function submitForm() {
-        // 여기서 폼을 서버로 제출하거나 다른 작업을 수행할 수 있습니다.
-        document.getElementById("alert").submit();
-        }
-    </script>-->
-
-
 </head>
 <body>
 <div id="page-top">
@@ -120,7 +93,7 @@
                     <br>
                     <div style="text-align: center">
                         <button type="submit" class="btn btn-success" onclick="mappingurl('/admin/{{selectUser.User_id}}/updateuser',15,'수정')">수정</button>&nbsp;&nbsp;
-                        <button class="btn btn-secondary" onclick="location.href='/admin/user'">취소</button>
+                        <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
                     </div>
             </form> <!-- 테이블 끝-->
             </div>
@@ -137,9 +110,11 @@
 </div>
 <!-- End of Content Wrapper -->
 {{>layout/bootstrapjs}}
-
-
+<script>
+    var url = "/admin/user";
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/static/js/deletepost.js"></script>
 <script src="/static/js/cu_alert.js"></script>
 </body>
 </html>

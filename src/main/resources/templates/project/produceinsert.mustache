@@ -21,6 +21,8 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
+            <div style="text-align: center; display: block; margin-top:50px;" >
+                <h1 class="h3 mb-2 text-gray-800" >제작 작성</h1>
 
             <!-- DataTales Example -->
             <div class="card shadow mb-4" style="margin-top: 50px;">
@@ -36,9 +38,9 @@
                     <td>배역 <input class="field3" name="casting" type="text" placeholders="배역"/></td>
                 </tr>
             </table>
-                <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-center align-items-center">
                     <input type="submit" value="등록" role="button" class="btn btn-primary"
-                           onclick="mappingurl('/project/insertproduce', 3,'작성')"/>
+                           onclick="mappingurl('/project/insertproduce', 3,'작성')"/> &nbsp;&nbsp;
                     <a role="button" class="btn btn-info" href="/project/produce">목록</a>
                 </div>
         </form>

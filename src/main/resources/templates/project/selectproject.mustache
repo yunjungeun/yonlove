@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/static/js/delete.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
     {{>layout/header}}
 </head>
 
@@ -39,8 +39,8 @@
 
                         <tr>
                             <td colspan="2">
-                                시작일<input type="text" id="format1" name="project_start_date" readonly>
-                                (예상)종료일<input type="text" id="format2" name="project_end_date" readonly>
+                                시작일<input type="date" id="format1" name="project_start_date" readonly>
+                                (예상)종료일<input type="date" id="format2" name="project_end_date" readonly>
                                 진행상태
                                 <select name="project_state">
                                     <option {{selectProject.project_state}} selected>{{selectProject.project_state}}</option>
@@ -54,8 +54,7 @@
 
             <div class="d-flex justify-content-center align-items-center">
                 <a href="/project/updateprojectview/{{selectProject.project_id}}" class="btn btn-success">수정</a>&nbsp;&nbsp;&nbsp;
-                <a href="/project/deleteproject/{{selectProject.project_id}}" class="btn btn-secondary"
-                   onclick="confirmDelete(event)">삭제</a>&nbsp;&nbsp;&nbsp;
+                <a href="javascript:void(0);" class="btn btn-danger" onclick="deleteAlert('/project/deleteproject/{{selectProject.project_id}}')">삭제</a>&nbsp;&nbsp;&nbsp;
                 <a href="/project/project" role="button" class="btn btn-info">목록</a>
             </div>
 
@@ -83,9 +82,8 @@
 </script>
 <!--date 변수를 dateformat.js에 넘겨주는 링크-->
 <script src="/static/js/dateformat.js"></script>
-
-<script src="/static/js/cu_alert.js"></script>
-
+<script src="/static/js/delete.js"></script>
+<script src="/static/js/deletepost.js"></script>
 {{>layout/bootstrapjs}}
 </body>
 </html>
