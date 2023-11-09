@@ -367,21 +367,26 @@ public class PlanController {
     @ResponseBody
     public String insertFilm(FilmPlanDto dto, Principal user) {
         UserDto userInfo = userService.getUser(user.getName());
-        String companyId = userInfo.getCompany_id(); //회사 id 스트링
 
         //dto에는 insert에 들어갈 act_id가 없음. dto에 있는 pd_id와 scene_id로 act_id를 획득하는 로직
         String actId = planService.selectFilmJoinActID(dto.getPd_id(), dto.getScene_id());// day_id 값이 여러개가 나와서
         dto.setAct_id(actId);   //획득된 act_id를 dto에 바인드
-        System.out.println("dto 내용 최종 : "+dto.toString());
         planService.insertFilm(dto);
 
         return "/plan/film_plan";
     }
 
     @GetMapping("plan/{film_id}/filmPlanUpdateView") //컨텐츠 업데이트하는 뷰
-    public ModelAndView filmPlanUpdateView( FilmPlanDto dto) {
+    public ModelAndView filmPlanUpdateView(FilmPlanDto dto) {
         FilmPlanDto filmPlanDto = planService.selectFilmPlan(dto);
         ModelAndView mv = new ModelAndView();
+
+        HashMap<String, Boolean> insideFlag = planService.insideFlagCheck(filmPlanDto);
+        HashMap<String, Boolean> dayFlag = planService.dayFlagCheck(filmPlanDto);
+
+        mv.addObject("insideFlag",insideFlag);
+        mv.addObject("dayFlag",dayFlag);
+
         mv.setViewName("/plan/filmPlanUpdateView");
         mv.addObject("filmPlanUpdate", filmPlanDto);
         return mv;
@@ -390,6 +395,7 @@ public class PlanController {
     @GetMapping("plan/{film_id}/updatefilm") //업데이트 처리
     @ResponseBody
     public String updateFilm(FilmPlanDto dto) {
+        System.out.println(dto.toString());
         planService.updateFilm(dto);
         return "/plan/film_plan";
     }

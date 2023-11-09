@@ -115,7 +115,6 @@ public class AdminController {
     @GetMapping("/admin/{user_id}/updateuser")
     @ResponseBody
     public String updateUser(UserDto dto) {
-        System.out.println(dto.toString());
         adminService.updateUser(dto);
 
         return "/admin/user";

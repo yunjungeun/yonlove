@@ -42,16 +42,22 @@
                                 </th>
                             </tr>
                             <tr>
-                                <th>안&nbsp;/&nbsp;밖<input name="inside_flag" type="text" class="field3 ml-2" ></th>
-                                <th>낮&nbsp;/&nbsp;밤<input name="day_flag" type="text" class="field4 ml-2"></th>
-                                <th colspan="2">컷 수<input name="cut" type="text" class="field5 ml-2" ></th>
+                                <th>안&nbsp;/&nbsp;밖
+                                    <input class="radio ml-3" type="radio" name="inside_flag" value="실내" checked> 실내
+                                    <input class="radio ml-3" type="radio" name="inside_flag" value="실외"> 실외
+                                </th>
+                                <th>낮&nbsp;/&nbsp;밤
+                                    <input class="radio2 ml-3" type="radio" name="day_flag" value="낮" checked> 낮
+                                    <input class="radio2 ml-3" type="radio" name="day_flag" value="밤"> 밤
+                                </th>
+                                <th colspan="2">컷 수<input name="cut" type="text" class="field3 ml-2" ></th>
                             </tr>
                             낮밤 / 안밖은 라디오버튼 적용시키면 될듯?
                         </table>
 
                         <div class="d-flex justify-content-end">
-                            <input type="submit" value="등록" class="btn btn-primary mr-2" onclick="mappingurl('/plan/insertFilm',5,'작성')">
-                            <a href="/plan/film_plan" class="btn btn-primary">뒤로가기</a>
+                            <input type="submit" value="등록" class="btn btn-primary mr-2" onclick="mappingurl('/plan/insertFilm',3,'작성')">
+                            <a href="/plan/film_plan" class="btn btn-primary">뒤로</a>
                         </div>
                     </form>
 
@@ -71,6 +77,8 @@
     var selectName = "scene_id";
     var produceId = "pd_id";
     <!--selectName이 실행되기 위해선 cu_alert 스크립트소스가 이 아래 있어야함-->
+    var radioButtonName = "inside_flag";
+    var radioButtonName2 = "day_flag";
 </script>
 <script src="/static/js/dropdown.js"></script>
 <script src="/static/js/cu_alert.js"></script>

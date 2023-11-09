@@ -175,15 +175,32 @@ public class PlanService {
         return planMapper.selectFkFilm();
     }
 
-    //옵션헤쉬맵
-    public String fkJsonFilm(List<ScheduleDayDto> dto) throws JsonProcessingException {
-        Map<String, String> fkList = new LinkedHashMap<>();//해쉬맵은 삽입순서를 유지하지 않기 때문에, LinkedHashMap<>으로 사용자 편의를 위한 정렬삽입을 했음
-        for (int i = 0; i < dto.size(); i++) {
-            fkList.put(dto.get(i).getDay_id(), dto.get(i).getDay_title());
+
+    //실외/실내 라디오 버튼에 대한 기본값 해쉬맵을 생성해주는 메서드
+    public HashMap<String, Boolean> insideFlagCheck(FilmPlanDto dto){
+        HashMap<String, Boolean> flagList = new LinkedHashMap<>();
+        String[] insdie = {"실외","실내"};
+        for(int i = 0; i < insdie.length; i++){
+            if(insdie[i].equals(dto.getInside_flag())){
+                flagList.put(insdie[i],true);
+            }else {
+                flagList.put(insdie[i], false);
+            }
         }
-        ObjectMapper objectMapper = new ObjectMapper();
-        String jsonList = objectMapper.writeValueAsString(fkList);
-        return jsonList;
+        return flagList;
+    }
+    //낮/밤 라디오 버튼에 대한 기본값 해쉬맵을 생성해주는 메서드
+    public HashMap<String, Boolean> dayFlagCheck(FilmPlanDto dto){
+        HashMap<String, Boolean> flagList = new LinkedHashMap<>();
+        String[] day = {"낮","밤"};
+        for(int i = 0; i < day.length; i++){
+            if(day[i].equals(dto.getDay_flag())){
+                flagList.put(day[i],true);
+            }else {
+                flagList.put(day[i], false);
+            }
+        }
+        return flagList;
     }
 
     public List<FilmPlanDto> selectListFilmPlan(PageDto pageInfo) {

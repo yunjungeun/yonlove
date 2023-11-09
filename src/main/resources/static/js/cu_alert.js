@@ -4,6 +4,9 @@ try{var produce = prodcueId;}catch (error){}
 try{
 var radioName = radioButtonName;
 }catch (error){}
+try{
+var radioName2 = radioButtonName2;
+}catch (error){}
 
 
 function mappingurl(submiturl, int, text, cnt){
@@ -73,9 +76,16 @@ function mappingurl(submiturl, int, text, cnt){
         var selectedRadio = null;
         if(radioName != null){
            var radioButtons = document.querySelectorAll('.radio');
-           selectedRadio = document.querySelector('input[name='+radioName+']:checked').value; alert(selectedRadio);
+           selectedRadio = document.querySelector('input[name='+radioName+']:checked').value;
            data[radioName] = selectedRadio;
         } else{}
+
+        if(radioName2 != null){
+           var radioButtons = document.querySelectorAll('.radio2');
+           selectedRadio = document.querySelector('input[name='+radioName2+']:checked').value;
+           data[radioName2] = selectedRadio;
+        } else{}
+
 
     $.ajax({
             url: submiturl,
