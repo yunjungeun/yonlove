@@ -8,81 +8,42 @@
     <script src="/static/js/cu_alert.js"></script>
     {{>layout/header}}
 </head>
-<body id="page-top">
+<div id="page-top">
+    {{>layout/sidebar}}
+    {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container">
 
-{{>layout/sidebar}}
-{{>layout/topbar}}
-
-<!-- Content Wrapper -->
-<div id="content-wrapper" class="d-flex flex-column">
-
-    <!-- Main Content -->
-    <div id="content">
-
-        <div class="container-fluid">
-
-            <!-- Page Heading -->
-            <div style="text-align: center; display: block; margin-top:100px;">
-                <h1 class="h3 mb-2 text-gray-800"></h1>
-            </div>
 
             <div class="card shadow mb-4" style="margin-top: 150px; margin-right: 300px; margin-left: 300px">
                 <div class="card-header py-3">
 
                     <div style="display: flex; justify-content: center">
                         <form id="alert" action="/admin/insertdpt" method="get">
+                            <div class="mb-3" style="text-align: center; display: inline-block;">
+                                <strong>부서명</strong>
+                                <input id="formGroupExampleInput" class="field1 card shadow mb-4" name="dpt_name" type="text" style="width: 90%; text-align: center" />
+                            </div>
 
-                            <div class="parent" style="margin-left: 20%; margin-top: 5%; ">
-                                <div style="display: inline-block;">
-                                    <div class="mb-3" style="text-align: center; display: inline-block;">
-                                        <label for="formGroupExampleInput"
-                                               class="form-label"><strong>부서명</strong></label>
-                                    </div>
-
-                                    <div class="mb-3" style="text-align: center; display: inline-block ">
-                                        <input id="formGroupExampleInput" class="field1 card shadow mb-4"
-                                               name="dpt_name" type="text" style="width: 90%; text-align: center">
-                                    </div>
-                                </div>
-
-                                <div style="display: inline-block;">
-                                    <div class="mb-3" style="text-align: center; display: inline-block;">
-                                        <label for="formGroupExampleInput"
-                                               class="form-label"><strong>부서기능</strong></label>
-                                    </div>
-                                    <div class="mb-3" style="text-align: center; display: inline-block ">
-                                        <input id="formGroupExampleInput" class="field2 card shadow mb-4"
-                                               name="dpt_function" type="text" style="width: 90%; text-align: center ">
-                                    </div>
-                                </div>
-
+                            <div style="text-align: center; display: inline-block;">
+                                <strong>부서기능</strong>
+                                <input id="formGroupExampleInput" class="field2 card shadow mb-4" name="dpt_function" type="text" style="width: 90%; text-align: center " />
                             </div>
 
                             <div style="text-align: center">
-                                <button type="submit" class="btn btn-primary"
-                                        onclick="mappingurl('/admin/insertdpt',2,'작성')">등록
-                                </button>
-                                <a href="/admin/department" class="btn btn-secondary"
-                                   style="text-decoration: none;">취소</a>
+                                <button type="submit" class="btn btn-primary" onclick="mappingurl('/admin/insertdpt',2,'생성')">등록</button>
+                                <a href="/admin/department" class="btn btn-secondary" style="text-decoration: none;">취소</a>
                             </div>
-
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
-        <!-- /.container-fluid -->
     </div>
-    <!-- End of Main Content -->
-
-    {{>layout/footer}}
-
 </div>
-<!-- End of Content Wrapper -->
+    {{>layout/footer}}
+</div>
+
 
 <script>
     var url = "/admin/department";

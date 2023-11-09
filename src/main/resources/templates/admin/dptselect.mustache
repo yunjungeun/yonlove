@@ -6,117 +6,84 @@
     <title>게시판 리스트</title>
     {{>layout/header}}
 </head>
-<body id="page-top">
+<div id="page-top">
+    {{>layout/sidebar}}
+    {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container">
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                부서 세부정보
+            </h1>
 
-{{>layout/sidebar}}
-{{>layout/topbar}}
-
-<!-- Content Wrapper -->
-<div id="content-wrapper" class="d-flex flex-column">
-
-    <!-- Main Content -->
-    <div id="content">
-
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
-
-            <!-- DataTales Example -->
             <div class="card shadow mb-4" style="margin-top: 50px;">
-                <div class="card-header py-3">
+                <div class="card-header py-3 d-flex justify-content-end"><!--카드헤더-->
+                </div><!--카드헤더-->
 
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <div class="card-body">
+                    <table class="table table-bordered" width="100%" cellspacing="0">
                         <thead>
                         <tr>
-                            <th style="text-align: center;">부서명<input
-                                    style="margin-left: 10px; border-radius: 2px; text-align: center" name="dpt_name"
-                                    type="text" value="{{selectDpt.dpt_name}}" readonly/></th>
-                            <th style="text-align: center;">부서기능<input style="margin-left: 10px; border-radius: 2px;"
-                                name="dpt_function" type="text" value="{{selectDpt.dpt_function}}" readonly/>
+                            <th style="text-align: center;">부서명<input style="margin-left: 10px; border-radius: 2px; text-align: center" name="dpt_name" type="text" value="{{selectDpt.dpt_name}}" readonly/></th>
+                            <th style="text-align: center;">부서기능<input style="margin-left: 10px; border-radius: 2px;" name="dpt_function" type="text" value="{{selectDpt.dpt_function}}" readonly/>
                             </th>
                         </tr>
                         </thead>
                     </table>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
+
+                    <h4 class="h4 mb-2 font-weight-bold text-gray-800" style="margin-top: 30px; text-align: center;">
+                        직원 현황
+                    </h4>
+
+                    <table class="table table-bordered mt-1" width="100%" cellspacing="0">
+                        <thead style="text-align: center;">
+                        <tr>
+                            <th>직원ID</th>
+                            <th>성명</th>
+                            <th>닉네임</th>
+                            <th>연락처</th>
+                            <th>E-mail</th>
+                        </tr>
+                        </thead>
+                        <tbody style="text-align: center;">
+                        {{#selectListUser}}
                             <tr>
-                                <th style="text-align: center;">직원ID</th>
-                                <th style="text-align: center;">성명</th>
-                                <th style="text-align: center;">닉네임</th>
-                                <th style="text-align: center;">연락처</th>
-                                <th style="text-align: center;">E-mail</th>
+                                <td><a href="/admin/{{user_id}}/selectuser">{{user_id}}</a></td>
+                                <td>{{user_name}}</td>
+                                <td>{{nickname}}</td>
+                                <td>{{phone}}</td>
+                                <td>{{email}}</td>
                             </tr>
-                            </thead>
-                            <tbody>
-                            {{#selectListUser}}
-                                <tr>
-                                    <td style="text-align: center;"><a
-                                            href="/admin/{{user_id}}/selectuser">{{user_id}}</a></td>
-                                    <td style="text-align: center;">{{user_name}}</td>
-                                    <td style="text-align: center;">{{nickname}}</td>
-                                    <td style="text-align: center;">{{phone}}</td>
-                                    <td style="text-align: center;">{{email}}</td>
-                                </tr>
-                            {{/selectListUser}}
-                            </tbody>
-                        </table>
+                        {{/selectListUser}}
+                        </tbody>
+                    </table>
+
                         <!--페이징 처리 레이아웃-->
-
-                        <div class="d-flex justify-content-between align-items-center mt-6" style="margin-top: 50px">
-
-                            <span></span>
-                            <span>{{>layout/paging}}</span> <!-- 페이징은 왼쪽에 배치 -->
-
-                            <div style="margin-left: 250px">
+                    <span class="d-flex justify-content-center">{{>layout/paging}}</span>
+                        <div class="d-flex justify-content-center" style="margin-top: 10px">
+                            <div>
                                 <a href="/admin/department" class="btn btn-primary">목록</a> <!-- 목록 버튼 -->
                                 <a href="/admin/{{selectDpt.dpt_id}}/updatedptview" class="btn btn-success">수정</a>
                                 <!-- 수정 버튼 -->
                                 <a href="javascript:void(0);" class="btn btn-danger"
                                    onclick="deleteAlert('/admin/{{selectDpt.dpt_id}}/deletedpt')">삭제</a> <!-- 삭제 버튼 -->
                             </div>
-
-                            <form action="/admin/user" method="get" class="d-none d-sm-inline-block form-inline">
-                                <div class="input-group">
-                                    <select id="searchType" name="searchType">
-                                        <option value="all">선택</option>
-                                        <option value="title">이름</option>
-                                        <option value="content">닉네임</option>
-                                        <!-- 필요한 항목 추가 -->
-                                    </select>
-                                    <input id="search" name="search" type="text" style="width: 150px;"
-                                           class="form-control bg-light border-0 small" placeholder="Search for..."
-                                           aria-label="Search" aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                        <input class="btn btn-primary" type="submit" value="검색">
-                                    </div>
-                                </div>
-                            </form>
                         </div>
-                    </div>
 
-                    <br/>
-                </div>
-
-                <a class="scroll-to-top rounded" href="#page-top">
-                    <i class="fas fa-angle-up"></i>
-                </a>
-                <!-- /.container-fluid -->
-            </div>
-            <!-- End of Main Content -->
-
-            {{>layout/footer}}
+                </div><!--카드 바디 end-->
+            </div><!--카드 섹션 end-->
 
         </div>
-        <!-- End of Content Wrapper -->
+    </div>
+</div>
+{{>layout/footer}}
+</div>
 
-        <script>
-            var url = "/admin/user";
-        </script>
-        <script src="/static/js/search.js"></script>
 
-        {{>layout/bootstrapjs}}
+<script>
+    var url = "/admin/user";
+</script>
+<script src="/static/js/search.js"></script>
+{{>layout/bootstrapjs}}
 </body>
 
 </html>

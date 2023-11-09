@@ -18,15 +18,14 @@ function mappingurl(submiturl, int, text, cnt){
 
      /*   var fileData = new FormData(document.getElementById("alert"));
         data.append("file", fileData);*/
-
         for(var i = 1; i <= int; i++){
             var name = ".field"+i;  // name <-  ". field" +i  클래스이름 대체 +1 갯수숫자의미  .점은 선택자 클래스라서 점으로 표시
             $(name).each(function() {    // $(클랙스이름) 넣고 반복해서 함수를
              var field = $(this).attr("name");   // 클래스 필드=  뷰페이지의 네임 값을 넣음
              //data[field] = $(this).val();  // 데이터안에 값을 넣음
 
-             // 추가
-             if ($(this).val().trim() === '') {
+             // 데이터값이 공란이면 경고문을 띄우고 submit 취소
+             if ($(this).val().trim() === '' && nextflag) {
                                 // 입력값이 비어있을 경우
                                 alert("빈칸을 모두 입력하세요.");
                                 nextflag = false
@@ -39,7 +38,6 @@ function mappingurl(submiturl, int, text, cnt){
         if(nextflag == false){
             return false; // submit 멈추기
         }
-
 
         //숫자형 name값을 처리하는 for문
         for(var j = 1; j<= cnt; j++){

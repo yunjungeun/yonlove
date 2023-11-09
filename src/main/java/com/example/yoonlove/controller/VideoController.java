@@ -21,6 +21,8 @@ public class VideoController {
     private VideoService videoService;
     @Autowired
     private PagingService pagingService;
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private UserService userService;
@@ -41,7 +43,6 @@ public class VideoController {
         List<VideoDto> contentList = videoService.selectListContent(pageInfo);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("video/contentList");
-        mv.setStatus(HttpStatus.valueOf(200));
         mv.addObject("selectContentList", contentList);
 
         mv.addObject("prefixUrl","vd");
