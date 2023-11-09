@@ -8,7 +8,6 @@ try{
 var radioName2 = radioButtonName2;
 }catch (error){}
 
-
 function mappingurl(submiturl, int, text, cnt){
     document.getElementById("alert").addEventListener("submit", function (event){
     event.preventDefault();
@@ -18,13 +17,10 @@ function mappingurl(submiturl, int, text, cnt){
     var hasEmptyField = false;   //추가
     var nextflag = true;
 
-     /*   var fileData = new FormData(document.getElementById("alert"));
-        data.append("file", fileData);*/
         for(var i = 1; i <= int; i++){
             var name = ".field"+i;  // name <-  ". field" +i  클래스이름 대체 +1 갯수숫자의미  .점은 선택자 클래스라서 점으로 표시
             $(name).each(function() {    // $(클랙스이름) 넣고 반복해서 함수를
              var field = $(this).attr("name");   // 클래스 필드=  뷰페이지의 네임 값을 넣음
-             //data[field] = $(this).val();  // 데이터안에 값을 넣음
 
              // 데이터값이 공란이면 경고문을 띄우고 submit 취소
              if ($(this).val().trim() === '' && nextflag) {

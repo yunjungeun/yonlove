@@ -62,7 +62,8 @@
                                     <div class="container1 text-center">
                                         <a href="/creator/creater" class="btn btn-primary">목록</a>
                                         <a href="/creator/updatecreatorview/{{selectCreator.ch_id}}" class="btn btn-success">수정</a>
-                                        <a href="/creator/deletecreator/{{selectCreator.ch_id}}" class="btn btn-danger" onclick="confirmDelete(event,'/creator/creater')">삭제</a>
+                                        <a href="creator/deletecreator/{{selectCreator.ch_id}}" class="btn btn-danger"
+                                           onclick="deleteAlert('/creator/deletecreator/{{selectCreator.ch_id}}')">삭제</a>
                                     </div>
 
                                 </div>

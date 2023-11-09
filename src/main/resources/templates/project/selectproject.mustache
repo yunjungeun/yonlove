@@ -40,8 +40,8 @@
 
                         <tr>
                             <td colspan="2">
-                                시작일<input type="text" id="format1" name="project_start_date" readonly>
-                                (예상)종료일<input type="text" id="format2" name="project_end_date" readonly>
+                                시작일<input type="date" id="format1" name="project_start_date" readonly>
+                                (예상)종료일<input type="date" id="format2" name="project_end_date" readonly>
                                 진행상태
                                 <select name="project_state">
                                     <option {{selectProject.project_state}} selected>{{selectProject.project_state}}</option>
@@ -55,9 +55,8 @@
 
             <div class="d-flex justify-content-center align-items-center">
                 <a href="/project/updateprojectview/{{selectProject.project_id}}" class="btn btn-success">수정</a>&nbsp;&nbsp;&nbsp;
-                <a href="/project/deleteproject/{{selectProject.project_id}}" class="btn btn-secondary"
-                   onclick="confirmDelete(event,'/project/project')">삭제</a>&nbsp;&nbsp;&nbsp;
-                <a href="/project/project" role="button" class="btn btn-info mr-2">목록</a>
+                <a href="javascript:void(0);" class="btn btn-danger" onclick="deleteAlert('/project/deleteproject/{{selectProject.project_id}}')">삭제</a>&nbsp;&nbsp;&nbsp;
+                <a href="/project/project" role="button" class="btn btn-info">목록</a>
                 <a href="/project/budget/{{selectProject.project_id}}" role="button" class="btn btn-info">예산편성</a>
             </div>
 
@@ -76,7 +75,6 @@
 <!-- End of Content Wrapper -->
 <script>
     var url="project/project";
-
 </script>
 <script>
     <!--2023-11-02 00:00:00 뒤에 시간값을 없애주기기 위해 변수에 값을 저장하고 js파일에 넘겨줌-->
@@ -88,7 +86,7 @@
 <script src="/static/js/dateformat.js"></script>
 <script src="/static/js/delete.js"></script>
 <script src="/static/js/cu_alert.js"></script>
-
+<script src="/static/js/deletepost.js"></script>
 {{>layout/bootstrapjs}}
 </body>
 </html>

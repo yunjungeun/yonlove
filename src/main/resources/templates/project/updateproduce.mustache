@@ -22,6 +22,9 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
+            <div style="text-align: center; display: block; margin-top:50px;" >
+                <h1 class="h3 mb-2 text-gray-800" >제작인원 수정</h1>
+
             <!-- DataTales Example -->
             <div class="card shadow mb-4" style="margin-top: 50px;">
                 <div class="card-header py-3">
@@ -31,17 +34,16 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                    <td>이름 <input class="field1" name="pd_name" type="text" placeholder="이름"/></td>
-                                    <td>역할 <input class="field2" name="role" type="text" placeholders="역할"/></td>
-                                    <td>배역 <input class="field3" name="casting" type="text" placeholders="배역"/></td>
+                                    <td>이름 <input class="field1" name="pd_name" type="text" value="{{selectProduce.pd_name}}"/></td>
+                                    <td>역할 <input class="field2" name="role" type="text" value="{{selectProduce.role}}"/></td>
+                                    <td>배역 <input class="field3" name="casting" type="text" value="{{selectProduce.casting}}"/></td>
                                 </tr>
                                 </thead>
                             </table>
                             <div class="d-flex justify-content-center align-items-center">
                                 <input type="submit" value="수정" class="btn btn-success"
                                    onclick="mappingurl('/project/updateproduce/{{selectProduce.pd_id}}', 3,'수정')"/>&nbsp;&nbsp;
-
-                                 <a href="/project/produce" role="button" class="btn btn-secondary">목록</a>
+                                <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
                             </div>
                         </form>
 

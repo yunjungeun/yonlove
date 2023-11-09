@@ -1,17 +1,14 @@
 package com.example.yoonlove.controller;
 
-import com.example.yoonlove.dto.CompanyDto;
-import com.example.yoonlove.dto.DepartmentDto;
-import com.example.yoonlove.dto.PageDto;
-import com.example.yoonlove.dto.UserDto;
+import com.example.yoonlove.dto.*;
 import com.example.yoonlove.service.AdminService;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -161,10 +158,7 @@ public class AdminController {
     public ModelAndView adduser(){
 
         ModelAndView mv = new ModelAndView();
-
-
         mv.setViewName("/admin/adduser");
-
         return mv;
 
     }
@@ -250,9 +244,10 @@ public class AdminController {
         adminService.updateDepartment(dto);
         return "/admin/department";
     }
+
     @GetMapping("/admin/{dpt_id}/deletedpt")
     public String deleteDepartment(DepartmentDto dto){
         adminService.deleteDepartment(dto);
-        return "redirect:/admin/department";
+        return "redirect:/admin/dpt";
     }
 }

@@ -16,7 +16,9 @@
 
 <!-- Main Content -->
 <div id="content">
-
+    <!-- Page Heading -->
+    <div style="text-align: center; display: block; margin-top:50px;" >
+        <h1 class="h3 mb-2 text-gray-800" >스토리보드 상세보기</h1>
         <!-- DataTales Example -->
         <div class="card shadow mb-4" style="margin-top: 50px;">
             <div class="card-header py-3">
@@ -118,7 +120,7 @@
             <a style="margin-left: 20px" href="/scene/scene" role="button" class="btn btn-info">목록</a>
             <a style="margin-left: 20px" href="/scene/{{selectScene.scene_id}}/updatesceneview"
                 role="button" class="btn btn-success">수정</a>
-            <a style="margin-left: 20px" href="javascript:void(0);" role="button" class="btn btn-secondary"
+            <a style="margin-left: 20px" href="javascript:void(0);" role="button" class="btn btn-danger"
                onclick="deleteAlert('/scene/{{selectScene.scene_id}}/deletescene')">삭제</a>
         </div> <!-- 별도 버튼 끝 -->
 

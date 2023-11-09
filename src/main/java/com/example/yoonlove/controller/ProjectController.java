@@ -90,7 +90,6 @@ public class ProjectController {
         // 삭제 !!!!!!!!!!!!!!!!!!
     @GetMapping("/project/deleteproject/{project_id}")
     public String deleteProject(ProjectDto dto){
-
          projectService.deleteProject(dto);
         return "redirect:/project/project";
     }
@@ -250,13 +249,18 @@ public class ProjectController {
 
     @GetMapping("project/insertproduce")   // 작성 후 입력값 넘기는~ , 추가
     @ResponseBody
-    public String insertProduce(ProduceDto produceDto){
+    public String insertProduce(ProduceDto produceDto,Principal user){
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        produceDto.setCompany_id(companyId);
         projectService.insertProduce(produceDto);
-        return "/project/produce";}
+        return "/project/produce";
+    }
 
     @GetMapping("project/{pd_id}/selectproduce")   //상세보기
     public ModelAndView selectProduce(ProduceDto produceDto){
-        System.out.println(produceDto);
         ProduceDto dto = projectService.selectProduce(produceDto);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/project/selectproduce");

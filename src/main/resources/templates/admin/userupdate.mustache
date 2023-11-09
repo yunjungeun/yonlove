@@ -93,7 +93,7 @@
                     <br>
                     <div style="text-align: center">
                         <button type="submit" class="btn btn-success" onclick="mappingurl('/admin/{{selectUser.User_id}}/updateuser',15,'수정')">수정</button>&nbsp;&nbsp;
-                        <button class="btn btn-secondary" onclick="location.href='/admin/user'">취소</button>
+                        <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
                     </div>
             </form> <!-- 테이블 끝-->
             </div>
@@ -113,8 +113,10 @@
 
 <script>
     var radioButtonName = "authority";
+    var url = "/admin/user";
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/static/js/deletepost.js"></script>
 <script src="/static/js/cu_alert.js"></script>
 </body>
 </html>

@@ -48,10 +48,13 @@ public class ProjectService {
 
     public List<ProduceDto> selectListProduce(PageDto pageDto){
         return projectMapper.selectListProduce(pageDto);}
+
     public void insertProduce(ProduceDto dto){
        projectMapper.insertProduce(dto);}
+
     public ProduceDto selectProduce(ProduceDto produceDto){
         return projectMapper.selectProduce(produceDto);}
+
     public void deleteProduce(ProduceDto dto){
          projectMapper.deleteProduce(dto);}
 

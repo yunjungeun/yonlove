@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>예산 상세보기</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/static/js/delete.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
     {{>layout/header}}
 </head>
 <body id="page-top">
@@ -48,8 +48,7 @@
 
     <div class="d-flex justify-content-center align-items-center">
         <a href="/project/updatebudgetview/{{selectBudget.budget_id}}" role="button" class="btn btn-success">수정</a>&nbsp;&nbsp;&nbsp;
-        <a href="/project/deletebudget/{{selectBudget.budget_id}}" role="button" class="btn btn-secondary"
-           onclick="confirmDelete(event)">삭제</a>&nbsp;&nbsp;&nbsp;
+        <a href="javascript:void(0);" class="btn btn-danger" onclick="deleteAlert('/project/deletebudget/{{selectBudget.budget_id}}')">삭제</a>&nbsp;&nbsp;&nbsp;
         <a href="/project/budget" role="button" class="btn btn-info">목록</a>
     </div>
                 </div>
@@ -67,11 +66,17 @@
 <!-- End of Main Content -->
 {{>layout/footer}}
 </div>
+</div>
 <!-- End of Content Wrapper -->
 
 <script>
     var url = "/project/budget";
 </script>
+
+<script src="/static/js/dateformat.js"></script>
+<script src="/static/js/delete.js"></script>
+<script src="/static/js/deletepost.js"></script>
+<script src="/static/js/projectjs/defaultdate.js"></script>
 
 {{>layout/bootstrapjs}}
 </body>
