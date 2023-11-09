@@ -18,6 +18,9 @@ public interface VideoMapper {
     public void insertContent(VideoDto dto);
 
     public void updateContent(VideoDto dto);
+
+    //id가 이미 존재하는 확인하는 메소드
+    VideoDto searchVideoId(String video_id);
     public void deleteContent(VideoDto dto);
 
 }

@@ -6,10 +6,13 @@ import com.example.yoonlove.dto.VideoDto;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.UserService;
 import com.example.yoonlove.service.VideoService;
+import com.example.yoonlove.service.YouTubeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -23,6 +26,8 @@ public class VideoController {
     private PagingService pagingService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private YouTubeService youTubeService;
 
     @GetMapping("vd/video") //컨텐츠 전체목록보기 뷰
     public ModelAndView selectListContent(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page,

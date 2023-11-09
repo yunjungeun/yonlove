@@ -11,6 +11,7 @@ import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.ChannelListResponse;
 import com.google.api.services.youtube.model.SearchListResponse;
+import com.google.api.services.youtube.model.VideoListResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -102,5 +103,69 @@ public class YouTubeService {
         dto.setViewcount(Long.parseLong(resultMap.get("viewCount")));
 
         return dto;
+    }
+
+
+    //특정 채널의 최신 동영상 5개를 가저오는 메소드
+    public String getChannelVideos(String channelId) throws GeneralSecurityException, IOException{
+        YouTube youtubeService = getService();
+        YouTube.Search.List request = youtubeService.search()
+                .list(Collections.singletonList("snippet"));
+        SearchListResponse response = request.setKey(key)
+                .setChannelId(channelId)
+                .setMaxResults(5L)
+                .setOrder("date")
+                .setType(Collections.singletonList("video"))
+                .execute();
+
+        // Jackson ObjectMapper를 사용하여 JSON 파싱
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(String.valueOf(response));
+        JsonNode items = jsonNode.get("items");
+
+
+        StringBuilder videoIdsBuild = new StringBuilder();  //문자열을 연결할때 쓰는 객체
+        for(int i = 0; i < items.size() ; i++) {
+            videoIdsBuild.append(items.get(i).get("id").get("videoId").asText());
+            if (i < items.size() - 1) {
+                videoIdsBuild.append(",");
+            }
+        }
+        return videoIdsBuild.toString();
+    }
+
+
+    //영상의 댓글, 구독, 좋아요 제목, 업로드 날짜 정보를 가져오는 메소드
+    public HashMap<String, String> getVideosInfo(String channelId) throws GeneralSecurityException, IOException {
+        String videoIds = getChannelVideos(channelId);
+
+        YouTube youtubeService = getService();
+        YouTube.Videos.List request = youtubeService.videos()
+                .list(Collections.singletonList("snippet,statistics"));
+        VideoListResponse response = request.setKey(key)
+                .setId(Collections.singletonList(videoIds)).execute();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(String.valueOf(response));
+
+        HashMap<String, String> resultMap = new LinkedHashMap<>();
+        JsonNode items = jsonNode.get("items");
+
+        for (int i = 0; i < items.size(); i++){
+            String title = items.get(i).get("snippet").get("title").asText();
+            String publishedAt  = items.get(i).get("snippet").get("publishedAt").asText();
+            String id = items.get(i).get("id").asText();
+            String viewCount = items.get(i).get("statistics").get("viewCount").asText();
+            String likeCount = items.get(i).get("statistics").get("likeCount").asText();
+            String commentCount = items.get(i).get("statistics").get("commentCount").asText();
+
+            resultMap.put("title" + i, title);
+            resultMap.put("uploadDate" + i, publishedAt);
+            resultMap.put("id" + i, id);
+            resultMap.put("viewCount" + i, viewCount);
+            resultMap.put("likeCount" + i, likeCount);
+            resultMap.put("commentCount" + i, commentCount);
+        }
+        return resultMap;
     }
 }

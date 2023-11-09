@@ -50,17 +50,22 @@
 
     <insert id="insertContent" parameterType="com.example.yoonlove.dto.VideoDto" >
         INSERT INTO video VALUES (
-        (select concat('video',(substr(NVL(max(video_id),'video0'),6)+1)) from video),<!--pk코드 자동증가-->
+        #{video_id},
         #{video_name},
-        #{video_sub},
+        null,
         #{video_view},
         #{like_cnt},
         #{video_url},
-        #{upload_date},
+        to_date(substr(#{upload_date},1,10), 'YYYY-MM-DD'),
         #{video_profit},
-        #{project_id}
+        'project1',
+        #{commentcnt}
         )
     </insert>
+
+    <select id="searchVideoId" resultType="com.example.yoonlove.dto.VideoDto">
+        SELECT video_id FROM video WHERE video_id = #{video_id}
+    </select>
 
     <update id="updateContent" parameterType="com.example.yoonlove.dto.VideoDto" >
         UPDATE
