@@ -105,8 +105,9 @@ import java.util.List;
           dto.setFormattedCh_sub(formattedCh_sub);
 
 
-          //서브페이징 // 채널의 영상들
+          //서브페이징 // 채널의 영상들을 자동으로 불러와서 db에 저장해서 최신화함
           //videoService.videoInsert(creatorDto.getCh_id());
+
           //유저정보 가저오는 dto
           UserDto userInfo = userService.getUser(user.getName());
           String companyId = userInfo.getCompany_id(); //회사 id 스트링
