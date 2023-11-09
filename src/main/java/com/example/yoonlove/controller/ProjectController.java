@@ -115,16 +115,17 @@ public class ProjectController {
 
     //제작예산
     // httpserveltrequest -> @RequestParam -> Command Object (dto)
-    @GetMapping("/project/budget")   // ddl 테이블명
+    @GetMapping("/project/budget/{project_id}")   // ddl 테이블명
         public ModelAndView selectListBudget(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page,
-                                             Principal user){
+                                             Principal user, BudgetDto budgetDto){
         //유저정보 가저오는 dto
         UserDto userInfo = userService.getUser(user.getName());
         String companyId = userInfo.getCompany_id(); //회사 id 스트링
 
         PageDto pageDto = new PageDto("budget", "budget_id", page, pdto,companyId);
-        PageDto pageInfo = pagingService.paging(pageDto);
+        pageDto.setPkid(budgetDto.getProject_id());
 
+        PageDto pageInfo = pagingService.paging(pageDto);
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.pageRink(pageDto);
 
@@ -132,9 +133,14 @@ public class ProjectController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/project/listbudget");  // 머스터치 이름
         mv.addObject("selectListBudget", dto);
-
+        mv.addObject("project_id",budgetDto.getProject_id());
         //예산 총계 구하는 메서드
-        int totalInt = projectService.getTotalBudget(pdto);
+        int totalInt;
+        try {
+            totalInt = projectService.getTotalBudget(pageDto);  //검색결과가 없을경우 null 에러 발생
+        }catch (Exception e){
+            totalInt = 0;
+        }
         DecimalFormat decimalFormat = new DecimalFormat("#,###");  //숫자를 금액처럼 , 붙여줌
         String total = decimalFormat.format(totalInt);
         mv.addObject("total", total);

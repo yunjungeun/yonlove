@@ -114,8 +114,12 @@
         <if test="company_id != 'company1'">
             where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
         </if>
+            and project_id = #{pkid}
         <if test="title != null and search != ''">
-            AND project_name like '%${title}%'
+            AND budget_name like '%${title}%'
+        </if>
+        <if test="content != null and search != ''">
+            AND budget_content like '%${content}%'
         </if>
         order by ${id} desc) t)
         <!-- rownum을 기준(r)으로 시작번호부터 끝번호까지 검색   -->
@@ -130,9 +134,13 @@
         <if test="company_id != 'company1'">
             where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
         </if>
+            and project_id = #{pkid}
         <!--검색어가 있다면 아래 조건문을 실행-->
         <if test="title != null and search != ''">
-            AND project_name like '%${title}%'
+            AND budget_name like '%${title}%'
+        </if>
+        <if test="content != null and search != ''">
+            AND budget_content like '%${content}%'
         </if>
     </select>
 
@@ -167,8 +175,12 @@
     <!--예산 총액 구하는 sql-->
     <select id="getTotalBudget">
         SELECT sum(budget_amount) FROM budgetjoin
+        where project_id = #{pkid}
         <if test="title != null and search != ''">
-        where project_name like '%${title}%'
+        and budget_name like '%${title}%'
+        </if>
+        <if test="content != null and search != ''">
+            and budget_content like '%${content}%'
         </if>
     </select>
 
