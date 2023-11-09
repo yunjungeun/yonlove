@@ -1,11 +1,10 @@
 //html 본문에서 옵션 값을 받아와 저장하는 변수
-var fkid = selectName;
+try{var fkid = selectName;}catch (error){}
 try{var produce = prodcueId;}catch (error){}
 try{
 var radioName = radioButtonName;
 }catch (error){}
 
-alert('test111');
 
 function mappingurl(submiturl, int, text, cnt){
     document.getElementById("alert").addEventListener("submit", function (event){

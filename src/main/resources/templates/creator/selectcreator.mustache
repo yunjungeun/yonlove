@@ -16,10 +16,6 @@
 
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
-    <!--d-flex flex-column: flex박스 스타일을 적용한 클래스 : 요소들 수평이나 수직으로 배치하고 간격을 조절하는 등의 작업 간편화
-       content-wrapper: 컨텐츠 섹션 감싸고  그 안의 요소들을 유연하게 배치하고 정렬 주로  다양한 화면 크기와 디바이스에 대응하는 반응형 디자인을 구현하는 데 유용-->
-
-    <!-- Main Content -->
     <div id="content">
 
         <!-- Begin Page Content -->
@@ -66,7 +62,7 @@
                                     <div class="container1 text-center">
                                         <a href="/creator/creater" class="btn btn-primary">목록</a>
                                         <a href="/creator/updatecreatorview/{{selectCreator.ch_id}}" class="btn btn-success">수정</a>
-                                        <a href="creator/deletecreator/{{selectCreator.ch_id}}" class="btn btn-danger" onclick="deleteAlert('/creator/deletecreator/{{selectCreator.ch_id}}')">삭제</a>
+                                        <a href="/creator/deletecreator/{{selectCreator.ch_id}}" class="btn btn-danger" onclick="confirmDelete(event,'/creator/creater')">삭제</a>
                                     </div>
 
                                 </div>
