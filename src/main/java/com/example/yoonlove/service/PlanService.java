@@ -104,6 +104,9 @@ public class PlanService {
     public void deleteTime(ScheduleTimeDto dto) {
         planMapper.deleteTime(dto);
     }
+    public String searchDayId(String time_id){
+       return planMapper.searcheDayId(time_id);
+    }
 
     //옵션 fk검색
     public List<ScheduleDayDto> selectFk() {

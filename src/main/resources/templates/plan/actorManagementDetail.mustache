@@ -44,9 +44,9 @@
                         </tbody>
                     </table>
                     <div class="d-flex justify-content-end">
-                        <a href="/plan/actor_management" class="btn btn-primary mr-2">뒤로가기</a>
+                        <a href="javascript:history.back()" role="button" class="btn btn-secondary mr-2">뒤로</a>
                         <a href="/plan/{{actorManagementDetail.actor_id}}/actorManagementUpdateView" class="btn btn-success mr-2">수정</a>
-                        <a href="/plan/{{actorManagementDetail.actor_id}}/deleteActorManagement" class="btn btn-danger" onclick="confirmDelete(event)">삭제</a>
+                        <a href="/plan/{{actorManagementDetail.actor_id}}/deleteActorManagement" class="btn btn-danger" onclick="confirmDelete(event, '/plan/schedule/{{actorManagementDetail.day_id}}')">삭제</a>
                     </div>
                 </div><!--카드바디-->
             </div><!--카드 end-->
@@ -56,6 +56,10 @@
 </div><!--page-top end-->
 {{>layout/footer}}
 </div>
+
+<script>
+    <script src="/static/js/delete.js"></script>
+
 {{>layout/bootstrapjs}}
 </body>
 </html>

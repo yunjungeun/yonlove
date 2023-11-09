@@ -191,6 +191,10 @@
         DELETE FROM schedule_time WHERE time_id = #{time_id}
     </delete>
 
+    <select id="searcheDayId">
+        SELECT day_id FROM schedule_time WHERE time_id = #{time_id}
+    </select>
+
     <!-- schedule_Time CRUD쿼리문 작성완료-->
 
 
@@ -257,7 +261,7 @@
 
     <insert id="insertActorManagement" parameterType="com.example.yoonlove.dto.ActorManagementDto" >
         INSERT INTO actor_management values (
-        (select concat('actor', (nvl(max(to_number(substr(actor_id, 3))), 0)+1)) from actor_management),<!--pk코드 자동증가(수정2)-->
+        (select concat('actor', (nvl(max(to_number(substr(actor_id, 6))), 0)+1)) from actor_management),<!--pk코드 자동증가(수정2)-->
 
         #{actor_name},
         #{arrival_time},

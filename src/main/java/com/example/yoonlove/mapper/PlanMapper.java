@@ -44,6 +44,7 @@ public interface PlanMapper {
 
     public void deleteTime(ScheduleTimeDto dto);
 
+    String searcheDayId(String time_id);
     //==============================출연자관리==========================================
     public List<ActorManagementDto> selectListActorManagement(PageDto pageInfo);
 

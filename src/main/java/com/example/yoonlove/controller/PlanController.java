@@ -4,7 +4,6 @@ import com.example.yoonlove.dto.*;
 import com.example.yoonlove.service.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -196,8 +195,7 @@ public class PlanController {
     @ResponseBody
     public String insertTime(ScheduleTimeDto dto) {
         planService.insertTime(dto);
-
-        return "/plan/schedule_time";
+        return "/plan/schedule/"+dto.getDay_id();
     }
 
 
@@ -206,7 +204,6 @@ public class PlanController {
         ScheduleTimeDto scheduleTimeDto = planService.selectScheduleTime(dto);//업데이트를 하려면 해당 컨텐츠 불러와야하니까 위에 selectContent메소드를 다시씀!
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/updateScheduleTime");
-        mv.setStatus(HttpStatus.valueOf(200));
         mv.addObject("updateScheduleTime", scheduleTimeDto);
         return mv;
     }
@@ -219,9 +216,11 @@ public class PlanController {
     }
 
     @GetMapping("plan/{time_id}/deleteTime") //삭제 처리
-    public String deleteTime( ScheduleTimeDto dto) {
+    @ResponseBody
+    public String deleteTime(ScheduleTimeDto dto) {
+        String day_id = planService.searchDayId(dto.getTime_id());
         planService.deleteTime(dto);
-        return "redirect:/plan/schedule_time";
+        return "/plan/schedule/"+day_id;
     }
 
 //===================================출연자관리=========================================================

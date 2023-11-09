@@ -37,9 +37,9 @@
 
 
                     <div class="d-flex justify-content-end">
-                        <a href="/plan/schedule_time" class="btn btn-primary mr-2">돌아가기</a>
                         <a href="/plan/{{scheduleTime.time_id}}/scheduleTimeUpdateView"  class="btn btn-success mr-2">수정</a>
-                        <a href="/plan/{{scheduleTime.time_id}}/deleteTime" class="btn btn-danger" onclick="confirmDelete(event)">삭제</a>
+                        <a href="/plan/{{scheduleTime.time_id}}/deleteTime" class="btn btn-danger mr-2" onclick="confirmDelete(event, '/plan/schedule/{{scheduleTime.day_id}}')">삭제</a>
+                        <a href="javascript:history.back()" role="button" class="btn btn-secondary">뒤로</a>
                     </div>
 
                 </div><!--카드바디-->
