@@ -111,7 +111,6 @@ public class LoginController {
     }
 
 
-
     @PostMapping("ConfirmId")
     public ResponseEntity<?> confirmId(@RequestParam("user_id") String user_id) {
         ModelAndView mv = new ModelAndView();
