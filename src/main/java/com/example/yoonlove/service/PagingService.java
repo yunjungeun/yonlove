@@ -116,6 +116,8 @@ public class PagingService {
 
         //소속회사에 관한 정보를 저장
         pageDto.setCompany_id(dto.getCompany_id());
+        //크리에이터 의 채널id정보를 인계-->크리에이터 페이징처리를 위해서 존재
+        pageDto.setCh_id(dto.getCh_id());
         return pageDto;
     }
 

@@ -50,6 +50,8 @@ public class PageDto {
 
     //회사 정보에 관한 프로퍼티
     private String company_id;
+    //크리에이터 정보에 관한 프로퍼티(크리에이터의 영상목록 페이징에 필요)
+    private String ch_id;
 
     public PageDto(){}
     public PageDto(String table, String pkid, int currentPage, PageDto dto, String company_id){
@@ -96,7 +98,7 @@ public class PageDto {
                 ", 페이지당 표시되는 글의 수=" + postCnt +
                 ", 페이지의 총 갯수=" + pageCnt +
                 ", 현재페이지 값=" + currentPage +
-                ", 페이지당 표시되는 글 의 수=" + paging +
+                ", 페이징에 표시되는 페이지의 수=" + paging +
                 ", 페이징 시작 페이지=" + pageStart +
                 ", 페이징 마지막 페이지=" + pageEnd +
                 ", 테이블='" + table + '\'' +

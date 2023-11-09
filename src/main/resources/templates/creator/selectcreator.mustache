@@ -22,10 +22,7 @@
     <div id="content">
 
         <!-- Begin Page Content -->
-        <div class="container-fluid">  <!--얘가 없으면 전체적으로 다 위로 올라가고 푸터가 사이드 옆쪽으로 붙어버림 -->
-            <!--container-fluid:  Bootstrap 프레임워크를 사용하여 생성된 컨테이너로, 웹 페이지의 내용을 감싸는 역할, 화면 폭에 맞게 자동으로 넓어져서 브라우저의 너비에 따라 반응형으로 조절-->
-            <!--mb-2:하단의 여백 -->
-            <!-- Page Heading -->
+        <div class="container-fluid">
             <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px;">크리에이터</h1>
             <!--공지사항이 너무 천장에 붙어있어서 margin-top: 50px을 줘서 내렸습니다-->
             <!-- <p class="mb-4">게시판 설명 넣는곳 <a target="_blank" href="https://datatables.net">이곳에 링크 넣으세요</a>.</p>-->
@@ -55,9 +52,9 @@
                                 <tr>
                                     <td style="text-align: center;">{{selectCreator.ch_name}}</td>
                                     <td style="text-align: center;">{{selectCreator.user_id}}</td>
-                                    <td style="text-align: center;">{{selectCreator.formattedCh_sub}}</td>
-                                    <td style="text-align: center;">{{selectCreator.formattedVideocount}}</td>
-                                    <td style="text-align: center;">{{selectCreator.formattedViewcount}}</td>
+                                    <td style="text-align: center;">{{selectCreator.formattedCh_sub}} 명</td>
+                                    <td style="text-align: center;">{{selectCreator.formattedVideocount}} 개</td>
+                                    <td style="text-align: center;">{{selectCreator.formattedViewcount}} 회</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -82,14 +79,56 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div><!--카드섹션 end-->
 
-            <br/>
+            <div class="card shadow mb-4" style="margin-top: 50px;">
+                <div class="card-body">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th  style="text-align: center;">제목</th>
+                            <th  style="text-align: center;">조회수</th>
+                            <th  style="text-align: center;">좋아요 수</th>
+                            <th  style="text-align: center;">댓글 수</th>
+                            <th  style="text-align: center;">업로드일</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#selectContentList}}
+                            <tr>
+                                <td style="width:35%"><a href="{{video_url}}">{{video_name}}</a></td>
+                                <td style="text-align: center; vertical-align: middle;">{{formattedView}} 회</td>
+                                <td style="text-align: center; vertical-align: middle;">{{formattedLike}} </td>
+                                <td style="text-align: center; vertical-align: middle;">{{formattedComment}} 개</td>
+                                <td style="text-align: center; vertical-align: middle;">{{formattedDate}}</td>
+                            </tr>
+                        {{/selectContentList}}
+                        </tbody>
+                    </table>
+
+                    <div class="d-flex justify-content-center">
+                        <span>{{>layout/subpaging}}</span>
+                    </div>
+
+                        <form action="/script/scriptpaper" method="GET"
+                              class="d-flex justify-content-end  form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
+                            <input type="hidden" id="searchType" value="title">
+                            <input type="text" id="search" name="search"
+                                   style="width: 150px;" class="form-control bg-light border-0 small" placeholder="검색"
+                                   aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="submit" class="btn btn-primary" value="검색">
+                        </form>
+
+                </div><!--카드바디 end-->
+            </div><!--카드 섹션 end-->
+
+
         </div>
+
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
-        <!-- .container-fluid -->
+
     </div>
     <!-- End of Main Content -->
     {{>layout/footer}}
@@ -97,6 +136,10 @@
 <!-- End of Content Wrapper -->
 {{>layout/bootstrapjs}}
 
+<script>
+    var url = '/creator/{{selectCreator.ch_id}}/selectcreator';
+</script>
+<script src="/static/js/search.js"></script>
 <script src="/static/js/delete.js"></script>
 </body>
 </html>

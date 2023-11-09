@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,8 +23,25 @@ public class VideoService {
     private YouTubeService youTubeService;
 
 
-    public List<VideoDto> selectListContent(PageDto pageInfo) {
-        List<VideoDto> videoList = videoMapper.selectListContent(pageInfo);// 오류원인:videoMapper 얘를 VideoMapper로 했었음..
+    public List<VideoDto> selectListContent(PageDto pageInfo, String ch_id) {
+        List<VideoDto> videoList = videoMapper.selectListContent(pageInfo);
+
+        //날짜 변환
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+
+        //데이터를 내가 원하는 포멧으로 변경 저장
+        for(int i = 0; i<videoList.size(); i++){
+            String formattedView = decimalFormat.format(videoList.get(i).getVideo_view());
+            String formattedLike = decimalFormat.format(videoList.get(i).getLike_cnt());
+            String formattedDate =videoList.get(i).getUpload_date().substring(0,10);
+            String formattedComment =decimalFormat.format(videoList.get(i).getCommentcnt());
+
+            videoList.get(i).setFormattedDate(formattedDate);
+            videoList.get(i).setFormattedView(formattedView);
+            videoList.get(i).setFormattedLike(formattedLike);
+            videoList.get(i).setFormattedComment(formattedComment);
+        }
+
         return videoList;
     }
 

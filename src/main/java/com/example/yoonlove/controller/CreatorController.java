@@ -1,9 +1,6 @@
 package com.example.yoonlove.controller;
 
-import com.example.yoonlove.dto.CompanyDto;
-import com.example.yoonlove.dto.CreatorDto;
-import com.example.yoonlove.dto.PageDto;
-import com.example.yoonlove.dto.UserDto;
+import com.example.yoonlove.dto.*;
 import com.example.yoonlove.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +32,8 @@ import java.util.List;
         private UserService userService;
         @Autowired
         private AdminService adminService;
+        @Autowired
+        private VideoService videoService;
 
 
         @GetMapping("creator/creater")  // 뒤에 테이블명
@@ -87,9 +86,12 @@ import java.util.List;
 
 
       @GetMapping("/creator/{ch_id}/selectcreator")
-      public ModelAndView selectCreator(CreatorDto creatorDto){
+      public ModelAndView selectCreator(CreatorDto creatorDto, Principal user,
+                                        PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page) throws GeneralSecurityException, IOException {
           CreatorDto dto = creatorservice.selectCreator(creatorDto);
           ModelAndView mv = new ModelAndView();
+          mv.setViewName("/creator/selectcreator");
+          mv.addObject("selectCreator", dto);
 
           //dto의 조회수, 영상수, 구독자수를 쉼표를 포함한 문자열로 변환
           DecimalFormat decimalFormat = new DecimalFormat("#,###");
@@ -102,8 +104,29 @@ import java.util.List;
           dto.setFormattedViewcount(formattedViewCount);
           dto.setFormattedCh_sub(formattedCh_sub);
 
-          mv.setViewName("/creator/selectcreator");
-          mv.addObject("selectCreator", dto);
+
+          //서브페이징 // 채널의 영상들
+          //videoService.videoInsert(creatorDto.getCh_id());
+          //유저정보 가저오는 dto
+          UserDto userInfo = userService.getUser(user.getName());
+          String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+          pdto.setPkid(dto.getCh_id());
+
+          PageDto pageDto = new PageDto("video","video_id", page,pdto, companyId);
+          pageDto.setCh_id(creatorDto.getCh_id()); //크리에이터 소속의 영상의 페이징을 하기위해, pageInfo에 chId를 넘겨줌
+          PageDto pageInfo = pagingService.paging(pageDto); // paging ==> 전체게시글 갯수 구해오는 메소드
+          List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
+          String rink = pagingService.subPageRink(pageDto,"creator");
+          List<VideoDto> contentList = videoService.selectListContent(pageInfo, creatorDto.getCh_id());
+
+          mv.addObject("selectContentList", contentList);
+
+          mv.addObject("pageDto", pageDto);
+          mv.addObject("prefixUrl", "creator"); //컨트롤러 이름
+          mv.addObject("paging", pageInfo);
+          mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
+          mv.addObject("pageRink",rink);
           // 기존 크레이터 값 끝
           return mv;
       }

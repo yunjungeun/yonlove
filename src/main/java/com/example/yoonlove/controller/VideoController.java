@@ -42,10 +42,10 @@ public class VideoController {
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
         String rink = pagingService.pageRink(pageDto);
 
-        List<VideoDto> contentList = videoService.selectListContent(pageInfo);
+        //List<VideoDto> contentList = videoService.selectListContent(pageInfo);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("video/contentList");
-        mv.addObject("selectContentList", contentList);
+        mv.addObject("selectContentList");
 
         mv.addObject("prefixUrl","vd");
         mv.addObject("paging", pageInfo);  //페이징정보
@@ -60,7 +60,6 @@ public class VideoController {
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/video/contentDetail");
-        mv.setStatus(HttpStatus.valueOf(200));
         mv.addObject("content", contentDetail);
         return mv;
     }

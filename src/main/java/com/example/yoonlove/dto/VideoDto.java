@@ -14,5 +14,11 @@ public class VideoDto {
     private int video_profit;
     private String project_id;
     private int commentcnt;
+    private String ch_id;
+
+    private String formattedDate;
+    private String formattedLike;
+    private String formattedView;
+    private String formattedComment;
 
 }
