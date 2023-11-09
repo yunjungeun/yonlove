@@ -5,6 +5,8 @@ try{
 var radioName = radioButtonName;
 }catch (error){}
 
+alert('test111');
+
 function mappingurl(submiturl, int, text, cnt){
     document.getElementById("alert").addEventListener("submit", function (event){
     event.preventDefault();
