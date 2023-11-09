@@ -151,9 +151,11 @@ public class ProjectController {
     }
 
     @GetMapping("/project/insertbudgetview")  // 작성클릭 후 페이지 리턴하는
-    public ModelAndView insertbudgetview()throws JsonProcessingException {
-        String jsonListProject = dropDownService.dropDownOption("project",null, null);
+    public ModelAndView insertbudgetview(Principal user)throws JsonProcessingException {
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
 
+        String jsonListProject = dropDownService.dropDownOption("project",null, companyId);
         ModelAndView mv = new ModelAndView();
         mv.addObject("fkList", jsonListProject);
         mv.setViewName("project/budgetinsert");
