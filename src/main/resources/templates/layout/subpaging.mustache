@@ -12,13 +12,13 @@
 {{#pagelist}}
     <!--현재페이지는 링크가 없고 강조표시-->
     {{#currentPageFlag}}
-        <strong>{{currentPage}}</strong>
+        <strong class="btn btn-primary">{{currentPage}}</strong>
     {{/currentPageFlag}}
     <!--현재 페이지가 아닌 숫자들은 해당페이지로 이동하는 링크생성-->
 
 
     {{^currentPageFlag}}
-        <a href="/{{prefixUrl}}/{{pageDto.pkid}}/{{pageRink}}{{currentPage}}">{{currentPage}}</a>
+        <a href="/{{prefixUrl}}/{{pageDto.pkid}}/{{pageRink}}{{currentPage}}" class="btn btn-info">{{currentPage}}</a>
     {{/currentPageFlag}}
 {{/pagelist}}
 

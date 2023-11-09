@@ -6,7 +6,7 @@
     <title>제작예산 리스트</title>
     {{>layout/header}}
 </head>
-<body id="page-top">
+< id="page-top">
 {{>layout/sidebar}}
 {{>layout/topbar}}
 <!-- Content Wrapper -->
@@ -38,8 +38,6 @@
                 </div>
             </div>
         </form>
-        </div>
-
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -74,12 +72,12 @@
                         {{>layout/paging}}</span>
                 <a href="/project/insertbudgetview" role="button" class="btn btn-primary">글 작성</a>
                 </div>
-            </div>
-            </div>
-        </div>
 
+                    </div>
+                </div>
+            </div>
         </div>
-    <br/>
+    </div>
 </div>
 
     <a class="scroll-to-top rounded" href="#page-top">
@@ -87,11 +85,11 @@
     </a>
     <!-- /.container-fluid -->
 </div>
-<!-- End of Main Content -->
+</div><!-- End of Main Content -->
 {{>layout/footer}}
 </div>
-<!-- End of Content Wrapper -->
 
+<!-- End of Content Wrapper -->
 <script>
     var url = "/project/budget";
 </script>

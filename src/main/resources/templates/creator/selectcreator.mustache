@@ -30,11 +30,7 @@
 
             <div class="card shadow mb-4" style="margin-top: 50px;">
                 <div class="card-header py-3">
-                    <!--<h6 class="m-0 font-weight-bold text-primary">공지사항</h6>-->
 
-                    <!--d-none: 화면에서 폼을 숨기는 기능
-                    mr-auto: 오른쪽 마진을 자동으로 설정 ml-md-3:왼쪽 마진을 3단위만큼 설정
-                    my-2 my-md-0: 수직여백 설정  mw-100: 최대너비 100%설정 navbar-search: 커스텀클래스 (폼을나타내는 클래스)-->
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -61,16 +57,16 @@
                         <!--페이징 처리 레이아웃-->
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <!-- 테이블 헤더 및 데이터 부분 -->
+
                             </table>
                             <div class="d-flex justify-content-end">
 
                                 <div>
-                                    <!-- 검색/목록/홈페이지 부분 -->
+
                                     <div class="container1 text-center">
                                         <a href="/creator/creater" class="btn btn-primary">목록</a>
                                         <a href="/creator/updatecreatorview/{{selectCreator.ch_id}}" class="btn btn-success">수정</a>
-                                        <a href="creator/deletecreator/{{selectCreator.ch_id}}" class="btn btn-danger" onclick="confirmDelete(event,'/creator/creater')">삭제</a>
+                                        <a href="creator/deletecreator/{{selectCreator.ch_id}}" class="btn btn-danger" onclick="deleteAlert('/creator/deletecreator/{{selectCreator.ch_id}}')">삭제</a>
                                     </div>
 
                                 </div>
@@ -138,7 +134,7 @@
     <!-- End of Main Content -->
     {{>layout/footer}}
 </div>
-<!-- End of Content Wrapper -->
+
 {{>layout/bootstrapjs}}
 
 <script>

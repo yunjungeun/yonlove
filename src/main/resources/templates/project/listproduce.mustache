@@ -43,43 +43,42 @@
                 </div>
             </div>
         </form> <!-- form 끝 -->
+
     </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                <tr>
-                                    <th>기획</th>
-                                    <th>이름</th>
-                                    <th>역할</th>
-                                    <th>배역</th>
-                                </tr>
-                                </thead>
+        <div class="card-body">
+            <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>기획</th>
+                            <th>이름</th>
+                            <th>역할</th>
+                            <th>배역</th>
+                        </tr>
+                        </thead>
 
-                                <tbody>
-                                {{#selectListProduce}}
-                                    <tr>
-                                        <td style="text-align: center;">{{project_name}}</td>
-                                        <td style="text-align: center;"> <a href="/project/{{pd_id}}/selectproduce">{{pd_name}}</a></td>
-                                        <td style="text-align: center;">{{role}}</td>
-                                        <td style="text-align: center;">{{casting}}</td>
-                                    </tr>
-                                {{/selectListProduce}}
-                                </tbody>
-                            </table>
+                        <tbody>
+                        {{#selectListProduce}}
+                            <tr>
+                                <td style="text-align: center;">{{project_name}}</td>
+                                <td style="text-align: center;"> <a href="/project/{{pd_id}}/selectproduce">{{pd_name}}</a></td>
+                                <td style="text-align: center;">{{role}}</td>
+                                <td style="text-align: center;">{{casting}}</td>
+                            </tr>
+                        {{/selectListProduce}}
+                        </tbody>
+                    </table>
 
-                                <!--페이징 처리 레이아웃-->
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span></span>
-                                    <span>
-                                    {{>layout/paging}}</span>
-                                <a href="/project/insertprojectview" role="button" class="btn btn-primary">글 작성</a>
-                                </div>
+                        <!--페이징 처리 레이아웃-->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span></span>
+                            <span>
+                            {{>layout/paging}}</span>
+                        <a href="/project/insertprojectview" role="button" class="btn btn-primary">글 작성</a>
+                        </div>
                     </div>
                 </div>
             </div>   <!-- table 끝 -->
-
-
         </div>
     </div>
 
