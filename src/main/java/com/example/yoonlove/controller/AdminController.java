@@ -4,16 +4,17 @@ import com.example.yoonlove.dto.*;
 import com.example.yoonlove.service.AdminService;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class AdminController {
@@ -91,13 +92,39 @@ public class AdminController {
         dptDto.setDpt_id(dto.getDpt_id());
         DepartmentDto dptname = adminService.selectDepartment(dptDto);
 
-        mv.addObject("selectDpt",dptname);
+        //-------------------------------아래 내용 추가 및 수정함
+        Map<String, Object> model = new HashMap<>();
+        model.put("selectDpt", dptname);
+        model.put("selectCompany", companyname);
+        model.put("selectUser", dto);
+        model.put("isAdmin", "admin".equals(dto.getAuthority()));
+        model.put("isNormal", "일반".equals(dto.getAuthority()));
+
+        mv.setViewName("/admin/userupdate");
+        mv.addAllObjects(model);
+
+        return mv;
+        /*mv.addObject("selectDpt",dptname);
         mv.addObject("selectCompany",companyname);
 
         mv.setViewName("/admin/userupdate");
         mv.addObject("selectUser", dto);
-        return mv;
+        return mv;*/
     }
+
+    @GetMapping("/admin/{user_id}/updateuser")
+    @ResponseBody
+    /*public String updateUser(HttpServletRequest request, @ModelAttribute("dto") UserDto dto) {
+        String authority = request.getParameter("authority");
+        dto.setAuthority(authority);
+        adminService.updateUser(dto);
+        */
+
+        public String updateUser(UserDto dto){
+
+        return "/admin/user";
+    }
+
 
     @GetMapping("/admin/{user_id}/deleteuser")
     public String deleteUser(UserDto dto){
@@ -134,12 +161,6 @@ public class AdminController {
         return mv;
     }
 
-    @GetMapping("/admin/{user_id}/updateuser")
-    @ResponseBody
-    public String updateUser(UserDto dto){
-        adminService.updateUser(dto);
-        return "/admin/user";
-    }
 
 
     @GetMapping("/admin/adduserview")

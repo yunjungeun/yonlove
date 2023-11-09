@@ -24,10 +24,8 @@ public class VideoController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserService userService;
 
-    @GetMapping("vd/video") //컨텐츠 전체목록보기 뷰
+      @GetMapping("vd/video") //컨텐츠 전체목록보기 뷰
     public ModelAndView selectListContent(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page,
                                           Principal user) {
         //유저정보 가저오는 dto
