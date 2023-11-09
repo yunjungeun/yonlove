@@ -140,7 +140,6 @@ public class AdminController {
         PageDto pageDto = new PageDto("department","dpt_id",page,pdto, company);
 
         PageDto pageInfo = pagingService.paging(pageDto);
-        System.out.println("test");
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.pageRink(pageDto);
         List<DepartmentDto> dto = adminService.selectListDepartment(pageInfo);
@@ -204,7 +203,6 @@ public class AdminController {
         String rink = pagingService.subPageRink(pageDto,"department");
 
         List<UserDto> subList = adminService.selectListUser(pageInfo);
-        System.out.println(pageInfo.getPkid());
         mv.addObject("selectListUser", subList);
 
         //페이징에 필요한센션

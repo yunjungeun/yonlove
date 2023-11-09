@@ -82,6 +82,7 @@ public class ProjectController {
         String companyId = userInfo.getCompany_id(); //회사 id 스트링
 
         projectDto.setCompany_id(companyId);
+        projectDto.setProject_writer(userInfo.getNickname());
         projectService.insertProject(projectDto);
         return "/project/project";
     }
@@ -89,6 +90,7 @@ public class ProjectController {
         // 삭제 !!!!!!!!!!!!!!!!!!
     @GetMapping("/project/deleteproject/{project_id}")
     public String deleteProject(ProjectDto dto){
+
          projectService.deleteProject(dto);
         return "redirect:/project/project";
     }

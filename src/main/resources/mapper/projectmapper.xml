@@ -66,7 +66,7 @@
         <if test="project_num != null and project_num != 0">
             #{project_num},
         </if>
-            '작성자', <!--작성자-->
+            #{project_writer}, <!--작성자-->
             #{project_concept},  <!--콘셉트-->
             #{project_content}, <!--기획내용-->
             (select * from todaytime),  <!--기획일-->
