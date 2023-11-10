@@ -75,33 +75,35 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4" style="margin-top: 50px; margin-right:100px; margin-left:100px;">
         <div class="card-header py-3">
+            <h4 class="h4 mb-2 font-weight-bold text-gray-800 mt-3" style="text-align: center;">
+                스크립트페이퍼
+            </h4>
+        </div>
             <div class="card-body">
                 <div class="table-responsive">
-    <!--서브 게시판 / 스크립트페이퍼-->
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <ul>
-            <tr>
-                <td style="text-align: center;">씬 번호</td>
-                <td style="text-align: center;">영상제목</td>
-                <td style="text-align: center;">촬영일자</td>
-                <td style="text-align: center;">콘티</td>
-            </tr>
-            {{#selectListScriptPaper}}
-                <tr>
-                    <td style="text-align: center;">{{selectScene.scene_num}}<!--씬 번호가 들어가야함(조인)--></td>
-                    <td style="text-align: center;"><a href="/script/{{script_id}}/selectscriptpaper">{{video_name}}</a></td>
-                    <td style="text-align: center;">{{video_date}}</td>
-                    <td style="text-align: center;">{{conti}}</td>
-                </tr>
-            {{/selectListScriptPaper}}
-        </ul>
-    </table>
-        <!--서브게시판 페이징-->
-    <div class="d-flex justify-content-center align-items-center">
-        <span></span>
-        <span>
-            {{>layout/paging}}</span>
-    </div>  <!-- 페이징 끝 -->
+                    <!--서브 게시판 / 스크립트페이퍼-->
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <tr>
+                            <th style="text-align: center;">씬 번호</th>
+                            <th style="text-align: center;">영상제목</th>
+                            <th style="text-align: center;">촬영일자</th>
+                            <th style="text-align: center;">콘티</th>
+                        </tr>
+                        {{#selectListScriptPaper}}
+                            <tr>
+                                <td style="text-align: center;">{{selectScene.scene_num}}<!--씬 번호가 들어가야함(조인)--></td>
+                                <td style="text-align: center;"><a href="/script/{{script_id}}/selectscriptpaper">{{video_name}}</a></td>
+                                <td style="text-align: center;">{{video_date}}</td>
+                                <td style="text-align: center;">{{conti}}</td>
+                            </tr>
+                        {{/selectListScriptPaper}}
+                    </table>
+                    <!--서브게시판 페이징-->
+                    <div class="d-flex justify-content-center align-items-center">
+                        <span></span>
+                        <span>{{>layout/paging}}</span>
+                    </div>  <!-- 페이징 끝 -->
+
                     <!--서브게시판 검색-->
                     <form action="/script/scriptpaper" method="GET" class="d-flex justify-content-end form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
                         <div class="input-group">

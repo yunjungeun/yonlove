@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,26 +57,24 @@ public class ScriptPaperService {
 
     //타임테이블
     public TimeTableDto selectTimeTable(TimeTableDto dto){
-        TimeTableDto timeTableDto = scriptPaperMapper.selectTimeTable(dto);
-        String time = timeTableDto.getFilm_time();
-        String slate = timeTableDto.getSlate_time();
-
-        timeTableDto.setFormattedTime(time.substring(11,16));
-        timeTableDto.setFormattedSlate(slate.substring(11,16));
-
-        return timeTableDto;
+            return scriptPaperMapper.selectTimeTable(dto);
     }
-    public List<TimeTableDto> selectListTimeTable(PageDto pageInfo) {
-        List<TimeTableDto> timeTableDtos = scriptPaperMapper.selectListTimeTable(pageInfo);
-        //2023-11-07 00:00:00 이렇게 나오는걸 00:00 이렇게 바꿈  //데이터가공
-        for(int i = 0; i < timeTableDtos.size(); i++){
-            String time = timeTableDtos.get(i).getFilm_time();
-            String slate = timeTableDtos.get(i).getSlate_time();
-            timeTableDtos.get(i).setFormattedTime(time.substring(11,16));
-            timeTableDtos.get(i).setFormattedSlate(slate.substring(11,16));
-        }
 
-        return timeTableDtos;
+    public HashMap<String, Boolean> okFlagCheck(TimeTableDto dto){
+        HashMap<String, Boolean> okList = new LinkedHashMap<>();
+        String[] sign = {"OK","NG"};
+        for(int i = 0; i < sign.length; i++){
+            if(sign[i].equals(dto.getOk_ng())){
+                okList.put(sign[i],true);
+            }else {
+                okList.put(sign[i], false);
+            }
+        }
+        return okList;
+    }
+
+    public List<TimeTableDto> selectListTimeTable(PageDto pageInfo) {
+    return  scriptPaperMapper.selectListTimeTable(pageInfo);
     }
     public void insertTimeTable(TimeTableDto dto){
         scriptPaperMapper.insertTimeTable(dto);

@@ -79,12 +79,13 @@
         #{scene_id}, <!--옵션값으로 들어가야되는부분-->
         #{video_name}, <!--영상제목-->
         #{video_date}, <!--영상촬영 날짜-->
-        #{video_time}, <!--영상 촬영시작시간-->
-        #{video_end_time}, <!--영상 촬영 종료시간-->
-        null, <!--이부분 이제 안씀 테이블삭제 해도됨-->
+        null, <!--안씀(vide_time)-->
+        #{video_start_time}, <!--영상 촬영 종료시간-->
+        null, <!--액션이미지-->
         #{action_content}, <!--액션 내용-->
-        #{position_image}, <!--카메라포지션 첨부파일 주소-->
-        #{conti} <!--콘티-->
+        null, <!--카메라포지션 첨부파일 주소-->
+        #{conti}, <!--콘티-->
+        #{video_end_time} <!--영상 촬영 종료시간-->
         )
     </insert>
 
@@ -93,10 +94,9 @@
         set
         video_name = #{video_name},
         video_date = #{video_date},
-        video_time = #{video_time},
         video_start_time = #{video_start_time},
+        video_end_time = #{video_end_time},
         action_content = #{action_content},
-        position_image = #{position_image},
         conti = #{conti}
         where script_id = #{script_id}
     </update>
@@ -138,7 +138,7 @@
         insert into timetable values(
         (select concat('time',(nvl(max(to_number(substr(table_id, 5))), 0)+1)) from timetable),<!--pk코드 자동증가(수정2)-->
         #{film_time},<!--촬영시간(몇시간 몇분)-->
-        #{time_num},<!--타임테이블 번호 자동증가 해야됨-->
+        (select nvl(max(time_num),0)+1 from timetable where script_id=#{script_id}),<!--타임테이블 번호 자동증가 해야됨-->
         #{ok_ng}, <!--ok판정-->
         #{slate_time}, <!--슬레이트시간-->
         #{script_id} <!--script id값 /나중에 조인해서 스크립트 번호가 가야됨-->

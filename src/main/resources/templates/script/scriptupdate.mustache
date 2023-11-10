@@ -24,19 +24,29 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr style="text-align: center;">
-                                <th>씬</th>
-                                <th>영상제목</th>
-                                <th>촬영날짜</th>
-                                <th>영상 길이</th>
-                                <th>촬영 시작시간</th>
+                                <th>기획</th>
+                                <th>시나리오</th>
+                                <th colspan="2">씬</th>
                             </tr>
                             </thead>
                             <tr style="text-align: center;">
-                                <td><input name="scene_num" readonly style="text-align: center;" value="{{selectScriptPaper.scene_num}}"></td>
+                                <td><input name="project_name" readonly style="text-align: center;" value="{{selectScriptPaper.project_name}}"></td>
+                                <td><input name="scenario_name" readonly style="text-align: center;" value="{{selectScriptPaper.scenario_name}}"></td>
+                                <td colspan="2"><input name="scene_num" readonly style="text-align: center;" value="{{selectScriptPaper.scene_num}}"></td>
+                            </tr>
+
+                            <tr style="text-align: center;">
+                                <th>영상제목</th>
+                                <th>촬영날짜</th>
+                                <th>촬영 시작시간</th>
+                                <th>촬영 종료시간</th>
+                            </tr>
+
+                            <tr style="text-align: center;">
                                 <td><input name="video_name" type="text" class="field1" style="text-align: center;" value="{{selectScriptPaper.video_name}}"></td>
                                 <td><input name="video_date" type="date" class="field2" style="text-align: center;" value="{{selectScriptPaper.video_date}}"></td>
-                                <td><input name="video_time" type="time" class="field3" style="text-align: center;" value="{{selectScriptPaper.video_time}}"></td>
-                                <td><input name="video_start_time" type="time" class="field4" style="text-align: center;" value="{{selectScriptPaper.video_start_time}}"></td>
+                                <td><input name="video_start_time" type="time" class="field3" style="text-align: center;" value="{{selectScriptPaper.video_start_time}}"></td>
+                                <td><input name="video_end_time" type="time" class="field4" style="text-align: center;" value="{{selectScriptPaper.video_end_time}}"></td>
                             </tr>
 
                             <tr style="text-align: center;">
@@ -50,8 +60,8 @@
                             <tr style="text-align: center;">
                                 <th colspan="5">콘티</th>
                             </tr>
-                            <tr>
-                                <td colspan="5" ><textarea name="conti" type="text" class="field6" style="text-align: center;" value="{{selectScriptPaper.conti}}"></textarea></td>
+                            <tr style="text-align: center;">
+                                <td colspan="5" ><textarea name="conti" type="text" class="field6" style="text-align: center;" row="5" cols="80" >{{selectScriptPaper.conti}}</textarea></td>
                             </tr>
                         </table>
 

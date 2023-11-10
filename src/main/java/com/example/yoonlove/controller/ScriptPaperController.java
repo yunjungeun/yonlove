@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -111,6 +112,7 @@ public class ScriptPaperController {
     @GetMapping("script/insertscriptpaper")
     @ResponseBody
     public String insertScriptPaper(ScriptPaperDto dto){
+        System.out.println(dto.toString());
         scriptPaperService.insertScriptPaper(dto);
         return "/script/scriptpaper";
     }
@@ -168,24 +170,29 @@ public class ScriptPaperController {
         return mv;
     }
 
-    @GetMapping("script/inserttimeview")
-    public String insertTimeView(){
-        return "script/timetableinsert";
+    @GetMapping("script/inserttimeview/{script_id}")
+    public ModelAndView insertTimeView(TimeTableDto dto){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/script/timetableinsert");
+
+        mv.addObject("script_id",dto.getScript_id());
+        return mv;
     }
 
-    @GetMapping("script/inserttimetable/{script_id}")
+    @GetMapping("script/inserttimetable")
     @ResponseBody
     public String insertTimeTable(TimeTableDto dto){
-        System.out.println(dto.toString());
         scriptPaperService.insertTimeTable(dto);
-        return "/script/timetable";
+        return "/script/"+dto.getScript_id()+"/selectscriptpaper";
     }
 
     @GetMapping("script/{table_id}/updatetimeview")
     public ModelAndView updateTimeView(TimeTableDto timeTableDto){
         TimeTableDto dto = scriptPaperService.selectTimeTable(timeTableDto);
         ModelAndView mv = new ModelAndView();
+        HashMap<String, Boolean> okFlag = scriptPaperService.okFlagCheck(dto);
         mv.setViewName("script/timetableupdate");
+        mv.addObject("okFlag", okFlag);
         mv.addObject("selectTimeTable", dto);
         return mv;
     }
@@ -193,12 +200,13 @@ public class ScriptPaperController {
     @ResponseBody
     public String updateTimeTable(TimeTableDto dto){
         scriptPaperService.updateTimeTable(dto);
-        return "/script/timetable";
+        return "/script/"+dto.getScript_id()+"/selectscriptpaper";
     }
 
     @GetMapping("script/{table_id}/deletetimetable")
     public String deleteTimeTable(TimeTableDto dto){
+        TimeTableDto timeTableDto = scriptPaperService.selectTimeTable(dto);
         scriptPaperService.deleteTimeTable(dto);
-        return "redirect:/script/timetable";
+        return "redirect:/script/"+timeTableDto.getScript_id()+"/selectscriptpaper";
     }
 }
