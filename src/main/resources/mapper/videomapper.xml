@@ -90,5 +90,8 @@
         DELETE FROM video WHERE video_id = #{video_id}
     </delete>
 
+    <select id="searchVideo" resultType="com.example.yoonlove.dto.VideoDto">
+        SELECT * FROM videojoin WHERE company_id = #{company_id}
+    </select>
 
 </mapper>

@@ -23,4 +23,6 @@ public interface VideoMapper {
     VideoDto searchVideoId(String video_id);
     public void deleteContent(VideoDto dto);
 
+    List<VideoDto> searchVideo(String company_id);
+
 }

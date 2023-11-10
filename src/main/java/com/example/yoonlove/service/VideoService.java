@@ -1,7 +1,9 @@
 package com.example.yoonlove.service;
 
 
+import com.example.yoonlove.dto.BestVideoDto;
 import com.example.yoonlove.dto.PageDto;
+import com.example.yoonlove.dto.UserDto;
 import com.example.yoonlove.dto.VideoDto;
 import com.example.yoonlove.mapper.VideoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,8 @@ public class VideoService {
     private VideoMapper videoMapper;
     @Autowired
     private YouTubeService youTubeService;
-
+    @Autowired
+    private UserService userService;
 
     public List<VideoDto> selectListContent(PageDto pageInfo, String ch_id) {
         List<VideoDto> videoList = videoMapper.selectListContent(pageInfo);
@@ -95,6 +98,17 @@ public class VideoService {
                 insertContent(dto);
             }
         }
+
+    }
+
+
+
+    public void bestvideo(String userId){
+        UserDto userInfo = userService.getUser(userId);
+        BestVideoDto bestVideoDto = new BestVideoDto();
+
+        List<VideoDto> videoDtos = videoMapper.searchVideo(userInfo.getCompany_id());
+        System.out.println(videoDtos);
 
     }
 }

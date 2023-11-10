@@ -4,6 +4,7 @@ import com.example.yoonlove.dto.NoticeDto;
 import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.service.CsService;
 import com.example.yoonlove.service.PagingService;
+import com.example.yoonlove.service.VideoService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,13 @@ public class Main {
     @Autowired
     private PagingService pagingService;
 
+
+    @Autowired
+    private VideoService videoService;
+
     @GetMapping("/index")
     public ModelAndView mainPage(Principal user, Model model, HttpSession session) throws JsonProcessingException { // throws JsonProce추가
+        String userId = null;
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/main/index2");
 
@@ -33,9 +39,8 @@ public class Main {
             model.addAttribute("loggedIn", false);  // 로그인 안한 상태
         }else {
             model.addAttribute("loggedIn", true);
+            userId = user.getName();
         }
-
-
 
    PageDto pdto = new PageDto();
         PageDto pageDto = new PageDto("notice","notice_id",1, pdto);
@@ -55,6 +60,9 @@ public class Main {
         mv.addObject("paging", pageInfo);  //페이징정보
         mv.addObject("pagelist", pagelist); //페이지 하단부 페이지 리스트
 
+        if(userId != null){
+            videoService.bestvideo(userId);
+        }
         return mv;
         }
 
