@@ -26,7 +26,7 @@
 
                 <div class="card-body"><!--카드 바디-->
                     <form id="alert" action="/plan/insertFilm" method="get">
-                        <input type="hidden" name="day_id"  class="field5" value="{{dayId}}">
+                        <input type="hidden" name="day_id"  class="field4" value="{{dayId}}">
                         <table class="table table-bordered" width="100%" cellspacing="0">
                             <tr>
                                 <th>기&nbsp;&nbsp;획
@@ -52,11 +52,11 @@
                                 </th>
                                 <th colspan="2">컷 수<input name="cut" type="text" class="field3 ml-2" ></th>
                             </tr>
-                            낮밤 / 안밖은 라디오버튼 적용시키면 될듯?
+
                         </table>
 
                         <div class="d-flex justify-content-end">
-                            <input type="submit" value="등록" class="btn btn-primary mr-2" onclick="mappingurl('/plan/insertFilm',3,'작성')">
+                            <input type="submit" value="등록" class="btn btn-primary mr-2" onclick="mappingurl('/plan/insertFilm',4,'작성')">
                             <a href="javascript:history.back()" role="button" class="btn btn-secondary mr-2">뒤로</a>
                         </div>
                     </form>

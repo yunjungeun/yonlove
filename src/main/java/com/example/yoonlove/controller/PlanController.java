@@ -373,13 +373,12 @@ public class PlanController {
     @ResponseBody
     public String insertFilm(FilmPlanDto dto, Principal user) {
         UserDto userInfo = userService.getUser(user.getName());
-
         //dto에는 insert에 들어갈 act_id가 없음. dto에 있는 pd_id와 scene_id로 act_id를 획득하는 로직
         String actId = planService.selectFilmJoinActID(dto.getPd_id(), dto.getScene_id());// day_id 값이 여러개가 나와서
         dto.setAct_id(actId);   //획득된 act_id를 dto에 바인드
         planService.insertFilm(dto);
 
-        return "/plan/film_plan";
+        return "/plan/schedule/"+dto.getDay_id();
     }
 
     @GetMapping("plan/{film_id}/filmPlanUpdateView") //컨텐츠 업데이트하는 뷰
@@ -401,15 +400,17 @@ public class PlanController {
     @GetMapping("plan/{film_id}/updatefilm") //업데이트 처리
     @ResponseBody
     public String updateFilm(FilmPlanDto dto) {
-        System.out.println(dto.toString());
+        FilmPlanDto filmPlanDto = planService.selectFilmPlan(dto);
         planService.updateFilm(dto);
-        return "/plan/film_plan";
+        return "/plan/schedule/"+filmPlanDto.getDay_id();
     }
 
     @GetMapping("plan/{film_id}/deleteFilm") //삭제 처리
-    public String deleteFilm( FilmPlanDto dto) {
+    @ResponseBody
+    public String deleteFilm(FilmPlanDto dto) {
+        FilmPlanDto filmPlanDto = planService.selectFilmPlan(dto);
         planService.deleteFilm(dto);
-        return "redirect:/plan/film_plan";
+        return "/plan/schedule/"+filmPlanDto.getDay_id();
     }
 
     //------------------------월력형 테이블 로직---------------------------------//
