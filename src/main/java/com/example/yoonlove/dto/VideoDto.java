@@ -21,4 +21,9 @@ public class VideoDto {
     private String formattedView;
     private String formattedComment;
 
+    //조인 뷰테이블 : videojoin
+    private String user_id;
+    private String nickname;
+    private String ch_name;
+    private String company_id;
 }

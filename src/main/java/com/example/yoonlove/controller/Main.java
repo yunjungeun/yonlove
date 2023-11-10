@@ -2,18 +2,14 @@ package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.NoticeDto;
 import com.example.yoonlove.dto.PageDto;
-import com.example.yoonlove.service.CalendarService;
 import com.example.yoonlove.service.CsService;
 import com.example.yoonlove.service.PagingService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -59,23 +55,7 @@ public class Main {
         mv.addObject("paging", pageInfo);  //페이징정보
         mv.addObject("pagelist", pagelist); //페이지 하단부 페이지 리스트
 
-
-        // 달력
-    /*    List<List<String>> calendarData = calendarService.generateCalendarData(year,month);
-
-        //제작일지 Json 불러오기 : {log1 : 작성일자} 식으로 존재함
-        String calendarLog = calendarService.logJson(year,month,companyId);
-        mv.addObject("logJson",calendarLog);
-
-        //촬영일정표 Json 불러오기 : {day1 : 작성일자} 식으로 존재함
-        String calendarDay = calendarService.dayJson(year,month,companyId);
-        mv.addObject("dayJson",calendarDay);
-        mv.addObject("month", month);
-        mv.addObject("year", year);
-        mv.addObject("calendar", calendarData)
-*/
         return mv;
-
         }
 
 
