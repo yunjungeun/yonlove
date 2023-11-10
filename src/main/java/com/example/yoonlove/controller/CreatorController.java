@@ -106,7 +106,7 @@ import java.util.List;
 
 
           //서브페이징 // 채널의 영상들을 자동으로 불러와서 db에 저장해서 최신화함
-          //videoService.videoInsert(creatorDto.getCh_id());
+          videoService.videoInsert(creatorDto.getCh_id());
 
           //유저정보 가저오는 dto
           UserDto userInfo = userService.getUser(user.getName());

@@ -59,9 +59,9 @@
         #{video_url},
         to_date(substr(#{upload_date},1,10), 'YYYY-MM-DD'),
         #{video_profit},
-        'project1',
+        null,<!--프로젝트id/프로젝트별 결과별 정렬할려고 넣었는데 미구현하기로함-->
         #{commentcnt},
-        '임시'
+        #{ch_id}
         )
     </insert>
 

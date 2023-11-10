@@ -91,6 +91,7 @@ public class VideoService {
                 dto.setVideo_url("https://www.youtube.com/watch?v=" + videosInfo.get("id" + i));  //동영상 url
                 dto.setUpload_date(videosInfo.get("uploadDate" + i));  //업로드일
                 dto.setCommentcnt(Integer.parseInt(videosInfo.get("commentCount" + i)));  //댓글 수
+                dto.setCh_id(channelId);
                 insertContent(dto);
             }
         }
