@@ -7,7 +7,6 @@
     <title>Document</title>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/static/js/cu_alert.js"></script>
 
     {{>layout/header}}
 </head>
@@ -26,46 +25,47 @@
         <div class="container-fluid">
             <!-- Page Heading -->
             <div style="text-align: center; display: block; margin-top:50px;" >
-                <h1 class="h3 mb-2 text-gray-800" >시나리오 수정</h1>
+                <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                    시나리오 수정
+                </h1>
 
             <!-- DataTales Example -->
-            <div class="card shadow mb-4" style="margin-top: 50px;">
-                <div class="card-header py-3">
+            <div class="card shadow mb-4" style="margin-top: 50px; margin-right:110px; margin-left:110px;">
+                <div class="card-body">
                     <div class="table-responsive">
-
-<form id="alert" method="get" action="/scenario/{{updateScenario.scenario_id}}/updatescenario">
-    <input name="scenario_id" type="hidden" value="{{updateScenario.scenario_id}}"/>
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <thead>
-        <tr>
-            <td>시나리오 제목
-                <input class="field1" name="scenario_name" type="text" value="{{updateScenario.scenario_name}}"></td>
-            <td>기획
-                <input class="field2" name="project_id" type="text" value="{{updateScenario.project_name}}" readonly></td>
-            <td>시나리오 번호
-                <input class="field3" name="scenario_num" type="text" value="{{updateScenario.scenario_num}}"></td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td colspan="3"><textarea class="field4" name="scenario_content" cols="50" rows="20">{{updateScenario.scenario_content}}</textarea></td>
-        </tr>
-        </tbody>
-    </table>
-    <div class="d-flex justify-content-center align-items-center">
-    <input type="submit" value="수정" role="button" class="btn btn-success"
-           onclick="mappingurl('/scenario/{{updateScenario.scenario_id}}/updatescenario',4,'수정')" /> &nbsp;&nbsp;
-   <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
-    </div>
-</form>
+                        <form id="alert" method="get" action="/scenario/{{updateScenario.scenario_id}}/updatescenario">
+                            <input name="scenario_id" type="hidden" value="{{updateScenario.scenario_id}}"/>
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <td>시나리오 제목
+                                        <input class="field1" name="scenario_name" type="text" value="{{updateScenario.scenario_name}}"></td>
+                                    <td>기획
+                                        <input class="field2" name="project_id" type="text" value="{{updateScenario.project_name}}" readonly></td>
+                                    <td>시나리오 번호
+                                        <input class="int1" name="scenario_num" type="number" value="{{updateScenario.scenario_num}}"></td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;"><textarea class="field3" name="scenario_content" cols="100" rows="20">{{updateScenario.scenario_content}}</textarea></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <input type="submit" value="수정" role="button" class="btn btn-success mr-2"
+                                       onclick="mappingurl('/scenario/{{updateScenario.scenario_id}}/updatescenario',3,'수정',1)" />
+                                <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </div>
+            </div>
 
+        </div>
+        <br/>
     </div>
-    <br/>
-</div>
 
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
@@ -80,15 +80,7 @@
 <script>
     var url="scenario/scenario";
 </script>
-
-<script src="/static/js/search.js"></script>
-<!-- 페이징 처리와 관련된 부트스트랩 라이브러리-->
-<script src="/static/bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="/static/bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-<!-- 페이징 처리와 관련된 부트스트랩 라이브러리 -->
-<script src="/static/bootstrap/js/demo/datatables-demo.js"></script>
-
+    <script src="/static/js/cu_alert.js"></script>
 {{>layout/bootstrapjs}}
 </body>
 </html>

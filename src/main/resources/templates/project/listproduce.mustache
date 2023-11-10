@@ -19,10 +19,12 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-            <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px;">제작인원 편성</h1>
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                제작인원
+            </h1>
 
             <!-- DataTales Example -->
-            <div class="card shadow mb-4" style="margin-top: 50px;">
+            <div class="card shadow mb-4" style="margin-top: 50px; margin-left:100px; margin-right:100px;">
                 <div class="card-header py-3">
 
         <!--검색-->
@@ -60,7 +62,7 @@
                         <tbody>
                         {{#selectListProduce}}
                             <tr>
-                                <td style="text-align: center;">{{project_name}}</td>
+                                <td style="text-align: center;"><a href="/project/{{project_id}}/selectproject">{{project_name}}</a></td>
                                 <td style="text-align: center;"> <a href="/project/{{pd_id}}/selectproduce">{{pd_name}}</a></td>
                                 <td style="text-align: center;">{{role}}</td>
                                 <td style="text-align: center;">{{casting}}</td>
@@ -74,7 +76,7 @@
                             <span></span>
                             <span>
                             {{>layout/paging}}</span>
-                        <a href="/project/insertproduceview" role="button" class="btn btn-primary">글 작성</a>
+                        <a href="/project/insertproduceview/{{project_id}}" role="button" class="btn btn-primary">편성</a>
                         </div>
                     </div>
                 </div>

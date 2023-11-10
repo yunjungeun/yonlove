@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.List;
 @Controller
 public class ProjectController {
@@ -172,9 +173,8 @@ public class ProjectController {
     @GetMapping("project/insertbudget")   // 작성 후 입력값 넘기는~
     @ResponseBody
     public String insertBudget(BudgetDto budgetDto){
-        System.out.println(budgetDto.toString());
         projectService.insertBudget(budgetDto);
-        return "/project/budget";
+        return "/project/budget/"+budgetDto.getProject_id();
     }
 
     @GetMapping("project/{budget_id}/selectbudget")
@@ -210,21 +210,22 @@ public class ProjectController {
     @GetMapping("/project/updatebudget/{budget_id}") // 수정-해당주소 머스터치에 액션값
     @ResponseBody
     public String updateBudget(BudgetDto dto){
+        BudgetDto budgetDto = projectService.selectBudget(dto);
         projectService.updateBudget(dto);
 
-        return "/project/budget";   // 목록페이지로 이동
+        return "/project/budget/"+budgetDto.getProject_id();   // 목록페이지로 이동
     }
  // =====================budget 완료 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
-    @GetMapping("/project/produce")   //목록
+    @GetMapping("/project/produce/{project_id}")   //목록
     public ModelAndView selectListProduce(PageDto pdto, @RequestParam(name="page", defaultValue = "1")int page,
-                                          Principal user){
+                                          Principal user, ProjectDto projectDto){
         //유저정보 가저오는 dto
         UserDto userInfo = userService.getUser(user.getName());
         String companyId = userInfo.getCompany_id(); //회사 id 스트링
-
         PageDto pageDto = new PageDto("produce", "pd_id", page,pdto, companyId);
+        pageDto.setPkid(projectDto.getProject_id());
         PageDto pageInfo = pagingService.paging(pageDto);
 
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
@@ -234,7 +235,7 @@ public class ProjectController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/project/listproduce");
         mv.addObject("selectListProduce", dto);
-
+        mv.addObject("project_id",projectDto.getProject_id());
         mv.addObject("prefixUrl", "project"); //컨트롤러 이름
         mv.addObject("paging", pageInfo);  //페이징정보
         mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
@@ -242,9 +243,12 @@ public class ProjectController {
         return mv;
     }
 
-    @GetMapping("project/insertproduceview")  // 작성클릭 후 페이지 리턴하는
-    public String insertproduceview(){
-        return "project/produceinsert";
+    @GetMapping("project/insertproduceview/{project_id}")  // 작성클릭 후 페이지 리턴하는
+    public ModelAndView insertproduceview(ProjectDto dto){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/project/produceinsert");
+        mv.addObject("project_id",dto.getProject_id());
+        return mv;
     }
 
     @GetMapping("project/insertproduce")   // 작성 후 입력값 넘기는~ , 추가
@@ -253,10 +257,10 @@ public class ProjectController {
         //유저정보 가저오는 dto
         UserDto userInfo = userService.getUser(user.getName());
         String companyId = userInfo.getCompany_id(); //회사 id 스트링
-
         produceDto.setCompany_id(companyId);
         projectService.insertProduce(produceDto);
-        return "/project/produce";
+
+        return "/project/produce/"+produceDto.getProject_id();
     }
 
     @GetMapping("project/{pd_id}/selectproduce")   //상세보기
@@ -269,22 +273,26 @@ public class ProjectController {
     }
     @GetMapping("project/deleteproduce/{pd_id}")
     public String deleteProduce(ProduceDto dto){    //삭제
+        ProduceDto produceDto = projectService.selectProduce(dto);
         projectService.deleteProduce(dto);
-        return "redirect:/project/produce";
+        return "redirect:/project/produce/"+produceDto.getProject_id();
     }
     @GetMapping("project/updateproduceview/{pd_id}") // 수정
     public ModelAndView updateProduceView(ProduceDto produceDto){
         ModelAndView mv = new ModelAndView();
         ProduceDto dto = projectService.selectProduce(produceDto);
+        HashMap<String, Boolean> role = projectService.roleCheck(dto);
+        System.out.println(role);
         mv.setViewName("/project/updateproduce");
         mv.addObject("selectProduce", dto);
+        mv.addObject("role", role);
         return mv;
     }
     @GetMapping("project/updateproduce/{pd_id}") // 수정-해당주소 머스터치에 액션값
     @ResponseBody
     public String updateProduce(ProduceDto dto){
         projectService.updateProduce(dto);
-        return "/project/produce"; }
+        return "/project/produce/"+dto.getProject_id(); }
 // 프로듀스 제작 완료 !!!!!!!!============================================
 }
 

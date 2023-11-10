@@ -71,20 +71,15 @@
         , log_date = #{log_date}
         , log_content = #{log_content}
         , project_id  =  #{project_id}
-
-
         WHERE
         log_id = #{log_id}
     </update>
 
 
 
-
-
     <delete id="deleteLog" parameterType="com.example.yoonlove.dto.LogDto">
-        DELETE FROM logjoin
-        WHERE company_id = #{company_id}
-        and log_id = #{log_id}
+        DELETE FROM log
+        WHERE log_id = #{log_id}
     </delete>
 
     <!--해당월에 대한 제작일지 기록 모두 출력-->

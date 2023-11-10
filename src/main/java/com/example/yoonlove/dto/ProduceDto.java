@@ -1,10 +1,8 @@
 package com.example.yoonlove.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class ProduceDto {
     //제작인원편성
     private String pd_id;

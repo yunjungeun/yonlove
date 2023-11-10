@@ -3,7 +3,7 @@
 
 <mapper namespace="com.example.yoonlove.mapper.SceneMapper">
     <select id="selectScene" parameterType="com.example.yoonlove.dto.SceneDto">
-        SELECT * FROM scene where scene_id = #{scene_id}
+        SELECT * FROM storyboardlist where scene_id = #{scene_id}
     </select>
 
     <!--옵션값에 넣기 위한 fk테이블의 검색값을 가져오는 쿼리-->

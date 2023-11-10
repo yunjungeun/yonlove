@@ -1,12 +1,16 @@
 package com.example.yoonlove.service;
 
-import com.example.yoonlove.dto.*;
+import com.example.yoonlove.dto.PageDto;
+import com.example.yoonlove.dto.SceneDto;
+import com.example.yoonlove.dto.ScriptPaperDto;
+import com.example.yoonlove.dto.TimeTableDto;
 import com.example.yoonlove.mapper.ScriptPaperMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,10 +57,24 @@ public class ScriptPaperService {
 
     //타임테이블
     public TimeTableDto selectTimeTable(TimeTableDto dto){
-        return scriptPaperMapper.selectTimeTable(dto);
+            return scriptPaperMapper.selectTimeTable(dto);
     }
+
+    public HashMap<String, Boolean> okFlagCheck(TimeTableDto dto){
+        HashMap<String, Boolean> okList = new LinkedHashMap<>();
+        String[] sign = {"OK","NG"};
+        for(int i = 0; i < sign.length; i++){
+            if(sign[i].equals(dto.getOk_ng())){
+                okList.put(sign[i],true);
+            }else {
+                okList.put(sign[i], false);
+            }
+        }
+        return okList;
+    }
+
     public List<TimeTableDto> selectListTimeTable(PageDto pageInfo) {
-        return scriptPaperMapper.selectListTimeTable(pageInfo);
+    return  scriptPaperMapper.selectListTimeTable(pageInfo);
     }
     public void insertTimeTable(TimeTableDto dto){
         scriptPaperMapper.insertTimeTable(dto);

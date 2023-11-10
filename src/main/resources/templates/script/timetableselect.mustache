@@ -18,7 +18,7 @@
 <div id="content">
 
     <div style="text-align: center; display: block; margin-top:50px;" >
-        <h1 class="h3 mb-2 text-gray-800">타임테이블 상세보기</h1>
+        <h1 class="h3 mb-2 text-gray-800">타임테이블</h1>
     </div>
 
     <!-- DataTales Example -->
@@ -34,16 +34,16 @@
                     </tr>
                     </thead>
                     <tr style="text-align: center;">
-                        <td>{{selectTimeTable.film_time}}</td>
                         <td>{{selectTimeTable.time_num}}</td>
                         <td>{{selectTimeTable.ok_ng}}</td>
+                        <td>{{selectTimeTable.film_time}}</td>
                         <td>{{selectTimeTable.slate_time}}</td>
                     </tr>
                 </table>
 
                 <div style="text-align: center">
-                    <a href="/script/timetable" class="btn btn-primary">뒤로</a> &nbsp;&nbsp;
-                    <a href="/script/{{selectTimeTable.table_id}}/updatetimeview" class="btn btn-success">수정</a>&nbsp;&nbsp;
+                    <a href="javascript:history.back()" role="button" class="btn btn-secondary mr-2">뒤로</a>
+                    <a href="/script/{{selectTimeTable.table_id}}/updatetimeview" class="btn btn-success mr-2">수정</a>
                     <a href="javascript:void(0);" class="btn btn-danger" onclick="deleteAlert('/script/{{selectTimeTable.table_id}}/deletetimetable')">삭제</a>
                 </div>
 

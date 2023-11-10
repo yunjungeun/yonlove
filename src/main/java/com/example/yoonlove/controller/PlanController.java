@@ -44,7 +44,6 @@ public class PlanController {
         PageDto pageInfo = pagingService.paging(pageDto); // paging ==> 전체게시글 갯수 구해오는 메소드
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
         String rink = pagingService.pageRink(pageDto);
-
         List<ScheduleDayDto> dto = planService.selectListSchedule(pageInfo);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/schedule_day");

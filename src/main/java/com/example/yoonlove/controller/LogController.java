@@ -83,22 +83,21 @@ public class LogController {
     @GetMapping("log/insertLog")
     @ResponseBody
     public String insertLog(LogDto dto) {
-
-        System.out.println("test111!!!!!"+dto.toString());
-
         logService.insertLog(dto);
-
-        System.out.println("test222!!!!!"+dto.toString());
-
         return "/log/log";
     }
 
     @GetMapping("log/{log_id}/logUpdateView")
-    public ModelAndView selectBbsUpdateView(LogDto dto) {
+    public ModelAndView selectBbsUpdateView(LogDto dto, Principal user) throws JsonProcessingException {
         LogDto logdto = logService.selectLog(dto);//업데이트를 하려면 해당 컨텐츠 불러와야하니까 위에 selectContent메소드를 다시씀!
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        String jsonList = dropDownService.dropDownOption("project",null, companyId);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("log/logUpdateView");
         mv.addObject("updateLog", logdto);
+        mv.addObject("fkList", jsonList);
         return mv;
     }
 
@@ -111,6 +110,7 @@ public class LogController {
 
     @GetMapping("log/{log_id}/deleteLog")
     public String deleteLog(LogDto dto) {
+        System.out.println(dto.toString());
         logService.deleteLog(dto);
         return "redirect:/log/log";
 
