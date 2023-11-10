@@ -34,6 +34,7 @@ public class UserDto implements UserDetails {
 
         //조인테이블 컬럼 : user_info
     private String company_name;
+    private String dpt_name;
 
 
     @Override//권한 반환                    스프링시큐리티 유저디테일 인터페이스에 정의된 메서드

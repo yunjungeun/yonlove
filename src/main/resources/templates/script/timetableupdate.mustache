@@ -22,7 +22,7 @@
 
         <div class="container-fluid">
             <div style="text-align: center; display: block; margin-top:40px;" > <!-- 수정 ! 마진 탑 100->수정 -->
-                <h1 class="h3 mb-2 text-gray-800" >게시글 수정</h1>
+                <h1 class="h3 mb-2 text-gray-800" >타임테이블 수정</h1>
             </div>
 
             <!-- DataTales Example -->
@@ -35,25 +35,22 @@
             <div style="display: inline-block;">
 
         <div class="mb-3" style="display: inline-block;">
-            <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>스크립트 번호</strong></label>
-            <input id="formGroupExampleInput" class="field1" name="script_id" type="text" value="{{selectTimeTable.script_id}}"><br/><br/>
-
             <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>촬영시간</strong></label>
-            <input id="formGroupExampleInput"  class="field2" name="film_time" type="date" value="{{selectTimeTable.film_time}}"/><br/><br/>
+            <input id="formGroupExampleInput"  class="field1" name="film_time" type="time" value="{{selectTimeTable.film_time}}"/><br/><br/>
 
             <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>타임테이블 번호</strong></label>
-            <input id="formGroupExampleInput" class="field3" name="time_num" type="number" value="{{selectTimeTable.time_num}}"><br/><br/>
+            <input id="formGroupExampleInput" class="int1" name="time_num" type="number" value="{{selectTimeTable.time_num}}"><br/><br/>
 
             <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>OK/NG</strong></label>
-            <input id="formGroupExampleInput"  class="field4" name="ok_ng" type="text" value="{{selectTimeTable.ok_ng}}"><br/><br/>
+            <input id="formGroupExampleInput"  class="field2" name="ok_ng" type="text" value="{{selectTimeTable.ok_ng}}"><br/><br/>
 
             <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>슬레이트</strong></label>
-            <input id="formGroupExampleInput"  class="field5" name="slate_time" type="date" value="{{selectTimeTable.slate_time}}"><br/><br/>
+            <input id="formGroupExampleInput"  class="field3" name="slate_time" type="time" value="{{selectTimeTable.slate_time}}"><br/><br/>
         </div>
 
                 <div style="display: flex; justify-content: center;">
                     <button type="submit" class="btn btn-primary"
-                            onclick="mappingurl('/script/{{selectTimeTable.table_id}}/updatetimetable',5,'수정')">수정</button> &nbsp; &nbsp;
+                            onclick="mappingurl('/script/{{selectTimeTable.table_id}}/updatetimetable',3,'수정',1)">수정</button> &nbsp; &nbsp;
                     <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
 
                 </div>

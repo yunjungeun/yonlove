@@ -18,7 +18,7 @@
     <div id="content">
 
     <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
-        스크립트페이퍼 상세보기
+        스크립트페이퍼
     </h1>
 
         <div class="card shadow mb-4" style="margin-top: 50px; margin-right: 200px; margin-left: 200px">
@@ -59,7 +59,7 @@
 
 
                 <div style="text-align: center">
-                    <a href="/script/timetable" class="btn btn-primary">목록</a> &nbsp;&nbsp;
+                    <a href="javascript:history.back()" role="button" class="btn btn-primary mr-2">뒤로</a>
                     <a href="/script/{{selectScriptPaper.script_id}}/updatescriptview" class="btn btn-success">수정</a>&nbsp;&nbsp;
                     <a href="javascript:void(0);" class="btn btn-danger" onclick="deleteAlert('/script/{{selectScriptPaper.script_id}}/deletescriptpaper')">삭제</a>
                 </div>
@@ -85,13 +85,14 @@
                     <tr>
                         <td style="text-align: center;"><a href="/script/{{table_id}}/selecttimetable">{{time_num}}</a></td>
                         <td style="text-align: center;">{{ok_ng}}</td>
-                        <td style="text-align: center;">{{film_time}}</td>
-                        <td style="text-align: center;">{{slate_time}}</td>
+                        <td style="text-align: center;">{{formattedTime}}</td>
+                        <td style="text-align: center;">{{formattedSlate}}</td>
                     </tr>
                 {{/selectListTimeTable}}
                 </tbody>
             </table>
             <div class="d-flex justify-content-between align-items-between">
+                <span></span>
                 <span>{{>layout/subpaging}}</span>
             <a style="margin-left: 20px" href="/script/inserttimeview/{{selectScriptPaper.script_id}}" role="button" class="btn btn-primary">작성</a>
             </div>

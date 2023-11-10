@@ -13,6 +13,9 @@ public class TimeTableDto {
     private String slate_time;
     private String script_id;
 
+    private String formattedTime;
+    private String formattedSlate;
+
     @Override
     public String toString() {
         return "TimeTableDto{" +

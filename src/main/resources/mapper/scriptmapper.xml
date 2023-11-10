@@ -3,7 +3,7 @@
 
 <mapper namespace="com.example.yoonlove.mapper.ScriptPaperMapper">
     <select id="selectScriptPaper" resultType="com.example.yoonlove.dto.ScriptPaperDto">
-        select * from scriptpaper where script_id = #{script_id}
+        select * from scriptview where script_id = #{script_id}
     </select>
 
 

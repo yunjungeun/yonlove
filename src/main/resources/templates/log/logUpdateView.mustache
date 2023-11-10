@@ -38,19 +38,19 @@
                                 <tbody>
                                 <tr style="text-align: center;">
                                     <td><select id="fk1" name="project_id" ></select></td>
-                                    <td><input name="log_num" type="text" class="field1" style="text-align: center;" value="{{updateLog.log_num}}"  ></td>
-                                    <td><input name="log_date" type="date" class="field2" value="{{updateLog.log_date}}"></td>
+                                    <td><input name="log_num" type="number" class="int1" style="text-align: center;" value="{{updateLog.log_num}}"  ></td>
+                                    <td><input name="log_date" type="date" class="field1" value="{{updateLog.log_date}}"></td>
                                 </tr>
                                 <tr>
                                     <td colspan="3" style="text-align: center;">
-                                        <textarea name="log_content" class="field3" style="height: 30vh; width: 100%;  display: block; margin: 0 auto;">{{updateLog.log_content}}
+                                        <textarea name="log_content" class="field2" style="height: 30vh; width: 100%;  display: block; margin: 0 auto;">{{updateLog.log_content}}
                                         </textarea>
                                 </tr>
                                 </tbody>
                             </table>
 
                         <div style="text-align: center">
-                            <button type="submit" class="btn btn-primary" onclick="mappingurl('/log/{{updateLog.log_id}}/updateLog',3,'수정')">등록</button>
+                            <button type="submit" class="btn btn-primary" onclick="mappingurl('/log/{{updateLog.log_id}}/updateLog',2,'수정',1)">등록</button>
                             <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
                         </div>
                     </form>
@@ -67,7 +67,14 @@
 </div>
 
 
+<script>
+    var jsonValue = '{{{fkList}}}';
+
+    var selectName = "project_id";
+        var url = "/log/log";
+</script>
 <script src="/static/js/cu_alert.js"></script>
+<script src="/static/js/dropdown.js"></script>
 
 {{>layout/bootstrapjs}}
 </body>

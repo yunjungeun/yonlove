@@ -18,45 +18,54 @@
 <div id="content">
     <!-- Page Heading -->
     <div style="text-align: center; display: block; margin-top:50px;" >
-        <h1 class="h3 mb-2 text-gray-800" >스토리보드 상세보기</h1>
+        <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+            스토리보드
+        </h1>
         <!-- DataTales Example -->
-        <div class="card shadow mb-4" style="margin-top: 50px;">
-            <div class="card-header py-3">
+        <div class="card shadow mb-4" style="margin-top: 50px; margin-right:100px; margin-left:100px;">
 
                 <!-- 바디시작 -->
 <div class="card-body">
     <div class="table-responsive">
 
-      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+      <table class="table table-bordered" width="100%" cellspacing="0">
         <thead>
         <tr>
             <td>시나리오
-                <input name="scenario_id" type="text" readonly value="{{selectScene.scenario_id}}"/></td>
+                <input class="ml-2" name="scenario_id" type="text" readonly value="{{selectScene.scenario_name}}"/></td>
             <td>씬 번호
-                <input name="scene_num" type="number" value="{{selectScene.scene_num}}" readonly/></td>
+                <input class="ml-2" name="scene_num" type="number" value="{{selectScene.scene_num}}" readonly/></td>
             <!--<button value="{1{file.file_id}}">파일 삭제</button>-->
         </tr>
 
         <tr>
             <td>장면 요약
-                <input name="scene_content" type="text" value="{{selectScene.scene_content}}" readonly/></td>
+                <input class="ml-2" name="scene_content" type="text" value="{{selectScene.scene_content}}" readonly/></td>
             <td>첨부파일
                 <input name="file" type="text" value="{{file.file_path}}" readonly /></td>
         </tr>
 
         <tr>
-            <td> <img src="{{file.file_path}}" style="width: 450px; height: 420px;"></td>
+            <td> <img src="{{file.file_path}}" style="width: 450px; height: 320px;"></td>
             <td colspan="2">
-            <textarea name="story_board" cols="50" rows="20" readonly>{{selectScene.story_board}}</textarea></td>
+            <textarea name="story_board" cols="50" rows="15" readonly>{{selectScene.story_board}}</textarea></td>
         </tr>
 
         <tr>
-            <td>촬영장소<input name="scene_place" type="text" value="{{selectScene.scene_place}}" readonly/></td>
+            <td colspan="2">촬영장소<input class="ml-2" name="scene_place" type="text" value="{{selectScene.scene_place}}" readonly/></td>
         </tr>
             </thead>
         </table>
                 </div>
-            </div> <!-- 바디 끝 -->
+    <div class="d-flex justify-content-center align-items-center">
+        <a href="javascript:history.back()" role="button" class="btn btn-secondary mr-2">뒤로</a>
+        <a style="margin-left: 20px" href="/scene/{{selectScene.scene_id}}/updatesceneview"
+           role="button" class="btn btn-success">수정</a>
+        <a style="margin-left: 20px" href="javascript:void(0);" role="button" class="btn btn-danger"
+           onclick="deleteAlert('/scene/{{selectScene.scene_id}}/deletescene')">삭제</a>
+    </div> <!-- 별도 버튼 끝 -->
+
+</div> <!-- 바디 끝 -->
 
         </div>
     </div> <!--  DataTales  끝 -->
@@ -64,7 +73,7 @@
 
 <!-- 서브게시판 시작 -->
     <!-- DataTales Example -->
-    <div class="card shadow mb-4" style="margin-top: 50px;">
+    <div class="card shadow mb-4" style="margin-top: 50px; margin-right:100px; margin-left:100px;">
         <div class="card-header py-3">
             <div class="card-body">
                 <div class="table-responsive">
@@ -79,7 +88,7 @@
             </tr>
             {{#selectListScriptPaper}}
                 <tr>
-                    <td style="text-align: center;">{{scene_id}}<!--씬 번호가 들어가야함(조인)--></td>
+                    <td style="text-align: center;">{{selectScene.scene_num}}<!--씬 번호가 들어가야함(조인)--></td>
                     <td style="text-align: center;"><a href="/script/{{script_id}}/selectscriptpaper">{{video_name}}</a></td>
                     <td style="text-align: center;">{{video_date}}</td>
                     <td style="text-align: center;">{{conti}}</td>
@@ -93,38 +102,27 @@
         <span>
             {{>layout/paging}}</span>
     </div>  <!-- 페이징 끝 -->
-
+                    <!--서브게시판 검색-->
+                    <form action="/script/scriptpaper" method="GET" class="d-flex justify-content-end form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
+                        <div class="input-group">
+                            <select id="searchType" name="searchType">
+                                <option value="all">선택</option>
+                                <option value="title">스크립트 번호</option>
+                                <option value="content">액션내용</option>
+                                <!-- 필요한 항목 추가 -->
+                            </select>
+                            <input type="text" id="search" name="search"
+                                   style="width: 150px;" class="form-control bg-light border-0 small" placeholder="검색"
+                                   aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="submit" class="btn btn-primary" value="검색">
+                        </div>
+                    </form> <!--서브게시판 검색 / end-->
                 </div>
              </div>
         </div>
+        </div>
     </div><!--서브게시판 / end-->
 
-
-    <!--서브게시판 검색-->
-    <form action="/script/scriptpaper" method="GET" class="d-flex justify-content-end form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
-        <div class="input-group">
-        <select id="searchType" name="searchType">
-            <option value="all">선택</option>
-            <option value="title">스크립트 번호</option>
-            <option value="content">액션내용</option>
-            <!-- 필요한 항목 추가 -->
-        </select>
-        <input type="text" id="search" name="search"
-               style="width: 150px;" class="form-control bg-light border-0 small" placeholder="검색"
-               aria-label="Search" aria-describedby="basic-addon2">
-        <input type="submit" class="btn btn-primary" value="검색">
-        </div>
-    </form> <!--서브게시판 검색 / end-->
-<br/>
-        <div class="d-flex justify-content-center align-items-center">
-            <a style="margin-left: 20px" href="/scene/scene" role="button" class="btn btn-info">목록</a>
-            <a style="margin-left: 20px" href="/scene/{{selectScene.scene_id}}/updatesceneview"
-                role="button" class="btn btn-success">수정</a>
-            <a style="margin-left: 20px" href="javascript:void(0);" role="button" class="btn btn-danger"
-               onclick="deleteAlert('/scene/{{selectScene.scene_id}}/deletescene')">삭제</a>
-        </div> <!-- 별도 버튼 끝 -->
-
-</div>
 
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>

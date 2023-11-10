@@ -1,6 +1,9 @@
 package com.example.yoonlove.service;
 
-import com.example.yoonlove.dto.*;
+import com.example.yoonlove.dto.PageDto;
+import com.example.yoonlove.dto.SceneDto;
+import com.example.yoonlove.dto.ScriptPaperDto;
+import com.example.yoonlove.dto.TimeTableDto;
 import com.example.yoonlove.mapper.ScriptPaperMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -53,10 +56,26 @@ public class ScriptPaperService {
 
     //타임테이블
     public TimeTableDto selectTimeTable(TimeTableDto dto){
-        return scriptPaperMapper.selectTimeTable(dto);
+        TimeTableDto timeTableDto = scriptPaperMapper.selectTimeTable(dto);
+        String time = timeTableDto.getFilm_time();
+        String slate = timeTableDto.getSlate_time();
+
+        timeTableDto.setFormattedTime(time.substring(11,16));
+        timeTableDto.setFormattedSlate(slate.substring(11,16));
+
+        return timeTableDto;
     }
     public List<TimeTableDto> selectListTimeTable(PageDto pageInfo) {
-        return scriptPaperMapper.selectListTimeTable(pageInfo);
+        List<TimeTableDto> timeTableDtos = scriptPaperMapper.selectListTimeTable(pageInfo);
+        //2023-11-07 00:00:00 이렇게 나오는걸 00:00 이렇게 바꿈  //데이터가공
+        for(int i = 0; i < timeTableDtos.size(); i++){
+            String time = timeTableDtos.get(i).getFilm_time();
+            String slate = timeTableDtos.get(i).getSlate_time();
+            timeTableDtos.get(i).setFormattedTime(time.substring(11,16));
+            timeTableDtos.get(i).setFormattedSlate(slate.substring(11,16));
+        }
+
+        return timeTableDtos;
     }
     public void insertTimeTable(TimeTableDto dto){
         scriptPaperMapper.insertTimeTable(dto);
