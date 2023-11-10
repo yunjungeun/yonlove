@@ -19,7 +19,7 @@
                         제작인원 편성
                     </h1>
 
-            <div class="card shadow mb-4" style="margin-top: 50px; margin-left:150px; margin-right:150px;">  <!--카드전체 섹션-->
+            <div class="card shadow mb-4" style="margin-top: 50px; margin-left:80px; margin-right:80px;">  <!--카드전체 섹션-->
                 <div class="card-header py-3" style="center;"> <!--카드헤더 div-->
                 </div><!--카드헤더 end-->
                 <div class="card-body"><!--카드 바디-->
@@ -28,14 +28,21 @@
                         <input type="hidden" class="field1" name="project_id" value="{{project_id}}">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <tr>
-                                <td>이름 <input class="field2" name="pd_name" type="text" placeholder="이름"/></td>
-                                <td>역할 <input class="field3" name="role" type="text" placeholders="역할"/></td>
-                                <td>배역 <input class="field4" name="casting" type="text" placeholders="배역"/></td>
+                                <th style="text-align: center;"><p>이름</p> <input class="field2" name="pd_name" type="text" placeholder="이름"/></th>
+                                <th style="text-align: center;"><p class="mr-3">역할</p>
+
+                                    PD<input type="radio" class="radio mr-2" name="role" value="PD">
+                                    출연자<input type="radio" class="radio  mr-2" name="role" value="출연자" checked>
+                                    편집<input type="radio" class="radio  mr-2" name="role" value="편집">
+                                    카메라<input type="radio" class="radio  mr-2" name="role" value="카메라">
+                                    기타<input type="radio" class="radio mr-2" name="role" value="기타">
+
+                                <th style="text-align: center;"><p>배역</p> <input class="field3" name="casting" type="text" placeholders="배역"/></th>
                             </tr>
                         </table>
                         <div class="d-flex justify-content-center align-items-center">
                             <input type="submit" value="등록" role="button" class="btn btn-primary"
-                                   onclick="mappingurl('/project/insertproduce', 4,'작성')"/> &nbsp;&nbsp;
+                                   onclick="mappingurl('/project/insertproduce', 3,'작성')"/> &nbsp;&nbsp;
                             <a href="javascript:history.back()" role="button" class="btn btn-secondary">뒤로</a>
                         </div>
                     </form>
@@ -57,6 +64,7 @@
 
 <script>
     var url = "/project/produce";
+        var radioButtonName = "role";
 </script>
 
 {{>layout/bootstrapjs}}

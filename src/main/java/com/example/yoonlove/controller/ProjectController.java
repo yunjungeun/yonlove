@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.List;
 @Controller
 public class ProjectController {
@@ -280,15 +281,18 @@ public class ProjectController {
     public ModelAndView updateProduceView(ProduceDto produceDto){
         ModelAndView mv = new ModelAndView();
         ProduceDto dto = projectService.selectProduce(produceDto);
+        HashMap<String, Boolean> role = projectService.roleCheck(dto);
+        System.out.println(role);
         mv.setViewName("/project/updateproduce");
         mv.addObject("selectProduce", dto);
+        mv.addObject("role", role);
         return mv;
     }
     @GetMapping("project/updateproduce/{pd_id}") // 수정-해당주소 머스터치에 액션값
     @ResponseBody
     public String updateProduce(ProduceDto dto){
         projectService.updateProduce(dto);
-        return "/project/produce"; }
+        return "/project/produce/"+dto.getProject_id(); }
 // 프로듀스 제작 완료 !!!!!!!!============================================
 }
 
