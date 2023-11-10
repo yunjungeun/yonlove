@@ -97,6 +97,7 @@ public class PlanService {
         planMapper.insertTime(dto);
     }
 
+
     public void updateTime(ScheduleTimeDto dto) {
         planMapper.updateTime(dto);
     }

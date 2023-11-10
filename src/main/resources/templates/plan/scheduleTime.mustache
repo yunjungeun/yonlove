@@ -27,11 +27,9 @@
                 <div class="card-body"><!--카드 바디-->
                     <table class="table table-bordered" width="100%" cellspacing="0">
                         <tr>
-                            <th>촬영시간<input name="film_time" type="date"  value="{{scheduleTime.start_time}}" ></th>
-                            <th>촬영내용<input name="film_content" type="text"  value="{{scheduleTime.film_content}}" ></th>
-                            <th>계획표id
-                                <select id="fk" name="day_id" class="field1"></select>
-                            </th>
+                            <th style="text-align: center;"> 촬영시간 <input class="ml-2" type="time" readonly value="{{scheduleTime.start_time}}" ></th>
+                            <th style="text-align: center;"> 종료시간<input nclass="ml-2" type="time" readonly value="{{scheduleTime.end_time}}"></th>
+                            <th style="text-align: center;"> 촬영내용 <input class="ml-2" type="text" readonly value="{{scheduleTime.film_content}}" ></th>
                         </tr>
                     </table>
 

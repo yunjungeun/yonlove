@@ -211,8 +211,11 @@ public class PlanController {
     @GetMapping("plan/{time_id}/updateScheduleTime") //업데이트 처리
     @ResponseBody
     public String updateTime( ScheduleTimeDto dto) {
+        //리다이렉트할 url에 들어갈 값을 추출
+        ScheduleTimeDto scheduleTimeDto = planService.selectScheduleTime(dto);
         planService.updateTime(dto);
-        return "/plan/schedule_time";
+
+        return "/plan/schedule/" + scheduleTimeDto.getDay_id();
     }
 
     @GetMapping("plan/{time_id}/deleteTime") //삭제 처리
@@ -297,15 +300,19 @@ public class PlanController {
 
     @GetMapping("plan/{actor_id}/updateActorManagement") //업데이트 처리
     @ResponseBody
-    public String updateActorManagement( ActorManagementDto dto) {
+    public String updateActorManagement(ActorManagementDto dto) {
+        //수정후 리다이렉션 할 url의 값을 추출
+        ActorManagementDto actorManagementDto = planService.selectActorManagement(dto);
         planService.updateActorManagement(dto);
-        return "/plan/actor_management";
+        return "/plan/schedule/" + actorManagementDto.getDay_id();
     }
 
     @GetMapping("plan/{actor_id}/deleteActorManagement") //삭제 처리
-    public String deleteActorManagement( ActorManagementDto dto) {
+    @ResponseBody
+    public String deleteActorManagement(ActorManagementDto dto) {
+        ActorManagementDto actorManagementDto = planService.selectActorManagement(dto);
         planService.deleteActorManagement(dto);
-        return "redirect:/plan/actor_management";
+        return "/plan/schedule/"+ actorManagementDto.getDay_id();
     }
 
 //===========================================================================================출연자 관리 end
