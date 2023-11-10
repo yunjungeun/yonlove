@@ -127,8 +127,25 @@
                                                        <div class="card border-left-info shadow h-100 py-2" style="overflow: auto;">
                                                            <div class="card-body">
                                                                <!-- 달력 데이터 넣기 -->
-
-
+                                                               <table style="width: 100%;">
+                                                                   <tr>
+                                                                       <th>일</th>
+                                                                       <th>월</th>
+                                                                       <th>화</th>
+                                                                       <th>수</th>
+                                                                       <th>목</th>
+                                                                       <th>금</th>
+                                                                       <th>토</th>
+                                                                   </tr>
+                                                               <tr>
+                                                                   {{#calendar}}
+                                                                       <td>{{.}}</td>
+                                                                       {{#saturday}}
+                                                                       </tr><tr>
+                                                                       {{/saturday}}
+                                                                   {{/calendar}}
+                                                               </tr>
+                                                               </table>
                                                            </div>
                                                        </div>
                                                    </div>
