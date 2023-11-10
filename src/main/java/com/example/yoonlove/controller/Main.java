@@ -2,9 +2,11 @@ package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.NoticeDto;
 import com.example.yoonlove.dto.PageDto;
+import com.example.yoonlove.dto.UserDto;
 import com.example.yoonlove.service.CalendarService;
 import com.example.yoonlove.service.CsService;
 import com.example.yoonlove.service.PagingService;
+import com.example.yoonlove.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -27,6 +30,13 @@ public class Main {
 
     @Autowired
     private PagingService pagingService;
+
+    @Autowired
+    private CalendarService calendarService;
+
+    @Autowired
+    private UserService userService;
+
 
     @GetMapping("/index")
     public ModelAndView mainPage(Principal user, Model model, HttpSession session) throws JsonProcessingException { // throws JsonProce추가
@@ -61,7 +71,14 @@ public class Main {
 
 
         // 달력
-    /*    List<List<String>> calendarData = calendarService.generateCalendarData(year,month);
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        int year = LocalDate.now().getYear();
+        int month = LocalDate.now().getMonthValue();
+
+     List<List<String>> calendarData = calendarService.generateCalendarData(year,month);
 
         //제작일지 Json 불러오기 : {log1 : 작성일자} 식으로 존재함
         String calendarLog = calendarService.logJson(year,month,companyId);
@@ -72,8 +89,8 @@ public class Main {
         mv.addObject("dayJson",calendarDay);
         mv.addObject("month", month);
         mv.addObject("year", year);
-        mv.addObject("calendar", calendarData)
-*/
+        mv.addObject("calendar", calendarData);
+
         return mv;
 
         }
