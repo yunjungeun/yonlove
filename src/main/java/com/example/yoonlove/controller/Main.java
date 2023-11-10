@@ -5,6 +5,7 @@ import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.service.CalendarService;
 import com.example.yoonlove.service.CsService;
 import com.example.yoonlove.service.PagingService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -28,7 +29,7 @@ public class Main {
     private PagingService pagingService;
 
     @GetMapping("/index")
-    public ModelAndView mainPage(Principal user, Model model, HttpSession session){
+    public ModelAndView mainPage(Principal user, Model model, HttpSession session) throws JsonProcessingException { // throws JsonProce추가
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/main/index2");
 
@@ -60,9 +61,7 @@ public class Main {
 
 
         // 달력
-
-/*
-        List<List<String>> calendarData = calendarService.generateCalendarData(year,month);
+    /*    List<List<String>> calendarData = calendarService.generateCalendarData(year,month);
 
         //제작일지 Json 불러오기 : {log1 : 작성일자} 식으로 존재함
         String calendarLog = calendarService.logJson(year,month,companyId);
@@ -71,11 +70,10 @@ public class Main {
         //촬영일정표 Json 불러오기 : {day1 : 작성일자} 식으로 존재함
         String calendarDay = calendarService.dayJson(year,month,companyId);
         mv.addObject("dayJson",calendarDay);
-
         mv.addObject("month", month);
         mv.addObject("year", year);
-        mv.addObject("calendar", calendarData)*/
-
+        mv.addObject("calendar", calendarData)
+*/
         return mv;
 
         }
