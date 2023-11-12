@@ -25,5 +25,6 @@ public class VideoDto {
     private String user_id;
     private String nickname;
     private String ch_name;
+    private int ch_sub;
     private String company_id;
 }

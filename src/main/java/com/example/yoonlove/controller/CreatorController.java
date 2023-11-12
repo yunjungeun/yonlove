@@ -111,7 +111,6 @@ import java.util.List;
           //유저정보 가저오는 dto
           UserDto userInfo = userService.getUser(user.getName());
           String companyId = userInfo.getCompany_id(); //회사 id 스트링
-
           pdto.setPkid(dto.getCh_id());
 
           PageDto pageDto = new PageDto("video","video_id", page,pdto, companyId);
@@ -120,7 +119,6 @@ import java.util.List;
           List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
           String rink = pagingService.subPageRink(pageDto,"creator");
           List<VideoDto> contentList = videoService.selectListContent(pageInfo, creatorDto.getCh_id());
-
           mv.addObject("selectContentList", contentList);
 
           mv.addObject("pageDto", pageDto);

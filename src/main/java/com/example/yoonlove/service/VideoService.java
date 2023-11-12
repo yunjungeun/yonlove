@@ -1,7 +1,6 @@
 package com.example.yoonlove.service;
 
 
-import com.example.yoonlove.dto.BestVideoDto;
 import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.UserDto;
 import com.example.yoonlove.dto.VideoDto;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.List;
 
@@ -103,12 +103,26 @@ public class VideoService {
 
 
 
-    public void bestvideo(String userId){
-        UserDto userInfo = userService.getUser(userId);
-        BestVideoDto bestVideoDto = new BestVideoDto();
+    public HashMap<String, VideoDto> bestvideo(String userId){
+        UserDto userInfo = new UserDto();
+        if(userId.equals("비회원")){
+            userInfo.setCompany_id("company2");
+        }else {
+            userInfo = userService.getUser(userId);
+        }
+        NumberFormat numberFormat = NumberFormat.getNumberInstance();
 
-        List<VideoDto> videoDtos = videoMapper.searchVideo(userInfo.getCompany_id());
-        System.out.println(videoDtos);
+        HashMap<String, VideoDto> bestVideos = new HashMap<>();
+        VideoDto bestview = videoMapper.searchVideo(userInfo.getCompany_id(), "video_view").get(0);
+        bestview.setFormattedView(numberFormat.format(bestview.getVideo_view()));
+        VideoDto bestlike = videoMapper.searchVideo(userInfo.getCompany_id(), "like_cnt").get(0);
+        VideoDto bestSubCh = videoMapper.bestSubCh(userInfo.getCompany_id()).get(0);
+        VideoDto bestChvideo = videoMapper.bestChVideo(bestSubCh.getCh_id()).get(0);
 
+        bestVideos.put("bestView", bestview);
+        bestVideos.put("bestLike", bestlike);
+        bestVideos.put("bestChVideo", bestChvideo);
+
+        return bestVideos;
     }
 }

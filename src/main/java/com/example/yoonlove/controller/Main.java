@@ -2,6 +2,7 @@ package com.example.yoonlove.controller;
 
 import com.example.yoonlove.dto.NoticeDto;
 import com.example.yoonlove.dto.PageDto;
+import com.example.yoonlove.dto.VideoDto;
 import com.example.yoonlove.service.CsService;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.VideoService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -35,6 +37,7 @@ public class Main {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/main/index2");
 
+
         if(user == null){
             model.addAttribute("loggedIn", false);  // 로그인 안한 상태
         }else {
@@ -42,55 +45,37 @@ public class Main {
             userId = user.getName();
         }
 
-   PageDto pdto = new PageDto();
+        PageDto pdto = new PageDto();
         PageDto pageDto = new PageDto("notice","notice_id",1, pdto);
 
         //페이징정보처리 메소드
         PageDto pageInfo = pagingService.paging(pageDto);
-
-        //뷰페이지에 하단 페이징처리를 해주는 리스트
-        List<PageDto> pagelist = pagingService.pageList(pageInfo.getPageStart(), pageInfo.getPageEnd(), 1);
-
         //검색유무에 따라 동적 페이지링크를 만들어줌
-        String rink = pagingService.pageRink(pageDto);
         List<NoticeDto> dto = csService.selectListNotice(pageInfo);
         mv.addObject("selectListNotice", dto);
-
         //페이징에 필요한센션
         mv.addObject("paging", pageInfo);  //페이징정보
-        mv.addObject("pagelist", pagelist); //페이지 하단부 페이지 리스트
 
+
+        //동영상 섹션
+        HashMap<String, VideoDto> bestVideo = new HashMap<>();
         if(userId != null){
-            videoService.bestvideo(userId);
+           bestVideo = videoService.bestvideo(userId);
+        }else {
+           bestVideo = videoService.bestvideo("비회원");
         }
+        //베스트 크리에이터 영상 정보 해쉬맵
+        mv.addObject("bestVideo", bestVideo);
+        //동영상 섹션end
+
         return mv;
         }
 
 
     @GetMapping("/임시")
     public String mainPage2(){
-        return "/main/index";
-    }
-
-    @GetMapping("/게시판")
-    public String testPage1(){
-        return "/main/posttest";
-    }
-
-
-    @GetMapping("/로그인")
-    public String testPage2(){
-        return "/main/login";
-    }
-
-    @GetMapping("/헤더")
-    public String testPage3(){
-        return "/layout/header";
-    }
-
-    @GetMapping("/일반회원가입")
-    public String testPage4(){
-        return "/login/signup";
+        return "/main/index2";
     }
 }
+
 

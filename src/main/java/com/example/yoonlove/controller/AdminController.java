@@ -1,14 +1,17 @@
 package com.example.yoonlove.controller;
 
-import com.example.yoonlove.dto.*;
+import com.example.yoonlove.dto.CompanyDto;
+import com.example.yoonlove.dto.DepartmentDto;
+import com.example.yoonlove.dto.PageDto;
+import com.example.yoonlove.dto.UserDto;
 import com.example.yoonlove.service.AdminService;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -57,6 +60,30 @@ public class AdminController {
 
     @GetMapping("/admin/{user_id}/selectuser")
     public ModelAndView selectUser(UserDto userDto){
+        UserDto dto = adminService.selectUser(userDto);
+        ModelAndView mv = new ModelAndView();
+
+        //회사 조인안하고 그냥 객체로 만듬
+        CompanyDto companyDto = new CompanyDto();
+        companyDto.setCompany_id(dto.getCompany_id());
+        CompanyDto companyname = adminService.selectCompany(companyDto);
+
+        //부서 조인안하고 그냥 객체만듬
+        DepartmentDto dptDto = new DepartmentDto();
+        dptDto.setDpt_id(dto.getDpt_id());
+        DepartmentDto dptname = adminService.selectDepartment(dptDto);
+
+        mv.addObject("selectDpt",dptname);
+        mv.addObject("selectCompany",companyname);
+        mv.setViewName("/admin/userselect");
+        mv.addObject("selectUser", dto);
+        return mv;
+    }
+
+    @GetMapping("/mypage")
+    public ModelAndView mypage(Principal user){
+        UserDto userDto = new UserDto();
+        userDto.setUser_id(user.getName());
         UserDto dto = adminService.selectUser(userDto);
         ModelAndView mv = new ModelAndView();
 
