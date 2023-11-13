@@ -40,7 +40,7 @@ public class LoginController {
         return "/login/companysignup";
     }
 
-    @GetMapping("companysignup")
+    @GetMapping("/companysignup")
     @ResponseBody
     public String companysign(CompanyDto dto, Principal user, UserDto userDto ) {
 
@@ -54,7 +54,7 @@ public class LoginController {
 
         userService.updateUserCompanyID(userId, companyID);
 
-        return "redirect:/index";
+        return "/index";
     }
 
 

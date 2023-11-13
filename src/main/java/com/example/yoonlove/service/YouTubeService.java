@@ -118,6 +118,7 @@ public class YouTubeService {
                 .setType(Collections.singletonList("video"))
                 .execute();
 
+
         // Jackson ObjectMapper를 사용하여 JSON 파싱
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(String.valueOf(response));

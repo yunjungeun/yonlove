@@ -37,7 +37,9 @@
                         <tbody>
                         {{#hashmap}}
                             <tr>
-                                <td style="text-align: center; vertical-align: middle;"><a href="/creator/insertcreator?channelId={{channelId}}&title={{channelTitle}}&userId={{userId}}">{{channelTitle}}</a></td>
+                                <td style="text-align: center; vertical-align: middle;">
+                                    <a href="/creator/insertcreator?channelId={{channelId}}&title={{channelTitle}}
+                                                &userId={{userId}}">{{channelTitle}}</a></td>
                                 <td style="text-align: center; vertical-align: middle;"><img src="{{thumbnailsUrl}}" alt="Thumbnail"></td>
                             </tr>
                         {{/hashmap}}
