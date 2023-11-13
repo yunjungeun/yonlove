@@ -43,17 +43,21 @@ public class Main {
         String userId = null;
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/main/index2");
+        UserDto userInfo = new UserDto();
+        String companyId = null;
 
-        if(user == null){
+        if(user == null){//비회원 로직처리
             model.addAttribute("loggedIn", false);  // 로그인 안한 상태
-        }else {
+            companyId = "없음";
+        }else {  //회원 로그인시 로직처리
             model.addAttribute("loggedIn", true);
             userId = user.getName();
+            userInfo = userService.getUser(user.getName());
+            companyId = userInfo.getCompany_id(); //회사 id 스트링
         }
 
         PageDto pdto = new PageDto();
         PageDto pageDto = new PageDto("notice","notice_id",1, pdto);
-
         //페이징정보처리 메소드
         PageDto pageInfo = pagingService.paging(pageDto);
         //검색유무에 따라 동적 페이지링크를 만들어줌
@@ -64,14 +68,15 @@ public class Main {
 
 
         // 달력
-        //유저정보 가저오는 dto
-        UserDto userInfo = userService.getUser(user.getName());
-        String companyId = userInfo.getCompany_id(); //회사 id 스트링
-
+        //현재 날짜를 가저옴
         int year = LocalDate.now().getYear();
         int month = LocalDate.now().getMonthValue();
 
-     List<List<String>> calendarData = calendarService.generateCalendarData(year,month);
+        //칼린더생성
+        List<List<String>> calendarData = calendarService.generateCalendarData(year,month);
+        mv.addObject("month", month);
+        mv.addObject("year", year);
+        mv.addObject("calendar", calendarData);
 
         //제작일지 Json 불러오기 : {log1 : 작성일자} 식으로 존재함
         String calendarLog = calendarService.logJson(year,month,companyId);
@@ -80,9 +85,6 @@ public class Main {
         //촬영일정표 Json 불러오기 : {day1 : 작성일자} 식으로 존재함
         String calendarDay = calendarService.dayJson(year,month,companyId);
         mv.addObject("dayJson",calendarDay);
-        mv.addObject("month", month);
-        mv.addObject("year", year);
-        mv.addObject("calendar", calendarData);
 
 
         //동영상 섹션

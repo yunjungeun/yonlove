@@ -68,7 +68,6 @@ public class PageDto {
         this.company_id = company_id;
     }
 
-    //버려져야할 임시 생성자
     public PageDto(String table, String pkid, int currentPage, PageDto dto){
         this.table = table;
         this.id = pkid;
