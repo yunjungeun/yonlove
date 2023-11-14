@@ -15,6 +15,7 @@ public interface DropDownMapper {
     List<ScheduleDayDto> selectFkDay(String ajaxData, String company_id);
     List<ProduceDto> selectFkProduce(String ajaxData);
     List<FilmPlanDto> selectFkTable1(String ajaxData);
+    List<DepartmentDto> selectFkDpt(String ajaxData, String company_id);
     //dropDownOption 메소드 end------------>
 
 

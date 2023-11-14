@@ -85,14 +85,14 @@
                             회원등급<input class="field12" name="grade" type="text" value="{{selectUser.grade}}" >&nbsp;&nbsp;
                             가입일 <input class="field13" name="sign_date" type="text" value="{{selectUser.sign_date}}" ><br/>
                             소속회사 <input class="field14" name="company_name" type="text" value="{{selectCompany.company_name}}" >&nbsp;&nbsp;
-                            부서&nbsp;&nbsp;<input class="field15" name="dpt_name" type="text" value="{{selectDpt.dpt_name}}" >
+                            부서&nbsp;&nbsp;<select id="fk1" name="dpt_id"></select>
                         </td>
                         </tr>
                         </tbody>
                     </table>
                     <br>
                     <div style="text-align: center">
-                        <button type="submit" class="btn btn-success" onclick="mappingurl('/admin/{{selectUser.User_id}}/updateuser',15,'수정')">수정</button>&nbsp;&nbsp;
+                        <button type="submit" class="btn btn-success" onclick="mappingurl('/admin/{{selectUser.User_id}}/updateuser',14,'수정')">수정</button>&nbsp;&nbsp;
                         <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
                     </div>
             </form> <!-- 테이블 끝-->
@@ -114,9 +114,14 @@
 <script>
     var radioButtonName = "authority";
     var url = "/admin/user";
+    var jsonValue = '{{{fkList}}}';
+    <!--select 옵션 name값을 cu_alert.js에 보내주기 위한 변수 값/이게없으면 제출이 안됨-->
+    var selectName = "dpt_id";
+    <!--selectName이 실행되기 위해선 cu_alert 스크립트소스가 이 아래 있어야함-->
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/static/js/deletepost.js"></script>
 <script src="/static/js/cu_alert.js"></script>
+<script src="/static/js/dropdown.js"></script>
 </body>
 </html>

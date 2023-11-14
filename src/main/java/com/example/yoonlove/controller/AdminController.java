@@ -5,8 +5,10 @@ import com.example.yoonlove.dto.DepartmentDto;
 import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.UserDto;
 import com.example.yoonlove.service.AdminService;
+import com.example.yoonlove.service.DropDownService;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +31,8 @@ public class AdminController {
     private PagingService pagingService;
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private DropDownService dropDownService;
 
     //유저관리
     @GetMapping("/admin/user")
@@ -105,7 +108,7 @@ public class AdminController {
     }
 
     @GetMapping("/admin/{user_id}/updateuserview")
-    public ModelAndView updateUserView(UserDto userDto) {
+    public ModelAndView updateUserView(UserDto userDto) throws JsonProcessingException {
         UserDto dto = adminService.selectUser(userDto);
         ModelAndView mv = new ModelAndView();
 
@@ -130,6 +133,9 @@ public class AdminController {
         model.put("isAdmin", "admin".equals(dto.getAuthority()));
         model.put("isNormal", "일반".equals(dto.getAuthority()));
 
+        String jsonList = dropDownService.dropDownOption("department",null, dto.getCompany_id());
+
+        mv.addObject("fkList", jsonList);
         mv.setViewName("/admin/userupdate");
         mv.addAllObjects(model);
 

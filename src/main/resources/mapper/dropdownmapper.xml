@@ -49,13 +49,21 @@
     </select>
 
     <select id="selectFkTable1">
-        SELECT pd_id, pd_name FROM day_table1
+        SELECT pd_id, pd_name FROM day_table1 where 1=1
         <if test="ajaxData != null and ajaxData !=''">
             and pd_id = #{ajaxData}
         </if>
         order by pd_id desc
     </select>
 
+    <select id="selectFkDpt">
+        SELECT dpt_id, dpt_name FROM department
+        where company_id = #{company_id}
+        <if test="ajaxData != null and ajaxData !=''">
+            and dpt_id = #{ajaxData}
+        </if>
+        order by dpt_id desc
+    </select>
 
     <select id="selectScenario">
         SELECT scenario_id, scenario_name FROM scenario where project_id = #{pkId}
