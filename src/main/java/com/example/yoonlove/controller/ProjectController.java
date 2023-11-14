@@ -280,11 +280,11 @@ public class ProjectController {
     @GetMapping("project/updateproduceview/{pd_id}") // 수정
     public ModelAndView updateProduceView(ProduceDto produceDto){
         ModelAndView mv = new ModelAndView();
-        ProduceDto dto = projectService.selectProduce(produceDto);
-        HashMap<String, Boolean> role = projectService.roleCheck(dto);
-        System.out.println(role);
         mv.setViewName("/project/updateproduce");
+        ProduceDto dto = projectService.selectProduce(produceDto);
         mv.addObject("selectProduce", dto);
+
+        HashMap<String, Boolean> role = projectService.roleCheck(dto);
         mv.addObject("role", role);
         return mv;
     }
@@ -294,15 +294,5 @@ public class ProjectController {
         projectService.updateProduce(dto);
         return "/project/produce/"+dto.getProject_id(); }
 // 프로듀스 제작 완료 !!!!!!!!============================================
+
 }
-
-
-
-
-
-
-
-
-
-
-

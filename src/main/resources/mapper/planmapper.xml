@@ -161,7 +161,7 @@
 
     <!--일일촬영계획 리스트 //촬영계획표-->
     <select id="selectListDayTable2" resultType="com.example.yoonlove.dto.ScheduleTimeDto">
-        SELECT * FROM schedule_time WHERE day_id = #{day_id}
+        SELECT * FROM schedule_time WHERE day_id = #{day_id} order by start_time
     </select>
 
     <insert id="insertTime" parameterType="com.example.yoonlove.dto.ScheduleTimeDto" >

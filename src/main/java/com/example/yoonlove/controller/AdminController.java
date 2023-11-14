@@ -80,6 +80,7 @@ public class AdminController {
         mv.addObject("selectCompany",companyname);
         mv.setViewName("/admin/userselect");
         mv.addObject("selectUser", dto);
+
         return mv;
     }
 
@@ -199,7 +200,6 @@ public class AdminController {
     @GetMapping("/admin/adduser")
     @ResponseBody
     public String updateContent(Principal user, UserDto userDto) {
-
       String userId = user.getName();
 
       UserDto myUser = userService.getUser(userId);

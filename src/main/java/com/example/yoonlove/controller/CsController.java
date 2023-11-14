@@ -89,6 +89,7 @@ public class CsController {
     @ResponseBody
     public String insertNotice(NoticeDto dto, Principal user){
         dto.setUser_id(user.getName());
+        System.out.println(dto.toString());
         csService.insertNotice(dto);
         return "/cs/notice";
     }
