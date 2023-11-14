@@ -7,7 +7,6 @@ import com.example.yoonlove.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -59,25 +58,15 @@ public class LoginController {
 
 
 
-    @GetMapping("/test1")
-    public void test(Principal user){
-
-        String companyID = "company20";
-        String userId = user.getName(); // 유저id
-        userService.updateUserCompanyID(userId, companyID);
-    }
-
-
     @PostMapping("/ConfirmId")
-    public ResponseEntity<?> confirmId(@RequestParam("user_id") String user_id) {
-        ModelAndView mv = new ModelAndView();
+    public Boolean confirmId(String user_id) {
+        System.out.println("test" + user_id);
         UserDto dto = new UserDto();
         dto.setUser_id(user_id);
-        mv.setViewName("/login/signup");
-        mv.addObject("ConfirmId", userService.selectId(dto));
 
         boolean isIdAvailable = userService.selectId(dto);
-        return ResponseEntity.ok(isIdAvailable);
+        System.out.println(isIdAvailable);
+        return isIdAvailable;
     }
 
 

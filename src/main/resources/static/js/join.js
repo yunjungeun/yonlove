@@ -10,11 +10,8 @@
         	//Ajax로 전송
         	$.ajax({
         		url : '/ConfirmId',
-        		data : {
-        			user_id : id
-        		},
         		type : 'POST',
-        		dataType : 'json',
+        		data : id,
         		success : function(result) {
         			if (result === false) {
         				alert("사용가능 ID 입니다.");

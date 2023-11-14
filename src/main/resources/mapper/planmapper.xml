@@ -346,7 +346,7 @@
 
     <!--film_plan에 act_id를 구하기위한 메소드-->
     <select id="selectFilmJoinActID">
-        select DISTINCT act_id from actorjoin where pd_id= #{pd_id} and scene_id = #{scene_id}
+        select max(act_id) from actorjoin where pd_id= #{pd_id} and scene_id = #{scene_id}
     </select>
 
     <insert id="insertFilm" parameterType="com.example.yoonlove.dto.FilmPlanDto" >
