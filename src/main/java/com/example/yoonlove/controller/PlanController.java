@@ -370,13 +370,13 @@ public class PlanController {
 
     @GetMapping("plan/insertFilm")  //컨텐츠 추가 처리
     @ResponseBody
-    public String insertFilm(FilmPlanDto dto, Principal user) {
-        UserDto userInfo = userService.getUser(user.getName());
+    public String insertFilm(FilmPlanDto dto) {
         //dto에는 insert에 들어갈 act_id가 없음. dto에 있는 pd_id와 scene_id로 act_id를 획득하는 로직
+        System.out.println(dto.toString());
         String actId = planService.selectFilmJoinActID(dto.getPd_id(), dto.getScene_id());// day_id 값이 여러개가 나와서
+        System.out.println("액트아이디 : "+actId);
         dto.setAct_id(actId);   //획득된 act_id를 dto에 바인드
         planService.insertFilm(dto);
-
         return "/plan/schedule/"+dto.getDay_id();
     }
 
