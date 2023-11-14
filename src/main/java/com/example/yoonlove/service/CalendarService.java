@@ -73,7 +73,7 @@ public class CalendarService {
         ObjectMapper objectMapper = new ObjectMapper();
         // 해시맵을 JSON 문자열로 변환
         String jsonString = objectMapper.writeValueAsString(hashMap);
-
+        System.out.println(jsonString);
         return jsonString;
     }
 

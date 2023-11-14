@@ -275,6 +275,6 @@ public class AdminController {
     @GetMapping("/admin/{dpt_id}/deletedpt")
     public String deleteDepartment(DepartmentDto dto){
         adminService.deleteDepartment(dto);
-        return "redirect:/admin/dpt";
+        return "redirect:/admin/department";
     }
 }
