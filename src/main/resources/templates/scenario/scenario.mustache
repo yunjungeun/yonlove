@@ -4,57 +4,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>시나리오 리스트</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{>layout/header}}
 </head>
 <body>
-<h1>시나리오 게시판</h1>
-<table border="1" cellpadding="1" cellspacing="1">
-    <ul>
-        <tr>
-            <td>시나리오 번호</td>
-            <td>제목</td>
-            <td>작성자</td>
-            <td>작성일</td>
-            <td>기획번호</td>
-            <td>기획명</td>
-        </tr>
-        {{#selectListScenario}}
-            <tr>
-                <td>{{scenario_num}}</td>
-                <td><a href="/scenario/{{scenario_id}}/selectscenario/">{{scenario_name}}</a></td>
-                <td>{{scenario_writer}}</td>
-                <td>{{scenario_date}}</td>
-                <td>{{project_id}}</td>
-                <td>코딩예정<!--기획명을 조인 테이블로 해서 입력해야됨--></td>
+<div id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
 
-            </tr>
-        {{/selectListScenario}}
-    </ul>
-</table>
-<!--페이징 처리 레이아웃-->
-{{>layout/paging}}
+<div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+        <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+            시나리오
+        </h1>
 
-    <form action="/scenario/scenario" method="GET">
-        <select id="searchType" name="searchType">
-            <option value="all">선택</option>
-            <option value="title">시나리오명</option>
-            <option value="content">내용</option>
-            <option value="writer">작성자</option>
-            <!-- 필요한 항목 추가 -->
-        </select>
-        <input type="text" id="search" name="search" placeholder="검색">
+            <div class="card shadow mb-4" style="margin-top: 50px; margin-right:100px; margin-left:100px;">
+                <div class="card-header py-3">
+                    <form action="/scenario/scenario" method="get"
+                          class="d-flex justify-content-end form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
 
-        <input type="submit" value="검색">
+                        <div class="input-group">
+                            <select id="searchType" name="searchType">
+                                <option value="all">선택</option>
+                                <option value="title">시나리오명</option>
+                                <option value="content">내용</option>
+                                <option value="writer">작성자</option>
+                                <!-- 필요한 항목 추가 -->
+                            </select>
 
-    </form>
+                            <input id="search" name="search" type="text"  style="width: 150px;" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                   aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <input class="btn btn-primary" type="submit" value="검색">
+                            </div>
+                        </div>
+                    </form>
+                </div><!--헤더-->
 
-<a href="/scenario/insertscenarioview" role="button">시나리오 작성</a>
-<a href="/scenario/scenario">목록</a>
-<a href="/index">홈 페이지</a>
+
+              <div class="card-body">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th  style="text-align: center;">시나리오 번호</th>
+                        <th  style="text-align: center;">제목</th>
+                        <th  style="text-align: center;">작성자</th>
+                        <th  style="text-align: center;">작성일</th>
+                        <th  style="text-align: center;">기획명</th>
+                        <th  style="text-align: center;">기획시작일</th>
+                        <th  style="text-align: center;">기획상태</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#selectListScenario}}
+                        <tr>
+                            <td style="text-align: center;">{{scenario_num}}</td>
+                            <td style="text-align: center;"><a href="/scenario/{{scenario_id}}/selectscenario">{{scenario_name}}</a></td>
+                            <td style="text-align: center;">{{scenario_writer}}</td>
+                            <td style="text-align: center;">{{scenario_date}}</td>
+                            <td style="text-align: center;">{{project_name}}</td>
+                            <td style="text-align: center;">{{project_start_date}}</td>
+                            <td style="text-align: center;">{{project_state}}</td>
+                        </tr>
+                    {{/selectListScenario}}
+                    </tbody>
+                </table>
+
+                <!--페이징 처리 레이아웃-->
+                <div class="d-flex justify-content-between align-items-center">
+                    <span></span>
+                    <span>
+                        {{>layout/paging}}</span>
+                    <a href="/scenario/insertscenarioview" role="button" class="btn btn-primary">작성</a>
+                </div>
+
+            </div><!--카드바디end-->
+            </div><!--카드 섹션 end-->
+
+        </div>
+    </div>
+</div>
+    {{>layout/footer}}
+</div>
 
 <script>
     var url = "/scenario/scenario";
 </script>
-<script src="/static/js/search.js"></script>
 
+<script src="/static/js/search.js"></script>
+{{>layout/bootstrapjs}}
 </body>
 </html>

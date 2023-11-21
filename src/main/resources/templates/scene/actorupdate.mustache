@@ -7,24 +7,66 @@
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/static/js/cu_alert.js"></script>
-
+    {{>layout/header}}
 </head>
-<body>
+<body id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
 
-<form id="alert" method="get" action="/scene/{{updateActor.actor_id}}/updateactor">
-<table border="1" cellpadding="1" cellspacing="1">
-    <tr>
-        <td>씬 번호<input  class="field1" name="scene_id" type="text" readonly value="{{updateActor.scene_id}}"></td>
-        <td>시나리오 번호(조인 테이블로 생성된 값이 들어가야함)<input name="pd_id" type="text" value="{{updateActor.pd_id}}" readonly> </td>
-    </tr>
-    <tr>
-        <td>출연자 정보<input  class="field2" name="actor_info" type="text" value="{{updateActor.actor_info}}"/></td>
-    </tr>
-</table>
-<input type="submit" value="수정"  onclick="mappingurl('/scene/{{updateActor.actor_id}}/updateactor','/scene/actor',2,'수정')"/>
-</form>
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
 
-<a href="/scene/actor">취소</a>
+    <!-- Main Content -->
+    <div id="content">
 
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+            <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px;">출연자 수정</h1>
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4" style="margin-top: 50px;">
+                <div class="card-header py-3">
+                    <div class="table-responsive">
+            <form id="alert" method="get" action="/scene/{{updateActor.act_id}}/updateactor">
+                <input type="hidden" class="field7" name="pd_id" value="{{updateActor.pd_id}}" />
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <tr>
+                    <td>기획<input class="field1" name="project_name" type="text" readonly value="{{updateActor.project_name}}" /></td>
+                    <td>시나리오 <input class="field2" name="scenario_name" type="text" value="{{updateActor.scenario_name}}" readonly/> </td>
+                    <td>씬<input class="field3" name="scene_num" type="text" readonly value="{{updateActor.scene_num}}"/></td>
+                </tr>
+                <tr>
+                    <td>출연자 이름<input class="field4" name="pd_name" type="text" value="{{updateActor.pd_name}}" /></td>
+                    <td>출연자 배역<input class="field5" name="casting" type="text" value="{{updateActor.casting}}" /></td>
+                    <td>출연자 정보<input class="field6" name="actor_info" type="text" value="{{updateActor.actor_info}}"/></td>
+                </tr>
+            </table>
+                <div style="text-align: center;">
+            <input class="btn btn-primary" type="submit" value="수정"  onclick="mappingurl('/scene/{{updateActor.act_id}}/updateactor',7,'수정')"/> &nbsp;&nbsp;
+                    <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
+
+                </div>
+            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br/>
+</div>
+
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+<!-- /.container-fluid -->
+</div>
+<!-- End of Main Content -->
+{{>layout/footer}}
+</div>
+<!-- End of Content Wrapper -->
+<script src="/static/js/deletepost.js"></script>
+
+{{>layout/bootstrapjs}}
 </body>
 </html>

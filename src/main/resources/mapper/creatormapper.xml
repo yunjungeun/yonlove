@@ -10,8 +10,13 @@
         from(select rownum as r, t.*
 
         <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
-        from (select * from ${table}
-        where 1=1
+        from (select * from createjoin
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
         <if test="title != null and search != ''">
             AND ch_name like '%${title}%'
         </if>
@@ -24,8 +29,13 @@
 
     <!--검색유무에 따라 게시판의 총 게시글 수는 구하는 쿼리-->
     <select id="totalCreatorPost" parameterType="com.example.yoonlove.dto.PageDto">
-        select count(${id}) as totalPost from ${table}
-        where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
+        select count(${id}) as totalPost from createjoin
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
         <!--검색어가 있다면 아래 조건문을 실행-->
         <if test="title != null and search != ''">
             AND ch_name like '%${title}%'
@@ -39,17 +49,20 @@
 
     <insert id="insertCreator">
         insert into creater values(
-        (select concat('ch', (nvl(max(to_number(substr(ch_id, 3))), 0)+1)) from creater),<!--pk코드 자동증가(수정2)-->
+        #{ch_id},
         #{ch_name},
         #{ch_sub},
-        #{user_id}
+        #{user_id},
+        #{description},
+        #{videocount},
+        #{viewcount},
+        #{createrurl}
         )
     </insert>
 
     <update id="updateCreator" >
         UPDATE CREATER
-        SET ch_name=#{ch_name},
-        ch_sub=#{ch_sub},
+        SET
         user_id=#{user_id}
         where ch_id = #{ch_id}
     </update>

@@ -1,0 +1,55 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{>layout/header}}
+</head>
+<body>
+<div id="page-top">
+    {{>layout/sidebar}}
+    {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container">
+
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                촬영 시간표
+            </h1>
+
+            <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
+                <div class="card-header py-3" style="center;"> <!--카드헤더 div-->
+
+                </div><!--카드헤더 end-->
+
+                <div class="card-body"><!--카드 바디-->
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <tr>
+                            <th style="text-align: center;"> 촬영시간 <input class="ml-2" type="time" readonly value="{{scheduleTime.start_time}}" ></th>
+                            <th style="text-align: center;"> 종료시간<input nclass="ml-2" type="time" readonly value="{{scheduleTime.end_time}}"></th>
+                            <th style="text-align: center;"> 촬영내용 <input class="ml-2" type="text" readonly value="{{scheduleTime.film_content}}" ></th>
+                        </tr>
+                    </table>
+
+
+                    <div class="d-flex justify-content-end">
+                        <a href="/plan/{{scheduleTime.time_id}}/scheduleTimeUpdateView"  class="btn btn-success mr-2">수정</a>
+                        <a href="/plan/{{scheduleTime.time_id}}/deleteTime" class="btn btn-danger mr-2" onclick="confirmDelete(event, '/plan/schedule/{{scheduleTime.day_id}}')">삭제</a>
+                        <a href="javascript:history.back()" role="button" class="btn btn-secondary">뒤로</a>
+                    </div>
+
+                </div><!--카드바디-->
+            </div><!--카드 end-->
+
+        </div><!--컨테이너 end-->
+    </div><!--warpper end-->
+</div><!--page-top end-->
+{{>layout/footer}}
+</div>
+
+    <script src="/static/js/delete.js"></script>
+{{>layout/bootstrapjs}}
+</body>
+</html>

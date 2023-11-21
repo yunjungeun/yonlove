@@ -4,24 +4,70 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>게시판 리스트</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/static/js/cu_alert.js"></script>
+    {{>layout/header}}
 </head>
 <body>
-<form id="alert" action="/cs/insertnotice" method="get">
-<table border="1" cellpadding="1" cellspacing="1">
-        <tr>
-            <td>제목 <input class="field1" name="notice_title" type="text">
-        작성자 : <input class="field2"  name="notice_writer" type="text" value="{{writer}}" readonly></td>
-    </tr>
-    <tr>
-        <td colspan="2"><textarea class="field3" name="notice_content" cols="50" rows="20"></textarea></td>
-    </tr>
-</table>
-    <input type="submit"  id="insert" value="등록" onclick="mappingurl('/cs/insertnotice','/cs/notice',3,'작성')">
-</form>
- <a href="/cs/notice">취소</a>
+<div id="page-top">
 
+{{>layout/sidebar}}
+{{>layout/topbar}}
+
+<div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+
+        <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+            공지사항
+        </h1>
+
+        <div class="card shadow mb-4" style="margin-top: 50px; margin-left:100px; margin-right:100px;">  <!--카드전체 섹션-->
+                <div class="card-header py-3" style="center;">
+                </div>
+
+                <div class="card-body"><!--카드 바디-->
+                    <form id="alert" action="/cs/insertqna" method="get">
+
+                            <table class="table" width="100%" cellspacing="0">
+                                <thead class="text-align: center;" >
+                                <tr>
+                                    <th>제목</th>
+                                    <th><input class="field1 card shadow" name="notice_title" type="text"></th>
+                                    <th>작성자</th>
+                                    <th><input  class="field2 card shadow"  name="notice_writer" type="text" value="{{writer}}" readonly></th>
+                                </tr>
+                                </thead>
+                                <tbody class="text-align: center;">
+                                    <tr>
+                                        <td colspan="4">
+                                            <textarea type="text"  placeholder="내용을 입력하세요.." class="field3 card shadow mb-4" name="notice_content"  style="height: 30vh; width: 100%;  display: block; margin: 0 auto;"></textarea>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        <div style="text-align: center">
+                            <button type="submit" class="btn btn-primary mr-2" onclick="mappingurl('/cs/insertnotice',3,'작성')">등록</button>
+                            <a href="/cs/notice" class="btn btn-secondary" style="text-decoration: none;">취소</a>
+                        </div>
+                    </form>
+
+                </div><!--카드바디-->
+            </div><!--카드전체 섹션-->
+
+
+        </div>
+    </div>
+</div>
+ {{>layout/footer}}
+</div>
+
+
+<script>
+    var url = "/cs/notice";
+</script>
+<script src="/static/js/cu_alert.js"></script>
+
+{{>layout/bootstrapjs}}
 </body>
 </html>

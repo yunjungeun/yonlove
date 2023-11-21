@@ -57,7 +57,7 @@
         (select * from todaytime)<!--현재 날짜+시간 뷰테이블-->,
         '23-9-12',
         0,
-        'test')
+        #{user_id})
     </insert>
 
     <update id="updateNotice">
@@ -119,11 +119,11 @@
         (select NVL(Max(qna_id),0)+1 from qna),<!--글번호를 1씩 증가시키는 서브쿼리-->
         #{qna_title},<!--입력받은 제목-->
         #{qna_content},<!--입력받은 내용-->
-        '관리자',<!--작성자(닉네임)-->
+        #{qna_writer},<!--작성자(닉네임)-->
         (select * from todaytime)<!--현재 날짜+시간 뷰테이블-->,
         null,<!--수정일자-->
         0,<!--조회수 처음갑은0-->
-        'test'<!--작성한 유저id-->)
+        #{user_id}<!--작성한 유저id-->)
     </insert>
 
     <update id="updateQnA">

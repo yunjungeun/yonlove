@@ -4,32 +4,94 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
+    <title>스토리보드</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/static/js/cu_alert.js"></script>
-
+    {{>layout/header}}
 </head>
-<body>
-<form id="alert" method="get" action="/scene/{{updateScene.scene_id}}/updatescene">
-    <input type="hidden" name="scene=id" value="{{updateScene.scene_id}}">
-<table border="1" cellpadding="1" cellspacing="1">
-    <tr>
-        <td>시나리오<input name="scenario_id" type="text" readonly value="{{updateScene.scenario_id}}"></td>
-        <td>씬 번호<input class="field1" name="scene_num" type="number" value="{{updateScene.scene_num}}"></td>
-    </tr>
-    <tr>
-        <td>장면 요약<input class="field2" name="scene_content" type="text" value="{{updateScene.scene_content}}"/></td>
-    </tr>
-    <tr>
-        <td>카메라 장면 : 첨부파일 등록하게끔 만들어야함</td>
-        <td colspan="2"><textarea class="field3" name="story_board" cols="50" rows="20">{{updateScene.story_board}}</textarea></td>
-        <td>촬영장소 <input class="field4" name="scene_place" type="text" value="{{updateScene.scene_place}}"/></td>
-    </tr>
-</table>
-    <input type="submit" value="수정" onclick="mappingurl('/scene/{{updateScene.scene_id}}/updatescene','/scene/scene',4,'수정')"/>
-</form>
-<a href="/scene/scene">목록</a>
 
+<body id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
+
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <div style="text-align: center; display: block; margin-top:50px;" >
+                <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                    스토리보드 수정
+                </h1>
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4" style="margin-top: 50px; margin-right:50px; margin-left:50px;">
+                <div class="card-body">
+
+        <div class="table-responsive">
+
+<form id="alert" method="get" action="/scene/{{updateScene.scene_id}}/updatescene">
+    <input id="pk" type="hidden" name="scene_id" value="{{updateScene.scene_id}}">
+
+
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+        <tr>
+            <td>시나리오<input class="ml-2" name="scenario_id" type="text" readonly value="{{updateScene.scenario_name}}"></td>
+            <td>씬 번호<input class="int1 ml-2" name="scene_num" type="number" value="{{updateScene.scene_num}}"></td>
+            <td>첨부파일<input id="updateFile ml-2" name="newfile" type="file" placeholder="파일을 첨부하세요">
+                <input id="deletefile" type="button" onclick="deleteFile()" value="파일삭제" />
+            </td>
+        </tr>
+
+        <tr>
+            <td>장면 요약<input class="field1 ml-2" name="scene_content" type="text" value="{{updateScene.scene_content}}"/></td>
+        </tr>
+
+        <tr>
+            <td> <img src="{{file.file_path}}" style="width: 450px; height: 320px;"/></td>
+            <td colspan="2"><textarea class="field2" name="story_board" cols="45" rows="15">{{updateScene.story_board}}</textarea></td>
+        </tr>
+        <tr>
+            <td colspan="3">촬영장소 <input class="field3 ml-2" name="scene_place" type="text" value="{{updateScene.scene_place}}"/></td>
+        </tr>
+        </thead>
+    </table>
+    <div class="d-flex justify-content-center align-items-center">
+        <input type="submit" value="수정" role="button" class="btn btn-success"
+               onclick="mappingurl('/scene/{{updateScene.scene_id}}/updatescene',3,'수정', 1)"/> &nbsp;&nbsp;
+        <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
+
+    </div>
+</form>
+
+
+        </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br/>
+</div>
+
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+<!-- /.container-fluid -->
+</div>
+<!-- End of Main Content -->
+{{>layout/footer}}
+</div>
+
+<!-- End of Content Wrapper -->
+
+<script src="/static/js/cu_alert.js"></script>
+<script src="/static/js/uploadFile.js"></script>
+{{>layout/bootstrapjs}}
 </body>
 </html>

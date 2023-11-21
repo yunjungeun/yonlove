@@ -3,19 +3,32 @@
 
 <mapper namespace="com.example.yoonlove.mapper.ScriptPaperMapper">
     <select id="selectScriptPaper" resultType="com.example.yoonlove.dto.ScriptPaperDto">
-        select * from scriptpaper where script_id = #{script_id}
+        select * from scriptview where script_id = #{script_id}
     </select>
 
 
     <select id="totalScriptPost" parameterType="com.example.yoonlove.dto.PageDto">
-        select count(${id}) as totalPost from ${table}
-        where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
+        select count(${id}) as totalPost from scriptview
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
         <!--검색어가 있다면 아래 조건문을 실행-->
         <if test="title != null and search != ''">
             AND script_id like '%${title}%'
         </if>
         <if test="content != null and search != ''">
             AND action_content like '%${content}%'
+        </if>
+
+        <if test="writer != null and search != ''">
+            AND scenario_name like '%${writer}%'
+        </if>
+
+        <if test="pkid != null">
+            AND scene_id = #{pkid}
         </if>
     </select>
 
@@ -26,46 +39,64 @@
         from(select rownum as r, t.*
 
         <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
-        from (select * from ${table}
-        where 1=1
+        from (select * from scriptview
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
         <if test="title != null and search != ''">
-            AND script_id like '%${title}%'
+            AND scene_num like '%${title}%'
         </if>
         <if test="content != null and search != ''">
             AND action_content like '%${title}%'
         </if>
-        order by ${id} desc) t)
 
+
+        <if test="writer != null and search != ''">
+            AND scenario_name like '%${writer}%'
+        </if>
+        order by ${id} desc) t)
         <!-- rownum을 기준(r)으로 시작번호부터 끝번호까지 검색   -->
         where r between #{postStart} and #{postEnd}
+    </select>
+
+
+    <!--옵션값에 넣기 위한 fk테이블의 검색값을 가져오는 쿼리-->
+    <select id="selectFk">
+        SELECT scene_id, scene_num, scene_place, scenario_id FROM scene order by scene_id desc
+    </select>
+
+    <select id="selectTimeFk">
+        SELECT table_id, film_time, time_num, ok_ng, slate_time FROM timetable order by table_id desc
     </select>
 
 
     <insert id="insertScriptPaper">
         insert into scriptpaper values(
         (select concat('script', (nvl(max(to_number(substr(script_id, 7))), 0)+1)) from scriptpaper),<!--pk코드 자동증가(수정2)-->
-        #{scene_id}, <!--script id값 /나중에 조인해서 스크립트 번호가 가야됨-->
+        #{scene_id}, <!--옵션값으로 들어가야되는부분-->
         #{video_name}, <!--영상제목-->
         #{video_date}, <!--영상촬영 날짜-->
-        #{video_time}, <!--영상 촬영시작시간-->
-        #{video_end_time}, <!--영상 촬영 종료시간-->
-        #{action_image}, <!--액션이미지 첨부파일 주소-->
+        null, <!--안씀(vide_time)-->
+        #{video_start_time}, <!--영상 촬영 종료시간-->
+        null, <!--액션이미지-->
         #{action_content}, <!--액션 내용-->
-        #{position_image}, <!--카메라포지션 첨부파일 주소-->
-        #{conti} <!--콘티-->
+        null, <!--카메라포지션 첨부파일 주소-->
+        #{conti}, <!--콘티-->
+        #{video_end_time} <!--영상 촬영 종료시간-->
         )
     </insert>
 
     <update id="updateScriptPaper">
         update scriptpaper
-        set scene_id = #{scene_id},
+        set
         video_name = #{video_name},
         video_date = #{video_date},
-        video_time = #{video_time},
+        video_start_time = #{video_start_time},
         video_end_time = #{video_end_time},
-        action_image = #{action_image},
         action_content = #{action_content},
-        position_image = #{position_image},
         conti = #{conti}
         where script_id = #{script_id}
     </update>
@@ -78,7 +109,7 @@
     <!--타임테이블-->
     <select id="totalTimeTablePost" parameterType="com.example.yoonlove.dto.PageDto">
         select count(${id}) as totalPost from ${table}
-        where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
+            where 1=1
         <!--검색어가 있다면 아래 조건문을 실행-->
         <if test="title != null and search != ''">
             AND table_id like '%${title}%'
@@ -93,7 +124,7 @@
 
         <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
         from (select * from ${table}
-        where 1=1
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
         <if test="title != null and search != ''">
             AND table_id like '%${title}%'
         </if>
@@ -105,9 +136,9 @@
 
     <insert id="insertTimeTable">
         insert into timetable values(
-        (select concat('time',(nvl(max(to_number(substr(table_id, 4)), 0)+1))) from timetable),<!--pk코드 자동증가(수정2)-->
+        (select concat('time',(nvl(max(to_number(substr(table_id, 5))), 0)+1)) from timetable),<!--pk코드 자동증가(수정2)-->
         #{film_time},<!--촬영시간(몇시간 몇분)-->
-        #{time_num},<!--타임테이블 번호 자동증가 해야됨-->
+        (select nvl(max(time_num),0)+1 from timetable where script_id=#{script_id}),<!--타임테이블 번호 자동증가 해야됨-->
         #{ok_ng}, <!--ok판정-->
         #{slate_time}, <!--슬레이트시간-->
         #{script_id} <!--script id값 /나중에 조인해서 스크립트 번호가 가야됨-->

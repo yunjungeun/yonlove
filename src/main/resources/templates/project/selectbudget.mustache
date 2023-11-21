@@ -4,52 +4,80 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>예산 상세보기</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/cu_alert.js"></script>
+    {{>layout/header}}
 </head>
-<body>
-<div id="div_box">
-    <h1> 예산서 상세보기</h1>
-    <hr>
-    <table board="1" cellpascing="0" cellpading="0">
+<body id="page-top">
+
+{{>layout/sidebar}}
+{{>layout/topbar}}
+
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+            <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px; margin-left :150px; margin-right:150px;"> 항목이름: {{selectBudget.budget_name}}</h1>
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4" style="margin-top: 50px;margin-left:150px; margin-right:150px;">
+                <div class="card-header py-3">
+     <hr>
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <tr>
-            <td bgcolor="pink" width="70">예산아이디 </td>
-            <td align="left">{{selectBudget.budget_id}}</td>
+            <td style="text-align: center;">기획명</td>
+            <td align="left">{{selectBudget.project_name}}</td>
         </tr>
 
         <tr>
-            <td bgcolor="pink">항목명</td>
-            <td align="left">{{selectBudget.budget_name}}</td>
-        </tr>
-
-        <tr>
-            <td bgcolor="pink">내용</td>
+            <td style="text-align: center;">내용</td>
             <td align="left">{{selectBudget.budget_content}}</td>
         </tr>
 
         <tr>
-            <td bgcolor="pink">금액</td>
-            <td align="left">{{selectBudget.budget_amount}}</td>
-        </tr>
-
-        <tr>
-            <td bgcolor="pink">항목코드</td>
-            <td align="left">{{selectBudget.budget_code}}</td>
-        </tr>
-
-        <tr>
-            <td bgcolor="pink">예산서</td>
-            <td align="left">{{selectBudget.budget_flag}}</td>
-        </tr>
-
-        <tr>
-            <td bgcolor="pink">기획아이디</td>
-            <td align="left">{{selectBudget.project_id}}</td>
+            <td style="text-align: center;">금액</td>
+            <td align="left">{{selectBudget.fomattedAmount}} 원</td>
         </tr>
     </table>
     <hr>
-    <a href="/project/updatebudgetview/{{selectBudget.budget_id}}">게시글 수정</a>&nbsp;&nbsp;&nbsp;
-    <a href="/project/deletebudget/{{selectBudget.budget_id}}">게시글 삭제</a>&nbsp;
-    <a href="/project/listbudget">전체 목록 보기</a>
+
+    <div class="d-flex justify-content-center align-items-center">
+        <a href="/project/updatebudgetview/{{selectBudget.budget_id}}" role="button" class="btn btn-success">수정</a>&nbsp;&nbsp;&nbsp;
+        <a href="javascript:void(0);" class="btn btn-danger" onclick="deleteAlert('/project/deletebudget/{{selectBudget.budget_id}}')">삭제</a>&nbsp;&nbsp;&nbsp;
+        <a href="javascript:history.back()" role="button" class="btn btn-secondary">뒤로</a>
+    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+<!-- /.container-fluid -->
+</div>
+<!-- End of Main Content -->
+{{>layout/footer}}
+</div>
+</div>
+<!-- End of Content Wrapper -->
+
+<script>
+    var url = "/project/budget";
+</script>
+
+<script src="/static/js/dateformat.js"></script>
+<script src="/static/js/delete.js"></script>
+<script src="/static/js/deletepost.js"></script>
+<script src="/static/js/projectjs/defaultdate.js"></script>
+
+{{>layout/bootstrapjs}}
 </body>
 </html>

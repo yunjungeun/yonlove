@@ -1,15 +1,16 @@
 package com.example.yoonlove.controller;
 
-import com.example.yoonlove.dto.PageDto;
-import com.example.yoonlove.dto.ScenarioDto;
-import com.example.yoonlove.service.PagingService;
-import com.example.yoonlove.service.ScenarioService;
+import com.example.yoonlove.dto.*;
+import com.example.yoonlove.service.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -18,10 +19,21 @@ public class ScenarioController {
     private ScenarioService scenarioService;
     @Autowired
     private PagingService pagingService;
+    @Autowired
+    private SceneService sceneService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private DropDownService dropDownService;
 
     @GetMapping("/scenario/scenario")
-    public ModelAndView selectListScenario(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page){
-        PageDto pageDto = new PageDto("scenario","scenario_id",page,pdto);
+    public ModelAndView selectListScenario(PageDto pdto, @RequestParam(name="page", defaultValue = "1") int page,
+                                           Principal user){
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        PageDto pageDto = new PageDto("scenario","scenario_id",page,pdto, companyId);
         PageDto pageInfo = pagingService.paging(pageDto);
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
         String rink = pagingService.pageRink(pageDto);
@@ -38,24 +50,58 @@ public class ScenarioController {
         return mv;
     }
 
-    @GetMapping("/scenario/{scenario_id}/selectscenario/")
-    public ModelAndView selectScenario(ScenarioDto scenarioDto){
+    @GetMapping("/scenario/{scenario_id}/selectscenario")
+    public ModelAndView selectScenario(ScenarioDto scenarioDto, @RequestParam(name="page", defaultValue = "1") int page,
+                                       PageDto pdto, Principal user){
+        //유저정보 가저오는 dto //서브게시판에 우리회사만 가져오려면 있어야함
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        //기존 select
         ScenarioDto dto = scenarioService.selectScenario(scenarioDto);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/scenario/selectscenario");
         mv.addObject("selectScenario", dto);
+        //기존 select end
+
+        //fk 검색 값 설정
+        pdto.setPkid(dto.getScenario_id());
+        PageDto pageDto = new PageDto("scene","scene_id",page,pdto,companyId);
+        PageDto pageInfo = pagingService.paging(pageDto);
+
+        List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page);
+        String rink = pagingService.subPageRink(pageDto,"scenario");
+        List<SceneDto> subList = sceneService.selectListScene(pageInfo);
+        mv.addObject("selectListScene", subList);
+        mv.addObject("pageDto", pageDto);
+        mv.addObject("prefixUrl", "scenario"); //컨트롤러 이름
+        mv.addObject("paging", pageInfo);  //페이징정보
+        mv.addObject("pagelist", pageList); //페이지 하단부 페이지 리스트
+        mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
+
         return mv;
     }
 
     @GetMapping("/scenario/insertscenarioview")
-    public String insertView(){
-        return "/scenario/insertscenario";
+    public ModelAndView insertView(Principal user) throws JsonProcessingException {
+
+        //유저정보 가저오는 dto //서브게시판에 우리회사만 가져오려면 있어야함
+        UserDto userInfo = userService.getUser(user.getName());
+        String companyId = userInfo.getCompany_id(); //회사 id 스트링
+
+        String jsonList = dropDownService.dropDownOption("project",null, companyId);
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/scenario/insertscenario");
+        mv.addObject("fkList", jsonList);
+        return mv;
     }
 
     @GetMapping("/scenario/insertscenario")
+    @ResponseBody
     public String insertScenario(ScenarioDto dto){
         scenarioService.insertScenario(dto);
-        return "redirect:/scenario/scenario";
+        return "/scenario/scenario";
     }
 
     @GetMapping("/scenario/{scenario_id}/updatescenarioview")
@@ -68,9 +114,10 @@ public class ScenarioController {
     }
 
     @GetMapping("/scenario/{scenario_id}/updatescenario")
+    @ResponseBody
     public String updateScenario(ScenarioDto dto){
         scenarioService.updateScenario(dto);
-        return "redirect:/scenario/scenario";
+        return "/scenario/scenario";
     }
 
 

@@ -1,0 +1,54 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{>layout/header}}
+</head>
+<body>
+<div id="page-top">
+    {{>layout/sidebar}}
+    {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container">
+
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                촬영시간표 수정
+            </h1>
+
+            <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
+                <div class="card-header py-3" style="center;"> <!--카드헤더 div-->
+                </div><!--카드헤더 end-->
+
+                <div class="card-body"><!--카드 바디-->
+                    <form id="alert" action="/plan/{{updateScheduleTime.time_id}}/updateScheduleTime" method="get">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <tr>
+                                <th style="text-align: center;">시작시간<input name="start_time" type="time"  class="field1" value="{{updateScheduleTime.start_time}}"></th>
+                                <th style="text-align: center;">종료시간<input name="end_time" type="time"  class="field2" value="{{updateScheduleTime.end_time}}"></th>
+                                <th style="text-align: center;">촬영내용<input name="film_content" type="text"  class="field3" value="{{updateScheduleTime.film_content}}"></th>
+                            </tr>
+
+                        </table>
+                        <div class="d-flex justify-content-end">
+                            <input type="submit" value="수정" class="btn btn-primary mr-2" onclick="mappingurl('/plan/{{updateScheduleTime.time_id}}/updateScheduleTime', 3,'수정')">
+                            <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
+                        </div>
+                    </form>
+
+                </div><!--카드바디-->
+            </div><!--카드 end-->
+
+        </div><!--컨테이너 end-->
+    </div><!--warpper end-->
+</div><!--page-top end-->
+{{>layout/footer}}
+</div>
+
+<script src="/static/js/cu_alert.js"></script>
+{{>layout/bootstrapjs}}
+</body>
+</html>

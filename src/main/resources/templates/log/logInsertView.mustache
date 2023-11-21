@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 리스트</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{>layout/header}}
+</head>
+<body>
+<div id="page-top">
+    {{>layout/sidebar}}
+    {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container">
+
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                제작일지 작성
+            </h1>
+
+            <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
+                <div class="card-header py-3" style="center;"> <!--카드헤더 div-->
+                </div>
+
+                <div class="card-body" style="display: inline-block; text-align: left;" >
+                    <form id="alert" action="/log/insertLog" method="get">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th style="text-align: center;">기획명</th>
+                                <th style="text-align: center;">일지번호</th>
+                                <th style="text-align: center;">일지 기록일</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr>
+                                <td style="text-align: center;"> <select id="fk1" name="project_id"></select></td>
+                                <td style="text-align: center;"><input name="log_num" type="number" placeholder="미입력시 자동입력" class="int1" ></td>
+                                <td style="text-align: center;"><input name="log_date" type="date" class="field1"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="text-align: center;">
+                                    <textarea name="log_content" placeholder="내용을 입력하세요" class="field2" style="height: 30vh; width: 100%;  display: block; margin: 0 auto;"></textarea>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div style="text-align: center">
+                            <button type="submit" class="btn btn-primary" onclick="mappingurl('/log/insertLog',2,'작성',1)">등록</button>
+                            <a href="/log/log" class="btn btn-secondary" style="text-decoration: none;">취소</a>
+                        </div>
+                    </form>
+
+            </div><!--카드바디-->
+        </div><!--카드 end-->
+
+    </div><!--컨테이너 end-->
+</div><!--warpper end-->
+</div><!--page-top end-->
+{{>layout/footer}}
+</div>
+
+<script>
+    var jsonValue = '{{{fkList}}}';
+
+    var selectName = "project_id";
+        var url = "/log/log";
+</script>
+
+<script src="/static/js/dropdown.js"></script>
+<script src="/static/js/cu_alert.js"></script>
+
+{{>layout/bootstrapjs}}
+</body>
+</html>
+

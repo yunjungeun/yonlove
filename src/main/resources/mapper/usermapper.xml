@@ -1,25 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!--부서-->
-<mapper namespace="com.example.yoonlove.mapper.UserMapper">
 
+<mapper namespace="com.example.yoonlove.mapper.UserMapper">
     <select id="getUser" resultType="com.example.yoonlove.dto.UserDto">
         SELECT * FROM users where user_id = #{user_id}
     </select>
 
 
     <insert id="signUp" parameterType="com.example.yoonlove.dto.UserDto">
-        insert into users (user_id, pw, authority, sign_date) values(
-        #{user_id},
-        #{pw},
-        #{authority},
-        '23/10/16'
+        insert into users (user_id, pw, user_name, nickname, phone, email, address1, address2, address3, zip_code, authority, sign_date, company_id) values(
+        #{user_id},  <!--id-->
+        #{pw},         <!--비번-->
+        #{user_name},
+        #{nickname},<!--닉네임-->
+        #{phone},<!--핸드폰-->
+        #{email},<!--이메일-->
+        #{address1},  <!--주소1-->
+        #{address2},  <!--주소2-->
+        #{address3},  <!--주소3-->
+        #{zip_code},   <!--우편번호-->
+        '일반',   <!--권한-->
+        (select * from todaytime),   <!--가입일-->
+        'company9'
         )
     </insert>
 
     <select id="getNick" resultType="com.example.yoonlove.dto.UserDto">
         SELECT nickname FROM users where user_id = #{user_id}
+    </select>
+
+
+    <insert id="insertCompany" parameterType="com.example.yoonlove.dto.CompanyDto">
+        INSERT INTO company VALUES (
+        (select concat('company', (nvl(max(to_number(substr(company_id, 8))), 0)+1)) from company),<!--pk코드 자동증가(수정2)-->
+         #{company_name},
+        '2023/10/25',
+        #{company_homepage},
+        #{company_address1},
+        #{company_address2},
+        #{company_email},
+        #{zip_code},
+        #{company_address3}
+        )
+    </insert>
+
+    <select id="lastCompanyID"  >
+
+        select concat('company',max(to_number(substr(company_id,8)))) from  company
+    </select>
+
+    <update id="updateUserCompanyID" >
+        UPDATE users
+        SET company_id = #{company},
+            authority = 'admin'
+        WHERE user_id = #{user}
+    </update>
+
+
+
+
+
+    <update id="updateUser" parameterType="com.example.yoonlove.dto.UserDto" >
+
+        update users
+        set company_id = #{company_id}
+
+        where user_id = #{user_id}
+
+
+    </update>
+
+
+
+
+
+
+
+    <select id="selectId" resultType="boolean">  <!-- !!!!!!아이디 중복체크 !!!!!!!!! -->
+        SELECT COUNT(*)
+        FROM USERS
+        WHERE user_id = #{user_id}
+
     </select>
 
 </mapper>

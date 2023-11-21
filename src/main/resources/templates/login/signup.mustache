@@ -4,15 +4,232 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<form method="get" action="/signup">
-    아이디<input name="user_id" type="text">
-    비번<input name="pw" type="password">
-    역할<input name="authority" type="text">
-    <input type="submit" value="회원가입">
-</form>
 
+    <title>회원가입</title>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    {{>layout/header}}
+</head>
+
+<body class="bg-gradient-primary">
+<div class="container" style="max-width: 550px;">
+    <h2>회원가입</h2>
+    <form id="alert" class="joinForm" method="get" action="/signup">
+
+        <!-- required 란?
+        사용자가 해당 필드를 작성하지 않고 제출하려고 할 때 브라우저가 사용자에게 경고를 표시하고 제출을 막는 역할
+        즉, 사용자에게 필수 입력 사항이란것을 알려주는 요소이다.-->
+
+        <label for="user_id">아이디:</label>
+        <input type="text" class="field1" id="user_id" name="user_id" required>
+        <input type="hidden" name="decide_id" id="decide_id"> <!-- name="decide_id"  삭제여부 추후 확인예정!!!!!!-->
+        <p><span id="decide" style='color:red;'>ID 중복 여부를 확인</span>
+            <input type="button" id="check_button" value="ID 중복 검사" onclick="checkIdDuplicate();"></p>
+
+
+        <label for="pw">비밀번호:</label>
+        <input type="password" class="field2" id="pw" name="pw" onkeyup="passwordCheckFunction();" required>
+
+        <label for="confirm_password">비밀번호 확인:</label>
+        <input type="password" class="field3" id="confirm_password" onkeyup="passwordCheckFunction();"  required>
+        <div id="passwordCheckMessage" style="color: red;"></div>
+
+        <label for="name">이름:</label>
+        <input type="text" class="field4" id="user_name" name="user_name" required>
+
+        <label for="nickname">닉네임 :</label>
+        <input type="text" class="field5" id="nickname" name="nickname" required>
+
+        <label for="phone">핸드폰번호:</label>
+        <input type="text" class="field6" id="phone" name="phone" required>
+
+        <label for="email">이메일:</label>
+        <input type="email" class="field7" id="email" name="email" required>
+
+        <label for="zip_code">우편번호:</label>
+        <input type="text" class="field8" id="zip_code" name="zip_code" placeholder="우편번호" required>
+        <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+
+        <label for="address">주소:</label>
+        <input type="text" class="field9" id="address1"  name="address1" placeholder="주소" required ><br>
+        <input type="text" class="field10" id="address2" name="address2" placeholder="상세주소">
+        <input type="text" class="field11"id="extraAddress" name="address3" placeholder="참고항목">
+
+        <br/>
+        <label for="terms">약관에 동의합니다:</label>
+        <input type="checkbox" id="terms" required>
+        <br/>
+        <button type="submit" id="submitBtn" onclick="mappingurl('/signup', 11,'작성')"
+                style="display: block; margin: 0 auto;">회원가입</button>
+    </form>
+</div>
+
+    <script> //아래는 카카오 주소검색 API 내용입니다.
+        var usercomfim = {{ConfirmId}}
+
+        function execDaumPostcode {
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                    // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                    var addr = ''; // 주소 변수
+                    var extraAddr = ''; // 참고항목 변수
+
+                    //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                    if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                        addr = data.roadAddress;
+                    } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                        addr = data.jibunAddress;
+                    }
+
+                    // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                    if(data.userSelectedType === 'R'){
+                        // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                        // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                        if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                            extraAddr += data.bname;
+                        }
+                        // 건물명이 있고, 공동주택일 경우 추가한다.
+                        if(data.buildingName !== '' && data.apartment === 'Y'){
+                            extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                        }
+                        // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                        if(extraAddr !== ''){
+                            extraAddr = ' (' + extraAddr + ')';
+                        }
+                        // 조합된 참고항목을 해당 필드에 넣는다.
+                        document.getElementById("extraAddress").value = extraAddr; //참고항목
+
+                    } else {
+                        document.getElementById("extraAddress").value = '';  //참고항목
+                    }
+
+                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                    document.getElementById('zip_code').value = data.zonecode;  //우편번호
+                    document.getElementById("address1").value = addr;   //메인주소
+                    // 커서를 상세주소 필드로 이동한다.
+                    document.getElementById("address2").focus();   //상세주소
+                }
+            }).open();
+        }
+</script>
+
+<script>
+    function execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                const addressInput = document.getElementById("address1");
+                const zipCodeInput = document.getElementById("zip_code");
+                const extraAddressInput = document.getElementById("extraAddress"); // extraAddress 필드 가져오기
+
+                addressInput.value = data.address;
+                zipCodeInput.value = data.zonecode;
+
+                // 각 주소 정보 가져오기
+                const address = data.address;
+                const zonecode = data.zonecode;
+                const userSelectedType = data.userSelectedType;
+
+                // extraAddress 필드 설정 (도로명 주소일 때만)
+                if (userSelectedType === 'R') {
+                    // 참고항목 조합
+                    let extraAddr = '';
+                    if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                        extraAddr += data.bname;
+                    }
+                    if (data.buildingName !== '' && data.apartment === 'Y') {
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    if (extraAddr !== '') {
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+
+                    // extraAddress 필드에 설정
+                    extraAddressInput.value = extraAddr;
+                } else {
+                    // 도로명 주소가 아닌 경우, extraAddress 필드를 비웁니다.
+                    extraAddressInput.value = '';
+                }
+
+                validateForm(); // 유효성 검사 실행
+            }
+        }).open();
+    }
+
+    const userIdInput = document.getElementById("user_id");
+    const pwInput = document.getElementById("pw");
+    const confirmPasswordInput = document.getElementById("confirm_password");
+    const nameInput = document.getElementById("user_name");
+    const nicknameInput = document.getElementById("nickname");
+    const phoneInput = document.getElementById("phone");
+    const emailInput = document.getElementById("email");
+    const addressInput = document.getElementById("address1");
+    const address2Input = document.getElementById("address2");
+    const extraAddressInput = document.getElementById("extraAddress");
+    const termsCheckbox = document.getElementById("terms");
+    const submitButton = document.getElementById("submitBtn");
+
+
+
+  function validateForm() {  // 각 필드값에 유효성 검사하는 함수
+
+        const userId = userIdInput.value.trim();
+        const pw = pwInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+        const name = nameInput.value.trim();
+        const nickname = nicknameInput.value.trim();
+        const phone = phoneInput.value.trim();
+        const email = emailInput.value.trim();
+        const address1 = addressInput.value.trim();
+        const address2 = address2Input.value.trim();
+
+        const extraAddress = extraAddressInput.value;
+       const termsAgreed = termsCheckbox.checked;
+
+        const isInvalid = (
+        userId === "" ||
+        pw === "" ||
+        confirmPassword === "" ||
+        name === "" ||
+        nickname === "" ||
+        phone === "" ||
+        email === "" ||
+        address1 === "" ||
+        address2 === "" ||
+        extraAddress === "" ||
+        !termsAgreed
+    );
+
+   if (isInvalid) {
+        submitButton.disabled = true;
+
+    } else {
+        submitButton.disabled = false;
+    }
+}
+
+    userIdInput.addEventListener("input", validateForm);
+    pwInput.addEventListener("input", validateForm);
+    confirmPasswordInput.addEventListener("input", validateForm);
+    nameInput.addEventListener("input", validateForm);
+    nicknameInput.addEventListener("input", validateForm);
+    phoneInput.addEventListener("input", validateForm);
+    emailInput.addEventListener("input", validateForm);
+    addressInput.addEventListener("input", validateForm);
+    address2Input.addEventListener("input", validateForm);
+    extraAddressInput.addEventListener("input", validateForm);
+    termsCheckbox.addEventListener("change", validateForm);
+</script>
+<script>
+    var url="/index";
+</script>
+
+<script src="/static/js/join.js"></script>  <!--아이디,비밀번호 확인기능 -->
+<script src="/static/js/cu_alert.js"></script>
 </body>
 </html>

@@ -1,0 +1,197 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>기업 회원가입</title>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    {{>layout/header}}
+</head>
+
+<body class="bg-gradient-primary">
+<div class="container" style="max-width: 550px;">
+    <h2>기업 회원가입</h2>
+    <form id="alert" method="get" action="/companysignup">
+
+
+
+
+        <label for="company_name">기업명:</label>
+        <input type="text" class="field1" id="company_name" name="company_name" required>
+
+
+
+        <label for="company_homepage">기업 홈페이지 :</label>
+        <input type="text" class="field2" id="company_homepage" name="company_homepage" required>
+
+        <label for="zip_code">우편번호:</label>
+        <input type="text" class="field3" id="zip_code" name="zip_code" placeholder="우편번호" required>
+        <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+
+        <label for="company_address1">주소:</label>
+        <input type="text" class="field4" id="company_address1"  name="company_address1" placeholder="주소" required ><br>
+        <input type="text" class="field5" id="company_address2" name="company_address2" placeholder="상세주소">
+        <input type="text" class="field6" id="company_address3" name="company_address3" placeholder="참고항목">
+
+        <label for="company_email">사업자 이메일:</label>
+        <input type="text" class="field7" id="company_email" name="company_email" required>
+
+        <br/>
+        <button type="submit" id="submitBtn" onclick="mappingurl('/companysignup', 7,'가입')"
+                style="display: block; margin: 0 auto;">기업 회원가입</button>
+        <!--컨트롤러 insert 주소 ,    클릭 후 메인주소, 작성값의 갯수 , text 나오는값 -->
+    </form>
+</div>
+
+<script>
+    // 카카오 주소검색
+function execDaumPostcode() {   // 우편번호 찾기 버튼을 누르면,
+    new daum.Postcode({    //우편번호 실행
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var addr = ''; // 주소 변수
+            var extraAddr = ''; // 참고항목 변수
+
+            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                addr = data.roadAddress;
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                addr = data.jibunAddress;
+            }
+
+            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+            if(data.userSelectedType === 'R'){
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraAddr !== ''){
+                    extraAddr = ' (' + extraAddr + ')';
+                }
+                // 조합된 참고항목을 해당 필드에 넣는다.
+                document.getElementById("company_address3").value = extraAddr;
+
+            } else {
+                document.getElementById("company_address3").value = '';
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('zip_code').value = data.zonecode;
+            document.getElementById("company_address1").value = addr;  //메인주소
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById("company_address2").focus();  //상세주소
+        }
+    }).open();
+}
+</script>
+
+<script>
+
+      function execDaumPostcode() {
+          new daum.Postcode({
+              oncomplete: function(data) {
+                  const addressInput = document.getElementById("company_address1");
+                  const zipCodeInput = document.getElementById("zip_code");
+                  const address3Input = document.getElementById("company_address3"); // extraAddress -> company_address3 필드 가져오기
+
+                  addressInput.value = data.address;
+                  zipCodeInput.value = data.zonecode;
+
+                  // 각 주소 정보 가져오기
+                  const address = data.address;
+                  const zonecode = data.zonecode;
+                  const userSelectedType = data.userSelectedType;
+
+                  // extraAddress 필드 설정 (도로명 주소일 때만)
+                  if (userSelectedType === 'R') {
+                      // 참고항목 조합
+                      let extraAddr = '';
+                      if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                          extraAddr += data.bname;
+                      }
+                      if (data.buildingName !== '' && data.apartment === 'Y') {
+                          extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                      }
+                      if (extraAddr !== '') {
+                          extraAddr = ' (' + extraAddr + ')';
+                      }
+
+                      // extraAddress 필드에 설정
+                      address3Input.value = extraAddr;
+                  } else {
+                      // 도로명 주소가 아닌 경우, extraAddress 필드를 비웁니다.
+                      address3Input.value = '';
+                  }
+
+                  validateForm(); // 유효성 검사 실행
+              }
+          }).open();
+      }
+
+          const nameInput = document.getElementById("company_name");
+          const homepageInput = document.getElementById("company_homepage");
+          const addressInput = document.getElementById("company_address1");
+          const address2Input = document.getElementById("company_address2");
+          const address3Input = document.getElementById("company_address3");
+          const emailInput = document.getElementById("company_email");
+          const submitButton = document.getElementById("submitBtn");
+
+
+        function validateForm() {  // 각 필드값에 유효성 검사하는 함수
+
+              const name = nameInput.value.trim();
+              const homepage = homepageInput.value.trim();
+              const address1 = addressInput.value.trim();
+              const address2 = address2Input.value.trim();
+              const address3 = address3Input.value;
+              const email = emailInput.value.trim();
+
+
+              const isInvalid = (
+              name === "" ||
+              homepage === "" ||
+              address1 === "" ||
+              address2 === "" ||
+              address3 === "" ||
+              email === "" ||
+
+          );
+
+         if (isInvalid) {
+              submitButton.disabled = true;
+
+          } else {
+              submitButton.disabled = false;
+          }
+      }
+
+          nameInput.addEventListener("input", validateForm);
+          homepageInput .addEventListener("input", validateForm);
+          addressInput.addEventListener("input", validateForm);
+          address2Input.addEventListener("input", validateForm);
+          address3Input.addEventListener("input", validateForm);
+          emailInput.addEventListener("input", validateForm);
+
+</script>
+<script>
+    var url="/index";
+</script>
+<script src="/static/js/cu_alert.js"></script>
+
+</body>
+</html>

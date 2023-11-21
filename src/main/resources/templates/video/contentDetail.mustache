@@ -1,0 +1,117 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>상세보기</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/delete.js"></script>
+    {{>layout/header}}
+</head>
+
+<body id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
+
+
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+            <div style="text-align: center; display: block; margin-top:40px;" > <!-- 수정 ! 마진 탑 100->수정 -->
+                <h1 class="h3 mb-2 text-gray-800" >영상 상세보기</h1>
+            </div>
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4" style="margin-top: 50px; margin-right: 300px; margin-left: 300px">
+                <div class="card-header py-3">
+
+
+<div style="margin-left: 15%; margin-right: 15%;  margin-top: 5%;">
+    <div style="display: inline-block;">
+
+            <div class="mb-3" style="text-align: center; display: inline-block;">
+                <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>영상 제목</strong>
+                    <input id="formGroupExampleInput" class="field1 card shadow mb-4"
+                           value="{{content.video_name}}"  name="video_name" type="text" style="width: 100%; text-align: center">
+                </label> </div>
+
+            <div class="mb-3" style="text-align: center; display: inline-block;">
+                <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>영상 설명</strong>
+                    <input id="formGroupExampleInput" class="field2 card shadow mb-4"
+                          value="{{content.video_sub}}" name="video_sub" type="text" style="width: 100%; text-align: center">
+                </label> </div>
+
+
+            <div class="mb-3" style="text-align: center; display: inline-block;">
+                <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>영상 주소</strong>
+                    <input id="formGroupExampleInput" class="field3 card shadow mb-4"
+                           value="{{content.video_url}}" name="video_url" type="text" style="width: 100%; text-align: center">
+                </label> </div>
+            <div class="mb-3" style="text-align: center; display: inline-block;">
+                <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>업로드날짜</strong>
+                    <input id="formGroupExampleInput" class="field4 card shadow mb-4"
+                           value="{{content.upload_date}}" name="upload_date" type="date" style="width: 200px; text-align: center">
+                </label> </div>
+            <div class="mb-3" style="text-align: center; display: inline-block;">
+                <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>영상수익</strong>
+                    <input id="formGroupExampleInput" class="field5 card shadow mb-4"
+                           value="{{content.video_profit}}" name="video_profit" type="number" style="width: 100%; text-align: center">
+                </label> </div>
+            <div class="mb-3" style="text-align: center; display: inline-block;">
+                <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>좋아요수</strong>
+                    <input id="formGroupExampleInput" class="field6 card shadow mb-4"
+                           value="{{content.like_cnt}}"  name="like_cnt"  type="number" style="width: 100%; text-align: center">
+                </label> </div>
+            <div class="mb-3" style="text-align: center; display: inline-block;">
+                <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>조회수</strong>
+                    <input id="formGroupExampleInput" class="field7 card shadow mb-4"
+                           value="{{content.video_view}}"  name="video_view" type="number" style="width: 100%; text-align: center">
+                </label> </div>
+            <div class="mb-3" style="text-align: center; display: inline-block;">
+                <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>프로젝트ID</strong>
+                    <input id="formGroupExampleInput" class="field8 card shadow mb-4"
+                           value="{{content.project_id}}"name="project_id" type="text" style="width: 100%; text-align: center">
+                </label> </div>
+
+    </div>
+
+    <div style="display: flex; justify-content: center;">
+<a href="/vd/video" class="btn btn-primary">목록</a>&nbsp;&nbsp;
+<a href="/vd/{{content.video_id}}/UpdateView" class="btn btn-success">수정</a>&nbsp;&nbsp;
+<a href="javascript:void(0);" class="btn btn-danger" onclick="deleteAlert('/vd/{{content.video_id}}/delete')">삭제</a>
+
+         </div>
+    </div>
+</div>
+<!--<div class="card-body">
+</div>-->
+
+</div>
+<br/>  <!-- 추가 -->
+</div>
+
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+<!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+</div>
+<!-- End of Content Wrapper -->
+<br/>
+
+<script>
+    var url="vd/video";
+</script>
+<script src="/static/js/cu_alert.js"></script>
+
+{{>layout/bootstrapjs}}
+</body>
+</html>

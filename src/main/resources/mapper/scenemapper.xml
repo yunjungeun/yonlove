@@ -2,19 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.yoonlove.mapper.SceneMapper">
-    <select id="selectScene">
-        SELECT * FROM scene where scene_id = #{scene_id}
+    <select id="selectScene" parameterType="com.example.yoonlove.dto.SceneDto">
+        SELECT * FROM storyboardlist where scene_id = #{scene_id}
     </select>
 
+    <!--옵션값에 넣기 위한 fk테이블의 검색값을 가져오는 쿼리-->
+    <select id="selectFk">
+        SELECT scenario_id, scenario_num, scenario_name FROM scenario order by scenario_id desc
+    </select>
+
+
     <select id="totalScenePost" parameterType="com.example.yoonlove.dto.PageDto">
-        select count(${id}) as totalPost from ${table}
-        where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
+        select count(${id}) as totalPost from storyboardlist
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
         <!--검색어가 있다면 아래 조건문을 실행-->
         <if test="title != null and search != ''">
             AND scene_num like '%${title}%'
         </if>
         <if test="content != null and search != ''">
             AND scene_content like '%${content}%'
+        </if>
+        <if test="writer != null and search != ''">
+            AND scenario_name like '%${writer}%'
+        </if>
+        <if test="pkid != null">
+            AND scenario_id = #{pkid}
         </if>
     </select>
 
@@ -25,13 +42,27 @@
         from(select rownum as r, t.*
 
         <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
-        from (select * from ${table}
-        where 1=1
+        from (select * from storyboardlist
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
         <if test="title != null and search != ''">
             AND scene_num like '%${title}%'
         </if>
         <if test="content != null and search != ''">
             AND scene_content like '%${content}%'
+        </if>
+
+        <if test="writer != null and search != ''">
+            AND scenario_name like '%${writer}%'
+        </if>
+
+        <!--다른곳의 서브게시판으로 사용된다면 실행-->
+        <if test="pkid != null">
+            AND scenario_id = #{pkid}
         </if>
         order by ${id} desc) t)
 
@@ -39,17 +70,28 @@
         where r between #{postStart} and #{postEnd}
     </select>
 
-    <insert id="insertScene">
+    <insert id="insertScene"  parameterType="com.example.yoonlove.dto.SceneDto">
         insert into scene values(
-        (select concat('scene', (nvl(max(to_number(substr(scene_id, 6)), 0)+1))) from scene),<!--pk코드 자동증가(수정2)-->
-        (select nvl(max(scene_num),0)+1 from scene),<!--씬 번호 자동증가-->
-        null,<!--이미지 첨부파일 주소-->
+        (select concat('scene', (nvl(max(to_number(substr(scene_id, 6))), 0)+1)) from scene),<!--pk코드 자동증가(수정2)-->
+        <if test="scene_num == 0 or  scene_num == null">
+            (select nvl(max(scene_num),0)+1 from scene where scenario_id=#{scenario_id}),<!--씬 번호 자동증가-->
+        </if>
+        <if test="scene_num != null and  scene_num != 0">
+            #{scene_num},
+        </if>
         #{scene_place}, <!--촬영장소-->
         #{story_board},<!--스토리보드 내용-->
         #{scene_content}, <!--스토리보드 요약-->
-        'scenario1' <!--시나리오 id 조인해서 드롭다운 형태로 선택할수 있어야함-->
+        (select scenario_id from scenario where scenario_id=#{scenario_id})
         )
     </insert>
+
+    <!--마지막 작성글 불러오는 메소드-->
+    <select id="lastPost" parameterType="com.example.yoonlove.dto.SceneDto" resultType="int">
+        SELECT max(substr(scene_id,6)) from scene
+    </select>
+
+
 
     <update id="updateScene">
         update scene
@@ -66,16 +108,28 @@
 
 
     <!--Actor SQL-->
-    <select id="selectActor">
-        SELECT * FROM actor where actor_id = #{actor_id}
+    <select id="selectActor" resultType="com.example.yoonlove.dto.ActorDto">
+        SELECT * FROM actorjoin where act_id = #{act_id}
+        <if test="day_id != null and day_id != ''">
+            and day_id = #{day_id}
+        </if>
+    </select>
+
+    <select id="selectActorOne">
+        SELECT * FROM actor where act_id = #{act_id}
     </select>
 
     <select id="totalActorPost" parameterType="com.example.yoonlove.dto.PageDto">
-        select count(${id}) as totalPost from ${table}
-        where 1=1 <!--검색어가 공란이면 전체 리스트 조회-->
+        select count(${id}) as totalPost from actorjoin
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
         <!--검색어가 있다면 아래 조건문을 실행-->
         <if test="title != null and search != ''">
-            AND actor_id like '%${title}%'
+            AND act_id like '%${title}%'
         </if>
         <if test="content != null and search != ''">
             AND actor_info like '%${content}%'
@@ -89,10 +143,15 @@
         from(select rownum as r, t.*
 
         <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
-        from (select * from ${table}
-        where 1=1
+        from (select * from actorjoin
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
         <if test="title != null and search != ''">
-            AND actor_id like '%${title}%'
+            AND act_id like '%${title}%'
         </if>
         <if test="content != null and search != ''">
             AND actor_info like '%${content}%'
@@ -106,21 +165,21 @@
 
     <insert id="insertActor">
         insert into actor values(
-        (select concat('actor', (nvl(max(to_number(substr(actor_id, 6)), 0)+1))) from actor),<!--pk코드 자동증가(수정2)-->
-        'scene1', <!--외래키로, 조인해온 외래키를 드롭다운으로 선택하게끔 해야함-->
-        'pd1', <!--외래키로, 조인해온 외래키를 드롭다운으로 선택하게끔 해야함-->
+        (select concat('actor', (nvl(max(to_number(substr(act_id, 6))), 0)+1)) from actor),<!--pk코드 자동증가(수정2)-->
+        #{scene_id},
+        #{pd_id}, <!--외래키로, 조인해온 외래키를 드롭다운으로 선택하게끔 해야함-->
         #{actor_info}<!--출연자정보-->
         )
     </insert>
 
     <update id="updateActor">
         update actor
-        set scene_id = #{scene_id},
+        set
         actor_info = #{actor_info}
-        where actor_id = #{actor_id}
+        where act_id = #{act_id}
     </update>
 
     <delete id="deleteActor">
-        delete from actor where actor_id = #{actor_id}
+        delete from actor where act_id = #{act_id}
     </delete>
 </mapper>

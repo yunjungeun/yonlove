@@ -5,23 +5,67 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{>layout/header}}
 </head>
+
 <body>
-<table border="1" cellpadding="1" cellspacing="1">
-    <tr>
-        <td>스크립트 번호 <input name="script_id" type="text" value="{{selectTimeTable.script_id}}" readonly></td>
-        <td>촬영시간 <input name="film_time" type="date" value="{{selectTimeTable.film_time}}" readonly/></td>
-        <td>타임테이블 번호<input name="time_num" type="number" value="{{selectTimeTable.time_num}}" readonly></td>
-        <td>OK/NG<input name="ok_ng" type="text" value="{{selectTimeTable.ok_ng}}" readonly></td>
-        <td>슬레이트<input name="slate_time" type="date" value="{{selectTimeTable.slate_time}}" readonly></td>
-    </tr>
-</table>
-<a href="/script/timetable">목록</a>
-<a href="/script/{{selectTimeTable.table_id}}/updatetimeview">수정</a>
-<a href="javascript:void(0);" onclick="deleteAlert('/script/{{selectTimeTable.table_id}}/deletetimetable')">삭제</a>
+<div id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
 
-<br/>현재까지 버그<br/>
+<div id="content-wrapper" class="d-flex flex-column">
+<div id="content">
 
-<script src="/static/js/deletepost.js"></script>
+    <div style="text-align: center; display: block; margin-top:50px;" >
+        <h1 class="h3 mb-2 text-gray-800">타임테이블</h1>
+    </div>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4" style="margin-top: 20px; margin-right: 200px; margin-left: 200px;">
+            <div class="card-body">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th  style="text-align: center;">순 서</th>
+                        <th  style="text-align: center;">OK/NG</th>
+                        <th  style="text-align: center;">촬영시간</th>
+                        <th  style="text-align: center;">슬레이트</th>
+                    </tr>
+                    </thead>
+                    <tr style="text-align: center;">
+                        <td>{{selectTimeTable.time_num}}</td>
+                        <td>{{selectTimeTable.ok_ng}}</td>
+                        <td>{{selectTimeTable.film_time}}</td>
+                        <td>{{selectTimeTable.slate_time}}</td>
+                    </tr>
+                </table>
+
+                <div style="text-align: center">
+                    <a href="javascript:history.back()" role="button" class="btn btn-secondary mr-2">뒤로</a>
+                    <a href="/script/{{selectTimeTable.table_id}}/updatetimeview" class="btn btn-success mr-2">수정</a>
+                    <a href="javascript:void(0);" class="btn btn-danger" onclick="deleteAlert('/script/{{selectTimeTable.table_id}}/deletetimetable')">삭제</a>
+                </div>
+
+
+            </div><!--카드바디 end-->
+        </div><!--카드섹션 end-->
+
+    </div>
+</div>
+</div>
+
+{{>layout/footer}}
+</div>
+
+
+    <script>
+        var url = "/cs/notice";
+    </script>
+    <script src="/static/js/deletepost.js"></script>
+    {{>layout/bootstrapjs}}
 </body>
 </html>
+
+
+

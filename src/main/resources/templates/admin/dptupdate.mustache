@@ -1,28 +1,62 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 리스트</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{>layout/header}}
 </head>
-<body>
-<form id="alert" method="get" action="/admin/{{selectDpt.dpt_id}}/updatedpt">
-<table border="1" cellpadding="1" cellspacing="1">
-    <tr>
-        <td>부서명 <input class="field1" name="dpt_name" type="text" value="{{selectDpt.dpt_name}}" /></td>
-        <td>부서기능 <input class="field2" name="dpt_function" type="text" value="{{selectDpt.dpt_function}}"/></td>
-        <td>여기에 직원현황이 나와야하나?</td>
-    </tr>
-</table>
-<input type="submit" value="수정"  onclick="mappingurl('/admin/{{selectDpt.dpt_id}}/updatedpt','/admin/department',2,'수정')"/>
-</form>
+<div id="page-top">
+    {{>layout/sidebar}}
+    {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container">
+            <!-- Page Heading -->
+            <div style="text-align: center; display: block; margin-top:50px;" >
+                <h1 class="h3 mb-2 text-gray-800" >부서 수정</h1>
 
-<a href="/admin/department">취소</a>
+            <div class="card shadow mb-4" style="margin-top: 150px; margin-right: 300px; margin-left: 300px">
+                <div class="card-header py-3">
 
-<br/>현재까지 버그<br/>
+                <div style="display: flex; justify-content: center">
+                    <form id="alert" action="/admin/updatedpt" method="get">
+                        <div class="mb-3" style="text-align: center; display: inline-block;">
+                            <strong>부서명</strong>
+                            <input id="formGroupExampleInput" class="field1 card shadow mb-4" name="dpt_name" type="text" style="width: 90%; text-align: center" value="{{selectDpt.dpt_name}}"/>
+                        </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <div style="text-align: center; display: inline-block;">
+                            <strong>부서기능</strong>
+                            <input id="formGroupExampleInput" class="field2 card shadow mb-4" name="dpt_function" type="text" style="width: 90%; text-align: center " value="{{selectDpt.dpt_function}}" />
+                        </div>
+
+                        <div class="mb-2" style="text-align: center">
+                            <button type="submit" class="btn btn-primary"
+                                    onclick="mappingurl('/admin/{{selectDpt.dpt_id}}/updatedpt',2, '수정')">수정
+                            </button>
+                            <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
+
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+    {{>layout/footer}}
+</div>
+</div>
+
+<script>
+    var url = "/admin/department";
+</script>
 <script src="/static/js/cu_alert.js"></script>
+
+
+{{>layout/bootstrapjs}}
+
 </body>
 </html>

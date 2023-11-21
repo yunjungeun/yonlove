@@ -5,33 +5,88 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/static/js/cu_alert.js"></script>
-
+    {{>layout/header}}
 </head>
 <body>
-<form id="alert" method="get" action="/script/{{selectScriptPaper.script_id}}/updatescriptpaper">
-    <input name="script_id" type="hidden" value="{{selectScriptPaper.script_id}}"/>
+<div id="page-top">
+    {{>layout/sidebar}}
+    {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                스크립트페이퍼 수정
+            </h1>
+            <div class="card shadow mb-4" style="margin-top: 50px; margin-right: 200px; margin-left: 200px">
+                <div class="card-body">
+                    <form id="alert" method="get" action="/script/{{selectScriptPaper.script_id}}/updatescriptpaper">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr style="text-align: center;">
+                                <th>기획</th>
+                                <th>시나리오</th>
+                                <th colspan="2">씬</th>
+                            </tr>
+                            </thead>
+                            <tr style="text-align: center;">
+                                <td><input name="project_name" readonly style="text-align: center;" value="{{selectScriptPaper.project_name}}"></td>
+                                <td><input name="scenario_name" readonly style="text-align: center;" value="{{selectScriptPaper.scenario_name}}"></td>
+                                <td colspan="2"><input name="scene_num" readonly style="text-align: center;" value="{{selectScriptPaper.scene_num}}"></td>
+                            </tr>
 
-<table border="1" cellpadding="1" cellspacing="1">
-    <tr>
-        <td>씬 번호(자동입력 필요)<input name="scene_id" type="text" value="{{selectScriptPaper.scene_id}}" ></td>
-        <td>영상 제목<input class="field1" name="video_name" type="text" value="{{selectScriptPaper.video_name}}" ></td>
-        <td>촬영날짜<input class="field2" name="video_date" type="date" value="{{selectScriptPaper.video_date}}" ></td>
-        <td>촬영시작시간<input class="field3" name="video_time" type="date" value="{{selectScriptPaper.video_time}}" ></td>
-        <td>촬영종료시간<input class="field4" name="video_end_time" type="date" value="{{selectScriptPaper.video_end_time}}" ></td>
-    </tr>
-    <tr>
-        <td>액션 이미지 첨부파일 <input name="action_image" type="text" value="{{selectScriptPaper.action_image}}" /></td>
-        <td>액션 내용 <input class="field5" name="action_content" type="text" value="{{selectScriptPaper.action_content}}" /></td>
-        <td>카메라포지션 첨부파일 <input class="field6" name="position_image" type="text" value="{{selectScriptPaper.position_image}}" /></td>
-        <td>콘티 <input class="field7" name="conti" type="text" value="{{selectScriptPaper.conti}}" /></td>
-    </tr>
-</table>
-    <input type="submit" value="수정" onclick="mappingurl('/script/{{selectScriptPaper.script_id}}/updatescriptpaper','/script/scriptpaper',7,'수정')"/>
-</form>
-<a href="/script/scriptpaper">취소</a>
-<br/>현재까지 버그<br/>
+                            <tr style="text-align: center;">
+                                <th>영상제목</th>
+                                <th>촬영날짜</th>
+                                <th>촬영 시작시간</th>
+                                <th>촬영 종료시간</th>
+                            </tr>
+
+                            <tr style="text-align: center;">
+                                <td><input name="video_name" type="text" class="field1" style="text-align: center;" value="{{selectScriptPaper.video_name}}"></td>
+                                <td><input name="video_date" type="date" class="field2" style="text-align: center;" value="{{selectScriptPaper.video_date}}"></td>
+                                <td><input name="video_start_time" type="time" class="field3" style="text-align: center;" value="{{selectScriptPaper.video_start_time}}"></td>
+                                <td><input name="video_end_time" type="time" class="field4" style="text-align: center;" value="{{selectScriptPaper.video_end_time}}"></td>
+                            </tr>
+
+                            <tr style="text-align: center;">
+                                <th colspan="3">액션 이미지</th>
+                                <th colspan="2">액션 내용</th>
+                            </tr>
+                            <tr style="text-align: center;">
+                                <td colspan="3">여기 이미지 뜨게 해줘</td>
+                                <td colspan="2"><input name="action_content" type="text" class="field5" style="text-align: center;" value="{{selectScriptPaper.action_content}}"></td>
+                            </tr>
+                            <tr style="text-align: center;">
+                                <th colspan="5">콘티</th>
+                            </tr>
+                            <tr style="text-align: center;">
+                                <td colspan="5" ><textarea name="conti" type="text" class="field6" style="text-align: center;" row="5" cols="80" >{{selectScriptPaper.conti}}</textarea></td>
+                            </tr>
+                        </table>
+
+                        <div style="text-align: center">
+                            <button type="submit" class="btn btn-primary"
+                                    onclick="mappingurl('/script/{{selectScriptPaper.script_id}}/updatescriptpaper',6,'수정')">
+                                수정
+                            </button>
+                            <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
+
+                        </div>
+                    </form>
+                </div><!--1번 카드바디-->
+            </div><!--1번 카드섹션-->
+        </div>
+    </div>
+</div>
+{{>layout/footer}}
+</div>
+
+<script>
+    var url = "script/scriptpaper";
+</script>
+<script src="/static/js/cu_alert.js"></script>
+
+{{>layout/bootstrapjs}}
 </body>
 </html>

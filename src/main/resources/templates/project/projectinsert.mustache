@@ -4,20 +4,87 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>프로젝트 추가!!!!!</title>
+    <title>프로젝트 추가</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{>layout/header}}
 </head>
-<body>
-<form action="/project/insertproject" method="get">
 
-    <table border="1" cellpadding="1" cellspacing="1">
+<body id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
+
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                신규기획
+            </h1>
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4" style="margin-top: 50px; margin-right: 200px; margin-left: 200px;">
+               <div class="card-header py-3">
+                   <div class="d-flex justify-content-center align-items-center">
+<form id="alert" action="/project/insertproject" method="get" >
+
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
         <tr>
-            <td>기획명 <input name="project_name" type="text" placeholder="기획명"/></td>
-            <td>기획번호 <input name="project_num" type="number" placeholders="기획번호"/></td>
-
+            <td>기획명 <input class="field1" name="project_name" type="text" placeholder="기획명"/></td>
+            <td>기획번호 <input class="int1" name="project_num" type="number" placeholder="미입력시 자동작성"/></td>
         </tr>
+        </thead>
+
+        <tbody>
+            <tr><td colspan="2">콘셉트<textarea cols="50" rows="5" class="field2" name="project_concept"></textarea></td>
+            <tr><td colspan="2">기획 안<textarea cols="50" rows="20" class="field3" name="project_content"></textarea></td>
+            <tr>
+                <td colspan="2">
+                    시작일<input class="field4" type="date" id="default_start" name="project_start_date" >
+                   (예상)종료일<input class="field5" type="date" id="default_end"   name="project_end_date" >
+                    진행상태<select class="field6" name="project_state">
+                            <option value="작성 중">작성 중</option>
+                            <option value="작성 완료">작성 완료</option>
+                            <option value="진행 중">진행 중</option>
+                            <option value="기타">기타</option>
+                          </select>
+                </td>
+            </tr>
+        </tbody>
     </table>
-    <input type="submit" value="등록"/>
+    <div class="d-flex justify-content-center align-items-center">
+    <input type="submit" value="등록"  class="btn btn-success" onclick="mappingurl('/project/insertproject', 6,'작성',1)"/>&nbsp;&nbsp;
+    <a href="/project/project" role="button" class="btn btn-info">목록</a>
+    </div>
 </form>
-<a href="/project/listproject">목록으로 가기</a>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+<!-- /.container-fluid -->
+
+<!-- End of Main Content -->
+{{>layout/footer}}
+
+<!-- End of Content Wrapper -->
+
+<script>
+    var url = "/project/project";
+</script>
+
+
+<script src="/static/js/cu_alert.js"></script>
+<script src="/static/js/projectjs/defaultdate.js"></script>
+{{>layout/bootstrapjs}}
 </body>
 </html>

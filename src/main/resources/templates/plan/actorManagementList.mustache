@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배우</title>
+    {{>layout/header}}
+</head>
+<body>
+{{>layout/sidebar}}
+{{>layout/topbar}}
+
+<div class="container">
+<h1>매니지먼트 현황</h1>
+        <table border="1" cellpadding="1" cellspacing="1">
+            <ul>
+                <tr>
+                    <td>배우이름</td>
+                    <td>도착시간</td>
+                    <td>장소</td>
+                    <td>셋콜</td>
+                    <td>일정id</td>
+                </tr>
+                {{#actorManagementList}}
+                    <tr>
+                        <td>{{arrival_time}}</td>
+                        <td><a href="/plan/actorManagement/{{actor_id}}">{{actor_name}}</a></td>
+                        <td>{{place}}</td>
+                        <td>{{set_call}}</td>
+                        <td>{{day_id}}</td>
+                    </tr>
+                {{/actorManagementList}}
+            </ul>
+        </table>
+
+{{>layout/paging}}
+
+    <div class="container1">
+        <form action="/plan/actor_management" method="GET">
+            <select id="searchType" name="searchType">
+                <option value="all">선택</option>
+                <option value="title">제목</option>
+                <!-- 필요한 항목 추가 -->
+            </select>
+            <input type="text" id="search" name="search" placeholder="검색">
+            <input type="submit" value="검색">
+        </form>
+    </div>
+
+    <div class="container2">
+        <a href="/plan/insertactorManagementView" role="button">출연자정보 작성</a>  &nbsp;&nbsp;
+        <a href="/plan/actor_management">목록</a>&nbsp;&nbsp;
+        <a href="/index">홈 페이지</a>
+    </div>
+</div>
+{{>layout/footer}}
+<script>
+    var url = "/plan/actor_management";
+</script>
+<script src="/static/js/search.js"></script>
+
+{{>layout/bootstrapjs}}
+</body>
+</html>

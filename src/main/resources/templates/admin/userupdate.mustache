@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원(user)</title>
+    {{>layout/header}}
+
+</head>
+<body>
+<div id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
+
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+            <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px; text-align: center;">회원정보 수정
+            </h1>
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4" style="margin-top: 50px; margin-right: 300px; margin-left: 300px">
+                <div class="card-header py-3" >
+                </div>
+
+            <!-- 테이블 시작 -->
+                <div class="card-body">
+            <form id="alert" method="get" action="/admin/{{selectUser.user_id}}/updateuser">
+                    <table class="table" width="100%" cellspacing="0">
+                        <thead class="bg-gradient-primary">
+                        <tr>
+                        <th style="text-align:center; color:white;">
+                        <strong>회원ID </strong>
+                            <input class="field1" name="user_id" type="text" value="{{selectUser.user_id}}" >
+                        </tr>
+                        <thead>
+                        <tbody style="text-align: center;">
+                        <tr>
+                        <td>
+                            이름&nbsp; <input class="field2" name="user_name" type="text" value="{{selectUser.user_name}}">&nbsp;&nbsp;
+                            닉네임<input class="field3" name="nickname" type="text" value="{{selectUser.nickname}}"><br>
+                            핸드폰<input class="field4" name="phone" type="text" value="{{selectUser.phone}}">&nbsp;&nbsp;
+                            E-mail<input class="field5" name="email" type="text" value="{{selectUser.email}}">
+                        </td>
+                        </tr>
+                        </tbody>
+                    </table><br>
+
+                    <table class="table">
+                        <thead class="bg-gradient-primary">
+                        <tr>
+                        <th style="text-align:center;  color:white;">
+                        <strong>기업회원여부</strong>
+                            <input class="field6" name="company_user" type="text" value="{{selectUser.company_user}}" ></th>
+                        </tr>
+                        <thead>
+                        <tbody style="text-align: center;">
+                        <tr>
+                        <td>
+                            우편번호<input class="field7" name="zip_code" type="text" value="{{selectUser.zip_code}}" > <br/>
+                            주소&nbsp;<input class="field8" name="address1" type="text" value="{{selectUser.address1}}" > <br/>
+                            주소2 <input class="field9" name="address2" type="text" value="{{selectUser.address2}}">&nbsp;&nbsp;
+                            상세주소<input class="field10" name="address3" type="text" value="{{selectUser.address3}}">
+                        </td>
+                        </tr>
+                        </tbody>
+                    </table> <br>
+
+                    <table class="table">
+                     <thead class="bg-gradient-primary">
+                        <tr>
+                         <th style="text-align:center; color:white;">
+                             <strong>권한: &nbsp;</strong>
+                             <input type="radio" class="radio" name="authority" value="admin" {{#authority}}{{#admin}}checked{{/admin}}{{/authority}}> 관리자 &nbsp;&nbsp;
+                             <input type="radio" class="radio" name="authority" value="user" {{#authority}}{{#user}}checked{{/user}}{{/authority}}> 일반
+                         </th>
+                        </tr>
+                        <thead>
+
+                        <tbody style="text-align: center;">
+                        <tr>
+                        <td>
+                            회원등급<input class="field12" name="grade" type="text" value="{{selectUser.grade}}" >&nbsp;&nbsp;
+                            가입일 <input class="field13" name="sign_date" type="text" value="{{selectUser.sign_date}}" ><br/>
+                            소속회사 <input class="field14" name="company_name" type="text" value="{{selectCompany.company_name}}" >&nbsp;&nbsp;
+                            부서&nbsp;&nbsp;<select id="fk1" name="dpt_id"></select>
+                        </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <div style="text-align: center">
+                        <button type="submit" class="btn btn-success" onclick="mappingurl('/admin/{{selectUser.User_id}}/updateuser',14,'수정')">수정</button>&nbsp;&nbsp;
+                        <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
+                    </div>
+            </form> <!-- 테이블 끝-->
+            </div>
+        </div><!-- 끝 DataTales Example -->
+
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- End of Main Content -->
+    {{>layout/footer}}
+</div>
+</div>
+<!-- End of Content Wrapper -->
+{{>layout/bootstrapjs}}
+
+<script>
+    var radioButtonName = "authority";
+    var url = "/admin/user";
+    var jsonValue = '{{{fkList}}}';
+    <!--select 옵션 name값을 cu_alert.js에 보내주기 위한 변수 값/이게없으면 제출이 안됨-->
+    var selectName = "dpt_id";
+    <!--selectName이 실행되기 위해선 cu_alert 스크립트소스가 이 아래 있어야함-->
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/static/js/deletepost.js"></script>
+<script src="/static/js/cu_alert.js"></script>
+<script src="/static/js/dropdown.js"></script>
+</body>
+</html>

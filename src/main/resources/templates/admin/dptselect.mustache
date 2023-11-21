@@ -1,27 +1,91 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 리스트</title>
+    {{>layout/header}}
 </head>
-<body>
-    <table border="1" cellpadding="1" cellspacing="1">
-        <tr>
-            <td>부서명 <input name="dpt_name" type="text" value="{{selectDpt.dpt_name}}" readonly/></td>
-            <td>부서기능 <input name="dpt_function" type="text" value="{{selectDpt.dpt_function}}" readonly/></td>
-            <td>여기에 직원현황이 나와야하나?</td>
-        </tr>
-    </table>
+<div id="page-top">
+    {{>layout/sidebar}}
+    {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container">
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                부서 세부정보
+            </h1>
 
-<a href="/admin/department">목록</a>
-    <a href="/admin/{{selectDpt.dpt_id}}/updatedptview">수정</a>
-    <a href="javascript:void(0);" onclick="deleteAlert('/admin/{{selectDpt.dpt_id}}/deletedpt')">삭제</a>
+            <div class="card shadow mb-4" style="margin-top: 50px;">
+                <div class="card-header py-3 d-flex justify-content-end"><!--카드헤더-->
+                </div><!--카드헤더-->
 
-<br/>현재까지 버그<br/>
+                <div class="card-body">
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th style="text-align: center;">부서명<input style="margin-left: 10px; border-radius: 2px; text-align: center" name="dpt_name" type="text" value="{{selectDpt.dpt_name}}" readonly/></th>
+                            <th style="text-align: center;">부서기능<input style="margin-left: 10px; border-radius: 2px;" name="dpt_function" type="text" value="{{selectDpt.dpt_function}}" readonly/>
+                            </th>
+                        </tr>
+                        </thead>
+                    </table>
 
-    <script src="/static/js/deletepost.js"></script>
+                    <h4 class="h4 mb-2 font-weight-bold text-gray-800" style="margin-top: 30px; text-align: center;">
+                        직원 현황
+                    </h4>
+
+                    <table class="table table-bordered mt-1" width="100%" cellspacing="0">
+                        <thead style="text-align: center;">
+                        <tr>
+                            <th>직원ID</th>
+                            <th>성명</th>
+                            <th>닉네임</th>
+                            <th>연락처</th>
+                            <th>E-mail</th>
+                        </tr>
+                        </thead>
+                        <tbody style="text-align: center;">
+                        {{#selectListUser}}
+                            <tr>
+                                <td><a href="/admin/{{user_id}}/selectuser">{{user_id}}</a></td>
+                                <td>{{user_name}}</td>
+                                <td>{{nickname}}</td>
+                                <td>{{phone}}</td>
+                                <td>{{email}}</td>
+                            </tr>
+                        {{/selectListUser}}
+                        </tbody>
+                    </table>
+
+                        <!--페이징 처리 레이아웃-->
+                    <span class="d-flex justify-content-center">{{>layout/paging}}</span>
+                        <div class="d-flex justify-content-center" style="margin-top: 10px">
+                            <div>
+                                <a href="/admin/department" class="btn btn-primary">목록</a> <!-- 목록 버튼 -->
+                                <a href="/admin/{{selectDpt.dpt_id}}/updatedptview" class="btn btn-success">수정</a>
+                                <!-- 수정 버튼 -->
+                                <a href="javascript:void(0);" class="btn btn-danger"
+                                   onclick="deleteAlert('/admin/{{selectDpt.dpt_id}}/deletedpt')">삭제</a> <!-- 삭제 버튼 -->
+                            </div>
+                        </div>
+
+                </div><!--카드 바디 end-->
+            </div><!--카드 섹션 end-->
+
+        </div>
+    </div>
+</div>
+{{>layout/footer}}
+</div>
+
+
+<script>
+    var url = "/admin/department";
+</script>
+<script src="/static/js/deletepost.js"></script>
+<script src="/static/js/search.js"></script>
+<script src="/static/js/deletepost.js"></script>
+{{>layout/bootstrapjs}}
 </body>
+
 </html>

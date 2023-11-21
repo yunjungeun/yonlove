@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스케쥴</title>
+    {{>layout/header}}
+</head>
+<div id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
+<div id="content-wrapper" class="d-flex flex-column">
+    <div class="container">
+
+        <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+            일일 촬영계획표
+        </h1>
+
+        <div class="card shadow mb-4" style="margin-top: 50px;">  <!--그림자-->
+            <div class="card-header py-3" style="center;"> <!--카드헤더 div-->
+                검색 옵션박스에 기획명 적용안됨
+                <div class="container1">
+                    <form action="/plan/schedule_day" method="GET" class="d-flex justify-content-end form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
+                        <div class="input-group">
+                            <select id="searchType" name="searchType">
+                                <option value="all">선택</option>
+                                <option value="title">제목</option>
+                                <option value="content">기획명</option>
+                                <!-- 필요한 항목 추가 -->
+                            </select>
+                            <input type="text" id="search" name="search"  style="width: 150px;" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                   aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <input class="btn btn-primary" type="submit" value="검색">
+                            </div>
+                         </div>
+                    </form>
+                </div>
+            </div><!--카드헤더 end-->
+
+            <div class="card-body"><!--카드 바디-->
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                        <tr>
+                            <th style="text-align: center; width: 80px;">기 획 명</th>
+                            <th style="text-align: center; width: 80px;">제  목</th>
+                            <th style="text-align: center; width: 80px;">촬 영 일</th>
+                            <th style="text-align: center; width: 80px;">촬 영 회 차</th>
+                        </tr>
+
+                        {{#scheduleList}}
+                            <tr>
+                                <td style="text-align: center;">{{project_name}}</td>
+                                <td style="text-align: center;"><a href="/plan/schedule/{{day_id}}">{{day_title}}</a></td>
+                                <td style="text-align: center;">{{film_date}}</td>
+                                <td style="text-align: center;">{{day_num}}</td>
+
+                            </tr>
+                        {{/scheduleList}}
+                </table>
+
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span></span>
+                        <span>{{>layout/paging}}</span>
+                        <a href="/plan/insertScheduleView" role="button" class="btn btn-primary">작성</a>
+                    </div>
+            </div><!--카드바디 end-->
+        </div><!--카드end-->
+
+
+
+    </div><!--컨테이너 end-->
+    </div>
+</div>
+    {{>layout/footer}}
+</div>
+</div><!--컨텐츠 와이퍼end-->
+<script>
+    var url = "/plan/schedule_day";
+</script>
+<script src="/static/js/search.js"></script>
+{{>layout/bootstrapjs}}
+</body>
+</html>

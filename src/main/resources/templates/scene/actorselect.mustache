@@ -5,22 +5,76 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    {{>layout/header}}
 </head>
-<body>
-    <table border="1" cellpadding="1" cellspacing="1">
-        <tr>
-            <td>씬 번호<input name="scene_id" type="text" readonly value="{{selectActor.scene_id}}"></td>
-            <td>시나리오 번호(조인 테이블로 생성된 값이 들어가야함)<input name="pd_id" type="text" value="{{selectActor.pd_id}}" readonly> </td>
-        </tr>
-        <tr>
-            <td>출연자 정보<input name="actor_info" type="text" value="{{selectActor.actor_info}}" readonly/></td>
-        </tr>
-    </table>
+<body id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
 
-    <a href="/scene/actor">목록</a>
-    <a href="/scene/{{selectActor.actor_id}}/updateactorview">수정</a>
-    <a href="javascript:void(0);" onclick="deleteAlert('/scene/{{selectActor.actor_id}}/deleteactor')">삭제</a>
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
 
-    <script src="/static/js/deletepost.js"></script>
+<!-- Main Content -->
+<div id="content">
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+            <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px;">출연자 상세보기</h1>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4" style="margin-top: 50px;">
+            <div class="card-header py-3">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                    <tr>
+                        <td>기획<input name="project_name" type="text" readonly value="{{selectActor.project_name}}" /></td>
+                        <td>시나리오 <input name="scenario_name" type="text" value="{{selectActor.scenario_name}}" readonly/> </td>
+                        <td>씬<input name="scene_num" type="text" readonly value="{{selectActor.scene_num}}"/></td>
+                    </tr>
+                    <tr>
+                        <td>출연자 이름<input name="pd_name" type="text" value="{{selectActor.pd_name}}" readonly /></td>
+                        <td>출연자 배역<input name="casting" type="text" value="{{selectActor.casting}}" readonly /></td>
+                        <td>출연자 정보<input name="actor_info" type="text" value="{{selectActor.actor_info}}" readonly /></td>
+                    </tr>
+                    </table>
+
+                    <div style="text-align: center;">
+    <a style="margin-left: 20px" href="/scene/actor" role="button" class="btn btn-info">목록</a>
+    <a style="margin-left: 20px" href="/scene/{{selectActor.act_id}}/updateactorview" role="button" class="btn btn-success">수정</a>
+    <a style="margin-left: 20px" href="javascript:void(0);" role="button" class="btn btn-danger"
+       onclick="deleteAlert('/scene/{{selectActor.act_id}}/deleteactor')">삭제</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+    <br/>
+</div>
+
+
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+<!-- /.container-fluid -->
+</div>
+<!-- End of Main Content -->
+{{>layout/footer}}
+</div>
+<!-- End of Content Wrapper -->
+<script src="/static/js/deletepost.js"></script>
+
+<!-- 페이징 처리와 관련된 부트스트랩 라이브러리-->
+<script src="/static/bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- 페이징 처리와 관련된 부트스트랩 라이브러리 -->
+<script src="/static/bootstrap/js/demo/datatables-demo.js"></script>
+
+{{>layout/bootstrapjs}}
 </body>
 </html>

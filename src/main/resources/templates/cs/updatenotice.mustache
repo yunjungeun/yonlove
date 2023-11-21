@@ -1,31 +1,68 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 리스트</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/static/js/cu_alert.js"></script>
-
+    {{>layout/header}}
 </head>
 <body>
-<form id="alert" method="get" action="/cs/{{updateNotice.notice_id}}/updatenotice">
-    <input name="notice_id" type="hidden" value="{{updateNotice.notice_id}}"/>
-<table border="1" cellpadding="1" cellspacing="1">
-    <tr>
-        <td>제목</td>
-        <td><input class="field1" name="notice_title" type="text" value="{{updateNotice.notice_title}}"><td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <textarea class="field2" name="notice_content" cols="50" rows="20">{{updateNotice.notice_content}}</textarea>
-        </td>
-    </tr>
-</table>
-    <input type="submit" value="수정" onclick="mappingurl('/cs/{{updateNotice.notice_id}}/updatenotice','/cs/notice',2,'수정')"/>
-</form>
-<a href="/cs/notice">목록</a>
+<div id="page-top">
+    {{>layout/sidebar}}
+    {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container">
+
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                공지사항 수정
+            </h1>
+
+            <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
+                <div class="card-header py-3" style="center;"> <!--카드헤더 div-->
+                </div>
+
+                <div class="card-body"><!--카드 바디-->
+                <form id="alert" action="/cs/{{updateNotice.notice_id}}/updatenotice" method="get">
+                    <input name="notice_id" type="hidden" value="{{updateNotice.notice_id}}"/>
+                    <table class="table" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>제목 :</th>
+                            <td>{{updateNotice.notice_title}}</td>
+                            <th>작성자 :</th>
+                            <td>{{updateNotice.notice_writer}}</td>
+                        </tr>
+                        </thead>
+                        <tbody class="text-align: center;">
+                        <tr>
+                            <td colspan="4">
+                                <textarea type="text"  placeholder="내용을 입력하세요.." class="field3 card shadow mb-4" name="notice_content" readonly style="height: 30vh; width: 100%;  display: block; margin: 0 auto;">
+                                    {{updateNotice.notice_content}}</textarea>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div style="text-align: center">
+                        <button type="submit" class="btn btn-primary" onclick="mappingurl('/cs/{{updateNotice.notice_id}}/updatenotice',2,'수정')">수정</button>
+                        <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
+                    </div>
+                    </form>
+
+                </div><!--카드바디-->
+            </div><!--카드 end-->
+
+        </div><!--컨테이너 end-->
+    </div><!--warpper end-->
+</div><!--page-top end-->
+
+{{>layout/footer}}
+</div>
+<script>
+    var url = "/cs/notice";
+</script>
+
+{{>layout/bootstrapjs}}
 </body>
 </html>

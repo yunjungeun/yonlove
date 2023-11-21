@@ -1,0 +1,65 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/delete.js"></script>
+    {{>layout/header}}
+</head>
+<body>
+<div id="page-top">
+    {{>layout/sidebar}}
+    {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container">
+
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                출연자관리 상세보기
+            </h1>
+
+            <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
+                <div class="card-header py-3" style="center;"> <!--카드헤더 div-->
+                </div><!--카드헤더 end-->
+                <div class="card-body"><!--카드 바디-->
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <thead>
+                        <tr style="text-align: center;">
+                            <th>출연자</th>
+                            <th>도착시간</th>
+                            <th>장소</th>
+                            <th>셋콜</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr style="text-align: center;">
+                            <td >{{actorManagementDetail.actor_name}}</td>
+                            <td>{{actorManagementDetail.arrival_time}}</td>
+                            <td>{{actorManagementDetail.place}}</td>
+                            <td>{{actorManagementDetail.set_call}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-end">
+                        <a href="javascript:history.back()" role="button" class="btn btn-secondary mr-2">뒤로</a>
+                        <a href="/plan/{{actorManagementDetail.actor_id}}/actorManagementUpdateView" class="btn btn-success mr-2">수정</a>
+                        <a href="/plan/{{actorManagementDetail.actor_id}}/deleteActorManagement" class="btn btn-danger" onclick="confirmDelete(event, '/plan/schedule/{{actorManagementDetail.day_id}}')">삭제</a>
+                    </div>
+                </div><!--카드바디-->
+            </div><!--카드 end-->
+
+        </div><!--컨테이너 end-->
+    </div><!--warpper end-->
+</div><!--page-top end-->
+{{>layout/footer}}
+</div>
+
+
+<script src="/static/js/delete.js"></script>
+<script src="/static/js/deletepost.js"></script>
+
+{{>layout/bootstrapjs}}
+</body>
+</html>

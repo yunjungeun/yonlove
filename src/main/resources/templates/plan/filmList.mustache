@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>촬영</title>
+    {{>layout/header}}
+</head>
+<body>
+{{>layout/sidebar}}
+{{>layout/topbar}}
+
+<div class="container">
+
+<h1>촬영 현황</h1>
+    <table border="1" cellpadding="1" cellspacing="1">
+        <ul>
+            <tr>
+                <td>기획명</td>
+                <td>일일찰영계획</td>
+                <td>낮/밤</td>
+                <td>안/밖</td>
+                <td>컷</td>
+            </tr>
+            {{#filmList}}
+                <tr>
+                    <td>{{project_name}}</td>
+                    <td>{{day_title}}</td>
+                    <td>{{day_flag}}</td>
+                    <td>{{inside_flag}}</td>
+                    <td>{{cut}}</td>
+                </tr>
+            {{/filmList}}
+        </ul>
+    </table>
+
+
+{{>layout/paging}}
+    <div class="container1">
+        <form action="/plan/film_plan" method="GET">
+            <select id="searchType" name="searchType">
+                <option value="all">선택</option>
+                <option value="title">안/밖</option>
+                <option value="content">낮/밤</option>
+                <!-- 필요한 항목 추가 -->
+            </select>
+
+            <input type="text" id="search" name="search" placeholder="검색">
+            <input type="submit" value="검색">
+        </form>
+    </div>
+
+    <div class="container2">
+        <a href="/plan/insertFilmPlanView" role="button">새 시간표 작성</a> &nbsp;&nbsp;
+        <a href="/plan/film_plan">목록</a> &nbsp;&nbsp;
+        <a href="/index">홈 페이지</a>
+
+    </div>
+</div>
+{{>layout/footer}}
+<script>
+    var url = "/plan/film_plan";
+</script>
+<script src="/static/js/search.js"></script>
+{{>layout/bootstrapjs}}
+</body>
+</html>

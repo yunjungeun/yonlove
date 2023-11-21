@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Main Index</title>
+    <link href="/static/bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <link href="/static/bootstrap/css/sb-admin-2.min.css" rel="stylesheet"/>
+
+    <!--jQuery 라이브러리 소스 이게 없으면 ajax못씀-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!--머스테치 라이브러리 소스-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+</head>
+<body id="page-top">
+        {{>layout/sidebar}}
+        <div id="content-wrapper" >
+
+            <div id="content">
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <!-- Topbar Navbar -->
+                   <ul class="navbar-nav ml-auto">
+                        <!-- 기업  -->
+                      <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="/companysignupview" id="messagesDropdown" role="button">
+                               <!-- data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 드롭다운 사용X -->
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">기업가입</span>
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-buildings" viewBox="0 0 16 16">
+                                    <path d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022ZM6 8.694 1 10.36V15h5V8.694ZM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15Z"/>
+                                    <path d="M2 11h1v1H2v-1Zm2 0h1v1H4v-1Zm-2 2h1v1H2v-1Zm2 0h1v1H4v-1Zm4-4h1v1H8V9Zm2 0h1v1h-1V9Zm-2 2h1v1H8v-1Zm2 0h1v1h-1v-1Zm2-2h1v1h-1V9Zm0 2h1v1h-1v-1ZM8 7h1v1H8V7Zm2 0h1v1h-1V7Zm2 0h1v1h-1V7ZM8 5h1v1H8V5Zm2 0h1v1h-1V5Zm2 0h1v1h-1V5Zm0-2h1v1h-1V3Z"/>
+                                </svg>
+                            </a></li>
+       <div class="topbar-divider"></div>
+                        <!-- Nav Item  로그인 부분 -->
+                        <li class="nav-item dropdown no-arrow">
+{{#loggedIn}}
+            <a class="nav-link dropdown-toggle" href="/logout" id="userDropdown" role="button">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="logoutAction">로그아웃</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-open" viewBox="0 0 16 16">
+                    <path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
+                    <path d="M10.828.122A.5.5 0 0 1 11 .5V1h.5A1.5 1.5 0 0 1 13 2.5V15h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117zM11.5 2H11v13h1V2.5a.5.5 0 0 0-.5-.5zM4 1.934V15h6V1.077l-6 .857z"/>
+                </svg>
+            </a>
+{{/loggedIn}}
+
+{{^loggedIn}}
+            <a class="nav-link dropdown-toggle" href="/login" id="userDropdown" role="button">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="userAction">로그인
+                <!-- svg 로그인아이콘 추가함 -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+                    <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                </svg>
+                </span>
+            </a>
+{{/loggedIn}}
+                        </li>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- 시작  -->
+                <div class="container-fluid"> <!-- 인덱스 시작 부분 -->
+
+
+                        <div class="d-flex">  <!--공지사항/일정 틀 시작 -->
+                           <div class="col-xl-6">
+                               <div class="card border-left-success shadow h-100 py-2" style="overflow: auto;">
+                                   <div class="card-header py-3 d-flex flex-row align-items-center justify-content-center">
+                                       <h4 class="m-0 font-weight-bold text-primary align-items-center">공지사항</h4>
+                                   </div>
+                                   <div class="card-body">
+                                       <table class="table table-bordered" id="dataTable">
+                                           <thead>
+                                           <tr>
+                                               <th style="text-align: center;">번호</th>
+                                               <th style="text-align: center;">제목</th>
+                                               <th style="text-align: center;">작성자</th>
+                                               <th style="text-align: center;">작성일</th>
+                                               <th style="text-align: center;">조회수</th>
+                                           </tr>
+                                           </thead>
+                                           <tbody>
+                                           {{#selectListNotice}}
+                                               <tr>
+                                                   <td style="text-align: center;">{{notice_id}}</td>
+                                                   <td style="text-align: center;"><a href="/cs/selectnotice/{{notice_id}}">{{notice_title}}</a></td>
+                                                   <td style="text-align: center;">{{notice_writer}}</td>
+                                                   <td style="text-align: center;">{{notice_date}}</td>
+                                                   <td style="text-align: center;">{{notice_cnt}}</td>
+                                               </tr>
+                                           {{/selectListNotice}}
+                                           </tbody>
+                                       </table>
+
+                                   </div>
+                               </div>
+                                   </div> <!-- 공지사항 틀 end  -->
+
+                                       <div class="col-xl-6">
+                                           <div class="card border-left-info shadow h-100 py-2" style="overflow: auto;">
+                                               <div class="card-header py-3 d-flex flex-row align-items-center justify-content-center">
+                                                   <h4 class="m-0 font-weight-bold text-primary align-items-center">{{year}}년 {{month}}월 주요일정</h4>
+                                               </div>
+                                               <div class="card-body">
+                                                   <!-- 달력 데이터 넣기 -->
+                                                   <table  id="calendar-container" class="table table-bordered" width="100%" cellspacing="0">
+                                                       <tr>
+                                                           <th style="text-align: center; width: 80px;"><span style="color:red">일</span></th>
+                                                           <th style="text-align: center; width: 80px;">월</th>
+                                                           <th style="text-align: center; width: 80px;">화</th>
+                                                           <th style="text-align: center; width: 80px;">수</th>
+                                                           <th style="text-align: center; width: 80px;">목</th>
+                                                           <th style="text-align: center; width: 80px;">금</th>
+                                                           <th style="text-align: center; width: 80px;"><span style="color:blue">토</span></th>
+                                                       </tr>
+                                                       {{#calendar}}
+                                                           <tr style="height:100px;">
+                                                               {{#this}}
+                                                                   <td style="text-align: center;" id="{{.}}">{{.}}</td>
+                                                               {{/this}}
+                                                           </tr>
+                                                       {{/calendar}}
+                                                   </table>
+                                               </div>
+                                           </div>
+                                       </div>
+
+                                </div>  <!--공지사항/일정 틀 end -->
+                    <br><br><br>
+
+                        <div class="row">   <!-- 동영상 시작 부분 -->
+                            <div class="col-md-4"><!-- 첫번째 영상 -->
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
+                                            <path d="M8.864.046C7.908-.193 7.02.53 6.956 1.466c-.072 1.051-.23 2.016-.428 2.59-.125.36-.479 1.013-1.04 1.639-.557.623-1.282 1.178-2.131 1.41C2.685 7.288 2 7.87 2 8.72v4.001c0 .845.682 1.464 1.448 1.545 1.07.114 1.564.415 2.068.723l.048.03c.272.165.578.348.97.484.397.136.861.217 1.466.217h3.5c.937 0 1.599-.477 1.934-1.064a1.86 1.86 0 0 0 .254-.912c0-.152-.023-.312-.077-.464.201-.263.38-.578.488-.901.11-.33.172-.762.004-1.149.069-.13.12-.269.159-.403.077-.27.113-.568.113-.857 0-.288-.036-.585-.113-.856a2.144 2.144 0 0 0-.138-.362 1.9 1.9 0 0 0 .234-1.734c-.206-.592-.682-1.1-1.2-1.272-.847-.282-1.803-.276-2.516-.211a9.84 9.84 0 0 0-.443.05 9.365 9.365 0 0 0-.062-4.509A1.38 1.38 0 0 0 9.125.111L8.864.046zM11.5 14.721H8c-.51 0-.863-.069-1.14-.164-.281-.097-.506-.228-.776-.393l-.04-.024c-.555-.339-1.198-.731-2.49-.868-.333-.036-.554-.29-.554-.55V8.72c0-.254.226-.543.62-.65 1.095-.3 1.977-.996 2.614-1.708.635-.71 1.064-1.475 1.238-1.978.243-.7.407-1.768.482-2.85.025-.362.36-.594.667-.518l.262.066c.16.04.258.143.288.255a8.34 8.34 0 0 1-.145 4.725.5.5 0 0 0 .595.644l.003-.001.014-.003.058-.014a8.908 8.908 0 0 1 1.036-.157c.663-.06 1.457-.054 2.11.164.175.058.45.3.57.65.107.308.087.67-.266 1.022l-.353.353.353.354c.043.043.105.141.154.315.048.167.075.37.075.581 0 .212-.027.414-.075.582-.05.174-.111.272-.154.315l-.353.353.353.354c.047.047.109.177.005.488a2.224 2.224 0 0 1-.505.805l-.353.353.353.354c.006.005.041.05.041.17a.866.866 0 0 1-.121.416c-.165.288-.503.56-1.066.56z"/>
+                                        </svg>&nbsp;<h6 class="m-0 font-weight-bold text-primary align-items-center">좋아요 No.1: {{bestVideo.bestLike.ch_name}}</h6>
+                                    </div>
+                                    <div class="card-body text-center" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                                                src="https://www.youtube.com/embed/{{bestVideo.bestLike.video_id}}"
+                                                title="YouTube video player"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+                                        </iframe>
+                                    </div>
+                                </div>
+                            </div> <!-- 첫번째 영상 end -->
+
+                            <div class="col-md-4">
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-index-thumb" viewBox="0 0 16 16">
+                                            <path d="M6.75 1a.75.75 0 0 1 .75.75V8a.5.5 0 0 0 1 0V5.467l.086-.004c.317-.012.637-.008.816.027.134.027.294.096.448.182.077.042.15.147.15.314V8a.5.5 0 0 0 1 0V6.435l.106-.01c.316-.024.584-.01.708.04.118.046.3.207.486.43.081.096.15.19.2.259V8.5a.5.5 0 1 0 1 0v-1h.342a1 1 0 0 1 .995 1.1l-.271 2.715a2.5 2.5 0 0 1-.317.991l-1.395 2.442a.5.5 0 0 1-.434.252H6.118a.5.5 0 0 1-.447-.276l-1.232-2.465-2.512-4.185a.517.517 0 0 1 .809-.631l2.41 2.41A.5.5 0 0 0 6 9.5V1.75A.75.75 0 0 1 6.75 1zM8.5 4.466V1.75a1.75 1.75 0 1 0-3.5 0v6.543L3.443 6.736A1.517 1.517 0 0 0 1.07 8.588l2.491 4.153 1.215 2.43A1.5 1.5 0 0 0 6.118 16h6.302a1.5 1.5 0 0 0 1.302-.756l1.395-2.441a3.5 3.5 0 0 0 .444-1.389l.271-2.715a2 2 0 0 0-1.99-2.199h-.581a5.114 5.114 0 0 0-.195-.248c-.191-.229-.51-.568-.88-.716-.364-.146-.846-.132-1.158-.108l-.132.012a1.26 1.26 0 0 0-.56-.642 2.632 2.632 0 0 0-.738-.288c-.31-.062-.739-.058-1.05-.046l-.048.002zm2.094 2.025z"/>
+                                        </svg>&nbsp;<h6 class="m-0 font-weight-bold text-primary align-items-center">인기 크리에이터 : {{bestVideo.bestChVideo.ch_name}}</h6>
+                                    </div>
+                                    <div class="card-body text-center" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                                                src="https://www.youtube.com/embed/{{bestVideo.bestChVideo.video_id}}"
+                                                title="YouTube video player"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+                                        </iframe>
+                                    </div>
+                                </div>
+                            </div> <!-- 두번째 영상 end -->
+
+                            <div class="col-md-4">
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5Z"/>
+                                        </svg>&nbsp;<h6 class="m-0 font-weight-bold text-primary align-items-center">최고 조회수 : {{bestVideo.bestView.formattedView}} 회</h6>
+                                    </div>
+                                    <div class="card-body text-center" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                                                src="https://www.youtube.com/embed/{{bestVideo.bestView.video_id}}"
+                                                title="YouTube video player"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+                                        </iframe>
+                                    </div>
+                                </div>
+                            </div> <!-- 세번째 영상 end -->
+                        </div>  <!--동영상 end-->
+                </div> <!-- 인덱스 끝  -->
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            {{>layout/footer}}
+        </div>
+        </div>
+            <!-- End of Footer -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    {{>layout/bootstrapjs}}
+
+<script>
+    var logJson = {{{logJson}}};
+    var dayJson = {{{dayJson}}};
+
+    var year = {{year}};
+    var month = {{month}};
+</script>
+<script src="/static/js/calendar.js"></script>
+</body>
+
+<script>
+    const userIsLoggedIn = true;
+    const loginElement = document.getElementById('userAction');
+    const logoutElement = document.getElementById('logoutAction');
+    if (userIsLoggedIn) {
+      loginElement.style.display = 'none';
+      logoutElement.style.display = 'block';
+    } else {
+      loginElement.style.display = 'block';
+      logoutElement.style.display = 'none';
+    }
+</script>
+
+</html>

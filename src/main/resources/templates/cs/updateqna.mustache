@@ -1,31 +1,68 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 리스트</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/static/js/cu_alert.js"></script>
-
+    {{>layout/header}}
 </head>
-<body>
-<form id="alert" method="get" action="/cs/{{updateQnA.qna_id}}/updateqna">
-    <input name="qna_id" type="hidden" value="{{updateQnA.qna_id}}"/>
-    <table border="1" cellpadding="1" cellspacing="1">
-        <tr>
-            <td>제목</td>
-            <td><input class="field1" name="qna_title" type="text" value="{{updateQnA.qna_title}}"><td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <textarea class="field2" name="qna_content" cols="50" rows="20">{{updateQnA.qna_content}}</textarea>
-            </td>
-        </tr>
-    </table>
-    <input type="submit" value="수정"  onclick="mappingurl('/cs/{{updateQnA.qna_id}}/updateqna','/cs/qna',2,'수정')"/>
-</form>
-<a href="/cs/qna">목록</a>
+<body id="page-top">
+
+{{>layout/sidebar}}
+{{>layout/topbar}}
+
+
+<div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+        <div class="container-fluid">
+            <div style="text-align: center; display: block; margin-top:100px;" >
+                <h1 class="h3 mb-2 text-gray-800" >문의사항 수정</h1>
+            </div>
+
+            <div class="card shadow mb-4" style="margin-top: 150px; margin-right: 300px; margin-left: 300px">
+                <div class="card-header py-3">
+
+                    <form id="alert" action="/cs/{{updateQnA.qna_id}}/updateqna" method="get">
+                        <input name="qna_id" type="hidden" value="{{updateQnA.qna_id}}"/>
+
+                        <div style="margin-left: 20%; margin-top: 5%;">
+                            <div style="display: inline-block;">
+                                <div class="mb-3" style="text-align: center; display: inline-block;">
+                                    <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>제목</strong></label>
+                                </div>
+
+                                <div class="mb-3" style="text-align: center; display: inline-block;">
+                                    <input id="formGroupExampleInput" class="field1 card shadow mb-4" name="qna_title" type="text" value="{{updateQnA.qna_title}}"  style="width: 90%; text-align: center">
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="mb-3" style="text-align: center">
+                            <label for="formGroupExampleInput" class="form-label" style="display: block;"></label>
+                            <textarea type="text"  id="formGroupExampleInput" class="field2 card shadow mb-4" name="qna_content"  style="height: 30vh; width: 60%;  display: block; margin: 0 auto;">{{updateQnA.qna_content}}</textarea>
+                        </div>
+
+                        <div style="text-align: center">
+                            <button type="submit" class="btn btn-primary" onclick="mappingurl('/cs/{{updateQnA.qna_id}}/updateqna',2,'수정')">등록</button>
+                            <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+    </div>
+    {{>layout/footer}}
+</div>
+<script>
+    var url = "/cs/notice";
+</script>
+{{>layout/bootstrapjs}}
 </body>
 </html>

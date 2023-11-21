@@ -1,77 +1,64 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>업뎃수정</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 리스트</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{>layout/header}}
 </head>
-<body>
-<form id="updateFrom" method="get" action="/creator/updatecreator/{{selectCreator.ch_id}}">
-<div id="div_box">
-    <h1>게시글 수정</h1>
-    <hr>
-    <table board="1" cellpascing="0" cellpading="0">
-        <tr>
-            <td bgcolor="pink" width="70">채널아이디</td>
-            <td align="left">{{selectCreator.ch_id}}</td>
-        </tr>
+<body id="page-top">
 
-        <tr>
-            <td bgcolor="pink">채널명</td>
-            <td align="left"><input type="text" name="ch_name" value="{{selectCreator.ch_name}}"/></td>
-        </tr>
+{{>layout/sidebar}}
+{{>layout/topbar}}
 
-        <tr>
-            <td bgcolor="pink">구독자수</td>
-            <td align="left"> <input type="number" name="ch_sub" value="{{selectCreator.ch_sub}}"/></td>
-        </tr>
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+    <div class="container">
+        <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+            크리에이터 수정
+        </h1>
 
-        <tr>
-            <td bgcolor="pink">유저ID</td>
-            <td align="left"><input type="text" name="user_id" value="{{selectCreator.user_id}}"/></td>
-        </tr>
+        <div class="card shadow mb-4" style="margin-top: 50px;">
+            <div class="card-header py-3">
+            </div>
 
-    </table>
-        <input type="submit" value="수정" id="updateBtn"/>
-    <hr>
-    <a href="/creator/updatecreatorview/{{selectCreator.ch_id}}">게시글 수정</a>&nbsp;&nbsp;&nbsp;
-    <a href="#" class="delete-link" data-id="{{selectCreator.ch_id}}">게시글 삭제</a>&nbsp;
-    <a href="/creator/creater">전체 목록 보기</a>
+            <div class="card-body">
+                <form id="alert" action="/creator/updatecreator/{{selectCreator.ch_id}}" method="get">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th style="text-align:center; width:30%">채널명</th>
+                            <th style="text-align:center;">구독자수</th>
+                            <th style="text-align:center;">유저ID</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td style="text-align:center;">{{selectCreator.ch_name}}</td>
+                            <td style="text-align:center;">{{selectCreator.ch_sub}}</td>
+                            <td style="text-align:center;"><input style="text-align:center" class="field1" name="user_id" type="text" value="{{selectCreator.user_id}}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div style="text-align: center">
+                        <button type="submit" class="btn btn-primary"
+                                onclick="mappingurl('/creator/updatecreator/{{selectCreator.ch_id}}',1,'수정')">등록
+                        </button>
+                        <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
-</form>
-
+</div>
+{{>layout/footer}}
+</div>
 <script>
-    document.getElementById("updateFrom").addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        // 입력된 데이터 가져오기
-        var ch_name = $("input[name='ch_name']").val();
-        var ch_sub = $("input[name='ch_sub']").val();
-        var user_id = $("input[name='user_id']").val();
-
-        // Mustache 템플릿에서 추출한 ch_id 값
-        var ch_id = "{{selectCreator.ch_id}}";  // 이 부분을 실제 Mustache 데이터로 대체해야 합니다.
-
-        // API로 데이터 전송
-        $.ajax({
-            url: "/creator/updatecreator/" + ch_id,
-            type: "GET",
-            data: {
-                ch_name: ch_name,
-                ch_sub: ch_sub,
-                user_id: user_id
-            },
-            success: function (response) {
-                alert("글 수정 처리 완료" );
-                window.location.href = "/creator/creator" ;
-            },
-            error: function (error) {
-                alert("오류가 발생.");
-            }
-        });
-    });
+    var url = "/creator/creater";
 </script>
+<script src="/static/js/cu_alert.js"></script>
+{{>layout/bootstrapjs}}
 </body>
 </html>

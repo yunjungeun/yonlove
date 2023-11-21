@@ -1,0 +1,87 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{>layout/header}}
+</head>
+<body>
+<div id="page-top">
+    {{>layout/sidebar}}
+    {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container">
+
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                촬영계획 작성
+            </h1>
+
+            <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
+                <div class="card-header py-3" style="center;"> <!--카드헤더 div-->
+
+                </div><!--카드헤더 end-->
+
+                <div class="card-body"><!--카드 바디-->
+                    <form id="alert" action="/plan/insertFilm" method="get">
+                        <input type="hidden" name="day_id"  class="field4" value="{{dayId}}">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <tr>
+                                <th>기&nbsp;&nbsp;획
+                                    <select id="fk1" class="ml-2" name="project_id"></select>
+                                <th>시나리오
+                                    <select id="fk2" class="ml-2" name="scenario_id"></select>
+                                </th>
+                                <th>씬
+                                    <select id="fk3" name="scene_id" class="field1 ml-2"></select>
+                                </th>
+                                <th>출연자
+                                    <select id="fk4" name="pd_id" class="field2 ml-2"></select>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>안&nbsp;/&nbsp;밖
+                                    <input class="radio ml-3" type="radio" name="inside_flag" value="실내" checked> 실내
+                                    <input class="radio ml-3" type="radio" name="inside_flag" value="실외"> 실외
+                                </th>
+                                <th>낮&nbsp;/&nbsp;밤
+                                    <input class="radio2 ml-3" type="radio" name="day_flag" value="낮" checked> 낮
+                                    <input class="radio2 ml-3" type="radio" name="day_flag" value="밤"> 밤
+                                </th>
+                                <th colspan="2">컷 수<input name="cut" type="text" class="field3 ml-2" ></th>
+                            </tr>
+
+                        </table>
+
+                        <div class="d-flex justify-content-end">
+                            <input type="submit" value="등록" class="btn btn-primary mr-2" onclick="mappingurl('/plan/insertFilm',4,'작성')">
+                            <a href="javascript:history.back()" role="button" class="btn btn-secondary mr-2">뒤로</a>
+                        </div>
+                    </form>
+
+
+                </div><!--카드바디-->
+            </div><!--카드 end-->
+
+        </div><!--컨테이너 end-->
+    </div><!--warpper end-->
+</div><!--page-top end-->
+{{>layout/footer}}
+</div>
+
+<script>
+    var jsonValue = '{{{fkList}}}';
+    <!--select 옵션 name값을 cu_alert.js에 보내주기 위한 변수 값/이게없으면 제출이 안됨-->
+    var selectName = "scene_id";
+    var produceId = "pd_id";
+    <!--selectName이 실행되기 위해선 cu_alert 스크립트소스가 이 아래 있어야함-->
+    var radioButtonName = "inside_flag";
+    var radioButtonName2 = "day_flag";
+</script>
+<script src="/static/js/dropdown.js"></script>
+<script src="/static/js/cu_alert.js"></script>
+ {{>layout/bootstrapjs}}
+</body>
+</html>

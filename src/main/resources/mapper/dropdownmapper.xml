@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.yoonlove.mapper.DropDownMapper">
+
+    <select id="selectFkScenario">
+        SELECT scenario_id, scenario_name FROM scenariolist
+        where company_id = #{company_id}
+        <if test="ajaxData != null and ajaxData !=''">
+            and project_id = #{ajaxData}
+        </if>
+        order by scenario_id desc
+    </select>
+
+    <select id="selectFkScene">
+        SELECT scene_id, scene_num FROM storyboardlist
+        where company_id = #{company_id}
+        <if test="ajaxData != null and ajaxData !=''">
+            and scenario_id = #{ajaxData}
+        </if>
+        order by scene_id desc
+    </select>
+
+    <select id="selectFkProject">
+        SELECT project_id, project_name FROM project
+        where company_id = #{company_id}
+        <!--현재 if문은 상위 테이블이 없어서 있으나 마나임-->
+        <if test="ajaxData != null and ajaxData !=''">
+            and project_id = #{ajaxData}
+        </if>
+        order by project_id desc
+    </select>
+
+    <select id="selectFkDay">
+        SELECT day_id, day_title FROM scheduledaylist
+        where company_id = #{company_id}
+        <if test="ajaxData != null and ajaxData !=''">
+            and project_id = #{ajaxData}
+        </if>
+        order by project_id desc
+    </select>
+
+    <select id="selectFkProduce">
+        SELECT pd_id, pd_name FROM produce
+        where role = '출연자'
+        <if test="ajaxData != null and ajaxData !=''">
+            and project_id = #{ajaxData}
+        </if>
+        order by project_id desc
+    </select>
+
+    <select id="selectFkTable1">
+        SELECT pd_id, pd_name FROM day_table1 where 1=1
+        <if test="ajaxData != null and ajaxData !=''">
+            and pd_id = #{ajaxData}
+        </if>
+        order by pd_id desc
+    </select>
+
+    <select id="selectFkDpt">
+        SELECT dpt_id, dpt_name FROM department
+        where company_id = #{company_id}
+        <if test="ajaxData != null and ajaxData !=''">
+            and dpt_id = #{ajaxData}
+        </if>
+        order by dpt_id desc
+    </select>
+
+    <select id="selectScenario">
+        SELECT scenario_id, scenario_name FROM scenario where project_id = #{pkId}
+    </select>
+
+</mapper>

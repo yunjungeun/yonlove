@@ -4,57 +4,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시판 리스트</title>
+    {{>layout/header}}
 </head>
-<body>
-<h1>공지사항</h1>
-    <table border="1" cellpadding="1" cellspacing="1">
-        <ul>
-            <tr>
-                <td>번호</td>
-                <td>제목</td>
-                <td>작성자</td>
-                <td>날짜</td>
-                <td>조회수</td>
-            </tr>
-            {{#selectListNotice}}
-                <tr>
-                    <td>{{notice_id}}</td>
-                    <td><a href="/cs/selectnotice/{{notice_id}}">{{notice_title}}</a></td>
-                    <td>{{notice_writer}}</td>
-                    <td>{{notice_date}}</td>
-                    <td>{{notice_cnt}}</td>
-                </tr>
-            {{/selectListNotice}}
-        </ul>
-    </table>
+<body id="page-top">
 
-<!--페이징 처리 레이아웃-->
-{{>layout/paging}}
+{{>layout/sidebar}}
+{{>layout/topbar}}
 
-<br/>
-<form action="/cs/notice" method="GET">
-<select id="searchType" name="searchType">
-    <option value="all">선택</option>
-    <option value="title">제목</option>
-    <option value="writer">작성자</option>
-    <!-- 필요한 항목 추가 -->
-</select>
-<input type="text" id="search" name="search" placeholder="검색">
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
 
-    <input type="submit" value="검색">
+    <!-- Main Content -->
+    <div id="content">
 
-</form>
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
 
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                공지사항
+            </h1>
 
-<br/>
-<a href="/cs/insertnotice-view" role="button">글 작성</a>
-<a href="/cs/notice">목록</a>
-<a href="/index">홈 페이지</a>
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4" style="margin-top: 50px; margin-left:100px; margin-right:100px;">
+                <div class="card-header py-3">
 
+                    <form action="/cs/notice" method="get" class="d-flex justify-content-end form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
+
+                        <div class="input-group">
+                            <select id="searchType" name="searchType">
+                                <option value="all">선택</option>
+                                <option value="title">제목</option>
+                                <option value="writer">작성자</option>
+                            </select>
+                            <input id="search" name="search" type="text"  style="width: 150px;" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                   aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <input class="btn btn-primary" type="submit" value="검색">
+
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th style="text-align: center;">번호</th>
+                                <th style="text-align: center;">제목</th>
+                                <th style="text-align: center;">작성자</th>
+                                <th style="text-align: center;">작성일</th>
+                                <th style="text-align: center;">조회수</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {{#selectListNotice}}
+                                <tr>
+                                    <td style="text-align: center;">{{notice_id}}</td>
+                                    <td style="text-align: center;"><a href="/cs/selectnotice/{{notice_id}}">{{notice_title}}</a></td>
+                                    <td style="text-align: center;">{{notice_writer}}</td>
+                                    <td style="text-align: center;">{{notice_date}}</td>
+                                    <td style="text-align: center;">{{notice_cnt}}</td>
+                                </tr>
+                            {{/selectListNotice}}
+                            </tbody>
+                        </table>
+                    </div>
+
+                        <!--페이징 처리 레이아웃-->
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span></span>
+                                <span>
+                                {{>layout/paging}}</span>
+                                <a href="/cs/insertnotice-view" role="button" class="btn btn-primary">작성</a>
+                            </div>
+                </div>
+            </div>
+            <br/>
+        </div>
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+    </div>
+    {{>layout/footer}}
+</div>
 
 <script>
     var url = "/cs/notice";
 </script>
 <script src="/static/js/search.js"></script>
+<!-- 페이징 처리와 관련된 부트스트랩 라이브러리-->
+<script src="/static/bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- 페이징 처리와 관련된 부트스트랩 라이브러리 -->
+<script src="/static/bootstrap/js/demo/datatables-demo.js"></script>
+
+{{>layout/bootstrapjs}}
 </body>
 </html>

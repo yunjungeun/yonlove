@@ -1,19 +1,22 @@
 package com.example.yoonlove.controller;
 
 
+import com.example.yoonlove.dto.CompanyDto;
 import com.example.yoonlove.dto.UserDto;
-import com.example.yoonlove.mapper.UserMapper;
 import com.example.yoonlove.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContext;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.security.Principal;
 
 @Controller
 public class LoginController {
@@ -23,28 +26,74 @@ public class LoginController {
     @Autowired
     public BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @GetMapping("login")
-    public String login(){
-        return "/login/login";
+    @RequestMapping("/login")
+    public String login(@RequestParam(name = "error", required = false) String error, Model model){
+
+        if (error != null) {
+            model.addAttribute("errorMessage", "아이디와 비밀번호를 확인하세요.");
+        }
+          return "/main/login";
     }
 
-   /* @PostMapping("login/porc")
-    public String loginporoc(UserDto dto){
-        String rawPw = dto.getPw();
-        String encPw = bCryptPasswordEncoder.encode(rawPw);
-        userService.loadUserByUsername(dto.getUser_id());
-       return null;
-    }*/
+    @GetMapping("companysignupview")
+    public String companysignupview() {
+        return "/login/companysignup";
+    }
+
+    @GetMapping("/companysignup")
+    @ResponseBody
+    public String companysign(CompanyDto dto, Principal user, UserDto userDto ) {
+
+        //기업회원가입 로직 sql
+        userService.companysignup(dto);
+
+        String companyID = userService.lastCompanyID();
+        //-------------테이블생성
+
+        String userId = user.getName(); // 유저id
+
+        userService.updateUserCompanyID(userId, companyID);
+
+        return "/index";
+    }
+
+
+
+    @GetMapping("/test1")
+    public void test(Principal user){
+
+        String companyID = "company20";
+        String userId = user.getName(); // 유저id
+        userService.updateUserCompanyID(userId, companyID);
+    }
+
+
+    @PostMapping("/ConfirmId")
+    public ResponseEntity<?> confirmId(@RequestParam("user_id") String user_id) {
+        ModelAndView mv = new ModelAndView();
+        UserDto dto = new UserDto();
+        dto.setUser_id(user_id);
+
+
+        boolean isIdAvailable = userService.selectId(dto);
+        return ResponseEntity.ok(isIdAvailable);
+    }
+
 
     @GetMapping("signupview")
-    public String signview(){
-        return "/login/signup";
+    public ModelAndView signview(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/login/signup");
+        String test = "ture";
+        mv.addObject("ConfirmId" , test);
+
+        return mv;
     }
+
     @GetMapping("signup")
+    @ResponseBody
     public String sign(UserDto dto){
-        System.out.println("sql실행전"+dto.toString());
         userService.signUp(dto);
-        System.out.println("sql실행후");
         return "/cs/qna";
     }
 

@@ -4,33 +4,98 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
+    <title>스크립트 작성</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/static/js/cu_alert.js"></script>
-
+    {{>layout/header}}
 </head>
-<body>
-<form id="alert" action="/script/insertscriptpaper" method="get">
-    <table border="1" cellpadding="1" cellspacing="1">
-        <tr>
-            <td>씬 번호(자동입력 필요)<input name="scene_id" type="text" placeholder="드롭다운"></td>
-            <td>영상 제목<input class="field1" name="video_name" type="text" placeholder="영상제목 입력"></td>
-            <td>촬영날짜<input class="field2" name="video_date" type="date" placeholder="날짜형식 yy/mm/dd 입력"></td>
-            <td>촬영시작시간<input class="field3" name="video_time" type="date" placeholder="날짜형식입력(시간아직안됨)"></td>
-            <td>촬영종료시간<input class="field4" name="video_end_time" type="date" placeholder="날짜형식입력"></td>
-        </tr>
-        <tr>
-            <td>액션 이미지 첨부파일 <input name="action_image" type="text" placeholder="varchar2"/></td>
-            <td>액션 내용 <input class="field5" name="action_content" type="text" placeholder="varchar2"/></td>
-            <td>카메라포지션 첨부파일 <input class="field6" name="position_image" type="text" placeholder="varchar2"/></td>
-            <td>콘티 <input class="field7" name="conti" type="text" placeholder="varchar2"/></td>
-        </tr>
-    </table>
-    <input type="submit" value="등록" onclick="mappingurl('/script/insertscriptpaper','/script/scriptpaper',7,'작성')"/>
-</form>
-<a href="/script/scriptpaper">취소</a>
 
-<br/>현재까지 버그<br/>
+<body>
+<div id="page-top">
+    {{>layout/sidebar}}
+    {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container">
+
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                스크립트페이퍼 작성
+            </h1>
+
+            <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
+                <div class="card-body"><!--카드 바디-->
+                    <form id="alert" action="/script/insertscriptpaper" method="get">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead style="text-align: center;">
+                            <tr>
+                                <th>기&nbsp;&nbsp;획</th>
+                                <th>시나리오</th>
+                                <th colspan="2">씬</th>
+                            </tr>
+                            </thead>
+                            <tbody style="text-align: center;">
+                            <tr style="text-align: center;">
+                                <td><select id="fk1" class="ml-2" name="project_id"></select></td>
+                                <td><select id="fk2" class="ml-2" name="scenario_id"></select></td>
+                                <td colspan="2"><select id="fk3" name="scene_id" class="field1 ml-2"></select></td>
+                            </tr>
+                            <tr>
+                                <th>영상제목</th>
+                                <th>촬영일자</th>
+                                <th>촬영 시작시간</th>
+                                <th>촬영 종료시간</th>
+                            </tr>
+                            <tr>
+                                <td><input class="field1" name="video_name" type="text" placeholder="영상제목 입력"></td>
+                                <td><input class="field2" name="video_date" type="date"></td>
+                                <td><input class="field3" name="video_start_time" type="time"></td>
+                                <td><input class="field4" name="video_end_time" type="time"></td>
+
+                            </tr>
+                            <tr>
+                                <th>액션이미지</th>
+                                <th>액션내용</th>
+                                <th>카메라포지션</th>
+                                <th>콘티</th>
+                            </tr>
+                            <tr>
+                                <td><input id="fileInput" name="action_image" type="file" /></td>
+                                <td><input class="field5" name="action_content" type="text" placeholder="작성.."/></td>
+                                <td><input class="field6" name="position_image" type="text" placeholder="작성.."/></td>
+                                <td><input class="field7" name="conti" type="text" placeholder="작성.."/></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary mr-2" onclick="mappingurl('/script/insertscriptpaper',7,'작성')">등록</button>
+                            <a href="javascript:history.back()" role="button" class="btn btn-secondary mr-2">뒤로</a>
+                        </div>
+                    </form>
+                </div><!--카드바디-->
+            </div><!--카드섹션-->
+
+        </div><!--warpper-->
+    </div><!--컨테이너-->
+</div><!--탑페이지-->
+
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+        <!-- /.container-fluid -->
+
+{{>layout/footer}}
+</div>
+
+<script>
+    var url = "script/scriptpaper";
+
+    var jsonValue = '{{{fkList}}}';
+    <!--select 옵션 name값을 'cu_alert.js'에 보내주기 위한 변수 값/ 이게없으면 제출이 안됨-->
+    var selectName = "scene_id";
+</script>
+<script src="/static/js/dropdown.js"></script>
+<script src="/static/js/cu_alert.js"></script>
+
+{{>layout/bootstrapjs}}
 </body>
+
 </html>

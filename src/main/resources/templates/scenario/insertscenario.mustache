@@ -4,26 +4,79 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>시나리오 작성</title>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/static/js/cu_alert.js"></script>
-
+    {{>layout/header}}
 </head>
+
 <body>
-<form id="alert" action="/scenario/insertscenario" method="get">
-    <table border="1" cellpadding="1" cellspacing="1">
-        <tr>
-            <td>제목</td>
-            <td><input class="field1" name="scenario_name" type="text"><td>
-        </tr>
-        <tr>
-            <td colspan="2"><textarea class="field2" name="scenario_content" cols="50" rows="20"></textarea></td>
-        </tr>
-    </table>
-    <input type="submit" value="등록" onclick="mappingurl('/scenario/insertscenario','/scenario/scenario',2,'작성')">
-</form>
-<a href="/scenario/scenario">취소</a>
+{{>layout/sidebar}}
+{{>layout/topbar}}
+<div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+
+
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <div style="text-align: center; display: block; margin-top:50px;" >
+                <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                    시나리오 작성
+                </h1>
+
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4" style="margin-top:50px; margin-right: 100px; margin-left: 100px">
+                    <div class="card-body">
+                        <form id="alert" action="/scenario/insertscenario" method="get">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <td>프로젝트
+                                        <select id="fk1" name="project_id"></select></td>
+                                    <td>제목
+                                        <input class="field1" name="scenario_name" type="text"></td>
+                                    <td>시나리오 번호
+                                        <input  class="int1" name="scenario_num" type="number" placeholder="미입력시 자동입력"></td>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr>
+                                    <td colspan="3" style="text-align:center;" ><textarea class="field2" name="scenario_content" cols="100" rows="20"></textarea></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <input type="submit" value="작성" role="button" class="btn btn-primary"
+                                       onclick="mappingurl('/scenario/insertscenario',2,'작성',1)"> &nbsp;&nbsp;
+                                <a href="/scenario/scenario" role="button" class="btn btn-secondary">취소</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br/>
+</div>
+
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+<!-- End of Main Content -->
+{{>layout/footer}}
+<!--옵션 태그에 필요한 js-->
+<script>
+    var jsonValue = '{{{fkList}}}';
+    <!--select 옵션 name값을 cu_alert.js에 보내주기 위한 변수 값/이게없으면 제출이 안됨-->
+    var selectName = "project_id";
+    <!--selectName이 실행되기 위해선 cu_alert 스크립트소스가 이 아래 있어야함-->
+</script>
+<script src="/static/js/dropdown.js"></script>
+<script src="/static/js/cu_alert.js"></script>
+{{>layout/bootstrapjs}}
 
 </body>
 </html>

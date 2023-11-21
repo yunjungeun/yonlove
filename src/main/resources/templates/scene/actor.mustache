@@ -4,51 +4,111 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>출연자 관리 리스트</title>
+    {{>layout/header}}
 </head>
-<body>
-<h1>출연자 게시판</h1>
-<table border="1" cellpadding="1" cellspacing="1">
-    <ul>
-        <tr>
-            <td>씬 번호</td>
-            <td>출연자 id(조인으로 성명들어가야함)</td>
-            <td>출연장 배역/역할</td>
-        </tr>
-        {{#selectListActor}}
-            <tr>
-                <td>{{actor_id}}<!--여기누르면 시나리오로 이동해야함--></td>
-                <td><a href="/scene/{{actor_id}}/selectactor">{{scene_id}}</a></td>
-                <td>{{actor_info}}</td>
-            </tr>
-        {{/selectListActor}}
-    </ul>
-</table>
+<body id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
 
-<!--페이징 처리 레이아웃-->
-{{>layout/paging}}
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
 
-<form action="/scene/actor" method="GET">
-    <select id="searchType" name="searchType">
-        <option value="all">선택</option>
-        <option value="title">actor_id</option>
-        <option value="content">역할</option>
-        <!-- 필요한 항목 추가 -->
-    </select>
-    <input type="text" id="search" name="search" placeholder="검색">
+    <!-- Main Content -->
+    <div id="content">
 
-    <input type="submit" value="검색">
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+            <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px;">출연자 게시판</h1>
 
-</form>
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4" style="margin-top: 50px;">
+                <div class="card-header py-3">
+            <!--검색-->
+        <form action="/scene/actor" method="get" class="d-flex justify-content-end form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
 
-근데 작성자는 잇어야되지 않을까요?<br/>
-<a href="/scene/insertactorview" role="button">작성</a>
-<a href="/scene/actor">목록</a>
-<a href="/index">홈 페이지</a>
+            <div class="input-group">
+                <select id="searchType" name="searchType">
+                    <option value="all">선택</option>
+                    <option value="title">actor_id</option>
+                    <option value="writer">역할</option>
+                    <!-- 필요한 항목 추가 -->
+                </select>
+
+                <input id="search" name="search" type="text"  style="width: 150px;" class="form-control bg-light border-0 small" placeholder="Search for..."
+                       aria-label="Search" aria-describedby="basic-addon2">
+
+                <div class="input-group-append">
+                    <input class="btn btn-primary" type="submit" value="검색">
+                </div>
+            </div>
+        </form>
+
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th  style="text-align: center;">기획</th>
+                        <th  style="text-align: center;">시나리오</th>
+                        <th  style="text-align: center;">씬</th>
+                        <th  style="text-align: center;">성명</th>
+                        <th  style="text-align: center;">출연자 배역</th>
+                        <th  style="text-align: center;">기타</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#selectListActor}}
+                        <tr>
+                            <td style="text-align: center;">{{project_name}}</td>
+                            <td style="text-align: center;">{{scenario_name}}</td>
+                            <td style="text-align: center;">{{scene_num}}</td>
+                            <td style="text-align: center;"><a href="/scene/selectactor?act_id={{act_id}}&day_id={{day_id}}">{{pd_name}}</a></td>
+                            <td style="text-align: center;">{{casting}}</td>
+                            <td style="text-align: center;">{{actor_info}}</td>
+                        </tr>
+                    {{/selectListActor}}
+                    </tbody>
+                </table>
+
+                <!--페이징 처리 레이아웃-->
+                <div class="d-flex justify-content-between align-items-center">
+                    <span></span>
+                    <span>
+                        {{>layout/paging}}</span>
+                <a style="margin-left: 20px" href="/scene/insertactorview" role="button" class="btn btn-primary">글 작성</a>
+                </div>
+            </div>
+            </div>
+        </div>
+
+    </div>
+    <br/>
+</div>
+
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- End of Main Content -->
+    {{>layout/footer}}
+</div>
+<!-- End of Content Wrapper -->
 
 <script>
     var url = "/scene/actor";
 </script>
-<script src="/static/js/search.js"></script>
 
+<script src="/static/js/search.js"></script>
+<!-- 페이징 처리와 관련된 부트스트랩 라이브러리-->
+<script src="/static/bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- 페이징 처리와 관련된 부트스트랩 라이브러리 -->
+<script src="/static/bootstrap/js/demo/datatables-demo.js"></script>
+
+{{>layout/bootstrapjs}}
 </body>
 </html>

@@ -3,6 +3,7 @@ package com.example.yoonlove.controller;
 import com.example.yoonlove.dto.NoticeDto;
 import com.example.yoonlove.dto.PageDto;
 import com.example.yoonlove.dto.QnADto;
+import com.example.yoonlove.dto.UserDto;
 import com.example.yoonlove.service.CsService;
 import com.example.yoonlove.service.PagingService;
 import com.example.yoonlove.service.UserService;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -46,13 +48,14 @@ public class CsController {
         return mv;
     }
     @GetMapping("/cs/notice")
-    public ModelAndView selectListNotice(PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page){
+    public ModelAndView selectListNotice(PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page, Principal user_id){
+
+        String user= user_id.getName();
         //페이징에 필요한 매개변수, 객체생성
         PageDto pageDto = new PageDto("notice","notice_id",page, pdto);
 
         //페이징정보처리 메소드
         PageDto pageInfo = pagingService.paging(pageDto);
-
 
         //뷰페이지에 하단 페이징처리를 해주는 리스트
         List<PageDto> pagelist = pagingService.pageList(pageInfo.getPageStart(), pageInfo.getPageEnd(), page);
@@ -65,28 +68,11 @@ public class CsController {
         mv.setViewName("/cs/listnotice");
         mv.addObject("selectListNotice", dto);
 
-
         //페이징에 필요한센션
         mv.addObject("prefixUrl", "cs");
         mv.addObject("paging", pageInfo);  //페이징정보
         mv.addObject("pagelist", pagelist); //페이지 하단부 페이지 리스트
         mv.addObject("pageRink",rink); //검색유무에 다라 동적 페이지링크를 뷰페이지에 전달
-
-
-       //유튜브 api 부분
-     /*   try {
-            System.out.println(youTubeService.searchVideos("ytn"));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return mv;
-        }
-
-        try {
-            youTubeService.searchCh();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }*/
-        //유튜브 api 끝
 
         return mv;
     }
@@ -100,8 +86,9 @@ public class CsController {
     }
 
     @GetMapping("/cs/insertnotice")
-    public String insertNotice(NoticeDto dto){
-
+    @ResponseBody
+    public String insertNotice(NoticeDto dto, Principal user){
+        dto.setUser_id(user.getName());
         csService.insertNotice(dto);
         return "/cs/notice";
     }
@@ -115,8 +102,8 @@ public class CsController {
         return mv;
     }
     @GetMapping("/cs/{notice_id}/updatenotice")
+    @ResponseBody
     public String updateNotice(NoticeDto dto){
-        System.out.println(dto.toString());
         csService.updateNotice(dto);
         return "/cs/notice";
     }
@@ -141,7 +128,6 @@ public class CsController {
     }
     @GetMapping("/cs/qna")
     public ModelAndView selectListQnA(PageDto pdto,@RequestParam(name="page", defaultValue = "1") int page){
-        System.out.println("질의응답 게시판리스트");
         PageDto pageDto = new PageDto("qna","qna_id",page,pdto);
         PageDto pageInfo = pagingService.paging(pageDto);
 
@@ -166,8 +152,15 @@ public class CsController {
     public String insertQnAView(){
         return "/cs/insertqnaview";
     }
+
     @GetMapping("/cs/insertqna")
-    public String insertQnA(QnADto dto){
+    @ResponseBody
+    public String insertQnA(QnADto dto, Principal user){
+        //유저정보 가저오는 dto
+        UserDto userInfo = userService.getUser(user.getName());
+        dto.setUser_id(userInfo.getUser_id());
+        dto.setQna_writer(userInfo.getNickname());
+
         csService.insertQnA(dto);
         return "/cs/qna";
     }
@@ -181,10 +174,12 @@ public class CsController {
         return mv;
     }
     @GetMapping("/cs/{qna_id}/updateqna")
+    @ResponseBody
     public String updateQnA(QnADto dto){
         csService.updateQnA(dto);
         return "/cs/qna";
     }
+
     @GetMapping("/cs/{qna_id}/deleteqna")
     public String deleteQnA(QnADto dto){
         csService.deleteQnA(dto);

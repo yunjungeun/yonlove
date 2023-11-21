@@ -1,0 +1,119 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{>layout/header}}
+</head>
+<body>
+<div id="page-top">
+    {{>layout/sidebar}}
+    {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container">
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                {{updateSchedule.day_title}}
+            </h1>
+
+            <div class="card shadow mb-4" style="margin-top: 50px;">  <!--그림자-->
+                <div class="card-header py-3" style="center;"> <!--카드헤더 div-->
+                </div><!--카드헤더 end-->
+
+                <div class="card-body"><!--카드 바디-->
+
+                    <form id="alert" action="/plan/{{updateSchedule.day_id}}/updateSchedule" method="get">
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <tr>
+                            <td>기&nbsp&nbsp획&nbsp&nbsp
+                                <select id="fk1" name="project_id"></select>
+                            </td>
+                            <th>제&nbsp&nbsp목&nbsp&nbsp<input name="day_title" type="text" class="field1" style="width:200px;" value="{{updateSchedule.day_title}}"></th>
+                            <td style="text-align: center;">
+                                <input style="text-align: right; width:160px;" name="day_num" type="number" class="int1" size="2" placeholder="미입력시 자동입력" value="{{updateSchedule.day_num}}">회차</td>
+                        </tr>
+                        <tr>
+                            <td>촬영날짜 &nbsp&nbsp
+                                <input name="film_date" type="date" class="field2" value="{{updateSchedule.film_date}}" ></td>
+                            <td colspan="2">
+                                날씨 &nbsp: &nbsp
+                                <input type="radio" class="radio" name="weather" value="맑음" {{#weather}}{{#맑음}}checked{{/맑음}}{{/weather}} >
+                                <label for="sunny">맑음</label>&nbsp&nbsp
+
+                                <input type="radio" class="radio" name="weather" value="흐림" {{#weather}}{{#흐림}}checked{{/흐림}}{{/weather}}>
+                                <label for="cloudy">흐림</label>&nbsp&nbsp
+
+                                <input type="radio" class="radio" name="weather" value="안개" {{#weather}}{{#안개}}checked{{/안개}}{{/weather}}>
+                                <label for="foggy">안개</label>&nbsp&nbsp
+
+                                <input type="radio" class="radio" name="weather" value="비" {{#weather}}{{#비}}checked{{/비}}{{/weather}}>
+                                <label for="rainy">비</label>&nbsp&nbsp
+
+                                <input type="radio" class="radio" name="weather" value="눈" {{#weather}}{{#눈}}checked{{/눈}}{{/weather}}>
+                                <label for="snowy">눈</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="text-align: center;">조명</th>
+                            <th style="text-align: center;">의상</th>
+                            <th style="text-align: center;">소품</th>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                <textarea name="light" class="field3" rows="5" cols="30">{{updateSchedule.light}}</textarea>
+                            </td>
+                            <td style="text-align: center;">
+                                <textarea name="costume" class="field4" rows="5" cols="30">{{updateSchedule.costume}}</textarea>
+                            </td>
+                            <td style="text-align: center;">
+                                <textarea name="prop" class="field5" rows="5" cols="30">{{updateSchedule.prop}}</textarea>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th style="text-align: center;">촬영순서</th>
+                            <th style="text-align: center;">연출/제작</th>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                <textarea name="film_order" class="field6" rows="5" cols="30">{{updateSchedule.film_order}}</textarea>
+                            </td>
+                            <td style="text-align: center;">
+                                <textarea name="direct" class="field7" rows="5" cols="30">{{updateSchedule.direct}}</textarea>
+                            </td>
+                        </tr>
+                    </table>
+                        <div class="d-flex justify-content-center">
+                            <input class="btn btn-primary mr-5" type="submit" value="수정" onclick="mappingurl('/plan/{{updateSchedule.day_id}}/updateSchedule', 7,'수정',1)">
+                            <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
+                        </div>
+                    </form>
+
+
+
+                </div><!--카드바디-->
+            </div><!--카드 end-->
+
+        </div><!--컨테이너 end-->
+    </div><!--warpper end-->
+</div><!--page-top end-->
+{{>layout/footer}}
+</div>
+
+
+<script>
+    var base ="/plan/schedule_day";
+    <!--옵션 태그에 필요한 js-->
+    var jsonValue = '{{{fkList}}}';
+    <!--select 옵션 name값을 cu_alert.js에 보내주기 위한 변수 값/이게없으면 제출이 안됨-->
+    var selectName = "project_id";
+    <!--selectName이 실행되기 위해선 cu_alert 스크립트소스가 이 아래 있어야함-->
+    var radioButtonName = "weather";
+</script>
+<script src="/static/js/dropdown.js"></script>
+<script src="/static/js/cu_alert.js"></script>
+{{>layout/bootstrapjs}}
+</body>
+</html>

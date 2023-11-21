@@ -4,26 +4,73 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>타임테이블 작성</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/static/js/cu_alert.js"></script>
-
+    {{>layout/header}}
 </head>
-<body>
-<form id="alert" action="/script/inserttimetable" method="get">
-    <table border="1" cellpadding="1" cellspacing="1">
-        <tr>
-            <td>스크립트 번호 <input class="field1" name="script_id" type="text" placeholder="스크립트번호/"></td>
-            <td>촬영시간 <input class="field2" name="film_time" type="date" placeholder="시간값date"/></td>
-            <td>타임테이블 번호<input class="field3" name="time_num" type="number" placeholder="숫자값"></td>
-            <td>OK/NG<input class="field4" name="ok_ng" type="text" placeholder="ok또는ng 선택"></td>
-            <td>슬레이트<input name="slate_time" type="date" placeholder="시간값"></td>
-        </tr>
-    </table>
-    <input type="submit" value="등록" onclick="mappingurl('/script/inserttimetable','/script/timetable',4,'작성')"/>
-</form>
-<a href="/script/timetable">취소</a>
 
-<br/>현재까지 버그<br/>
+<body>
+<div id="page-top">
+{{>layout/sidebar}}
+{{>layout/topbar}}
+
+<div id="content-wrapper" class="d-flex flex-column">
+<div id="content">
+
+    <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+        타임테이블 작성
+    </h1>
+
+
+    <div class="card shadow mb-4" style="margin-top: 20px; margin-right: 200px; margin-left: 200px">
+        <div class="card-body">
+            <form id="alert" action="/script/inserttimetable" method="get">
+                <input type="hidden" class="field1" name="script_id" value="{{script_id}}">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th  style="text-align: center;">순 서</th>
+                        <th  style="text-align: center;">OK/NG</th>
+                        <th  style="text-align: center;">촬영시간</th>
+                        <th  style="text-align: center;">슬레이트</th>
+                    </tr>
+                    </thead>
+                    <tr style="text-align: center;">
+                        <td><input class="int1" type="number" name="time_num" placeholder="미입력시 자동입력"></td>
+                        <td>
+                            <input type="radio" class="radio" name="ok_ng" value="OK" checked>
+                            <label for="sunny">OK</label>&nbsp&nbsp
+
+                            <input type="radio" class="radio" name="ok_ng" value="NG">
+                            <label for="cloudy">NG</label>&nbsp&nbsp
+                        </td>
+                        <td><input class="field2" name="film_time" type="time" /></td>
+                        <td><input class="field3" name="slate_time" type="time" /></td>
+                    </tr>
+                </table>
+
+                <div style="display: flex; justify-content: center;">
+                    <button type="submit" class="btn btn-primary" onclick="mappingurl('/script/inserttimetable',3,'작성',1)">등록</button> &nbsp; &nbsp;
+                    <a href="javascript:history.back()" role="button" class="btn btn-secondary mr-2">취소</a>
+                </div>
+            </form>
+
+        </div><!--바디end-->
+    </div><!--카드섹션 end-->
+
+
+</div>
+</div>
+</div>
+    {{>layout/footer}}
+</div>
+
+<script>
+    var url="script/timetable";
+        var radioButtonName = "ok_ng";
+</script>
+<script src="/static/js/cu_alert.js"></script>
+
+{{>layout/bootstrapjs}}
 </body>
 </html>

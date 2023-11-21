@@ -1,16 +1,15 @@
 package com.example.yoonlove.mapper;
 
-import com.example.yoonlove.dto.BudgetDto;
-import com.example.yoonlove.dto.ProduceDto;
-import com.example.yoonlove.dto.ProjectDto;
-import com.example.yoonlove.dto.SearchDto;
+import com.example.yoonlove.dto.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 @Mapper
 public interface ProjectMapper {
 
-    public List<ProjectDto> selectListProject();
+    public List<ProjectDto> selectListProject(PageDto pageDto);
+
+    public PageDto totalProjectPost(PageDto dto);
 
     public ProjectDto selectProject(ProjectDto projectDto);
 
@@ -21,13 +20,18 @@ public interface ProjectMapper {
     public void updateProject(ProjectDto projectDto);
 // -------------------------====================================프로젝트 끝
 
-    public List<BudgetDto> selectListBudget(SearchDto searchDto);
-    public BudgetDto selectBudget(BudgetDto budgetDto);
+    public List<BudgetDto> selectListBudget(PageDto pageDto );
+    public PageDto totalBudgetPost(PageDto dto);
+    public BudgetDto selectBudget(BudgetDto dto);
     public void insertBudget(BudgetDto dto);
-    public void updateBudget(BudgetDto budgetDto);
+    public void updateBudget(BudgetDto dto);
     public void deleteBudget(BudgetDto dto);
+
+    //예산 총액 구하는 메소드
+    int getTotalBudget(PageDto dto);
     // -------------------------====================================Budget 끝
-    public List<ProduceDto> selectListProduce();
+    public List<ProduceDto> selectListProduce(PageDto pageDto);
+    public PageDto totalProducePost(PageDto dto);
     public ProduceDto selectProduce(ProduceDto produceDto);
     public void insertProduce(ProduceDto produceDto);
     public void deleteProduce(ProduceDto dto);

@@ -3,8 +3,52 @@
 
 <mapper namespace="com.example.yoonlove.mapper.ProjectMapper">
 
-    <select id="selectListProject" resultType="com.example.yoonlove.dto.ProjectDto">
-        SELECT * FROM project
+    <select id="selectListProject" parameterType="com.example.yoonlove.dto.PageDto" resultType="com.example.yoonlove.dto.ProjectDto">
+        select *
+        <!--검색결과에 rownum을 하고 r로 지정-->
+        from(select rownum as r, t.*
+
+        <!--  ( 결과 또는 검색 후 리스트에 대한 결과 )를 t로 지정-->
+        from (select to_char(project_start_date, 'YY-MM-DD') as string_start_date,to_char(project_end_date, 'YY-MM-DD') as string_end_date, project.*
+                            <!--날짜+시간을 강제로 날짜값으려 변경-->
+                from ${table}
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
+        <if test="title != null and search != ''">
+            AND project_name like '%${title}%'
+        </if>
+
+        <if test="writer != null and search != ''">
+            AND project_writer like '%${writer}%'
+        </if>
+
+        order by ${id} desc) t)
+
+        <!-- rownum을 기준(r)으로 시작번호부터 끝번호까지 검색   -->
+        where r between #{postStart} and #{postEnd}
+    </select>
+
+    <!--검색유무에 따라 게시판의 총 게시글 수는 구하는 쿼리-->
+    <select id="totalProjectPost" parameterType="com.example.yoonlove.dto.PageDto">
+        select count(${id}) as totalPost from ${table}
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
+        <!--검색어가 있다면 아래 조건문을 실행-->
+        <if test="title != null and search != ''">
+            AND project_name like '%${title}%'
+        </if>
+
+        <if test="writer != null and search != ''">
+            AND project_writer like '%${writer}%'
+        </if>
     </select>
 
     <select id="selectProject" resultType="com.example.yoonlove.dto.ProjectDto">
@@ -14,18 +58,25 @@
     <insert id="insertProject">
         insert into project values(
             (select concat('project', (nvl(max(to_number(substr(project_id, 8))), 0)+1)) from project),<!--pk코드 자동증가(수정2)-->
-            #{project_name},
+            #{project_name},  <!--기획명-->
+
+        <if test="project_num == 0 or project_num == null">      <!--com1 부분 로그인 세션가져와서 적용필요-->
+            (select nvl(max(project_num),0)+1 from project where company_id = 'com1'),
+        </if>
+        <if test="project_num != null and project_num != 0">
             #{project_num},
-            '테스트',
-            '테스트진행중',
-            '기획내용 내용테스트',
-            '23/10/11',
-            null,
-            null,
-            null,
-            'true',
-            null,
-            'com1'
+        </if>
+            #{project_writer}, <!--작성자-->
+            #{project_concept},  <!--콘셉트-->
+            #{project_content}, <!--기획내용-->
+            (select * from todaytime),  <!--기획일-->
+            #{project_start_date},  <!--기획 시작일-->
+            #{project_end_date},   <!--기획 종료일-->
+            (select * from todaytime),   <!--작성일-->
+            'false', <!--종료여부-->
+            '-',   <!--종료사유-->
+            #{company_id},
+            #{project_state} <!--작성상태-->
         )
     </insert>
 
@@ -33,7 +84,14 @@
         UPDATE project
         SET
         project_name = #{project_name},
-        project_num = #{project_num}
+        project_num = #{project_num},
+        project_concept = #{project_concept},
+        project_content = #{project_content},
+        project_start_date = #{project_start_date},
+        project_end_date = #{project_end_date}
+        <if test="project_state != '----------'">
+        , project_state = #{project_state}
+        </if>
         where project_id = #{project_id}
         </update>
 
@@ -44,62 +102,137 @@
 
     <!-- !!!!!!!!!!!!!!!!!!!!=======================프로젝트 기획 끝!!!!!!!!!!!!!!!!!!!! -->
 
-    <select id="selectListBudget" parameterType="com.example.yoonlove.dto.SearchDto" resultType="com.example.yoonlove.dto.BudgetDto">
-        select * from budget
-        where 1=1
-        <if test="id != null and search != ''"> <!-- 값이 존재 하면 -->
-            AND project_id like '%${id}%'
+    <select id="selectListBudget" parameterType="com.example.yoonlove.dto.PageDto" resultType="com.example.yoonlove.dto.BudgetDto">
+        select *
+        <!--notice검색결과에 rownum을 하고 r로 지정-->
+        from(select rownum as r, t.*
+        <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
+        from (select * from budgetjoin
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
         </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
+            and project_id = #{pkid}
         <if test="title != null and search != ''">
             AND budget_name like '%${title}%'
+        </if>
+        <if test="content != null and search != ''">
+            AND budget_content like '%${content}%'
+        </if>
+        order by ${id} desc) t)
+        <!-- rownum을 기준(r)으로 시작번호부터 끝번호까지 검색   -->
+        where r between #{postStart} and #{postEnd}
+    </select>
+
+    <select id="totalBudgetPost" parameterType="com.example.yoonlove.dto.PageDto">
+        select count(${id}) as totalPost from budgetjoin
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
+            and project_id = #{pkid}
+        <!--검색어가 있다면 아래 조건문을 실행-->
+        <if test="title != null and search != ''">
+            AND budget_name like '%${title}%'
+        </if>
+        <if test="content != null and search != ''">
+            AND budget_content like '%${content}%'
         </if>
     </select>
 
     <select id="selectBudget" resultType="com.example.yoonlove.dto.BudgetDto">
-        SELECT * FROM budget
+        SELECT * FROM budgetjoin
         where budget_id = #{budget_id}
     </select>
 
     <insert id="insertBudget">
         insert into budget values(
-        (select concat('budget', (nvl(max(substr(budget_id, 7)), 0)+1)) from budget),<!--pk코드 자동증가(수정)-->
+        (select concat('budget', (nvl(max(to_number(substr(budget_id, 7))), 0)+1)) from budget),<!--pk코드 자동증가(수정2)-->
         #{budget_name},
-       '테스트내용',
+        #{budget_content},
         #{budget_amount},
-        'code101',
-        '예산서테스터01',
-        'project2'
+        null,
+        null,
+        #{project_id}
         )
     </insert>
 
-    <update id="updateBudget">
+    <update id ="updateBudget" parameterType="com.example.yoonlove.dto.BudgetDto">
         UPDATE budget
         SET
         budget_name = #{budget_name},
+        budget_content = #{budget_content},
         budget_amount = #{budget_amount}
         where budget_id = #{budget_id}
     </update>
 
     <delete id="deleteBudget"> DELETE FROM budget WHERE budget_id = #{budget_id}</delete>
 
+    <!--예산 총액 구하는 sql-->
+    <select id="getTotalBudget">
+        SELECT sum(budget_amount) FROM budgetjoin
+        where project_id = #{pkid}
+        <if test="title != null and search != ''">
+        and budget_name like '%${title}%'
+        </if>
+        <if test="content != null and search != ''">
+            and budget_content like '%${content}%'
+        </if>
+    </select>
+
     <!--=========================================Budget 완료 !!!!!!!!!!======================== -->
-    <select id="selectListProduce" resultType="com.example.yoonlove.dto.ProduceDto">
-        select * from produce
+    <select id="selectListProduce" parameterType="com.example.yoonlove.dto.PageDto" resultType="com.example.yoonlove.dto.ProduceDto">
+        select *
+        <!--notice검색결과에 rownum을 하고 r로 지정-->
+        from(select rownum as r, t.*
+        <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
+        from (select * from producejoin
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
+        and project_id = #{pkid}
+        <if test="title != null and search != ''">
+            AND pd_name like '%${title}%'
+        </if>
+        order by ${id} desc) t)
+        <!-- rownum을 기준(r)으로 시작번호부터 끝번호까지 검색   -->
+        where r between #{postStart} and #{postEnd}
+    </select>
+
+    <select id="totalProducePost" parameterType="com.example.yoonlove.dto.PageDto">
+        select count(${id}) as totalPost from producejoin
+        <if test="company_id == 'company1'">
+            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
+        </if>
+        <if test="company_id != 'company1'">
+            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        </if>
+        <!--검색어가 있다면 아래 조건문을 실행-->
+        <if test="title != null and search != ''">
+            AND pd_name like '%${title}%'
+        </if>
     </select>
     
     <select id="selectProduce" resultType="com.example.yoonlove.dto.ProduceDto">
-        select * from produce
+        select * from producejoin
         where pd_id = #{pd_id}
     </select>
 
     <insert id="insertProduce">
         insert into produce values(
-        (select concat('pd',(substr(NVL(max(pd_id),'pd0'),3)+1)) from produce),
+        (select concat('pd', (nvl(max(to_number(substr(pd_id, 3))), 0)+1)) from produce),<!--pk코드 자동증가(수정2)-->
         #{pd_name},
         #{role},
         #{casting},
-        'project1',
-        'test'
+        #{project_id},
+        null
         )
     </insert>
 
@@ -108,10 +241,13 @@
     <update id="updateProduce">
         update produce
         set
-        pd_id = #{pd_name},
+        pd_name = #{pd_name},
+        <if test="role != null and role !=''">
         role = #{role},
+        </if>
         casting = #{casting}
+
+        where pd_id = #{pd_id}
     </update>
-    <!--==================================프로듀스 완료 !!!!!!!!!!============== -->
 
 </mapper>
