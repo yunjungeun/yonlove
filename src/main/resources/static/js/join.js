@@ -11,7 +11,7 @@
         	$.ajax({
         		url : '/ConfirmId',
         		type : 'POST',
-        		data : id,
+        		data : {user_id : id},
         		success : function(result) {
         			if (result === false) {
         				alert("사용가능 ID 입니다.");
