@@ -98,7 +98,7 @@ public class PlanController {
     }
 
 
-    @GetMapping("plan/insertSchedule")  //컨텐츠 추가 처리
+    @PostMapping("plan/insertSchedule")  //컨텐츠 추가 처리
     @ResponseBody
     public String insertSchedule(ScheduleDayDto dto) {
         planService.insertSchedule(dto);
@@ -124,7 +124,7 @@ public class PlanController {
         return mv;
     }
 
-    @GetMapping("plan/{day_id}/updateSchedule") //업데이트 처리
+    @PostMapping("plan/{day_id}/updateSchedule") //업데이트 처리
     @ResponseBody
     public String updateSchedule(ScheduleDayDto dto) {
         System.out.println(dto.toString());
@@ -132,7 +132,7 @@ public class PlanController {
         return "/plan/schedule_day";
     }
 
-    @GetMapping("plan/{day_id}/deleteSchedule") //삭제 처리
+    @PostMapping("plan/{day_id}/deleteSchedule") //삭제 처리
     public String deleteSchedule( ScheduleDayDto dto) {
         planService.deleteSchedule(dto);
         return "redirect:/plan/schedule_day";
@@ -190,7 +190,7 @@ public class PlanController {
     }
 
 
-    @GetMapping("plan/insertScheduleTime")  //컨텐츠 추가 처리
+    @PostMapping("plan/insertScheduleTime")  //컨텐츠 추가 처리
     @ResponseBody
     public String insertTime(ScheduleTimeDto dto) {
         planService.insertTime(dto);
@@ -207,7 +207,7 @@ public class PlanController {
         return mv;
     }
 
-    @GetMapping("plan/{time_id}/updateScheduleTime") //업데이트 처리
+    @PostMapping("plan/{time_id}/updateScheduleTime") //업데이트 처리
     @ResponseBody
     public String updateTime( ScheduleTimeDto dto) {
         //리다이렉트할 url에 들어갈 값을 추출
@@ -217,7 +217,7 @@ public class PlanController {
         return "/plan/schedule/" + scheduleTimeDto.getDay_id();
     }
 
-    @GetMapping("plan/{time_id}/deleteTime") //삭제 처리
+    @PostMapping("plan/{time_id}/deleteTime") //삭제 처리
     @ResponseBody
     public String deleteTime(ScheduleTimeDto dto) {
         String day_id = planService.searchDayId(dto.getTime_id());
@@ -275,7 +275,7 @@ public class PlanController {
     }
 
 
-    @GetMapping("plan/insertactorManagement")  //컨텐츠 추가 처리
+    @PostMapping("plan/insertactorManagement")  //컨텐츠 추가 처리
     @ResponseBody
     public String insertActorManagement(ActorManagementDto dto) {
         String dayId = dto.getDay_id();
@@ -297,7 +297,7 @@ public class PlanController {
         return mv;
     }
 
-    @GetMapping("plan/{actor_id}/updateActorManagement") //업데이트 처리
+    @PostMapping("plan/{actor_id}/updateActorManagement") //업데이트 처리
     @ResponseBody
     public String updateActorManagement(ActorManagementDto dto) {
         //수정후 리다이렉션 할 url의 값을 추출
@@ -306,7 +306,7 @@ public class PlanController {
         return "/plan/schedule/" + actorManagementDto.getDay_id();
     }
 
-    @GetMapping("plan/{actor_id}/deleteActorManagement") //삭제 처리
+    @PostMapping("plan/{actor_id}/deleteActorManagement") //삭제 처리
     @ResponseBody
     public String deleteActorManagement(ActorManagementDto dto) {
         ActorManagementDto actorManagementDto = planService.selectActorManagement(dto);
@@ -368,7 +368,7 @@ public class PlanController {
     }
 
 
-    @GetMapping("plan/insertFilm")  //컨텐츠 추가 처리
+    @PostMapping("plan/insertFilm")  //컨텐츠 추가 처리
     @ResponseBody
     public String insertFilm(FilmPlanDto dto) {
         //dto에는 insert에 들어갈 act_id가 없음. dto에 있는 pd_id와 scene_id로 act_id를 획득하는 로직
@@ -394,7 +394,7 @@ public class PlanController {
         return mv;
     }
 
-    @GetMapping("plan/{film_id}/updatefilm") //업데이트 처리
+    @PostMapping("plan/{film_id}/updatefilm") //업데이트 처리
     @ResponseBody
     public String updateFilm(FilmPlanDto dto) {
         FilmPlanDto filmPlanDto = planService.selectFilmPlan(dto);
@@ -402,7 +402,7 @@ public class PlanController {
         return "/plan/schedule/"+filmPlanDto.getDay_id();
     }
 
-    @GetMapping("plan/{film_id}/deleteFilm") //삭제 처리
+    @PostMapping("plan/{film_id}/deleteFilm") //삭제 처리
     @ResponseBody
     public String deleteFilm(FilmPlanDto dto) {
         FilmPlanDto filmPlanDto = planService.selectFilmPlan(dto);

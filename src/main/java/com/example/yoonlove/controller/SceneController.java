@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -113,7 +114,7 @@ public class SceneController {
         return mv;
     }
 
-    @GetMapping("/scene/insertscene")
+    @PostMapping("/scene/insertscene")
     @ResponseBody
     public String insertScene(SceneDto dto) {
             sceneService.insertScene(dto);
@@ -131,13 +132,13 @@ public class SceneController {
         return mv;
     }
 
-    @GetMapping("/scene/{scene_id}/updatescene")
+    @PostMapping("/scene/{scene_id}/updatescene")
     @ResponseBody
     public String updateScene(SceneDto dto) {
         sceneService.updateScene(dto);
         return "/scene/scene";
     }
-    @GetMapping("/scene/{scene_id}/deletescene")
+    @PostMapping("/scene/{scene_id}/deletescene")
     public String deleteScene(SceneDto dto){
         sceneService.deleteScene(dto);
         return "redirect:/scene/scene";
@@ -196,7 +197,7 @@ public class SceneController {
         mv.setViewName("/scene/actorinsert");
         return mv;
     }
-    @GetMapping("scene/insertactor")
+    @PostMapping("scene/insertactor")
     @ResponseBody
     public String insertActor(ActorDto dto){
         sceneService.insertActor(dto);
@@ -213,7 +214,7 @@ public class SceneController {
         return mv;
     }
 
-    @GetMapping("scene/{act_id}/updateactor")
+    @PostMapping("scene/{act_id}/updateactor")
     @ResponseBody
     public String updateActor(ActorDto dto){
         sceneService.updateActor(dto);
@@ -223,7 +224,7 @@ public class SceneController {
         projectService.updateProduce(produceDto);
         return "/scene/actor";
     }
-    @GetMapping("scene/{act_id}/deleteactor")
+    @PostMapping("scene/{act_id}/deleteactor")
     public String deleteActor(ActorDto dto){
         sceneService.deleteActor(dto);
         return "redirect:/scene/actor";

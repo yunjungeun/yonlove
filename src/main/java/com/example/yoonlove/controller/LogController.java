@@ -11,6 +11,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -80,7 +81,7 @@ public class LogController {
         return mv;
     }
 
-    @GetMapping("log/insertLog")
+    @PostMapping("log/insertLog")
     @ResponseBody
     public String insertLog(LogDto dto) {
         logService.insertLog(dto);
@@ -101,14 +102,14 @@ public class LogController {
         return mv;
     }
 
-    @GetMapping("log/{log_id}/updateLog")
+    @PostMapping("log/{log_id}/updateLog")
     @ResponseBody
     public String updateLog(LogDto dto){
         logService.updateLog(dto);
         return "/log/log";
     }
 
-    @GetMapping("log/{log_id}/deleteLog")
+    @PostMapping("log/{log_id}/deleteLog")
     public String deleteLog(LogDto dto) {
         System.out.println(dto.toString());
         logService.deleteLog(dto);

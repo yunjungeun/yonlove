@@ -12,6 +12,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -143,7 +144,7 @@ public class AdminController {
         return mv;
     }
 
-    @GetMapping("/admin/{user_id}/updateuser")
+    @PostMapping("/admin/{user_id}/updateuser")
     @ResponseBody
     public String updateUser(UserDto dto) {
         adminService.updateUser(dto);
@@ -152,7 +153,7 @@ public class AdminController {
     }
 
 
-    @GetMapping("/admin/{user_id}/deleteuser")
+    @PostMapping("/admin/{user_id}/deleteuser")
     public String deleteUser(UserDto dto){
         adminService.deleteUser(dto);
         return "redirect:/admin/user";
@@ -197,7 +198,7 @@ public class AdminController {
 
     }
 
-    @GetMapping("/admin/adduser")
+    @PostMapping("/admin/adduser")
     @ResponseBody
     public String updateContent(Principal user, UserDto userDto) {
       String userId = user.getName();
@@ -251,7 +252,7 @@ public class AdminController {
     }
 
 
-    @GetMapping("/admin/insertdpt")
+    @PostMapping("/admin/insertdpt")
     @ResponseBody
     public String insertDepartment(DepartmentDto dto, Principal user){
         //로그인한 유저의 dto정보를 가져옴
@@ -271,14 +272,14 @@ public class AdminController {
         return mv;
     }
 
-    @GetMapping("/admin/{dpt_id}/updatedpt")
+    @PostMapping("/admin/{dpt_id}/updatedpt")
     @ResponseBody
     public String updateDepartment(DepartmentDto dto){
         adminService.updateDepartment(dto);
         return "/admin/department";
     }
 
-    @GetMapping("/admin/{dpt_id}/deletedpt")
+    @PostMapping("/admin/{dpt_id}/deletedpt")
     public String deleteDepartment(DepartmentDto dto){
         adminService.deleteDepartment(dto);
         return "redirect:/admin/department";
