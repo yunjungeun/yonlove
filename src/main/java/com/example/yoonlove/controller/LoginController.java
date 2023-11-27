@@ -6,10 +6,8 @@ import com.example.yoonlove.dto.UserDto;
 import com.example.yoonlove.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -17,11 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-
-import java.security.Principal;
 
 import java.security.Principal;
 
@@ -33,13 +26,6 @@ public class LoginController {
     @Autowired
     public BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
-    /*@RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginSuccess(Model model, HttpSession session) {
-        session.setAttribute("userLoggedIn", true);
-        return "redirect:/index";
-    }*/
-
     @RequestMapping("/login")
     public String login(@RequestParam(name = "error", required = false) String error, Model model){
 
@@ -49,55 +35,26 @@ public class LoginController {
           return "/main/login";
     }
 
-   /* @PostMapping("login/porc")
-    public String loginporoc(UserDto dto){
-        String rawPw = dto.getPw();
-        String encPw = bCryptPasswordEncoder.encode(rawPw);
-        userService.loadUserByUsername(dto.getUser_id());
-       return null;
-    }*/
-
-
-
-
-
-
     @GetMapping("companysignupview")
     public String companysignupview() {
         return "/login/companysignup";
     }
 
-    @GetMapping("companysignup")
+    @GetMapping("/companysignup")
     @ResponseBody
     public String companysign(CompanyDto dto, Principal user, UserDto userDto ) {
 
         //기업회원가입 로직 sql
-
-        System.out.println("test1"+dto.toString());
-
         userService.companysignup(dto);
 
-        System.out.println("test2");
-
         String companyID = userService.lastCompanyID();
-
-        System.out.println("test3"+companyID);
-
-
-
         //-------------테이블생성
-        System.out.println("principal 의 내용 : "+user);
 
         String userId = user.getName(); // 유저id
-        System.out.println("유저의 id는 "+userId);
-
-
-        System.out.println(userId);
-        System.out.println(companyID);
 
         userService.updateUserCompanyID(userId, companyID);
 
-        return "redirect:/index";
+        return "/index";
     }
 
 
@@ -111,14 +68,12 @@ public class LoginController {
     }
 
 
-
-    @PostMapping("ConfirmId")
+    @PostMapping("/ConfirmId")
     public ResponseEntity<?> confirmId(@RequestParam("user_id") String user_id) {
         ModelAndView mv = new ModelAndView();
         UserDto dto = new UserDto();
         dto.setUser_id(user_id);
-        mv.setViewName("/login/signup");
-        mv.addObject("ConfirmId", userService.selectId(dto));
+
 
         boolean isIdAvailable = userService.selectId(dto);
         return ResponseEntity.ok(isIdAvailable);

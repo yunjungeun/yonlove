@@ -9,42 +9,58 @@
 
     {{>layout/header}}
 </head>
-<body id="page-top">
-{{>layout/sidebar}}
-{{>layout/topbar}}
+<body>
+<div id="page-top">
+    {{>layout/sidebar}}
+    {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container">
 
-<!-- Content Wrapper -->
-<div id="content-wrapper" class="d-flex flex-column">
-
-    <!-- Main Content -->
-    <div id="content">
-
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
-
-            <!-- DataTales Example -->
-            <div class="card shadow mb-4" style="margin-top: 50px;">
-                <div class="card-header py-3">
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                예산서 작성
+            </h1>
 
 
+            <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
+                <div class="card-header py-3" style="center;"> <!--카드헤더 div-->
+                </div><!--카드헤더 end-->
+                <div class="card-body"><!--카드 바디-->
+                    <form id="alert" action="/project/insertbudget" method="get"
+                          class="d-flex justify-content-end form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
 
+                        <table class="table table-bordered" id="dataTable" width="70%" cellspacing="0">
+                            <tr>
+                                <td>프로젝트
+                                    <select id="fk1" class="field1" name="project_id"></select></td>
+                                <td>항목명 <input class="field2" name="budget_name" type="text" placeholder="예산이름"/></td>
+                                <td>사용내역<input class="field3" name="budget_content" type="text" placeholder="예산이름"/></td>
+                                <td>금액 <input class="int1" name="budget_amount" type="number" placeholders="예산금액"/></td>
 
-<form id="alert" action="/project/insertbudget" method="get"
-      class="d-flex justify-content-end form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
+                            </tr>
+                        </table>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span></span>
+                            <span>
+                                {{>layout/paging}}</span>
+                            <input type="submit" value="등록" onclick="mappingurl('/project/insertbudget', 3,'작성',1)"
+                                   role="button" class="btn btn-primary"/>
+                            <a href="javascript:history.back()" role="button" class="btn btn-secondary mr-2">뒤로</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <tr>
-            <td>프로젝트
-                <select id="fk1" class="field1" name="project_id"></select></td>
-            <td>항목명 <input class="field2" name="budget_name" type="text" placeholder="예산이름"/></td>
-            <td>사용내역<input class="field3" name="budget_content" type="text" placeholder="예산이름"/></td>
-            <td>금액 <input class="int1" name="budget_amount" type="number" placeholders="예산금액"/></td>
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
 
-        </tr>
-    </table>
-    <input type="submit" value="등록" onclick="mappingurl('/project/insertbudget', 3,'작성',1)"/>
-</form>
-<a href="/project/budget">목록</a>
+<!-- End of Main Content -->
+{{>layout/footer}}
+</div>
+
 
 <!--옵션 태그에 필요한 js-->
 <script>
@@ -52,9 +68,12 @@
     <!--select 옵션 name값을 cu_alert.js에 보내주기 위한 변수 값/이게없으면 제출이 안됨-->
     var selectName = "project_id";
     <!--selectName이 실행되기 위해선 cu_alert 스크립트소스가 이 아래 있어야함-->
+    var url = "/project/budget";
 </script>
 
 <script src="/static/js/dropdown.js"></script>
 <script src="/static/js/cu_alert.js"></script>
+
+{{>layout/bootstrapjs}}
 </body>
 </html>

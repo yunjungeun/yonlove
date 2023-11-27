@@ -1,6 +1,5 @@
-var url = base;
-
 function confirmDelete(event, url) {
+
     event.preventDefault(); // 링크의 기본 동작(페이지 이동)을 중지합니다.
     var deleteUrl = event.target.getAttribute('href'); // 삭제 URL 가져오기
 

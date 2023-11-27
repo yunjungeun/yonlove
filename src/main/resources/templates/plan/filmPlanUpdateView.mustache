@@ -17,7 +17,7 @@
         <div class="container">
 
             <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
-                제목머임? : 수정하기
+                촬영계획 수정
             </h1>
 
             <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
@@ -46,22 +46,24 @@
                             </tr>
 
                             <tr>
-                                <th style="text-align: center;">안&nbsp;/&nbsp;밖 :&nbsp;
-                                    <input type="text" class="field1" name="inside_flag" value="{{filmPlanUpdate.inside_flag}}" />
+                                <th style="text-align: center;">안&nbsp;/&nbsp;밖
+                                    <input class="radio ml-3" type="radio" name="inside_flag" value="실내" {{#insideFlag}}{{#실내}}checked{{/실내}}{{/insideFlag}}> 실내
+                                    <input class="radio ml-3" type="radio" name="inside_flag" value="실외" {{#insideFlag}}{{#실외}}checked{{/실외}}{{/insideFlag}}> 실외
                                 </th>
-                                <th style="text-align: center;">낮&nbsp;/&nbsp;밤 :&nbsp;
-                                    <input type="text" class="field2" name="day_flag" value="{{filmPlanUpdate.day_flag}}" />
+                                <th style="text-align: center;">낮&nbsp;/&nbsp;밤
+                                    <input class="radio2 ml-3" type="radio" name="day_flag" value="낮" {{#dayFlag}}{{#낮}}checked{{/낮}}{{/dayFlag}}> 낮
+                                    <input class="radio2 ml-3" type="radio" name="day_flag" value="밤" {{#dayFlag}}{{#밤}}checked{{/밤}}{{/dayFlag}}> 밤
                                 </th>
-                                <th colspan="2" style="text-align: center;">컷 수 :&nbsp;
-                                    <input type="text" class="field3" name="cut" value="{{filmPlanUpdate.cut}}"/>
+                                <th style="text-align: center;">컷
+                                    <input class="field1" type="text" name="cut" value="{{filmPlanUpdate.cut}}"/>
                                 </th>
                             </tr>
                             </tbody>
                         </table>
-                        라디오 버튼 만들고 / 출연자 배역도 바꿀수 있게 해야되지 않을까..싶음..
+
                         <div class="d-flex justify-content-end">
-                            <input type="submit" value="등록" class="btn btn-primary mr-2" onclick="mappingurl('/plan/{{filmPlanUpdate.film_id}}/updatefilm',3,'수정')">
-                            <a href="/plan/film_plan" class="btn btn-primary">목록</a>
+                            <input type="submit" value="등록" class="btn btn-primary mr-2" onclick="mappingurl('/plan/{{filmPlanUpdate.film_id}}/updatefilm',1,'수정')">
+                            <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
                         </div>
                     </form>
 
@@ -74,6 +76,10 @@
 {{>layout/footer}}
 </div>
 
+<script>
+    var radioButtonName = "inside_flag";
+    var radioButtonName2 = "day_flag";
+</script>
 <script src="/static/js/cu_alert.js"></script>
 {{>layout/bootstrapjs}}
 </body>

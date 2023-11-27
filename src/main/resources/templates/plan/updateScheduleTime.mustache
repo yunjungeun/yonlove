@@ -16,7 +16,7 @@
         <div class="container">
 
             <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
-                촬영 시간표
+                촬영시간표 수정
             </h1>
 
             <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
@@ -34,8 +34,8 @@
 
                         </table>
                         <div class="d-flex justify-content-end">
-                            <input type="submit" value="등록" class="btn btn-primary mr-2" onclick="mappingurl('/plan/{{updateScheduleTime.time_id}}/updateScheduleTime', 3,'수정')">
-                            <a href="/plan/schedule_time" class="btn btn-primary">취소</a>
+                            <input type="submit" value="수정" class="btn btn-primary mr-2" onclick="mappingurl('/plan/{{updateScheduleTime.time_id}}/updateScheduleTime', 3,'수정')">
+                            <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
                         </div>
                     </form>
 

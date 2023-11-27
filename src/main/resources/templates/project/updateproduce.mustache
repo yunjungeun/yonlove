@@ -4,7 +4,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>제작 수정하기</title>
+    <title>제작 수정</title>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {{>layout/header}}
@@ -18,32 +18,39 @@
 
     <!-- Main Content -->
     <div id="content">
-
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
+            <div style="text-align: center; display: block; margin-top:50px;" >
+                <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                    제작인원 수정
+                </h1>
 
             <!-- DataTales Example -->
-            <div class="card shadow mb-4" style="margin-top: 50px;">
-                <div class="card-header py-3">
+            <div class="card shadow mb-4" style="margin-top: 50px; margin-left:150px; margin-right:150px;">
+                <div class="card-body">
+                    <form id="alert" action="/project/updateproduce/{{selectProduce.pd_id}}" method="get"
+                          class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
+                        <input type="hidden" class="field1" name="project_id" value="{{selectProduce.project_id}}"/>
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th style="text-align: center;"><p>이름</p> <input class="field2" name="pd_name" type="text" value="{{selectProduce.pd_name}}"/></th>
+                                <th style="text-align: center;"><p class="mr-3">역할</p>
 
-                <form id="alert" action="/project/updateproduce/{{selectProduce.pd_id}}" method="get"
-                      class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                        <tr>
-                            <td>이름 <input class="field1" name="pd_name" type="text" placeholder="이름"/></td>
-                            <td>역할 <input class="field2" name="role" type="text" placeholders="역할"/></td>
-                            <td>배역 <input class="field3" name="casting" type="text" placeholders="배역"/></td>
-                        </tr>
-                        </thead>
-                    </table>
-                    <div class="d-flex justify-content-center align-items-center">
-                        <input type="submit" value="수정" class="btn btn-success"
-                           onclick="mappingurl('/project/updateproduce/{{selectProduce.pd_id}}', 3,'수정')"/>&nbsp;&nbsp;
+                                    PD<input type="radio" class="radio mr-2" name="role" value="PD" {{#role}}{{#PD}}checked{{/PD}}{{/role}}>
+                                    출연자<input type="radio" class="radio  mr-2" name="role" value="출연자" {{#role}}{{#출연자}}checked{{/출연자}}{{/role}}>
+                                    편집<input type="radio" class="radio  mr-2" name="role" value="편집" {{#role}}{{#편집}}checked{{/편집}}{{/role}}>
+                                    카메라<input type="radio" class="radio  mr-2" name="role" value="카메라" {{#role}}{{#카메라}}checked{{/카메라}}{{/role}}>
+                                    기타<input type="radio" class="radio mr-2" name="role" value="기타" {{#role}}{{#기타}}checked{{/기타}}{{/role}}>
 
-                         <a href="/project/produce" role="button" class="btn btn-secondary">목록</a>
-                    </div>
-                </form>
+                                <th style="text-align: center;"><p>배역</p> <input class="field3" name="casting" type="text" value="{{selectProduce.casting}}"/></th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <input type="submit" value="수정" class="btn btn-success"
+                                   onclick="mappingurl('/project/updateproduce/{{selectProduce.pd_id}}', 4,'수정')"/>&nbsp;&nbsp;
+                            <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
+                        </div>
+                    </form>
 
                 </div>
             </div>
@@ -63,6 +70,7 @@
 <!-- End of Content Wrapper -->
 <script>
     var url="/project/produce";
+        var radioButtonName = "role";
 </script>
 <script src="/static/js/cu_alert.js"></script>
 

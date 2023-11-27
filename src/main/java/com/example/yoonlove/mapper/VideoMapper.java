@@ -18,6 +18,12 @@ public interface VideoMapper {
     public void insertContent(VideoDto dto);
 
     public void updateContent(VideoDto dto);
+
+    //id가 이미 존재하는 확인하는 메소드
+    VideoDto searchVideoId(String video_id);
     public void deleteContent(VideoDto dto);
 
+    List<VideoDto> searchVideo(String company_id, String order);
+    List<VideoDto> bestSubCh(String company_id);
+    List<VideoDto> bestChVideo(String bestCh);
 }

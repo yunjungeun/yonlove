@@ -7,58 +7,58 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/static/js/cu_alert.js"></script>
+
     {{>layout/header}}
 </head>
 
-<body id="page-top">
+<body>
+<div id="page-top">
 {{>layout/sidebar}}
 {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container">
 
-    <table>
-        <thead>
-        <tr>
-            <th>채널 제목</th>
-            <th>썸네일</th>
-        </tr>
-        </thead>
-        <tbody>
-        {{#hashmap}}
-            <tr>
-                <td><a href="/creator/insertcreator?channelId={{channelId}}&title={{channelTitle}}&userId={{userId}}">{{channelTitle}}</a></td>
-                <td><img src="{{thumbnailsUrl}}" alt="Thumbnail"></td>
-            </tr>
-        {{/hashmap}}
-        </tbody>
-    </table>
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                크리에이터 선택
+            </h1>
 
-<a href="/creator/creater">목록으로 가기</a>
+            <div class="card shadow mb-4" style="margin-top: 50px; margin-right: 100px; margin-left: 100px;">  <!--카드전체 섹션-->
+                <div class="card-header py-3" style="center;"> <!--카드헤더 div-->
+                </div><!--카드헤더 end-->
 
+                <div class="card-body"><!--카드 바디-->
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <thead style="text-align: center;">
+                        <tr>
+                            <th>채널 제목</th>
+                            <th>썸네일</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#hashmap}}
+                            <tr>
+                                <td style="text-align: center; vertical-align: middle;">
+                                    <a href="/creator/insertcreator?channelId={{channelId}}&title={{channelTitle}}
+                                                &userId={{userId}}">{{channelTitle}}</a></td>
+                                <td style="text-align: center; vertical-align: middle;"><img src="{{thumbnailsUrl}}" alt="Thumbnail"></td>
+                            </tr>
+                        {{/hashmap}}
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-center">
+                        <a href="/creator/creater" class="btn btn-secondary">취소</a>
+                    </div>
+                </div><!--카드바디-->
+            </div><!--카드 end-->
+
+        </div><!--컨테이너 end-->
+    </div><!--warpper end-->
+</div><!--page-top end-->
+{{>layout/footer}}
+</div>
+
+    <script src="/static/js/cu_alert.js"></script>
 <script src="/static/js/youtubejs.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

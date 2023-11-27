@@ -17,7 +17,7 @@
             AND day_title like '%${title}%'
         </if>
         <if test="content != null and search != ''">
-            AND weather like '%${content}%'
+            AND project_name like '%${content}%'
         </if>
     </select>
 
@@ -47,14 +47,13 @@
         <if test="title != null and search != ''">
             AND day_title like '%${title}%'
         </if>
-
         <if test="content != null and search != ''">
-            AND weather like '%${content}%'
+            AND project_name like '%${content}%'
         </if>
         order by ${id} desc) t)
 
         <!-- rownum을 기준(r)으로 시작번호부터 끝번호까지 검색   -->
-        where r between #{postStart} and #{postEnd}    /*where r between 1 and 10    where r between 11 and 20*/
+        where r between #{postStart} and #{postEnd}
     </select>
 
     <!--옵션값에 넣기 위한 fk테이블의 검색값을 가져오는 쿼리-->
@@ -162,7 +161,7 @@
 
     <!--일일촬영계획 리스트 //촬영계획표-->
     <select id="selectListDayTable2" resultType="com.example.yoonlove.dto.ScheduleTimeDto">
-        SELECT * FROM schedule_time WHERE day_id = #{day_id}
+        SELECT * FROM schedule_time WHERE day_id = #{day_id} order by start_time
     </select>
 
     <insert id="insertTime" parameterType="com.example.yoonlove.dto.ScheduleTimeDto" >
@@ -175,12 +174,13 @@
         )
     </insert>
 
+
     <update id="updateTime" parameterType="com.example.yoonlove.dto.ScheduleTimeDto" >
         UPDATE
         schedule_time
         SET
-        day_id = #{day_id},
-        film_time = #{film_time},
+        start_time = #{start_time},
+        end_time = #{end_time},
         film_content = #{film_content}
 
         WHERE
@@ -190,6 +190,10 @@
     <delete id="deleteTime" parameterType="com.example.yoonlove.dto.ScheduleTimeDto">
         DELETE FROM schedule_time WHERE time_id = #{time_id}
     </delete>
+
+    <select id="searcheDayId">
+        SELECT day_id FROM schedule_time WHERE time_id = #{time_id}
+    </select>
 
     <!-- schedule_Time CRUD쿼리문 작성완료-->
 
@@ -257,8 +261,7 @@
 
     <insert id="insertActorManagement" parameterType="com.example.yoonlove.dto.ActorManagementDto" >
         INSERT INTO actor_management values (
-        (select concat('actor', (nvl(max(to_number(substr(actor_id, 3))), 0)+1)) from actor_management),<!--pk코드 자동증가(수정2)-->
-
+        (select concat('actor', (nvl(max(to_number(substr(actor_id, 6))), 0)+1)) from actor_management),<!--pk코드 자동증가(수정2)-->
         #{actor_name},
         #{arrival_time},
         #{place},
@@ -274,10 +277,7 @@
         actor_name = #{actor_name},
         arrival_time = #{arrival_time},
         place = #{place},
-        set_call = #{set_call},
-        day_id = #{day_id}
-
-
+        set_call = #{set_call}
         WHERE
         actor_id = #{actor_id}
     </update>
@@ -346,7 +346,7 @@
 
     <!--film_plan에 act_id를 구하기위한 메소드-->
     <select id="selectFilmJoinActID">
-        select act_id from actorjoin where pd_id= #{pd_id} and scene_id = #{scene_id}
+        select max(act_id) from actorjoin where pd_id= #{pd_id} and scene_id = #{scene_id}
     </select>
 
     <insert id="insertFilm" parameterType="com.example.yoonlove.dto.FilmPlanDto" >

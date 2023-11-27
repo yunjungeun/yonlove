@@ -179,6 +179,7 @@ public class CsController {
         csService.updateQnA(dto);
         return "/cs/qna";
     }
+
     @GetMapping("/cs/{qna_id}/deleteqna")
     public String deleteQnA(QnADto dto){
         csService.deleteQnA(dto);

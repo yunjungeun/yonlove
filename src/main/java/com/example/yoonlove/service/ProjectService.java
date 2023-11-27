@@ -5,6 +5,8 @@ import com.example.yoonlove.mapper.ProjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 @Service
 public class ProjectService {
@@ -48,10 +50,26 @@ public class ProjectService {
 
     public List<ProduceDto> selectListProduce(PageDto pageDto){
         return projectMapper.selectListProduce(pageDto);}
+
     public void insertProduce(ProduceDto dto){
        projectMapper.insertProduce(dto);}
+
     public ProduceDto selectProduce(ProduceDto produceDto){
         return projectMapper.selectProduce(produceDto);}
+
+    public HashMap<String, Boolean> roleCheck(ProduceDto dto){
+        HashMap<String, Boolean> roleList = new LinkedHashMap<>();
+        String[] role = {"PD","출연자","편집","카메라","기타"};
+        for(int i = 0; i < role.length; i++){
+            if(role[i].equals(dto.getRole())){
+                roleList.put(role[i],true);
+            }else {
+                roleList.put(role[i], false);
+            }
+        }
+        return roleList;
+    }
+
     public void deleteProduce(ProduceDto dto){
          projectMapper.deleteProduce(dto);}
 

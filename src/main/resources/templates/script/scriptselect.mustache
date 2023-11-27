@@ -24,21 +24,31 @@
         <div class="card shadow mb-4" style="margin-top: 50px; margin-right: 200px; margin-left: 200px">
             <div class="card-body">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
+                    <thead style="text-align: center;">
                     <tr style="text-align: center;">
-                        <th>씬</th>
-                        <th>영상제목</th>
-                        <th>촬영날짜</th>
-                        <th>영상 길이</th>
-                        <th>촬영 시작시간</th>
+                        <th>기획</th>
+                        <th>시나리오</th>
+                        <th colspan="2">씬</th>
                     </tr>
                     </thead>
                     <tr style="text-align: center;">
-                        <td>{{selectScriptPaper.scene_num}}</td>
+                        <td>{{selectScriptPaper.project_name}}</td>
+                        <td>{{selectScriptPaper.scenario_name}}</td>
+                        <td colspan="2">{{selectScriptPaper.scene_num}}</td>
+                    </tr>
+                    <thead>
+                    <tr style="text-align: center;">
+                        <th>영상제목</th>
+                        <th>촬영날짜</th>
+                        <th>촬영 시작시간</th>
+                        <th>촬영 종료시간</th>
+                    </tr>
+                    </thead>
+                    <tr style="text-align: center;">
                         <td>{{selectScriptPaper.video_name}}</td>
                         <td>{{selectScriptPaper.video_date}}</td>
-                        <td>{{selectScriptPaper.video_time}}</td>
                         <td>{{selectScriptPaper.video_start_time}}</td>
+                        <td>{{selectScriptPaper.video_end_time}}</td>
                     </tr>
 
                     <tr style="text-align: center;">
@@ -46,7 +56,7 @@
                         <th colspan="2">액션 내용</th>
                     </tr>
                     <tr style="text-align: center;">
-                        <td colspan="3">여기 이미지 뜨게 해줘</td>
+                        <td colspan="3"></td>
                         <td colspan="2">{{selectScriptPaper.action_content}}</td>
                     </tr>
                     <tr style="text-align: center;">
@@ -59,7 +69,7 @@
 
 
                 <div style="text-align: center">
-                    <a href="/script/timetable" class="btn btn-primary">목록</a> &nbsp;&nbsp;
+                    <a href="javascript:history.back()" role="button" class="btn btn-primary mr-2">뒤로</a>
                     <a href="/script/{{selectScriptPaper.script_id}}/updatescriptview" class="btn btn-success">수정</a>&nbsp;&nbsp;
                     <a href="javascript:void(0);" class="btn btn-danger" onclick="deleteAlert('/script/{{selectScriptPaper.script_id}}/deletescriptpaper')">삭제</a>
                 </div>
@@ -92,6 +102,7 @@
                 </tbody>
             </table>
             <div class="d-flex justify-content-between align-items-between">
+                <span></span>
                 <span>{{>layout/subpaging}}</span>
             <a style="margin-left: 20px" href="/script/inserttimeview/{{selectScriptPaper.script_id}}" role="button" class="btn btn-primary">작성</a>
             </div>

@@ -4,7 +4,6 @@ import com.example.yoonlove.dto.*;
 import com.example.yoonlove.service.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,7 +44,6 @@ public class PlanController {
         PageDto pageInfo = pagingService.paging(pageDto); // paging ==> 전체게시글 갯수 구해오는 메소드
         List<PageDto> pageList = pagingService.pageList(pageInfo.getPageStart(),pageInfo.getPageEnd(),page); // pageList==> 뷰페이지에 페이징 리스트를 생성해주는 리스트 메소드
         String rink = pagingService.pageRink(pageDto);
-
         List<ScheduleDayDto> dto = planService.selectListSchedule(pageInfo);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/schedule_day");
@@ -196,8 +194,7 @@ public class PlanController {
     @ResponseBody
     public String insertTime(ScheduleTimeDto dto) {
         planService.insertTime(dto);
-
-        return "/plan/schedule_time";
+        return "/plan/schedule/"+dto.getDay_id();
     }
 
 
@@ -206,7 +203,6 @@ public class PlanController {
         ScheduleTimeDto scheduleTimeDto = planService.selectScheduleTime(dto);//업데이트를 하려면 해당 컨텐츠 불러와야하니까 위에 selectContent메소드를 다시씀!
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/plan/updateScheduleTime");
-        mv.setStatus(HttpStatus.valueOf(200));
         mv.addObject("updateScheduleTime", scheduleTimeDto);
         return mv;
     }
@@ -214,14 +210,19 @@ public class PlanController {
     @GetMapping("plan/{time_id}/updateScheduleTime") //업데이트 처리
     @ResponseBody
     public String updateTime( ScheduleTimeDto dto) {
+        //리다이렉트할 url에 들어갈 값을 추출
+        ScheduleTimeDto scheduleTimeDto = planService.selectScheduleTime(dto);
         planService.updateTime(dto);
-        return "/plan/schedule_time";
+
+        return "/plan/schedule/" + scheduleTimeDto.getDay_id();
     }
 
     @GetMapping("plan/{time_id}/deleteTime") //삭제 처리
-    public String deleteTime( ScheduleTimeDto dto) {
+    @ResponseBody
+    public String deleteTime(ScheduleTimeDto dto) {
+        String day_id = planService.searchDayId(dto.getTime_id());
         planService.deleteTime(dto);
-        return "redirect:/plan/schedule_time";
+        return "/plan/schedule/"+day_id;
     }
 
 //===================================출연자관리=========================================================
@@ -298,15 +299,19 @@ public class PlanController {
 
     @GetMapping("plan/{actor_id}/updateActorManagement") //업데이트 처리
     @ResponseBody
-    public String updateActorManagement( ActorManagementDto dto) {
+    public String updateActorManagement(ActorManagementDto dto) {
+        //수정후 리다이렉션 할 url의 값을 추출
+        ActorManagementDto actorManagementDto = planService.selectActorManagement(dto);
         planService.updateActorManagement(dto);
-        return "/plan/actor_management";
+        return "/plan/schedule/" + actorManagementDto.getDay_id();
     }
 
     @GetMapping("plan/{actor_id}/deleteActorManagement") //삭제 처리
-    public String deleteActorManagement( ActorManagementDto dto) {
+    @ResponseBody
+    public String deleteActorManagement(ActorManagementDto dto) {
+        ActorManagementDto actorManagementDto = planService.selectActorManagement(dto);
         planService.deleteActorManagement(dto);
-        return "redirect:/plan/actor_management";
+        return "/plan/schedule/"+ actorManagementDto.getDay_id();
     }
 
 //===========================================================================================출연자 관리 end
@@ -365,23 +370,25 @@ public class PlanController {
 
     @GetMapping("plan/insertFilm")  //컨텐츠 추가 처리
     @ResponseBody
-    public String insertFilm(FilmPlanDto dto, Principal user) {
-        UserDto userInfo = userService.getUser(user.getName());
-        String companyId = userInfo.getCompany_id(); //회사 id 스트링
-
+    public String insertFilm(FilmPlanDto dto) {
         //dto에는 insert에 들어갈 act_id가 없음. dto에 있는 pd_id와 scene_id로 act_id를 획득하는 로직
         String actId = planService.selectFilmJoinActID(dto.getPd_id(), dto.getScene_id());// day_id 값이 여러개가 나와서
         dto.setAct_id(actId);   //획득된 act_id를 dto에 바인드
-        System.out.println("dto 내용 최종 : "+dto.toString());
         planService.insertFilm(dto);
-
-        return "/plan/film_plan";
+        return "/plan/schedule/"+dto.getDay_id();
     }
 
     @GetMapping("plan/{film_id}/filmPlanUpdateView") //컨텐츠 업데이트하는 뷰
-    public ModelAndView filmPlanUpdateView( FilmPlanDto dto) {
+    public ModelAndView filmPlanUpdateView(FilmPlanDto dto) {
         FilmPlanDto filmPlanDto = planService.selectFilmPlan(dto);
         ModelAndView mv = new ModelAndView();
+
+        HashMap<String, Boolean> insideFlag = planService.insideFlagCheck(filmPlanDto);
+        HashMap<String, Boolean> dayFlag = planService.dayFlagCheck(filmPlanDto);
+
+        mv.addObject("insideFlag",insideFlag);
+        mv.addObject("dayFlag",dayFlag);
+
         mv.setViewName("/plan/filmPlanUpdateView");
         mv.addObject("filmPlanUpdate", filmPlanDto);
         return mv;
@@ -390,14 +397,17 @@ public class PlanController {
     @GetMapping("plan/{film_id}/updatefilm") //업데이트 처리
     @ResponseBody
     public String updateFilm(FilmPlanDto dto) {
+        FilmPlanDto filmPlanDto = planService.selectFilmPlan(dto);
         planService.updateFilm(dto);
-        return "/plan/film_plan";
+        return "/plan/schedule/"+filmPlanDto.getDay_id();
     }
 
     @GetMapping("plan/{film_id}/deleteFilm") //삭제 처리
-    public String deleteFilm( FilmPlanDto dto) {
+    @ResponseBody
+    public String deleteFilm(FilmPlanDto dto) {
+        FilmPlanDto filmPlanDto = planService.selectFilmPlan(dto);
         planService.deleteFilm(dto);
-        return "redirect:/plan/film_plan";
+        return "/plan/schedule/"+filmPlanDto.getDay_id();
     }
 
     //------------------------월력형 테이블 로직---------------------------------//

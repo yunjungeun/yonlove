@@ -9,115 +9,81 @@
     {{>layout/header}}
 </head>
 
-<body id="page-top">
-{{>layout/sidebar}}
-{{>layout/topbar}}
+<body>
+<div id="page-top">
+    {{>layout/sidebar}}
+    {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container">
 
-<!-- Content Wrapper -->
-<div id="content-wrapper" class="d-flex flex-column">
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                스크립트페이퍼 작성
+            </h1>
 
-    <!-- Main Content -->
-    <div id="content">
+            <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
+                <div class="card-body"><!--카드 바디-->
+                    <form id="alert" action="/script/insertscriptpaper" method="get">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead style="text-align: center;">
+                            <tr>
+                                <th>기&nbsp;&nbsp;획</th>
+                                <th>시나리오</th>
+                                <th colspan="2">씬</th>
+                            </tr>
+                            </thead>
+                            <tbody style="text-align: center;">
+                            <tr style="text-align: center;">
+                                <td><select id="fk1" class="ml-2" name="project_id"></select></td>
+                                <td><select id="fk2" class="ml-2" name="scenario_id"></select></td>
+                                <td colspan="2"><select id="fk3" name="scene_id" class="field1 ml-2"></select></td>
+                            </tr>
+                            <tr>
+                                <th>영상제목</th>
+                                <th>촬영일자</th>
+                                <th>촬영 시작시간</th>
+                                <th>촬영 종료시간</th>
+                            </tr>
+                            <tr>
+                                <td><input class="field1" name="video_name" type="text" placeholder="영상제목 입력"></td>
+                                <td><input class="field2" name="video_date" type="date"></td>
+                                <td><input class="field3" name="video_start_time" type="time"></td>
+                                <td><input class="field4" name="video_end_time" type="time"></td>
 
-        <div class="container-fluid">
-            <div style="text-align: center; display: block; margin-top:40px;" > <!-- 수정 ! 마진 탑 100->수정 -->
-                <h1 class="h3 mb-2 text-gray-800" >스크립트페이퍼 작성</h1>
-            </div>
-            <!-- DataTales Example -->
-    <div class="card shadow mb-4" style="margin-top: 50px; margin-right: 300px; margin-left: 300px">
-        <div class="card-header py-3">
+                            </tr>
+                            <tr>
+                                <th>액션이미지</th>
+                                <th>액션내용</th>
+                                <th>카메라포지션</th>
+                                <th>콘티</th>
+                            </tr>
+                            <tr>
+                                <td><input id="fileInput" name="action_image" type="file" /></td>
+                                <td><input class="field5" name="action_content" type="text" placeholder="작성.."/></td>
+                                <td><input class="field6" name="position_image" type="text" placeholder="작성.."/></td>
+                                <td><input class="field7" name="conti" type="text" placeholder="작성.."/></td>
+                            </tr>
+                            </tbody>
+                        </table>
 
-            <form id="alert" action="/script/insertscriptpaper" method="get">
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary mr-2" onclick="mappingurl('/script/insertscriptpaper',7,'작성')">등록</button>
+                            <a href="javascript:history.back()" role="button" class="btn btn-secondary mr-2">뒤로</a>
+                        </div>
+                    </form>
+                </div><!--카드바디-->
+            </div><!--카드섹션-->
 
-    <div style="margin-left: 15%; margin-right: 15%; margin-top: 5%;">
-        <div style="display: inline-block;">
-
-
-        <div class="mb-3" style="text-align: center; display: inline-block;">
-            <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>기획</strong>
-                <select id="fk1" name="project_id"></select>
-            </label></div>
-
-        <div class="mb-3" style="text-align: center; display: inline-block;">
-            <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>시나리오</strong>
-                <select id="fk2" name="scenario_id"><option selected>선택</option></select>
-            </label> </div>
-
-        <div class="mb-3" style="text-align: center; display: inline-block;">
-            <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>씬 번호</strong>
-                <select id="fk3" name="scene_id"><option selected>선택</option></select>
-            </label> </div>
-
-        <div class="mb-3" style="text-align: center; display: inline-block;">
-            <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>영상 제목</strong>
-                <input class="field1" name="video_name" type="text" placeholder="영상제목 입력">
-            </label> </div>
-
-        <div class="mb-3" style="text-align: center; display: inline-block;">
-            <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>촬영 날짜</strong>
-                <input class="field2" name="video_date" type="date" placeholder="날짜형식 yy/mm/dd 입력">
-            </label> </div>
-
-        <div class="mb-3" style="text-align: center; display: inline-block;">
-            <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>촬영시작시간</strong>
-                <input class="field3" name="video_time" type="date" placeholder="날짜형식입력(시간아직안됨)">
-            </label> </div>
-
-        <div class="mb-3" style="text-align: center; display: inline-block;">
-            <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>촬영종료시간</strong>
-                <input class="field4" name="video_end_time" type="date" placeholder="날짜형식입력">
-            </label> </div>
-
-
-
-        <div class="mb-3" style="text-align: center; display: inline-block;">
-            <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>액션 이미지</strong>
-                <input id="fileInput" name="action_image" type="file" />
-            </label> </div>
-
-        <div class="mb-3" style="text-align: center; display: inline-block;">
-            <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>액션 내용</strong>
-                <input class="field5" name="action_content" type="text" placeholder="작성.."/>
-            </label> </div>
-
-        <div class="mb-3" style="text-align: center; display: inline-block;">
-            <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>카메라포지션</strong>
-                <input class="field6" name="position_image" type="text" placeholder="작성.."/>
-            </label> </div>
-
-        <div class="mb-3" style="text-align: center; display: inline-block;">
-            <label for="formGroupExampleInput" class="form-label" style="display: block;"><strong>콘티</strong>
-                <input class="field7" name="conti" type="text" placeholder="작성.."/>
-            </label> </div>
-
-
-        <div style="text-align: center">
-            <button type="submit" class="btn btn-primary" onclick="mappingurl('/script/insertscriptpaper',7,'작성')"/>등록</button>
-            <a href="/script/scriptpaper" class="btn btn-secondary" style="text-decoration: none;">취소</a>
-        </div>
-
-    </div>
-</div>
-    </form>
-
-
-</div>
-
-    </div>
-            <br/>  <!-- 추가 -->
-        </div>
+        </div><!--warpper-->
+    </div><!--컨테이너-->
+</div><!--탑페이지-->
 
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
         <!-- /.container-fluid -->
 
-    </div>
-    <!-- End of Main Content -->
+{{>layout/footer}}
 </div>
-<!-- End of Content Wrapper -->
-<br/>
-
 
 <script>
     var url = "script/scriptpaper";

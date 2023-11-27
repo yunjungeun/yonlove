@@ -136,6 +136,7 @@
         address3 = #{address3},
         company_user = #{company_user},
         grade = #{grade},
+        dpt_id=#{dpt_id},
         authority = #{authority}
         where user_id = #{user_id}
     </update>

@@ -1,23 +1,26 @@
 package com.example.yoonlove.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.sql.Date;
 
-@Getter
-@Setter
+@Data
 public class ScriptPaperDto {
     private String script_id;
     private String scene_id;
     private String video_name;
     private Date video_date;
     private Date video_time;
-    private Date video_start_time;
+    private String video_start_time;
     private String action_image;
     private String action_content;
     private String position_image;
     private String conti;
+    private String video_end_time;  //추가
+
+    private String formattedStart;
+    private String formattedEnd;
+    private String formattedDate;
 
     //==============3중조인 : scriptview======================
     private int scene_num;
@@ -34,4 +37,5 @@ public class ScriptPaperDto {
     private String project_id;
     private String scenario_update;
     private String company_id;
+    private String project_name;
 }

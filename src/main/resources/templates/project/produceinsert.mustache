@@ -4,47 +4,52 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>제작(프로듀스) 추가 </title>
+    <title>제작편성 </title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/static/js/cu_alert.js"></script>
     {{>layout/header}}
 </head>
+<body>
+<div id="page-top">
+    {{>layout/sidebar}}
+    {{>layout/topbar}}
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container">
 
-<body id="page-top">
-{{>layout/sidebar}}
-{{>layout/topbar}}
-<!-- Content Wrapper -->
-<div id="content-wrapper" class="d-flex flex-column">
+                    <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                        제작인원 편성
+                    </h1>
 
-    <!-- Main Content -->
-    <div id="content">
+            <div class="card shadow mb-4" style="margin-top: 50px; margin-left:80px; margin-right:80px;">  <!--카드전체 섹션-->
+                <div class="card-header py-3" style="center;"> <!--카드헤더 div-->
+                </div><!--카드헤더 end-->
+                <div class="card-body"><!--카드 바디-->
+                    <form id="alert" action="/project/insertproduce" method="get"
+                          class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
+                        <input type="hidden" class="field1" name="project_id" value="{{project_id}}">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <tr>
+                                <th style="text-align: center;"><p>이름</p> <input class="field2" name="pd_name" type="text" placeholder="이름"/></th>
+                                <th style="text-align: center;"><p class="mr-3">역할</p>
 
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
+                                    PD<input type="radio" class="radio mr-2" name="role" value="PD">
+                                    출연자<input type="radio" class="radio  mr-2" name="role" value="출연자" checked>
+                                    편집<input type="radio" class="radio  mr-2" name="role" value="편집">
+                                    카메라<input type="radio" class="radio  mr-2" name="role" value="카메라">
+                                    기타<input type="radio" class="radio mr-2" name="role" value="기타">
 
-            <!-- DataTales Example -->
-            <div class="card shadow mb-4" style="margin-top: 50px;">
+                                <th style="text-align: center;"><p>배역</p> <input class="field3" name="casting" type="text" placeholders="배역"/></th>
+                            </tr>
+                        </table>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <input type="submit" value="등록" role="button" class="btn btn-primary"
+                                   onclick="mappingurl('/project/insertproduce', 3,'작성')"/> &nbsp;&nbsp;
+                            <a href="javascript:history.back()" role="button" class="btn btn-secondary">뒤로</a>
+                        </div>
+                    </form>
 
-                <div class="card-header py-3">
-
-<form id="alert" action="/project/insertproduce" method="get"
-      class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search ml-auto">
-
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <tr>
-            <td>이름 <input class="field1" name="pd_name" type="text" placeholder="이름"/></td>
-            <td>역할 <input class="field2" name="role" type="text" placeholders="역할"/></td>
-            <td>배역 <input class="field3" name="casting" type="text" placeholders="배역"/></td>
-        </tr>
-    </table>
-        <div class="d-flex justify-content-between align-items-center">
-            <input type="submit" value="등록" role="button" class="btn btn-primary"
-                   onclick="mappingurl('/project/insertproduce', 3,'작성')"/>
-            <a role="button" class="btn btn-info" href="/project/produce">목록</a>
-        </div>
-</form>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -52,17 +57,17 @@
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
-<!-- /.container-fluid -->
-</div>
-<!-- End of Main Content -->
+
 {{>layout/footer}}
 </div>
 <!-- End of Content Wrapper -->
 
 <script>
     var url = "/project/produce";
+        var radioButtonName = "role";
 </script>
 
 {{>layout/bootstrapjs}}
+<script src="/static/js/cu_alert.js"></script>
 </body>
 </html>

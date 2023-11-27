@@ -3,7 +3,6 @@ package com.example.yoonlove.dto;
 import lombok.Data;
 
 @Data
-
 public class ActorManagementDto {
 
     private String actor_id;

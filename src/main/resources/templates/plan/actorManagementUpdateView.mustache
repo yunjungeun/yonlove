@@ -15,7 +15,7 @@
     <div id="content-wrapper" class="d-flex flex-column">
         <div class="container">
             <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
-                출연자 관리//수정? 일정명이 추가되면?
+                출연자 준비
             </h1>
 
             <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
@@ -35,16 +35,16 @@
                             <tbody style="text-align: center;">
                             <tr>
                                 <td><input name="actor_name" type="text" value="{{actorManagementUpdate.actor_name}}" class="field1" ></td>
-                                <td><input name="arrival_time" type="date" value="{{actorManagementUpdate.arrival_time}}" class="field2" ></td>
+                                <td><input name="arrival_time" type="time" value="{{actorManagementUpdate.arrival_time}}" class="field2" ></td>
                                 <td><input name="place" type="text"  value="{{actorManagementUpdate.place}}" class="field3"></td>
-                                <td><input name="set_call" type="text" value="{{actorManagementUpdate.set_call}}" class="field4"></td>
+                                <td><input name="set_call" type="time" value="{{actorManagementUpdate.set_call}}" class="field4"></td>
                             </tr>
                             </tbody>
                         </table>
 
                         <div class="d-flex justify-content-end">
-                            <input type="submit" value="등록" class="btn btn-primary mr-2" onclick="mappingurl('/plan/{{actorManagementUpdate.actor_id}}/updateActorManagement',5,'수정')">
-                            <a href="/plan/actor_management" class="btn btn-primary">목록</a>
+                            <input type="submit" value="수정" class="btn btn-primary mr-2" onclick="mappingurl('/plan/{{actorManagementUpdate.actor_id}}/updateActorManagement',4,'수정')">
+                            <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
                         </div>
                     </form>
 

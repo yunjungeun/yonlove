@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>제작예산 리스트</title>
+    <title>예산편성</title>
     {{>layout/header}}
 </head>
 <body id="page-top">
@@ -15,10 +15,12 @@
     <div id="content">
         <!-- Begin Page Content -->
         <div class="container-fluid">
-            <h1 class="h3 mb-2 text-gray-800" style="margin-top: 50px;">기획예산 편성</h1>
+            <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
+                예산편성
+            </h1>
 
             <!-- DataTales Example -->
-            <div class="card shadow mb-4" style="margin-top: 50px;">
+            <div class="card shadow mb-4" style="margin-top: 50px; margin-left :100px; margin-right:100px">
                 <div class="card-header py-3">
 
         <!--검색 -->
@@ -27,7 +29,8 @@
             <div class="input-group">
                 <select id="searchType" name="searchType">
                     <option value="all">선택</option>
-                    <option value="title">기획명</option>
+                    <option value="title">항목명</option>
+                    <option value="content">항목내용</option>
                     <!-- 필요한 항목 추가 -->
                 </select>
                 <input id="search" name="search" type="text"  style="width: 150px;" class="form-control bg-light border-0 small" placeholder="Search for..."
@@ -38,8 +41,6 @@
                 </div>
             </div>
         </form>
-        </div>
-
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -54,7 +55,7 @@
                     <tbody>
                     {{#selectListBudget}}
                         <tr>
-                            <td style="text-align: center;">{{project_name}}</td>
+                            <td style="text-align: center;"><a href="/project/{{project_id}}/selectproject">{{project_name}}</a></td>
                             <td style="text-align: center;"> <a href="/project/{{budget_id}}/selectbudget">{{budget_name}}</a></td>
                             <td style="text-align: center;">{{budget_content}}</td>
                             <td style="text-align: center;">{{fomattedAmount}} 원</td>
@@ -72,14 +73,14 @@
                     <span></span>
                     <span>
                         {{>layout/paging}}</span>
-                <a href="/project/insertbudgetview" role="button" class="btn btn-primary">글 작성</a>
+                <a href="/project/insertbudgetview" role="button" class="btn btn-primary">편성</a>
+                </div>
+
+                    </div>
                 </div>
             </div>
-            </div>
         </div>
-
-        </div>
-    <br/>
+    </div>
 </div>
 
     <a class="scroll-to-top rounded" href="#page-top">
@@ -87,13 +88,13 @@
     </a>
     <!-- /.container-fluid -->
 </div>
-<!-- End of Main Content -->
+</div><!-- End of Main Content -->
 {{>layout/footer}}
 </div>
-<!-- End of Content Wrapper -->
 
+<!-- End of Content Wrapper -->
 <script>
-    var url = "/project/budget";
+    var url = "/project/budget/{{project_id}}";
 </script>
 
 <script src="/static/js/search.js"></script>

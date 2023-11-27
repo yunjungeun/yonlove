@@ -3,13 +3,11 @@
 
 <mapper namespace="com.example.yoonlove.mapper.VideoMapper">
 
-    <select id="totalContentPost" parameterType="com.example.yoonlove.dto.PageDto">  /**/
+    <select id="totalContentPost" parameterType="com.example.yoonlove.dto.PageDto">
         select count(${id}) as totalPost from ${table}
-        <if test="company_id == 'company1'">
-            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
-        </if>
-        <if test="company_id != 'company1'">
-            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+            where 1=1
+        <if test="ch_id != '' and ch_id != null">
+            and ch_id = #{ch_id} <!--시스템계정이 아니면 소속 회사만 보기-->
         </if>
         <!--검색어가 있다면 아래 조건문을 실행-->
         <if test="title != null and search != ''">
@@ -25,11 +23,9 @@
 
         <!--  (   notice 결과 또는 검색 후 리스트에 대한 결과      )를 t로 지정-->
         from (select * from ${table}
-        <if test="company_id == 'company1'">
-            where 1=1 <!--시스템 계정이면 모든 데이터보기-->
-        </if>
-        <if test="company_id != 'company1'">
-            where company_id = #{company_id} <!--시스템계정이 아니면 소속 회사만 보기-->
+        where 1=1<!--시스템 계정이면 모든 데이터보기-->
+        <if test="ch_id != '' and ch_id != null">
+            and ch_id = #{ch_id}
         </if>
         <if test="title != null and search != ''">
             AND video_name like '%${title}%'
@@ -37,7 +33,7 @@
         order by ${id} desc) t)
 
         <!-- rownum을 기준(r)으로 시작번호부터 끝번호까지 검색   -->
-        where r between #{postStart} and #{postEnd}    /*where r between 1 and 10    where r between 11 and 20*/
+        where r between #{postStart} and #{postEnd}
     </select>
 
     <select id="selectContent" parameterType="com.example.yoonlove.dto.VideoDto" resultType="com.example.yoonlove.dto.VideoDto">
@@ -50,17 +46,23 @@
 
     <insert id="insertContent" parameterType="com.example.yoonlove.dto.VideoDto" >
         INSERT INTO video VALUES (
-        (select concat('video',(substr(NVL(max(video_id),'video0'),6)+1)) from video),<!--pk코드 자동증가-->
+        #{video_id},
         #{video_name},
-        #{video_sub},
+        null,
         #{video_view},
         #{like_cnt},
         #{video_url},
-        #{upload_date},
+        to_date(substr(#{upload_date},1,10), 'YYYY-MM-DD'),
         #{video_profit},
-        #{project_id}
+        null,<!--프로젝트id/프로젝트별 결과별 정렬할려고 넣었는데 미구현하기로함-->
+        #{commentcnt},
+        #{ch_id}
         )
     </insert>
+
+    <select id="searchVideoId" resultType="com.example.yoonlove.dto.VideoDto">
+        SELECT video_id FROM video WHERE video_id = #{video_id}
+    </select>
 
     <update id="updateContent" parameterType="com.example.yoonlove.dto.VideoDto" >
         UPDATE
@@ -83,5 +85,25 @@
         DELETE FROM video WHERE video_id = #{video_id}
     </delete>
 
+    <select id="searchVideo" resultType="com.example.yoonlove.dto.VideoDto">
+        SELECT ch_name, ch_sub, video_name, video_view, like_cnt, video_url, commentcnt, video_id
+        FROM videojoin
+        WHERE company_id = #{company_id}
+        order by ${order} desc
+    </select>
+
+    <select id="bestSubCh">
+        SELECT ch_id
+        FROM videojoin
+        WHERE company_id = #{company_id}
+        order by ch_sub desc
+    </select>
+
+    <select id="bestChVideo" resultType="com.example.yoonlove.dto.VideoDto">
+        SELECT ch_name, video_name, video_view, like_cnt, video_url, video_id
+        FROM videojoin
+        WHERE ch_id = #{bestCh}
+        order by upload_date desc
+    </select>
 
 </mapper>

@@ -37,18 +37,17 @@
 
                             <tr>
                                 <td style="text-align: center;"> <select id="fk1" name="project_id"></select></td>
-                                <td style="text-align: center;"><input name="log_num" type="number" placeholder="미입력시 자동입력" class="field1" ></td>
-                                <td style="text-align: center;"><input name="log_date" type="date" class="field2"></td>
+                                <td style="text-align: center;"><input name="log_num" type="number" placeholder="미입력시 자동입력" class="int1" ></td>
+                                <td style="text-align: center;"><input name="log_date" type="date" class="field1"></td>
                             </tr>
                             <tr>
                                 <td colspan="3" style="text-align: center;">
-                                    <textarea name="log_content" placeholder="내용을 입력하세요" class="field3" style="height: 30vh; width: 100%;  display: block; margin: 0 auto;"></textarea>
+                                    <textarea name="log_content" placeholder="내용을 입력하세요" class="field2" style="height: 30vh; width: 100%;  display: block; margin: 0 auto;"></textarea>
                             </tr>
                             </tbody>
                         </table>
-
                         <div style="text-align: center">
-                            <button type="submit" class="btn btn-primary" onclick="mappingurl('/log/insertLog',3,'작성')">등록</button>
+                            <button type="submit" class="btn btn-primary" onclick="mappingurl('/log/insertLog',2,'작성',1)">등록</button>
                             <a href="/log/log" class="btn btn-secondary" style="text-decoration: none;">취소</a>
                         </div>
                     </form>

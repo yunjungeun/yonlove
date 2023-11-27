@@ -62,6 +62,12 @@ public class DropDownService {
                     fkStringList.put(filmPlanDtos.get(i).getPd_id(),filmPlanDtos.get(i).getPd_name());
                 }
                 break;
+            case "department" :
+                List<DepartmentDto> departmentDtos = dropDownMapper.selectFkDpt(ajaxData,companyId);
+                for(int i=0; i< departmentDtos.size(); i++){
+                    fkStringList.put(departmentDtos.get(i).getDpt_id(),departmentDtos.get(i).getDpt_name());
+                }
+                break;
         }
 
         if(fkIntList.isEmpty()){

@@ -48,8 +48,6 @@ public class PagingService {
             case "actor" : pageDto = sceneMapper.totalActorPost(dto); break;
             case "actor_management" : pageDto = planMapper.totalActorManagementPost(dto); break;
             case "budget" : pageDto = projectMapper.totalBudgetPost(dto); break;
-            case "actor_managment" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
-            case "company" : System.out.println("pageing서비스의 paging 메서드 안에 스위치 문 pageDto = '컨트롤러명'Mapper.total'테이블명'Post(dto) 미작성"); break;
             case "creater" : pageDto = creatorMapper.totalCreatorPost(dto); break;
             case "department" : pageDto = adminMapper.totalDptPost(dto); break;
             case "film_plan" : pageDto = planMapper.totalFilmPlanPost(dto); break;
@@ -116,6 +114,8 @@ public class PagingService {
 
         //소속회사에 관한 정보를 저장
         pageDto.setCompany_id(dto.getCompany_id());
+        //크리에이터 의 채널id정보를 인계-->크리에이터 페이징처리를 위해서 존재
+        pageDto.setCh_id(dto.getCh_id());
         return pageDto;
     }
 

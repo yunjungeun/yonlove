@@ -17,12 +17,11 @@
         <div class="container">
 
             <h1 class="h2 mb-2 font-weight-bold text-gray-800" style="margin-top: 50px; text-align: center;">
-                출연자 관리///상세보기
+                출연자관리 상세보기
             </h1>
 
             <div class="card shadow mb-4" style="margin-top: 50px;">  <!--카드전체 섹션-->
                 <div class="card-header py-3" style="center;"> <!--카드헤더 div-->
-
                 </div><!--카드헤더 end-->
                 <div class="card-body"><!--카드 바디-->
                     <table class="table table-bordered" width="100%" cellspacing="0">
@@ -36,7 +35,7 @@
                         </thead>
                         <tbody>
                         <tr style="text-align: center;">
-                            <td>{{actorManagementDetail.actor_name}}</td>
+                            <td >{{actorManagementDetail.actor_name}}</td>
                             <td>{{actorManagementDetail.arrival_time}}</td>
                             <td>{{actorManagementDetail.place}}</td>
                             <td>{{actorManagementDetail.set_call}}</td>
@@ -44,9 +43,9 @@
                         </tbody>
                     </table>
                     <div class="d-flex justify-content-end">
-                        <a href="/plan/actor_management" class="btn btn-primary mr-2">뒤로가기</a>
+                        <a href="javascript:history.back()" role="button" class="btn btn-secondary mr-2">뒤로</a>
                         <a href="/plan/{{actorManagementDetail.actor_id}}/actorManagementUpdateView" class="btn btn-success mr-2">수정</a>
-                        <a href="/plan/{{actorManagementDetail.actor_id}}/deleteActorManagement" class="btn btn-danger" onclick="confirmDelete(event)">삭제</a>
+                        <a href="/plan/{{actorManagementDetail.actor_id}}/deleteActorManagement" class="btn btn-danger" onclick="confirmDelete(event, '/plan/schedule/{{actorManagementDetail.day_id}}')">삭제</a>
                     </div>
                 </div><!--카드바디-->
             </div><!--카드 end-->
@@ -56,6 +55,11 @@
 </div><!--page-top end-->
 {{>layout/footer}}
 </div>
+
+
+<script src="/static/js/delete.js"></script>
+<script src="/static/js/deletepost.js"></script>
+
 {{>layout/bootstrapjs}}
 </body>
 </html>

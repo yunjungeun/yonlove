@@ -1,13 +1,12 @@
 package com.example.yoonlove.service;
 
-import com.example.yoonlove.dto.CompanyDto;
-import com.example.yoonlove.dto.DepartmentDto;
-import com.example.yoonlove.dto.PageDto;
-import com.example.yoonlove.dto.UserDto;
+import com.example.yoonlove.dto.*;
 import com.example.yoonlove.mapper.AdminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 @Service
@@ -33,6 +32,20 @@ public class AdminService {
     }
     public void deleteUser(UserDto dto){
         adminMapper.deleteUser(dto);
+    }
+
+    //유저 권한 라디오버튼
+    public HashMap<String, Boolean> authorityCheck(UserDto dto){
+        HashMap<String, Boolean> authorityList = new LinkedHashMap<>();
+        String[] authority = {"admin","user"};
+        for(int i = 0; i < authority.length; i++){
+            if(authority[i].equals(dto.getAuthority())){
+                authorityList.put(authority[i],true);
+            }else {
+                authorityList.put(authority[i], false);
+            }
+        }
+        return authorityList;
     }
 
     //부서정보
