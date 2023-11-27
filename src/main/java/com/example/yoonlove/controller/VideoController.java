@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -73,7 +74,7 @@ public class VideoController {
         return mv;
     }
 
-    @GetMapping("vd/contentInsert")  //컨텐츠 추가 처리
+    @PostMapping("vd/contentInsert")  //컨텐츠 추가 처리
     @ResponseBody
     public String insertContent(VideoDto dto) {
         videoService.insertContent(dto);
@@ -90,14 +91,14 @@ public class VideoController {
         return mv;
     }
 
-    @GetMapping("vd/{video_id}/updateContent") //업데이트 처리
+    @PostMapping("vd/{video_id}/updateContent") //업데이트 처리
     @ResponseBody
     public String updateContent( VideoDto dto) {
         videoService.updateContent(dto);
         return "/vd/video";
     }
 
-    @GetMapping("/vd/{video_id}/delete") //삭제 처리
+    @PostMapping("/vd/{video_id}/delete") //삭제 처리
     public String deleteContent( VideoDto dto) {
         videoService.deleteContent(dto);
         return "redirect:/vd/video";

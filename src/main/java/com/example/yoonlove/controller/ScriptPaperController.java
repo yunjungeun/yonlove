@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -109,7 +110,7 @@ public class ScriptPaperController {
         return mv;
     }
 
-    @GetMapping("script/insertscriptpaper")
+    @PostMapping("script/insertscriptpaper")
     @ResponseBody
     public String insertScriptPaper(ScriptPaperDto dto){
         System.out.println(dto.toString());
@@ -127,13 +128,13 @@ public class ScriptPaperController {
         return mv;
     }
 
-    @GetMapping("script/{script_id}/updatescriptpaper")
+    @PostMapping("script/{script_id}/updatescriptpaper")
     @ResponseBody
     public String updateScriptPaper(ScriptPaperDto dto){
         scriptPaperService.updateScriptPaper(dto);
         return "/script/scriptpaper";
     }
-    @GetMapping("script/{script_id}/deletescriptpaper")
+    @PostMapping("script/{script_id}/deletescriptpaper")
     public String deleteScriptPaper(ScriptPaperDto dto){
         scriptPaperService.deleteScriptPaper(dto);
         return "redirect:/script/scriptpaper";
@@ -179,7 +180,7 @@ public class ScriptPaperController {
         return mv;
     }
 
-    @GetMapping("script/inserttimetable")
+    @PostMapping("script/inserttimetable")
     @ResponseBody
     public String insertTimeTable(TimeTableDto dto){
         scriptPaperService.insertTimeTable(dto);
@@ -196,14 +197,14 @@ public class ScriptPaperController {
         mv.addObject("selectTimeTable", dto);
         return mv;
     }
-    @GetMapping("script/{table_id}/updatetimetable")
+    @PostMapping("script/{table_id}/updatetimetable")
     @ResponseBody
     public String updateTimeTable(TimeTableDto dto){
         scriptPaperService.updateTimeTable(dto);
         return "/script/"+dto.getScript_id()+"/selectscriptpaper";
     }
 
-    @GetMapping("script/{table_id}/deletetimetable")
+    @PostMapping("script/{table_id}/deletetimetable")
     public String deleteTimeTable(TimeTableDto dto){
         TimeTableDto timeTableDto = scriptPaperService.selectTimeTable(dto);
         scriptPaperService.deleteTimeTable(dto);

@@ -8,7 +8,7 @@ function confirmDelete(event, url) {
 
         $.ajax({
             url: deleteUrl,
-            type: "GET",
+            type: "POST",
             success: function (response) {
                 alert("정상적으로 삭제되었습니다");
                 window.location.href = url; // 삭제 후 리디렉션할 URL을 설정합니다.

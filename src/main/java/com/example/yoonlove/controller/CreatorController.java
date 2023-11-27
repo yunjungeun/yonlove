@@ -75,7 +75,7 @@ import java.util.List;
             return mv;
         }
 
-        @GetMapping("creator/insertcreator")
+        @PostMapping("creator/insertcreator")
         public String insertcreatorview(String userId, String channelId, String title) throws GeneralSecurityException, IOException {
             CreatorDto dto = youTubeService.channel(channelId);
             dto.setCh_name(title);
@@ -139,7 +139,7 @@ import java.util.List;
         return mv;
     }
 
-     @GetMapping("/creator/updatecreator/{ch_id}") // 수정
+     @PostMapping("/creator/updatecreator/{ch_id}") // 수정
      @ResponseBody
     public String updateCreator(CreatorDto dto){
             System.out.println("test111" +dto.toString());
@@ -148,7 +148,7 @@ import java.util.List;
         return "/creator/creater";   // 목록페이지로 이동
     }
 
-    @GetMapping("/creator/deletecreator/{ch_id}")
+    @PostMapping("/creator/deletecreator/{ch_id}")
     public String deleteCreator(CreatorDto dto){
         creatorservice.deleteCreator(dto);
         return "redirect:/creator/creater";

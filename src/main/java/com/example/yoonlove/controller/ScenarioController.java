@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -97,7 +98,7 @@ public class ScenarioController {
         return mv;
     }
 
-    @GetMapping("/scenario/insertscenario")
+    @PostMapping("/scenario/insertscenario")
     @ResponseBody
     public String insertScenario(ScenarioDto dto){
         scenarioService.insertScenario(dto);
@@ -113,7 +114,7 @@ public class ScenarioController {
         return mv;
     }
 
-    @GetMapping("/scenario/{scenario_id}/updatescenario")
+    @PostMapping("/scenario/{scenario_id}/updatescenario")
     @ResponseBody
     public String updateScenario(ScenarioDto dto){
         scenarioService.updateScenario(dto);
@@ -121,7 +122,7 @@ public class ScenarioController {
     }
 
 
-    @GetMapping("/scenario/{scenario_id}/deletescenario")
+    @PostMapping("/scenario/{scenario_id}/deletescenario")
     public String deleteScenario(ScenarioDto dto){
         scenarioService.deleteScenario(dto);
         return "redirect:/scenario/scenario";

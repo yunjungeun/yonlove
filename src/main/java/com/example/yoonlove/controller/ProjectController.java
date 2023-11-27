@@ -9,6 +9,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -74,7 +75,7 @@ public class ProjectController {
         return "project/projectinsert";
     }
 
-    @GetMapping("project/insertproject")   // 작성 후 입력값 넘기는~
+    @PostMapping("project/insertproject")   // 작성 후 입력값 넘기는~
     @ResponseBody
     public String insertProject(ProjectDto projectDto, Principal user){
 
@@ -89,7 +90,7 @@ public class ProjectController {
     }
 
         // 삭제 !!!!!!!!!!!!!!!!!!
-    @GetMapping("/project/deleteproject/{project_id}")
+    @PostMapping("/project/deleteproject/{project_id}")
     public String deleteProject(ProjectDto dto){
          projectService.deleteProject(dto);
         return "redirect:/project/project";
@@ -105,7 +106,7 @@ public class ProjectController {
         return mv;
     }
 
-    @GetMapping("/project/updateproject/{project_id}") // 수정 //해당주소 머스터치에 액션값
+    @PostMapping("/project/updateproject/{project_id}") // 수정 //해당주소 머스터치에 액션값
     @ResponseBody
     public String updateProject(ProjectDto dto){
         projectService.updateProject(dto);
@@ -170,7 +171,7 @@ public class ProjectController {
         return mv;
     }
 
-    @GetMapping("project/insertbudget")   // 작성 후 입력값 넘기는~
+    @PostMapping("project/insertbudget")   // 작성 후 입력값 넘기는~
     @ResponseBody
     public String insertBudget(BudgetDto budgetDto){
         projectService.insertBudget(budgetDto);
@@ -191,7 +192,7 @@ public class ProjectController {
         return mv;
     }
 
-    @GetMapping("/project/deletebudget/{budget_id}")
+    @PostMapping("/project/deletebudget/{budget_id}")
     public String deleteBudget(BudgetDto dto){
         projectService.deleteBudget(dto);
         return "redirect:/project/budget";
@@ -207,7 +208,7 @@ public class ProjectController {
         return mv;
     }
 
-    @GetMapping("/project/updatebudget/{budget_id}") // 수정-해당주소 머스터치에 액션값
+    @PostMapping("/project/updatebudget/{budget_id}") // 수정-해당주소 머스터치에 액션값
     @ResponseBody
     public String updateBudget(BudgetDto dto){
         BudgetDto budgetDto = projectService.selectBudget(dto);
@@ -251,7 +252,7 @@ public class ProjectController {
         return mv;
     }
 
-    @GetMapping("project/insertproduce")   // 작성 후 입력값 넘기는~ , 추가
+    @PostMapping("project/insertproduce")   // 작성 후 입력값 넘기는~ , 추가
     @ResponseBody
     public String insertProduce(ProduceDto produceDto,Principal user){
         //유저정보 가저오는 dto
@@ -271,7 +272,7 @@ public class ProjectController {
         mv.addObject("selectProduce", dto);
         return mv;
     }
-    @GetMapping("project/deleteproduce/{pd_id}")
+    @PostMapping("project/deleteproduce/{pd_id}")
     public String deleteProduce(ProduceDto dto){    //삭제
         ProduceDto produceDto = projectService.selectProduce(dto);
         projectService.deleteProduce(dto);
@@ -288,7 +289,7 @@ public class ProjectController {
         mv.addObject("role", role);
         return mv;
     }
-    @GetMapping("project/updateproduce/{pd_id}") // 수정-해당주소 머스터치에 액션값
+    @PostMapping("project/updateproduce/{pd_id}") // 수정-해당주소 머스터치에 액션값
     @ResponseBody
     public String updateProduce(ProduceDto dto){
         projectService.updateProduce(dto);

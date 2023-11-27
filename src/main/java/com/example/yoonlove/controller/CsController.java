@@ -11,6 +11,7 @@ import com.example.yoonlove.service.YouTubeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -85,7 +86,7 @@ public class CsController {
         return mv;
     }
 
-    @GetMapping("/cs/insertnotice")
+    @PostMapping("/cs/insertnotice")
     @ResponseBody
     public String insertNotice(NoticeDto dto, Principal user){
         dto.setUser_id(user.getName());
@@ -101,14 +102,14 @@ public class CsController {
         mv.setViewName("/cs/updatenotice");
         return mv;
     }
-    @GetMapping("/cs/{notice_id}/updatenotice")
+    @PostMapping("/cs/{notice_id}/updatenotice")
     @ResponseBody
     public String updateNotice(NoticeDto dto){
         csService.updateNotice(dto);
         return "/cs/notice";
     }
 
-    @GetMapping("/cs/{notice_id}/deletenotice")
+    @PostMapping("/cs/{notice_id}/deletenotice")
     public String deleteNotice(NoticeDto dto){
         csService.deleteNotice(dto);
         return "/cs/notice";
@@ -153,7 +154,7 @@ public class CsController {
         return "/cs/insertqnaview";
     }
 
-    @GetMapping("/cs/insertqna")
+    @PostMapping("/cs/insertqna")
     @ResponseBody
     public String insertQnA(QnADto dto, Principal user){
         //유저정보 가저오는 dto
@@ -173,14 +174,14 @@ public class CsController {
         mv.addObject("updateQnA",dto);
         return mv;
     }
-    @GetMapping("/cs/{qna_id}/updateqna")
+    @PostMapping("/cs/{qna_id}/updateqna")
     @ResponseBody
     public String updateQnA(QnADto dto){
         csService.updateQnA(dto);
         return "/cs/qna";
     }
 
-    @GetMapping("/cs/{qna_id}/deleteqna")
+    @PostMapping("/cs/{qna_id}/deleteqna")
     public String deleteQnA(QnADto dto){
         csService.deleteQnA(dto);
 
